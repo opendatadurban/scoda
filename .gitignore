@@ -87,3 +87,14 @@ ENV/
 
 # Rope project settings
 .ropeproject
+/healthtools_ec/data/Manicured_Final.csv
+*.xml
+.idea/dataSources/7906e1ad-c6de-4980-b442-f563044942ad/_metadata_/metadata
+*.keystream
+.idea/dataSources/7906e1ad-c6de-4980-b442-f563044942ad/_metadata_/metadata.len
+*.at
+.idea/dataSources/7906e1ad-c6de-4980-b442-f563044942ad/_metadata_/metadata_i
+*.len
+.idea/scoda.iml
+*.xml
+.idea/vcs.xml

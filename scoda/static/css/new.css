@@ -1,0 +1,48 @@
+#tile10{
+    background-color: #EA001A;
+}
+.tilecaption{
+    position: relative;
+    top: 35%;
+    transform: translateY(-60%);
+    -webkit-transform: translateY(-60%);
+    -ms-transform: translateY(-60%);
+    margin:0!important;
+    text-align: center;
+    color:white;
+    font-family: "PT Sans";
+    font-weight: bolder;
+}
+
+h3{
+font-size:15px;
+font-size:2em;
+}
+h2{
+font-size:12px;}
+a
+{
+color:#ffffff;
+}
+a:hover{
+color:#ffffff;
+}
+
+.footer-basic-centered {
+    background-color: #EA001A;
+    text-align: center;
+    font: normal 18px sans-serif;
+    color: #ffffff;
+}
+.footer-basic-centered .footer-company-motto {
+    color: #ffffff;
+    font-size: 20px;
+}
+img{
+max-width:130px
+}
+
+/*.navbar-default {*/
+    /*background-color: #EA001A;*/
+    /*border-color: #FFFFFF;*/
+/*}*/
