@@ -1,41 +1,50 @@
-<div class="container-fluid container-1">
-        <nav class="navbar navbar-default navbar-fixed-top container-1 bot" style="background: #CE232B">
-            <div class="navbar-header page-scroll">
-                <button type="button" id="my-element-11"
-                        class="navbar-toggle btn-responsive container-4 Absolute-Center "
-                        data-target="#bs-example-navbar-collapse-1" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                </button>
-                <button type="submit" id="my-element-11"
-                        class="navbar-toggle btn-responsive container-4 Absolute-Center-2"
-                        aria-expanded="false" onclick="window.location.href='/xh'">XH
-                </button>
-                <div class="container-fluid container-1" style="background: #CE232B">
-                    <a class="navbar-brand" href="{{ url_for('home') }}">Initiation Watch<br/>
-                        <p class="head-respond">Ezolwaluko</p></a>
-                </div>
-                <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-center">
-                        <li><a href="{{ url_for('widgets') }}" class="btn btn-default btn-responsive" style="line-height: 14px; padding: 2px">Is
-                            your surgeon registered?</a></li>
-                        <li><a href="{{ url_for('initiates_home') }}" class="btn btn-default btn-responsive" style="line-height: 14px; padding: 2px">Do
-                            you know an initiate in trouble?</a></li>
-                        <li><a href="{{ url_for('reports_home') }}" class="btn btn-default btn-responsive" style="line-height: 14px; padding: 2px">Report
-                            an illegal traditional surgeon</a></li>
-                        <li><a href="{{ url_for('surgeons_register') }}" class="btn btn-default btn-responsive" style="line-height: 14px; padding: 2px">Register
-                            as a traditional surgeon</a></li>
-                        <li><a href="{{ url_for('locator') }}" class="btn btn-default btn-responsive" style="line-height: 14px; padding: 2px">Find
-                            a registered traditional surgeon</a></li>
-                        <li><a href="{{ url_for('about') }}" class="btn btn-default btn-responsive" style="line-height: 14px; padding: 2px">About
-                            this project</a></li>
-                        <li><a href="{{ url_for('contact') }}" class="btn btn-default btn-responsive" style="line-height: 14px; padding: 2px;">Contact
-                            details</a></li>
-                        <br>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
+<!-- BODY options, add following classes to body to change options
+		1. 'compact-nav'     	  - Switch sidebar to minified version (width 50px)
+		2. 'sidebar-nav'		  - Navigation on the left
+			2.1. 'sidebar-off-canvas'	- Off-Canvas
+				2.1.1 'sidebar-off-canvas-push'	- Off-Canvas which move content
+				2.1.2 'sidebar-off-canvas-with-shadow'	- Add shadow to body elements
+		3. 'fixed-nav'			  - Fixed navigation
+		4. 'navbar-fixed'		  - Fixed navbar
+		5. 'footer-fixed'		  - Fixed navbar
+-->
+
+<header class="navbar">
+        <div class="container-fluid">
+            <button class="navbar-toggler mobile-toggler hidden-lg-up" type="button">☰</button>
+            <a class="navbar-brand" href="#"></a>
+            <ul class="nav navbar-nav hidden-md-down">
+                <li class="nav-item">
+                    <a class="nav-link navbar-toggler layout-toggler" href="#">☰</a>
+                </li>
+
+                <li class="nav-item px-1">
+                    <a type="button" class="btn btn-primary px-2" href="{{ url_for('home_user') }}">Login</a>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav float-xs-right hidden-md-down">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="hidden-md-down">Username</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+
+                        <div class="dropdown-header text-xs-center">
+                            <strong>Account</strong>
+                        </div>
+
+                        <a class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> Updates<span class="tag tag-info">42</span></a>
+                        <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages<span class="tag tag-success">42</span></a>
+                        <a class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Tasks<span class="tag tag-danger">42</span></a>
+                        <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> Comments<span class="tag tag-warning">42</span></a>
+                        <a class="dropdown-item" href="{{ url_for('security.logout') }}"><i class="fa fa-lock"></i> Logout</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link aside-toggle" href="#">☰</a>
+                </li>
+
+            </ul>
+        </div>
+    </header>

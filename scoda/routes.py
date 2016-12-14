@@ -8,7 +8,12 @@ import scoda.researcher
 
 
 @app.route('/')
-def home():
+def home_public():
+        return redirect(url_for('public'))
+
+
+@app.route('/registered')
+def home_user():
     if current_user.is_authenticated:
         if current_user.has_role('city'):
             return redirect(url_for('city_dashboard'))
@@ -16,10 +21,6 @@ def home():
         if current_user.has_role('researcher'):
             return redirect(url_for('researcher_dashboard'))
 
-        if current_user.has_role('admin'):
-            return redirect(url_for('admin_dashboard'))
-
-        return render_template('noperms.html')
+        return render_template('security/noperms.html')
     else:
-        render_template('home/home.html')
-        # return redirect(url_for('security.login'))
+        return redirect(url_for('security.login'))

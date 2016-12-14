@@ -2,8 +2,6 @@ from flask import Flask
 import jinja2
 
 app = Flask(__name__, static_folder='static')
-tmpl_dir = '%s/templates' % app.root_path
-app.jinja_loader = jinja2.FileSystemLoader(tmpl_dir)
 
 env = 'production'
 app.config['ENV'] = env

@@ -87,7 +87,7 @@ ENV/
 
 # Rope project settings
 .ropeproject
-/healthtools_ec/data/Manicured_Final.csv
+/scoda/data/Manicured_Final.csv
 *.xml
 .idea/dataSources/7906e1ad-c6de-4980-b442-f563044942ad/_metadata_/metadata
 *.keystream
@@ -98,3 +98,6 @@ ENV/
 .idea/scoda.iml
 *.xml
 .idea/vcs.xml
+/scoda/data/process_test.py
+/scoda/data/Indicators.csv
+/scoda/data/UniqueIndicators.csv

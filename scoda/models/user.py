@@ -29,6 +29,7 @@ class User(db.Model, UserMixin):
     email = Column(String(50), index=True, nullable=False, unique=True)
     password = Column(String(100), default='')
     disabled = Column(Boolean, default=False)
+    admin = Column(Boolean, default=False)
 
     created_at = Column(DateTime(timezone=True), index=True, unique=False, nullable=False, server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.current_timestamp())
@@ -61,7 +62,7 @@ class User(db.Model, UserMixin):
 
 class Role(db.Model, RoleMixin):
     """
-        Determines which features users can access.
+    Determines which features users can access.
     """
     __tablename__ = "roles"
 
@@ -75,7 +76,6 @@ class Role(db.Model, RoleMixin):
     @classmethod
     def create_defaults(self):
         return [
-            Role(name='admin', description='user can access admin panel'),
             Role(name='city', description='user can access city user panels'),
             Role(name='researcher', description='user can access researcher panel')
         ]
@@ -93,5 +93,5 @@ class LoginForm(Form):
 
 # user authentication
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-security = Security(app, user_datastore, login_form=LoginForm)
+security = Security(app, user_datastore)
 app.extensions['security'].render_template = render_template

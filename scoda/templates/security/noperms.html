@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'snippets/header.html' %}
+</head>
+
+<body>
+    <div class="container d-table">
+        <div class="d-100vh-va-middle">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="clearfix">
+                        <h1 class="float-xs-left display-3 mr-2">Oh dear</h1>
+                        <h4 class="pt-1">you do not have permission to view this :(</h4>
+                        <p class="text-muted">If you would like to register as a user please contact <a href="mailto:matthew@opendata.durban">matthew@opendata.durban</a></p>
+                    </div>
+                        <a class="btn btn-lg" href="{{ url_for('home_public') }}">Back to public page</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'snippets/footer.html' %}
+
+<!-- Bootstrap and necessary plugins -->
+    <script src="../../static/vendor/jquery/jquery.min.js"></script>
+    <script src="../../static/vendor/tether/js/tether.min.js"></script>
+    <script src="../../static/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../static/vendor/pace/pace.min.js"></script>
+
+    <!-- Plugins and scripts required by all views -->
+    <script src="../../static/vendor/plotly/plotly-latest.min.js"></script>
+    <script src="../../static/js/app.js"></script>
+
+    <!-- Plugins and scripts required by this views -->
+
+    <!-- Custom scripts required by this view -->
+    <script src="../../static/js/views/main.js"></script>
+
+</body>
+</html>

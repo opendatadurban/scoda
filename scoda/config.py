@@ -24,10 +24,11 @@ SECURITY_LOGIN_URL = "/login/"
 SECURITY_LOGOUT_URL = "/logout/"
 SECURITY_CHANGE_URL = "/change-password/"
 SECURITY_RESET_URL = "/forgot-password"
+SECURITY_POST_LOGIN_VIEW = "/registered"
 
 # Flask-Security email subject lines
-SECURITY_EMAIL_SUBJECT_REGISTER = "Welcome to HealthTools-EC"
-SECURITY_EMAIL_SUBJECT_PASSWORD_RESET = "Password reset instructions for your HealthTools-EC account"
+SECURITY_EMAIL_SUBJECT_REGISTER = "Welcome to SCODA"
+SECURITY_EMAIL_SUBJECT_PASSWORD_RESET = "Password reset instructions for your SCODA account"
 
 # Flask-Security features
 SECURITY_RECOVERABLE = True
