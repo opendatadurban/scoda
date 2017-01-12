@@ -29,14 +29,23 @@ types = {'City': 1,
          'National': 3
          }
 
+themes = {'Demographics': 1,
+          'Productive': 2,
+          'Sustainable': 3,
+          'Inclusive': 4,
+          'Well-governed': 5
+          }
 
 dfi = pd.read_csv('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/Indicators.csv')
 df = pd.read_csv('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/Manicured_final.csv')
 mapping = {}
+mapping_theme = {}
 for i in range(0, len(dfi)):
     index = dfi.iloc[i][0]
     indicator = dfi.iloc[i][2]
+    theme = dfi.iloc[i][3]
     mapping[index] = indicator
+    mapping_theme[index] = theme
 
 
 def seed_db(db):
@@ -60,6 +69,9 @@ def seed_db(db):
         for x in Type.create_defaults():
             db.session.add(x)
         print 'Created type table...'
+        for x in Theme.create_defaults():
+            db.session.add(x)
+        print 'Created theme table...'
         db.session.commit()
         print 'Populating datapoints...'
         for i in range(0, len(df)):
@@ -67,6 +79,7 @@ def seed_db(db):
             indicator_id = mapping[df.iloc[i][0]]
             region_id = regions[df.iloc[i][1]]
             type_id = types[df.iloc[i][2]]
+            theme_id = mapping_theme[df.iloc[i][0]]
             for y, c in zip(range(1996, 2018), range(3, 25)):
                 if isnan(df.iloc[i][c]):
                     pass
@@ -78,6 +91,7 @@ def seed_db(db):
                     point.indicator_id = int(indicator_id)
                     point.region_id = int(region_id)
                     point.type_id = int(type_id)
+                    point.theme_id = int(theme_id)
                     point.value = float(value)
                     point.year = int(year)
                     db.session.add(point)

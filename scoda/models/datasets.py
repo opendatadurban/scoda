@@ -1,7 +1,8 @@
 from ..app import db
 from ..forms import Form
-from wtforms import StringField, validators
+from wtforms import StringField, validators, SelectField, SelectMultipleField
 from sqlalchemy import func
+from sqlalchemy.orm import relationship
 from wtforms.widgets import TextArea
 
 from sqlalchemy import (
@@ -29,8 +30,16 @@ class DataPoint(db.Model):
     indicator_id = Column(Integer, ForeignKey('indicators.id'), index=True, nullable=False)
     region_id = Column(Integer, ForeignKey('regions.id'), index=True, nullable=False)
     type_id = Column(Integer, ForeignKey('types.id'), index=True, nullable=False)
+    theme_id = Column(Integer, ForeignKey('themes.id'), index=True, nullable=False)
     value = Column(Float, unique=False, nullable=False)
     year = Column(Integer, index=True, unique=False, nullable=False)
+
+    # Associations
+    dataset = relationship("DataSet")
+    indicator = relationship("Indicator")
+    region = relationship("Region", backref='region')
+    type = relationship("Type")
+    theme = relationship("Theme")
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
@@ -451,32 +460,80 @@ class Type(db.Model):
         National
         """
 
-        type = []
+        types = []
         for s in text.strip().split("\n"):
             i = Type()
             i.name = s.strip()
-            type.append(i)
+            types.append(i)
 
-        return type
+        return types
 
     @classmethod
     def all(cls):
         return cls.query.order_by(Type.name).all()
 
 
-class DataForm(Form):
-    class Meta:
-        model = DataSet
+class Theme(db.Model):
+    """
+    The geographic data type
+    """
+    __tablename__ = "themes"
 
-    name = StringField('', [validators.Length(max=50), validators.DataRequired()])
-    phone_number = StringField('', [validators.Length(min=10, max=10), validators.DataRequired()])
-    initiate_problem = StringField('', [validators.Length(max=1024), validators.DataRequired()], widget=TextArea())
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50), index=True, nullable=False, unique=True)
+
+    def __repr__(self):
+        return "<Type='%s'>" % (self.name)
+
+    @classmethod
+    def create_defaults(self):
+        text = """
+        Demographics
+        Productive
+        Sustainable
+        Inclusive
+        Well-governed
+        """
+
+        theme = []
+        for s in text.strip().split("\n"):
+            i = Theme()
+            i.name = s.strip()
+            theme.append(i)
+
+        return theme
+
+    @classmethod
+    def all(cls):
+        return cls.query.order_by(Theme.name).all()
+
+
+class ExploreForm(Form):
+
+    dataset_id = SelectField('Dataset', [validators.Optional()])
+    indicator_id = SelectField('Indicator', [validators.DataRequired()])
+    region_id = SelectField('Region', [validators.Optional()])
+    type_id = SelectField('Region Type', [validators.Optional()])
+    theme_id = SelectField('Indicator Theme', [validators.Optional()])
+    year = SelectField('Year', [validators.Optional()])
 
     def __init__(self, *args, **kwargs):
-        super(DataForm, self).__init__(*args, **kwargs)
+        super(ExploreForm, self).__init__(*args, **kwargs)
+        self.dataset_id.choices = [[str(c.id), c.name] for c in DataSet.all()]
+        self.dataset_id.choices.insert(0, ('', 'Empty'))
+        self.indicator_id.choices = [[str(c.id), c.name] for c in Indicator.all()]
+        self.indicator_id.choices.insert(0, ('', 'Empty'))
+        self.region_id.choices = [[str(c.id), c.name] for c in Region.all()]
+        self.region_id.choices.insert(0, ('', 'Empty'))
+        self.type_id.choices = [[str(c.id), c.name] for c in Type.all()]
+        self.type_id.choices.insert(0, ('', 'Empty'))
+        self.theme_id.choices = [[str(c.id), c.name] for c in Theme.all()]
+        self.theme_id.choices.insert(0, ('', 'Empty'))
+        self.year.choices = [[str(i), str(y)] for i, y in enumerate(range(1996, 2018))]
+        self.year.choices.insert(0, ('', 'Empty'))
 
     def validate(self):
-        return super(DataForm, self).validate()
+        return super(ExploreForm, self).validate()
 
     def populate_obj(self, obj):
-        super(DataForm, self).populate_obj(obj)
+        super(ExploreForm, self).populate_obj(obj)

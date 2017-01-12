@@ -9,7 +9,7 @@ import scoda.researcher
 
 @app.route('/')
 def home_public():
-        return redirect(url_for('public'))
+        return redirect(url_for('explore'))
 
 
 @app.route('/registered')

@@ -12,32 +12,19 @@
 
     <main class="main">
 
-{#        {% include 'snippets/breadcrumbs.html' %}#}
+        {% include 'snippets/breadcrumbs.html' %}
+
+        {% block content %}
+
+        {% endblock content %}
 
     </main>
 
     {% include 'snippets/aside.html' %}
 
-    {% block content %}
-
-    {% endblock content %}
-
     {% include 'snippets/footer.html' %}
 
 <!-- Bootstrap and necessary plugins -->
-    <script src="../static/vendor/jquery/jquery.min.js"></script>
-    <script src="../static/vendor/tether/js/tether.min.js"></script>
-    <script src="../static/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../static/vendor/pace/pace.min.js"></script>
-
-    <!-- Plugins and scripts required by all views -->
-    <script src="../static/vendor/plotly/plotly-latest.min.js"></script>
-    <script src="../static/js/app.js"></script>
-
-    <!-- Plugins and scripts required by this views -->
-
-    <!-- Custom scripts required by this view -->
-    <script src="../static/js/views/main.js"></script>
 
 </body>
 </html>

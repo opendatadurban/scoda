@@ -7,4 +7,4 @@ from .models import *
 
 @app.route('/city')
 def city_dashboard():
-    return render_template('city/city.html')
+        return render_template('city/city_dashboard.html')
