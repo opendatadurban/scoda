@@ -84,7 +84,7 @@
     <div id="ui-view" style="opacity: 1;">
         <div class="animated fadeIn">
             <div class="row">
-                <div class="col-sm-6 col-lg-6 col-lg-3">
+                <div class="col-sm-3 col-lg-3 col-lg-3">
                     <div class="card card-inverse card-primary">
                         <form action="{{ url_for('explore') }}" id="Form" class="form-horizontal" method="POST">
                             {{ form.hidden_tag() }}
@@ -156,23 +156,218 @@
 
                             <button class="btn btn-success" type="submit">Explore This Indicator!</button>
                         </form>
-                    <a href="{{ url_for('explore') }}"><button class="btn btn-primary" id="clearForm">Reset Form</button></a>
+                        <a href="{{ url_for('explore') }}">
+                            <button class="btn btn-primary" id="clearForm">Reset Form</button>
+                        </a>
                     </div>
                 </div>
 
-{#                Plotting Card    #}
+                {#                Plotting Card    #}
 
                 {% if plot %}
+                    <script>
+                        function getImgData(chartContainer) {
+                            var chartArea = chartContainer.children[0];
+                            var svg = chartArea.innerHTML.substring(chartArea.innerHTML.indexOf("<svg"),
+                                chartArea.innerHTML.indexOf("</svg>") + 6);
+                            var doc = chartContainer.ownerDocument;
+                            var canvas = doc.createElement('canvas');
+                            canvas.setAttribute('width', chartArea.offsetWidth);
+                            canvas.setAttribute('height', chartArea.offsetHeight);
 
-                <div class="col-sm-6 col-lg-6 col-lg-3">
-                    <div class="card card-inverse card-danger">
+
+                            canvas.setAttribute(
+                                'style',
+                                'position: absolute; ' +
+                                'top: ' + (-chartArea.offsetHeight * 2) + 'px;' +
+                                'left: ' + (-chartArea.offsetWidth * 2) + 'px;');
+                            doc.body.appendChild(canvas);
+                            canvg(canvas, svg);
+                            var imgData = canvas.toDataURL("image/png");
+                            canvas.parentNode.removeChild(canvas);
+                            return imgData;
+                        }
+
+                        function saveAsImg(chartContainer) {
+                            var imgData = getImgData(chartContainer);
+
+                            // Replacing the mime-type will force the browser to trigger a download
+                            // rather than displaying the image in the browser window.
+                            window.location = imgData.replace("image/png", "image/octet-stream");
+                        }
+
+                        function toImg(chartContainer, imgContainer) {
+                            var doc = chartContainer.ownerDocument;
+                            var img = doc.createElement('img');
+                            img.src = getImgData(chartContainer);
+
+                            while (imgContainer.firstChild) {
+                                imgContainer.removeChild(imgContainer.firstChild);
+                            }
+                            imgContainer.appendChild(img);
+                        }
+                    </script>
+
+                    <script type="text/javascript">
+
+                        google.charts.load('visualization', 'current', {
+                            packages: ['controls', 'bar', 'corechart', 'geochart']
+                        });
+
+                        function redraw() {
+                            console.log('Redraw!');
+                            window.dispatchEvent(new Event('resize'));
+                        }
+
+                        function drawBar1() {
+
+                            var data = google.visualization.arrayToDataTable({{ table|safe }})
+
+                            var categoryPicker1 = new google.visualization.ControlWrapper({
+                                'controlType': 'CategoryFilter',
+                                'containerId': 'categorySelector1',
+                                'state': {'selectedValues': []},
+                                'options': {
+                                    'filterColumnLabel': 'city',
+                                    'ui': {
+                                        'labelStacking': 'vertical',
+                                        'allowMultiple': true,
+                                        'allowNone': false,
+                                        'allowTyping': false,
+                                        'caption': 'Choose a city...'
+                                    }
+                                }
+                            });
+
+                            var categoryPicker2 = new google.visualization.ControlWrapper({
+                                'controlType': 'CategoryFilter',
+                                'containerId': 'categorySelector2',
+                                'state': {'selectedValues': [{{ year|safe }}]},
+                                'options': {
+                                    'filterColumnLabel': 'year',
+                                    'ui': {
+                                        'labelStacking': 'vertical',
+                                        'allowTyping': false,
+                                        'allowMultiple': false,
+                                        'allowNone': false
+                                    }
+                                }
+                            });
+
+                            var bar1 = new google.visualization.ChartWrapper({
+                                'chartType': 'Bar',
+                                'containerId': 'chart',
+                                'options': {
+                                    stacked: true,
+                                    legend: 'right',
+                                    bars: 'vertical',
+                                    vAxis: {minValue: 0},
+                                    series: {{ series|safe }}
+                                },
+                                view: {'columns': {{ view|safe }}}
+                            });
+
+                            var bar2 = new google.visualization.ChartWrapper({
+                                'chartType': 'ColumnChart',
+                                'containerId': 'chart_img',
+                                'options': {
+                                    height: '800',
+                                    width: '1024',
+                                    isStacked: true,
+                                    legend: { position: 'right', maxLines: 10},
+                                    chartArea: {left: '10%', right: '35%'},
+                                    bars: 'vertical',
+                                    vAxis: {minValue: 0},
+                                    hAxis: {slantedText: true},
+                                    series: {{ series|safe }}
+                                },
+                                view: {'columns': {{ view|safe }}}
+                            });
+
+                            var table1 = new google.visualization.ChartWrapper({
+                                'chartType': 'Table',
+                                'containerId': 'table',
+                                'options': {}
+
+                            });
+
+                            var geochart1 = new google.visualization.ChartWrapper({
+                                'chartType': 'GeoChart',
+                                'containerId': 'geochart',
+                                'options': {
+                                    region: 'ZA',
+                                    displayMode: 'markers',
+                                    resolution: 'provinces',
+                                    width: 640,
+                                    height: 480,
+                                    theme:'material'}
+                            });
+
+
+                            var dashboard = new google.visualization.Dashboard();
+                            dashboard.bind([categoryPicker1, categoryPicker2], [bar1, bar2, table1]);
+                            dashboard.draw(data);
+
+                            function resize() {
+                                dashboard.draw(data);
+                            }
+
+                            google.visualization.events.addListener(table1, 'ready', function () {
+
+                                var dt = table1.getDataTable();
+                                var csv = google.visualization.dataTableToCsv(dt);
+
+                                $('#Export').click(function () {
+                                    this.href = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+                                });
+
+                                var myView = new google.visualization.DataView(dt);
+
+                                myView.setColumns([0,2]);
+
+                                geochart1.setDataTable(myView);
+                                geochart1.draw()
+
+                            });
+
+                            if (window.addEventListener) {
+                                window.addEventListener('resize', resize);
+                            }
+
+                            else {
+                                window.attachEvent('onresize', resize);
+                            }
+                        }
+                        google.setOnLoadCallback(drawBar1);
+
+                    </script>
+
+                    <div class="col-sm-9 col-lg-9 col-lg-6">
+                        <div class="card card-inverse card-danger">
+                            <div id="dashboard">
+                                <div id="categorySelector1"></div>
+                                <div id="categorySelector2"></div>
+                                <div id="chart" style="display: none; margin: 0 auto; width: 100%;"></div>
+                                <div id="chart_img" class="hidden" style="display: none; margin: 0 auto; width: 100%;"></div>
+                                <div id="table" style="display: none; margin: 0 auto; width: 50%;"></div>
+                                <div id="geochart" style="width: 900px; height: 500px;"></div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <a id="Export" href="data.csv" target="_blank" download="data.csv">
+                        <button class="btn-primary">Download as csv</button>
+                    </a>
+
+                    <button onclick="saveAsImg(document.getElementById('chart_img'));">Save as PNG Image</button>
 
                     </div>
-                </div>
 
                 {% endif %}
 
-            </div>
         </div>
     </div>
+</div>
 </div>

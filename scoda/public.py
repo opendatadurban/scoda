@@ -6,6 +6,7 @@ from .models.datasets import ExploreForm
 from pandas import read_sql_query
 import gviz_api
 
+
 @app.route('/explore', methods=['GET', 'POST'])
 def explore():
     session['explore'] = []
@@ -16,21 +17,33 @@ def explore():
         if form.validate():
             plot = 1
             ind = form.indicator_id.data
-            query = db.session.query(DataPoint.year, DataPoint.value, DataPoint.region_id.name).filter(DataPoint.indicator_id == ind)
-            regions = {c.id: c.name for c in Region.all()}
+            query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value).\
+                filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
+                filter(DataPoint.region_id == Region.id)
+
             df = read_sql_query(query.statement, query.session.bind)
-            df['region_id'] = df['region_id'].apply(lambda x: regions[x])
+            table = []
+            years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
+            colours = ['#f44336', '#03a9f4', '#4caf50', '#ffc107', '#03a9f4', '#ff5722', '#9c27b0']
+            series = {i: {'color': colours[i]} for i in range(len(datasets))}
+            view = range(2, len(datasets)+2)
+            view.insert(0, 0)
 
-            schema = [('Year', 'number'), ('Value', 'number'),
-                      ('City', 'string'), ('ID', 'number')]
+            head = ['city', 'year']
+            for i in datasets:
+                head.append(str(i))
+            table.append(head)
 
-            data_table = gviz_api.DataTable(schema)
-            data_table.LoadData(dataFrame.values)
-            json = data_table.ToJSon(columns_order=('Category', 'City', 'Female',
-                                                    'Male', 'Year', 'ID'), order_by="City")
+            for c in cities:
+                for y in years:
+                    row = [str(c), str(y)]
+                    for d in datasets:
+                        row.append(
+                            float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (df["ds_name"] == d), "value"]))
+                    table.append(row)
 
-
-            return render_template('explore/explore.html', form=form, plot=plot)
+            return render_template('explore/explore.html', form=form, plot=plot, table=table, colours=colours,
+                                   year=str(max(years)), series=series, view=view)
         else:
             if request.is_xhr:
                 status = 412
@@ -76,7 +89,7 @@ def parse_data():
 
     response = {}
 
-    dataset_list = [(i, str(DataSet.query.filter_by(id=i).first().name)) for i in datasets]
+    dataset_list = [(i, str(DataSet.query.filter_by(id=i).first().ds_name)) for i in datasets]
     if 'dataset_id' not in session['explore']:
         dataset_list.insert(0, ('', 'Empty'))
     else:
@@ -84,7 +97,7 @@ def parse_data():
 
     response['dataset'] = dataset_list
 
-    indicator_list = [(i, str(Indicator.query.filter_by(id=i).first().name)) for i in indicators]
+    indicator_list = [(i, str(Indicator.query.filter_by(id=i).first().in_name)) for i in indicators]
     if 'indicator_id' not in session['explore']:
         indicator_list.insert(0, ('', 'Empty'))
     else:
@@ -92,7 +105,7 @@ def parse_data():
 
     response['indicator'] = indicator_list
 
-    region_list = [(i, str(Region.query.filter_by(id=i).first().name)) for i in regions]
+    region_list = [(i, str(Region.query.filter_by(id=i).first().re_name)) for i in regions]
 
     if 'region_id' not in session['explore']:
         region_list.insert(0, ('', 'Empty'))
@@ -101,7 +114,7 @@ def parse_data():
 
     response['region'] = region_list
 
-    type_list = [(i, str(Type.query.filter_by(id=i).first().name)) for i in types]
+    type_list = [(i, str(Type.query.filter_by(id=i).first().ty_name)) for i in types]
 
     if 'type_id' not in session['explore']:
         type_list.insert(0, ('', 'Empty'))
@@ -110,7 +123,7 @@ def parse_data():
 
     response['type'] = type_list
 
-    theme_list = [(i, str(Theme.query.filter_by(id=i).first().name)) for i in themes]
+    theme_list = [(i, str(Theme.query.filter_by(id=i).first().th_name)) for i in themes]
 
     if 'theme_id' not in session['explore']:
         theme_list.insert(0, ('', 'Empty'))

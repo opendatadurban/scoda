@@ -35,7 +35,7 @@ class DataPoint(db.Model):
     year = Column(Integer, index=True, unique=False, nullable=False)
 
     # Associations
-    dataset = relationship("DataSet")
+    dataset = relationship("DataSet", backref='dataset')
     indicator = relationship("Indicator")
     region = relationship("Region", backref='region')
     type = relationship("Type")
@@ -52,10 +52,10 @@ class DataSet(db.Model):
     __tablename__ = "datasets"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(80), index=True, nullable=False, unique=True)
+    ds_name = Column(String(80), index=True, nullable=False, unique=True)
 
     def __repr__(self):
-        return "<Dataset='%s'>" % (self.name)
+        return "<Dataset='%s'>" % (self.ds_name)
 
     @classmethod
     def create_defaults(self):
@@ -250,14 +250,14 @@ class DataSet(db.Model):
         dataset = []
         for s in text.strip().split("\n"):
             i = DataSet()
-            i.name = s.strip()
+            i.ds_name = s.strip()
             dataset.append(i)
 
         return dataset
 
     @classmethod
     def all(cls):
-        return cls.query.order_by(DataSet.name).all()
+        return cls.query.order_by(DataSet.ds_name).all()
 
 
 class Indicator(db.Model):
@@ -267,10 +267,10 @@ class Indicator(db.Model):
     __tablename__ = "indicators"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(80), index=True, nullable=False, unique=True)
+    in_name = Column(String(80), index=True, nullable=False, unique=True)
 
     def __repr__(self):
-        return "<Indicator='%s'>" % (self.name)
+        return "<Indicator='%s'>" % (self.in_name)
 
     @classmethod
     def create_defaults(self):
@@ -381,14 +381,14 @@ class Indicator(db.Model):
         indicator = []
         for s in text.strip().split("\n"):
             i = Indicator()
-            i.name = s.strip()
+            i.in_name = s.strip()
             indicator.append(i)
 
         return indicator
 
     @classmethod
     def all(cls):
-        return cls.query.order_by(Indicator.name).all()
+        return cls.query.order_by(Indicator.in_name).all()
 
 
 class Region(db.Model):
@@ -398,10 +398,10 @@ class Region(db.Model):
     __tablename__ = "regions"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(50), index=True, nullable=False, unique=True)
+    re_name = Column(String(50), index=True, nullable=False, unique=True)
 
     def __repr__(self):
-        return "<Region='%s'>" % (self.name)
+        return "<Region='%s'>" % (self.re_name)
 
     @classmethod
     def create_defaults(self):
@@ -430,14 +430,14 @@ class Region(db.Model):
         region = []
         for s in text.strip().split("\n"):
             i = Region()
-            i.name = s.strip()
+            i.re_name = s.strip()
             region.append(i)
 
         return region
 
     @classmethod
     def all(cls):
-        return cls.query.order_by(Region.name).all()
+        return cls.query.order_by(Region.re_name).all()
 
 
 class Type(db.Model):
@@ -447,10 +447,10 @@ class Type(db.Model):
     __tablename__ = "types"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(50), index=True, nullable=False, unique=True)
+    ty_name = Column(String(50), index=True, nullable=False, unique=True)
 
     def __repr__(self):
-        return "<Type='%s'>" % (self.name)
+        return "<Type='%s'>" % (self.ty_name)
 
     @classmethod
     def create_defaults(self):
@@ -463,14 +463,14 @@ class Type(db.Model):
         types = []
         for s in text.strip().split("\n"):
             i = Type()
-            i.name = s.strip()
+            i.ty_name = s.strip()
             types.append(i)
 
         return types
 
     @classmethod
     def all(cls):
-        return cls.query.order_by(Type.name).all()
+        return cls.query.order_by(Type.ty_name).all()
 
 
 class Theme(db.Model):
@@ -480,10 +480,10 @@ class Theme(db.Model):
     __tablename__ = "themes"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(50), index=True, nullable=False, unique=True)
+    th_name = Column(String(50), index=True, nullable=False, unique=True)
 
     def __repr__(self):
-        return "<Type='%s'>" % (self.name)
+        return "<Type='%s'>" % (self.th_name)
 
     @classmethod
     def create_defaults(self):
@@ -498,14 +498,14 @@ class Theme(db.Model):
         theme = []
         for s in text.strip().split("\n"):
             i = Theme()
-            i.name = s.strip()
+            i.th_name = s.strip()
             theme.append(i)
 
         return theme
 
     @classmethod
     def all(cls):
-        return cls.query.order_by(Theme.name).all()
+        return cls.query.order_by(Theme.th_name).all()
 
 
 class ExploreForm(Form):
@@ -519,15 +519,15 @@ class ExploreForm(Form):
 
     def __init__(self, *args, **kwargs):
         super(ExploreForm, self).__init__(*args, **kwargs)
-        self.dataset_id.choices = [[str(c.id), c.name] for c in DataSet.all()]
+        self.dataset_id.choices = [[str(c.id), c.ds_name] for c in DataSet.all()]
         self.dataset_id.choices.insert(0, ('', 'Empty'))
-        self.indicator_id.choices = [[str(c.id), c.name] for c in Indicator.all()]
+        self.indicator_id.choices = [[str(c.id), c.in_name] for c in Indicator.all()]
         self.indicator_id.choices.insert(0, ('', 'Empty'))
-        self.region_id.choices = [[str(c.id), c.name] for c in Region.all()]
+        self.region_id.choices = [[str(c.id), c.re_name] for c in Region.all()]
         self.region_id.choices.insert(0, ('', 'Empty'))
-        self.type_id.choices = [[str(c.id), c.name] for c in Type.all()]
+        self.type_id.choices = [[str(c.id), c.ty_name] for c in Type.all()]
         self.type_id.choices.insert(0, ('', 'Empty'))
-        self.theme_id.choices = [[str(c.id), c.name] for c in Theme.all()]
+        self.theme_id.choices = [[str(c.id), c.th_name] for c in Theme.all()]
         self.theme_id.choices.insert(0, ('', 'Empty'))
         self.year.choices = [[str(i), str(y)] for i, y in enumerate(range(1996, 2018))]
         self.year.choices.insert(0, ('', 'Empty'))
