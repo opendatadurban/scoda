@@ -406,15 +406,15 @@ class Region(db.Model):
     @classmethod
     def create_defaults(self):
         text = """
-        City of Johannesburg
-        City of Tshwane
-        City of Cape Town
-        EThekwini Municipality
-        Ekurhuleni Municipality
-        Nelson Mandela Bay Municipality
-        Buffalo City Municipality
-        Mangaung Municipality
-        Msunduzi Municipality
+        Johannesburg
+        Tshwane
+        Cape Town
+        EThekwini
+        Ekurhuleni
+        Nelson Mandela Bay
+        Buffalo City
+        Mangaung
+        Msunduzi
         Western Cape
         Eastern Cape
         Northern Cape
