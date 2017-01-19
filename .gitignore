@@ -101,3 +101,13 @@ ENV/
 /scoda/data/process_test.py
 /scoda/data/Indicators.csv
 /scoda/data/UniqueIndicators.csv
+/scoda/data/jhbpopests_clean.csv
+/scoda/data/metro_salc_geo.json
+/scoda/data/pandasTest.py
+.idea/
+out.csv
+scoda/data/jhbpopests_clean.csv
+scoda/data/metro_salc_geo.json
+scoda/data/pandasTest.py
+scoda/static/vendor/blockUI/
+scoda/static/vendor/grChartImg/

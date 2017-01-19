@@ -5,6 +5,7 @@ from .models import *
 from .models.datasets import ExploreForm
 from pandas import read_sql_query
 import gviz_api
+import re
 
 
 @app.route('/explore', methods=['GET', 'POST'])
@@ -16,6 +17,7 @@ def explore():
     if request.method == 'POST':
         if form.validate():
             plot = 1
+
             ind = form.indicator_id.data
             query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value).\
                 filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
@@ -24,26 +26,47 @@ def explore():
             df = read_sql_query(query.statement, query.session.bind)
             table = []
             years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
+
+            cities = [c.encode('utf-8') for c in cities]
+
+            plot_type = 1
+            if len(datasets) > 1:
+                plot_type = 2
+
             colours = ['#f44336', '#03a9f4', '#4caf50', '#ffc107', '#03a9f4', '#ff5722', '#9c27b0']
             series = {i: {'color': colours[i]} for i in range(len(datasets))}
             view = range(2, len(datasets)+2)
             view.insert(0, 0)
+
+            minVal = min(map(float, list(df.value.unique())))
+            maxVal = max(map(float, list(df.value.unique()))) * 1.1
 
             head = ['city', 'year']
             for i in datasets:
                 head.append(str(i))
             table.append(head)
 
-            for c in cities:
-                for y in years:
-                    row = [str(c), str(y)]
-                    for d in datasets:
-                        row.append(
-                            float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (df["ds_name"] == d), "value"]))
-                    table.append(row)
+            if plot_type == 1:
+                df = df.iloc[:, (0, 1, 3)]
+
+                schema = [('City', 'string'), ('Year', 'string'), ('%s' % datasets[0], 'number')]
+
+                data_table = gviz_api.DataTable(schema)
+                data_table.LoadData(df.values)
+                table = data_table.ToJSon(columns_order=('City', '%s' % datasets[0], 'Year'))
+
+            else:
+                for c in cities:
+                    for y in years:
+                        row = [str(c), str(y)]
+                        for d in datasets:
+                            row.append(
+                                float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (df["ds_name"] == d), "value"]))
+                        table.append(row)
 
             return render_template('explore/explore.html', form=form, plot=plot, table=table, colours=colours,
-                                   year=str(max(years)), series=series, view=view)
+                                   year=str(max(years)), series=series, view=view, plot_type=plot_type, min=minVal,
+                                   max=maxVal, cities=cities)
         else:
             if request.is_xhr:
                 status = 412

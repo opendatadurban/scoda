@@ -1,7 +1,10 @@
 from . import *  # noqa
 from ..app import app
 import pandas as pd
-from numpy import isnan
+from numpy import isnan, sort, genfromtxt
+import geojson
+from sqlalchemy import func
+from geomet import wkt
 
 regions = {'City of Johannesburg': 1,
            'City of Tshwane': 2,
@@ -38,6 +41,26 @@ themes = {'Demographics': 1,
 
 dfi = pd.read_csv('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/Indicators.csv')
 df = pd.read_csv('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/Manicured_final.csv')
+
+with open('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/metro_salc_geo.json') as data_file:
+    data = geojson.load(data_file)
+
+data2 = genfromtxt('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/jhbpopests_clean.csv', delimiter=',')
+
+parser = {}
+for i, I in enumerate(sort(list(set(data2[:, 2])))):
+    parser[int(I)] = {}
+    parser[int(I)]['includes'] = []
+    parser[int(I)]['city_ref'] = i
+
+for i in range(len(data2)):
+    parser[int(data2[i, 2])]['includes'].append(data2[i, 1])
+
+parser2 = {}
+
+for i in data2:
+    parser2[int(i[1])] = list(i[21:])
+
 mapping = {}
 mapping_theme = {}
 for i in range(0, len(dfi)):
@@ -95,4 +118,22 @@ def seed_db(db):
                     point.value = float(value)
                     point.year = int(year)
                     db.session.add(point)
+
+        print 'Populating city GIS data...'
+        for poly in data['features']:
+            if poly['properties']['dc_mdb_c'] == 'JHB':
+                area = Area()
+                for i in parser:
+                    if int(poly['properties']['sal_code']) in parser[i]['includes']:
+                        area.ward_code = i
+                        area.city_ward_code = parser[i]['city_ref'] + 1
+
+                area.sal_code = int(poly['properties']['sal_code'])
+                area.region_id = 1
+                area.data = parser2[int(poly['properties']['sal_code'])]
+                polygon = wkt.dumps(poly['geometry'], decimals=6)
+                area.geom = polygon
+                db.session.add(area)
+            else:
+                pass
         db.session.commit()

@@ -169,203 +169,17 @@
 
                 {% if plot %}
 
-                    <script>
-                        function getImgData(chartContainer) {
-                            var chartArea = chartContainer.children[0];
-                            var svg = chartArea.innerHTML.substring(chartArea.innerHTML.indexOf("<svg"),
-                                chartArea.innerHTML.indexOf("</svg>") + 6);
-                            var doc = chartContainer.ownerDocument;
-                            var canvas = doc.createElement('canvas');
-                            canvas.setAttribute('width', chartArea.offsetWidth);
-                            canvas.setAttribute('height', chartArea.offsetHeight);
+                    {% include 'snippets/image_export.html' %}
 
+                    {% if plot_type == 2 %}
 
-                            canvas.setAttribute(
-                                'style',
-                                'position: absolute; ' +
-                                'top: ' + (-chartArea.offsetHeight * 2) + 'px;' +
-                                'left: ' + (-chartArea.offsetWidth * 2) + 'px;');
-                            doc.body.appendChild(canvas);
-                            canvg(canvas, svg);
-                            var imgData = canvas.toDataURL("image/png");
-                            canvas.parentNode.removeChild(canvas);
-                            return imgData;
-                        }
+                        {% include 'snippets/charts_bar.html' %}
 
-                        function saveAsImg(chartContainer) {
-                            var imgData = getImgData(chartContainer);
+                    {% else %}
 
-                            // Replacing the mime-type will force the browser to trigger a download
-                            // rather than displaying the image in the browser window.
-                            window.location = imgData.replace("image/png", "image/octet-stream");
-                        }
+                        {% include 'snippets/charts_line.html' %}
 
-                        function toImg(chartContainer, imgContainer) {
-                            var doc = chartContainer.ownerDocument;
-                            var img = doc.createElement('img');
-                            img.src = getImgData(chartContainer);
-
-                            while (imgContainer.firstChild) {
-                                imgContainer.removeChild(imgContainer.firstChild);
-                            }
-                            imgContainer.appendChild(img);
-                        }
-                    </script>
-
-                    <script type="text/javascript">
-
-                        google.charts.load('visualization', 'current', {
-                            packages: ['controls', 'bar', 'corechart', 'geochart']
-                        });
-
-                        function redraw() {
-                            console.log('Redraw!');
-                            window.dispatchEvent(new Event('resize'));
-                        }
-
-                        function drawBar1() {
-
-                            var data = google.visualization.arrayToDataTable({{ table|safe }})
-
-                            var categoryPicker1 = new google.visualization.ControlWrapper({
-                                'controlType': 'CategoryFilter',
-                                'containerId': 'categorySelector1',
-                                'state': {'selectedValues': []},
-                                'options': {
-                                    'filterColumnLabel': 'city',
-                                    'ui': {
-                                        'labelStacking': 'vertical',
-                                        'allowMultiple': true,
-                                        'allowNone': false,
-                                        'allowTyping': false,
-                                        'caption': 'Choose a city...'
-                                    }
-                                }
-                            });
-
-                            var categoryPicker2 = new google.visualization.ControlWrapper({
-                                'controlType': 'CategoryFilter',
-                                'containerId': 'categorySelector2',
-                                'state': {'selectedValues': [{{ year|safe }}]},
-                                'options': {
-                                    'filterColumnLabel': 'year',
-                                    'ui': {
-                                        'labelStacking': 'vertical',
-                                        'allowTyping': false,
-                                        'allowMultiple': false,
-                                        'allowNone': false
-                                    }
-                                }
-                            });
-
-                            var bar2 = new google.visualization.ChartWrapper({
-                                'chartType': 'ColumnChart',
-                                'containerId': 'chart_img',
-                                'options': {
-                                    height: '800',
-                                    width: '1024',
-                                    isStacked: true,
-                                    legend: {position: 'right', maxLines: 10},
-                                    chartArea: {left: '10%', right: '35%'},
-                                    bars: 'vertical',
-                                    vAxis: {minValue: 0},
-                                    hAxis: {slantedText: true},
-                                    series: {{ series|safe }}
-                                },
-                                view: {'columns': {{ view|safe }}}
-                            });
-
-                            var table1 = new google.visualization.ChartWrapper({
-                                'chartType': 'Table',
-                                'containerId': 'table',
-                                'options': {}
-
-                            });
-
-                            var cardHeight = $("#formCard").height() + $("#formCardHead").height() + 20;
-                            var cardWidth = $("#geoCard").width();
-
-                            var bar1 = new google.visualization.ChartWrapper({
-                                'chartType': 'Bar',
-                                'containerId': 'chart',
-                                'options': {
-                                    stacked: true,
-                                    legend: 'right',
-                                    bars: 'vertical',
-                                    vAxis: {minValue: 0},
-                                    hAxis: {slantedText: true},
-                                    height: cardHeight,
-                                    bar: { groupWidth: '99%' },
-                                    series: {{ series|safe }}
-                                },
-                                view: {'columns': {{ view|safe }}}
-                            });
-
-                            var geochart1 = new google.visualization.ChartWrapper({
-                                'chartType': 'GeoChart',
-                                'containerId': 'geochart',
-                                'options': {
-                                    region: 'ZA',
-                                    displayMode: 'markers',
-                                    resolution: 'provinces',
-                                    theme: 'material',
-                                    height: cardHeight,
-                                    width: cardWidth,
-                                    keepAspectRatio: false
-                                }
-                            });
-
-                            var dashboard = new google.visualization.Dashboard();
-                            dashboard.bind([categoryPicker1, categoryPicker2], [bar1, bar2, table1]);
-                            dashboard.draw(data);
-
-                            $("#selectCard").css({height: cardHeight * 1.2});
-                            $("#chartCard").css({height: cardHeight  * 1.2});
-
-                            function resize() {
-                                dashboard.draw(data);
-                            }
-
-                            google.visualization.events.addListener(table1, 'ready', function () {
-
-                                var dt = table1.getDataTable();
-                                var csv = google.visualization.dataTableToCsv(dt);
-
-                                $('#Export').click(function () {
-                                    this.href = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
-                                });
-
-                                var myView = new google.visualization.DataView(dt);
-
-                                myView.setColumns([0, 2]);
-
-                                geochart1.setDataTable(myView);
-                                geochart1.draw();
-                            });
-
-                            if (window.addEventListener) {
-                                window.addEventListener('resize', resize);
-                            }
-
-                            else {
-                                window.attachEvent('onresize', resize);
-                            }
-
-                        }
-                        google.setOnLoadCallback(drawBar1);
-
-                        $(document).ready(function () {
-
-                            var dt = table1.getDataTable();
-                            var myView = new google.visualization.DataView(dt);
-
-                            myView.setColumns([0, 2]);
-
-                            geochart1.setDataTable(myView);
-                            geochart1.draw();
-                        });
-
-                    </script>
+                    {%  endif %}
 
                     <div class="col-sm-7 col-lg-7 col-lg-7">
                         <div class="card" id="geoCard">
@@ -411,6 +225,8 @@
                                     <div class="card-block">
                                         <div id="table"
                                              style="display: inline-block; margin: 0 auto; width: 100%;"></div>
+                                        <div id="table2"
+                                             style="display: none; margin: 0 auto; width: 100%;"></div>
                                     </div>
                                 </div>
                             </div>

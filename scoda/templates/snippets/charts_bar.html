@@ -1,0 +1,152 @@
+<script type="text/javascript">
+
+    google.charts.load('visualization', 'current', {
+        packages: ['controls', 'bar', 'corechart', 'geochart']
+    });
+
+    function redraw() {
+        window.dispatchEvent(new Event('resize'));
+    }
+
+    function drawBar1() {
+
+        var data = google.visualization.arrayToDataTable({{ table|safe }})
+
+        var categoryPicker1 = new google.visualization.ControlWrapper({
+            'controlType': 'CategoryFilter',
+            'containerId': 'categorySelector1',
+            'state': {'selectedValues': {{ cities|safe }}},
+            'options': {
+                'filterColumnLabel': 'city',
+                'ui': {
+                    'labelStacking': 'vertical',
+                    'allowMultiple': true,
+                    'allowNone': false,
+                    'allowTyping': false,
+                    'caption': 'Choose a city...'
+                }
+            }
+        });
+
+        var categoryPicker2 = new google.visualization.ControlWrapper({
+            'controlType': 'CategoryFilter',
+            'containerId': 'categorySelector2',
+            'state': {'selectedValues': [{{ year|safe }}]},
+            'options': {
+                'filterColumnLabel': 'year',
+                'ui': {
+                    'labelStacking': 'vertical',
+                    'allowTyping': false,
+                    'allowMultiple': false,
+                    'allowNone': false
+                }
+            }
+        });
+
+        var bar2 = new google.visualization.ChartWrapper({
+            'chartType': 'LineChart',
+            'containerId': 'chart_img',
+            'options': {
+                height: '800',
+                width: '1024',
+                legend: {position: 'right', maxLines: 10},
+                chartArea: {left: '10%', right: '35%'},
+                bars: 'vertical',
+                vAxis: {minValue: 0},
+                series: {{ series|safe }}
+            },
+            view: {'columns': {{ view|safe }}}
+        });
+
+        var table1 = new google.visualization.ChartWrapper({
+            'chartType': 'Table',
+            'containerId': 'table',
+            'options': {}
+
+        });
+
+        var cardHeight = $("#formCard").height() + $("#formCardHead").height() + 20;
+        var cardWidth = $("#geoCard").width();
+
+        var bar1 = new google.visualization.ChartWrapper({
+            'chartType': 'Bar',
+            'containerId': 'chart',
+            'options': {
+                stacked: true,
+                legend: {position: 'right'},
+                bars: 'vertical',
+                vAxis: {minValue: 0},
+                hAxis: {slantedText: true},
+                height: cardHeight,
+                bar: {groupWidth: '99%'},
+                series: {{ series|safe }}
+            },
+            view: {'columns': {{ view|safe }}}
+        });
+
+        var geochart1 = new google.visualization.ChartWrapper({
+            'chartType': 'GeoChart',
+            'containerId': 'geochart',
+            'options': {
+                region: 'ZA',
+                displayMode: 'markers',
+                resolution: 'provinces',
+                theme: 'material',
+                height: cardHeight,
+                width: cardWidth,
+                keepAspectRatio: true
+            }
+        });
+
+        var dashboard = new google.visualization.Dashboard();
+
+        dashboard.bind([categoryPicker1, categoryPicker2], [bar1, bar2, table1]);
+        dashboard.draw(data);
+
+        $("#selectCard").css({height: cardHeight * 1.2});
+        $("#chartCard").css({height: cardHeight * 1.2});
+
+        function resize() {
+            dashboard.draw(data);
+        }
+
+        google.visualization.events.addListener(table1, 'ready', function () {
+
+            var dt = table1.getDataTable();
+            var csv = google.visualization.dataTableToCsv(dt);
+
+            $('#Export').click(function () {
+                this.href = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+            });
+
+            var myView = new google.visualization.DataView(dt);
+
+            myView.setColumns([0, 2]);
+
+            geochart1.setDataTable(myView);
+            geochart1.draw();
+        });
+
+        if (window.addEventListener) {
+            window.addEventListener('resize', resize);
+        }
+
+        else {
+            window.attachEvent('onresize', resize);
+        }
+
+    }
+    google.setOnLoadCallback(drawBar1);
+
+    $(document).ready(function () {
+
+        var dt = table1.getDataTable();
+        var myView = new google.visualization.DataView(dt);
+
+        myView.setColumns([0, 2]);
+
+        geochart1.setDataTable(myView);
+        geochart1.draw();
+    });
+
+</script>
