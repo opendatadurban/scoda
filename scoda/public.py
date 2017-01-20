@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from scoda.app import app
 from flask import request, url_for, redirect, flash, make_response, session, render_template, jsonify
 from .models import db
@@ -5,7 +7,7 @@ from .models import *
 from .models.datasets import ExploreForm
 from pandas import read_sql_query
 import gviz_api
-import re
+import geojson, json
 
 
 @app.route('/explore', methods=['GET', 'POST'])
@@ -85,6 +87,24 @@ def explore():
     return (resp, status,
             # ensure the browser refreshes the page when Back is pressed
             {'Cache-Control': 'no-cache, no-store, must-revalidate'})
+
+
+@app.route('/demographics', methods=['GET', 'POST'])
+def demographics():
+    query = db.session.query(Area.geom.ST_AsGeoJSON(), Area.data)
+    geometries = {"type": "FeatureCollection",
+                  "features": []}
+
+    # geometries = []
+
+    for g in query:
+        d = json.loads(g[0])
+        geometries['features'].append({"type": "Feature", "properties": {"density": g[1][0]},
+                                  "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
+        # geometries.append({"type": "Polygon", "coordinates": d['coordinates']})
+
+
+    return render_template('demographics/demographics.html', geometries=geometries)
 
 
 @app.route('/_parse_data', methods=['GET'])

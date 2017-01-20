@@ -111,3 +111,4 @@ scoda/data/metro_salc_geo.json
 scoda/data/pandasTest.py
 scoda/static/vendor/blockUI/
 scoda/static/vendor/grChartImg/
+/scoda/templates/demographics/testMap.html
