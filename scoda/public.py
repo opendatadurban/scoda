@@ -5,6 +5,7 @@ from flask import request, url_for, redirect, flash, make_response, session, ren
 from .models import db
 from .models import *
 from .models.datasets import ExploreForm
+from .models.maps import MapForm
 from pandas import read_sql_query
 import gviz_api
 import geojson, json
@@ -31,11 +32,15 @@ def explore():
 
             cities = [c.encode('utf-8') for c in cities]
 
+            options_list = [{'optid': i, 'optname': d} for i, d in enumerate(datasets)]
+            years_list = [{'optid': i, 'optname': 'Year: %s' % d} for i, d in enumerate(years)]
+
             plot_type = 1
             if len(datasets) > 1:
                 plot_type = 2
 
-            colours = ['#f44336', '#03a9f4', '#4caf50', '#ffc107', '#03a9f4', '#ff5722', '#9c27b0']
+            colours = ['#f44336', '#03a9f4', '#4caf50', '#ffc107', '#03a9f4', '#ff5722', '#9c27b0', '#8bc34a',
+                       '#ffeb3b', '#9e9e9e']
             series = {i: {'color': colours[i]} for i in range(len(datasets))}
             view = range(2, len(datasets)+2)
             view.insert(0, 0)
@@ -68,7 +73,7 @@ def explore():
 
             return render_template('explore/explore.html', form=form, plot=plot, table=table, colours=colours,
                                    year=str(max(years)), series=series, view=view, plot_type=plot_type, min=minVal,
-                                   max=maxVal, cities=cities)
+                                   max=maxVal, cities=cities, options_list=options_list, years_list=years_list)
         else:
             if request.is_xhr:
                 status = 412
@@ -91,21 +96,85 @@ def explore():
 
 @app.route('/demographics', methods=['GET', 'POST'])
 def demographics():
-    query = db.session.query(Area.geom.ST_AsGeoJSON(), Area.data)
-    geometries = {"type": "FeatureCollection",
-                  "features": []}
+    form = MapForm()
+    status = 200
+    geometries = {}
+    if request.method == 'POST':
+        if form.validate():
+            # query = db.session.query(Area.geom.ST_AsGeoJSON(), Area.data)
+            year = int(form.year.data)
+            year_ind = range(1996, 2031)
 
-    # geometries = []
+            if form.city_ward_code.data == '':
 
-    for g in query:
-        d = json.loads(g[0])
-        geometries['features'].append({"type": "Feature", "properties": {"density": g[1][0]},
-                                  "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
-        # geometries.append({"type": "Polygon", "coordinates": d['coordinates']})
+                query = db.session.query(Ward.geom.ST_AsGeoJSON(), Ward.data, Ward.city_ward_code)
+                geometries = {"type": "FeatureCollection",
+                              "features": []}
+                for g in query:
+                    d = json.loads(g[0])
+                    geometries['features'].append({"type": "Feature", "properties": {"density": g[1][year],
+                                                                                     "name": 'Ward %s' % g[2],
+                                                                                     "year": year_ind[year]},
+                                              "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
 
+            else:
+                query = db.session.query(Area.geom.ST_AsGeoJSON(), Area.data, Area.city_ward_code) \
+                    .filter(Area.city_ward_code == form.city_ward_code.data)
+                print form.city_ward_code.data
+                geometries = {"type": "FeatureCollection",
+                              "features": []}
 
-    return render_template('demographics/demographics.html', geometries=geometries)
+                for g in query:
+                    d = json.loads(g[0])
+                    geometries['features'].append(
+                        {"type": "Feature", "properties": {"density": g[1][year],
+                                                           "name": 'Area %s' % g[2],
+                                                           "year": year_ind[year]},
+                         "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
 
+            return render_template('demographics/demographics.html', form=form, geometries=geometries)
+
+        else:
+            if request.is_xhr:
+                status = 412
+            else:
+                flash('Please correct the problems below and try again.', 'warning')
+
+    else:
+        query = db.session.query(Ward.geom.ST_AsGeoJSON(), Ward.data, Ward.city_ward_code)
+        geometries = {"type": "FeatureCollection",
+                      "features": []}
+
+        for g in query:
+            d = json.loads(g[0])
+            geometries['features'].append({"type": "Feature", "properties": {"density": g[1][0],
+                                                                             "name": 'Ward %s' % g[2],
+                                                                             "year": 1996},
+                                           "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
+
+        return render_template('demographics/demographics.html', form=form, geometries=geometries)
+
+    if not request.is_xhr:
+        query = db.session.query(Ward.geom.ST_AsGeoJSON(), Ward.data, Ward.city_ward_code)
+        geometries = {"type": "FeatureCollection",
+                      "features": []}
+
+        # geometries = []
+
+        for g in query:
+            d = json.loads(g[0])
+            geometries['features'].append({"type": "Feature", "properties": {"density": g[1][0], "name": g[2],
+                                                                             "year": 1996},
+                                           "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
+
+        resp = make_response(render_template('demographics/demographics.html', form=form, geometries=geometries))
+
+    else:
+        resp = ''
+
+    return (resp, status,
+            # ensure the browser refreshes the page when Back is pressed
+            {'Cache-Control': 'no-cache, no-store, must-revalidate'})
 
 @app.route('/_parse_data', methods=['GET'])
 def parse_data():

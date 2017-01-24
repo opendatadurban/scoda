@@ -1,7 +1,7 @@
 from . import *  # noqa
 from ..app import app
 import pandas as pd
-from numpy import isnan, sort, genfromtxt
+from numpy import isnan, sort, genfromtxt, zeros, sum
 import geojson
 from sqlalchemy import func
 from geomet import wkt
@@ -119,7 +119,9 @@ def seed_db(db):
                     point.year = int(year)
                     db.session.add(point)
 
-        print 'Populating city GIS data...'
+        db.session.commit()
+
+        print 'Populating city enumerator GIS data...'
         for poly in data['features']:
             if poly['properties']['dc_mdb_c'] == 'JHB':
                 area = Area()
@@ -136,4 +138,24 @@ def seed_db(db):
                 db.session.add(area)
             else:
                 pass
+        db.session.commit()
+
+        print 'Populating city ward GIS data...'
+        data3 = geojson.load(open('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/MunicipalWards2016.json', 'r'))
+
+        for i in data3['features']:
+            if 'Johannesburg' in i['properties']['MunicName']:
+                ward = Ward()
+                ward.ward_code = int(i['properties']['WardID'])
+                ward.city_ward_code = int(i['properties']['WardNo'])
+                ward.region_id = 1
+
+                D = zeros((len(parser[int(i['properties']['WardID'])]['includes']), 35))
+                for j, J in enumerate(parser[int(i['properties']['WardID'])]['includes']):
+                    D[j, :] = parser2[J]
+                ward.data = list(sum(D, axis=0))
+
+                ward.geom = wkt.dumps(i['geometry'], decimals=6)
+                db.session.add(ward)
+
         db.session.commit()

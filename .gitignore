@@ -112,3 +112,4 @@ scoda/data/pandasTest.py
 scoda/static/vendor/blockUI/
 scoda/static/vendor/grChartImg/
 /scoda/templates/demographics/testMap.html
+/scoda/data/MunicipalWards2016.json

@@ -193,6 +193,28 @@
                     </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-sm-5 col-lg-5 col-lg-5">
+                            <div class="card" id="mapSelect">
+                                <div class="card-header">Data on Map</div>
+                                <div class="card-block" style="text-align: center">
+                                     <select class="js-example-basic-single" style="width: 80%">
+                                         {% for o in options_list %}
+                                            <option name="{{ o.optid }}">{{ o.optname }}</option>
+                                         {% endfor %}
+                                     </select>
+                                     <br>
+                                    <br>
+                                     <select class="js-example-basic-single" style="width: 80%">
+                                         {% for y in years_list %}
+                                            <option name="{{ y.optid }}">{{ y.optname }}</option>
+                                         {% endfor %}
+                                     </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div id="dashboard">
                         <div class="row">
                             <div class="col-sm-2 col-lg-2 col-lg-2">

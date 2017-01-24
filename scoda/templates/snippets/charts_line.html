@@ -72,6 +72,7 @@
                 chartArea: {left: '10%', right: '35%'},
                 bars: 'vertical',
                 vAxis: {minValue: 0},
+                pointSize: 5,
                 series: {{ series|safe }}
             },
             view: {'columns': {{ view|safe }}}
@@ -111,7 +112,9 @@
                 hAxis: {slantedText: true},
                 height: cardHeight,
                 linewidth: 4,
-                interpolateNulls: true
+                interpolateNulls: true,
+                pointSize: 5
+
             }
         });
 
