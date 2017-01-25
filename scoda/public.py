@@ -32,15 +32,15 @@ def explore():
 
             cities = [c.encode('utf-8') for c in cities]
 
-            options_list = [{'optid': i, 'optname': d} for i, d in enumerate(datasets)]
-            years_list = [{'optid': i, 'optname': 'Year: %s' % d} for i, d in enumerate(years)]
+            options_list = [{'optid': i, 'optname': d} for i, d in enumerate(datasets, start=1)]
+            years_list = [{'optid': i, 'optname': 'Year: %s' % d} for i, d in enumerate(sorted(years), start=1)]
 
             plot_type = 1
-            if len(datasets) > 1:
+            if (len(datasets) > 1) or (len(years) == 1):
                 plot_type = 2
 
             colours = ['#f44336', '#03a9f4', '#4caf50', '#ffc107', '#03a9f4', '#ff5722', '#9c27b0', '#8bc34a',
-                       '#ffeb3b', '#9e9e9e']
+                       '#ffeb3b', '#9e9e9e', '#3f51b5', '#e91e63']
             series = {i: {'color': colours[i]} for i in range(len(datasets))}
             view = range(2, len(datasets)+2)
             view.insert(0, 0)
@@ -67,8 +67,12 @@ def explore():
                     for y in years:
                         row = [str(c), str(y)]
                         for d in datasets:
-                            row.append(
-                                float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (df["ds_name"] == d), "value"]))
+                            datapoint = df.loc[(df["re_name"] == c) & (df["year"] == y) & (df["ds_name"] == d), "value"]
+                            if len(datapoint) == 0:
+                                row.append(None)
+                            else:
+                                row.append(
+                                    float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (df["ds_name"] == d), "value"]))
                         table.append(row)
 
             return render_template('explore/explore.html', form=form, plot=plot, table=table, colours=colours,
@@ -120,7 +124,6 @@ def demographics():
             else:
                 query = db.session.query(Area.geom.ST_AsGeoJSON(), Area.data, Area.city_ward_code) \
                     .filter(Area.city_ward_code == form.city_ward_code.data)
-                print form.city_ward_code.data
                 geometries = {"type": "FeatureCollection",
                               "features": []}
 
@@ -175,6 +178,7 @@ def demographics():
     return (resp, status,
             # ensure the browser refreshes the page when Back is pressed
             {'Cache-Control': 'no-cache, no-store, must-revalidate'})
+
 
 @app.route('/_parse_data', methods=['GET'])
 def parse_data():

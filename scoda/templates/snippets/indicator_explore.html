@@ -1,6 +1,7 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
+
         $('.js-example-basic-single').select2();
         $('.js-example-basic-multiple').select2();
 
@@ -179,7 +180,7 @@
 
                         {% include 'snippets/charts_line.html' %}
 
-                    {%  endif %}
+                    {% endif %}
 
                     <div class="col-sm-7 col-lg-7 col-lg-7">
                         <div class="card" id="geoCard">
@@ -198,18 +199,36 @@
                             <div class="card" id="mapSelect">
                                 <div class="card-header">Data on Map</div>
                                 <div class="card-block" style="text-align: center">
-                                     <select class="js-example-basic-single" style="width: 80%">
-                                         {% for o in options_list %}
-                                            <option name="{{ o.optid }}">{{ o.optname }}</option>
-                                         {% endfor %}
-                                     </select>
-                                     <br>
+                                    <select id="dataSelect" class="js-example-basic-single" {% if plot_type == 1 %}disabled{% endif %} style="width: 80%">
+                                        {% if plot_type == 2 %}
+                                            {% for o in options_list %}
+                                                <option value="{{ o.optid }}">{{ o.optname }}</option>
+                                            {% endfor %}
+                                        {% else %}
+                                            <option value="-">-</option>
+                                        {% endif %}
+                                    </select>
                                     <br>
-                                     <select class="js-example-basic-single" style="width: 80%">
-                                         {% for y in years_list %}
-                                            <option name="{{ y.optid }}">{{ y.optname }}</option>
-                                         {% endfor %}
-                                     </select>
+                                    <br>
+                                    <select id="yearSelect" class="js-example-basic-single" {% if plot_type == 2 %}disabled{% endif %} style="width: 80%">
+                                        {% if plot_type == 2 %}
+                                            <option value="-">-</option>
+                                        {% else %}
+                                            {% for y in years_list %}
+                                                <option value="{{ y.optid }}">{{ y.optname }}</option>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-7 col-lg-7 col-lg-7">
+                            <div class="card" id="descriptionCard">
+                                <div class="card-header">About This Indicator</div>
+                                <div class="card-block" style="text-align: center">
+                                    <p>A description of the indicator will go here. This should include, among others,
+                                        information on how the data was collected and any assumptions made.</p>
                                 </div>
                             </div>
                         </div>
@@ -255,20 +274,42 @@
 
                         </div>
                     </div>
-                </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-5 col-lg-5 col-lg-5">
+                            <div class="card" id="mapSelect">
+                                <div class="card-header">Download data</div>
+                                <div class="card-block" style="text-align: center">
+
+                                    <a id="Export" href="data.csv" target="_blank" download="data.csv">
+                                        <button class="btn btn-primary" style="margin-right: 40px;">Download table data
+                                            as a CSV file
+                                        </button>
+                                    </a>
+                                    <a download="chart.png" onclick="saveAsImg(document.getElementById('chart_img'));">
+                                        <button class="btn btn-primary" style="margin-left: 40px;">Save chart as a
+                                            PNG image
+                                        </button>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 {% endif %}
 
     </div>
 
-    {#                    <a id="Export" href="data.csv" target="_blank" download="data.csv">#}
-    {#                        <button class="btn-primary">Download as csv</button>#}
-    {#                    </a>#}
-    {##}
-    {#                    <button onclick="saveAsImg(document.getElementById('chart_img'));">Save as PNG Image</button>#}
-
-
 </div>
 
+<script type="text/javascript">
 
+    $(document).ready(function (e) {
+        var selectHeight = $("#mapSelect").height() + 2;
+        $("#descriptionCard").css({height: selectHeight});
+    });
 
+</script>

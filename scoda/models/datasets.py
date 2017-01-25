@@ -136,7 +136,7 @@ class DataSet(db.Model):
         Emissions - Government
         Emissions - Agriculture
         Emissions - Losses
-        Emissions (all fuels excl. aviation, marine)
+        Emissions - All fuels excl aviation and marine
         Male learner enrolment- primary
         Female learner enrolment- primary
         Male learner enrolment- secondary

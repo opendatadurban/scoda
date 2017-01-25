@@ -26,7 +26,7 @@
 
                             // Replacing the mime-type will force the browser to trigger a download
                             // rather than displaying the image in the browser window.
-                            window.location = imgData.replace("image/png", "image/octet-stream");
+                            download(imgData, "chart.png", 'image/png');
                         }
 
                         function toImg(chartContainer, imgContainer) {

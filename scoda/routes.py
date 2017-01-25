@@ -16,7 +16,7 @@ def home_public():
 def home_user():
     if current_user.is_authenticated:
         if current_user.has_role('city'):
-            return redirect(url_for('city_dashboard'))
+            return redirect(url_for('explore'))
 
         if current_user.has_role('researcher'):
             return redirect(url_for('researcher_dashboard'))

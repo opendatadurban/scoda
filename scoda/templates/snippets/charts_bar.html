@@ -44,7 +44,7 @@
         });
 
         var bar2 = new google.visualization.ChartWrapper({
-            'chartType': 'LineChart',
+            'chartType': 'ColumnChart',
             'containerId': 'chart_img',
             'options': {
                 height: '800',
@@ -52,7 +52,9 @@
                 legend: {position: 'right', maxLines: 10},
                 chartArea: {left: '10%', right: '35%'},
                 bars: 'vertical',
+                isStacked: true,
                 vAxis: {minValue: 0},
+                hAxis: {slantedText: true},
                 series: {{ series|safe }}
             },
             view: {'columns': {{ view|safe }}}
@@ -92,7 +94,8 @@
                 displayMode: 'markers',
                 resolution: 'provinces',
                 theme: 'material',
-                height: cardHeight,
+                colorAxis: {colors: ['#FED976', '#FC4E2A', '#800026']},
+                height: cardHeight - 2,
                 width: cardWidth,
                 keepAspectRatio: true
             }
@@ -106,11 +109,11 @@
         $("#selectCard").css({height: cardHeight * 1.2});
         $("#chartCard").css({height: cardHeight * 1.2});
 
-        function resize() {
-            dashboard.draw(data);
-        }
-
         google.visualization.events.addListener(table1, 'ready', function () {
+
+            var dataset = Number($('#dataSelect').find("option:selected").val());
+            dataset += 1;
+            var year = $('#yearSelect').find("option:selected").val();
 
             var dt = table1.getDataTable();
             var csv = google.visualization.dataTableToCsv(dt);
@@ -121,10 +124,26 @@
 
             var myView = new google.visualization.DataView(dt);
 
-            myView.setColumns([0, 3]);
+            myView.setColumns([0, dataset]);
 
             geochart1.setDataTable(myView);
             geochart1.draw();
+
+            $('#dataSelect').on('change', function () {
+
+                var dataset = Number($('#dataSelect').find("option:selected").val());
+                dataset += 1;
+                var year = $('#yearSelect').find("option:selected").val();
+
+                var myView = new google.visualization.DataView(dt);
+
+                myView.setColumns([0, dataset]);
+
+                geochart1.setDataTable(myView);
+                geochart1.draw();
+
+            });
+
         });
 
         if (window.addEventListener) {
@@ -137,16 +156,5 @@
 
     }
     google.setOnLoadCallback(drawBar1);
-
-    $(document).ready(function () {
-
-        var dt = table1.getDataTable();
-        var myView = new google.visualization.DataView(dt);
-
-        myView.setColumns([0, 2]);
-
-        geochart1.setDataTable(myView);
-        geochart1.draw();
-    });
 
 </script>
