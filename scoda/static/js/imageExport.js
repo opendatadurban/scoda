@@ -1,6 +1,7 @@
 /**
  * Created by mrade_000 on 25-Jan-17.
  */
+src="../../static/vendor/grChartImg/canvg/canvg.js"
 
 function getImgData(chartContainer) {
     var chartArea = chartContainer.children[0];
