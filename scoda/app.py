@@ -1,5 +1,6 @@
 from flask import Flask
 import jinja2
+import os
 
 app = Flask(__name__, static_folder='static')
 
@@ -17,8 +18,8 @@ CsrfProtect(app)
 # Database
 from flask_sqlalchemy import SQLAlchemy
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://scoda:scoda@localhost/scoda'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://scoda:scoda@localhost/scoda'
 db = SQLAlchemy(app)
 
 # Mail

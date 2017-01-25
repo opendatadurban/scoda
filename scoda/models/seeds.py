@@ -42,35 +42,6 @@ themes = {'Demographics': 1,
 dfi = pd.read_csv('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/Indicators.csv')
 df = pd.read_csv('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/Manicured_final.csv')
 
-with open('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/metro_salc_geo.json') as data_file:
-    data = geojson.load(data_file)
-
-data2 = genfromtxt('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/jhbpopests_clean.csv', delimiter=',')
-
-parser = {}
-for i, I in enumerate(sort(list(set(data2[:, 2])))):
-    parser[int(I)] = {}
-    parser[int(I)]['includes'] = []
-    parser[int(I)]['city_ref'] = i
-
-for i in range(len(data2)):
-    parser[int(data2[i, 2])]['includes'].append(data2[i, 1])
-
-parser2 = {}
-
-for i in data2:
-    parser2[int(i[1])] = list(i[21:])
-
-mapping = {}
-mapping_theme = {}
-for i in range(0, len(dfi)):
-    index = dfi.iloc[i][0]
-    indicator = dfi.iloc[i][2]
-    theme = dfi.iloc[i][3]
-    mapping[index] = indicator
-    mapping_theme[index] = theme
-
-
 def seed_db(db):
     """ Add seed entities to the database. """
     with app.app_context():
@@ -94,7 +65,9 @@ def seed_db(db):
         print 'Created type table...'
         for x in Theme.create_defaults():
             db.session.add(x)
+
         print 'Created theme table...'
+        db.session.flush()
         db.session.commit()
         print 'Populating datapoints...'
         for i in range(0, len(df)):
@@ -119,7 +92,35 @@ def seed_db(db):
                     point.year = int(year)
                     db.session.add(point)
 
+        db.session.flush()
         db.session.commit()
+
+        data = geojson.load(open('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/metro_salc_geo.json'))
+
+        data2 = genfromtxt('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/jhbpopests_clean.csv', delimiter=',')
+
+        parser = {}
+        for i, I in enumerate(sort(list(set(data2[:, 2])))):
+            parser[int(I)] = {}
+            parser[int(I)]['includes'] = []
+            parser[int(I)]['city_ref'] = i
+
+        for i in range(len(data2)):
+            parser[int(data2[i, 2])]['includes'].append(data2[i, 1])
+
+        parser2 = {}
+
+        for i in data2:
+            parser2[int(i[1])] = list(i[21:])
+
+        mapping = {}
+        mapping_theme = {}
+        for i in range(0, len(dfi)):
+            index = dfi.iloc[i][0]
+            indicator = dfi.iloc[i][2]
+            theme = dfi.iloc[i][3]
+            mapping[index] = indicator
+            mapping_theme[index] = theme
 
         print 'Populating city enumerator GIS data...'
         for poly in data['features']:
@@ -138,7 +139,10 @@ def seed_db(db):
                 db.session.add(area)
             else:
                 pass
+        db.session.flush()
         db.session.commit()
+        del data
+        del data2
 
         print 'Populating city ward GIS data...'
         data3 = geojson.load(open('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/MunicipalWards2016.json', 'r'))
@@ -157,5 +161,5 @@ def seed_db(db):
 
                 ward.geom = wkt.dumps(i['geometry'], decimals=6)
                 db.session.add(ward)
-
+        db.session.flush()
         db.session.commit()
