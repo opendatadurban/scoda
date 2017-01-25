@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'snippets/header.html' %}
+</head>
+
+<body class="navbar-fixed sidebar-nav fixed-nav">
+
+    {% include 'snippets/navigation.html' %}
+
+    {% include 'snippets/sidebar.html' %}
+
+    <main class="main">
+
+        {% include 'snippets/breadcrumbs.html' %}
+
+        {% block content %}
+
+        {% endblock content %}
+
+    </main>
+
+    {% include 'snippets/aside.html' %}
+
+    {% include 'snippets/footer.html' %}
+
+<!-- Bootstrap and necessary plugins -->
+
+</body>
+</html>

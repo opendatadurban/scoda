@@ -1,0 +1,237 @@
+<script type="text/javascript">
+
+    function transposeDataTable(dataTable) {
+            //step 1: let us get what the columns would be
+            var rows = [];//the row tip becomes the column header and the rest become
+            for (var rowIdx=0; rowIdx < dataTable.getNumberOfRows(); rowIdx++) {
+                var rowData = [];
+                for( var colIdx = 0; colIdx < dataTable.getNumberOfColumns(); colIdx++) {
+                    rowData.push(dataTable.getValue(rowIdx, colIdx));
+                }
+                rows.push( rowData);
+            }
+            var newTB = new google.visualization.DataTable();
+            newTB.addColumn('string', dataTable.getColumnLabel(0));
+            newTB.addRows(dataTable.getNumberOfColumns()-1);
+            var colIdx = 1;
+            for(var idx=0; idx < (dataTable.getNumberOfColumns() -1);idx++) {
+                var colLabel = dataTable.getColumnLabel(colIdx);
+                newTB.setValue(idx, 0, colLabel);
+                colIdx++;
+            }
+            for (var i=0; i< rows.length; i++) {
+                var rowData = rows[i];
+                newTB.addColumn('number',rowData[0]); //assuming the first one is always a header
+                var localRowIdx = 0;
+
+                for(var j=1; j< rowData.length; j++) {
+                    newTB.setValue(localRowIdx, (i+1), rowData[j]);
+                    localRowIdx++;
+                }
+            }
+            return newTB;
+      }
+
+
+    google.charts.load('visualization', 'current', {
+        packages: ['controls', 'line', 'corechart', 'geochart']
+    });
+
+    function redraw() {
+        window.dispatchEvent(new Event('resize'));
+    }
+
+    function drawBar1() {
+
+        var data = new google.visualization.DataTable({{ table|safe }});
+
+        var categoryPicker1 = new google.visualization.ControlWrapper({
+            'controlType': 'CategoryFilter',
+            'containerId': 'categorySelector1',
+            'state': {'selectedValues': {{ cities|safe }} },
+            'options': {
+                'filterColumnLabel': 'City',
+                'ui': {
+                    'labelStacking': 'vertical',
+                    'allowMultiple': true,
+                    'allowNone': false,
+                    'allowTyping': false,
+                    'caption': 'Choose a city...'
+                }
+            }
+        });
+
+        var bar2 = new google.visualization.ChartWrapper({
+            'chartType': 'LineChart',
+            'containerId': 'chart_img',
+            'options': {
+                height: '800',
+                width: '1024',
+                legend: {position: 'right', maxLines: 10},
+                chartArea: {left: '10%', right: '35%'},
+                vAxis: {minValue: {{ min }}, maxValue: {{ max }}},
+                hAxis: {slantedText: true},
+                interpolateNulls: true,
+                pointSize: 5
+                }
+
+        });
+
+        var table1 = new google.visualization.ChartWrapper({
+            'chartType': 'Table',
+            'containerId': 'table2',
+            'options': {}
+
+        });
+
+        var table2 = new google.visualization.ChartWrapper({
+            'chartType': 'Table',
+            'containerId': 'table',
+            'options': {}
+        });
+
+        var cardHeight = $("#formCard").height() + $("#formCardHead").height() + 20;
+        var cardWidth = $("#geoCard").width();
+
+        var bar1 = new google.visualization.ChartWrapper({
+            'chartType': 'Line',
+            'containerId': 'chart',
+            'options': {
+                legend: {position: 'right'},
+                axes: {
+                    y: {
+                        all: {
+                            range: {
+                                max: {{ max }},
+                                min: {{ min }}
+                            }
+                        }
+                    }
+                },
+                hAxis: {slantedText: true},
+                height: cardHeight,
+                lineWidth: 4,
+                interpolateNulls: true,
+                pointSize: 5
+
+            }
+        });
+
+        var geochart1 = new google.visualization.ChartWrapper({
+            'chartType': 'GeoChart',
+            'containerId': 'geochart',
+            'options': {
+                region: 'ZA',
+                displayMode: 'markers',
+                resolution: 'provinces',
+                theme: 'material',
+                colorAxis: {colors: ['#FED976', '#FC4E2A', '#800026']},
+                height: cardHeight,
+                width: cardWidth,
+                keepAspectRatio: true
+            }
+        });
+
+        var dashboard = new google.visualization.Dashboard();
+
+        dashboard.bind([categoryPicker1], [table1]);
+        dashboard.draw(data);
+
+        $("#selectCard").css({height: cardHeight * 1.2});
+        $("#chartCard").css({height: cardHeight * 1.2});
+
+        function resize() {
+            dashboard.draw(data);
+        }
+
+        google.visualization.events.addListener(table1, 'ready', function () {
+
+            var dataset = $('#dataSelect').find("option:selected").val();
+            var year = $('#yearSelect').find("option:selected").val();
+
+            var filteredData = table1.getDataTable();
+            var group = filteredData.getDistinctValues(0);
+
+            var columns = [2], groupColumns = [];
+            for (var i = 0; i < group.length; i++) {
+                var label = group[i];
+                columns.push({
+                    type: 'number',
+                    label: label,
+                    calc: (function (name) {
+                        return function (dt, row) {
+                            return (dt.getValue(row, 0) == name) ? dt.getValue(row, 1) : null;
+                        }
+                    })(label)
+                });
+                groupColumns.push({
+                    type: 'number',
+                    label: label,
+                    column: i + 1,
+                    aggregation: google.visualization.data.sum
+                });
+            }
+            var view = new google.visualization.DataView(filteredData);
+            view.setColumns(columns);
+            var groupedData = google.visualization.data.group(view, [0], groupColumns);
+            bar1.setDataTable(groupedData);
+            bar1.draw();
+            bar2.setDataTable(groupedData);
+            bar2.draw();
+            table2.setDataTable(transposeDataTable(groupedData));
+            table2.draw();
+
+            var dt = transposeDataTable(groupedData);
+            var csv = google.visualization.dataTableToCsv(dt);
+
+            $('#Export').click(function () {
+                this.href = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+            });
+
+            var myView = new google.visualization.DataView(dt);
+
+            myView.setColumns([0, Number(year)]);
+
+            geochart1.setDataTable(myView);
+            geochart1.draw();
+
+            $('#yearSelect').on('change', function () {
+
+                var year = $('#yearSelect').find("option:selected").val();
+
+                var myView = new google.visualization.DataView(dt);
+
+                myView.setColumns([0, Number(year)]);
+
+                geochart1.setDataTable(myView);
+                geochart1.draw();
+
+            });
+
+
+        });
+
+
+        google.visualization.events.addListener(bar1, 'error', function (googleError) {
+            google.visualization.errors.removeError(googleError.id);
+            document.getElementById("error_msg").innerHTML = "Message removed = '" + googleError.message + "'";
+        });
+
+        if (window.addEventListener) {
+            window.addEventListener('resize', resize);
+        }
+
+        else {
+            window.attachEvent('onresize', resize);
+        }
+
+
+    }
+
+    $(document).ready(function (e) {
+
+        google.setOnLoadCallback(drawBar1);
+
+        });
+
+</script>

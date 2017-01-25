@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+    <meta name="author" content="Open Data Durban">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="../../static/img/favicon.png">
+
+    <title>SCODA - Data Platform</title>
+
+     <script src="../../static/vendor/jquery/jquery.min.js"></script>
+    <script src="../../static/vendor/tether/js/tether.min.js"></script>
+    <script src="../../static/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../static/vendor/pace/pace.min.js"></script>
+    <script src="../../static/vendor/plotly/plotly-latest.min.js"></script>
+    <script src="../../static/vendor/select2/js/select2.min.js"></script>
+    <script src="../../static/vendor/blockUI/js/jquery.blockUI.js"></script>
+
+    <!-- Plugins and scripts required by all views -->
+    <script src="../../static/js/app.js"></script>
+    <script src="../../static/js/views/charts.js"></script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+     <!--[if lt IE 9]><script type="text/javascript" src="path/flashcanvas.js"></script><![endif]-->
+    <script type="text/javascript" src="../../static/vendor/grChartImg/canvg/canvg.js"></script>
+    <script type="text/javascript" src="../../static/vendor/grChartImg/canvg/rgbcolor.js"></script>
+    <script type="text/javascript" src="../../static/vendor/grChartImg/grChartImg.js"></script>
+
+    <!-- Plugins and scripts required by this views -->
+
+    <!-- Custom scripts required by this view -->
+    <script src="../../static/js/views/main.js"></script>
+
+    <!-- Icons -->
+    <link href="../../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../static/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../static/css/simple-line-icons.css" rel="stylesheet">
+    <link href="../../static/vendor/select2/css/select2.min.css" rel="stylesheet">
+
+    <!-- Main styles for this application -->
+    <link href="../../static/css/style.css" rel="stylesheet">
+</head>
+
+<body class="navbar-fixed sidebar-nav fixed-nav">
+
+    <!-- BODY options, add following classes to body to change options
+		1. 'compact-nav'     	  - Switch sidebar to minified version (width 50px)
+		2. 'sidebar-nav'		  - Navigation on the left
+			2.1. 'sidebar-off-canvas'	- Off-Canvas
+				2.1.1 'sidebar-off-canvas-push'	- Off-Canvas which move content
+				2.1.2 'sidebar-off-canvas-with-shadow'	- Add shadow to body elements
+		3. 'fixed-nav'			  - Fixed navigation
+		4. 'navbar-fixed'		  - Fixed navbar
+		5. 'footer-fixed'		  - Fixed navbar
+-->
+
+from flask_login import current_user
+
+<header class="navbar">
+        <div class="container-fluid">
+            <button class="navbar-toggler mobile-toggler hidden-lg-up" type="button">☰</button>
+            <a class="navbar-brand" href="#"></a>
+            <ul class="nav navbar-nav hidden-md-down">
+                <li class="nav-item">
+                    <a class="nav-link navbar-toggler layout-toggler" href="#">☰</a>
+                </li>
+            </ul>
+
+
+
+                 <ul class="nav navbar-nav float-xs-right hidden-md-down">
+                    <li class="nav-item px-1">
+                        <a type="button" class="btn btn-primary px-2" href="/registered">Login</a>
+                    </li>
+                 </ul>
+
+
+        </div>
+    </header>
+
+    <div class="sidebar">
+
+        <nav class="sidebar-nav">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/registered"><i class="icon-speedometer"></i>My Dashboard</a>
+                </li>
+
+                <li class="nav-title">
+                    Options
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-rocket fa-lg m-t-2"></i>New Analysis</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-sitemap fa-lg m-t-2"></i>My Analyses</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-table fa-lg m-t-2"></i>My Datasets</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/demographics"><i class="fa fa-group fa-lg m-t-2"></i>Demographics</a>
+                </li>
+
+                <li class="nav-item nav-dropdown">
+                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-book fa-lg m-t-2"></i>Documentation</a>
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Section 1</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Section 2</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Section 3</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Section 4</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Section 5</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Section 6</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Section 7</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-title">
+                    Links
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-tasks fa-lg m-t-2 "></i>SCODA Repository</a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+
+    <main class="main">
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">Home</li>
+            <li class="breadcrumb-item"><a href="#">Admin</a>
+            </li>
+            <li class="breadcrumb-item active">Dashboard</li>
+
+            <!-- Breadcrumb Menu-->
+            <li class="breadcrumb-menu">
+                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                    <a class="btn btn-secondary" href="#"><i class="icon-speech"></i></a>
+                    <a class="btn btn-secondary" href="./"><i class="icon-graph"></i> &nbsp;Dashboard</a>
+                    <a class="btn btn-secondary" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>
+                </div>
+            </li>
+        </ol>
+
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+
+
+	<style>
+		#map {
+			width: 600px;
+			height: 400px;
+		}
+	</style>
+
+	<style>#map { width: 800px; height: 500px; }
+                    .info { padding: 6px 8px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }
+                    .legend { text-align: left; line-height: 18px; color: #555; } .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }</style>
+
+<div id='map'></div>
+
+<script type="text/javascript"></script>
+
+<script type="text/javascript">
+
+	var map = L.map('map').setView([-27, 24], 5.4);
+
+	L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>'
+	}).addTo(map);
+
+
+	// control that shows state info on hover
+	var info = L.control();
+
+	info.onAdd = function (map) {
+		this._div = L.DomUtil.create('div', 'info');
+		this.update();
+		return this._div;
+	};
+
+	info.update = function (props) {
+		this._div.innerHTML = '<h4>Demographic Model Data</h4>' +  (props ?
+			'<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
+			: 'Hover over a region');
+	};
+
+	info.addTo(map);
+
+
+	// get color depending on population density value
+	function getColor(d) {
+		return d > 1000 ? '#800026' :
+				d > 500  ? '#BD0026' :
+				d > 200  ? '#E31A1C' :
+				d > 100  ? '#FC4E2A' :
+				d > 50   ? '#FD8D3C' :
+				d > 20   ? '#FEB24C' :
+				d > 10   ? '#FED976' :
+							'#FFEDA0';
+	}
+
+	function style(feature) {
+		return {
+			weight: 2,
+			opacity: 1,
+			color: 'white',
+			dashArray: '3',
+			fillOpacity: 0.7,
+			fillColor: getColor(feature.properties.density)
+		};
+	}
+
+	function highlightFeature(e) {
+		var layer = e.target;
+
+		layer.setStyle({
+			weight: 5,
+			color: '#666',
+			dashArray: '',
+			fillOpacity: 0.7
+		});
+
+		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+			layer.bringToFront();
+		}
+
+		info.update(layer.feature.properties);
+	}
+
+	var geojson;
+
+	function resetHighlight(e) {
+		geojson.resetStyle(e.target);
+		info.update();
+	}
+
+	function zoomToFeature(e) {
+		map.fitBounds(e.target.getBounds());
+	}
+
+	function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+	}
+
+	geojson = L.geoJson( {'type': 'FeatureCollection', 'features': [{'geometry': u'{'}]}, {
+		style: style,
+		onEachFeature: onEachFeature
+	}).addTo(map);
+
+
+	var legend = L.control({position: 'bottomright'});
+
+	legend.onAdd = function (map) {
+
+		var div = L.DomUtil.create('div', 'info legend'),
+			grades = [0, 10, 20, 50, 100, 200, 500, 1000],
+			labels = [],
+			from, to;
+
+		for (var i = 0; i < grades.length; i++) {
+			from = grades[i];
+			to = grades[i + 1];
+
+			labels.push(
+				'<i style="background:' + getColor(from + 1) + '"></i> ' +
+				from + (to ? '&ndash;' + to : '+'));
+		}
+
+		div.innerHTML = labels.join('<br>');
+		return div;
+	};
+
+	legend.addTo(map);
+
+</script>
+
+
+
+
+    </main>
+
+    <aside class="aside-menu">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#timeline" role="tab"><i class="icon-list"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><i class="icon-speech"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#settings" role="tab"><i class="icon-settings"></i></a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+
+            <div class="tab-pane active" id="timeline" role="tabpanel">
+                <div class="callout m-0 py-h text-muted text-xs-center bg-faded text-uppercase">
+                    <small><b>Recent Analyses</b>
+                    </small>
+                </div>
+                <hr class="transparent mx-1 my-0">
+                <div class="callout callout-warning m-0 py-1">
+                    <div>Analysis 1</div>
+                    <small class="text-muted mr-1"><i class="icon-calendar"></i> Date performed</small>
+                </div>
+                <hr class="transparent mx-1 my-0">
+                <div class="callout callout-warning m-0 py-1">
+                    <div>Analysis 2</div>
+                    <small class="text-muted mr-1"><i class="icon-calendar"></i> Date performed</small>
+                </div>
+                <hr class="transparent mx-1 my-0">
+                <div class="callout callout-warning m-0 py-1">
+                    <div>Analysis 3</div>
+                    <small class="text-muted mr-1"><i class="icon-calendar"></i> Date performed</small>
+                </div>
+                <hr class="transparent mx-1 my-0">
+                <div class="callout callout-warning m-0 py-1">
+                    <div>Analysis 1</div>
+                    <small class="text-muted mr-1"><i class="icon-calendar"></i> Date performed</small>
+                </div>
+            </div>
+
+            <div class="tab-pane p-1" id="messages" role="tabpanel">
+            </div>
+
+            <div class="tab-pane p-1" id="settings" role="tabpanel">
+                <h6>Settings</h6>
+            </div>
+        </div>
+    </aside>
+
+    <footer class="footer">
+        <span class="text-left">
+            <a href="http://http://www.sacities.net/">SCODA</a> © South African Cities Network
+        </span>
+        <span class="float-xs-right">
+            Powered by <a href="http://opendata.durban">Open Data Durban</a>
+        </span>
+</footer>
+
+
+<!-- Bootstrap and necessary plugins -->
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'snippets/header.html' %}
+</head>
+
+<body>
+    <div class="container d-table">
+        <div class="d-100vh-va-middle">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card-group">
+                        <div class="card p-2">
+                            <div class="card-block">
+                                <h1>Login</h1>
+                                <p class="text-muted">Sign In to your account</p>
+
+                                <form action="{{ url_for('security.login') }}" method="POST">
+                                    {{ login_user_form.hidden_tag() }}
+                                    <div class="input-group mb-1">
+                                        <span class="input-group-addon"><i class="icon-user"></i>
+                                        </span>
+{#                                        <input type="text" class="form-control" placeholder="Username">#}
+                                        {{ login_user_form.email(placeholder="Email", class="form-control", required="True") }}
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-addon"><i class="icon-lock"></i>
+                                        </span>
+{#                                        <input type="password" class="form-control" placeholder="Password">#}
+                                        {{ login_user_form.password(placeholder="Password", class="form-control", required="True") }}
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <input type="submit" class="btn btn-primary px-2" value="Login"></input>
+                                        </div>
+                                        <div class="col-xs-6 text-xs-right">
+                                            <a type="button" class="btn btn-link px-0" href="{{ url_for('security.forgot_password') }}">Forgot password?</a>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'snippets/footer.html' %}
+
+    <script src="../../static/vendor/jquery/jquery.min.js"></script>
+    <script src="../../static/vendor/tether/js/tether.min.js"></script>
+    <script src="../../static/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../static/vendor/pace/pace.min.js"></script>
+
+    <!-- Plugins and scripts required by all views -->
+    <script src="../../static/vendor/plotly/plotly-latest.min.js"></script>
+    <script src="../../static/js/app.js"></script>
+
+    <!-- Plugins and scripts required by this views -->
+
+    <!-- Custom scripts required by this view -->
+    <script src="../../static/js/views/main.js"></script>
+
+</body>
+
+</html>

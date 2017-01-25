@@ -87,3 +87,29 @@ ENV/
 
 # Rope project settings
 .ropeproject
+/scoda/data/Manicured_Final.csv
+*.xml
+.idea/dataSources/7906e1ad-c6de-4980-b442-f563044942ad/_metadata_/metadata
+*.keystream
+.idea/dataSources/7906e1ad-c6de-4980-b442-f563044942ad/_metadata_/metadata.len
+*.at
+.idea/dataSources/7906e1ad-c6de-4980-b442-f563044942ad/_metadata_/metadata_i
+*.len
+.idea/scoda.iml
+*.xml
+.idea/vcs.xml
+/scoda/data/process_test.py
+/scoda/data/Indicators.csv
+/scoda/data/UniqueIndicators.csv
+/scoda/data/jhbpopests_clean.csv
+/scoda/data/metro_salc_geo.json
+/scoda/data/pandasTest.py
+.idea/
+out.csv
+scoda/data/jhbpopests_clean.csv
+scoda/data/metro_salc_geo.json
+scoda/data/pandasTest.py
+scoda/static/vendor/blockUI/
+scoda/static/vendor/grChartImg/
+/scoda/templates/demographics/testMap.html
+/scoda/data/MunicipalWards2016.json

@@ -1,0 +1,315 @@
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('.js-example-basic-single').select2();
+        $('.js-example-basic-multiple').select2();
+
+        $('#Form').on('change', function () {
+
+            var dataset_input = $('#dataset_id').find("option:selected").val();
+            var indicator_input = $('#indicator_id').find("option:selected").val();
+            var region_input = $('#region_id').find("option:selected").val();
+            var type_input = $("#type_id").find("option:selected").val();
+            var theme_input = $("#theme_id").find("option:selected").val();
+            var year_input = $("#year").find("option:selected").val();
+
+            $.getJSON('/_parse_data', {
+
+                    dataset_id: dataset_input,
+                    indicator_id: indicator_input,
+                    region_id: region_input,
+                    type_id: type_input,
+                    theme_id: theme_input,
+                    year: year_input
+
+                },
+                function (data) {
+                    var datasets = data.dataset;
+                    var indicators = data.indicator;
+                    var regions = data.region;
+                    var types = data.type;
+                    var themes = data.theme;
+                    var years = data.year;
+
+                    $("#dataset_id").empty();
+                    $("#indicator_id").empty();
+                    $("#region_id").empty();
+                    $("#type_id").empty();
+                    $("#theme_id").empty();
+                    $("#year").empty();
+
+                    var options = $("#dataset_id");
+                    options.empty()
+                    datasets.forEach(function (item) {
+                        options.append($('<option>', {value: item[0], text: item[1]}));
+                    });
+
+                    var options = $("#indicator_id");
+                    options.empty()
+                    indicators.forEach(function (item) {
+                        options.append($('<option>', {value: item[0], text: item[1]}));
+                    });
+
+                    options = $("#region_id");
+                    options.empty()
+                    regions.forEach(function (item) {
+                        options.append($('<option>', {value: item[0], text: item[1]}));
+                    });
+
+                    options = $("#type_id");
+                    options.empty()
+                    types.forEach(function (item) {
+                        options.append($('<option>', {value: item[0], text: item[1]}));
+                    });
+
+                    options = $("#theme_id");
+                    options.empty()
+                    themes.forEach(function (item) {
+                        options.append($('<option>', {value: item[0], text: item[1]}));
+                    });
+
+                    options = $("#year");
+                    options.empty();
+                    years.forEach(function (item) {
+                        options.append($('<option>', {value: item[0], text: item[1]}));
+                    });
+                });
+        });
+
+    });
+
+</script>
+
+<div class="container-fluid">
+    <div id="ui-view" style="opacity: 1;">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-sm-5 col-lg-5 col-lg-5">
+                    <div class="card">
+                        <div class="card-header" id="formCardHead">Indicator Selector</div>
+                        <div class="card-block" id="formCard">
+                            <form action="{{ url_for('explore') }}" id="Form" class="form-horizontal" method="POST">
+                                {{ form.hidden_tag() }}
+                                <div class="form-group {% if form.dataset_id.errors %} has-error {% endif %}">
+                                    <div class="control-label">
+                                        Data Set:
+                                    </div>
+                                    <div>
+                                        {{ form.dataset_id(id='dataset_id',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ form.dataset_id.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if form.region_id.errors %} has-error {% endif %}">
+                                    <div class="control-label">
+                                        Region:
+                                    </div>
+                                    <div>
+                                        {{ form.region_id(id='region_id',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ form.region_id.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if form.type_id.errors %} has-error {% endif %}">
+                                    <div class="control-label">
+                                        Region Type:
+                                    </div>
+                                    <div>
+                                        {{ form.type_id(id='type_id',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ form.type_id.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if form.theme_id.errors %} has-error {% endif %}">
+                                    <div class="control-label">
+                                        Theme:
+                                    </div>
+                                    <div>
+                                        {{ form.theme_id(id='theme_id',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ form.theme_id.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if form.year.errors %} has-error {% endif %}">
+                                    <div class="control-label">
+                                        Year:
+                                    </div>
+                                    <div>
+                                        {{ form.year(id='year',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ form.year.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if form.indicator_id.errors %} has-error {% endif %}">
+                                    <div class="control-label">
+                                        Indicator:
+                                    </div>
+                                    <div>
+                                        {{ form.indicator_id(id='indicator_id',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ form.indicator_id.errors[0] }}
+                                </div>
+
+                                <button class="btn btn-success" type="submit">Explore This Indicator!</button>
+                            </form>
+                            <a href="{{ url_for('explore') }}">
+                                <button class="btn btn-primary" id="clearForm">Reset Form</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                {# Plotting Card #}
+
+                {% if plot %}
+
+                    {% include 'snippets/image_export.html' %}
+
+                    {% if plot_type == 2 %}
+
+                        {% include 'snippets/charts_bar.html' %}
+
+                    {% else %}
+
+                        {% include 'snippets/charts_line.html' %}
+
+                    {% endif %}
+
+                    <div class="col-sm-7 col-lg-7 col-lg-7">
+                        <div class="card" id="geoCard">
+                            <div class="card-header">
+                                Geographic Representation
+                            </div>
+                            <div class="card-block" style="padding: 0;">
+                                <div id="geochart"></div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-5 col-lg-5 col-lg-5">
+                            <div class="card" id="mapSelect">
+                                <div class="card-header">Data on Map</div>
+                                <div class="card-block" style="text-align: center">
+                                    <select id="dataSelect" class="js-example-basic-single" {% if plot_type == 1 %}disabled{% endif %} style="width: 80%">
+                                        {% if plot_type == 2 %}
+                                            {% for o in options_list %}
+                                                <option value="{{ o.optid }}">{{ o.optname }}</option>
+                                            {% endfor %}
+                                        {% else %}
+                                            <option value="-">-</option>
+                                        {% endif %}
+                                    </select>
+                                    <br>
+                                    <br>
+                                    <select id="yearSelect" class="js-example-basic-single" {% if plot_type == 2 %}disabled{% endif %} style="width: 80%">
+                                        {% if plot_type == 2 %}
+                                            <option value="-">-</option>
+                                        {% else %}
+                                            {% for y in years_list %}
+                                                <option value="{{ y.optid }}">{{ y.optname }}</option>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-7 col-lg-7 col-lg-7">
+                            <div class="card" id="descriptionCard">
+                                <div class="card-header">About This Indicator</div>
+                                <div class="card-block" style="text-align: center">
+                                    <p>A description of the indicator will go here. This should include, among others,
+                                        information on how the data was collected and any assumptions made.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="dashboard">
+                        <div class="row">
+                            <div class="col-sm-2 col-lg-2 col-lg-2">
+                                <div class="card" id="selectCard">
+                                    <div class="card-header">Select Your Data</div>
+                                    <div class="card-block">
+                                        <div id="categorySelector2"></div>
+                                        <div id="categorySelector1"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-10 col-lg-10 col-lg-10">
+                                <div class="card" id="chartCard">
+                                    <div class="card-header">Plotting Window</div>
+                                    <div class="card-block">
+                                        <div id="chart"
+                                             style="display: inline-block; margin: 0 auto; width: 100%;"></div>
+                                        <div id="chart_img" class="hidden"
+                                             style="display: none; margin: 0 auto; width: 100%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-12 col-lg-12">
+                                <div class="card">
+                                    <div class="card-header">Selected Data</div>
+                                    <div class="card-block">
+                                        <div id="table"
+                                             style="display: inline-block; margin: 0 auto; width: 100%;"></div>
+                                        <div id="table2"
+                                             style="display: none; margin: 0 auto; width: 100%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-5 col-lg-5 col-lg-5">
+                            <div class="card" id="mapSelect">
+                                <div class="card-header">Download data</div>
+                                <div class="card-block" style="text-align: center">
+
+                                    <a id="Export" href="data.csv" target="_blank" download="data.csv">
+                                        <button class="btn btn-primary" style="margin-right: 40px;">Download table data
+                                            as a CSV file
+                                        </button>
+                                    </a>
+                                    <a download="chart.png" onclick="saveAsImg(document.getElementById('chart_img'));">
+                                        <button class="btn btn-primary" style="margin-left: 40px;">Save chart as a
+                                            PNG image
+                                        </button>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endif %}
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function (e) {
+        var selectHeight = $("#mapSelect").height() + 2;
+        $("#descriptionCard").css({height: selectHeight});
+    });
+
+</script>
