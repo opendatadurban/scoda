@@ -53,7 +53,7 @@
                         <div class="card-header" id="formCardHead">Area Selector</div>
                         <div class="card-block" id="formCard">
                             <form action="{{ url_for('demographics') }}" id="Form" class="form-horizontal" method="POST">
-                                {% csrf_token %}
+                                {{ form.csrf_token }}
                                 {{ form.hidden_tag() }}
                                 <div class="form-group {% if form.city_ward_code.errors %} has-error {% endif %}">
                                     <div class="control-label">
