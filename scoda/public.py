@@ -105,9 +105,11 @@ def explore():
 def demographics():
     form = MapForm()
     status = 200
+    tour = 1
     geometries = {}
     if request.method == 'POST':
         if form.validate():
+            tour = 0
             # query = db.session.query(Area.geom.ST_AsGeoJSON(), Area.data)
             year = int(form.year.data)
             year_ind = range(1996, 2031)
@@ -119,7 +121,7 @@ def demographics():
                               "features": []}
                 for g in query:
                     d = json.loads(g[0])
-                    geometries['features'].append({"type": "Feature", "properties": {"density": g[1][year],
+                    geometries['features'].append({"type": "Feature", "properties": {"density": round(g[1][year]),
                                                                                      "name": 'Ward %s' % g[2],
                                                                                      "year": year_ind[year]},
                                               "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
@@ -133,12 +135,12 @@ def demographics():
                 for g in query:
                     d = json.loads(g[0])
                     geometries['features'].append(
-                        {"type": "Feature", "properties": {"density": g[1][year],
+                        {"type": "Feature", "properties": {"density": round(g[1][year]),
                                                            "name": 'Area %s' % g[2],
                                                            "year": year_ind[year]},
                          "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
 
-            return render_template('demographics/demographics.html', form=form, geometries=geometries)
+            return render_template('demographics/demographics.html', form=form, geometries=geometries, tour=tour)
 
         else:
             if request.is_xhr:
@@ -153,12 +155,12 @@ def demographics():
 
         for g in query:
             d = json.loads(g[0])
-            geometries['features'].append({"type": "Feature", "properties": {"density": g[1][0],
+            geometries['features'].append({"type": "Feature", "properties": {"density": round(g[1][0]),
                                                                              "name": 'Ward %s' % g[2],
                                                                              "year": 1996},
                                            "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
 
-        return render_template('demographics/demographics.html', form=form, geometries=geometries)
+        return render_template('demographics/demographics.html', form=form, geometries=geometries, tour=tour)
 
     if not request.is_xhr:
         query = db.session.query(Ward.geom.ST_AsGeoJSON(), Ward.data, Ward.city_ward_code)
@@ -167,11 +169,11 @@ def demographics():
 
         for g in query:
             d = json.loads(g[0])
-            geometries['features'].append({"type": "Feature", "properties": {"density": g[1][0], "name": g[2],
+            geometries['features'].append({"type": "Feature", "properties": {"density": round(g[1][0]), "name": g[2],
                                                                              "year": 1996},
                                            "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
 
-        resp = make_response(render_template('demographics/demographics.html', form=form, geometries=geometries))
+        resp = make_response(render_template('demographics/demographics.html', form=form, geometries=geometries, tour=tour))
 
     else:
         resp = ''
