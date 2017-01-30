@@ -4,6 +4,7 @@
             <li class="breadcrumb-item active">Explorer</li>
 
             <!-- Breadcrumb Menu-->
+            {% if current_user.is_authenticated %}
             <li class="breadcrumb-menu">
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                     <a class="btn btn-secondary" href="#"><i class="icon-speech"></i></a>
@@ -11,4 +12,5 @@
                     <a class="btn btn-secondary" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>
                 </div>
             </li>
+            {%  endif %}
         </ol>

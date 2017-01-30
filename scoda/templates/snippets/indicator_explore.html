@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../../static/vendor/shepherd/css/shepherd-theme-dark.css" />
 <script type="text/javascript">
 
     $(document).ready(function () {
@@ -31,7 +32,12 @@
                     var types = data.type;
                     var themes = data.theme;
                     var years = data.year;
+                    var ind_ready = data.ind_ready;
 
+                    if (ind_ready){
+                        document.getElementById("exploreButton").disabled = false;
+                        document.getElementById("exploreButton").innerText = "Explore This Indicator!";
+                    }
                     $("#dataset_id").empty();
                     $("#indicator_id").empty();
                     $("#region_id").empty();
@@ -77,6 +83,148 @@
                 });
         });
 
+        var tour = new Shepherd.Tour({
+            defaults: {
+                classes: 'shepherd-theme-dark',
+                scrollTo: true
+            }
+        });
+
+        tour.addStep('welcome', {
+            title: 'Welcome to the Indicator Explorer!',
+            text: 'This short tour will guide you through the necessary steps to select, visualize and download indicator data. You can exit the tour at any stage by clicking on the "Exit" button.',
+            attachTo: '#formCardHead right',
+            advanceOn: '.docs-link click',
+            buttons: [
+                {text: 'Exit',
+                action: tour.complete},
+                {text: 'Next',
+                action: tour.next}
+            ]
+        });
+
+        tour.addStep('form', {
+            title: 'The Selection Form',
+            text: 'This form is here to help you find the indicator you are interested in. The various selection blocks help to narrow down your choices from the 102 possible indicators available. When you make a selection in one or more of the fields, it will change which options are available in the others.',
+            attachTo: '#selectorCard right',
+            advanceOn: '.docs-link click',
+            buttons: [
+                {text: 'Back',
+                action: tour.back},
+                {text: 'Exit',
+                action: tour.complete},
+                {text: 'Next',
+                action: tour.next}
+            ]
+        });
+
+        tour.addStep('dataset', {
+            title: 'Dataset Selector',
+            text: 'Every indicator is constructed from one or more individual datasets. Selecting a dataset will often return only one indicator.',
+            attachTo: '#dataset_label right',
+            advanceOn: '.docs-link click',
+            buttons: [
+                {text: 'Back',
+                action: tour.back},
+                {text: 'Exit',
+                action: tour.complete},
+                {text: 'Next',
+                action: tour.next}
+            ]
+        });
+
+        tour.addStep('region', {
+            title: 'Region Selector',
+            text: 'The region is the city or province for which the data has been collected. Some indicators are also available at the National level.',
+            attachTo: '#region_label right',
+            advanceOn: '.docs-link click',
+            buttons: [
+                {text: 'Back',
+                action: tour.back},
+                {text: 'Exit',
+                action: tour.complete},
+                {text: 'Next',
+                action: tour.next}
+            ]
+        });
+
+        tour.addStep('region_type', {
+            title: 'Region Type Selector',
+            text: 'The region type allows you to select all city, provincial or national indicators, i.e. it is less specific than the region selector.',
+            attachTo: '#type_label right',
+            advanceOn: '.docs-link click',
+            buttons: [
+                {text: 'Back',
+                action: tour.back},
+                {text: 'Exit',
+                action: tour.complete},
+                {text: 'Next',
+                action: tour.next}
+            ]
+        });
+
+        tour.addStep('theme', {
+            title: 'Theme Selector',
+            text: 'The South African Cities Network has classified its indicators under several broad themes. Selection of a theme will return all the indicators included in this theme.',
+            attachTo: '#theme_label right',
+            advanceOn: '.docs-link click',
+            buttons: [
+                {text: 'Back',
+                action: tour.back},
+                {text: 'Exit',
+                action: tour.complete},
+                {text: 'Next',
+                action: tour.next}
+            ]
+        });
+
+        tour.addStep('year', {
+            title: 'Year Selector',
+            text: 'This field will reduce the indicator options to those that include data for a specific year.',
+            attachTo: '#year_label right',
+            advanceOn: '.docs-link click',
+            buttons: [
+                {text: 'Back',
+                action: tour.back},
+                {text: 'Exit',
+                action: tour.complete},
+                {text: 'Next',
+                action: tour.next}
+            ]
+        });
+
+        tour.addStep('indicator', {
+            title: 'Indicator Selector',
+            text: 'Selection of an indicator is the final step of the form. Once one has been selected, the "Explore This Indicator!" button will become click-able and will open up new page elements.',
+            attachTo: '#indicator_label right',
+            advanceOn: '.docs-link click',
+            buttons: [
+                {text: 'Back',
+                action: tour.back},
+                {text: 'Exit',
+                action: tour.complete},
+                {text: 'Next',
+                action: tour.next}
+            ]
+        });
+
+         tour.addStep('reset', {
+            title: 'Reset Form',
+            text: 'As the role of the selection fields is to reduce your number of choices, you may find yourself having gone a step too far. Never fear, simply click on this button and the form will be reset!',
+            attachTo: '#clearForm right',
+            advanceOn: '.docs-link click',
+            buttons: [
+                {text: 'Back',
+                action: tour.back},
+                {text: 'Exit',
+                action: tour.complete},
+                {text: 'Next',
+                action: tour.next}
+            ]
+        });
+
+        tour.start();
+
     });
 
 </script>
@@ -86,13 +234,14 @@
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-sm-5 col-lg-5 col-lg-5">
-                    <div class="card">
+                    <div class="card" id="selectorCard">
                         <div class="card-header" id="formCardHead">Indicator Selector</div>
                         <div class="card-block" id="formCard">
                             <form action="{{ url_for('explore') }}" id="Form" class="form-horizontal" method="POST">
+                                {{ form.csrf_token }}
                                 {{ form.hidden_tag() }}
                                 <div class="form-group {% if form.dataset_id.errors %} has-error {% endif %}">
-                                    <div class="control-label">
+                                    <div class="control-label" id="dataset_label">
                                         Data Set:
                                     </div>
                                     <div>
@@ -103,7 +252,7 @@
                                 </div>
 
                                 <div class="form-group {% if form.region_id.errors %} has-error {% endif %}">
-                                    <div class="control-label">
+                                    <div class="control-label" id="region_label">
                                         Region:
                                     </div>
                                     <div>
@@ -114,7 +263,7 @@
                                 </div>
 
                                 <div class="form-group {% if form.type_id.errors %} has-error {% endif %}">
-                                    <div class="control-label">
+                                    <div class="control-label" id="type_label">
                                         Region Type:
                                     </div>
                                     <div>
@@ -125,7 +274,7 @@
                                 </div>
 
                                 <div class="form-group {% if form.theme_id.errors %} has-error {% endif %}">
-                                    <div class="control-label">
+                                    <div class="control-label" id="theme_label">
                                         Theme:
                                     </div>
                                     <div>
@@ -136,7 +285,7 @@
                                 </div>
 
                                 <div class="form-group {% if form.year.errors %} has-error {% endif %}">
-                                    <div class="control-label">
+                                    <div class="control-label" id="year_label">
                                         Year:
                                     </div>
                                     <div>
@@ -147,7 +296,7 @@
                                 </div>
 
                                 <div class="form-group {% if form.indicator_id.errors %} has-error {% endif %}">
-                                    <div class="control-label">
+                                    <div class="control-label" id="indicator_label">
                                         Indicator:
                                     </div>
                                     <div>
@@ -156,8 +305,7 @@
                                     <p class="help-block">
                                         {{ form.indicator_id.errors[0] }}
                                 </div>
-
-                                <button class="btn btn-success" type="submit">Explore This Indicator!</button>
+                                <button class="btn btn-success" id="exploreButton" type="submit" disabled>Waiting for indicator selection...</button>
                             </form>
                             <a href="{{ url_for('explore') }}">
                                 <button class="btn btn-primary" id="clearForm">Reset Form</button>

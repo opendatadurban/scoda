@@ -162,8 +162,6 @@ def demographics():
         geometries = {"type": "FeatureCollection",
                       "features": []}
 
-        # geometries = []
-
         for g in query:
             d = json.loads(g[0])
             geometries['features'].append({"type": "Feature", "properties": {"density": g[1][0], "name": g[2],
@@ -188,6 +186,7 @@ def parse_data():
         if (param is not None) and (str(param) != '') and (i == 'year'):
             y = range(1996, 2018)
             kwargs[i] = y[int(param)]
+            print kwargs[i]
 
         elif (param is not None) and (str(param) != ''):
             kwargs[i] = param
@@ -216,8 +215,10 @@ def parse_data():
     indicator_list = [(i, str(Indicator.query.filter_by(id=i).first().in_name)) for i in indicators]
     if 'indicator_id' not in session['explore']:
         indicator_list.insert(0, ('', 'Empty'))
+        response['ind_ready'] = 0
     else:
         indicator_list.insert(1, ('', 'Empty'))
+        response['ind_ready'] = 1
 
     response['indicator'] = indicator_list
 
