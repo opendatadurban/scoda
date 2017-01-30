@@ -70,6 +70,16 @@ def seed_db(db):
         db.session.flush()
         db.session.commit()
         print 'Populating datapoints...'
+
+        mapping = {}
+        mapping_theme = {}
+        for i in range(0, len(dfi)):
+            index = dfi.iloc[i][0]
+            indicator = dfi.iloc[i][2]
+            theme = dfi.iloc[i][3]
+            mapping[index] = indicator
+            mapping_theme[index] = theme
+
         for i in range(0, len(df)):
             dataset_id = df.iloc[i][0]
             indicator_id = mapping[df.iloc[i][0]]
@@ -112,15 +122,6 @@ def seed_db(db):
 
         for i in data2:
             parser2[int(i[1])] = list(i[21:])
-
-        mapping = {}
-        mapping_theme = {}
-        for i in range(0, len(dfi)):
-            index = dfi.iloc[i][0]
-            indicator = dfi.iloc[i][2]
-            theme = dfi.iloc[i][3]
-            mapping[index] = indicator
-            mapping_theme[index] = theme
 
         print 'Populating city enumerator GIS data...'
         for poly in data['features']:

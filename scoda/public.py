@@ -17,9 +17,11 @@ def explore():
     form = ExploreForm()
     status = 200
     plot = 0
+    tour = 1
     if request.method == 'POST':
         if form.validate():
             plot = 1
+            tour = 2
 
             ind = form.indicator_id.data
             query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value).\
@@ -77,7 +79,8 @@ def explore():
 
             return render_template('explore/explore.html', form=form, plot=plot, table=table, colours=colours,
                                    year=str(max(years)), series=series, view=view, plot_type=plot_type, min=minVal,
-                                   max=maxVal, cities=cities, options_list=options_list, years_list=years_list)
+                                   max=maxVal, cities=cities, options_list=options_list, years_list=years_list,
+                                   tour=tour)
         else:
             if request.is_xhr:
                 status = 412
@@ -85,10 +88,10 @@ def explore():
                 flash('Please correct the problems below and try again.', 'warning')
 
     else:
-        return render_template('explore/explore.html', form=form)
+        return render_template('explore/explore.html', form=form, tour=tour)
 
     if not request.is_xhr:
-        resp = make_response(render_template('explore/explore.html', form=form, plot=plot))
+        resp = make_response(render_template('explore/explore.html', form=form, plot=plot, tour=tour))
 
     else:
         resp = ''
@@ -183,10 +186,12 @@ def parse_data():
     kwargs = {}
     for i in ['dataset_id', 'indicator_id', 'region_id', 'type_id', 'theme_id', 'year']:
         param = request.args.get(i)
-        if (param is not None) and (str(param) != '') and (i == 'year'):
-            y = range(1996, 2018)
-            kwargs[i] = y[int(param)]
-            print kwargs[i]
+        if (i == 'year'):
+            if (str(param) != 'Empty') and (param is not None) and (str(param) != ''):
+                print param
+                kwargs[i] = int(param)
+            else:
+                pass
 
         elif (param is not None) and (str(param) != ''):
             kwargs[i] = param

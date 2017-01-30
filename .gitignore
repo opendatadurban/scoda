@@ -113,3 +113,4 @@ scoda/static/vendor/blockUI/
 scoda/static/vendor/grChartImg/
 /scoda/templates/demographics/testMap.html
 /scoda/data/MunicipalWards2016.json
+/scoda/data/exporteth.csv
