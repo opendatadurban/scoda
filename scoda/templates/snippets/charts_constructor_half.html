@@ -1,0 +1,59 @@
+<script type="text/javascript">
+
+    var csrf_token = "{{ csrf_token() }}";
+
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+            }
+        }
+    });
+
+    google.charts.load('visualization', 'current', {
+        packages: ['controls','corechart', 'table']
+    });
+
+    function redraw() {
+        window.dispatchEvent(new Event('resize'));
+    }
+
+    function drawBar1() {
+
+        var data2 = google.visualization.arrayToDataTable({{ table_master|safe }});
+
+        var formatter = new google.visualization.NumberFormat({pattern: '####'});
+        formatter.format(data2, 1); // Apply formatter to second column
+
+        var table2 = new google.visualization.Table(document.getElementById('table_master'));
+
+        table2.draw(data2);
+
+        $('#Export').click(function () {
+            var dt = table1.getDataTable();
+            var csv = google.visualization.dataTableToCsv(dt);
+
+            $.ajax({
+                url: "/constructor/{{ analysis_id }}/download",
+                type: "POST",
+                data: JSON.stringify({info:csv, head: {{ table_master[0]|safe }} }),
+                contentType: 'application/json;charset=UTF-8',
+                success: function(data) {
+                    console.log('success');
+                }
+                });
+            });
+
+        if (window.addEventListener) {
+            window.addEventListener('resize', resize);
+        }
+
+        else {
+            window.attachEvent('onresize', resize);
+        }
+
+    }
+
+    google.setOnLoadCallback(drawBar1);
+
+</script>

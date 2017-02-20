@@ -8,7 +8,13 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 CSRF_ENABLED = True
 SECRET_KEY = 'uhrmaHghurds3craTC0de!'
 
-# MAIL_DEFAULT_SENDER = "matthew@opendata.durban"
+MAIL_SERVER = "swampfire.aserv.co.za"
+MAIL_DEFAULT_SENDER = "admin@opendata.durban"
+MAIL_USERNAME = 'admin@opendata.durban'
+MAIL_PASSWORD = '0p3ndaTan0w!'
+MAIL_PORT = 465
+MAIL_USE_TLS = False
+MAIL_USE_SSL = True
 
 # Flask-Security config
 SECURITY_URL_PREFIX = "/user"
@@ -24,7 +30,7 @@ SECURITY_LOGIN_URL = "/login/"
 SECURITY_LOGOUT_URL = "/logout/"
 SECURITY_CHANGE_URL = "/change-password/"
 SECURITY_RESET_URL = "/forgot-password"
-SECURITY_POST_LOGIN_VIEW = "/registered"
+SECURITY_POST_LOGIN_VIEW = "/my_datasets"
 
 # Flask-Security email subject lines
 SECURITY_EMAIL_SUBJECT_REGISTER = "Welcome to SCODA"

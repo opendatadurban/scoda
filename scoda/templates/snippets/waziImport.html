@@ -1,0 +1,1193 @@
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('.js-example-basic-single').select2();
+
+        $('.js-example-basic-multiple').select2();
+
+        $('#exploreButton').click(function(){$('input[id=explore_submitted]').val('1');});
+
+        $('#exploreForm').on('change', function () {
+
+            var dataset_input = $('#explore_dataset_id').find("option:selected").val();
+            var indicator_input = $('#explore_indicator_id').find("option:selected").val();
+            var region_input = $('#explore_region_id').find("option:selected").val();
+            var type_input = $("#explore_type_id").find("option:selected").val();
+            var theme_input = $("#explore_theme_id").find("option:selected").val();
+            var year_input = $("#explore_year").find("option:selected").text();
+
+            $.getJSON('/_parse_data', {
+
+                    dataset_id: dataset_input,
+                    indicator_id: indicator_input,
+                    region_id: region_input,
+                    type_id: type_input,
+                    theme_id: theme_input,
+                    year: year_input
+
+                },
+                function (data) {
+                    var datasets = data.dataset;
+                    var indicators = data.indicator;
+                    var regions = data.region;
+                    var types = data.type;
+                    var themes = data.theme;
+                    var years = data.year;
+                    var ind_ready = data.ind_ready;
+
+                    if (ind_ready) {
+                        document.getElementById("exploreButton").disabled = false;
+                        document.getElementById("exploreButton").innerText = "Explore This Indicator!";
+                    }
+                    $("#explore_dataset_id").empty();
+                    $("#explore_indicator_id").empty();
+                    $("#explore_region_id").empty();
+                    $("#explore_type_id").empty();
+                    $("#explore_theme_id").empty();
+                    $("#explore_year").empty();
+
+                    var options = $("#explore_dataset_id");
+                    options.empty()
+                    datasets.forEach(function (item) {
+                        options.append($('<option>', {value: item[0], text: item[1]}));
+                    });
+
+                    var options = $("#explore_indicator_id");
+                    options.empty()
+                    indicators.forEach(function (item) {
+                        options.append($('<option>', {value: item[0], text: item[1]}));
+                    });
+
+                    options = $("#explore_region_id");
+                    options.empty()
+                    regions.forEach(function (item) {
+                        options.append($('<option>', {value: item[0], text: item[1]}));
+                    });
+
+                    options = $("#explore_type_id");
+                    options.empty()
+                    types.forEach(function (item) {
+                        options.append($('<option>', {value: item[0], text: item[1]}));
+                    });
+
+                    options = $("#explore_theme_id");
+                    options.empty()
+                    themes.forEach(function (item) {
+                        options.append($('<option>', {value: item[0], text: item[1]}));
+                    });
+
+                    options = $("#explore_year");
+                    options.empty();
+                    years.forEach(function (item) {
+                        options.append($('<option>', {value: item[0], text: item[1]}));
+                    });
+                });
+        });
+
+        {% if tour == 1 %}
+
+            var tour = new Shepherd.Tour({
+                defaults: {
+                    classes: 'shepherd-theme-dark',
+                    scrollTo: true
+                }
+            });
+
+            tour.addStep('welcome', {
+                title: 'Welcome to the Indicator Explorer!',
+                text: 'This short tour will guide you through the necessary steps to select, visualize and download indicator data. You can exit the tour at any stage by clicking on the "Exit" button.',
+                attachTo: '#formCardHead right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('form', {
+                title: 'The Selection Form',
+                text: 'This form is here to help you find the indicator you are interested in. The various selection blocks help to narrow down your choices from the 102 possible indicators available. When you make a selection in one or more of the fields, it will change which options are available in the others. Finally, each field can be searched through, just start typing what you are looking for!',
+                attachTo: '#selectorCard right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('dataset', {
+                title: 'Dataset Selector',
+                text: 'Every indicator is constructed from one or more individual datasets. Selecting a dataset will often return only one indicator.',
+                attachTo: '#dataset_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('region', {
+                title: 'Region Selector',
+                text: 'The region is the city or province for which the data has been collected. Some indicators are also available at the National level.',
+                attachTo: '#region_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('region_type', {
+                title: 'Region Type Selector',
+                text: 'The region type allows you to select all city, provincial or national indicators, i.e. it is less specific than the region selector.',
+                attachTo: '#type_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('theme', {
+                title: 'Theme Selector',
+                text: 'The South African Cities Network has classified its indicators under several broad themes. Selection of a theme will return all the indicators included in this theme.',
+                attachTo: '#theme_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('year', {
+                title: 'Year Selector',
+                text: 'This field will reduce the indicator options to those that include data for a specific year.',
+                attachTo: '#year_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('indicator', {
+                title: 'Indicator Selector',
+                text: 'Selection of an indicator is the final step of the form. Once one has been selected, the "Explore This Indicator!" button will become click-able and will open up new page elements.',
+                attachTo: '#indicator_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('reset', {
+                title: 'Reset Form',
+                text: 'As the role of the selection fields is to reduce your number of choices, you may find yourself having gone a step too far. Never fear, simply click on this button and the form will be reset!',
+                attachTo: '#clearForm right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.start();
+
+        {% endif %}
+
+    });
+
+    $(document).ready(function () {
+        $('.js-example-basic-single').select2();
+        $('.js-example-basic-multiple').select2();
+
+        $('#waziButton').click(function(){$('input[id=wazi_submitted]').val('1');});
+
+        $('#wazi_top_tier').on('change', function () {
+
+            var top_tier = $('#wazi_top_tier').find("option:selected").val();
+
+            $.getJSON('/_parse_wazi', {
+
+                    top_tier: top_tier
+
+                },
+                function (data) {
+                    var lower_tier = data.lower_tier;
+
+                    $("#wazi_lower_tier").empty();
+
+                    var options = $("#wazi_lower_tier");
+                    options.empty();
+                    lower_tier.forEach(function (item) {
+                        options.append($('<option>', {value: item[0], text: item[1]}));
+                    });
+
+                });
+
+        });
+
+        {% if tour %}
+
+            var tour = new Shepherd.Tour({
+                defaults: {
+                    classes: 'shepherd-theme-dark',
+                    scrollTo: true
+                }
+            });
+
+            tour.addStep('welcome', {
+                title: 'Welcome to the Demographics Explorer!',
+                text: 'This short tour will guide you through the necessary steps to explore the demographic modelling data contained in this almanac. You can exit the tour at any stage by clicking on the "Exit" button.',
+                attachTo: '#formCardHead right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('form', {
+                title: 'The Selection Form',
+                text: 'This form is here to help you find the region you are interested in exploring. The selection fields will allow you to find the city, ward and year that you would like to explore. ',
+                attachTo: '#formCard right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('city', {
+                title: 'City Selector',
+                text: 'This field allows you to select the the city you would like to look at.',
+                attachTo: '#city_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('ward', {
+                title: 'Ward Selector',
+                text: 'This field allows you to select the ward that you would like to look at. Initially, and when "View All" is selected, the aggregated ward data will be shown. Selecting a particular ward and clicking "Submit" will zoom to that Ward and will show the small enumerator areas along with their data values.',
+                attachTo: '#ward_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('year', {
+                title: 'Year Selector',
+                text: 'This field allows you to choose which year\'s data values you would like to explore.',
+                attachTo: '#year_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('submit', {
+                title: 'Submit Button',
+                text: 'Once you have made your selections, click "Submit" to view the data!',
+                attachTo: '#submitButton right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('plot', {
+                title: 'Map Area',
+                text: 'This map shows projected migration values at the ward and small enumerator area levels for each metro. Clicking on an area will zoom to it, though clicking on a ward will NOT reveal its underlying enumerators.',
+                attachTo: '#geoCard left',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.start();
+
+        {% endif %}
+    });
+
+    $(document).ready(function () {
+        $('.js-example-basic-single').select2();
+        $('.js-example-basic-multiple').select2();
+
+        $('#muniButton').click(function(){$('input[id=muni_submitted]').val('1');});
+
+        $('#muni_top_tier').on('change', function () {
+
+            var top_tier = $('#muni_top_tier').find("option:selected").val();
+
+            $.getJSON('/_parse_muni', {
+
+                    top_tier: top_tier
+
+                },
+                function (data) {
+                    var lower_tier = data.lower_tier;
+
+                    $("#muni_lower_tier").empty();
+
+                    var options = $("#muni_lower_tier");
+                    options.empty();
+                    lower_tier.forEach(function (item) {
+                        options.append($('<option>', {value: item[0], text: item[1]}));
+                    });
+
+                });
+
+        });
+
+        {% if tour %}
+
+            var tour = new Shepherd.Tour({
+                defaults: {
+                    classes: 'shepherd-theme-dark',
+                    scrollTo: true
+                }
+            });
+
+            tour.addStep('welcome', {
+                title: 'Welcome to the Demographics Explorer!',
+                text: 'This short tour will guide you through the necessary steps to explore the demographic modelling data contained in this almanac. You can exit the tour at any stage by clicking on the "Exit" button.',
+                attachTo: '#formCardHead right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('form', {
+                title: 'The Selection Form',
+                text: 'This form is here to help you find the region you are interested in exploring. The selection fields will allow you to find the city, ward and year that you would like to explore. ',
+                attachTo: '#formCard right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('city', {
+                title: 'City Selector',
+                text: 'This field allows you to select the the city you would like to look at.',
+                attachTo: '#city_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('ward', {
+                title: 'Ward Selector',
+                text: 'This field allows you to select the ward that you would like to look at. Initially, and when "View All" is selected, the aggregated ward data will be shown. Selecting a particular ward and clicking "Submit" will zoom to that Ward and will show the small enumerator areas along with their data values.',
+                attachTo: '#ward_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('year', {
+                title: 'Year Selector',
+                text: 'This field allows you to choose which year\'s data values you would like to explore.',
+                attachTo: '#year_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('submit', {
+                title: 'Submit Button',
+                text: 'Once you have made your selections, click "Submit" to view the data!',
+                attachTo: '#submitButton right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('plot', {
+                title: 'Map Area',
+                text: 'This map shows projected migration values at the ward and small enumerator area levels for each metro. Clicking on an area will zoom to it, though clicking on a ward will NOT reveal its underlying enumerators.',
+                attachTo: '#geoCard left',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.start();
+
+        {% endif %}
+    });
+
+    $(document).ready(function () {
+        $('.js-example-basic-single').select2();
+        $('.js-example-basic-multiple').select2();
+
+        $('#myButton').click(function(){$('input[id=my_submitted]').val('1');});
+
+        {% if tour %}
+
+            var tour = new Shepherd.Tour({
+                defaults: {
+                    classes: 'shepherd-theme-dark',
+                    scrollTo: true
+                }
+            });
+
+            tour.addStep('welcome', {
+                title: 'Welcome to the Demographics Explorer!',
+                text: 'This short tour will guide you through the necessary steps to explore the demographic modelling data contained in this almanac. You can exit the tour at any stage by clicking on the "Exit" button.',
+                attachTo: '#formCardHead right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('form', {
+                title: 'The Selection Form',
+                text: 'This form is here to help you find the region you are interested in exploring. The selection fields will allow you to find the city, ward and year that you would like to explore. ',
+                attachTo: '#formCard right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('city', {
+                title: 'City Selector',
+                text: 'This field allows you to select the the city you would like to look at.',
+                attachTo: '#city_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('ward', {
+                title: 'Ward Selector',
+                text: 'This field allows you to select the ward that you would like to look at. Initially, and when "View All" is selected, the aggregated ward data will be shown. Selecting a particular ward and clicking "Submit" will zoom to that Ward and will show the small enumerator areas along with their data values.',
+                attachTo: '#ward_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('year', {
+                title: 'Year Selector',
+                text: 'This field allows you to choose which year\'s data values you would like to explore.',
+                attachTo: '#year_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('submit', {
+                title: 'Submit Button',
+                text: 'Once you have made your selections, click "Submit" to view the data!',
+                attachTo: '#submitButton right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('plot', {
+                title: 'Map Area',
+                text: 'This map shows projected migration values at the ward and small enumerator area levels for each metro. Clicking on an area will zoom to it, though clicking on a ward will NOT reveal its underlying enumerators.',
+                attachTo: '#geoCard left',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.start();
+
+        {% endif %}
+    });
+
+</script>
+
+<div class="container-fluid">
+    <div id="ui-view" style="opacity: 1;">
+        <div class="animated fadeIn">
+
+            <div class="row">
+                <div class="col-sm-12 col-lg-12 col-lg-12">
+                    {% if warning != 3 %}
+                        {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                            {% if messages %}
+                                <div class="alert {% if warning == 0 %}alert-success{% elif warning == 2 %}alert-warning{% elif warning == 1 %}alert-danger{% endif %}">
+                                    {% for message in messages %}
+                                       {{ message }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        {% endwith %}
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                    <div class="card" id="selectorCard">
+                        <div class="card-header" id="exploreFormCardHead">Indicators
+                            <div class="card-actions">
+                                <a class="btn-minimize" data-toggle="collapse" href="#exploreFormCard" aria-expanded="true"
+                                   aria-controls="exploreFormCard"><i class="icon-arrow-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-block collapse {% if explore_form_open %} in {% endif %}" id="exploreFormCard">
+                            <form action="/constructor/{{ analysis_id }}" id="exploreForm" class="form-horizontal" method="POST">
+                                {{ explore_form.csrf_token }}
+                                {{ explore_form.hidden_tag() }}
+                                <div class="form-group {% if explore_form.dataset_id.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="explore_dataset_label">
+                                        Data Set:
+                                    </div>
+                                    <div>
+                                        {{ explore_form.dataset_id(id='explore_dataset_id',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ explore_form.dataset_id.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if explore_form.region_id.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="explore_region_label">
+                                        Region:
+                                    </div>
+                                    <div>
+                                        {{ explore_form.region_id(id='explore_region_id',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ explore_form.region_id.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if explore_form.type_id.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="explore_type_label">
+                                        Region Type:
+                                    </div>
+                                    <div>
+                                        {{ explore_form.type_id(id='explore_type_id',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ explore_form.type_id.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if explore_form.theme_id.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="explore_theme_label">
+                                        Theme:
+                                    </div>
+                                    <div>
+                                        {{ explore_form.theme_id(id='explore_theme_id',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ explore_form.theme_id.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if explore_form.year.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="explore_year_label">
+                                        Year:
+                                    </div>
+                                    <div>
+                                        {{ explore_form.year(id='explore_year',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ explore_form.year.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if explore_form.indicator_id.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="explore_indicator_label">
+                                        Indicator:
+                                    </div>
+                                    <div>
+                                        {{ explore_form.indicator_id(id='explore_indicator_id',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ explore_form.indicator_id.errors[0] }}
+                                </div>
+                                <button class="btn btn-success" id="exploreButton" type="submit" disabled>Please select
+                                    an indicator...
+                                </button>
+                            </form>
+                            <a href="/constructor/{{ analysis_id }}">
+                                <button class="btn btn-primary" id="clearForm">Reset Form</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                    <div class="card" id="selectorCard">
+                        <div class="card-header" id="waziFormCardHead">Wazimap
+                            <div class="card-actions">
+                                <a class="btn-minimize" data-toggle="collapse" href="#waziFormCard" aria-expanded="true"
+                                   aria-controls="waziFormCard"><i class="icon-arrow-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-block collapse {% if wazi_form_open %} in {% endif %}" id="waziFormCard" aria-expanded="true">
+                            <form action="/constructor/{{ analysis_id }}" id=waziForm" class="form-horizontal" method="POST">
+                                {{ wazi_form.csrf_token }}
+                                {{ wazi_form.hidden_tag() }}
+
+                                <div class="form-group {% if wazi_form.region.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="dataset_label">
+                                        Region:
+                                    </div>
+                                    <div>
+                                        {{ wazi_form.region(id='wazi_region',class="js-example-basic-multiple js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ wazi_form.region.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if wazi_form.top_tier.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="wazi_region_label">
+                                        Category:
+                                    </div>
+                                    <div>
+                                        {{ wazi_form.top_tier(id='wazi_top_tier',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ wazi_form.top_tier.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if wazi_form.lower_tier.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="wazi_type_label">
+                                        Sub-Category:
+                                    </div>
+                                    <div>
+                                        {{ wazi_form.lower_tier(id='wazi_lower_tier',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ wazi_form.lower_tier.errors[0] }}
+                                </div>
+
+                                <button class="btn btn-success" id="waziButton" type="submit">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6 col-lg-3">
+
+                    <div class="card" id="selectorCard">
+                        <div class="card-header" id="muniFormCardHead">Municipal Money
+                            <div class="card-actions">
+                                <a class="btn-minimize" data-toggle="collapse" href="#muniFormCard" aria-expanded="true"
+                                   aria-controls="muniFormCard"><i class="icon-arrow-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-block collapse {% if muni_form_open %} in {% endif %}" id="muniFormCard" aria-expanded="true">
+                            <form action="/constructor/{{ analysis_id }}" id="muniForm" class="form-horizontal" method="POST">
+                                {{ muni_form.csrf_token }}
+                                {{ muni_form.hidden_tag() }}
+
+                                <div class="form-group {% if muni_form.region.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="muni_dataset_label">
+                                        Region:
+                                    </div>
+                                    <div>
+                                        {{ muni_form.region(id='muni_region',class="js-example-basic-multiple js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ muni_form.region.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if muni_form.top_tier.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="muni_region_label">
+                                        Cube:
+                                    </div>
+                                    <div>
+                                        {{ muni_form.top_tier(id='muni_top_tier',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ muni_form.top_tier.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if muni_form.lower_tier.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="muni_type_label">
+                                        Category:
+                                    </div>
+                                    <div>
+                                        {{ muni_form.lower_tier(id='muni_lower_tier',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ muni_form.lower_tier.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if muni_form.year.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="muni_type_label">
+                                        Year:
+                                    </div>
+                                    <div>
+                                        {{ muni_form.year(id='muni_year',class="js-example-basic-multiple js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ muni_form.year.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if muni_form.data_type.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="muni_type_label">
+                                        Data Type:
+                                    </div>
+                                    <div>
+                                        {{ muni_form.data_type(id='muni_data_type',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ muni_form.data_type.errors[0] }}
+                                </div>
+
+                                <button class="btn btn-success" id="muniButton" type="submit">Submit</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                    <div class="card" id="selectorCard">
+                        <div class="card-header" id="myFormCardHead">My Datasets
+                            <div class="card-actions">
+                                <a class="btn-minimize" data-toggle="collapse" href="#myFormCard" aria-expanded="true"
+                                   aria-controls="myFormCard"><i class="icon-arrow-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-block collapse {% if my_form_open %} in {% endif %}" id="myFormCard" aria-expanded="true">
+                            <form action="/constructor/{{ analysis_id }}" enctype=multipart/form-data id="myForm" class="form-horizontal" method="POST">
+                                {{ my_form.csrf_token }}
+                                {{ my_form.hidden_tag() }}
+
+                                <div class="form-group {% if my_form.ds_id.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="my_dataset_label">
+                                        Dataset name:
+                                    </div>
+                                    <div>
+                                        {{ my_form.ds_id(id='my_ds_id',class="js-example-basic-single", style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ my_form.ds_id.errors[0] }}
+                                </div>
+
+                                <button class="btn btn-success" id="myButton" type="submit">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        {% if plot %}
+
+            {% include 'snippets/charts_constructor_full.html' %}
+
+                    <div id="dashboard">
+                        <div class="row">
+                            <div class="col-sm-2 col-lg-2 col-lg-2">
+                                <div class="card" id="selectCard">
+                                    <div class="card-header">Select Your Data</div>
+                                    <div class="card-block">
+                                        <div id="categorySelector2"></div>
+                                        <div id="categorySelector1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-12 col-lg-12">
+                                <div class="card">
+                                    <div class="card-header">Selected Data</div>
+                                    <div class="card-block">
+                                        <div id="table"
+                                             style="display: inline-block; margin: 0 auto; width: 100%;"></div>
+                                        <div id="table2"
+                                             style="display: none; margin: 0 auto; width: 100%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                            <div class="col-sm-12 col-lg-12 col-lg-12">
+                                <div class="card" id="selectCard">
+                                    <div class="card-header">Your Current Analysis Data Set</div>
+                                    <div class="card-block">
+                                        <div id="table_master"
+                                             style="display: inline-block; margin: 0 auto; width: 100%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+
+
+        {% else %}
+
+            {% include 'snippets/charts_constructor_half.html' %}
+
+                    <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="card" id="selectCard">
+                                    <div class="card-header">Your Current Analysis Data Set</div>
+                                    <div class="card-block">
+                                        <div id="table_master"
+                                             style="display: inline-block; margin: 0 auto; width: 100%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+
+        {% endif %}
+
+                    <div class="row" style="text-align: center">
+
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <div class="card" id="mapSelect">
+                                <div class="card-header">Download data</div>
+                                <div class="card-block" style="text-align: center">
+                                    <div class="row">
+                                        <a id="Save">
+                                            <button class="btn btn-primary" style="margin-right: 10px">Add to your Analysis
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <div class="card" id="mapSelect">
+                                <div class="card-header">Download data</div>
+                                <div class="card-block" style="text-align: center">
+                                    <div class="row">
+                                        <a id="Export2" href="/constructor/{{ analysis_id }}/download"><button class="btn btn-warning">Download as CSV</button></a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+        </div>
+    </div>
+</div>

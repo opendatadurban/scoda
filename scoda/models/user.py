@@ -10,6 +10,7 @@ from sqlalchemy import (
     Integer,
     String,
     func,
+    JSON
 )
 from sqlalchemy.orm import relationship
 from flask_security import UserMixin, RoleMixin, Security, SQLAlchemyUserDatastore
@@ -89,6 +90,47 @@ roles_users = db.Table('roles_users',
 class LoginForm(Form):
     email = EmailField('Email', validators=[InputRequired()])
     password = PasswordField('Password', validators=[InputRequired()])
+
+
+class UserSet(db.Model):
+    """
+    A user's uploaded datasets
+    """
+    __tablename__ = "user_sets"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, index=True, nullable=False, unique=False)
+    ds_name = Column(String(80), index=False, nullable=False, unique=False)
+    ds_title = Column(String(80), index=False, nullable=False, unique=False)
+    pk_id = Column(String(80), index=False, nullable=False, unique=False)
+    file_id = Column(String(80), index=True, nullable=False, unique=True)
+
+    def __repr__(self):
+        return "<Dataset='%s'>" % (self.ds_name)
+
+    @classmethod
+    def all(cls):
+        return cls.query.order_by(UserSet.ds_name).all()
+
+
+class UserAnalysis(db.Model):
+    """
+    A user's custom analyses
+    """
+    __tablename__ = "user_analyses"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, index=True, nullable=False, unique=False)
+    ds_name = Column(String(80), index=False, nullable=False, unique=False)
+    current = Column(JSON)
+    previous = Column(JSON)
+
+    def __repr__(self):
+        return "<Analysis-'%s'>" % (self.ds_name)
+
+    @classmethod
+    def all(cls):
+        return cls.query.order_by(UserAnalysis.ds_name).all()
 
 
 # user authentication

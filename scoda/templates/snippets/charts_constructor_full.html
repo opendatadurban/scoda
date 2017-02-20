@@ -1,0 +1,123 @@
+<script type="text/javascript">
+
+    var csrf_token = "{{ csrf_token() }}";
+
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+            }
+        }
+    });
+
+    google.charts.load('visualization', 'current', {
+        packages: ['controls','corechart', 'table']
+    });
+
+    function redraw() {
+        window.dispatchEvent(new Event('resize'));
+    }
+
+    function drawBar1() {
+
+        var data2 = google.visualization.arrayToDataTable({{ table_master|safe }});
+
+        var table2 = new google.visualization.Table(document.getElementById('table_master'));
+
+        var formatter = new google.visualization.NumberFormat({pattern: '####'});
+
+        formatter.format(data2, 1); // Apply formatter to second column
+
+        var data = google.visualization.arrayToDataTable({{ table|safe }});
+
+        formatter.format(data, 1); // Apply formatter to second column
+
+        var categoryPicker1 = new google.visualization.ControlWrapper({
+            'controlType': 'CategoryFilter',
+            'containerId': 'categorySelector1',
+            'state': {'selectedValues': {{ cities|safe }}},
+            'options': {
+                'filterColumnLabel': 'City',
+                'ui': {
+                    'labelStacking': 'vertical',
+                    'allowMultiple': true,
+                    'allowNone': false,
+                    'allowTyping': false,
+                    'caption': 'Choose a city...'
+                }
+            }
+        });
+
+        var categoryPicker2 = new google.visualization.ControlWrapper({
+            'controlType': 'CategoryFilter',
+            'containerId': 'categorySelector2',
+            'state': {'selectedValues': {{ years|safe }}},
+            'options': {
+                'filterColumnLabel': 'Year',
+                'ui': {
+                    'labelStacking': 'vertical',
+                    'allowTyping': false,
+                    'allowMultiple': true,
+                    'allowNone': false
+                }
+            }
+        });
+
+        var table1 = new google.visualization.ChartWrapper({
+            'chartType': 'Table',
+            'containerId': 'table',
+            'options': {}
+
+        });
+
+        var dashboard = new google.visualization.Dashboard();
+
+        dashboard.bind([categoryPicker1, categoryPicker2], [table1]);
+        dashboard.draw(data);
+        table2.draw(data2);
+
+        $('#Save').click(function () {
+            var dt = table2.getDataTable();
+            var csv = google.visualization.dataTableToCsv(dt);
+
+            $.ajax({
+                url: "/constructor/{{ analysis_id }}/edit",
+                type: "POST",
+                data: JSON.stringify({info:csv, head: {{ table[0]|safe }} }),
+                contentType: 'application/json;charset=UTF-8',
+                success: function(data) {
+                    if (data.redirect) {
+                        // data.redirect contains the string URL to redirect to
+                        window.location.href = data.redirect;
+                    }}
+                });
+            });
+
+        $('#Export').click(function () {
+            var dt = table1.getDataTable();
+            var csv = google.visualization.dataTableToCsv(dt);
+
+            $.ajax({
+                url: "/constructor/{{ analysis_id }}/download",
+                type: "POST",
+                data: JSON.stringify({info:csv, head: {{ table[0]|safe }} }),
+                contentType: 'application/json;charset=UTF-8',
+                success: function(data) {
+                    console.log('success');
+                }
+                });
+            });
+
+        if (window.addEventListener) {
+            window.addEventListener('resize', resize);
+        }
+
+        else {
+            window.attachEvent('onresize', resize);
+        }
+
+    }
+
+    google.setOnLoadCallback(drawBar1);
+
+</script>

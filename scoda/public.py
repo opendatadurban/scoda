@@ -24,6 +24,7 @@ def explore():
             tour = 2
 
             ind = form.indicator_id.data
+
             query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value).\
                 filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
                 filter(DataPoint.region_id == Region.id)
@@ -103,6 +104,7 @@ def explore():
 
 @app.route('/demographics', methods=['GET', 'POST'])
 def demographics():
+    session['demo'] = []
     form = MapForm()
     status = 200
     tour = 1
@@ -116,7 +118,9 @@ def demographics():
 
             if form.city_ward_code.data == '':
 
-                query = db.session.query(Ward.geom.ST_AsGeoJSON(), Ward.data, Ward.city_ward_code)
+                query = db.session.query(Ward.geom.ST_AsGeoJSON(), Ward.data, Ward.city_ward_code).\
+                    filter(Ward.region_id == form.region_id.data)
+
                 geometries = {"type": "FeatureCollection",
                               "features": []}
                 for g in query:
@@ -128,7 +132,9 @@ def demographics():
 
             else:
                 query = db.session.query(Area.geom.ST_AsGeoJSON(), Area.data, Area.city_ward_code) \
-                    .filter(Area.city_ward_code == form.city_ward_code.data)
+                    .filter(Area.city_ward_code == form.city_ward_code.data)\
+                    .filter(Area.region_id == form.region_id.data)
+
                 geometries = {"type": "FeatureCollection",
                               "features": []}
 
@@ -149,7 +155,8 @@ def demographics():
                 flash('Please correct the problems below and try again.', 'warning')
 
     else:
-        query = db.session.query(Ward.geom.ST_AsGeoJSON(), Ward.data, Ward.city_ward_code)
+        query = db.session.query(Ward.geom.ST_AsGeoJSON(), Ward.data, Ward.city_ward_code). \
+            filter(Ward.region_id == 1)
         geometries = {"type": "FeatureCollection",
                       "features": []}
 
@@ -163,7 +170,8 @@ def demographics():
         return render_template('demographics/demographics.html', form=form, geometries=geometries, tour=tour)
 
     if not request.is_xhr:
-        query = db.session.query(Ward.geom.ST_AsGeoJSON(), Ward.data, Ward.city_ward_code)
+        query = db.session.query(Ward.geom.ST_AsGeoJSON(), Ward.data, Ward.city_ward_code). \
+            filter(Ward.region_id == 1)
         geometries = {"type": "FeatureCollection",
                       "features": []}
 
@@ -198,8 +206,6 @@ def parse_data():
         elif (param is not None) and (str(param) != ''):
             kwargs[i] = param
 
-    print kwargs
-
     session['explore'] = [i for i in kwargs]
 
     datasets = db.session.query(DataPoint.dataset_id).filter_by(**kwargs).distinct()
@@ -219,7 +225,8 @@ def parse_data():
 
     response['dataset'] = dataset_list
 
-    indicator_list = [(i, str(Indicator.query.filter_by(id=i).first().in_name)) for i in indicators]
+    indicator_list = [[i[0], str(Indicator.query.filter_by(id=i).first().in_name)] for i in indicators]
+
     if 'indicator_id' not in session['explore']:
         indicator_list.insert(0, ('', 'Empty'))
         response['ind_ready'] = 0
@@ -228,7 +235,6 @@ def parse_data():
         response['ind_ready'] = 1
 
     response['indicator'] = indicator_list
-
     region_list = [(i, str(Region.query.filter_by(id=i).first().re_name)) for i in regions]
 
     if 'region_id' not in session['explore']:
@@ -264,4 +270,35 @@ def parse_data():
         year_list.insert(1, ('', 'Empty'))
 
     response['year'] = year_list
+
+    print response['indicator']
+
+    return jsonify(response)
+
+
+@app.route('/_parse_demo', methods=['GET'])
+def parse_demo():
+    kwargs = {}
+    for i in ['region_id', 'ward_id']:
+        param = request.args.get(i)
+        if (param is not None) and (str(param) != ''):
+            kwargs[i] = param
+
+    session['demo'] = [i for i in kwargs]
+
+    wards = db.session.query(Ward.city_ward_code).filter_by(**kwargs).distinct().order_by(Ward.city_ward_code)
+
+    response = {}
+
+    ward_list = [(str(i[0]), 'Ward %s' % Ward.query.filter_by(id=i).first().city_ward_code) for i in wards]
+
+    if 'ward_id' not in session['demo']:
+        ward_list.insert(0, ('', 'View All'))
+    else:
+        ward_list.insert(1, ('', 'View All'))
+
+    print ward_list
+
+    response['wards'] = ward_list
+
     return jsonify(response)

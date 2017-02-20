@@ -1,0 +1,111 @@
+<script type="text/javascript">
+
+    var csrf_token = "{{ csrf_token() }}";
+
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+            }
+        }
+    });
+
+    $(document).ready(function () {
+
+            $('.js-example-basic-single').select2();
+
+            $('.js-example-basic-multiple').select2();
+
+        });
+
+</script>
+
+<div class="container-fluid">
+    <div id="ui-view" style="opacity: 1;">
+        <div class="animated fadeIn">
+
+            <div class="row">
+
+                <div class="col-sm-3 col-lg-3 col-lg-3">
+                    <div class="card" id="selectorCard">
+                        <div class="card-header" id="seriesFormCardHead">Indicator Selector</div>
+                        <div class="card-block" id="seriesFormCard">
+                            <form action="/constructor/{{ analysis_id }}/time-series" id="pivotForm" class="form-horizontal" method="POST">
+                                {{ form.csrf_token }}
+                                {{ form.hidden_tag() }}
+                                <div class="form-group {% if form.ds_id.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="pivot_dataset_label">
+                                        Data Set:
+                                    </div>
+                                    <div>
+                                        {{ form.ds_id(id='pivot_dataset_id',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ form.ds_id.errors[0] }}
+                                </div>
+
+                                <button class="btn btn-success" id="pivotButton" type="submit">Generate time-series
+                                </button>
+                            </form>
+                            <a href="/constructor/{{ analysis_id }}">
+                                <button class="btn btn-primary" id="clearForm">Back to Analysis</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% if plot %}
+
+            {% include 'snippets/charts_constructor_full.html' %}
+
+                    <div id="dashboard">
+                        <div class="row">
+                            <div class="col-sm-2 col-lg-2 col-lg-2">
+                                <div class="card" id="selectCard">
+                                    <div class="card-header">Select Your Data</div>
+                                    <div class="card-block">
+                                        <div id="categorySelector2"></div>
+                                        <div id="categorySelector1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-12 col-lg-12">
+                                <div class="card">
+                                    <div class="card-header">Selected Data</div>
+                                    <div class="card-block">
+                                        <div id="table"
+                                             style="display: inline-block; margin: 0 auto; width: 100%;"></div>
+                                        <div id="table2"
+                                             style="display: none; margin: 0 auto; width: 100%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+        {% endif %}
+
+                    <div class="row">
+
+                        <div class="col-sm-5 col-lg-5 col-lg-5">
+                            <div class="card" id="mapSelect">
+                                <div class="card-header">Download data</div>
+                                <div class="card-block" style="text-align: center">
+                                    <div class="row">
+                                        <a id="Export2" href="/constructor/{{ analysis_id }}/time-series/{{ series_id }}/download"><button class="btn btn-warning">Download as CSV</button></a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+        </div>
+    </div>
+</div>

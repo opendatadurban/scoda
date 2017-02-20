@@ -1,9 +1,9 @@
 from ..app import db
 from ..forms import Form
-from wtforms import StringField, validators, SelectField, SelectMultipleField
+from wtforms import StringField, validators, SelectField, SelectMultipleField, IntegerField
 from sqlalchemy import func
 from sqlalchemy.orm import relationship
-from wtforms.widgets import TextArea
+from wtforms.widgets import TextArea, HiddenInput
 
 from sqlalchemy import (
     Column,
@@ -440,6 +440,49 @@ class Region(db.Model):
         return cls.query.order_by(Region.re_name).all()
 
 
+class WaziRegion(db.Model):
+    """
+    The geographic region the data point belongs to
+    """
+    __tablename__ = "wazi_regions"
+
+    id = Column(Integer, primary_key=True)
+    re_name = Column(String(50), index=True, nullable=False, unique=True)
+    wazi_name = Column(String(50), index=True, nullable=False, unique=True)
+    wazi_abr = Column(String(10), index=True, nullable=False, unique=True)
+
+    def __repr__(self):
+        return "<Region='%s'>" % (self.re_name)
+
+    @classmethod
+    def create_defaults(self):
+
+        wazi_regions = {1: {'name': 'Johannesburg', 'wazi_name': 'city-of-johannesburg', 'abbreviation': 'JHB'},
+                        2: {'name': 'Tshwane', 'wazi_name': 'city-of-tshwane', 'abbreviation': 'TSH'},
+                        3: {'name': 'Cape Town', 'wazi_name': 'city-of-cape-town', 'abbreviation': 'CPT'},
+                        4: {'name': 'EThekwini', 'wazi_name': 'ethekwini', 'abbreviation': 'ETH'},
+                        5: {'name': 'Ekurhuleni', 'wazi_name': 'ekurhuleni', 'abbreviation': 'EKU'},
+                        6: {'name': 'Nelson Mandela Bay', 'wazi_name': 'nelson-mandela-bay', 'abbreviation': 'NMA'},
+                        7: {'name': 'Buffalo City', 'wazi_name': 'buffalo-city', 'abbreviation': 'BUF'},
+                        8: {'name': 'Mangaung', 'wazi_name': 'mangaung', 'abbreviation': 'MAN'},
+                        9: {'name': 'Msunduzi', 'wazi_name': 'the-msunduzi', 'abbreviation': 'KZN225'}
+                        }
+
+        waziregion = []
+        for i in range(1, 10):
+            r = WaziRegion()
+            r.re_name = wazi_regions[i]['name']
+            r.wazi_name = wazi_regions[i]['wazi_name']
+            r.wazi_abr = wazi_regions[i]['abbreviation']
+            waziregion.append(r)
+
+        return waziregion
+
+    @classmethod
+    def all(cls):
+        return cls.query.order_by(WaziRegion.id).all()
+
+
 class Type(db.Model):
     """
     The geographic data type
@@ -516,13 +559,14 @@ class ExploreForm(Form):
     type_id = SelectField('Region Type', [validators.Optional()])
     theme_id = SelectField('Indicator Theme', [validators.Optional()])
     year = SelectField('Year', [validators.Optional()])
+    explore_submitted = IntegerField('Submitted', default=0, widget=HiddenInput())
 
     def __init__(self, *args, **kwargs):
         super(ExploreForm, self).__init__(*args, **kwargs)
         self.dataset_id.choices = [[str(c.id), c.ds_name] for c in DataSet.all()]
         self.dataset_id.choices.insert(0, ('', 'Empty'))
         self.indicator_id.choices = [[str(c.id), c.in_name] for c in Indicator.all()]
-        self.indicator_id.choices.insert(0, ('', 'Empty'))
+        self.indicator_id.choices.insert(0, ['', 'Empty'])
         self.region_id.choices = [[str(c.id), c.re_name] for c in Region.all()]
         self.region_id.choices.insert(0, ('', 'Empty'))
         self.type_id.choices = [[str(c.id), c.ty_name] for c in Type.all()]
@@ -537,3 +581,4 @@ class ExploreForm(Form):
 
     def populate_obj(self, obj):
         super(ExploreForm, self).populate_obj(obj)
+

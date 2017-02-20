@@ -60,6 +60,9 @@ def seed_db(db):
         for x in Region.create_defaults():
             db.session.add(x)
         print 'Created region table...'
+        for x in WaziRegion.create_defaults():
+            db.session.add(x)
+        print 'Created Wazi-region table...'
         for x in Type.create_defaults():
             db.session.add(x)
         print 'Created type table...'
@@ -164,3 +167,6 @@ def seed_db(db):
                 db.session.add(ward)
         db.session.flush()
         db.session.commit()
+        del data3
+
+

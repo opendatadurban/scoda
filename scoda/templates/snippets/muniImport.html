@@ -1,85 +1,38 @@
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css"/>
-<link rel="stylesheet" href="../../static/vendor/shepherd/css/shepherd-theme-dark.css"/>
-<script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
-
-<style>#map {
-    width: 100%;
-    height: 600px;
-}
-
-.info {
-    padding: 6px 8px;
-    font: 14px/16px Arial, Helvetica, sans-serif;
-    background: white;
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-}
-
-.info h4 {
-    margin: 0 0 5px;
-    color: #777;
-}
-
-.legend {
-    text-align: left;
-    line-height: 18px;
-    color: #555;
-}
-
-.legend i {
-    width: 18px;
-    height: 18px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.7;
-}
-</style>
-
 <script type="text/javascript">
-
-    var csrf_token = "{{ csrf_token() }}";
-
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrf_token);
-            }
-        }
-    });
 
     $(document).ready(function () {
         $('.js-example-basic-single').select2();
         $('.js-example-basic-multiple').select2();
 
-         $('#Form').on('change', function () {
+        $('#muniButton').click(function(){$('input[id=submitted]').val('1');});
 
-            var region_input = $('#region_id').find("option:selected").val();
-            var ward_input = $('#ward_id').find("option:selected").val();
+        $('#top_tier').on('change', function () {
 
-            $.getJSON('/_parse_demo', {
+            var top_tier = $('#top_tier').find("option:selected").val();
 
-                    region_id: region_input,
-                    ward_id: ward_input
+            $.getJSON('/_parse_muni', {
+
+                    top_tier: top_tier
 
                 },
                 function (data) {
-                    var wards = data.wards;
+                    var lower_tier = data.lower_tier;
 
-                    $("#ward_id").empty();
+                    $("#lower_tier").empty();
 
-                    var options = $("#ward_id");
+                    var options = $("#lower_tier");
                     options.empty();
-                    wards.forEach(function (item) {
+                    lower_tier.forEach(function (item) {
                         options.append($('<option>', {value: item[0], text: item[1]}));
                     });
 
                 });
+
         });
 
         {% if tour %}
 
-        var tour = new Shepherd.Tour({
+            var tour = new Shepherd.Tour({
                 defaults: {
                     classes: 'shepherd-theme-dark',
                     scrollTo: true
@@ -240,37 +193,55 @@
     <div id="ui-view" style="opacity: 1;">
         <div class="animated fadeIn">
             <div class="row">
-                <div class="col-sm-3 col-lg-3 col-lg-3">
-                    <div class="card">
-                        <div class="card-header" id="formCardHead">Area Selector</div>
-                        <div class="card-block" id="formCard">
-                            <form action="{{ url_for('demographics') }}" id="Form" class="form-horizontal" method="POST">
+                <div class="col-sm-5 col-lg-5 col-lg-5">
+
+                    <div class="card" id="selectorCard">
+                        <div class="card-header" id="formCardHead">Municipal Money Selector
+                            <div class="card-actions">
+                                <a class="btn-minimize" data-toggle="collapse" href="#formCard" aria-expanded="true"
+                                   aria-controls="formCard"><i class="icon-arrow-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-block collapse in " id="formCard" aria-expanded="true">
+                            <form action="{{ url_for('muni_constructor') }}" id="Form" class="form-horizontal" method="POST">
                                 {{ form.csrf_token }}
                                 {{ form.hidden_tag() }}
-                                <div class="form-group {% if form.region_id.errors %} has-error {% endif %}">
-                                    <div class="control-label" id="city_label">
-                                        City Selection:
+
+                                <div class="form-group {% if form.region.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="dataset_label">
+                                        Region:
                                     </div>
                                     <div>
-                                        {{ form.region_id(id='region_id',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                        {{ form.region(id='region',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
                                     </div>
                                     <p class="help-block">
-                                        {{ form.region_id.errors[0] }}
+                                        {{ form.region.errors[0] }}
                                 </div>
 
-                                <div class="form-group {% if form.city_ward_code.errors %} has-error {% endif %}">
-                                    <div class="control-label" id="ward_label">
-                                        Ward Selection:
+                                <div class="form-group {% if form.top_tier.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="region_label">
+                                        Cube:
                                     </div>
                                     <div>
-                                        {{ form.city_ward_code(id='ward_id',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                        {{ form.top_tier(id='top_tier',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
                                     </div>
                                     <p class="help-block">
-                                        {{ form.city_ward_code.errors[0] }}
+                                        {{ form.top_tier.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if form.lower_tier.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="type_label">
+                                        Category:
+                                    </div>
+                                    <div>
+                                        {{ form.lower_tier(id='lower_tier',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ form.lower_tier.errors[0] }}
                                 </div>
 
                                 <div class="form-group {% if form.year.errors %} has-error {% endif %}">
-                                    <div class="control-label" id="year_label">
+                                    <div class="control-label" id="type_label">
                                         Year:
                                     </div>
                                     <div>
@@ -279,154 +250,82 @@
                                     <p class="help-block">
                                         {{ form.year.errors[0] }}
                                 </div>
-                                <button class="btn btn-success" type="submit" id="submitButton">Submit</button>
+
+                                <div class="form-group {% if form.data_type.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="type_label">
+                                        Data Type:
+                                    </div>
+                                    <div>
+                                        {{ form.data_type(id='data_type',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ form.data_type.errors[0] }}
+                                </div>
+
+                                <button class="btn btn-success" id="muniButton" type="submit">Submit</button>
+
                             </form>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                {# Plotting Card #}
+        {% if plot %}
 
-                <div class="col-sm-9 col-lg-9 col-lg-9">
-                    <div class="card" id="geoCard">
-                        <div class="card-header">
-                            Geographic Representation
+                    {% include 'snippets/charts_constructor.html' %}
+
+                    <div id="dashboard">
+                        <div class="row">
+                            <div class="col-sm-2 col-lg-2 col-lg-2">
+                                <div class="card" id="selectCard">
+                                    <div class="card-header">Select Your Data</div>
+                                    <div class="card-block">
+                                        <div id="categorySelector2"></div>
+                                        <div id="categorySelector1"></div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="card-block" style="padding: 0;">
-                            <div id='map'></div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-12 col-lg-12">
+                                <div class="card">
+                                    <div class="card-header">Selected Data</div>
+                                    <div class="card-block">
+                                        <div id="table"
+                                             style="display: inline-block; margin: 0 auto; width: 100%;"></div>
+                                        <div id="table2"
+                                             style="display: none; margin: 0 auto; width: 100%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                </div>
-            </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-5 col-lg-5 col-lg-5">
+                            <div class="card" id="mapSelect">
+                                <div class="card-header">Download data</div>
+                                <div class="card-block" style="text-align: center">
+                                    <div class="row">
+                                        <a id="Export" href="data.csv" target="_blank" download="data.csv">
+                                            <button class="btn btn-primary" style="margin-right: 10px">Download table
+                                                data
+                                                as a CSV file
+                                            </button>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endif %}
+
         </div>
     </div>
 </div>
-
-<script type="text/javascript"></script>
-
-<script type="text/javascript">
-
-    var map = L.map('map').setView([-26.195246, 28.034088], 10);
-
-    L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>'
-    }).addTo(map);
-
-
-    // listen for when all features have been retrieved from the server
-
-    // control that shows state info on hover
-    var info = L.control();
-
-    info.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'info');
-        this.update();
-        return this._div;
-    };
-
-    info.update = function (props) {
-        this._div.innerHTML = '<h4>Demographic Model Data</h4>' + (props ?
-            '<b>' + props.name + '</b><br />Migration Value for <b>' + props.year + '</b>: ' + props.density
-                : 'Hover over a region');
-    };
-
-    info.addTo(map);
-
-
-    // get color depending on population density value
-    function getColor(d) {
-        return d > 100000 ? '#800026' :
-            d > 50000 ? '#BD0026' :
-                d > 20000 ? '#E31A1C' :
-                    d > 10000 ? '#FC4E2A' :
-                        d > 5000 ? '#FD8D3C' :
-                            d > 2000 ? '#FEB24C' :
-                                d > 1000 ? '#FED976' :
-                                    '#FFEDA0';
-    }
-
-    function style(feature) {
-        return {
-            weight: 2,
-            opacity: 1,
-            color: 'white',
-            dashArray: '3',
-            fillOpacity: 0.7,
-            fillColor: getColor(feature.properties.density)
-        };
-    }
-
-    function highlightFeature(e) {
-        var layer = e.target;
-
-        layer.setStyle({
-            weight: 5,
-            color: '#666',
-            dashArray: '',
-            fillOpacity: 0.7
-        });
-
-        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-            layer.bringToFront();
-        }
-
-        info.update(layer.feature.properties);
-    }
-
-    var geojson;
-
-    function resetHighlight(e) {
-        geojson.resetStyle(e.target);
-        info.update();
-    }
-
-    function zoomToFeature(e) {
-        map.fitBounds(e.target.getBounds());
-    }
-
-    function onEachFeature(feature, layer) {
-        layer.on({
-            mouseover: highlightFeature,
-            mouseout: resetHighlight,
-            click: zoomToFeature
-        });
-    }
-
-    var statesData = {{ geometries|safe }}
-
-        geojson = L.geoJson(statesData, {
-            style: style,
-            onEachFeature: onEachFeature
-        }).addTo(map);
-
-
-    map.fitBounds(geojson.getBounds());
-
-
-    var legend = L.control({position: 'bottomright'});
-
-    legend.onAdd = function (map) {
-
-        var div = L.DomUtil.create('div', 'info legend'),
-            grades = [0, 1000, 2000, 5000, 10000, 20000, 50000, 100000],
-            labels = [],
-            from, to;
-
-        for (var i = 0; i < grades.length; i++) {
-            from = grades[i];
-            to = grades[i + 1];
-
-            labels.push(
-                '<i style="background:' + getColor(from + 1) + '"></i> ' +
-                from + (to ? '&ndash;' + to : '+'));
-        }
-
-        div.innerHTML = labels.join('<br>');
-        return div;
-    };
-
-    legend.addTo(map);
-
-</script>
-

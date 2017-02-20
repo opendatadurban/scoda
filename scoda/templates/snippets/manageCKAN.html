@@ -1,41 +1,3 @@
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css"/>
-<link rel="stylesheet" href="../../static/vendor/shepherd/css/shepherd-theme-dark.css"/>
-<script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
-
-<style>#map {
-    width: 100%;
-    height: 600px;
-}
-
-.info {
-    padding: 6px 8px;
-    font: 14px/16px Arial, Helvetica, sans-serif;
-    background: white;
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-}
-
-.info h4 {
-    margin: 0 0 5px;
-    color: #777;
-}
-
-.legend {
-    text-align: left;
-    line-height: 18px;
-    color: #555;
-}
-
-.legend i {
-    width: 18px;
-    height: 18px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.7;
-}
-</style>
-
 <script type="text/javascript">
 
     var csrf_token = "{{ csrf_token() }}";
@@ -52,34 +14,13 @@
         $('.js-example-basic-single').select2();
         $('.js-example-basic-multiple').select2();
 
-         $('#Form').on('change', function () {
-
-            var region_input = $('#region_id').find("option:selected").val();
-            var ward_input = $('#ward_id').find("option:selected").val();
-
-            $.getJSON('/_parse_demo', {
-
-                    region_id: region_input,
-                    ward_id: ward_input
-
-                },
-                function (data) {
-                    var wards = data.wards;
-
-                    $("#ward_id").empty();
-
-                    var options = $("#ward_id");
-                    options.empty();
-                    wards.forEach(function (item) {
-                        options.append($('<option>', {value: item[0], text: item[1]}));
-                    });
-
-                });
-        });
+        $('#newButton').click(function(){$('input[id=new_submitted]').val('1');});
+        $('#editButton').click(function(){$('input[id=edit_submitted]').val('1');});
+        $('#deleteButton').click(function(){$('input[id=delete_submitted]').val('1');});
 
         {% if tour %}
 
-        var tour = new Shepherd.Tour({
+            var tour = new Shepherd.Tour({
                 defaults: {
                     classes: 'shepherd-theme-dark',
                     scrollTo: true
@@ -240,193 +181,140 @@
     <div id="ui-view" style="opacity: 1;">
         <div class="animated fadeIn">
             <div class="row">
+
+            {% if is_submitted %}
+
                 <div class="col-sm-3 col-lg-3 col-lg-3">
-                    <div class="card">
-                        <div class="card-header" id="formCardHead">Area Selector</div>
-                        <div class="card-block" id="formCard">
-                            <form action="{{ url_for('demographics') }}" id="Form" class="form-horizontal" method="POST">
-                                {{ form.csrf_token }}
-                                {{ form.hidden_tag() }}
-                                <div class="form-group {% if form.region_id.errors %} has-error {% endif %}">
-                                    <div class="control-label" id="city_label">
-                                        City Selection:
+                    <div class="card" id="selectorCard">
+                        <div class="card-header" id="formCardHead">Upload a New Dataset
+                        </div>
+                         <div class="card-block collapse in " id="newFormCard" aria-expanded="true">
+                            <p>Submission successful!</p>
+                            <br>
+                            <a href="{{ url_for('my_datasets') }}"><button class="btn btn-success">Back to My Datasets</button></a>
+                         </div>
+                    </div>
+                </div>
+
+            {% else %}
+
+                <div class="col-sm-4 col-lg-4 col-lg-4">
+                    <div class="card" id="selectorCard">
+                        <div class="card-header" id="formCardHead">Upload a New Dataset
+                            <div class="card-actions">
+                                <a class="btn-minimize" data-toggle="collapse" href="#newFormCard" aria-expanded="true"
+                                   aria-controls="newFormCard"><i class="icon-arrow-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-block collapse" id="newFormCard" aria-expanded="true">
+                            <form action="{{ url_for('my_datasets') }}" enctype=multipart/form-data id="newForm" class="form-horizontal" method="POST">
+                                {{ new_form.csrf_token }}
+                                {{ new_form.hidden_tag() }}
+
+
+                                <div class="form-group{% if new_form.ds_name.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="new_dataset_label">
+                                        Dataset name:
                                     </div>
                                     <div>
-                                        {{ form.region_id(id='region_id',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                        {{ new_form.ds_name(id='new_ds_name',placeholder="Type your name (optional)...", styl="width: 100%", class="form-control") }}
                                     </div>
                                     <p class="help-block">
-                                        {{ form.region_id.errors[0] }}
+                                        {{ new_form.ds_name.errors[0] }}
                                 </div>
 
-                                <div class="form-group {% if form.city_ward_code.errors %} has-error {% endif %}">
-                                    <div class="control-label" id="ward_label">
-                                        Ward Selection:
+                                <div class="form-group {% if new_form.fileName.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="new_filename_label">
+                                        Upload file:
                                     </div>
                                     <div>
-                                        {{ form.city_ward_code(id='ward_id',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                        {{ new_form.fileName(id='new_fileName',style="width: 100%") }}
                                     </div>
                                     <p class="help-block">
-                                        {{ form.city_ward_code.errors[0] }}
+                                        {{ new_form.fileName.errors[0] }}
                                 </div>
 
-                                <div class="form-group {% if form.year.errors %} has-error {% endif %}">
-                                    <div class="control-label" id="year_label">
-                                        Year:
-                                    </div>
-                                    <div>
-                                        {{ form.year(id='year',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
-                                    </div>
-                                    <p class="help-block">
-                                        {{ form.year.errors[0] }}
-                                </div>
-                                <button class="btn btn-success" type="submit" id="submitButton">Submit</button>
+                                <button class="btn btn-success" id="newButton" type="submit">Submit</button>
                             </form>
                         </div>
                     </div>
                 </div>
 
-                {# Plotting Card #}
-
-                <div class="col-sm-9 col-lg-9 col-lg-9">
-                    <div class="card" id="geoCard">
-                        <div class="card-header">
-                            Geographic Representation
+                <div class="col-sm-4 col-lg-4 col-lg-4">
+                    <div class="card" id="selectorCard">
+                        <div class="card-header" id="formCardHead">Update an Existing Dataset
+                            <div class="card-actions">
+                                <a class="btn-minimize" data-toggle="collapse" href="#editFormCard" aria-expanded="true"
+                                   aria-controls="editFormCard"><i class="icon-arrow-down"></i></a>
+                            </div>
                         </div>
-                        <div class="card-block" style="padding: 0;">
-                            <div id='map'></div>
+                        <div class="card-block collapse" id="editFormCard" aria-expanded="true">
+                            <form action="{{ url_for('my_datasets') }}" enctype=multipart/form-data id="editForm" class="form-horizontal" method="POST">
+                                {{ edit_form.csrf_token }}
+                                {{ edit_form.hidden_tag() }}
+                                {{ edit_form.file }}
+
+                                <div class="form-group {% if edit_form.ds_id.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="edit_dataset_label">
+                                        Dataset name:
+                                    </div>
+                                    <div>
+                                        {{ edit_form.ds_id(id='edit_ds_id',class="js-example-basic-single", style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ edit_form.ds_id.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if edit_form.fileName.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="edit_filename_label">
+                                        Upload file:
+                                    </div>
+                                    <div>
+                                        {{ edit_form.fileName(id='edit_fileName',style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ edit_form.fileName.errors[0] }}
+                                </div>
+
+                                <button class="btn btn-success" id="editButton" type="submit">Submit</button>
+                            </form>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-sm-4 col-lg-4 col-lg-4">
+                    <div class="card" id="selectorCard">
+                        <div class="card-header" id="formCardHead">Delete an Existing Dataset
+                            <div class="card-actions">
+                                <a class="btn-minimize" data-toggle="collapse" href="#deleteFormCard" aria-expanded="true"
+                                   aria-controls="deleteFormCard"><i class="icon-arrow-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-block collapse" id="deleteFormCard" aria-expanded="true">
+                            <form action="{{ url_for('my_datasets') }}" enctype=multipart/form-data id="deleteForm" class="form-horizontal" method="POST">
+                                {{ delete_form.csrf_token }}
+                                {{ delete_form.hidden_tag() }}
+                                {{ delete_form.file }}
+
+                                <div class="form-group {% if delete_form.ds_id.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="delete_dataset_label">
+                                        Dataset name:
+                                    </div>
+                                    <div>
+                                        {{ delete_form.ds_id(id='delete_ds_id',class="js-example-basic-single", style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ delete_form.ds_id.errors[0] }}
+                                </div>
+
+                                <button class="btn btn-success" id="deleteButton" type="submit">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            {% endif %}
             </div>
         </div>
     </div>
 </div>
-
-<script type="text/javascript"></script>
-
-<script type="text/javascript">
-
-    var map = L.map('map').setView([-26.195246, 28.034088], 10);
-
-    L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>'
-    }).addTo(map);
-
-
-    // listen for when all features have been retrieved from the server
-
-    // control that shows state info on hover
-    var info = L.control();
-
-    info.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'info');
-        this.update();
-        return this._div;
-    };
-
-    info.update = function (props) {
-        this._div.innerHTML = '<h4>Demographic Model Data</h4>' + (props ?
-            '<b>' + props.name + '</b><br />Migration Value for <b>' + props.year + '</b>: ' + props.density
-                : 'Hover over a region');
-    };
-
-    info.addTo(map);
-
-
-    // get color depending on population density value
-    function getColor(d) {
-        return d > 100000 ? '#800026' :
-            d > 50000 ? '#BD0026' :
-                d > 20000 ? '#E31A1C' :
-                    d > 10000 ? '#FC4E2A' :
-                        d > 5000 ? '#FD8D3C' :
-                            d > 2000 ? '#FEB24C' :
-                                d > 1000 ? '#FED976' :
-                                    '#FFEDA0';
-    }
-
-    function style(feature) {
-        return {
-            weight: 2,
-            opacity: 1,
-            color: 'white',
-            dashArray: '3',
-            fillOpacity: 0.7,
-            fillColor: getColor(feature.properties.density)
-        };
-    }
-
-    function highlightFeature(e) {
-        var layer = e.target;
-
-        layer.setStyle({
-            weight: 5,
-            color: '#666',
-            dashArray: '',
-            fillOpacity: 0.7
-        });
-
-        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-            layer.bringToFront();
-        }
-
-        info.update(layer.feature.properties);
-    }
-
-    var geojson;
-
-    function resetHighlight(e) {
-        geojson.resetStyle(e.target);
-        info.update();
-    }
-
-    function zoomToFeature(e) {
-        map.fitBounds(e.target.getBounds());
-    }
-
-    function onEachFeature(feature, layer) {
-        layer.on({
-            mouseover: highlightFeature,
-            mouseout: resetHighlight,
-            click: zoomToFeature
-        });
-    }
-
-    var statesData = {{ geometries|safe }}
-
-        geojson = L.geoJson(statesData, {
-            style: style,
-            onEachFeature: onEachFeature
-        }).addTo(map);
-
-
-    map.fitBounds(geojson.getBounds());
-
-
-    var legend = L.control({position: 'bottomright'});
-
-    legend.onAdd = function (map) {
-
-        var div = L.DomUtil.create('div', 'info legend'),
-            grades = [0, 1000, 2000, 5000, 10000, 20000, 50000, 100000],
-            labels = [],
-            from, to;
-
-        for (var i = 0; i < grades.length; i++) {
-            from = grades[i];
-            to = grades[i + 1];
-
-            labels.push(
-                '<i style="background:' + getColor(from + 1) + '"></i> ' +
-                from + (to ? '&ndash;' + to : '+'));
-        }
-
-        div.innerHTML = labels.join('<br>');
-        return div;
-    };
-
-    legend.addTo(map);
-
-</script>
-

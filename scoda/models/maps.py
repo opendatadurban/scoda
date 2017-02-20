@@ -69,11 +69,11 @@ class MapForm(Form):
 
     def __init__(self, *args, **kwargs):
         super(MapForm, self).__init__(*args, **kwargs)
-        query = Ward.query.distinct(Ward.city_ward_code)
+        query = db.session.query(Ward.city_ward_code).filter(Ward.region_id == 1).order_by(Ward.city_ward_code).distinct()
         self.city_ward_code.choices = [[str(i), 'Ward %s' % row.city_ward_code] for i, row in enumerate(query.all(),
                                                                                                         start=1)]
         self.city_ward_code.choices.insert(0, ('', 'View All'))
-        self.region_id.choices = [[str(c.id), c.re_name] for c in Region.query.filter(Region.id == 1).distinct()]
+        self.region_id.choices = [[str(c.id), c.re_name] for c in Region.query.filter(Region.id < 10).order_by(Region.id).distinct()]
         self.year.choices = [[str(i), str(y)] for i, y in enumerate(range(1996, 2031))]
 
     def validate(self):

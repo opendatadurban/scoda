@@ -1,6 +1,16 @@
 <link rel="stylesheet" href="../../static/vendor/shepherd/css/shepherd-theme-dark.css"/>
 <script type="text/javascript">
 
+    var csrf_token = "{{ csrf_token() }}";
+
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+            }
+        }
+    });
+
     $(document).ready(function () {
 
         $('.js-example-basic-single').select2();
@@ -14,7 +24,6 @@
             var type_input = $("#type_id").find("option:selected").val();
             var theme_input = $("#theme_id").find("option:selected").val();
             var year_input = $("#year").find("option:selected").text();
-            console.log(year_input);
 
             $.getJSON('/_parse_data', {
 
@@ -55,6 +64,7 @@
                     var options = $("#indicator_id");
                     options.empty()
                     indicators.forEach(function (item) {
+                        console.log(item)
                         options.append($('<option>', {value: item[0], text: item[1]}));
                     });
 
