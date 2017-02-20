@@ -8,10 +8,6 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 CSRF_ENABLED = True
 SECRET_KEY = 'uhrmaHghurds3craTC0de!'
 
-MAIL_SERVER = "swampfire.aserv.co.za"
-MAIL_DEFAULT_SENDER = "admin@opendata.durban"
-MAIL_USERNAME = 'admin@opendata.durban'
-MAIL_PASSWORD = '0p3ndaTan0w!'
 MAIL_PORT = 465
 MAIL_USE_TLS = False
 MAIL_USE_SSL = True
