@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="../../static/vendor/shepherd/css/shepherd-theme-dark.css"/>
+
 <script type="text/javascript">
 
     var csrf_token = "{{ csrf_token() }}";
@@ -18,8 +20,6 @@
         $('#editButton').click(function(){$('input[id=edit_submitted]').val('1');});
         $('#deleteButton').click(function(){$('input[id=delete_submitted]').val('1');});
 
-        {% if tour %}
-
             var tour = new Shepherd.Tour({
                 defaults: {
                     classes: 'shepherd-theme-dark',
@@ -28,9 +28,9 @@
             });
 
             tour.addStep('welcome', {
-                title: 'Welcome to the Demographics Explorer!',
-                text: 'This short tour will guide you through the necessary steps to explore the demographic modelling data contained in this almanac. You can exit the tour at any stage by clicking on the "Exit" button.',
-                attachTo: '#formCardHead right',
+                title: 'Welcome to Your Datasets!',
+                text: 'Here you can upload your own datasets, edit existing ones and delete those that you no longer need.',
+                attachTo: '#breadCrumb bottom',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -45,9 +45,9 @@
             });
 
             tour.addStep('form', {
-                title: 'The Selection Form',
-                text: 'This form is here to help you find the region you are interested in exploring. The selection fields will allow you to find the city, ward and year that you would like to explore. ',
-                attachTo: '#formCard right',
+                title: 'Uploading a new dataset...',
+                text: 'Clicking on the downward arrow above will open a form that allows for you to upload a custom dataset to use in the Analysis Constructor. Any data uploaded to this server is stored securely and will not be accessed by any user other than yourself. The system administrator will have access, however, and any strictly private information should not be stored on this system. ',
+                attachTo: '#newFormCardHead bottom',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -65,10 +65,10 @@
                 ]
             });
 
-            tour.addStep('city', {
-                title: 'City Selector',
-                text: 'This field allows you to select the the city you would like to look at.',
-                attachTo: '#city_label right',
+            tour.addStep('form2', {
+                title: 'Uploading a new dataset...',
+                text: 'In order for your data to be compatible with other data on this platform it must have a specific structure and a link to a downloadable template is provided that demonstrates this structure.',
+                attachTo: '#newFormCardHead bottom',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -86,10 +86,10 @@
                 ]
             });
 
-            tour.addStep('ward', {
-                title: 'Ward Selector',
-                text: 'This field allows you to select the ward that you would like to look at. Initially, and when "View All" is selected, the aggregated ward data will be shown. Selecting a particular ward and clicking "Submit" will zoom to that Ward and will show the small enumerator areas along with their data values.',
-                attachTo: '#ward_label right',
+            tour.addStep('form3', {
+                title: 'Updating an existing dataset...',
+                text: 'This form allows for you to change the file associated with an existing dataset. Simply select the dataset you would like to update from the dropdown list provided, select the replacement CSV file and then submit.',
+                attachTo: '#editFormCardHead bottom',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -107,52 +107,10 @@
                 ]
             });
 
-            tour.addStep('year', {
-                title: 'Year Selector',
-                text: 'This field allows you to choose which year\'s data values you would like to explore.',
-                attachTo: '#year_label right',
-                advanceOn: '.docs-link click',
-                buttons: [
-                    {
-                        text: 'Back',
-                        action: tour.back
-                    },
-                    {
-                        text: 'Exit',
-                        action: tour.complete
-                    },
-                    {
-                        text: 'Next',
-                        action: tour.next
-                    }
-                ]
-            });
-
-            tour.addStep('submit', {
-                title: 'Submit Button',
-                text: 'Once you have made your selections, click "Submit" to view the data!',
-                attachTo: '#submitButton right',
-                advanceOn: '.docs-link click',
-                buttons: [
-                    {
-                        text: 'Back',
-                        action: tour.back
-                    },
-                    {
-                        text: 'Exit',
-                        action: tour.complete
-                    },
-                    {
-                        text: 'Next',
-                        action: tour.next
-                    }
-                ]
-            });
-
-            tour.addStep('plot', {
-                title: 'Map Area',
-                text: 'This map shows projected migration values at the ward and small enumerator area levels for each metro. Clicking on an area will zoom to it, though clicking on a ward will NOT reveal its underlying enumerators.',
-                attachTo: '#geoCard left',
+            tour.addStep('form4', {
+                title: 'Deleting a dataset...',
+                text: 'This form allows for you to delete an existing dataset. Simply select the dataset you would like to delete from the dropdown list provided and then click submit. Deleting a dataset will purge it permanently from the system and no-one will have further access to it.',
+                attachTo: '#deleteFormCardHead bottom',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -171,8 +129,6 @@
             });
 
             tour.start();
-
-        {% endif %}
     });
 
 </script>
@@ -200,7 +156,7 @@
 
                 <div class="col-sm-4 col-lg-4 col-lg-4">
                     <div class="card" id="selectorCard">
-                        <div class="card-header" id="formCardHead">Upload a New Dataset
+                        <div class="card-header" id="newFormCardHead">Upload a New Dataset
                             <div class="card-actions">
                                 <a class="btn-minimize" data-toggle="collapse" href="#newFormCard" aria-expanded="true"
                                    aria-controls="newFormCard"><i class="icon-arrow-down"></i></a>
@@ -242,7 +198,7 @@
 
                 <div class="col-sm-4 col-lg-4 col-lg-4">
                     <div class="card" id="selectorCard">
-                        <div class="card-header" id="formCardHead">Update an Existing Dataset
+                        <div class="card-header" id="editFormCardHead">Update an Existing Dataset
                             <div class="card-actions">
                                 <a class="btn-minimize" data-toggle="collapse" href="#editFormCard" aria-expanded="true"
                                    aria-controls="editFormCard"><i class="icon-arrow-down"></i></a>
@@ -284,7 +240,7 @@
 
                 <div class="col-sm-4 col-lg-4 col-lg-4">
                     <div class="card" id="selectorCard">
-                        <div class="card-header" id="formCardHead">Delete an Existing Dataset
+                        <div class="card-header" id="deleteFormCardHead">Delete an Existing Dataset
                             <div class="card-actions">
                                 <a class="btn-minimize" data-toggle="collapse" href="#deleteFormCard" aria-expanded="true"
                                    aria-controls="deleteFormCard"><i class="icon-arrow-down"></i></a>

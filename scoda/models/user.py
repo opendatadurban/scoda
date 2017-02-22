@@ -18,6 +18,7 @@ from flask_security import LoginForm as Form
 from wtforms.fields.html5 import EmailField
 from wtforms import StringField, PasswordField, validators
 from wtforms.validators import DataRequired, Length, InputRequired
+from wtforms.widgets import TextArea
 
 
 class User(db.Model, UserMixin):
@@ -122,6 +123,7 @@ class UserAnalysis(db.Model):
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, index=True, nullable=False, unique=False)
     ds_name = Column(String(80), index=False, nullable=False, unique=False)
+    description = Column(String(300), index=False, nullable=False, unique=False)
     current = Column(JSON)
     previous = Column(JSON)
 
@@ -131,6 +133,20 @@ class UserAnalysis(db.Model):
     @classmethod
     def all(cls):
         return cls.query.order_by(UserAnalysis.ds_name).all()
+
+
+class NewAnalysisForm(Form):
+    ds_name = StringField('Filename', [validators.DataRequired()])
+    description = StringField('Filename', [validators.DataRequired()], widget=TextArea())
+
+    def __init__(self, *args, **kwargs):
+        super(NewAnalysisForm, self).__init__(*args, **kwargs)
+
+    def validate(self):
+        return super(NewAnalysisForm, self).validate()
+
+    def populate_obj(self, obj):
+        super(NewAnalysisForm, self).populate_obj(obj)
 
 
 # user authentication

@@ -77,7 +77,7 @@
         table2.draw(data2);
 
         $('#Save').click(function () {
-            var dt = table2.getDataTable();
+            var dt = table1.getDataTable();
             var csv = google.visualization.dataTableToCsv(dt);
 
             $.ajax({

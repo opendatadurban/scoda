@@ -2,9 +2,9 @@
 <link rel="stylesheet" href="../../static/vendor/shepherd/css/shepherd-theme-dark.css"/>
 <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
 
-<style>#map {
+<style>#map1 {
     width: 100%;
-    height: 600px;
+    height: 300px;
 }
 
 .info {
@@ -34,6 +34,41 @@
     margin-right: 8px;
     opacity: 0.7;
 }
+
+
+#map2 {
+    width: 100%;
+    height: 300px;
+}
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
+.legend {
+    text-align: left;
+    line-height: 18px;
+    color: #555;
+}
+
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -52,10 +87,10 @@
         $('.js-example-basic-single').select2();
         $('.js-example-basic-multiple').select2();
 
-         $('#Form').on('change', function () {
+         $('#Form1').on('change', function () {
 
-            var region_input = $('#region_id').find("option:selected").val();
-            var ward_input = $('#ward_id').find("option:selected").val();
+            var region_input = $('#region_id1').find("option:selected").val();
+            var ward_input = $('#ward_id1').find("option:selected").val();
 
             $.getJSON('/_parse_demo', {
 
@@ -66,9 +101,34 @@
                 function (data) {
                     var wards = data.wards;
 
-                    $("#ward_id").empty();
+                    $("#ward_id1").empty();
 
-                    var options = $("#ward_id");
+                    var options = $("#ward_id1");
+                    options.empty();
+                    wards.forEach(function (item) {
+                        options.append($('<option>', {value: item[0], text: item[1]}));
+                    });
+
+                });
+        });
+
+         $('#Form2').on('change', function () {
+
+            var region_input = $('#region_id2').find("option:selected").val();
+            var ward_input = $('#ward_id2').find("option:selected").val();
+
+            $.getJSON('/_parse_demo', {
+
+                    region_id: region_input,
+                    ward_id: ward_input
+
+                },
+                function (data) {
+                    var wards = data.wards;
+
+                    $("#ward_id2").empty();
+
+                    var options = $("#ward_id2");
                     options.empty();
                     wards.forEach(function (item) {
                         options.append($('<option>', {value: item[0], text: item[1]}));
@@ -89,7 +149,7 @@
             tour.addStep('welcome', {
                 title: 'Welcome to the Demographics Explorer!',
                 text: 'This short tour will guide you through the necessary steps to explore the demographic modelling data contained in this almanac. You can exit the tour at any stage by clicking on the "Exit" button.',
-                attachTo: '#formCardHead right',
+                attachTo: '#breadCrumb bottom',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -190,7 +250,7 @@
             tour.addStep('submit', {
                 title: 'Submit Button',
                 text: 'Once you have made your selections, click "Submit" to view the data!',
-                attachTo: '#submitButton right',
+                attachTo: '#submitButton1 right',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -211,7 +271,49 @@
             tour.addStep('plot', {
                 title: 'Map Area',
                 text: 'This map shows projected migration values at the ward and small enumerator area levels for each metro. Clicking on an area will zoom to it, though clicking on a ward will NOT reveal its underlying enumerators.',
-                attachTo: '#geoCard left',
+                attachTo: '#geoCardHead1 left',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('time', {
+                title: 'Time-series',
+                text: 'This plot gives the values for the selected region (city or ward) from 1996 to 2030.',
+                attachTo: '#chartCard1 left',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('time2', {
+                title: 'Comparative Plotting',
+                text: 'A second demographics explorer row is provided to allow for comparisons between regions to be made.',
+                attachTo: '#geoCardHead2 top',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -236,50 +338,113 @@
 
 </script>
 
+<script type="text/javascript">
+
+    google.charts.load('visualization', 'current', {
+        packages: ['line']
+    });
+
+    function drawBar1() {
+
+        var data1 = google.visualization.arrayToDataTable({{ table1|safe }});
+        var data2 = google.visualization.arrayToDataTable({{ table2|safe }});
+
+        var options1 = {
+          curveType: 'function',
+          legend: {position:'none'},
+          chartArea: {top: "10%"},
+          lineWidth: 5,
+          hAxis: {gridlines: {count: 4}},
+          axes: {
+                    y: {
+                        all: {
+                            range: {
+                                max: {{ max1 }},
+                                min: 0
+                            }
+                        }
+                    }
+                },
+          colors: ['#BD0026'],
+        };
+
+        var options2 = {
+          curveType: 'function',
+          legend: {position:'none'},
+          chartArea: {top: "10%"},
+          hAxis: {gridlines: {count: 4}},
+          axes: {
+                    y: {
+                        all: {
+                            range: {
+                                max: {{ max2 }},
+                                min: 0
+                            }
+                        }
+                    }
+                },
+            colors: ['#BD0026'],
+        };
+
+        var chart1 = new google.charts.Line(document.getElementById('chart1'));
+
+        chart1.draw(data1, google.charts.Line.convertOptions(options1));
+
+        var chart2 = new google.charts.Line(document.getElementById('chart2'));
+
+        chart2.draw(data2, google.charts.Line.convertOptions(options2));
+
+        }
+
+    google.setOnLoadCallback(drawBar1);
+
+</script>
+
 <div class="container-fluid">
     <div id="ui-view" style="opacity: 1;">
         <div class="animated fadeIn">
+
             <div class="row">
-                <div class="col-sm-3 col-lg-3 col-lg-3">
+                <div class="col-sm-2 col-lg-2 col-lg-2">
                     <div class="card">
                         <div class="card-header" id="formCardHead">Area Selector</div>
                         <div class="card-block" id="formCard">
-                            <form action="{{ url_for('demographics') }}" id="Form" class="form-horizontal" method="POST">
-                                {{ form.csrf_token }}
-                                {{ form.hidden_tag() }}
-                                <div class="form-group {% if form.region_id.errors %} has-error {% endif %}">
+                            <form action="{{ url_for('demographics') }}" id="Form1" class="form-horizontal" method="POST">
+                                {{ form1.csrf_token }}
+                                {{ form1.hidden_tag() }}
+                                <div class="form-group {% if form1.region_id.errors %} has-error {% endif %}">
                                     <div class="control-label" id="city_label">
                                         City Selection:
                                     </div>
                                     <div>
-                                        {{ form.region_id(id='region_id',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                        {{ form1.region_id(id='region_id1',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
                                     </div>
                                     <p class="help-block">
-                                        {{ form.region_id.errors[0] }}
+                                        {{ form1.region_id.errors[0] }}
                                 </div>
 
-                                <div class="form-group {% if form.city_ward_code.errors %} has-error {% endif %}">
+                                <div class="form-group {% if form1.city_ward_code.errors %} has-error {% endif %}">
                                     <div class="control-label" id="ward_label">
                                         Ward Selection:
                                     </div>
                                     <div>
-                                        {{ form.city_ward_code(id='ward_id',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                        {{ form1.city_ward_code(id='ward_id1',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
                                     </div>
                                     <p class="help-block">
-                                        {{ form.city_ward_code.errors[0] }}
+                                        {{ form1.city_ward_code.errors[0] }}
                                 </div>
 
-                                <div class="form-group {% if form.year.errors %} has-error {% endif %}">
+                                <div class="form-group {% if form1.year.errors %} has-error {% endif %}">
                                     <div class="control-label" id="year_label">
                                         Year:
                                     </div>
                                     <div>
-                                        {{ form.year(id='year',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                        {{ form1.year(id='year1',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
                                     </div>
                                     <p class="help-block">
-                                        {{ form.year.errors[0] }}
+                                        {{ form1.year.errors[0] }}
                                 </div>
-                                <button class="btn btn-success" type="submit" id="submitButton">Submit</button>
+                                <button class="btn btn-success" type="submit" id="submitButton1">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -287,31 +452,247 @@
 
                 {# Plotting Card #}
 
-                <div class="col-sm-9 col-lg-9 col-lg-9">
-                    <div class="card" id="geoCard">
-                        <div class="card-header">
+                <div class="col-sm-6 col-lg-6 col-lg-6">
+                    <div class="card" id="geoCard1">
+                        <div class="card-header" id="geoCardHead1">
                             Geographic Representation
                         </div>
-                        <div class="card-block" style="padding: 0;">
-                            <div id='map'></div>
+                        <div class="card-block" style="padding: 0; height: 300px;">
+                            <div id='map1'></div>
+                        </div>
+                    </div>
+                </div>
+
+                {# Chart Card #}
+
+                <div class="col-sm-4 col-lg-4 col-lg-4">
+                    <div class="card" id="chartCard1">
+                        <div class="card-header">
+                            Time Series
+                        </div>
+                        <div class="card-block" style="padding: 0; height: 300px;">
+                            <div id='chart1' style="display: inline-block; margin: 0 auto; height: 300px; width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-2 col-lg-2 col-lg-2">
+                    <div class="card">
+                        <div class="card-header" id="formCardHead">Area Selector</div>
+                        <div class="card-block" id="formCard">
+                            <form action="{{ url_for('demographics') }}" id="Form2" class="form-horizontal" method="POST">
+                                {{ form2.csrf_token }}
+                                {{ form2.hidden_tag() }}
+                                <div class="form-group {% if form2.region_id.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="city_label">
+                                        City Selection:
+                                    </div>
+                                    <div>
+                                        {{ form2.region_id(id='region_id2',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ form2.region_id.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if form2.city_ward_code.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="ward_label">
+                                        Ward Selection:
+                                    </div>
+                                    <div>
+                                        {{ form2.city_ward_code(id='ward_id2',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ form2.city_ward_code.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if form2.year.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="year_label">
+                                        Year:
+                                    </div>
+                                    <div>
+                                        {{ form2.year(id='year2',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ form2.year.errors[0] }}
+                                </div>
+                                <button class="btn btn-success" type="submit" id="submitButton2">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                {# Plotting Card #}
+
+                <div class="col-sm-6 col-lg-6 col-lg-6">
+                    <div class="card" id="geoCard2">
+                        <div class="card-header" id="geoCardHead2">
+                            Geographic Representation
+                        </div>
+                        <div class="card-block" style="padding: 0; height: 300px;">
+                            <div id='map2'></div>
+                        </div>
+                    </div>
+                </div>
+
+                {# Chart Card #}
+
+                <div class="col-sm-4 col-lg-4 col-lg-4">
+                    <div class="card" id="chartCard2">
+                        <div class="card-header">
+                            Time Series
+                        </div>
+                        <div class="card-block" style="padding: 0; height: 300px;">
+
+                                <div id='chart2' style="display: inline-block; margin: 0 auto; height: 300px; width: 100%;"></div>
+
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 
-<script type="text/javascript"></script>
-
 <script type="text/javascript">
 
-    var map = L.map('map').setView([-26.195246, 28.034088], 10);
+    var map1 = L.map('map1').setView([-26.195246, 28.034088], 10);
 
     L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>'
-    }).addTo(map);
+    }).addTo(map1);
+
+
+    // listen for when all features have been retrieved from the server
+
+    // control that shows state info on hover
+    var info1 = L.control();
+
+    info1.onAdd = function (map1) {
+        this._div = L.DomUtil.create('div', 'info');
+        this.update();
+        return this._div;
+    };
+
+    info1.update = function (props) {
+        this._div.innerHTML = '<h4>Demographic Model Data</h4>' + (props ?
+            '<b>' + props.name + '</b><br />Migration Value for <b>' + props.year + '</b>: ' + props.density
+                : 'Hover over a region');
+    };
+
+    info1.addTo(map1);
+
+
+    // get color depending on population density value
+    function getColor(d) {
+        return d > 100000 ? '#800026' :
+            d > 50000 ? '#BD0026' :
+                d > 20000 ? '#E31A1C' :
+                    d > 10000 ? '#FC4E2A' :
+                        d > 5000 ? '#FD8D3C' :
+                            d > 2000 ? '#FEB24C' :
+                                d > 1000 ? '#FED976' :
+                                    '#FFEDA0';
+    }
+
+    function style(feature) {
+        return {
+            weight: 2,
+            opacity: 1,
+            color: 'white',
+            dashArray: '3',
+            fillOpacity: 0.7,
+            fillColor: getColor(feature.properties.density)
+        };
+    }
+
+    function highlightFeature(e) {
+        var layer = e.target;
+
+        layer.setStyle({
+            weight: 5,
+            color: '#666',
+            dashArray: '',
+            fillOpacity: 0.7
+        });
+
+        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+            layer.bringToFront();
+        }
+
+        info1.update(layer.feature.properties);
+    }
+
+    var geojson;
+
+    function resetHighlight(e) {
+        geojson.resetStyle(e.target);
+        info.update();
+    }
+
+    function zoomToFeature(e) {
+        map1.fitBounds(e.target.getBounds());
+    }
+
+    function onEachFeature(feature, layer) {
+        layer.on({
+            mouseover: highlightFeature,
+            mouseout: resetHighlight,
+            click: zoomToFeature
+        });
+    }
+
+    var statesData = {{ geometries1|safe }}
+
+        geojson = L.geoJson(statesData, {
+            style: style,
+            onEachFeature: onEachFeature
+        }).addTo(map1);
+
+
+    map1.fitBounds(geojson.getBounds());
+
+
+    var legend = L.control({position: 'bottomright'});
+
+    legend.onAdd = function (map1) {
+
+        var div = L.DomUtil.create('div', 'info legend'),
+            grades = [0, 1000, 2000, 5000, 10000, 20000, 50000, 100000],
+            labels = [],
+            from, to;
+
+        for (var i = 0; i < grades.length; i++) {
+            from = grades[i];
+            to = grades[i + 1];
+
+            labels.push(
+                '<i style="background:' + getColor(from + 1) + '"></i> ' +
+                from + (to ? '&ndash;' + to : '+'));
+        }
+
+        div.innerHTML = labels.join('<br>');
+        return div;
+    };
+
+    legend.addTo(map1);
+
+{# SECOND MAP #}
+
+</script>
+
+<script type="text/javascript">
+
+    var map2 = L.map('map2').setView([-26.195246, 28.034088], 10);
+
+    L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>'
+    }).addTo(map2);
 
 
     // listen for when all features have been retrieved from the server
@@ -319,7 +700,7 @@
     // control that shows state info on hover
     var info = L.control();
 
-    info.onAdd = function (map) {
+    info.onAdd = function (map2) {
         this._div = L.DomUtil.create('div', 'info');
         this.update();
         return this._div;
@@ -331,7 +712,7 @@
                 : 'Hover over a region');
     };
 
-    info.addTo(map);
+    info.addTo(map2);
 
 
     // get color depending on population density value
@@ -382,7 +763,7 @@
     }
 
     function zoomToFeature(e) {
-        map.fitBounds(e.target.getBounds());
+        map2.fitBounds(e.target.getBounds());
     }
 
     function onEachFeature(feature, layer) {
@@ -393,20 +774,20 @@
         });
     }
 
-    var statesData = {{ geometries|safe }}
+    var statesData = {{ geometries2|safe }}
 
         geojson = L.geoJson(statesData, {
             style: style,
             onEachFeature: onEachFeature
-        }).addTo(map);
+        }).addTo(map2);
 
 
-    map.fitBounds(geojson.getBounds());
+    map2.fitBounds(geojson.getBounds());
 
 
     var legend = L.control({position: 'bottomright'});
 
-    legend.onAdd = function (map) {
+    legend.onAdd = function (map2) {
 
         var div = L.DomUtil.create('div', 'info legend'),
             grades = [0, 1000, 2000, 5000, 10000, 20000, 50000, 100000],
@@ -426,7 +807,7 @@
         return div;
     };
 
-    legend.addTo(map);
+    legend.addTo(map2);
 
 </script>
 

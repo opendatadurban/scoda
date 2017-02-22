@@ -1,0 +1,55 @@
+<script type="text/javascript">
+
+    var csrf_token = "{{ csrf_token() }}";
+
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+            }
+        }
+    });
+
+</script>
+
+<script type="text/javascript">
+
+    google.charts.load('visualization', 'current', {
+        packages: ['line', 'table']
+    });
+
+    function drawBar1() {
+
+        var data1 = google.visualization.arrayToDataTable({{ table2|safe }});
+
+        var data2 = google.visualization.arrayToDataTable({{ table1|safe }});
+
+        var options1 = {
+          curveType: 'function',
+          legend: {position:'none'},
+          chartArea: {top: "10%"},
+          axes: {
+                y: {
+                    all: {
+                        range: {
+                            max: {{ max }},
+                            min: {{ min }}
+                        }
+                    }
+                }
+          }
+        };
+
+        var chart1 = new google.charts.Line(document.getElementById('chart1'));
+
+        chart1.draw(data1, google.charts.Line.convertOptions(options1));
+
+        var table = new google.visualization.Table(document.getElementById('table'));
+
+        table.draw(data2);
+
+        }
+
+    google.setOnLoadCallback(drawBar1);
+
+</script>

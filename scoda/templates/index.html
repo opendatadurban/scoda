@@ -1,0 +1,1978 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SA Cities Open Data Portal</title>
+    <link href="../static/homepage/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../static/homepage/css/freelancer.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="../static/homepage/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+       google.load('visualization', '1.0', {
+        packages: ['controls', 'motionchart','line']
+        });
+
+       function drawDashboard1() {
+            var data = new google.visualization.DataTable({{ json1 | safe }});
+
+            var formatter = new google.visualization.NumberFormat({suffix: '%'});
+                formatter.format(data, 2); // Apply formatter to second column
+                formatter.format(data, 3); // Apply formatter to second column
+
+            var categoryPicker1 = new google.visualization.ControlWrapper({
+              'controlType': 'CategoryFilter',
+              'containerId': 'categorySelector1',
+              'state': {'selectedValues': []},
+              'options': {
+                  'filterColumnLabel': 'City',
+//                  'values': names,
+                  'ui': {
+                      'labelStacking': 'vertical',
+                      'allowTyping': false,
+                      'caption': 'Choose a city...',
+                      'allowMultiple': false,
+                      'allowNone': false,
+                      'cssClass': 'drop-down-menu'
+                  }
+              }
+            });
+
+            var categoryPicker2 = new google.visualization.ControlWrapper({
+              'controlType': 'CategoryFilter',
+              'containerId': 'categorySelector2',
+              'state': {'selectedValues': ['2011']},
+              'options': {
+                  'filterColumnLabel': 'Year',
+//                  'values': names,
+                  'ui': {
+                      'labelStacking': 'vertical',
+                      'allowTyping': false,
+                      'allowMultiple': false,
+                      'allowNone': false,
+                  }
+              }
+            });
+
+            var bar1 = new google.visualization.ChartWrapper({
+              'chartType': 'BarChart',
+              'containerId': 'chart1',
+              'options': {
+{#                'height': '600',#}
+{#                'width': '600',#}
+                'vAxis': {'direction': -1},
+                'hAxis': {'format': ';'},
+                'isStacked': true,
+                'legend': 'none',
+{#                'title': 'Title',#}
+                'bars': 'vertical',
+
+              },
+              'view': {'columns': [0, 2, 3]}
+            });
+
+            var formatter = new google.visualization.NumberFormat({
+                pattern: ';'
+            });
+            formatter.format(data, 3)
+
+            // Create a dashboard
+            var dashboard = new google.visualization.Dashboard(
+            document.getElementById('dashboard1'));
+            dashboard.bind([categoryPicker1,categoryPicker2], bar1);
+            dashboard.draw(data);
+
+           function resize () {
+               dashboard.draw(data);
+           }
+
+           if (window.addEventListener) {
+               window.addEventListener('resize', resize);
+           }
+
+           else {
+               window.attachEvent('onresize', resize);
+           }
+
+        }
+
+       function drawPlot1() {
+
+            var data = new google.visualization.DataTable({{ json2 | safe }});
+
+            var countryPicker = new google.visualization.ControlWrapper({
+                controlType: 'CategoryFilter',
+                containerId: 'categorySelector3',
+                options: {
+                    filterColumnLabel: 'City',
+                    ui: {
+                        labelStacking: 'vertical',
+                        'allowTyping': false,
+                        'caption': 'Choose a city...',
+                        allowMultiple: true,
+                        allowNone: false,
+                    }
+                }
+            });
+
+            var barChart = new google.visualization.ChartWrapper({
+                'chartType': 'Line',
+                'containerId': 'chart2',
+                'options': {
+{#                    'width': 800,#}
+{#                    'height': 600,#}
+                    'vAxis': {minValue: -40, maxValue: 40, ticks: [-40, -20, 0, 20, 40], gridlines: {color: '#282828'}, title: 'Percentage Change'},
+                    'hAxis':  {ticks: ['2008/09','2009/10','2010/11','2011/12','2012/13','2013/14'],title: 'Years', gridlines: {color: '#282828', count: 6}, slantedText: true},
+                    'crosshair': { 'trigger': 'both' },
+                    'lineWidth': 4,
+                    'curveType': 'function',
+                    'legend': { position: 'right', maxLines: 10},
+                    interpolateNulls: true,
+{#                    'chartArea': {left: '10%', right: '35%'}#}
+                }
+            });
+
+            var table = new google.visualization.ChartWrapper({
+                'chartType': 'Table',
+                'containerId': 'chart3',
+                'options': {
+                    'width': '0px'
+                }
+            });
+
+            google.visualization.events.addListener(table, 'ready', function () {
+                var filteredData = table.getDataTable();
+                var group = filteredData.getDistinctValues(0);
+
+                var columns = [2], groupColumns = [];
+                for (var i = 0; i < group.length; i++) {
+                    var label = group[i];
+                    columns.push({
+                        type: 'number',
+                        label: label,
+                        calc: (function (name) {
+                            return function (dt, row) {
+                                return (dt.getValue(row, 0) == name) ? dt.getValue(row, 1) : null;
+                            }
+                        })(label)
+                    });
+                    groupColumns.push({
+                        type: 'number',
+                        label: label,
+                        column: i + 1,
+                        aggregation: google.visualization.data.sum
+                    });
+                }
+                var view = new google.visualization.DataView(filteredData);
+                view.setColumns(columns);
+                var groupedData = google.visualization.data.group(view, [0], groupColumns);
+
+                barChart.setDataTable(groupedData);
+                barChart.draw();
+            });
+
+           var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard2')).bind([countryPicker], [table]);
+           dashboard.draw(data)
+
+           function resize () {
+               dashboard.draw(data)
+           }
+
+           if (window.addEventListener) {
+               window.addEventListener('resize', resize);
+           }
+
+           else {
+               window.attachEvent('onresize', resize);
+           }
+        }
+
+       function drawMotion1() {
+           var data = new google.visualization.DataTable({{ json3 | safe }});
+
+           var motion = new google.visualization.MotionChart(document.getElementById('motion1'));
+           var width = 0.8 * $( window ).width();
+           var height = Math.min(0.75*width, 0.6*$(window).height())
+
+           motion.draw(data, {width: width, height: height, state: '{"showTrails":true,"xZoomedDataMin":518640,"yZoomedIn":false,"xLambda":1,"colorOption":"_UNICOLOR","nonSelectedAlpha":0.4,"sizeOption":"_UNISIZE","yAxisOption":"3","iconKeySettings":[],"playDuration":15000,"dimensions":{"iconDimensions":["dim0"]},"yZoomedDataMax":1520445.2,"iconType":"BUBBLE","xZoomedDataMax":4676581.4,"time":"1996","yZoomedDataMin":117149,"uniColorForNonSelected":false,"yLambda":1,"orderedByY":false,"duration":{"timeUnit":"Y","multiplier":1},"xAxisOption":"2","orderedByX":false,"xZoomedIn":false}'});
+
+       function resize () {
+               var width = 0.8 * $( window ).width();
+               var height = Math.min(0.75*width, 0.6*$(window).height())
+               motion.draw(data, {width: width, height: height, state: '{"showTrails":true,"xZoomedDataMin":518640,"yZoomedIn":false,"xLambda":1,"colorOption":"_UNICOLOR","nonSelectedAlpha":0.4,"sizeOption":"_UNISIZE","yAxisOption":"3","iconKeySettings":[],"playDuration":15000,"dimensions":{"iconDimensions":["dim0"]},"yZoomedDataMax":1520445.2,"iconType":"BUBBLE","xZoomedDataMax":4676581.4,"time":"1996","yZoomedDataMin":117149,"uniColorForNonSelected":false,"yLambda":1,"orderedByY":false,"duration":{"timeUnit":"Y","multiplier":1},"xAxisOption":"2","orderedByX":false,"xZoomedIn":false}'});
+           }
+
+       if (window.addEventListener) {
+           window.addEventListener('resize', resize);
+       }
+
+       else {
+           window.attachEvent('onresize', resize);
+       }
+
+        }
+
+       function drawBar1() {
+
+           var data = new google.visualization.DataTable({{ json4 | safe }});
+
+           var categoryPicker1 = new google.visualization.ControlWrapper({
+                  'controlType': 'CategoryFilter',
+                  'containerId': 'categorySelector4',
+                  'state': {'selectedValues': []},
+                  'options': {
+                      'filterColumnLabel': 'City',
+                      'ui': {
+                          'labelStacking': 'vertical',
+                          'allowMultiple': true,
+                          'allowNone': false,
+                          'allowTyping': false,
+                          'caption': 'Choose a city...',
+                      }
+                  }
+                });
+
+           var categoryPicker2 = new google.visualization.ControlWrapper({
+                  'controlType': 'CategoryFilter',
+                  'containerId': 'categorySelector5',
+                  'state': {'selectedValues': ['2011']},
+                  'options': {
+                      'filterColumnLabel': 'Census Year',
+                      'ui': {
+                          'labelStacking': 'vertical',
+                          'allowTyping': false,
+                          'allowMultiple': false,
+                          'allowNone': false
+                      }
+                  }
+                });
+
+               var bar1 = new google.visualization.ChartWrapper({
+                  'chartType': 'ColumnChart',
+                  'containerId': 'chart4',
+                  'options': {
+{#                    'height': 600,#}
+{#                    'width': 600,#}
+                      'isStacked': false,
+                    'legend': 'none',
+{#                    'title': 'Title',#}
+                      'legend': 'none',
+                    'bars': 'vertical',
+                      vAxis: {minValue: 0, title: 'Number of People and Households'},
+{#                      chartArea: {left: '30%'}#}
+                  },
+                });
+
+               var dashboard1 = new google.visualization.Dashboard(
+               document.getElementById('dashboard3'));
+               dashboard1.bind([categoryPicker1, categoryPicker2], bar1);
+               dashboard1.draw(data);
+
+           function resize () {
+               dashboard1.draw(data);
+           }
+
+           if (window.addEventListener) {
+               window.addEventListener('resize', resize);
+           }
+
+           else {
+               window.attachEvent('onresize', resize);
+           }
+       }
+
+       function drawBar2() {
+
+           var data = new google.visualization.DataTable({{ json5 | safe }});
+
+           var categoryPicker1 = new google.visualization.ControlWrapper({
+                  'controlType': 'CategoryFilter',
+                  'containerId': 'categorySelector6',
+                  'state': {'selectedValues': []},
+                  'options': {
+                      'filterColumnLabel': 'City',
+                      'ui': {
+                          'labelStacking': 'vertical',
+                          'allowTyping': false,
+                          'caption': 'Choose a city...',
+                          'allowMultiple': true,
+                          'allowNone': false
+                      }
+                  }
+                });
+
+           var bar1 = new google.visualization.ChartWrapper({
+             'chartType': 'ColumnChart',
+             'containerId': 'chart5',
+             'options': {
+{#                'height': 600,#}
+{#                'width': 800,#}
+                'isStacked': true,
+{#                'title': 'Title',#}
+                'bars': 'vertical',
+                'vAxis': {title: 'Number of People'},
+                'legend': {position: 'right'}
+{#                'chartArea': {left: '20%', right: '40%'}#}
+             },
+           });
+
+           var dashboard2 = new google.visualization.Dashboard(
+           document.getElementById('dashboard4'));
+           dashboard2.bind(categoryPicker1, bar1);
+           dashboard2.draw(data);
+
+           function resize () {
+               dashboard2.draw(data);
+           }
+
+           if (window.addEventListener) {
+               window.addEventListener('resize', resize);
+           }
+
+           else {
+               window.attachEvent('onresize', resize);
+           }
+
+        }
+
+       function drawBar3() {
+
+           var data = new google.visualization.DataTable({{ json6 | safe }});
+
+           var categoryPicker1 = new google.visualization.ControlWrapper({
+                  'controlType': 'CategoryFilter',
+                  'containerId': 'categorySelector7',
+                  'state': {'selectedValues': []},
+                  'options': {
+                      'filterColumnLabel': 'City',
+                      'ui': {
+                          'labelStacking': 'vertical',
+                          'allowTyping': false,
+                          'caption': 'Choose a city...',
+                          'allowMultiple': true,
+                          'allowNone': false
+                      }
+                  }
+                });
+
+           var categoryPicker2 = new google.visualization.ControlWrapper({
+                  'controlType': 'CategoryFilter',
+                  'containerId': 'categorySelector8',
+                  'state': {'selectedValues': ['2011']},
+                  'options': {
+                      'filterColumnLabel': 'Year',
+                      'ui': {
+                          'labelStacking': 'vertical',
+                          'allowTyping': false,
+                          'allowMultiple': false,
+                          'allowNone': false
+                      }
+                  }
+                });
+
+           var bar1 = new google.visualization.ChartWrapper({
+                  'chartType': 'ColumnChart',
+                  'containerId': 'chart6',
+                  'options': {
+{#                      'height': 600,#}
+{#                      'width': 800,#}
+                      'isStacked': true,
+{#                  'title': 'Title',#}
+                    'bars': 'vertical',
+                    'vAxis': {title: 'Energy (GJ)',minValue: 0},
+                    'legend': 'right',
+{#                    'chartArea': {left: '25%', right: '40%'},#}
+                  },
+                });
+
+           var dashboard3 = new google.visualization.Dashboard(
+           document.getElementById('dashboard5'));
+           dashboard3.bind([categoryPicker1, categoryPicker2], bar1);
+           dashboard3.draw(data);
+
+           function resize () {
+               dashboard3.draw(data);
+           }
+
+           if (window.addEventListener) {
+               window.addEventListener('resize', resize);
+           }
+
+           else {
+               window.attachEvent('onresize', resize);
+           }
+           }
+
+       function drawBar4() {
+
+           var data = new google.visualization.DataTable({{ json7 | safe }});
+
+           var formatter = new google.visualization.NumberFormat({
+               pattern: '##.#%'
+           });
+
+           formatter.format(data, 2);
+           formatter.format(data, 3);
+
+           var categoryPicker1 = new google.visualization.ControlWrapper({
+                  'controlType': 'CategoryFilter',
+                  'containerId': 'categorySelector9',
+                  'state': {'selectedValues': []},
+                  'options': {
+                      'filterColumnLabel': 'City',
+                      'ui': {
+                          'labelStacking': 'vertical',
+                          'allowTyping': false,
+                          'caption': 'Choose a city...',
+                          'allowMultiple': true,
+                          'allowNone': true
+                      }
+                  }
+                });
+
+           var categoryPicker2 = new google.visualization.ControlWrapper({
+                  'controlType': 'CategoryFilter',
+                  'containerId': 'categorySelector10',
+                  'state': {'selectedValues': ['2014']},
+                  'options': {
+                      'filterColumnLabel': 'Year',
+                      'ui': {
+                          'labelStacking': 'vertical',
+                          'allowTyping': false,
+                          'allowMultiple': false,
+                          'allowNone': false
+                      }
+                  }
+                });
+
+           var bar1 = new google.visualization.ChartWrapper({
+                  'chartType': 'ColumnChart',
+                  'containerId': 'chart7',
+                  'options': {
+{#                    'height': 600,#}
+{#                    'width': 600,#}
+                    'isStacked': true,
+                    'legend': 'none',
+{#                    'title': 'Title',#}
+                    'bars': 'vertical',
+                    'vAxis': {minValue: 0, title: 'Percent', format:'percent'},
+                    'hAxis': {'slantedText': true}
+                  },
+                  'view': {'columns': [0,2,3]}
+           });
+
+           var dashboard4 = new google.visualization.Dashboard(
+           document.getElementById('dashboard6'));
+           dashboard4.bind([categoryPicker1, categoryPicker2], bar1);
+           dashboard4.draw(data);
+
+           function resize () {
+               dashboard4.draw(data);
+           }
+
+           if (window.addEventListener) {
+               window.addEventListener('resize', resize);
+           }
+
+           else {
+               window.attachEvent('onresize', resize);
+           }
+       }
+
+       function drawPlot2() {
+
+           var data = new google.visualization.DataTable({{ json8 | safe }});
+
+           var countryPicker = new google.visualization.ControlWrapper({
+                controlType: 'CategoryFilter',
+                containerId: 'categorySelector11',
+                options: {
+                    filterColumnLabel: 'City',
+                    ui: {
+                        labelStacking: 'vertical',
+                        'allowTyping': false,
+                          'caption': 'Choose a city...',
+                        allowMultiple: true,
+                        allowNone:false
+                    }
+                }
+           });
+
+           var barChart = new google.visualization.ChartWrapper({
+                'chartType': 'Line',
+                'containerId': 'chart8',
+                'options': {
+{#                    'width': 800,#}
+{#                    'height': 600,#}
+                    'hAxis':  {format: '#', gridlines: {count: 4}, title: 'Years', slantedText: true, ticks: [1996,1999,2002,2005,2008,2011,2014]},
+                    'crosshair': { 'trigger': 'both' },
+                    'lineWidth': 4,
+                    'curveType': 'function',
+                    'legend': { position: 'right', maxLines: 10,},
+                    vAxis: {minValue: 0, title: 'GVA (Rands)'},
+{#                      chartArea: {left: '30%', right: '35%'},#}
+                    tooltip: {allowHTML: true},
+                    interpolateNulls: true
+                }
+           });
+
+           var table = new google.visualization.ChartWrapper({
+                'chartType': 'Table',
+                'containerId': 'chart9',
+                'options': {
+{#                    'width': 0#}
+                }
+           });
+
+           google.visualization.events.addListener(table, 'ready', function () {
+                var filteredData = table.getDataTable();
+
+                var group = filteredData.getDistinctValues(0);
+
+                var columns = [2], groupColumns = [];
+                for (var i = 0; i < group.length; i++) {
+                    var label = group[i];
+                    columns.push({
+{#                        'role': 'annotation',#}
+                        type: 'number',
+                        label: label,
+                        calc: (function (name) {
+                            return function (dt, row) {
+                                return (dt.getValue(row, 0) == name) ? dt.getValue(row, 1) : null;
+                            }
+                        })(label)
+                    });
+                    groupColumns.push({
+{#                        'role': 'annotation',#}
+                        type: 'number',
+                        label: label,
+                        column: i + 1,
+                        aggregation: google.visualization.data.sum
+                    });
+                }
+
+                var view = new google.visualization.DataView(filteredData);
+                view.setColumns(columns);
+                var groupedData = google.visualization.data.group(view, [0], groupColumns);
+
+                barChart.setDataTable(groupedData);
+                barChart.draw();
+           });
+
+           var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard7')).bind([countryPicker], [table]);
+           dashboard.draw(data)
+
+           function resize () {
+               dashboard.draw(data);
+           }
+
+           if (window.addEventListener) {
+               window.addEventListener('resize', resize);
+           }
+
+           else {
+               window.attachEvent('onresize', resize);
+           }
+       }
+
+       function drawBar5() {
+
+           var data = new google.visualization.DataTable({{ json9 | safe }});
+
+           var formatter = new google.visualization.NumberFormat({
+               pattern: '##.#%'
+           });
+
+           formatter.format(data, 2); // Apply formatter to second column
+
+           var categoryPicker1 = new google.visualization.ControlWrapper({
+               'controlType': 'CategoryFilter',
+               'containerId': 'categorySelector12',
+               'state': {'selectedValues': ['2011']},
+               'options': {
+                   'filterColumnLabel': 'Year',
+                   'ui': {
+                         'labelStacking': 'vertical',
+                         'allowTyping': false,
+                          'caption': 'Choose a city...',
+                         'allowMultiple': false,
+                         'allowNone': false
+                         }
+               }
+           });
+
+           var bar1 = new google.visualization.ChartWrapper({
+               'chartType': 'ColumnChart',
+               'containerId': 'chart10',
+               'options': {
+{#                   'height': 600,#}
+{#                   'width': 600,#}
+                   'isStacked': false,
+               'legend': 'none',
+{#               'title': 'Title',#}
+               'bars': 'vertical',
+               'hAxis': {'slantedText': true},
+               'vAxis': {title: 'Percent Unemployed',format: 'percent'}
+               },
+               'view': {'columns': [1,2]},
+           });
+
+        // Create a dashboard
+           var dashboard5 = new google.visualization.Dashboard(
+           document.getElementById('dashboard8'));
+           dashboard5.bind(categoryPicker1, bar1);
+           dashboard5.draw(data);
+
+           function resize () {
+               dashboard5.draw(data);
+           }
+
+           if (window.addEventListener) {
+               window.addEventListener('resize', resize);
+           }
+
+           else {
+               window.attachEvent('onresize', resize);
+           }
+
+       }
+
+       function drawBar6() {
+
+           var data = new google.visualization.DataTable({{ json10 | safe }});
+
+           var categoryPicker1 = new google.visualization.ControlWrapper({
+                  'controlType': 'CategoryFilter',
+                  'containerId': 'categorySelector13',
+                  'state': {'selectedValues': []},
+                  'options': {
+                      'filterColumnLabel': 'City',
+                      'ui': {
+                          'labelStacking': 'vertical',
+                          'allowTyping': false,
+                          'caption': 'Choose a city...',
+                          'allowMultiple': true,
+                          'allowNone': false,
+                      }
+                  }
+                });
+
+           var categoryPicker2 = new google.visualization.ControlWrapper({
+                 'controlType': 'CategoryFilter',
+                 'containerId': 'categorySelector14',
+                 'state': {'selectedValues': ['2013']},
+                 'options': {
+                     'filterColumnLabel': 'Year',
+                     'ui': {
+                         'labelStacking': 'vertical',
+                         'allowTyping': false,
+                         'allowMultiple': false,
+                         'allowNone': false
+                     }
+                 }
+           });
+
+           var bar1 = new google.visualization.ChartWrapper({
+                 'chartType': 'ColumnChart',
+                 'containerId': 'chart11',
+                 'options': {
+{#                    'height': 600,#}
+{#                    'width': 600,#}
+                    'isStacked': true,
+{#                    'title': 'Title',#}
+                    'bars': 'vertical',
+                     'vAxis': {title: 'Number of Households'},
+                    'legend': 'right',
+{#                    'chartArea': {left: '20%', right: '40%'}#}
+                 },
+                 'view': {'columns':[0,2,3,4]}
+           });
+
+           var dashboard1 = new google.visualization.Dashboard(
+           document.getElementById('dashboard9'));
+           dashboard1.bind([categoryPicker1, categoryPicker2], bar1);
+           dashboard1.draw(data);
+
+           function resize () {
+               dashboard1.draw(data);
+           }
+
+           if (window.addEventListener) {
+               window.addEventListener('resize', resize);
+           }
+
+           else {
+               window.attachEvent('onresize', resize);
+           }
+
+       }
+
+       function drawBar7() {
+
+           var data = new google.visualization.DataTable({{ json11 | safe }});
+
+           var categoryPicker1 = new google.visualization.ControlWrapper({
+                  'controlType': 'CategoryFilter',
+                  'containerId': 'categorySelector15',
+                  'state': {'selectedValues': []},
+                  'options': {
+                      'filterColumnLabel': 'City',
+                      'ui': {
+                          'labelStacking': 'vertical',
+                          'allowTyping': false,
+                          'caption': 'Choose a city...',
+                          'allowMultiple': true,
+                          'allowNone': false,
+                      }
+                  }
+            });
+
+           var categoryPicker2 = new google.visualization.ControlWrapper({
+                  'controlType': 'CategoryFilter',
+                  'containerId': 'categorySelector16',
+                  'state': {'selectedValues': ['2013']},
+                  'options': {
+                      'filterColumnLabel': 'Year',
+                      'ui': {
+                          'labelStacking': 'vertical',
+                          'allowTyping': false,
+                          'allowMultiple': false,
+                          'allowNone': false
+                      }
+                  }
+           });
+
+           var bar1 = new google.visualization.ChartWrapper({
+                  'chartType': 'ColumnChart',
+                  'containerId': 'chart12',
+                  'options': {
+{#                      'height': 600,#}
+{#                      'width': 800,#}
+                      'isStacked': true,
+{#                      'title': 'Title',#}
+                      'bars': 'vertical',
+                      'vAxis': {title: 'Number of Households'},
+                      'legend': {position: 'right'}
+{#                      'chartArea': {left: '20%', right: '40%'}#}
+                  },
+                  'view': {'columns':[0,2,3,4,5,6]}
+           });
+
+           var dashboard1 = new google.visualization.Dashboard(
+                   document.getElementById('dashboard10'));
+                   dashboard1.bind([categoryPicker1, categoryPicker2], bar1);
+                   dashboard1.draw(data);
+
+           function resize () {
+               dashboard1.draw(data);
+           }
+
+           if (window.addEventListener) {
+               window.addEventListener('resize', resize);
+           }
+
+           else {
+               window.attachEvent('onresize', resize);
+           }
+
+       }
+
+       google.setOnLoadCallback(drawDashboard1);
+       google.setOnLoadCallback(drawPlot1);
+       google.setOnLoadCallback(drawMotion1);
+       google.setOnLoadCallback(drawBar1);
+       google.setOnLoadCallback(drawBar2);
+       google.setOnLoadCallback(drawBar3);
+       google.setOnLoadCallback(drawBar4);
+       google.setOnLoadCallback(drawPlot2);
+       google.setOnLoadCallback(drawBar5);
+       google.setOnLoadCallback(drawBar6);
+       google.setOnLoadCallback(drawBar7);
+
+    </script>
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <script>
+        zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+    </script>
+
+    <style>
+    html,
+    body,
+    #myChart {
+        height: 100%;
+        width: 100%;
+    }
+
+  </style>
+
+</head>
+
+<body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#page-top">SCODA<sup style="font-size: 14px"><i>BETA</i></sup></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#howto">How-To</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#portfolio">Indicators</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#contact">Map</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#about">About</a>
+                    </li>
+                    <li><a href={{ url_for('explore') }}>Explorer</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="/static/img/SCODA Logo_04_bigger.jpg" alt="">
+                    <div class="intro-text">
+                        <span class="name">SA Cities Open Data Almanac<sup><i style="font-size: 18px">BETA</i></sup></span>
+                        <hr class="star-light">
+                        <span class="skills">Partners in City Development Strategies</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- How To -->
+    <section class="container" id="howto">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>How to Use the Portal</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 text-" style="text-align: justify">
+                    <p>The website is an open data portal that has been designed to be easy to access and download key data. The core dataset is the State of Cities Report 2016 Almanac which contains over 400 indicators of city performance.</p>
+                    <p>SCODA offers three main ways to access the data:</p>
+                    <p style="font-size: 19px">
+                        <b style="font-size: 21px">The Portal</b><br> The <u>Portal</u> allows users to download full datasets for the SoCR Almanac as well as other key data sets. Data can be downloaded as a Microsoft Excel file or as a csv file. Over time, all data sets generated by the SACN will be made available to download here.
+                            <ul style="font-size: 19px">
+                                <li>Three options for download are available:
+                                    <ol style="font-size: 19px" type="i">
+                                        <li>Full Almanac download, including metadata</li>
+                                        <li>Download per SACN theme (demographic data, productive cities, inclusive cities, sustainable cities and well-governed cities)</li>
+                                        <li>Download of per-City Dashboards (PDF posters as per the 2016 State of Cities Report)</li>
+                                    </ol>
+                                </li>
+                                <li>Additional data sets loaded as available, such as data generated for the Productive Cities chapter of the SOCR 2016; data from the 2015 State of City Finance report; and data from the State of Urban Safety Report 2016.</li>
+                            </ul>
+                    </p>
+                    <div class="text-center">
+                    <a href="http://almanac.opendata.durban" role="button" class="btn btn-default btn-lg responsive-width" style="width: 20%;background-color: #FF8E20; outline: 0 none; border-color: #FF8E20;text-align: center; margin-bottom: 20px">Portal</a>
+                    </div>
+                    <p style="font-size: 19px">
+                        <b style="font-size: 21px">Data visualisations (infographics)</b><br> The <u>Indicators</u> button allows users to explore 12 key city indicators as interactive infographics. Each infographic contains an explanation of the indicator as well as reference to where the data was sourced. All of the data for these Indicators is contained within the Almanac
+                    </p>
+                    <div class="text-center">
+                    <a href="#portfolio" role="button" class="btn btn-default btn-lg responsive-width" style="width: 20%; background-color: #FF8E20; outline: 0 none; border-color: #FF8E20;text-align: center; margin-bottom: 20px">Indicators</a>
+                    </div>
+                    <p style="font-size: 19px">
+                        <b style="font-size: 21px">Map</b><br> The <u>Map</u> highlights the Cities whose data is contained within SCODA as well as key data. The SACN, through a partnership with the CSIR, has also supported the development of more detailed spatial analyses and visualisations of city development which are available at: <a href="http://stepsa.org/sacn_socr.html" target="_blank"> http://stepsa.org/sacn_socr.html.</a>
+                    </p>
+                    <div class="text-center">
+                    <a href="#contact" role="button" class="btn btn-default btn-lg responsive-width" style="width: 20%; background-color: #FF8E20; outline: 0 none; border-color: #FF8E20;text-align: center; margin-bottom: 20px">Map</a>
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Grid Section -->
+    <section id="portfolio" class="success">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Indicators</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="../static/homepage/img/portfolio/PeopleAndHouseholds.png" class="img-responsive" alt="">
+                    </a>
+                </div>
+
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="../static/homepage/img/portfolio/CitiesOverTime.png" class="img-responsive" alt="">
+                    </a>
+                </div>
+
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="../static/homepage/img/portfolio/PopulationPyramids.png" class="img-responsive" alt="">
+                    </a>
+                </div>
+
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="../static/homepage/img/portfolio/EconomicGrowth.png" class="img-responsive" alt="">
+                    </a>
+                </div>
+
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="../static/homepage/img/portfolio/UnemploymentLevels.png" class="img-responsive" alt="">
+                    </a>
+                </div>
+
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="../static/homepage/img/portfolio/CityFinance.png" class="img-responsive" alt="">
+                    </a>
+                </div>
+
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal7" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="../static/homepage/img/portfolio/NonRevenueWater.png" class="img-responsive" alt="">
+                    </a>
+                </div>
+
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal8" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="../static/homepage/img/portfolio/AccessToElectricity.png" class="img-responsive" alt="">
+                    </a>
+                </div>
+
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal9" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="../static/homepage/img/portfolio/AccessToSanitation.png" class="img-responsive" alt="">
+                    </a>
+                </div>
+
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal10" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="../static/homepage/img/portfolio/EducationLevels.png" class="img-responsive" alt="">
+                    </a>
+                </div>
+
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal11" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="../static/homepage/img/portfolio/UrbanCrimeIndex.png" class="img-responsive" alt="">
+                    </a>
+                </div>
+
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal12" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="../static/homepage/img/portfolio/SourcesOfEnergy.png" class="img-responsive" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="container" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Member Cities Map</h2>
+                    <hr class="star-primary">
+                </div>
+            <iframe width="100%" height="620" frameborder="0" src="https://opendatadurban.cartodb.com/viz/f3149424-18df-11e6-9781-0e3a376473ab/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="success" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>About SCODA</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 text-" style="text-align: justify">
+                    <p>The South African Cities Open Data Almanac or SCODA is a city-centric data portal that aims to support the planning, management, monitoring, and reporting needs of cities.
+                       With the fast-changing and increasingly complex dynamics of contemporary South Africa where the majority of people now live in cities, monitoring how cities are planned and managed is important. Indicators are critical to effective planning and management in urban contexts, organising information sets into simpler, and easier to understand and compare ‘measures’ of what is happening. Good urban indicator sets allow for a longitudinal perspective (i.e. change over time) and comparisons between cities locally and internationally, enabling cities to see whether or not they are adequately achieving their objectives.
+                       SCODA contains data and indicators organised around key thematic areas:</p>
+                    <ul style="font-size: 19px">
+                        <li>Productive cities</li>
+                        <li>Inclusive cities</li>
+                        <li>Sustainable Cities</li>
+                        <li>Well-governed cities</li>
+                        <li>City demographics</li>
+                    </ul>
+                    <p>Each theme has a set of core and secondary indicators.</p>
+                    <p>SCODA is run by the <a href='http://www.sacities.net/' target="_blank" style="color: #FF8E20">South African Cities Network (SACN)</a>, an established network of South African cities and partners that encourages the exchange of information, experience and best practices on urban development and city management. The SACN has published State of South African Cities Reports (SoCR) since 2004, and these reports present a 5-year perspective on the performance and conditions of South Africa’s largest cities, with a focus on the SACN member cities. The SoCR process has always included a data almanac section, and long-envisaged having an online data portal that allows access to up-to-date data and indicators that are important to cities.</p>
+                    <p>The SCODA site now provides a framework to enable an ongoing process of making city data accessible. Through a partnership with the <a href="http://www.dataforcities.org/" target="_blank" style="color: #FF8E20">World Council for City Data</a>, SCODA also seeks to align to the <a href="http://www.iso.org/iso/catalogue_detail?csnumber=62436" target="_blank" style="color: #FF8E20">ISO 37120 Standard on City Indicators</a> so that South African cities can learn from global practice, and also benchmark themselves against international peers.</p>
+                    <p>Further information about the development of SCODA is available at <a href="http://www.sacities.net/" target="_blank" style="color: #FF8E20">www.sacities.net</a>.</p>
+                    <p><b style="font-size: 21px">Photo Acknowledgements</b><br>Photos used on this site are from the 2015 SACN Instagram competition and we acknowledge the photographer, by the indicator and their instagram handle:
+People and Households: <span style="color: #FF8E20">@amzbooysen</span>; Cities over time: <span style="color: #FF8E20">@moography</span>; Population pyramids: <span style="color: #FF8E20">@greg_alexander</span>; Economic growth: <span style="color: #FF8E20">@gavman18</span>; Unemployment: <span style="color: #FF8E20">@justjozi</span>; City finance: <span style="color: #FF8E20">@raeharrison1984</span>; Non-revenue water: <span style="color: #FF8E20">@pandanicoleium</span>; Access to electricity: <span style="color: #FF8E20">@ishotimagesza</span>; Access to sanitation: <span style="color: #FF8E20">@kojobaffoe</span>; Education: <span style="color: #FF8E20">@dane_forman</span>; Urban Crime index: <span style="color: #FF8E20">@iamsoweto</span>; Sources of energy 2011: <span style="color: #FF8E20">@drae_savvides</span>.
+</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Other Important Links</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 text-" style="text-align: justify">
+                    <ul style="font-size: 19px">
+                        <li>South African Cities Network: <a href="http://sacities.net" target="_blank">www.sacities.net</a></li>
+                        <li>2016 State of Cities Report:  <a href="http://sacities.net/socr" target="_blank">www.sacities.net/socr</a></li>
+                        <li>Spatial and Temporal Evidence for Planning in South Africa (stepSA):  <a href="http://stepsa.org" target="_blank">http://stepsa.org</a></li>
+                        <li>SALGA Municipal Barometer: <a href="http://www.municipalbarometer.co.za/" target="_blank">http://www.municipalbarometer.co.za/</a></li>
+                        <li>Statistics South Africa: <a href="http://www.statssa.gov.za/" target="_blank">http://www.statssa.gov.za/</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    <h3>Queries about SCODA? Email us at <a href="mailto:scoda@sacities.net" target="_blank">scoda@sacities.net</a></h3>
+                </div>
+                <div class="row">
+                    <div class="footer-col col-md-4">
+                        <h3>Address</h3>
+                        <p>Joburg Metro Building<br>16th Floor<br>158 Civic Boulevard<br>Braamfontein, 2017</p>
+                    </div>
+                    <div class="footer-col col-md-4">
+                        <h3>Around the Web</h3>
+                        <ul class="list-inline">
+                            <li>
+                                <a href="http://www.cloud.sacn.co.za/" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-cloud"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/SACitiesNetwork" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/SACitiesNetwork" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="http://www.linkedin.com/company/3168975?trk=NUS_CMPY_TWIT" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://instagram.com/sacitiesnetwork/" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-instagram"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/channel/UC18ZyP241BXS-OzXgkewYGw#" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-youtube"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer-col col-md-4">
+                        <h3>About SACN</h3>
+                        <p>Web: <a href="http://sacities.net" target="_blank">www.sacities.net</a><br>Phone: 011 407 6471<br>Fax: 011 403 5230<br>Email: <a href="mailto:scoda@sacities.net" target="_blank">scoda@sacities.net</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12" style="color: #fff">
+                        Built by <a href="https://opendata.durban" target="_blank">Open Data Durban</a>
+                        <br>
+                        Copyright &copy; South African Cities Network 2016
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll visible-xs visible-sm">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+    <!-- Portfolio Modals -->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                            <h2>People and Households</h2>
+                            <hr class="star-primary">
+                            <p>This graph compares city population and household number across the 1996, 2001 and 2011 census years. Data from StatsSA.</p>
+                        </div>
+                    </div>
+                </div>
+
+            <div id="dashboard3" class="form-group">
+              <div class="form-control" id="categorySelector4"></div>
+              <div id="categorySelector5"></div>
+              <div id="chart4" style="display: inline-block; margin: 0 auto; width: 100%; height: 600px"></div>
+            </div>
+
+            <div class="modal-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                            <h2>Cities over Time</h2>
+                            <hr class="star-primary">
+                            <p>This interactive graph lets you chose two  key indicator data sets and set your own chart type to compare how cities have changed over time. All data is available within the Almanac.</p>
+                            <p><b>(Currently unavailable on mobile)</b></p>
+                        </div>
+                    </div>
+                </div>
+
+            <div id="motion1" style="display: inline-block; margin: 0 auto;"></div>
+
+        <div class="modal-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                            <h2>Population Pyramids</h2>
+                            <hr class="star-primary">
+                            <p>Population pyramids per city showing how the age profiles of cities are changing over time. Data from StatsSA.</p>
+                        </div>
+                    </div>
+                </div>
+
+            <div id="dashboard1">
+            <div  id="categorySelector1"></div>
+            <div id="categorySelector2"></div>
+            <div id="chart1" style="display: inline-block; margin: 0 auto; width: 100%; height: 600px"></div>
+        </div>
+
+        <div class="modal-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                            <h2>Economic Growth</h2>
+                            <hr class="star-primary">
+                            <p>Gross Value Add (GVA) as an indicator of economic growth of cities between 1996 and 2013, measured in Rands. Data sourced from IHS Global Insight.</p>
+                        </div>
+                    </div>
+                </div>
+
+            <div id="dashboard7">
+                <div id="categorySelector11"></div>
+                    <div style="display: inline-block; margin: 0 auto;width: 100%; height: 600px" id="chart8"></div>
+                    <div style="display: inline-block; margin: 0 auto; width: 0px; height: 0px" id="chart9"></div>
+            </div>
+
+        <div class="modal-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                            <h2>Unemployment Levels</h2>
+                            <hr class="star-primary">
+                            <p>Number of unemployed workers as a proportion of the total labour force per city.</p>
+                        </div>
+                    </div>
+                </div>
+
+               <div id="dashboard8">
+                  <div id="categorySelector12"></div>
+                  <div id="chart10" style="display: inline-block; margin: 0 auto; width: 100%; height: 600px"></div>
+                </div>
+
+        <div class="modal-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                            <h2>City Finance</h2>
+                            <hr class="star-primary">
+                            <p>The graph reviews each city’s expenditure relative to revenue over time. Any number above zero represents expenditure higher than revenue and below zero is expenditure less than revenue. For more on city finances refer to the State of City Finances reporting of the SACN.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="dashboard2">
+                    <div id="categorySelector3"></div>
+                    <div style="display: inline-block; margin: 0 auto; width: 100%; height: 600px" id="chart2"></div>
+                    <div style="display: inline-block; margin: 0 auto; width: 0px; height: 0px" id="chart3"></div>
+                </div>
+
+        <div class="modal-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-modal modal fade" id="portfolioModal7" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                            <h2>Non-revenue Water</h2>
+                            <hr class="star-primary">
+                            <p>Non-revenue water (NRW) is water that has been produced and is “lost” before it reaches the customer/household. Losses can be physical losses (through leaks, sometimes also referred to as real losses) or commercial/apparent losses (for example through theft or metering inaccuracies). Nonrevenue water is presented as a percentage of total water produced. Data from the Water Research Commission.</p>
+                        </div>
+                    </div>
+                </div>
+
+            <div id="dashboard6">
+              <div id="categorySelector9"></div>
+              <div id="categorySelector10"></div>
+              <div id="chart7" style="display: inline-block; margin: 0 auto; width: 100%; height: 600px"></div>
+            </div>
+
+        <div class="modal-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-modal modal fade" id="portfolioModal8" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                            <h2>Access to Electricity</h2>
+                            <hr class="star-primary">
+                            <p>Graph showing the proportional access of households to electricity for different purposes. Data from StatsSA and IHS Global Insight.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="dashboard9">
+                    <div id="categorySelector13"></div>
+                    <div id="categorySelector14"></div>
+                    <div id="chart11" style="display: inline-block; margin: 0 auto; width: 100%; height: 600px"></div>
+                </div>
+
+        <div class="modal-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-modal modal fade" id="portfolioModal9" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                            <h2>Access to Sanitation</h2>
+                            <hr class="star-primary">
+                            <p>Graph showing the proportional access of households to sanitation services by type of service. Data from StatsSA and IHS Global Insight.</p>
+                        </div>
+                    </div>
+                </div>
+
+            <div id="dashboard10">
+                <div id="categorySelector15"></div>
+                <div id="categorySelector16"></div>
+                <div id="chart12" style="display: inline-block; margin: 0 auto; width: 100%; height: 600px"></div>
+            </div>
+
+        <div class="modal-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-modal modal fade" id="portfolioModal10" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                            <h2>Education Levels</h2>
+                            <hr class="star-primary">
+                            <p>Graph showing the highest education level achieved by people living within cities. Data from StatsSA Census 2011.</p>
+                        </div>
+                    </div>
+                </div>
+
+            <div id="dashboard4">
+                <div id="categorySelector6"></div>
+                <div id="chart5" style="display: inline-block; margin: 0 auto; width: 100%; height: 600px"></div>
+            </div>
+
+        <div class="modal-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-modal modal fade" id="portfolioModal11" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                            <h2>Urban Crime Index</h2>
+                            <hr class="star-primary">
+                            <p>The Urban Crime index is a high level benchmark of city level crime and violence, compared to a national average. Data from Centre  of Criminology (UCT) on behalf of SACN.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id='myChart'></div>
+                  <script>
+                    var myConfig = {
+                      "graphset": [{
+                        "type": "radar",
+                        "title": {"text": "Johannesburg"},
+                        "height": "33%",
+                        "width": "33%",
+                        "x": "0%",
+                        "y": "0%",
+                        "plot": {
+                          "aspect": "area",
+                          "tooltip":{
+                            "text":"%t: %v"
+                          }
+                        },
+                        "scale-k": {
+                            "labels": ["Interpersonal Crimes of Violence", "Violent Property", "Non-Violent Property", "Fear of Crime"],
+                        },
+                        "scale-v": {
+                          "values": "0:5:5"
+                        },
+                        "series": [{
+                          "values": [3.3, 4.2, 3.3, 5.0],
+                          "text": "City"
+                        },
+                            {"values": [2.8, 2.2, 2.3, 3.6],
+                             "text": "National"
+                        }]
+                      }, {
+                        "type": "radar",
+                        "title": {"text": "Tshwane"},
+                        "height": "33%",
+                        "width": "33%",
+                        "x": "33%",
+                        "y": "0%",
+                        "plot": {
+                          "aspect": "area",
+                          "tooltip":{
+                            "text":"%t: %v"
+                          }
+                        },
+                        "scale-k": {
+                            "labels": ["Interpersonal Crimes of Violence", "Violent Property", "Non-Violent Property", "Fear of Crime"],
+                        },
+                        "scale-v": {
+                          "values": "0:5:5"
+                        },
+                        "series": [{
+                          "values": [2.8, 3.6, 3.6, 2.8],
+                          "text": "City"
+                        }, {
+                          "values": [2.8, 2.2, 2.3, 3.6],
+                          "text": "National"
+                        }]
+                      }, {
+                        "type": "radar",
+                        "title": {"text": "Cape Town"},
+                        "height": "33%",
+                        "width": "33%",
+                        "x": "66%",
+                        "y": "0%",
+                        "plot": {
+                          "aspect": "area",
+                          "tooltip":{
+                            "text":"%t: %v"
+                          }
+                        },
+                        "scale-k": {
+                            "labels": ["Interpersonal Crimes of Violence", "Violent Property", "Non-Violent Property", "Fear of Crime"],
+                        },
+                        "scale-v": {
+                          "values": "0:5:5"
+                        },
+                        "series": [{
+                          "values": [4.1, 5, 5, 3.5],
+                          "text": "City"
+                        }, {
+                          "values": [2.8, 2.2, 2.3, 3.6],
+                          "text": "National"
+                        }]
+                      }, {
+                        "type": "radar",
+                        "title": {"text": "Ethekwini"},
+                        "height": "33%",
+                        "width": "33%",
+                        "x": "0%",
+                        "y": "33%",
+                        "plot": {
+                          "aspect": "area",
+                          "tooltip":{
+                            "text":"%t: %v"
+                          }
+                        },
+                        "scale-k": {
+                            "labels": ["Interpersonal Crimes of Violence", "Violent Property", "Non-Violent Property", "Fear of Crime"],
+                        },
+                        "scale-v": {
+                          "values": "0:5:5"
+                        },
+                        "series": [{
+                          "values": [2.8, 2.8, 2.6, 3.6],
+                          "text": "City"
+                        }, {
+                          "values": [2.8, 2.2, 2.3, 3.6],
+                          "text": "National"
+                        }]
+                      }, {
+                        "type": "radar",
+                        "title": {"text": "Ekurhuleni"},
+                        "height": "33%",
+                        "width": "33%",
+                        "x": "33%",
+                        "y": "33%",
+                        "plot": {
+                          "aspect": "area",
+                          "tooltip":{
+                            "text":"%t: %v"
+                          }
+                        },
+                        "scale-k": {
+                            "labels": ["Interpersonal Crimes of Violence", "Violent Property", "Non-Violent Property", "Fear of Crime"],
+                        },
+                        "scale-v": {
+                          "values": "0:5:5"
+                        },
+                        "series": [{
+                          "values": [2.6, 2.7, 2.5, 2.9],
+                          "text": "City"
+                        }, {
+                          "values": [2.8, 2.2, 2.3, 3.6],
+                          "text": "National"
+                        }]
+                      }, {
+                        "type": "radar",
+                        "title": {"text": "Nelson Mandela Bay"},
+                        "height": "33%",
+                        "width": "33%",
+                        "x": "66%",
+                        "y": "33%",
+                        "plot": {
+                          "aspect": "area",
+                          "tooltip":{
+                            "text":"%t: %v"
+                          }
+                        },
+                        "scale-k": {
+                            "labels": ["Interpersonal Crimes of Violence", "Violent Property", "Non-Violent Property", "Fear of Crime"],
+                        },
+                        "scale-v": {
+                          "values": "0:5:5"
+                        },
+                        "series": [{
+                          "values": [3.4, 3.5, 2.8, 4.4],
+                          "text": "City"
+                        }, {
+                          "values": [2.8, 2.2, 2.3, 3.6],
+                          "text": "National"
+                        }]
+                      }, {
+                        "type": "radar",
+                        "title": {"text": "Buffalo City"},
+                        "height": "33%",
+                        "width": "33%",
+                        "x": "0%",
+                        "y": "66%",
+                        "plot": {
+                          "aspect": "area",
+                          "tooltip":{
+                            "text":"%t: %v"
+                          }
+                        },
+                        "scale-k": {
+                            "labels": ["Interpersonal Crimes of Violence", "Violent Property", "Non-Violent Property", "Fear of Crime"],
+                        },
+                        "scale-v": {
+                          "values": "0:5:5"
+                        },
+                        "series": [{
+                          "values": [3.6, 2.9, 2.8, 3.6],
+                          "text": "City"
+                        }, {
+                          "values": [2.8, 2.2, 2.3, 3.6],
+                          "text": "National"
+                        }]
+                      }, {
+                        "type": "radar",
+                        "title": {"text": "Mangaung"},
+                        "height": "33%",
+                        "width": "33%",
+                        "x": "33%",
+                        "y": "66%",
+                        "plot": {
+                          "aspect": "area",
+                          "tooltip":{
+                            "text":"%t: %v"
+                          }
+                        },
+                        "scale-k": {
+                            "labels": ["Interpersonal Crimes of Violence", "Violent Property", "Non-Violent Property", "Fear of Crime"],
+                        },
+                        "scale-v": {
+                          "values": "0:5:5"
+                        },
+                        "series": [{
+                          "values": [5, 2.7, 3.1, 3.3],
+                          "text": "City"
+                        }, {
+                          "values": [2.8, 2.2, 2.3, 3.6],
+                          "text": "National"
+                        }]
+                      },
+                      {
+                        "type": "radar",
+                        "title": {"text": "Msunduzi"},
+                        "height": "33%",
+                        "width": "33%",
+                        "x": "66%",
+                        "y": "66%",
+                        "plot": {
+                          "aspect": "area",
+                          "tooltip":{
+                            "text":"%t: %v"
+                          }
+                        },
+                        "scale-k": {
+                            "labels": ["Interpersonal Crimes of Violence", "Violent Property", "Non-Violent Property", "Fear of Crime"],
+                        },
+                        "scale-v": {
+                          "values": "0:5:5"
+                        },
+                        "series": [{
+                          "values": [2.9, 2.4, 2.3, 1.1],
+                          "text": "City"
+                        }, {
+                          "values": [2.8, 2.2, 2.3, 3.6],
+                          "text": "National"
+                        }]
+                      }]
+                    };
+
+                    zingchart.render({
+                      id: 'myChart',
+                      data: myConfig,
+                      height: '800px',
+                      width: '100%'
+                    });
+                  </script>
+
+        <div class="modal-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-modal modal fade" id="portfolioModal12" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                            <h2>Sources of Energy</h2>
+                            <hr class="star-primary">
+                            <p>Graph showing the amount of energy used per type for cities in 2011, measured in Gigajoules (GJ). Data from Sustainable Energy Africa.</p>
+                        </div>
+                    </div>
+                </div>
+
+            <div id="dashboard5">
+                <div id="categorySelector7"></div>
+                <div id="categorySelector8"></div>
+                <div id="chart6" style="display: inline-block; margin: 0 auto; width: 100%; height: 600px"></div>
+            </div>
+
+        <div class="modal-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="../static/homepage/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../static/homepage/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="../static/homepage/js/classie.js"></script>
+    <script src="../static/homepage/js/cbpAnimatedHeader.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="../static/homepage/js/jqBootstrapValidation.js"></script>
+    <script src="../static/homepage/js/contact_me.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../static/homepage/js/freelancer.js"></script>
+
+</body>
+
+<script>
+    function redraw() {
+        console.log('Redraw!');
+        window.dispatchEvent(new Event('resize'));
+    }
+
+    $( document ).ready(function() {
+
+        $('#portfolioModal1').on('show.bs.modal', function () {
+             console.log('Modal Change!')
+{#             google.load('visualization', '1.0', { packages: ['controls', 'motionchart'], "callback": drawBar1});#}
+             setTimeout(drawBar1,250);
+       })
+
+        $('#portfolioModal2').on('show.bs.modal', function () {
+             console.log('Modal Change!')
+{#             google.load('visualization', '1.0', { packages: ['controls', 'motionchart'], "callback": drawBar1});#}
+             setTimeout(drawMotion1,250);
+       })
+
+        $('#portfolioModal3').on('show.bs.modal', function () {
+             console.log('Modal Change!')
+{#             google.load('visualization', '1.0', { packages: ['controls', 'motionchart'], "callback": drawBar1});#}
+             setTimeout(drawDashboard1,250);
+       })
+
+        $('#portfolioModal4').on('show.bs.modal', function () {
+             console.log('Modal Change!')
+{#             google.load('visualization', '1.0', { packages: ['controls', 'motionchart'], "callback": drawBar1});#}
+             setTimeout(drawPlot2,250);
+       })
+
+        $('#portfolioModal5').on('show.bs.modal', function () {
+             console.log('Modal Change!')
+{#             google.load('visualization', '1.0', { packages: ['controls', 'motionchart'], "callback": drawBar1});#}
+             setTimeout(drawBar5,250);
+       })
+
+        $('#portfolioModal6').on('show.bs.modal', function () {
+             console.log('Modal Change!')
+{#             google.load('visualization', '1.0', { packages: ['controls', 'motionchart'], "callback": drawBar1});#}
+             setTimeout(drawPlot1,250);
+       })
+
+        $('#portfolioModal7').on('show.bs.modal', function () {
+             console.log('Modal Change!')
+{#             google.load('visualization', '1.0', { packages: ['controls', 'motionchart'], "callback": drawBar1});#}
+             setTimeout(drawBar4,250);
+       })
+
+        $('#portfolioModal8').on('show.bs.modal', function () {
+             console.log('Modal Change!')
+{#             google.load('visualization', '1.0', { packages: ['controls', 'motionchart'], "callback": drawBar1});#}
+             setTimeout(drawBar6,250);
+       })
+
+        $('#portfolioModal9').on('show.bs.modal', function () {
+             console.log('Modal Change!')
+{#             google.load('visualization', '1.0', { packages: ['controls', 'motionchart'], "callback": drawBar1});#}
+             setTimeout(drawBar7,250);
+       })
+
+        $('#portfolioModal10').on('show.bs.modal', function () {
+             console.log('Modal Change!')
+{#             google.load('visualization', '1.0', { packages: ['controls', 'motionchart'], "callback": drawBar1});#}
+             setTimeout(drawBar2,250);
+       })
+
+        $('#portfolioModal12').on('show.bs.modal', function () {
+             console.log('Modal Change!')
+{#             google.load('visualization', '1.0', { packages: ['controls', 'motionchart'], "callback": drawBar1});#}
+             setTimeout(drawBar3,250);
+       })
+
+    });
+</script>
+
+</html>

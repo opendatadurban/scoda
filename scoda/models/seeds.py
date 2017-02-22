@@ -41,6 +41,8 @@ themes = {'Demographics': 1,
 
 dfi = pd.read_csv('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/Indicators.csv')
 df = pd.read_csv('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/Manicured_final.csv')
+dfm = pd.read_csv('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/Indicators_Metadata.csv').\
+    fillna(value='Unspecified')
 
 def seed_db(db):
     """ Add seed entities to the database. """
@@ -54,8 +56,18 @@ def seed_db(db):
         for x in DataSet.create_defaults():
             db.session.add(x)
         print 'Created dataset table...'
-        for x in Indicator.create_defaults():
-            db.session.add(x)
+        # for x in Indicator.create_defaults():
+        #     db.session.add(x)
+        for x in dfm.values.tolist():
+            ind = Indicator()
+            ind.in_name = x[0]
+            ind.unit = x[1]
+            ind.definition = x[2]
+            ind.theme = x[3]
+            ind.sub_theme = x[4]
+            ind.source = x[5]
+            ind.frequency = x[6]
+            db.session.add(ind)
         print 'Created indicator table...'
         for x in Region.create_defaults():
             db.session.add(x)

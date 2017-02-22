@@ -20,14 +20,14 @@
 
     function drawBar1() {
 
-        var data = google.visualization.arrayToDataTable({{ table|safe }})
+        var data = google.visualization.arrayToDataTable({{ table|safe }});
 
         var categoryPicker1 = new google.visualization.ControlWrapper({
             'controlType': 'CategoryFilter',
             'containerId': 'categorySelector1',
             'state': {'selectedValues': {{ cities|safe }}},
             'options': {
-                'filterColumnLabel': 'city',
+                'filterColumnLabel': 'City',
                 'ui': {
                     'labelStacking': 'vertical',
                     'allowMultiple': true,
@@ -43,7 +43,7 @@
             'containerId': 'categorySelector2',
             'state': {'selectedValues': [{{ year|safe }}]},
             'options': {
-                'filterColumnLabel': 'year',
+                'filterColumnLabel': 'Year',
                 'ui': {
                     'labelStacking': 'vertical',
                     'allowTyping': false,

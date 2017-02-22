@@ -1,12 +1,174 @@
+<link rel="stylesheet" href="../../static/vendor/shepherd/css/shepherd-theme-dark.css"/>
+<script type="text/javascript">
+
+     var tour = new Shepherd.Tour({
+                defaults: {
+                    classes: 'shepherd-theme-dark',
+                    scrollTo: true
+                }
+            });
+
+            tour.addStep('welcome', {
+                title: 'Welcome to your dashboard!',
+                text: 'Here you will find all the analyses that you have created and can choose to "Open" them to continue working, or to "Delete" them. ',
+                attachTo: '#breadCrumb bottom',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('welcome2', {
+                title: 'Welcome to your dashboard!',
+                text: 'You can return to this page at any time by clicking on the "My Dashboard" tab in the left-hand navigation bar. This bar can be opened and closed by clicking on the ☰ symbol in the left-hand screen corner. ',
+                attachTo: '#breadCrumb bottom',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('welcome3', {
+                title: 'Welcome to your dashboard!',
+                text: 'You can also jump to recent analyses using your right-hand navigation bar. This bar can be opened and closed by clicking on the ☰ icon in the top right-hand screen corner.',
+                attachTo: '#breadCrumb bottom',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('welcome4', {
+                title: 'Using the rest of your navigation...',
+                text: 'Your left-hand navigation also provides quick access to the Data Explorer, where you can explore, visualize and download all 102 SCODA datasets.',
+                attachTo: '#sideNav right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('welcome5', {
+                title: 'Using the rest of your navigation...',
+                text: 'The "New Analysis" tab will take you to a page where you can build a custom dataset.',
+                attachTo: '#sideNav right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('welcome6', {
+                title: 'Using the rest of your navigation...',
+                text: 'Clicking on "My Datasets" will take you to a page where you can upload, edit and delete your own custom datasets for use on this platform; and "Demographics" will take you to the demographics model explorer.',
+                attachTo: '#sideNav right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+             tour.addStep('welcome7', {
+                title: 'Using the rest of your navigation...',
+                text: 'Finally, clicking on "Demographics" will take you to the demographics model explorer.',
+                attachTo: '#sideNav right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    }
+                ]
+            });
+
+            tour.start();
+
+
+</script>
+
 {% if analyses %}
     {% for group in analyses %}
-        <div class="row">
+        <div class="row" style="padding-left: 30px">
             {% for analysis in group %}
                 {% if analysis %}
                     <div class="col-sm-3 col-lg-3 col-lg-3">
                         <div class="card" id="selectorCard">
                             <div class="card-header" id="analysis-{{ analysis[0] }}CardHead">{{ analysis[1] }}</div>
                             <div class="card-block" id="analysis-{{ analysis[0] }}CardBlock">
+                                <p>{{ analysis[2] }}</p>
                                 <div class="row" style="text-align: center">
                                     <a href="/constructor/{{ analysis[0] }}">
                                         <button class="btn btn-primary" id="openAnalysis">Open</button>

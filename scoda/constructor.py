@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 from .models.files import NewFileForm, EditFileForm, DeleteFileForm
 from .models.wazi import WaziForm, MuniForm, MyDataForm, PivotForm
 from .models.datasets import ExploreForm
-from .models.user import UserSet, UserAnalysis
+from .models.user import UserSet, UserAnalysis, NewAnalysisForm
 from .models import db
 from .models import *
 from io import StringIO
@@ -238,7 +238,6 @@ def series_download(id, ds_id):
 
 @app.route('/constructor/<id>/time-series', methods=['GET', 'POST'])
 def constructor_timeseries(id):
-    plot = 0
     analysis = UserAnalysis.query.get_or_404(id)
     form = PivotForm()
 
@@ -251,16 +250,34 @@ def constructor_timeseries(id):
     form.ds_id.choices = [[str(i), str(n)] for i, n in enumerate(s['head'][2:], start=2)]
 
     if request.method == 'POST':
-        print form.data
         if form.validate():
-            plot = 0
             dataset = s['head'][int(form.ds_id.data)]
             series = df.pivot(index='City', columns='Year', values=dataset)
-            series2 = df.pivot(index='Year', columns='City', values=dataset)
-            print series
-            print series2
 
-            return render_template('constructor/constructor_timeseries.html', form=form, series=series, plot=plot,
+            head = ['City'] + map(str, series.columns.values.tolist())
+
+            table1 = [head]
+
+            mins = []
+            maxs = []
+
+            for y, r in zip(df['City'].unique(), series.values.tolist()):
+                table1.append([str(y)] + r)
+                mins.append(min(r))
+                maxs.append(max(r))
+
+            Min = min(mins)
+            Max = max(maxs) * 1.05
+
+            series2 = df.pivot(index='Year', columns='City', values=dataset)
+            head = ['Year'] + series2.columns.values.tolist()
+
+            table2 = [head]
+
+            for y, r in zip(df['Year'].unique(), series2.values.tolist()):
+                table2.append([str(y)] + r)
+
+            return render_template('constructor/constructor_timeseries.html', min=Min, max=Max, form=form, table1=table1, table2=table2,
                                    analysis_id=id, series_id=int(form.ds_id.data))
 
         else:
@@ -269,7 +286,26 @@ def constructor_timeseries(id):
             else:
                 flash('Please correct the problems below and try again.', 'warning')
 
-    return render_template('constructor/constructor_timeseries.html', form=form, plot=plot, analysis_id=id)
+    return render_template('constructor/constructor_timeseries.html', form=form, analysis_id=id)
+
+
+@app.route('/constructor/new_analysis', methods=['GET', 'POST'])
+def constructor_new():
+
+    form = NewAnalysisForm()
+
+    if request.method == 'POST':
+        analysis = UserAnalysis()
+        analysis.user_id = current_user.id
+        analysis.ds_name = form.ds_name.data
+        analysis.description = form.description.data
+        db.session.add(analysis)
+        db.session.commit()
+        analysis_id = analysis.id
+
+        return redirect('/constructor/%s' % analysis_id)
+
+    return render_template('constructor/constructor_new.html', form=form)
 
 
 @app.route('/constructor/<id>/download', methods=['GET'])
@@ -337,17 +373,6 @@ def constructor_mod(id):
     db.session.commit()
 
     return jsonify({'redirect': '/constructor/%s' % id})
-
-
-@app.route('/constructor/create/<name>')
-def constructor_create(name):
-    analysis = UserAnalysis()
-    analysis.user_id = current_user.id
-    analysis.ds_name = name
-    db.session.add(analysis)
-    db.session.commit()
-    id = analysis.id
-    return redirect('/constructor/%s' % id)
 
 
 @app.route('/constructor/<id>/delete')
@@ -692,6 +717,53 @@ def constructor(id):
     return render_template('constructor/constructor.html', explore_form=explore_form, wazi_form=wazi_form, muni_form=muni_form,
                            my_form=my_form, table_master=table_master, analysis_id=id,
                            plot=plot, warning=warning)
+
+
+@app.route('/constructor/<id>/plot', methods=['GET'])
+def constructor_vis(id):
+
+    analysis = UserAnalysis.query.get_or_404(id)
+
+    plot = 1
+
+    if analysis.current in ['', None]:
+        head = ['City', 'Year']
+        table_master = [head]
+        plot = 2
+
+    else:
+        s = json.loads(analysis.current)
+        df = pd.DataFrame(s['table'], columns=s['head'])
+        types = df.apply(lambda x: pd.lib.infer_dtype(x.values))
+        for col in types[types == 'unicode'].index:
+            df[col] = df[col].astype(str)
+        head = [str(h) for h in s['head']]
+        table_master = [head]
+        indices = [i for i, x in enumerate(list(df.dtypes)) if x == "int64"]
+        mins = []
+        maxs = []
+        for r in df.values.tolist():
+            for j in indices:
+                r[j] = int(r[j])
+            table_master.append(r)
+            mins.append(min(r[2:]))
+            maxs.append(max(r[2:]))
+
+        cities = [c.encode('utf-8') for c in df['City'].unique()]
+        years = [str(c) for c in df['Year'].unique()]
+        colours = ['#f44336', '#03a9f4', '#4caf50', '#ffc107', '#03a9f4', '#ff5722', '#9c27b0', '#8bc34a',
+                   '#ffeb3b', '#9e9e9e', '#3f51b5', '#e91e63']
+        series = {i: {'color': colours[i]} for i in range(len(head[2:]))}
+
+    view = range(2, len(head))
+    view.insert(0, 0)
+
+    minVal = min(mins)
+    maxVal = max(maxs) * 1.1
+
+    return render_template('constructor/constructor_vis.html', table=table_master, analysis_id=id,
+                           cities=cities, colours=colours, series=series, min=minVal, max=maxVal,
+                           view=view, year=years)
 
 
 @app.route('/_parse_wazi', methods=['GET'])

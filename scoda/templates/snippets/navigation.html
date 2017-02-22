@@ -16,7 +16,7 @@ from flask_login import current_user
             <button class="navbar-toggler mobile-toggler hidden-lg-up" type="button">☰</button>
             <a class="navbar-brand" href="http://sa-cities-almanac-prototype.herokuapp.com" target="_blank"></a>
             <ul class="nav navbar-nav hidden-md-down">
-                <li class="nav-item">
+                <li class="nav-item" id="analysisNav">
                     <a class="nav-link navbar-toggler layout-toggler" href="#">☰</a>
                 </li>
             </ul>
@@ -34,10 +34,7 @@ from flask_login import current_user
                             <strong>Account</strong>
                         </div>
 
-                        <a class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> Updates<span class="tag tag-info">42</span></a>
-                        <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages<span class="tag tag-success">42</span></a>
-                        <a class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Tasks<span class="tag tag-danger">42</span></a>
-                        <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> Comments<span class="tag tag-warning">42</span></a>
+                        <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i>Contact Us</a>
                         <a class="dropdown-item" href="{{ url_for('security.logout') }}"><i class="fa fa-lock"></i> Logout</a>
                     </div>
                 </li>

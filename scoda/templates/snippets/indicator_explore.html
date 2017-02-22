@@ -622,9 +622,19 @@
                         <div class="col-sm-7 col-lg-7 col-lg-7">
                             <div class="card" id="descriptionCard">
                                 <div class="card-header">About This Indicator</div>
-                                <div class="card-block" style="text-align: center">
-                                    <p>A description of the indicator will go here. This should include, among others,
-                                        information on how the data was collected and any assumptions made.</p>
+                                <div class="card-block" style="text-align: justify">
+                                    <p style="text-decoration: underline"><b>Definition:</b></p>
+                                    <p>{{ indicator.definition }}</p>
+                                    <p style="text-decoration: underline"><b>Unit:</b></p>
+                                    <p>{{ indicator.unit }}</p>
+                                    <p style="text-decoration: underline"><b>Frequency:</b></p>
+                                    <p>{{ indicator.frequency }}</p>
+                                    <p style="text-decoration: underline"><b>Theme:</b></p>
+                                    <p>{{ indicator.theme }}</p>
+                                    <p style="text-decoration: underline"><b>Sub-Theme:</b></p>
+                                    <p>{{ indicator.sub_theme }}</p>
+                                    <p style="text-decoration: underline"><b>Source:</b></p>
+                                    <p>{{ indicator.source }}</p>
                                 </div>
                             </div>
                         </div>
@@ -707,9 +717,9 @@
 
 <script type="text/javascript">
 
-    $(document).ready(function (e) {
-        var selectHeight = $("#mapSelect").height() + 2;
-        $("#descriptionCard").css({height: selectHeight});
-    });
+{#    $(document).ready(function (e) {#}
+{#        var selectHeight = $("#mapSelect").height() + 2;#}
+{#        $("#descriptionCard").css({height: selectHeight});#}
+{#    });#}
 
 </script>

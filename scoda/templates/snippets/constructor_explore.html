@@ -1,0 +1,566 @@
+<link rel="stylesheet" href="../../static/vendor/shepherd/css/shepherd-theme-dark.css"/>
+<script type="text/javascript">
+
+    var csrf_token = "{{ csrf_token() }}";
+
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+            }
+        }
+    });
+
+    $(document).ready(function () {
+
+        $('.js-example-basic-single').select2();
+        $('.js-example-basic-multiple').select2();
+
+        $('#Form').on('change', function () {
+
+            var dataset_input = $('#dataset_id').find("option:selected").val();
+            var indicator_input = $('#indicator_id').find("option:selected").val();
+            var region_input = $('#region_id').find("option:selected").val();
+            var type_input = $("#type_id").find("option:selected").val();
+            var theme_input = $("#theme_id").find("option:selected").val();
+            var year_input = $("#year").find("option:selected").text();
+
+            $.getJSON('/_parse_data', {
+
+                    dataset_id: dataset_input,
+                    indicator_id: indicator_input,
+                    region_id: region_input,
+                    type_id: type_input,
+                    theme_id: theme_input,
+                    year: year_input
+
+                },
+                function (data) {
+                    var datasets = data.dataset;
+                    var indicators = data.indicator;
+                    var regions = data.region;
+                    var types = data.type;
+                    var themes = data.theme;
+                    var years = data.year;
+                    var ind_ready = data.ind_ready;
+
+                    if (ind_ready) {
+                        document.getElementById("exploreButton").disabled = false;
+                        document.getElementById("exploreButton").innerText = "Explore This Indicator!";
+                    }
+                    $("#dataset_id").empty();
+                    $("#indicator_id").empty();
+                    $("#region_id").empty();
+                    $("#type_id").empty();
+                    $("#theme_id").empty();
+                    $("#year").empty();
+
+                    var options = $("#dataset_id");
+                    options.empty()
+                    datasets.forEach(function (item) {
+                        options.append($('<option>', {value: item[0], text: item[1]}));
+                    });
+
+                    var options = $("#indicator_id");
+                    options.empty()
+                    indicators.forEach(function (item) {
+                        console.log(item)
+                        options.append($('<option>', {value: item[0], text: item[1]}));
+                    });
+
+                    options = $("#region_id");
+                    options.empty()
+                    regions.forEach(function (item) {
+                        options.append($('<option>', {value: item[0], text: item[1]}));
+                    });
+
+                    options = $("#type_id");
+                    options.empty()
+                    types.forEach(function (item) {
+                        options.append($('<option>', {value: item[0], text: item[1]}));
+                    });
+
+                    options = $("#theme_id");
+                    options.empty()
+                    themes.forEach(function (item) {
+                        options.append($('<option>', {value: item[0], text: item[1]}));
+                    });
+
+                    options = $("#year");
+                    options.empty();
+                    years.forEach(function (item) {
+                        options.append($('<option>', {value: item[0], text: item[1]}));
+                    });
+                });
+        });
+
+        {% if tour == 1 %}
+
+            var tour = new Shepherd.Tour({
+                defaults: {
+                    classes: 'shepherd-theme-dark',
+                    scrollTo: true
+                }
+            });
+
+            tour.addStep('welcome', {
+                title: 'Welcome to the Indicator Explorer!',
+                text: 'This short tour will guide you through the necessary steps to select, visualize and download indicator data. You can exit the tour at any stage by clicking on the "Exit" button.',
+                attachTo: '#formCardHead right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('form', {
+                title: 'The Selection Form',
+                text: 'This form is here to help you find the indicator you are interested in. The various selection blocks help to narrow down your choices from the 102 possible indicators available. When you make a selection in one or more of the fields, it will change which options are available in the others. Finally, each field can be searched through, just start typing what you are looking for!',
+                attachTo: '#selectorCard right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('dataset', {
+                title: 'Dataset Selector',
+                text: 'Every indicator is constructed from one or more individual datasets. Selecting a dataset will often return only one indicator.',
+                attachTo: '#dataset_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('region', {
+                title: 'Region Selector',
+                text: 'The region is the city or province for which the data has been collected. Some indicators are also available at the National level.',
+                attachTo: '#region_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('region_type', {
+                title: 'Region Type Selector',
+                text: 'The region type allows you to select all city, provincial or national indicators, i.e. it is less specific than the region selector.',
+                attachTo: '#type_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('theme', {
+                title: 'Theme Selector',
+                text: 'The South African Cities Network has classified its indicators under several broad themes. Selection of a theme will return all the indicators included in this theme.',
+                attachTo: '#theme_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('year', {
+                title: 'Year Selector',
+                text: 'This field will reduce the indicator options to those that include data for a specific year.',
+                attachTo: '#year_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('indicator', {
+                title: 'Indicator Selector',
+                text: 'Selection of an indicator is the final step of the form. Once one has been selected, the "Explore This Indicator!" button will become click-able and will open up new page elements.',
+                attachTo: '#indicator_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('reset', {
+                title: 'Reset Form',
+                text: 'As the role of the selection fields is to reduce your number of choices, you may find yourself having gone a step too far. Never fear, simply click on this button and the form will be reset!',
+                attachTo: '#clearForm right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.start();
+
+        {% elif tour == 2 %}
+
+            var tour = new Shepherd.Tour({
+                defaults: {
+                    classes: 'shepherd-theme-dark',
+                }
+            });
+
+            tour.addStep('map', {
+                title: 'Geographic Depiction',
+                text: 'This map gives a geographic comparison of data values. The size of the circles and their colours act as a comparative scale, hovering over the points themselves will give the numerical values. This map is purely for comparative purposes and so cannot be zoomed or moved.',
+                attachTo: '#geoCard left',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('map_select', {
+                title: 'Changing Map Data',
+                text: 'Depending on the indicator selected, there will often be multiple data layers that cannot be effectively displayed simultaneously on the map. The selection fields here allow you to choose the data values to be represented on the map. For some indicators this will involve changing the dataset, and others the year.',
+                attachTo: '#mapSelect right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('about', {
+                title: 'Indicator Description',
+                text: 'This area contains all the details of the indicator.',
+                attachTo: '#descriptionCard left',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('select_plot', {
+                title: 'Selecting Plot Data',
+                text: 'These controllers allow you to choose which regions (city or province) are displayed for all graphs, and which years are viewed for multi-layered data, i.e. the stacked bar-charts. Initially, all regions are displayed but you can remove a region by clicking on the small "x" next to its name. These selections will propagate through the plotting area, the map, and the data table at the bottom of the page.',
+                attachTo: '#selectCard right',
+                advanceOn: '.docs-link click',
+                scrollTo: true,
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('plot_area', {
+                title: 'The Plot Area',
+                text: 'Here the datasets of the indicator are shown in an interactive fashion. You can select a data series to focus on my clicking on it in the legend to the right and if you hover over a region the numerical values will be given.',
+                attachTo: '#chartCard left',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('table', {
+                title: 'Data Table',
+                text: 'This table contains all the data being displayed across the various visualizations',
+                attachTo: '#table top',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('export', {
+                title: 'Data Export',
+                text: 'Clicking this button will download the data as a Comma Separated Vector (CSV) file that can be opened by many different programs, e.g. Excel.',
+                attachTo: '#Export top',
+                advanceOn: '.docs-link click',
+                scrollTo: true,
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('image', {
+                title: 'Image Download',
+                text: 'Clicking this button will download the chart as a PNG image file.',
+                attachTo: '#image_download top',
+                advanceOn: '.docs-link click',
+                scrollTo: true,
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.start();
+
+        {% endif %}
+
+    });
+
+</script>
+
+<div class="container-fluid">
+    <div id="ui-view" style="opacity: 1;">
+        <div class="animated fadeIn">
+
+            {# Plotting Card #}
+
+            {% include 'snippets/image_export.html' %}
+
+            {% include 'snippets/charts_bar_constructor.html' %}
+
+            <div id="dashboard">
+                <div class="row">
+                    <div class="col-sm-2 col-lg-2 col-lg-2">
+                        <div class="card" id="selectCard">
+                            <div class="card-header">Select Your Data</div>
+                            <div class="card-block">
+                                <div id="categorySelector2"></div>
+                                <div id="categorySelector1"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-10 col-lg-10 col-lg-10">
+                        <div class="card" id="chartCard">
+                            <div class="card-header">Plotting Window</div>
+                            <div class="card-block">
+                                <div id="chart"
+                                     style="display: inline-block; margin: 0 auto; width: 100%;"></div>
+                                <div id="chart_img" class="hidden"
+                                     style="display: none; margin: 0 auto; width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">Selected Data</div>
+                            <div class="card-block">
+                                <div id="table"
+                                     style="display: inline-block; margin: 0 auto; width: 100%;"></div>
+                                <div id="table2"
+                                     style="display: none; margin: 0 auto; width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-5 col-lg-5 col-lg-5">
+                    <div class="card" id="mapSelect">
+                        <div class="card-header">Download data</div>
+                        <div class="card-block" style="text-align: center">
+                            <div class="row">
+                                <a id="Export" href="data.csv" target="_blank" download="data.csv">
+                                    <button class="btn btn-primary" style="margin-right: 10px">Download table
+                                        data
+                                        as a CSV file
+                                    </button>
+                                </a>
+
+                                <a download="chart.png" id="image_download"
+                                   onclick="saveAsImg(document.getElementById('chart_img'));">
+                                    <button class="btn btn-primary" style="margin-left: 10px">Save chart as a
+                                        PNG image
+                                    </button>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function (e) {
+        var selectHeight = $("#mapSelect").height() + 2;
+        $("#descriptionCard").css({height: selectHeight});
+    });
+
+</script>

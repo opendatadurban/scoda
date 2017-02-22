@@ -3,49 +3,30 @@
             <li class="nav-item">
                 <a class="nav-link active" data-toggle="tab" href="#timeline" role="tab"><i class="icon-list"></i></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><i class="icon-speech"></i></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#settings" role="tab"><i class="icon-settings"></i></a>
-            </li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
-
             <div class="tab-pane active" id="timeline" role="tabpanel">
                 <div class="callout m-0 py-h text-muted text-xs-center bg-faded text-uppercase">
                     <small><b>Recent Analyses</b>
                     </small>
                 </div>
-                <hr class="transparent mx-1 my-0">
-                <div class="callout callout-warning m-0 py-1">
-                    <div>Analysis 1</div>
-                    <small class="text-muted mr-1"><i class="icon-calendar"></i> Date performed</small>
-                </div>
-                <hr class="transparent mx-1 my-0">
-                <div class="callout callout-warning m-0 py-1">
-                    <div>Analysis 2</div>
-                    <small class="text-muted mr-1"><i class="icon-calendar"></i> Date performed</small>
-                </div>
-                <hr class="transparent mx-1 my-0">
-                <div class="callout callout-warning m-0 py-1">
-                    <div>Analysis 3</div>
-                    <small class="text-muted mr-1"><i class="icon-calendar"></i> Date performed</small>
-                </div>
-                <hr class="transparent mx-1 my-0">
-                <div class="callout callout-warning m-0 py-1">
-                    <div>Analysis 1</div>
-                    <small class="text-muted mr-1"><i class="icon-calendar"></i> Date performed</small>
-                </div>
-            </div>
 
-            <div class="tab-pane p-1" id="messages" role="tabpanel">
+                {% if analyses %}
+                    {% for group in analyses %}
+                            {% for analysis in group %}
+                                {% if analysis %}
+                                    <a href="/constructor/{{ analysis[0] }}">
+                                        <hr class="transparent mx-1 my-0">
+                                        <div class="callout callout-warning m-0 py-1">
+                                            <div>{{ analysis[1] }}</div>
+                                        </div>
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                {% endif %}
             </div>
-
-            <div class="tab-pane p-1" id="settings" role="tabpanel">
-                <h6>Settings</h6>
-            </div>
-        </div>
     </aside>

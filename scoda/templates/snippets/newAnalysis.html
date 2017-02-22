@@ -1,0 +1,87 @@
+<script type="text/javascript">
+
+    var csrf_token = "{{ csrf_token() }}";
+
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+            }
+        }
+    });
+
+</script>
+
+<link rel="stylesheet" href="../../static/vendor/shepherd/css/shepherd-theme-dark.css"/>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+      var tour = new Shepherd.Tour({
+                defaults: {
+                    classes: 'shepherd-theme-dark',
+                    scrollTo: true
+                }
+            });
+
+            tour.addStep('welcome', {
+                title: 'Creating a new analysis',
+                text: 'You can use this form to start a new custom analysis. Please provide a name and a description, click on the "Create Analysis" button and you will be taken to the analysis construction page.',
+                attachTo: '#selectorCard right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    }
+                ]
+            });
+
+            tour.start();
+    });
+
+</script>
+
+<div class="container-fluid">
+    <div id="ui-view" style="opacity: 1;">
+        <div class="animated fadeIn">
+
+            <div class="row">
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="card" id="selectorCard">
+                        <div class="card-header" id="analysisFormCardHead">New Analysis</div>
+                        <div class="card-block" id="analysisFormCard">
+                            <form action="/constructor/new_analysis" id="analysisForm"
+                                  class="form-horizontal" method="POST">
+                                {{ form.csrf_token }}
+                                {{ form.hidden_tag() }}
+                                <div class="form-group {% if form.ds_name.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="analysis_dataset_label">
+                                        Analysis Name:
+                                    </div>
+                                    <div>
+                                        {{ form.ds_name(id='analysis_dataset_id',placeholder='Enter a name for this analysis...',class="form-control",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ form.ds_name.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if form.description.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="analysis_description">
+                                        Description:
+                                    </div>
+                                    <div>
+                                        {{ form.description(id='analysis_description',placeholder='Describe this analysis...',class="form-control",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ form.description.errors[0] }}
+                                </div>
+                                <button class="btn btn-success" id="analysisButton" type="submit">Create Analysis!
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

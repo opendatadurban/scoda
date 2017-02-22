@@ -15,7 +15,7 @@ def grouper(iterable, n, fillvalue=None):
 @app.route('/dashboard')
 def city_dashboard():
 
-    query = db.session.query(UserAnalysis.id, UserAnalysis.ds_name) \
+    query = db.session.query(UserAnalysis.id, UserAnalysis.ds_name, UserAnalysis.description) \
         .filter(UserAnalysis.user_id == current_user.id).order_by(UserAnalysis.id.desc())
 
     analyses = []

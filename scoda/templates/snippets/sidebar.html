@@ -1,10 +1,11 @@
-<div class="sidebar">
-
+<div class="sidebar" id="sideNav">
         <nav class="sidebar-nav">
             <ul class="nav">
-{#                <li class="nav-item">#}
-{#                    <a class="nav-link" href="{{ url_for('home_user') }}"><i class="icon-speedometer"></i>My Dashboard</a>#}
-{#                </li>#}
+                {% if current_user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" id="sideDashboard" href="{{ url_for('city_dashboard') }}"><i class="icon-speedometer"></i>My Dashboard</a>
+                </li>
+                {%  endif %}
 
                 <li class="nav-title">
                     Options
@@ -14,56 +15,20 @@
                     <a class="nav-link" href="{{ url_for('explore') }}"><i class="fa fa-rocket fa-lg m-t-2"></i>Data Explorer</a>
                 </li>
 
-{#                 <li class="nav-item">#}
-{#                    <a class="nav-link" href="#"><i class="fa fa-star fa-lg m-t-2"></i>New Analysis</a>#}
-{#                </li>#}
-{##}
-{#                <li class="nav-item">#}
-{#                    <a class="nav-link" href="#"><i class="fa fa-sitemap fa-lg m-t-2"></i>My Analyses</a>#}
-{#                </li>#}
-{##}
-{#                <li class="nav-item">#}
-{#                    <a class="nav-link" href="#"><i class="fa fa-table fa-lg m-t-2"></i>My Datasets</a>#}
-{#                </li>#}
+            {% if current_user.is_authenticated %}
+
+                 <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('constructor_new') }}"><i class="fa fa-star fa-lg m-t-2"></i>New Analysis</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('my_datasets') }}"><i class="fa fa-table fa-lg m-t-2"></i>My Datasets</a>
+                </li>
+            {%  endif %}
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('demographics') }}"><i class="fa fa-group fa-lg m-t-2"></i>Demographics</a>
                 </li>
-
-{#                <li class="nav-item nav-dropdown">#}
-{#                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-book fa-lg m-t-2"></i>Documentation</a>#}
-{#                    <ul class="nav-dropdown-items">#}
-{#                        <li class="nav-item">#}
-{#                            <a class="nav-link" href="#">Section 1</a>#}
-{#                        </li>#}
-{#                        <li class="nav-item">#}
-{#                            <a class="nav-link" href="#">Section 2</a>#}
-{#                        </li>#}
-{#                        <li class="nav-item">#}
-{#                            <a class="nav-link" href="#">Section 3</a>#}
-{#                        </li>#}
-{#                        <li class="nav-item">#}
-{#                            <a class="nav-link" href="#">Section 4</a>#}
-{#                        </li>#}
-{#                        <li class="nav-item">#}
-{#                            <a class="nav-link" href="#">Section 5</a>#}
-{#                        </li>#}
-{#                        <li class="nav-item">#}
-{#                            <a class="nav-link" href="#">Section 6</a>#}
-{#                        </li>#}
-{#                        <li class="nav-item">#}
-{#                            <a class="nav-link" href="#">Section 7</a>#}
-{#                        </li>#}
-{#                    </ul>#}
-{#                </li>#}
-
-{#                <li class="nav-title">#}
-{#                    Links#}
-{#                </li>#}
-{##}
-{#                <li class="nav-item">#}
-{#                    <a class="nav-link" href="http://almanac.opendata.durban"><i class="fa fa-tasks fa-lg m-t-2 "></i>SCODA Repository</a>#}
-{#                </li>#}
 
             </ul>
         </nav>

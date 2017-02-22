@@ -1,0 +1,133 @@
+<script type="text/javascript">
+
+    var csrf_token = "{{ csrf_token() }}";
+
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+            }
+        }
+    });
+
+    google.charts.load('visualization', 'current', {
+        packages: ['controls', 'bar', 'corechart', 'geochart']
+    });
+
+    function redraw() {
+        window.dispatchEvent(new Event('resize'));
+    }
+
+    function drawBar1() {
+
+        var data = google.visualization.arrayToDataTable({{ table|safe }});
+
+        var categoryPicker1 = new google.visualization.ControlWrapper({
+            'controlType': 'CategoryFilter',
+            'containerId': 'categorySelector1',
+            'state': {'selectedValues': {{ cities|safe }}},
+            'options': {
+                'filterColumnLabel': 'City',
+                'ui': {
+                    'labelStacking': 'vertical',
+                    'allowMultiple': true,
+                    'allowNone': false,
+                    'allowTyping': false,
+                    'caption': 'Choose a city...'
+                }
+            }
+        });
+
+        var categoryPicker2 = new google.visualization.ControlWrapper({
+            'controlType': 'CategoryFilter',
+            'containerId': 'categorySelector2',
+            'state': {'selectedValues': [{{ year|safe }}]},
+            'options': {
+                'filterColumnLabel': 'Year',
+                'ui': {
+                    'labelStacking': 'vertical',
+                    'allowTyping': false,
+                    'allowMultiple': false,
+                    'allowNone': false
+                }
+            }
+        });
+
+        var bar2 = new google.visualization.ChartWrapper({
+            'chartType': 'ColumnChart',
+            'containerId': 'chart_img',
+            'options': {
+                height: '800',
+                width: '1024',
+                legend: {position: 'right', maxLines: 10},
+                chartArea: {left: '10%', right: '35%'},
+                bars: 'vertical',
+                isStacked: true,
+                vAxis: {minValue: 0},
+                hAxis: {slantedText: true},
+                series: {{ series|safe }}
+            },
+            view: {'columns': {{ view|safe }}}
+        });
+
+        var table1 = new google.visualization.ChartWrapper({
+            'chartType': 'Table',
+            'containerId': 'table',
+            'options': {}
+
+        });
+
+        var cardHeight = $("#formCard").height() + $("#formCardHead").height() + 20;
+        var cardWidth = $("#geoCard").width();
+
+        var bar1 = new google.visualization.ChartWrapper({
+            'chartType': 'Bar',
+            'containerId': 'chart',
+            'options': {
+                stacked: true,
+                legend: {position: 'right'},
+                bars: 'vertical',
+                vAxis: {minValue: 0},
+                hAxis: {slantedText: true},
+                height: cardHeight,
+                bar: {groupWidth: '99%'},
+                series: {{ series|safe }}
+            },
+            view: {'columns': {{ view|safe }}}
+        });
+
+        var dashboard = new google.visualization.Dashboard();
+
+        dashboard.bind([categoryPicker1, categoryPicker2], [bar1, bar2, table1]);
+        dashboard.draw(data);
+
+        $("#selectCard").css({height: cardHeight * 1.2});
+        $("#chartCard").css({height: cardHeight * 1.2});
+
+        google.visualization.events.addListener(table1, 'ready', function () {
+
+            var dataset = Number($('#dataSelect').find("option:selected").val());
+            dataset += 1;
+            var year = $('#yearSelect').find("option:selected").val();
+
+            var dt = table1.getDataTable();
+            var csv = google.visualization.dataTableToCsv(dt);
+
+            $('#Export').click(function () {
+                this.href = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+            });
+
+        });
+
+        if (window.addEventListener) {
+            window.addEventListener('resize', resize);
+        }
+
+        else {
+            window.attachEvent('onresize', resize);
+        }
+
+    }
+    google.setOnLoadCallback(drawBar1);
+
+</script>

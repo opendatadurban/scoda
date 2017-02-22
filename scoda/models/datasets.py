@@ -267,7 +267,13 @@ class Indicator(db.Model):
     __tablename__ = "indicators"
 
     id = Column(Integer, primary_key=True)
-    in_name = Column(String(80), index=True, nullable=False, unique=True)
+    in_name = Column(String(80), nullable=False, unique=True)
+    unit = Column(String(80), nullable=True, unique=False)
+    definition = Column(String(400), nullable=True, unique=False)
+    theme = Column(String(80), nullable=True, unique=False)
+    sub_theme = Column(String(80), nullable=True, unique=False)
+    source = Column(String(500), nullable=True, unique=False)
+    frequency = Column(String(80), nullable=True, unique=False)
 
     def __repr__(self):
         return "<Indicator='%s'>" % (self.in_name)
