@@ -1,0 +1,76 @@
+<script type="text/javascript">
+
+    var csrf_token = "{{ csrf_token() }}";
+
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+            }
+        }
+    });
+
+</script>
+
+<link rel="stylesheet" href="../../static/vendor/shepherd/css/shepherd-theme-dark.css"/>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+      var tour = new Shepherd.Tour({
+                defaults: {
+                    classes: 'shepherd-theme-dark',
+                    scrollTo: true
+                }
+            });
+
+            tour.addStep('welcome', {
+                title: 'Please Give Us Feedback!',
+                text: 'Your feedback is critical to our ensuring that this platform is both user-friendly and impactful. Please detail your comment / challenge in the box provided.',
+                attachTo: '#selectorCard right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    }
+                ]
+            });
+
+            tour.start();
+    });
+
+</script>
+
+<div class="container-fluid">
+    <div id="ui-view" style="opacity: 1;">
+        <div class="animated fadeIn">
+
+            <div class="row">
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="card" id="selectorCard">
+                        <div class="card-header" id="analysisFormCardHead">Feedback</div>
+                        <div class="card-block" id="analysisFormCard">
+                            <form action={{ url_for('contact') }} id="analysisForm"
+                                  class="form-horizontal" method="POST">
+                                {{ form.csrf_token }}
+                                {{ form.hidden_tag() }}
+                                <div class="form-group {% if form.description.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="analysis_description">
+                                        Description:
+                                    </div>
+                                    <div>
+                                        {{ form.description(id='analysis_description',placeholder='Please enter feedback here...',class="form-control",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ form.description.errors[0] }}
+                                </div>
+                                <button class="btn btn-success" id="analysisButton" type="submit">Send Email!
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

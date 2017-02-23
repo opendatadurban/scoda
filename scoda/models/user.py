@@ -149,6 +149,19 @@ class NewAnalysisForm(Form):
         super(NewAnalysisForm, self).populate_obj(obj)
 
 
+class EmailForm(Form):
+    description = StringField('Comment', [validators.DataRequired()], widget=TextArea())
+
+    def __init__(self, *args, **kwargs):
+        super(EmailForm, self).__init__(*args, **kwargs)
+
+    def validate(self):
+        return super(EmailForm, self).validate()
+
+    def populate_obj(self, obj):
+        super(EmailForm, self).populate_obj(obj)
+
+
 # user authentication
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)

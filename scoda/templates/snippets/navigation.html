@@ -34,7 +34,7 @@ from flask_login import current_user
                             <strong>Account</strong>
                         </div>
 
-                        <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i>Contact Us</a>
+                        <a class="dropdown-item" href="{{ url_for('contact') }}"><i class="fa fa-envelope-o"></i>Contact Us</a>
                         <a class="dropdown-item" href="{{ url_for('security.logout') }}"><i class="fa fa-lock"></i> Logout</a>
                     </div>
                 </li>

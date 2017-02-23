@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 from .models.files import NewFileForm, EditFileForm, DeleteFileForm
 from .models.wazi import WaziForm, MuniForm, MyDataForm, PivotForm
 from .models.datasets import ExploreForm
-from .models.user import UserSet, UserAnalysis, NewAnalysisForm
+from .models.user import UserSet, UserAnalysis, NewAnalysisForm, EmailForm
 from .models import db
 from .models import *
 from io import StringIO
@@ -844,10 +844,20 @@ def parse_analysis():
     return jsonify(response)
 
 
-@app.route('/email-test', methods=['GET'])
-def test_email():
-    msg = Message('Test Email', sender=MAIL_DEFAULT_SENDER, recipients=['mattadendorff@gmail.com'])
-    msg.body = 'Test body'
-    mail.send(msg)
+@app.route('/contact_us', methods=['GET', 'POST'])
+def contact():
 
-    return redirect(url_for('city_dashboard'))
+    form = EmailForm()
+
+    if request.method == 'POST':
+
+        msg = Message('SCODA User %s Comment' % current_user.id, sender=MAIL_DEFAULT_SENDER,
+                      recipients=['matthew@gmainnovations.com'])
+
+        msg.body = form.description.data
+        mail.send(msg)
+        flash('Thank you for your feedback! We will be in touch soon.', 'email')
+        return redirect(url_for('city_dashboard'))
+
+    else:
+        return render_template('constructor/constructor_email.html', form=form)

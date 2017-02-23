@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from scoda.app import app
-from flask import request, url_for, redirect, flash, make_response, session, render_template, jsonify
+from flask import request, url_for, redirect, flash, make_response, session, render_template, jsonify, Response
 from .models import db
 from .models import *
 from .models.datasets import ExploreForm
@@ -105,6 +105,34 @@ def explore():
             {'Cache-Control': 'no-cache, no-store, must-revalidate'})
 
 
+@app.route('/demographics/<region_id>/<city_ward_code>/download', methods=['GET'])
+def demographics_download(region_id, city_ward_code):
+
+    region = Region.query.get(region_id).re_name
+
+    if city_ward_code == 'None':
+        query = db.session.query(Ward.data, Ward.city_ward_code). \
+            filter(Ward.region_id == region_id).all()
+
+        df = pd.DataFrame()
+        df['Year'] = range(1996, 2031)
+        for g in query:
+            df['%s - Ward %s' % (region, g[1])] = list(g[0])
+
+    else:
+        query = db.session.query(Ward.data, Ward.city_ward_code) \
+            .filter(Ward.city_ward_code == city_ward_code) \
+            .filter(Ward.region_id == region_id).all()
+
+        df = pd.DataFrame()
+        df['Year'] = range(1996, 2031)
+        for g in query:
+            df['%s - Ward %s' % (region, g[1])] = list(g[0])
+
+    return Response(df.to_csv(index=False), mimetype="text/csv",
+                    headers={"Content-disposition": "attachment; filename=demographics.csv"})
+
+
 @app.route('/demographics', methods=['GET', 'POST'])
 def demographics():
     session['demo'] = []
@@ -147,7 +175,14 @@ def demographics():
                               "features": []}
                 for g in query:
                     d = json.loads(g[0])
+
+                    if year1 == 0:
+                        flow = 0
+                    else:
+                        flow = round(g[1][year1] - g[1][year1-1])
+
                     geometries1['features'].append({"type": "Feature", "properties": {"density": round(g[1][year1]),
+                                                                                      "flow": flow,
                                                                                      "name": 'Ward %s' % g[2],
                                                                                      "year": year_ind1[year1]},
                                               "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
@@ -180,8 +215,15 @@ def demographics():
 
                 for g in query:
                     d = json.loads(g[0])
+
+                    if year1 == 0:
+                        flow = 0
+                    else:
+                        flow = round(g[1][year1] - g[1][year1 - 1])
+
                     geometries1['features'].append(
                         {"type": "Feature", "properties": {"density": round(g[1][year1]),
+                                                           "flow": flow,
                                                            "name": 'Area %s' % g[2],
                                                            "year": year_ind1[year1]},
                          "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
@@ -217,7 +259,14 @@ def demographics():
                               "features": []}
                 for g in query:
                     d = json.loads(g[0])
+
+                    if year2 == 0:
+                        flow = 0
+                    else:
+                        flow = round(g[1][year1] - g[1][year2 - 1])
+
                     geometries2['features'].append({"type": "Feature", "properties": {"density": round(g[1][year2]),
+                                                                                      "flow": flow,
                                                                                      "name": 'Ward %s' % g[2],
                                                                                      "year": year_ind2[year2]},
                                               "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
@@ -250,8 +299,15 @@ def demographics():
 
                 for g in query:
                     d = json.loads(g[0])
+
+                    if year2 == 0:
+                        flow = 0
+                    else:
+                        flow = round(g[1][year1] - g[1][year2 - 1])
+
                     geometries2['features'].append(
                         {"type": "Feature", "properties": {"density": round(g[1][year2]),
+                                                           "flow": flow,
                                                            "name": 'Area %s' % g[2],
                                                            "year": year_ind2[year2]},
                          "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
@@ -278,8 +334,24 @@ def demographics():
 
                 m2 = 1.05 * max(df.sum(axis=0).tolist())
 
+            query = db.session.query(Ward.city_ward_code).filter(Ward.region_id == form1.region_id.data).order_by(
+                Ward.city_ward_code).distinct()
+
+            form1.city_ward_code.choices = [[str(i), 'Ward %s' % row.city_ward_code] for i, row in enumerate(query.all()
+                                                                                                             , start=1)]
+            form1.city_ward_code.choices.insert(0, ('', 'View All'))
+
+            query = db.session.query(Ward.city_ward_code).filter(Ward.region_id == form2.region_id.data).order_by(
+                Ward.city_ward_code).distinct()
+
+            form2.city_ward_code.choices = [[str(i), 'Ward %s' % row.city_ward_code] for i, row in enumerate(query.all()
+                                                                                                             , start=1)]
+            form2.city_ward_code.choices.insert(0, ('', 'View All'))
+
             return render_template('demographics/demographics.html', form1=form1, form2=form2, geometries1=geometries1,
-                                   geometries2=geometries2, table1=table1, table2=table2, tour=tour, max1=m1, max2=m2)
+                                   geometries2=geometries2, table1=table1, table2=table2, tour=tour, max1=m1, max2=m2,
+                                   region1=form1.region_id.data, region2=form2.region_id.data,
+                                   ward1=form1.city_ward_code.data, ward2=form2.city_ward_code.data)
 
         else:
             if request.is_xhr:
@@ -304,11 +376,13 @@ def demographics():
         for g in query:
             d = json.loads(g[0])
             geometries1['features'].append({"type": "Feature", "properties": {"density": round(g[1][0]),
+                                                                              "flow": 0,
                                                                              "name": 'Ward %s' % g[2],
                                                                              "year": 1996},
                                            "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
 
             geometries2['features'].append({"type": "Feature", "properties": {"density": round(g[1][0]),
+                                                                              "flow": 0,
                                                                               "name": 'Ward %s' % g[2],
                                                                               "year": 1996},
                                             "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
@@ -331,7 +405,10 @@ def demographics():
             m = 1.05 * max(df.sum(axis=0).tolist())
 
         return render_template('demographics/demographics.html',  form1=form1, form2=form2, geometries1=geometries1,
-                               geometries2=geometries2, tour=tour, table1=table1, table2=table1, max1=m, max2=m)
+                               geometries2=geometries2, tour=tour, table1=table1, table2=table1, max1=m, max2=m,
+                               region1=1, region2=1,
+                               ward1=None, ward2=None
+                               )
 
     if not request.is_xhr:
         query = db.session.query(Ward.geom.ST_AsGeoJSON(), Ward.data, Ward.city_ward_code). \
@@ -344,11 +421,11 @@ def demographics():
 
         for g in query:
             d = json.loads(g[0])
-            geometries1['features'].append({"type": "Feature", "properties": {"density": round(g[1][0]), "name": g[2],
+            geometries1['features'].append({"type": "Feature", "properties": {"density": round(g[1][0]), "flow": 0, "name": g[2],
                                                                              "year": 1996},
                                            "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
 
-            geometries2['features'].append({"type": "Feature", "properties": {"density": round(g[1][0]), "name": g[2],
+            geometries2['features'].append({"type": "Feature", "properties": {"density": round(g[1][0]), "flow": 0, "name": g[2],
                                                                               "year": 1996},
                                             "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
 
@@ -371,7 +448,8 @@ def demographics():
 
         resp = make_response(render_template('demographics/demographics.html',  form1=form1, form2=form2,
                                              geometries1=geometries1, geometries2=geometries2, table1=table1,
-                                             table2=table1, tour=tour, max1=m, max2=m))
+                                             table2=table1, tour=tour, max1=m, max2=m, region1=1, region2=1,
+                               ward1=None, ward2=None))
 
     else:
         resp = ''

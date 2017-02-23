@@ -549,13 +549,16 @@
                                     <p class="help-block">
                                         {{ form.indicator_id.errors[0] }}
                                 </div>
-                                <button class="btn btn-success" id="exploreButton" type="submit" disabled>Please select
-                                    an indicator...
-                                </button>
+                                    <row>
+                                        <button class="btn btn-success" id="exploreButton" type="submit" disabled>Please select
+                                            an indicator...
+                                        </button>
+
+                                        <a href="{{ url_for('explore') }}">
+                                            <button class="btn btn-primary" type="button" id="clearForm">Reset Form</button>
+                                        </a>
+                                    </row>
                             </form>
-                            <a href="{{ url_for('explore') }}">
-                                <button class="btn btn-primary" id="clearForm">Reset Form</button>
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -684,26 +687,30 @@
 
 
                     <div class="row">
-                        <div class="col-sm-5 col-lg-5 col-lg-5">
+                        <div class="col-sm-12 col-md-6 col-lg-2">
                             <div class="card" id="mapSelect">
                                 <div class="card-header">Download data</div>
                                 <div class="card-block" style="text-align: center">
-                                    <div class="row">
                                         <a id="Export" href="data.csv" target="_blank" download="data.csv">
                                             <button class="btn btn-primary" style="margin-right: 10px">Download table
                                                 data
                                                 as a CSV file
                                             </button>
                                         </a>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="col-sm-12 col-md-6 col-lg-2">
+                            <div class="card" id="mapSelect">
+                                <div class="card-header">Download Image</div>
+                                <div class="card-block" style="text-align: center">
                                         <a download="chart.png" id="image_download"
                                            onclick="saveAsImg(document.getElementById('chart_img'));">
                                             <button class="btn btn-primary" style="margin-left: 10px">Save chart as a
                                                 PNG image
                                             </button>
                                         </a>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>

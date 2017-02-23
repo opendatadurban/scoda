@@ -444,7 +444,11 @@
                                     <p class="help-block">
                                         {{ form1.year.errors[0] }}
                                 </div>
-                                <button class="btn btn-success" type="submit" id="submitButton1">Submit</button>
+                                <row>
+                                    <button class="btn btn-success" type="submit" id="submitButton1">Submit</button>
+                                    <a href="/demographics/{{ region1 }}/{{ ward1 }}/download" download="demographics.csv"><button class="btn btn-primary" type="button" id="downloadButton1">Download</button></a>
+
+                                </row>
                             </form>
                         </div>
                     </div>
@@ -518,7 +522,10 @@
                                     <p class="help-block">
                                         {{ form2.year.errors[0] }}
                                 </div>
-                                <button class="btn btn-success" type="submit" id="submitButton2">Submit</button>
+                                <row>
+                                    <button class="btn btn-success" type="submit" id="submitButton2">Submit</button>
+                                    <a href="/demographics/{{ region2 }}/{{ ward2 }}/download" download="demographics.csv"><button class="btn btn-primary" type="button" id="downloadButton2">Download</button></a>
+                                </row>
                             </form>
                         </div>
                     </div>
@@ -580,7 +587,7 @@
 
     info1.update = function (props) {
         this._div.innerHTML = '<h4>Demographic Model Data</h4>' + (props ?
-            '<b>' + props.name + '</b><br />Migration Value for <b>' + props.year + '</b>: ' + props.density
+            '<b>' + props.name + '</b><br />Migration Value for <b>' + props.year + '</b>: ' + props.density + '<br />Flow Value: ' + props.flow
                 : 'Hover over a region');
     };
 
@@ -588,15 +595,29 @@
 
 
     // get color depending on population density value
+{#    function getColor(d) {#}
+{#        return d > 100000 ? '#800026' :#}
+{#            d > 50000 ? '#BD0026' :#}
+{#                d > 20000 ? '#E31A1C' :#}
+{#                    d > 10000 ? '#FC4E2A' :#}
+{#                        d > 5000 ? '#FD8D3C' :#}
+{#                            d > 2000 ? '#FEB24C' :#}
+{#                                d > 1000 ? '#FED976' :#}
+{#                                    '#FFEDA0';#}
+{#    }#}
+
     function getColor(d) {
-        return d > 100000 ? '#800026' :
-            d > 50000 ? '#BD0026' :
-                d > 20000 ? '#E31A1C' :
-                    d > 10000 ? '#FC4E2A' :
-                        d > 5000 ? '#FD8D3C' :
-                            d > 2000 ? '#FEB24C' :
-                                d > 1000 ? '#FED976' :
-                                    '#FFEDA0';
+        return d > 5000 ? '#b2182b' :
+            d > 2500 ? '#d6604d' :
+                d > 1000 ? '#f4a582' :
+                    d > 500 ? '#fddbc7' :
+                        d > 0 ? '#f7f7f7' :
+                            d > -500 ? '#d1e5f0' :
+                                d > -1000 ? '#92c5de' :
+                                    d > -2500 ? '#4393c3':
+                                        d > -5000 ? '#2166ac':
+                                            '#053061';
+
     }
 
     function style(feature) {
@@ -606,7 +627,7 @@
             color: 'white',
             dashArray: '3',
             fillOpacity: 0.7,
-            fillColor: getColor(feature.properties.density)
+            fillColor: getColor(feature.properties.flow)
         };
     }
 
@@ -631,7 +652,7 @@
 
     function resetHighlight(e) {
         geojson.resetStyle(e.target);
-        info.update();
+        info1.update();
     }
 
     function zoomToFeature(e) {
@@ -662,7 +683,8 @@
     legend.onAdd = function (map1) {
 
         var div = L.DomUtil.create('div', 'info legend'),
-            grades = [0, 1000, 2000, 5000, 10000, 20000, 50000, 100000],
+{#            grades = [0, 1000, 2000, 5000, 10000, 20000, 50000, 100000],#}
+            grades = [-5000, -2500, -1000, -500, 0, 500, 1000, 2500, 5000],
             labels = [],
             from, to;
 
@@ -708,7 +730,7 @@
 
     info.update = function (props) {
         this._div.innerHTML = '<h4>Demographic Model Data</h4>' + (props ?
-            '<b>' + props.name + '</b><br />Migration Value for <b>' + props.year + '</b>: ' + props.density
+            '<b>' + props.name + '</b><br />Migration Value for <b>' + props.year + '</b>: ' + props.density + '<br />Flow Value: ' + props.flow
                 : 'Hover over a region');
     };
 
@@ -716,15 +738,29 @@
 
 
     // get color depending on population density value
+{#    function getColor(d) {#}
+{#        return d > 100000 ? '#800026' :#}
+{#            d > 50000 ? '#BD0026' :#}
+{#                d > 20000 ? '#E31A1C' :#}
+{#                    d > 10000 ? '#FC4E2A' :#}
+{#                        d > 5000 ? '#FD8D3C' :#}
+{#                            d > 2000 ? '#FEB24C' :#}
+{#                                d > 1000 ? '#FED976' :#}
+{#                                    '#FFEDA0';#}
+{#    }#}
+
     function getColor(d) {
-        return d > 100000 ? '#800026' :
-            d > 50000 ? '#BD0026' :
-                d > 20000 ? '#E31A1C' :
-                    d > 10000 ? '#FC4E2A' :
-                        d > 5000 ? '#FD8D3C' :
-                            d > 2000 ? '#FEB24C' :
-                                d > 1000 ? '#FED976' :
-                                    '#FFEDA0';
+        return d > 1000 ? '#b2182b' :
+            d > 2500 ? '#d6604d' :
+                d > 1000 ? '#f4a582' :
+                    d > 500 ? '#fddbc7' :
+                        d > 0 ? '#f7f7f7' :
+                            d > -500 ? '#d1e5f0' :
+                                d > -1000 ? '#92c5de' :
+                                    d > -2500 ? '#4393c3':
+                                        d > -5000 ? '#2166ac':
+                                            '#053061';
+
     }
 
     function style(feature) {
@@ -734,7 +770,7 @@
             color: 'white',
             dashArray: '3',
             fillOpacity: 0.7,
-            fillColor: getColor(feature.properties.density)
+            fillColor: getColor(feature.properties.flow)
         };
     }
 
@@ -790,7 +826,8 @@
     legend.onAdd = function (map2) {
 
         var div = L.DomUtil.create('div', 'info legend'),
-            grades = [0, 1000, 2000, 5000, 10000, 20000, 50000, 100000],
+{#            grades = [0, 1000, 2000, 5000, 10000, 20000, 50000, 100000],#}
+            grades = [-5000, -2500, -1000, -500, 0, 500, 1000, 2500, 5000],
             labels = [],
             from, to;
 
