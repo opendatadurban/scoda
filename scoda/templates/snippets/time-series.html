@@ -20,6 +20,8 @@
 
 </script>
 
+{% include 'snippets/image_export.html' %}
+
 {% include 'snippets/charts_line_constructor.html' %}
 
 <div class="container-fluid">
@@ -47,12 +49,16 @@
                                         {{ form.ds_id.errors[0] }}
                                 </div>
 
-                                <button class="btn btn-success" id="pivotButton" type="submit">Generate time-series
-                                </button>
+                                <row>
+                                    <button class="btn btn-success" id="pivotButton" type="submit">Generate time-series</button>
+
+                                    <a href="/constructor/{{ analysis_id }}">
+                                        <button class="btn btn-primary" type="button">Back to Analysis</button>
+                                    </a>
+                                </row>
+
                             </form>
-                            <a href="/constructor/{{ analysis_id }}">
-                                <button class="btn btn-primary" id="clearForm">Back to Analysis</button>
-                            </a>
+
                         </div>
                     </div>
                 </div>
@@ -75,13 +81,15 @@
                         <div class="card-header">Visualization</div>
                         <div class="card-block">
                             <div id="chart1"></div>
+                            <div id="chart_img" class="hidden"
+                                     style="display: none; margin: 0 auto; width: 100%;"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-sm-5 col-lg-5 col-lg-5">
+                <div class="col-sm-12 col-lg-6 col-lg-2">
                     <div class="card" id="mapSelect">
                         <div class="card-header">Download data</div>
                         <div class="card-block" style="text-align: center">
@@ -95,6 +103,21 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-sm-12 col-lg-6 col-lg-2">
+                    <div class="card" id="mapSelect">
+                        <div class="card-header">Download Plot</div>
+                        <div class="card-block" style="text-align: center">
+                            <a download="chart.png" id="image_download"
+                               onclick="saveAsImg(document.getElementById('chart_img'));">
+                                <button class="btn btn-primary" style="margin-left: 10px">Save Chart As
+                                    PNG
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

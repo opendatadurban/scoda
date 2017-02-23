@@ -47,7 +47,7 @@
             tour.addStep('form', {
                 title: 'Uploading a new dataset...',
                 text: 'Clicking on the downward arrow above will open a form that allows for you to upload a custom dataset to use in the Analysis Constructor. Any data uploaded to this server is stored securely and will not be accessed by any user other than yourself. The system administrator will have access, however, and any strictly private information should not be stored on this system. ',
-                attachTo: '#newFormCardHead bottom',
+                attachTo: '#newFormCardHead right',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -67,8 +67,8 @@
 
             tour.addStep('form2', {
                 title: 'Uploading a new dataset...',
-                text: 'In order for your data to be compatible with other data on this platform it must have a specific structure and a link to a downloadable template is provided that demonstrates this structure.',
-                attachTo: '#newFormCardHead bottom',
+                text: 'In order for your data to be compatible with other data on this platform it must have a specific structure and a downloadable template is provided <a href="{{ url_for('template_download') }}" download="template.csv">here</a> that demonstrates this structure.',
+                attachTo: '#newFormCardHead right',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -89,7 +89,7 @@
             tour.addStep('form3', {
                 title: 'Updating an existing dataset...',
                 text: 'This form allows for you to change the file associated with an existing dataset. Simply select the dataset you would like to update from the dropdown list provided, select the replacement CSV file and then submit.',
-                attachTo: '#editFormCardHead bottom',
+                attachTo: '#editFormCardHead right',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -110,7 +110,7 @@
             tour.addStep('form4', {
                 title: 'Deleting a dataset...',
                 text: 'This form allows for you to delete an existing dataset. Simply select the dataset you would like to delete from the dropdown list provided and then click submit. Deleting a dataset will purge it permanently from the system and no-one will have further access to it.',
-                attachTo: '#deleteFormCardHead bottom',
+                attachTo: '#deleteFormCardHead left',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {

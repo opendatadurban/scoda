@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../../static/vendor/shepherd/css/shepherd-theme-dark.css"/>
 <script type="text/javascript">
 
     $(document).ready(function () {
@@ -96,19 +97,17 @@
                 });
         });
 
-        {% if tour == 1 %}
-
             var tour = new Shepherd.Tour({
                 defaults: {
                     classes: 'shepherd-theme-dark',
-                    scrollTo: true
+                    scrollTo: false
                 }
             });
 
             tour.addStep('welcome', {
-                title: 'Welcome to the Indicator Explorer!',
-                text: 'This short tour will guide you through the necessary steps to select, visualize and download indicator data. You can exit the tour at any stage by clicking on the "Exit" button.',
-                attachTo: '#formCardHead right',
+                title: 'Welcome to the Analysis Constructor!',
+                text: 'On this page you will be able to construct your own dataset from all 102 SCODA indicators, the 2011 National Census, National Treasury data, and your own uploaded datasets. Once generated, your dataset can be downloaded and/or visualized; and will be stored on this platform until such time as you choose to delete it.',
+                attachTo: '#breadCrumb bottom',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -122,10 +121,10 @@
                 ]
             });
 
-            tour.addStep('form', {
-                title: 'The Selection Form',
-                text: 'This form is here to help you find the indicator you are interested in. The various selection blocks help to narrow down your choices from the 102 possible indicators available. When you make a selection in one or more of the fields, it will change which options are available in the others. Finally, each field can be searched through, just start typing what you are looking for!',
-                attachTo: '#selectorCard right',
+            tour.addStep('welcome2', {
+                title: 'Welcome to the Analysis Constructor!',
+                text: 'All forms are currently closed, however, they can each be opened / closed by clicking on the arrow in the right corner of each card.',
+                attachTo: '#breadCrumb bottom',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -143,10 +142,10 @@
                 ]
             });
 
-            tour.addStep('dataset', {
-                title: 'Dataset Selector',
-                text: 'Every indicator is constructed from one or more individual datasets. Selecting a dataset will often return only one indicator.',
-                attachTo: '#dataset_label right',
+            tour.addStep('explore', {
+                title: 'Indicator Selection Form',
+                text: 'This form behaves identically to the one used in the Data Explorer. Selecting entries in the form fields will allow you to narrow down the indicator options. Once an indicator has been selected you will be able to click on the green button (text will change to "Explore This Indicator") and the indicator data will be selected.',
+                attachTo: '#exploreFormCardHead right',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -164,10 +163,10 @@
                 ]
             });
 
-            tour.addStep('region', {
-                title: 'Region Selector',
-                text: 'The region is the city or province for which the data has been collected. Some indicators are also available at the National level.',
-                attachTo: '#region_label right',
+            tour.addStep('wazi', {
+                title: 'Census Data Selector',
+                text: 'This form allows you to select data from the 2011 National Census by means of Code4SAs Wazimap <a href="https://wazimap.co.za" target="_blank">site</a>. You can select multiple cities and then choose which categories / sub-categories you would like to choose from. Once you have made your selection, clicking submit will retrieve the data.',
+                attachTo: '#waziFormCardHead right',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -185,10 +184,10 @@
                 ]
             });
 
-            tour.addStep('region_type', {
-                title: 'Region Type Selector',
-                text: 'The region type allows you to select all city, provincial or national indicators, i.e. it is less specific than the region selector.',
-                attachTo: '#type_label right',
+            tour.addStep('wazi2', {
+                title: 'Census Data Selector',
+                text: 'WARNING: This data is only available for 2011 and its addition to a dataset will reduce that set to 2011 values only!',
+                attachTo: '#waziFormCardHead right',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -206,10 +205,10 @@
                 ]
             });
 
-            tour.addStep('theme', {
-                title: 'Theme Selector',
-                text: 'The South African Cities Network has classified its indicators under several broad themes. Selection of a theme will return all the indicators included in this theme.',
-                attachTo: '#theme_label right',
+            tour.addStep('muni', {
+                title: 'Municipal Money Data Selector',
+                text: 'This form allows you to select data from National Treasury\'s Municipal Money <a href="https://municipalmoney.gov.za/" target="_blank">API</a>. You can select multiple cities as well as multiple years, and then choose which cube, category and data type you would like. Once you have made your selection, clicking submit will retrieve the data.',
+                attachTo: '#muniFormCardHead left',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -227,10 +226,10 @@
                 ]
             });
 
-            tour.addStep('year', {
-                title: 'Year Selector',
-                text: 'This field will reduce the indicator options to those that include data for a specific year.',
-                attachTo: '#year_label right',
+            tour.addStep('muni2', {
+                title: 'Municipal Money Data Selector',
+                text: 'WARNING: These selectors have been chosen to correspond to the nomenclature on the API and we STRONGLY recommend that you familiarize yourself with the data structures and types extensively documented on the Municipal Money <a href="https://municipalmoney.gov.za/" target="_blank">site</a>.',
+                attachTo: '#muniFormCardHead left',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -248,10 +247,10 @@
                 ]
             });
 
-            tour.addStep('indicator', {
-                title: 'Indicator Selector',
-                text: 'Selection of an indicator is the final step of the form. Once one has been selected, the "Explore This Indicator!" button will become click-able and will open up new page elements.',
-                attachTo: '#indicator_label right',
+            tour.addStep('my', {
+                title: 'My Datasets Data Selector',
+                text: 'This form allows you to select data from one of the datasets you have uploaded to your My Datasets <a href="{{ url_for('my_datasets') }}" target="_blank">page</a>.',
+                attachTo: '#myFormCardHead left',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -269,10 +268,10 @@
                 ]
             });
 
-            tour.addStep('reset', {
-                title: 'Reset Form',
-                text: 'As the role of the selection fields is to reduce your number of choices, you may find yourself having gone a step too far. Never fear, simply click on this button and the form will be reset!',
-                attachTo: '#clearForm right',
+            tour.addStep('current', {
+                title: 'Your Selected Data',
+                text: 'Once you have selected data by submitting one of the selector forms, a new table (named Selected Data) will open showing the data that you have selected and you can modify the selection further with a control panel (named Select Your Data) that will open above it.',
+                attachTo: '#currentCardHead top',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -289,10 +288,162 @@
                     }
                 ]
             });
+
+            tour.addStep('current2', {
+                title: 'Your Current Analysis',
+                text: 'This table contains your current analysis dataset. If this is a new analysis you will only see two columns, namely, "City" and "Year". As you add to your analysis new data columns will be added.',
+                attachTo: '#currentCardHead top',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('submit', {
+                title: 'Adding To Your Analysis',
+                text: 'Once your data in the Selected Data table is the way you want it, clicking on the "Add To My Analysis" button will merge this data with that shown in the "Your Current Analysis Data Set". You will also receive one of the three responses once this action ahs been performed, (1) that your addition was successful, (2) that your years / cities selected to do not much exactly to those in your analysis and the number of rows may have changed, (3) that none of the rows match and the merge cannot be performed.',
+                attachTo: '#modifyCardHead top',
+                advanceOn: '.docs-link click',
+                scrollTo: true,
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('undo', {
+                title: 'Undo Recent Changes',
+                text: 'If you would like to undo your most recent addition, simply click on the "Go Back" button and your dataset will be returned to the previous step. WARNING: Only one previous step is saved!',
+                attachTo: '#undoCardHead top',
+                advanceOn: '.docs-link click',
+                scrollTo: true,
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('download', {
+                title: 'Download Your Analysis',
+                text: 'Clicking on the "Download as CSV" button will allow you to save your analysis to your computer. The CSV format can be opened in many different pieces of software, e.g. Excel, SPSS, etc.',
+                attachTo: '#downloadCardHead top',
+                advanceOn: '.docs-link click',
+                scrollTo: true,
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('visualize', {
+                title: 'Plot Your Analysis',
+                text: 'Clicking on the "Plot" button will take you to a page where your analysis can be visualized and the resulting plot downloaded. You will be also be given the option to adjust which cities / years are shown and can download the data behind the individual plots',
+                attachTo: '#visualizeCardHead top',
+                advanceOn: '.docs-link click',
+                scrollTo: true,
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('time', {
+                title: 'Generate A Time Series',
+                text: 'If you would rather download your per-city data with year-values in each column, clicking on the "Time Series" button will take you to a page where you can select one of your data columns and convert it to a series for download.',
+                attachTo: '#timeCardHead top',
+                advanceOn: '.docs-link click',
+                scrollTo: true,
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('delete', {
+                title: 'Delete This Analysis',
+                text: 'If you no longer want this analysis, simply hit the "Delete" button and it\'s gone!',
+                attachTo: '#deleteCardHead top',
+                advanceOn: '.docs-link click',
+                scrollTo: true,
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
 
             tour.start();
-
-        {% endif %}
 
     });
 
@@ -462,13 +613,17 @@
                                     <p class="help-block">
                                         {{ explore_form.indicator_id.errors[0] }}
                                 </div>
-                                <button class="btn btn-success" id="exploreButton" type="submit" disabled>Please select
-                                    an indicator...
-                                </button>
+                                <row>
+                                    <button class="btn btn-success" id="exploreButton" type="submit" disabled style="width:50%">Select
+                                        an indicator...
+                                    </button>
+
+                                    <a href="/constructor/{{ analysis_id }}">
+                                        <button class="btn btn-primary" id="clearForm" type="button" style="width:25%">Reset Form</button>
+                                    </a>
+                                </row>
                             </form>
-                            <a href="/constructor/{{ analysis_id }}">
-                                <button class="btn btn-primary" id="clearForm">Reset Form</button>
-                            </a>
+
                         </div>
                     </div>
                 </div>
@@ -491,7 +646,7 @@
                                         Region:
                                     </div>
                                     <div>
-                                        {{ wazi_form.region(id='wazi_region',placeholder='Select regions for analysis...',class="js-example-basic-multiple js-example-responsive",style="width: 100%") }}
+                                        {{ wazi_form.region(id='wazi_region',placeholder='Select metros for analysis...',class="js-example-basic-multiple js-example-responsive",style="width: 100%") }}
                                     </div>
                                     <p class="help-block">
                                         {{ wazi_form.region.errors[0] }}
@@ -639,7 +794,7 @@
 
                     <div id="dashboard">
                         <div class="row">
-                            <div class="col-sm-2 col-lg-2 col-lg-2">
+                            <div class="col-sm-12 col-lg-12 col-lg-12">
                                 <div class="card" id="selectCard">
                                     <div class="card-header">Select Your Data</div>
                                     <div class="card-block">
@@ -669,7 +824,7 @@
                     <div class="row">
                             <div class="col-sm-12 col-lg-12 col-lg-12">
                                 <div class="card" id="selectCard">
-                                    <div class="card-header">Your Current Analysis Data Set</div>
+                                    <div class="card-header" id="currentCardHead">Your Current Analysis Data Set</div>
                                     <div class="card-block">
                                         <div id="table_master"
                                              style="display: inline-block; margin: 0 auto; width: 100%;"></div>
@@ -686,7 +841,7 @@
                     <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <div class="card" id="selectCard">
-                                    <div class="card-header">Your Current Analysis Data Set</div>
+                                    <div class="card-header" id="currentCardHead">Your Current Analysis Data Set</div>
                                     <div class="card-block">
                                         <div id="table_master"
                                              style="display: inline-block; margin: 0 auto; width: 100%;"></div>
@@ -701,11 +856,11 @@
 
                         <div class="col-sm-12 col-md-6 col-lg-2">
                             <div class="card" id="mapSelect">
-                                <div class="card-header">Modify Analysis</div>
+                                <div class="card-header" id="modifyCardHead">Modify Analysis</div>
                                 <div class="card-block" style="text-align: center">
                                     <div class="row">
                                         <a id="Save">
-                                            <button class="btn btn-primary" style="margin-right: 10px; width: 75%;">Add to your Analysis
+                                            <button class="btn btn-success" style="margin-right: 10px; width: 75%;">Add To My Analysis
                                             </button>
                                         </a>
                                     </div>
@@ -715,10 +870,10 @@
 
                         <div class="col-sm-12 col-md-6 col-lg-2">
                             <div class="card" id="mapSelect">
-                                <div class="card-header">Undo recent add</div>
+                                <div class="card-header" id="undoCardHead">Undo recent add</div>
                                 <div class="card-block" style="text-align: center">
                                     <div class="row">
-                                        <a id="Undo" href="/constructor/{{ analysis_id }}/revert"><button class="btn btn-warning" style="width: 75%">Undo</button></a>
+                                        <a id="Undo" href="/constructor/{{ analysis_id }}/revert"><button class="btn btn-primary" style="width: 75%">Go Back</button></a>
                                     </div>
 
                                 </div>
@@ -727,10 +882,10 @@
 
                         <div class="col-sm-12 col-md-6 col-lg-2">
                             <div class="card" id="mapSelect">
-                                <div class="card-header">Download data</div>
+                                <div class="card-header" id="downloadCardHead">Download data</div>
                                 <div class="card-block" style="text-align: center">
                                     <div class="row">
-                                        <a id="Export2" href="/constructor/{{ analysis_id }}/download"><button class="btn btn-warning" style="width: 75%">Download as CSV</button></a>
+                                        <a id="Export2" href="/constructor/{{ analysis_id }}/download"><button class="btn btn-primary" style="width: 75%">Download as CSV</button></a>
                                     </div>
 
                                 </div>
@@ -739,10 +894,10 @@
 
                         <div class="col-sm-12 col-md-6 col-lg-2">
                             <div class="card" id="mapSelect">
-                                <div class="card-header">Visualize</div>
+                                <div class="card-header" id="visualizeCardHead">Visualize</div>
                                 <div class="card-block" style="text-align: center">
                                     <div class="row">
-                                        <a id="Visualize" href="/constructor/{{ analysis_id }}/plot"><button class="btn btn-warning" style="width: 75%">Plot</button></a>
+                                        <a id="Visualize" href="/constructor/{{ analysis_id }}/plot"><button class="btn btn-primary" style="width: 75%">Plot</button></a>
                                     </div>
 
                                 </div>
@@ -751,10 +906,10 @@
 
                         <div class="col-sm-12 col-md-6 col-lg-2">
                             <div class="card" id="mapSelect">
-                                <div class="card-header">Convert to Time Series</div>
+                                <div class="card-header" id="timeCardHead">Convert to Time Series</div>
                                 <div class="card-block" style="text-align: center">
                                     <div class="row">
-                                        <a id="Timeseries" href="/constructor/{{ analysis_id }}/time-series"><button class="btn btn-warning" style="width: 75%">Time Series</button></a>
+                                        <a id="Timeseries" href="/constructor/{{ analysis_id }}/time-series"><button class="btn btn-primary" style="width: 75%">Time Series</button></a>
                                     </div>
                                 </div>
                             </div>
@@ -762,7 +917,7 @@
 
                         <div class="col-sm-12 col-md-6 col-lg-2">
                             <div class="card" id="mapSelect">
-                                <div class="card-header">Delete This Dataset</div>
+                                <div class="card-header" id="deleteCardHead">Delete This Dataset</div>
                                 <div class="card-block" style="text-align: center">
                                     <div class="row">
                                         <a id="Timeseries" href="/constructor/{{ analysis_id }}/delete"><button class="btn btn-danger" style="width: 75%">Delete</button></a>

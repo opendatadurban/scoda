@@ -1,5 +1,5 @@
 from scoda.app import app
-from flask import render_template, request, flash, redirect, session, jsonify, url_for, make_response, Response
+from flask import render_template, request, flash, redirect, session, jsonify, url_for, send_file, Response
 from flask_security import current_user
 from werkzeug.utils import secure_filename
 from .models.files import NewFileForm, EditFileForm, DeleteFileForm
@@ -108,6 +108,12 @@ def getFromDict(datadict, maplist):
     for k in maplist:
         datadict = datadict[k]
     return datadict
+
+
+@app.route('/return-template/')
+def template_download():
+
+    return send_file('static/template.csv', filename='template.csv', as_attachment=True)
 
 
 @app.route('/my_datasets', methods=['GET', 'POST'])
@@ -256,6 +262,8 @@ def constructor_timeseries(id):
 
             head = ['City'] + map(str, series.columns.values.tolist())
 
+            Height = (len(head)-1) * 80
+
             table1 = [head]
 
             mins = []
@@ -277,8 +285,8 @@ def constructor_timeseries(id):
             for y, r in zip(df['Year'].unique(), series2.values.tolist()):
                 table2.append([str(y)] + r)
 
-            return render_template('constructor/constructor_timeseries.html', min=Min, max=Max, form=form, table1=table1, table2=table2,
-                                   analysis_id=id, series_id=int(form.ds_id.data))
+            return render_template('constructor/constructor_timeseries.html', min=Min, max=Max, form=form, table1=table1
+                                   , table2=table2, analysis_id=id, series_id=int(form.ds_id.data), Height=Height)
 
         else:
             if request.is_xhr:

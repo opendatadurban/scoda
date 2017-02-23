@@ -15,7 +15,7 @@
 <script type="text/javascript">
 
     google.charts.load('visualization', 'current', {
-        packages: ['line', 'table']
+        packages: ['line', 'table', 'corechart']
     });
 
     function drawBar1() {
@@ -26,8 +26,9 @@
 
         var options1 = {
           curveType: 'function',
-          legend: {position:'none'},
-          chartArea: {top: "10%"},
+          legend: {position:'right'},
+          height: '{{ Height }}',
+          hAxis: {gridlines: {count: 4}},
           axes: {
                 y: {
                     all: {
@@ -40,9 +41,30 @@
           }
         };
 
+        var options2 = {
+            height: '800',
+            width: '1024',
+            legend: {position: 'right', maxLines: 10},
+            chartArea: {left: '10%', right: '45%'},
+            hAxis: {gridlines: {count: 4}},
+            axes: {
+                y: {
+                    all: {
+                        range: {
+                            max: {{ max }},
+                            min: {{ min }}
+                        }
+                    }
+                }
+            }
+            };
+
         var chart1 = new google.charts.Line(document.getElementById('chart1'));
 
+        var chart2 = new google.visualization.LineChart(document.getElementById('chart_img'));
+
         chart1.draw(data1, google.charts.Line.convertOptions(options1));
+        chart2.draw(data1, options2);
 
         var table = new google.visualization.Table(document.getElementById('table'));
 
