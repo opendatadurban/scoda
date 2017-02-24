@@ -184,6 +184,27 @@
                 ]
             });
 
+            tour.addStep('explore3', {
+                title: 'Indicator Selection Form',
+                text: 'WARNING: While it is possible to construct analyses using Provincial data from the SCODA indicator datasets, all other data selectors on this page are for City data only. Combining Provincial and City data is not possible on this platform, however, you can download the necessary datasets in CSV format and then combine them yourself.',
+                attachTo: '#exploreFormCardHead right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
             tour.addStep('wazi', {
                 title: 'Census Data Selector',
                 text: 'This form allows you to select data from the 2011 National Census by means of Code4SAs Wazimap <a href="https://wazimap.co.za" target="_blank">site</a>. You can select multiple cities and then choose which categories / sub-categories you would like to choose from. Once you have made your selection, clicking submit will retrieve the data.',

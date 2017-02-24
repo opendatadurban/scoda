@@ -6,6 +6,7 @@ from .models.files import NewFileForm, EditFileForm, DeleteFileForm
 from .models.wazi import WaziForm, MuniForm, MyDataForm, PivotForm
 from .models.datasets import ExploreForm
 from .models.user import UserSet, UserAnalysis, NewAnalysisForm, EmailForm
+from itertools import izip_longest
 from .models import db
 from .models import *
 from io import StringIO
@@ -110,6 +111,13 @@ def getFromDict(datadict, maplist):
     return datadict
 
 
+def grouper(iterable, n, fillvalue=None):
+    "Collect data into fixed-length chunks or blocks"
+    # grouper('ABCDEFG', 3, 'x') --> ABC DEF Gxx"
+    args = [iter(iterable)] * n
+    return izip_longest(*args, fillvalue=fillvalue)
+
+
 @app.route('/return-template/')
 def template_download():
 
@@ -118,6 +126,14 @@ def template_download():
 
 @app.route('/my_datasets', methods=['GET', 'POST'])
 def my_datasets():
+    query = db.session.query(UserAnalysis.id, UserAnalysis.ds_name, UserAnalysis.description) \
+        .filter(UserAnalysis.user_id == current_user.id).order_by(UserAnalysis.id.desc())
+
+    analyses = []
+
+    for i in grouper(query, 4):
+        analyses.append(i)
+
     new_form = NewFileForm()
     edit_form = EditFileForm()
     delete_form = DeleteFileForm()
@@ -220,7 +236,7 @@ def my_datasets():
                 flash('Please correct the problems below and try again.', 'warning')
 
     return render_template('my_datasets/my_datasets.html', new_form=new_form, edit_form=edit_form,
-                           delete_form=delete_form, is_submitted=is_submitted)
+                           delete_form=delete_form, is_submitted=is_submitted, analyses=analyses)
 
 
 @app.route('/constructor/<id>/time-series/<ds_id>/download', methods=['GET'])
@@ -244,6 +260,14 @@ def series_download(id, ds_id):
 
 @app.route('/constructor/<id>/time-series', methods=['GET', 'POST'])
 def constructor_timeseries(id):
+    query = db.session.query(UserAnalysis.id, UserAnalysis.ds_name, UserAnalysis.description) \
+        .filter(UserAnalysis.user_id == current_user.id).order_by(UserAnalysis.id.desc())
+
+    analyses = []
+
+    for i in grouper(query, 4):
+        analyses.append(i)
+
     analysis = UserAnalysis.query.get_or_404(id)
     form = PivotForm()
 
@@ -286,7 +310,8 @@ def constructor_timeseries(id):
                 table2.append([str(y)] + r)
 
             return render_template('constructor/constructor_timeseries.html', min=Min, max=Max, form=form, table1=table1
-                                   , table2=table2, analysis_id=id, series_id=int(form.ds_id.data), Height=Height)
+                                   , table2=table2, analysis_id=id, series_id=int(form.ds_id.data), Height=Height,
+                                   analyses=analyses)
 
         else:
             if request.is_xhr:
@@ -294,11 +319,18 @@ def constructor_timeseries(id):
             else:
                 flash('Please correct the problems below and try again.', 'warning')
 
-    return render_template('constructor/constructor_timeseries.html', form=form, analysis_id=id)
+    return render_template('constructor/constructor_timeseries.html', form=form, analysis_id=id, analyses=analyses)
 
 
 @app.route('/constructor/new_analysis', methods=['GET', 'POST'])
 def constructor_new():
+    query = db.session.query(UserAnalysis.id, UserAnalysis.ds_name, UserAnalysis.description) \
+        .filter(UserAnalysis.user_id == current_user.id).order_by(UserAnalysis.id.desc())
+
+    analyses = []
+
+    for i in grouper(query, 4):
+        analyses.append(i)
 
     form = NewAnalysisForm()
 
@@ -313,7 +345,7 @@ def constructor_new():
 
         return redirect('/constructor/%s' % analysis_id)
 
-    return render_template('constructor/constructor_new.html', form=form)
+    return render_template('constructor/constructor_new.html', form=form, analyses=analyses)
 
 
 @app.route('/constructor/<id>/download', methods=['GET'])
@@ -401,6 +433,14 @@ def constructor_revert(id):
 
 @app.route('/constructor/<id>', methods=['GET', 'POST'])
 def constructor(id):
+    query = db.session.query(UserAnalysis.id, UserAnalysis.ds_name, UserAnalysis.description) \
+        .filter(UserAnalysis.user_id == current_user.id).order_by(UserAnalysis.id.desc())
+
+    analyses = []
+
+    for i in grouper(query, 4):
+        analyses.append(i)
+
     if 'warning' in session.keys():
         if session['warning'] == 3:
             pass
@@ -516,7 +556,7 @@ def constructor(id):
                                        my_form=my_form, cities=cities2, years=years, explore_form=explore_form,
                                        table=table, muni_form_open=muni_form_open,
                                        plot=plot, wazi_form_open=wazi_form_open, explore_form_open=explore_form_open,
-                                       table_master=table_master, analysis_id=id)
+                                       table_master=table_master, analysis_id=id, analyses=analyses)
 
             if wazi_form.wazi_submitted.data:
                 wazi_form_open = 1
@@ -573,7 +613,7 @@ def constructor(id):
                                        explore_form=explore_form, my_form=my_form, table=table, plot=plot,
                                        cities=cities, years=years, wazi_form_open=wazi_form_open,
                                        explore_form_open=explore_form_open, muni_form_open=muni_form_open,
-                                       table_master=table_master, analysis_id=id)
+                                       table_master=table_master, analysis_id=id, analyses=analyses)
 
             if muni_form.muni_submitted.data:
                 muni_form_open = 1
@@ -652,7 +692,7 @@ def constructor(id):
                                        explore_form=explore_form, my_form=my_form, table=table, plot=plot,
                                        cities=cities, years=years, muni_form_open=muni_form_open,
                                        wazi_form_open=wazi_form_open, explore_form_open=explore_form_open,
-                                       table_master=table_master, analysis_id=id)
+                                       table_master=table_master, analysis_id=id, analyses=analyses)
 
             if my_form.my_submitted.data:
                 my_form_open = 1
@@ -697,7 +737,8 @@ def constructor(id):
                                        wazi_form=wazi_form, explore_form=explore_form, table=table, plot=plot,
                                        cities=cities2, years=years, muni_form_open=muni_form_open,
                                        wazi_form_open=wazi_form_open, explore_form_open=explore_form_open,
-                                       my_form_open=my_form_open, table_master=table_master, analysis_id=id)
+                                       my_form_open=my_form_open, table_master=table_master, analysis_id=id,
+                                       analyses=analyses)
 
         else:
             if request.is_xhr:
@@ -724,11 +765,18 @@ def constructor(id):
 
     return render_template('constructor/constructor.html', explore_form=explore_form, wazi_form=wazi_form, muni_form=muni_form,
                            my_form=my_form, table_master=table_master, analysis_id=id,
-                           plot=plot, warning=warning)
+                           plot=plot, warning=warning, analyses=analyses)
 
 
 @app.route('/constructor/<id>/plot', methods=['GET'])
 def constructor_vis(id):
+    query = db.session.query(UserAnalysis.id, UserAnalysis.ds_name, UserAnalysis.description) \
+        .filter(UserAnalysis.user_id == current_user.id).order_by(UserAnalysis.id.desc())
+
+    analyses = []
+
+    for i in grouper(query, 4):
+        analyses.append(i)
 
     analysis = UserAnalysis.query.get_or_404(id)
 
@@ -771,7 +819,7 @@ def constructor_vis(id):
 
     return render_template('constructor/constructor_vis.html', table=table_master, analysis_id=id,
                            cities=cities, colours=colours, series=series, min=minVal, max=maxVal,
-                           view=view, year=years)
+                           view=view, year=years, analyses=analyses)
 
 
 @app.route('/_parse_wazi', methods=['GET'])
@@ -846,6 +894,13 @@ def parse_analysis():
 
 @app.route('/contact_us', methods=['GET', 'POST'])
 def contact():
+    query = db.session.query(UserAnalysis.id, UserAnalysis.ds_name, UserAnalysis.description) \
+        .filter(UserAnalysis.user_id == current_user.id).order_by(UserAnalysis.id.desc())
+
+    analyses = []
+
+    for i in grouper(query, 4):
+        analyses.append(i)
 
     form = EmailForm()
 
@@ -860,4 +915,4 @@ def contact():
         return redirect(url_for('city_dashboard'))
 
     else:
-        return render_template('constructor/constructor_email.html', form=form)
+        return render_template('constructor/constructor_email.html', form=form, analyses=analyses)

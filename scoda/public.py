@@ -2,8 +2,11 @@
 
 from scoda.app import app
 from flask import request, url_for, redirect, flash, make_response, session, render_template, jsonify, Response
+from flask_security import current_user
+from itertools import izip_longest
 from .models import db
 from .models import *
+from .models.user import UserAnalysis
 from .models.datasets import ExploreForm
 from .models.maps import MapForm
 from pandas import read_sql_query
@@ -12,8 +15,24 @@ import geojson, json
 import pandas as pd
 
 
+def grouper(iterable, n, fillvalue=None):
+    "Collect data into fixed-length chunks or blocks"
+    # grouper('ABCDEFG', 3, 'x') --> ABC DEF Gxx"
+    args = [iter(iterable)] * n
+    return izip_longest(*args, fillvalue=fillvalue)
+
+
 @app.route('/explore', methods=['GET', 'POST'])
 def explore():
+    analyses = []
+
+    if current_user.is_authenticated:
+        query = db.session.query(UserAnalysis.id, UserAnalysis.ds_name, UserAnalysis.description) \
+            .filter(UserAnalysis.user_id == current_user.id).order_by(UserAnalysis.id.desc())
+
+        for i in grouper(query, 4):
+            analyses.append(i)
+
     session['explore'] = []
     form = ExploreForm()
     status = 200
@@ -84,7 +103,7 @@ def explore():
             return render_template('explore/explore.html', form=form, plot=plot, table=table, colours=colours,
                                    year=str(max(years)), series=series, view=view, plot_type=plot_type, min=minVal,
                                    max=maxVal, cities=cities, options_list=options_list, years_list=years_list,
-                                   tour=tour, indicator=indicator)
+                                   tour=tour, indicator=indicator, analyses=analyses)
         else:
             if request.is_xhr:
                 status = 412
@@ -95,7 +114,7 @@ def explore():
         return render_template('explore/explore.html', form=form, tour=tour)
 
     if not request.is_xhr:
-        resp = make_response(render_template('explore/explore.html', form=form, plot=plot, tour=tour))
+        resp = make_response(render_template('explore/explore.html', form=form, plot=plot, tour=tour, analyses=analyses))
 
     else:
         resp = ''
@@ -135,6 +154,15 @@ def demographics_download(region_id, city_ward_code):
 
 @app.route('/demographics', methods=['GET', 'POST'])
 def demographics():
+    analyses = []
+
+    if current_user.is_authenticated:
+        query = db.session.query(UserAnalysis.id, UserAnalysis.ds_name, UserAnalysis.description) \
+            .filter(UserAnalysis.user_id == current_user.id).order_by(UserAnalysis.id.desc())
+
+        for i in grouper(query, 4):
+            analyses.append(i)
+
     session['demo'] = []
 
     if 'maps' not in session.keys():
@@ -351,7 +379,8 @@ def demographics():
             return render_template('demographics/demographics.html', form1=form1, form2=form2, geometries1=geometries1,
                                    geometries2=geometries2, table1=table1, table2=table2, tour=tour, max1=m1, max2=m2,
                                    region1=form1.region_id.data, region2=form2.region_id.data,
-                                   ward1=form1.city_ward_code.data, ward2=form2.city_ward_code.data)
+                                   ward1=form1.city_ward_code.data, ward2=form2.city_ward_code.data,
+                                   analyses=analyses)
 
         else:
             if request.is_xhr:
@@ -407,7 +436,7 @@ def demographics():
         return render_template('demographics/demographics.html',  form1=form1, form2=form2, geometries1=geometries1,
                                geometries2=geometries2, tour=tour, table1=table1, table2=table1, max1=m, max2=m,
                                region1=1, region2=1,
-                               ward1=None, ward2=None
+                               ward1=None, ward2=None, analyses=analyses
                                )
 
     if not request.is_xhr:
@@ -449,7 +478,7 @@ def demographics():
         resp = make_response(render_template('demographics/demographics.html',  form1=form1, form2=form2,
                                              geometries1=geometries1, geometries2=geometries2, table1=table1,
                                              table2=table1, tour=tour, max1=m, max2=m, region1=1, region2=1,
-                               ward1=None, ward2=None))
+                               ward1=None, ward2=None, analyses=analyses))
 
     else:
         resp = ''

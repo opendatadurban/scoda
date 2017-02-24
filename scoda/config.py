@@ -6,10 +6,6 @@ DEBUG = False
 TESTING = False
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 CSRF_ENABLED = True
-SECRET_KEY = 'uhrmaHghurds3craTC0de!'
-
-MAIL_SERVER = "swampfire.aserv.co.za"
-
 MAIL_PORT = 465
 MAIL_USE_TLS = False
 MAIL_USE_SSL = True
