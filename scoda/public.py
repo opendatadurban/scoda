@@ -30,6 +30,8 @@ def explore():
         query = db.session.query(UserAnalysis.id, UserAnalysis.ds_name, UserAnalysis.description) \
             .filter(UserAnalysis.user_id == current_user.id).order_by(UserAnalysis.id.desc())
 
+        analyses = []
+
         for i in grouper(query, 4):
             analyses.append(i)
 
@@ -159,6 +161,8 @@ def demographics():
     if current_user.is_authenticated:
         query = db.session.query(UserAnalysis.id, UserAnalysis.ds_name, UserAnalysis.description) \
             .filter(UserAnalysis.user_id == current_user.id).order_by(UserAnalysis.id.desc())
+
+        analyses = []
 
         for i in grouper(query, 4):
             analyses.append(i)
