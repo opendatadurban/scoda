@@ -526,7 +526,7 @@ def constructor(id):
 
                 if plot_type == 1:
                     df = df.iloc[:, (0, 1, 3)]
-                    ds_name = [['City', 'Year', datasets[0]]]
+                    ds_name = [['City', 'Year', str(datasets[0])]]
                     schema = [('City', 'string'), ('Year', 'string'), ('%s' % datasets[0], 'number')]
 
                     data_table = gviz_api.DataTable(schema)
