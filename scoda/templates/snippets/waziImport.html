@@ -163,6 +163,27 @@
                 ]
             });
 
+            tour.addStep('explore2', {
+                title: 'Indicator Selection Form',
+                text: 'This form behaves identically to the one used in the Data Explorer. Selecting entries in the form fields will allow you to narrow down the indicator options. Once an indicator has been selected you will be able to click on the green button (text will change to "Explore This Indicator") and the indicator data will be selected.',
+                attachTo: '#exploreFormCardHead right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
             tour.addStep('wazi', {
                 title: 'Census Data Selector',
                 text: 'This form allows you to select data from the 2011 National Census by means of Code4SAs Wazimap <a href="https://wazimap.co.za" target="_blank">site</a>. You can select multiple cities and then choose which categories / sub-categories you would like to choose from. Once you have made your selection, clicking submit will retrieve the data.',

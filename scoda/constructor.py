@@ -468,7 +468,7 @@ def constructor(id):
                 ind = form.indicator_id.data
                 query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value). \
                     filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
-                    filter(DataPoint.region_id == Region.id)
+                    filter(DataPoint.region_id == Region.id).filter(DataPoint.region_id == Region.id)
 
                 df = read_sql_query(query.statement, query.session.bind)
                 table = []

@@ -11,7 +11,7 @@ def seed_db(db):
 
         data = geojson.load(open('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/metro_salc_geo.json'))
 
-        data2 = genfromtxt('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/exporteth.csv', delimiter=',',
+        data2 = genfromtxt('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/exporteth_old_2.csv', delimiter=',',
                            skip_header=1)
 
         parser = {}

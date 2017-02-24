@@ -263,7 +263,7 @@ def demographics():
                     if year2 == 0:
                         flow = 0
                     else:
-                        flow = round(g[1][year1] - g[1][year2 - 1])
+                        flow = round(g[1][year2] - g[1][year2 - 1])
 
                     geometries2['features'].append({"type": "Feature", "properties": {"density": round(g[1][year2]),
                                                                                       "flow": flow,
@@ -303,7 +303,7 @@ def demographics():
                     if year2 == 0:
                         flow = 0
                     else:
-                        flow = round(g[1][year1] - g[1][year2 - 1])
+                        flow = round(g[1][year2] - g[1][year2 - 1])
 
                     geometries2['features'].append(
                         {"type": "Feature", "properties": {"density": round(g[1][year2]),
