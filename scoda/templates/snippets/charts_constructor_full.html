@@ -86,7 +86,7 @@
                 {% if plot_type == 2 %}
                     data: JSON.stringify({info:csv, head: {{ table[0]|safe }} }),
                 {% else %}
-                    data: JSON.stringify({info:csv, head: {{ ds_name|safe }} }),
+                    data: JSON.stringify({info:csv, head: ['City', 'Year', '{{ ds_name|safe }}'] }),
                 {% endif %}
                 contentType: 'application/json;charset=UTF-8',
                 success: function(data) {
