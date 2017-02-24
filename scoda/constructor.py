@@ -526,7 +526,7 @@ def constructor(id):
 
                 if plot_type == 1:
                     df = df.iloc[:, (0, 1, 3)]
-
+                    ds_name = datasets[0]
                     schema = [('City', 'string'), ('Year', 'string'), ('%s' % datasets[0], 'number')]
 
                     data_table = gviz_api.DataTable(schema)
@@ -534,6 +534,7 @@ def constructor(id):
                     table = data_table.ToJSon(columns_order=('City', '%s' % datasets[0], 'Year'))
 
                 else:
+                    ds_name = 'derp'
                     for c in cities:
                         for y in years:
                             row = [str(c), str(y)]
@@ -554,7 +555,7 @@ def constructor(id):
 
                 return render_template('constructor/constructor.html', muni_form=muni_form, wazi_form=wazi_form,
                                        my_form=my_form, cities=cities2, years=years, explore_form=explore_form,
-                                       table=table, muni_form_open=muni_form_open,
+                                       table=table, muni_form_open=muni_form_open, ds_name=ds_name, plot_type=plot_type,
                                        plot=plot, wazi_form_open=wazi_form_open, explore_form_open=explore_form_open,
                                        table_master=table_master, analysis_id=id, analyses=analyses)
 
