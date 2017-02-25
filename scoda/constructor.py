@@ -515,7 +515,7 @@ def constructor(id):
 
                 years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
                 plot = 1
-                plot_type = 1
+                plot_type = 2
                 if (len(datasets) > 1) or (len(years) == 1):
                     plot_type = 2
 
