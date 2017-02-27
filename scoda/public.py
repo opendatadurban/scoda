@@ -517,7 +517,7 @@ def parse_data():
 
     response = {}
 
-    dataset_list = [(i, str(DataSet.query.filter_by(id=i).first().ds_name)) for i in datasets]
+    dataset_list = [(i[0], str(DataSet.query.filter_by(id=i).first().ds_name)) for i in datasets]
     if 'dataset_id' not in session['explore']:
         dataset_list.insert(0, ('', 'Empty'))
     else:
@@ -535,7 +535,7 @@ def parse_data():
         response['ind_ready'] = 1
 
     response['indicator'] = indicator_list
-    region_list = [(i, str(Region.query.filter_by(id=i).first().re_name)) for i in regions]
+    region_list = [(i[0], str(Region.query.filter_by(id=i).first().re_name)) for i in regions]
 
     if 'region_id' not in session['explore']:
         region_list.insert(0, ('', 'Empty'))
@@ -544,7 +544,7 @@ def parse_data():
 
     response['region'] = region_list
 
-    type_list = [(i, str(Type.query.filter_by(id=i).first().ty_name)) for i in types]
+    type_list = [(i[0], str(Type.query.filter_by(id=i).first().ty_name)) for i in types]
 
     if 'type_id' not in session['explore']:
         type_list.insert(0, ('', 'Empty'))
@@ -553,7 +553,7 @@ def parse_data():
 
     response['type'] = type_list
 
-    theme_list = [(i, str(Theme.query.filter_by(id=i).first().th_name)) for i in themes]
+    theme_list = [(i[0], str(Theme.query.filter_by(id=i).first().th_name)) for i in themes]
 
     if 'theme_id' not in session['explore']:
         theme_list.insert(0, ('', 'Empty'))
