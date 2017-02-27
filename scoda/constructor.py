@@ -21,7 +21,6 @@ import urllib2
 import urllib
 import json
 import requests
-import pprint
 import os
 import random
 import string
@@ -251,8 +250,6 @@ def series_download(id, ds_id):
 
     dataset = s['head'][int(ds_id)]
     series = df.pivot(index='City', columns='Year', values=dataset)
-
-    print series
 
     return Response(series.to_csv(), mimetype="text/csv",
                     headers={"Content-disposition": "attachment; filename=series.csv"})
@@ -534,7 +531,6 @@ def constructor(id):
                     table = data_table.ToJSon(columns_order=('City', '%s' % datasets[0], 'Year'))
 
                 else:
-                    ds_name = ['derp']
                     for c in cities:
                         for y in years:
                             row = [str(c), str(y)]
@@ -608,8 +604,6 @@ def constructor(id):
 
                 plot = 1
 
-                print cities
-
                 return render_template('constructor/constructor.html', wazi_form=wazi_form, muni_form=muni_form,
                                        explore_form=explore_form, my_form=my_form, table=table, plot=plot,
                                        cities=cities, years=years, wazi_form_open=wazi_form_open,
@@ -619,8 +613,6 @@ def constructor(id):
             if muni_form.muni_submitted.data:
                 muni_form_open = 1
                 muni_form.muni_submitted.data = 0
-
-                print form.region.data
 
                 for yind, yr in enumerate(form.year.data):
 
