@@ -453,6 +453,19 @@
 
         chart2.draw(data2, google.charts.Line.convertOptions(options2));
 
+        function resize () {
+               chart1.draw(data1, google.charts.Line.convertOptions(options1));
+               chart2.draw(data2, google.charts.Line.convertOptions(options2));
+           }
+
+           if (window.addEventListener) {
+               window.addEventListener('resize', resize);
+           }
+
+           else {
+               window.attachEvent('onresize', resize);
+           }
+
         }
 
     google.setOnLoadCallback(drawBar1);
@@ -481,7 +494,7 @@
             </div>
 
             <div class="row">
-                <div class="col-sm-2 col-lg-2 col-lg-2">
+                <div class="col-sm-12 col-md-12 col-lg-3">
                     <div class="card">
                         <div class="card-header" id="formCardHead1">Area Selector</div>
                         <div class="card-block" id="formCard">
@@ -515,7 +528,7 @@
                                         Year:
                                     </div>
                                     <div>
-                                        {{ form1.year(id='year1',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                        {{ form1.year(id='year1', class="js-example-basic-single js-example-responsive",style="width: 100%") }}
                                     </div>
                                     <p class="help-block">
                                         {{ form1.year.errors[0] }}
@@ -532,7 +545,7 @@
 
                 {# Plotting Card #}
 
-                <div class="col-sm-6 col-lg-6 col-lg-6">
+                <div class="col-sm-12 col-md-6 col-lg-5">
                     <div class="card" id="geoCard1">
                         <div class="card-header" id="geoCardHead1">
                             Geographic Representation
@@ -545,7 +558,7 @@
 
                 {# Chart Card #}
 
-                <div class="col-sm-4 col-lg-4 col-lg-4">
+                <div class="col-sm-12 col-md-6 col-lg-4">
                     <div class="card" id="chartCard1">
                         <div class="card-header">
                             Time Series
@@ -559,7 +572,7 @@
             </div>
 
             <div class="row">
-                <div class="col-sm-2 col-lg-2 col-lg-2">
+                <div class="col-sm-12 col-md-12 col-lg-3">
                     <div class="card">
                         <div class="card-header" id="formCardHead2">Area Selector</div>
                         <div class="card-block" id="formCard">
@@ -609,7 +622,7 @@
 
                 {# Plotting Card #}
 
-                <div class="col-sm-6 col-lg-6 col-lg-6">
+                <div class="col-sm12 col-md-6 col-lg-5">
                     <div class="card" id="geoCard2">
                         <div class="card-header" id="geoCardHead2">
                             Geographic Representation
@@ -622,7 +635,7 @@
 
                 {# Chart Card #}
 
-                <div class="col-sm-4 col-lg-4 col-lg-4">
+                <div class="col-sm-12 col-md-6 col-lg-4">
                     <div class="card" id="chartCard2">
                         <div class="card-header">
                             Time Series
@@ -775,6 +788,32 @@
                         </div>
                         <div class="card-block collapse" style="text-align: justify" id="p9FormCard">
                             {% include 'paragraphs/demo_paragraph9.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-header" id="jhbNightFormCardHead">Johannesburg Nightlights
+                        </div>
+                        <div class="card-block" style="text-align: justify" id="jhbNightFormCard">
+                            <p>You can explore the Johannesburg Nightlights data by clicking on the button below.</p>
+                            <a href="{{ url_for('demographics_night_jhb') }}"><button class="btn btn-primary btn-responsive" type="button" id="submitButton1">JHB</button></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-header" id="ethNightFormCardHead">EThekwini Nightlights
+                        </div>
+                        <div class="card-block" style="text-align: justify" id="jhbNightFormCard">
+                            <p>You can explore the EThekwini Nightlights data by clicking on the button below.</p>
+                            <div class="row" style="text-align: center;">
+                            <a href="{{ url_for('demographics_night_eth') }}"><button class="btn btn-primary btn-responsive" type="button" id="submitButton2">ETH</button></a>
+                            </div>
                         </div>
                     </div>
                 </div>

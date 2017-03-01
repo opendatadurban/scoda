@@ -15,9 +15,10 @@ from sqlalchemy import (
 from sqlalchemy.orm import relationship
 from flask_security import UserMixin, RoleMixin, Security, SQLAlchemyUserDatastore
 from flask_security import LoginForm as Form
+from flask_security import RegisterForm
 from wtforms.fields.html5 import EmailField
-from wtforms import StringField, PasswordField, validators
-from wtforms.validators import DataRequired, Length, InputRequired
+from wtforms import StringField, PasswordField, validators, TextField
+from wtforms.validators import DataRequired, Length, InputRequired, Required
 from wtforms.widgets import TextArea
 
 
@@ -28,12 +29,15 @@ class User(db.Model, UserMixin):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True)
-    email = Column(String(50), index=True, nullable=False, unique=True)
-    password = Column(String(100), default='')
+    email = Column(String(50), nullable=False, unique=True)
+    password = Column(String(100))
     disabled = Column(Boolean, default=False)
     admin = Column(Boolean, default=False)
 
-    created_at = Column(DateTime(timezone=True), index=True, unique=False, nullable=False, server_default=func.now())
+    first_name = Column(String(50))
+    last_name = Column(String(50))
+
+    created_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.current_timestamp())
 
     # associations
@@ -93,6 +97,11 @@ class LoginForm(Form):
     password = PasswordField('Password', validators=[InputRequired()])
 
 
+class ExtendedRegisterForm(RegisterForm):
+    first_name = StringField('First Name', validators=[Required()])
+    last_name = StringField('Last Name', validators=[Required()])
+
+
 class UserSet(db.Model):
     """
     A user's uploaded datasets
@@ -105,6 +114,7 @@ class UserSet(db.Model):
     ds_title = Column(String(80), index=False, nullable=False, unique=False)
     pk_id = Column(String(80), index=False, nullable=False, unique=False)
     file_id = Column(String(80), index=True, nullable=False, unique=True)
+    description = Column(String(300), nullable=True)
 
     def __repr__(self):
         return "<Dataset='%s'>" % (self.ds_name)
@@ -164,5 +174,5 @@ class EmailForm(Form):
 
 # user authentication
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-security = Security(app, user_datastore)
+security = Security(app, user_datastore, register_form=ExtendedRegisterForm)
 app.extensions['security'].render_template = render_template

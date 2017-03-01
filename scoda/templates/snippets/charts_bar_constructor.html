@@ -85,7 +85,7 @@
             'containerId': 'chart',
             'options': {
                 stacked: true,
-                legend: {position: 'right'},
+                legend: {position: {% if request.MOBILE %}'none'{% else %}'right'{% endif %}},
                 bars: 'vertical',
                 vAxis: {minValue: 0},
                 hAxis: {slantedText: true},
@@ -118,6 +118,10 @@
             });
 
         });
+
+        function resize () {
+               dashboard.draw(data);
+           }
 
         if (window.addEventListener) {
             window.addEventListener('resize', resize);

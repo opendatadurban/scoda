@@ -1,7 +1,7 @@
 from ..app import db
 from ..forms import Form
 from wtforms import FileField, validators, SelectField, IntegerField, StringField
-from wtforms.widgets import HiddenInput
+from wtforms.widgets import HiddenInput, TextArea
 from user import UserSet
 from flask_security import current_user
 
@@ -24,6 +24,7 @@ class NewFileForm(Form):
 
     ds_name = StringField('Filename', [validators.DataRequired()])
     fileName = FileField('File')
+    description = StringField('Filename', [validators.DataRequired()], widget=TextArea())
     new_submitted = IntegerField('Submitted', default=0, widget=HiddenInput())
 
     def __init__(self, *args, **kwargs):

@@ -1,0 +1,659 @@
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css"/>
+<link rel="stylesheet" href="../../static/vendor/shepherd/css/shepherd-theme-dark.css"/>
+<script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+
+<script type="text/javascript">
+
+    var csrf_token = "{{ csrf_token() }}";
+
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        $('.js-example-basic-single').select2();
+        $('.js-example-basic-multiple').select2();
+
+        {% if tour %}
+
+        var tour = new Shepherd.Tour({
+                defaults: {
+                    classes: 'shepherd-theme-dark',
+                    scrollTo: true
+                }
+            });
+
+            tour.addStep('welcome', {
+                title: 'Welcome to the Demographics Explorer!',
+                text: 'This short tour will guide you through the necessary steps to explore the demographic modelling data contained in this almanac. You can exit the tour at any stage by clicking on the "Exit" button.',
+                attachTo: '#breadCrumb bottom',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('Intro', {
+                title: 'Details of the Model...',
+                text: 'An extensive description of the demographics model used on this platform, along with details of its derivation and implementation are provided in the sections below. Clicking on the arrows located in the right corners of each section will drop down the information.',
+                attachTo: '#introFormCardHead top',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('form', {
+                title: 'The Selection Form',
+                text: 'This form is here to help you find the region you are interested in exploring. The selection fields will allow you to find the city, ward and year that you would like to explore. ',
+                attachTo: '#formCardHead1 right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('city', {
+                title: 'City Selector',
+                text: 'This field allows you to select the the city you would like to look at.',
+                attachTo: '#city_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('ward', {
+                title: 'Ward Selector',
+                text: 'This field allows you to select the ward that you would like to look at. Initially, and when "View All" is selected, the aggregated ward data will be shown. Selecting a particular ward and clicking "Submit" will zoom to that Ward and will show the small enumerator areas along with their data values.',
+                attachTo: '#ward_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('year', {
+                title: 'Year Selector',
+                text: 'This field allows you to choose which year\'s data values you would like to explore.',
+                attachTo: '#year_label right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('submit', {
+                title: 'Submit Button',
+                text: 'Once you have made your selections, click "Submit" to view the data!',
+                attachTo: '#submitButton1 right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+             tour.addStep('download', {
+                title: 'Download Button',
+                text: 'Clicking on this button will download all total population data for the selected region (city or ward) from 1996 to 2030.',
+                attachTo: '#downloadButton1 right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('plot', {
+                title: 'Map Area',
+                text: 'This map shows projected migration model values at the ward and small enumerator area levels for each metro. Clicking on an area will zoom to it, though clicking on a ward will NOT reveal its underlying enumerators.',
+                attachTo: '#geoCardHead1 left',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('plot2', {
+                title: 'Map Area',
+                text: 'Map polygons are coloured according to the total calculated flow of people into or out of the area over the course of the preceeding year. Consequently, 1996 values will register 0 net flow as there is no prior data to compare to. The calculated total number of people in an area is also shown within the tooltip that appears when you hover over an area.',
+                attachTo: '#geoCardHead1 left',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('time', {
+                title: 'Time-series',
+                text: 'This plot gives the values for the selected region (city or ward) from 1996 to 2030.',
+                attachTo: '#chartCard1 left',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('time2', {
+                title: 'Comparative Plotting',
+                text: 'A second demographics explorer row is provided to allow for comparisons between regions to be made.',
+                attachTo: '#geoCardHead2 top',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.start();
+
+        {% endif %}
+    });
+
+</script>
+
+<style>#map1 {
+    width: 100%;
+    height: 300px;
+}
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
+.legend {
+    text-align: left;
+    line-height: 18px;
+    color: #555;
+}
+
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+
+#map2 {
+    width: 100%;
+    height: 600px;
+}
+
+#map1 {
+    width: 100%;
+    height: 600px;
+}
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
+.legend {
+    text-align: left;
+    line-height: 18px;
+    color: #555;
+}
+
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+</style>
+
+<div class="container-fluid">
+    <div id="ui-view" style="opacity: 1;">
+        <div class="animated fadeIn">
+
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-3">
+                    <div class="card">
+                        <div class="card-header" id="formCardHead1">Area Selector</div>
+                        <div class="card-block" id="formCard">
+                            <form action="{{ url_for('demographics_night_jhb') }}" id="form" class="form-horizontal" method="POST">
+                                {{ form.csrf_token }}
+                                {{ form.hidden_tag() }}
+                                <div class="form-group {% if form.region_id.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="city_label">
+                                        City Selection:
+                                    </div>
+                                    <div>
+                                        {{ form.region_id(id='region_id1',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ form.region_id.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if form.city_ward_code.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="ward_label">
+                                        Ward Selection:
+                                    </div>
+                                    <div>
+                                        {{ form.city_ward_code(id='ward_id1',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ form.city_ward_code.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if form.grid_bias.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="bias_label">
+                                        Bias:
+                                    </div>
+                                    <div>
+                                        {{ form.grid_bias(id='bias',class="form-control",style="width: 100%;border: 0", min=0.5, max=2, step=0.1, onchange="showValue(this.value)") }}
+                                    </div>
+
+                                    <span id="range" >{{ bias_val|safe }}</span>
+                                    <script type="text/javascript">
+
+                                        function showValue(newValue)
+                                                {
+                                                    document.getElementById("range").innerHTML=newValue;
+                                                }
+                                    </script>
+
+                                    <p class="help-block">
+                                        {{ form.grid_bias.errors[0] }}
+                                </div>
+
+                                <div class="form-group {% if form.year.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="year_label">
+                                        Year:
+                                    </div>
+                                    <div>
+                                        {{ form.year(id='year1',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ form.year.errors[0] }}
+                                </div>
+
+                                <div class="row" style="text-align: center">
+                                    <button class="btn btn-success btn-responsive" type="submit" id="submitButton1">Submit</button>
+                                    <a href="{{ url_for('demographics') }}"><button class="btn btn-primary btn-responsive" type="button" id="submitButton1">Back</button></a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-9">
+                    <div class="card" id="geoCard1">
+                        <div class="card-header" id="geoCardHead1">
+                            Geographic Representation
+                        </div>
+                        <div class="card-block" style="padding: 0; height: 300px;">
+                            <div id='map1'></div>
+                        </div>
+                    </div>
+              </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var map1 = L.map('map1').setView([-26.195246, 28.034088], 10);
+
+    L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>'
+    }).addTo(map1);
+
+
+    // listen for when all features have been retrieved from the server
+
+    // control that shows state info on hover
+    var info1 = L.control();
+
+    info1.onAdd = function (map1) {
+        this._div = L.DomUtil.create('div', 'info');
+        this.update();
+        return this._div;
+    };
+
+    info1.update = function (props) {
+        this._div.innerHTML = '<h4>Demographic Model Data</h4>' + (props ?
+            '<b>' + props.name + '</b><br />Nightlights Flow Value for <b>' + props.year + '</b>: ' + props.density
+                : 'Hover over a region');
+    };
+
+    info1.addTo(map1);
+
+{#    function getColor(d) {#}
+{#        return d > 1000 ? '#253494' :#}
+{#            d > 500 ? '#2c7fb8' :#}
+{#                d > 200 ? '#41b6c4' :#}
+{#                    d > 100 ? '#a1dab4' :#}
+{#                        '#ffffcc';#}
+{#    }#}
+
+    function getColor(d) {
+        return d > 5000 ? '#b2182b' :
+            d > 2500 ? '#d6604d' :
+                d > 500 ? '#d6604d' :
+                    d > 100 ? '#f4a582' :
+                        d > 0 ? '#f4a582' :
+                            d > -100 ? '#92c5de' :
+                                d > -500 ? '#92c5de' :
+                                    d > -2500 ? '#2166ac':
+                                        d > -5000 ? '#2166ac':
+                                            '#053061';
+
+    }
+
+    function style(feature) {
+        return {
+            weight: 0.1,
+            opacity: 1,
+            color: 'black',
+            dashArray: '3',
+            fillOpacity: 0.7,
+            fillColor: getColor(feature.properties.density)
+        };
+    }
+
+    function highlightFeature(e) {
+        var layer = e.target;
+
+        layer.setStyle({
+            weight: 5,
+            color: '#666',
+            dashArray: '',
+            fillOpacity: 0.7
+        });
+
+        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+            layer.bringToFront();
+        }
+
+        info1.update(layer.feature.properties);
+    }
+
+    var geojson;
+    var geojson2;
+
+    function resetHighlight(e) {
+        geojson.resetStyle(e.target);
+        info1.update();
+    }
+
+    function zoomToFeature(e) {
+        map1.fitBounds(e.target.getBounds());
+    }
+
+    function onEachFeature(feature, layer) {
+        layer.on({
+            mouseover: highlightFeature,
+            mouseout: resetHighlight,
+            click: zoomToFeature
+        });
+    }
+
+    var statesData = {{ geometries|tojson }}
+
+        geojson = L.geoJson(statesData, {
+            style: style,
+            onEachFeature: onEachFeature
+        }).addTo(map1);
+
+    map1.fitBounds(geojson.getBounds());
+
+
+    {% if geometries2 %}
+
+{#    WARD POLYGON#}
+
+    var info3 = L.control();
+
+    info3.onAdd = function (map1) {
+        this._div = L.DomUtil.create('div', 'info');
+        this.update();
+        return this._div;
+    };
+
+    info3.update = function (props) {
+        this._div.innerHTML = '<h4>Ward {{ ward|safe }} shown in white </h4>';
+    };
+
+    info3.addTo(map1);
+
+    function style2(feature) {
+        return {
+            weight: 3,
+            opacity: 1,
+            color: 'black',
+            dashArray: '3',
+            fillOpacity: 0.7,
+            fillColor: 'white'
+        };
+    }
+
+    function highlightFeature2(e) {
+        var layer = e.target;
+
+        layer.setStyle({
+            weight: 5,
+            color: '#666',
+            dashArray: '',
+            fillOpacity: 0.7
+        });
+
+        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+            layer.bringToFront();
+        }
+
+        info3.update(layer.feature.properties);
+    }
+
+
+    function resetHighlight2(e) {
+        geojson2.resetStyle(e.target);
+        info3.update();
+    }
+
+    function zoomToFeature2(e) {
+        map1.fitBounds(e.target.getBounds());
+    }
+
+    function onEachFeature2(feature, layer) {
+        layer.on({
+            mouseover: highlightFeature2,
+            mouseout: resetHighlight2,
+            click: zoomToFeature2
+        });
+    }
+
+    var statesData2 = {{ geometries2|tojson }}
+
+        geojson2 = L.geoJson(statesData2, {
+            style: style2,
+            onEachFeature: onEachFeature2
+        }).addTo(map1);
+
+{#    WARD POLYGON#}
+
+    map1.fitBounds(geojson2.getBounds());
+
+    {% endif %}
+
+    var legend = L.control({position: 'bottomright'});
+
+    legend.onAdd = function (map1) {
+
+        var div = L.DomUtil.create('div', 'info legend'),
+{#            grades = [0, 1000, 2000, 5000, 10000, 20000, 50000, 100000],#}
+{#            grades = [0, 100, 200, 500, 1000],#}
+            grades = [-5000, -2500, -500, -100, 0, 100, 500, 2500, 5000],
+            labels = [],
+            from, to;
+
+        for (var i = 0; i < grades.length; i++) {
+            from = grades[i];
+            to = grades[i + 1];
+
+            labels.push(
+                '<i style="background:' + getColor(from + 1) + '"></i> ' +
+                from + (to ? '&ndash;' + to : '+'));
+        }
+
+        div.innerHTML = labels.join('<br>');
+        return div;
+    };
+
+    legend.addTo(map1);
+
+</script>

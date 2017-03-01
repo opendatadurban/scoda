@@ -9,7 +9,9 @@ from .models.user import UserSet, UserAnalysis, NewAnalysisForm, EmailForm
 from itertools import izip_longest
 from .models import db
 from .models import *
-from io import StringIO
+import StringIO
+import shutil
+from io import BytesIO
 from pandas import read_sql_query
 from datetime import datetime
 from ckanapi import RemoteCKAN
@@ -24,6 +26,7 @@ import requests
 import os
 import random
 import string
+import zipfile
 
 from flask_mail import Message
 from app import mail
@@ -184,6 +187,7 @@ def my_datasets():
 
                 user_set = UserSet()
                 user_set.ds_name = ds_name
+                user_set.description = form.description.data
                 user_set.pk_id = ds_name
                 user_set.file_id = response['result']['id']
                 user_set.user_id = current_user.id
@@ -354,8 +358,23 @@ def constructor_download(id):
     for col in types[types == 'unicode'].index:
         df[col] = df[col].astype(str)
 
-    return Response(df.to_csv(), mimetype="text/csv",
-                    headers={"Content-disposition": "attachment; filename=data.csv"})
+    from config import basedir
+
+    s = StringIO.StringIO()
+    df.to_csv(s)
+
+    memory_file = BytesIO()
+
+    with zipfile.ZipFile(memory_file, 'a', zipfile.ZIP_DEFLATED, False) as zf:
+        zf.write('%s/data/metadata/Census2011-Metadata.pdf' % basedir, 'Census2011-Metadata.pdf')
+        zf.write('%s/data/metadata/MuniMoney-TermsofUse.pdf' % basedir, 'MuniMoney-TermsofUse.pdf')
+        zf.write('%s/data/metadata/SACN_Indicators_Metadata.xlsx' % basedir, 'SACN_Indicators_Metadata.xlsx')
+        zf.writestr('MyAnalysis.csv', s.getvalue())
+        zf.close()
+
+    memory_file.seek(0)
+
+    return send_file(memory_file, attachment_filename='data.zip', as_attachment=True)
 
 
 @app.route('/constructor/<id>/edit', methods=['POST'])
@@ -513,8 +532,8 @@ def constructor(id):
                 years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
                 plot = 1
                 plot_type = 2
-                if (len(datasets) > 1) or (len(years) == 1):
-                    plot_type = 2
+                # if (len(datasets) > 1) or (len(years) == 1):
+                #     plot_type = 2
 
                 head = ['City', 'Year']
                 for i in datasets:
@@ -523,7 +542,7 @@ def constructor(id):
 
                 if plot_type == 1:
                     df = df.iloc[:, (0, 1, 3)]
-                    ds_name = [['City', 'Year', str(datasets[0])]]
+
                     schema = [('City', 'string'), ('Year', 'string'), ('%s' % datasets[0], 'number')]
 
                     data_table = gviz_api.DataTable(schema)
@@ -551,7 +570,7 @@ def constructor(id):
 
                 return render_template('constructor/constructor.html', muni_form=muni_form, wazi_form=wazi_form,
                                        my_form=my_form, cities=cities2, years=years, explore_form=explore_form,
-                                       table=table, muni_form_open=muni_form_open, ds_name=ds_name, plot_type=plot_type,
+                                       table=table, muni_form_open=muni_form_open, plot_type=plot_type,
                                        plot=plot, wazi_form_open=wazi_form_open, explore_form_open=explore_form_open,
                                        table_master=table_master, analysis_id=id, analyses=analyses)
 
@@ -887,6 +906,7 @@ def parse_analysis():
 
 @app.route('/contact_us', methods=['GET', 'POST'])
 def contact():
+
     query = db.session.query(UserAnalysis.id, UserAnalysis.ds_name, UserAnalysis.description) \
         .filter(UserAnalysis.user_id == current_user.id).order_by(UserAnalysis.id.desc())
 
@@ -909,3 +929,4 @@ def contact():
 
     else:
         return render_template('constructor/constructor_email.html', form=form, analyses=analyses)
+

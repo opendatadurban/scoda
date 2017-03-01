@@ -26,7 +26,7 @@
 
         var options1 = {
           curveType: 'function',
-          legend: {position:'right'},
+          legend: {position: {% if request.MOBILE %}'none'{% else %}'right'{% endif %}},
           height: '{{ Height }}',
           hAxis: {gridlines: {count: 4}},
           axes: {
@@ -69,6 +69,20 @@
         var table = new google.visualization.Table(document.getElementById('table'));
 
         table.draw(data2);
+
+        function resize () {
+            chart1.draw(data1, google.charts.Line.convertOptions(options1));
+            chart2.draw(data1, options2);
+            table.draw(data2);
+           }
+
+        if (window.addEventListener) {
+            window.addEventListener('resize', resize);
+        }
+
+        else {
+            window.attachEvent('onresize', resize);
+        }
 
         }
 

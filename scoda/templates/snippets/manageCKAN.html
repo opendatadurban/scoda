@@ -154,7 +154,7 @@
 
             {% else %}
 
-                <div class="col-sm-4 col-lg-4 col-lg-4">
+                <div class="col-sm-12 col-md-6 col-lg-4">
                     <div class="card" id="selectorCard">
                         <div class="card-header" id="newFormCardHead">Upload a New Dataset
                             <div class="card-actions">
@@ -173,10 +173,21 @@
                                         Dataset name:
                                     </div>
                                     <div>
-                                        {{ new_form.ds_name(id='new_ds_name',placeholder="Type your name (optional)...", styl="width: 100%", class="form-control") }}
+                                        {{ new_form.ds_name(id='new_ds_name',placeholder="Type name (optional)...", styl="width: 100%", class="form-control") }}
                                     </div>
                                     <p class="help-block">
                                         {{ new_form.ds_name.errors[0] }}
+                                </div>
+
+                                <div class="form-group{% if new_form.description.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="new_dataset_description">
+                                        Dataset description:
+                                    </div>
+                                    <div>
+                                        {{ new_form.description(id='new_description',placeholder="Type description (optional)...", styl="width: 100%", class="form-control") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ new_form.description.errors[0] }}
                                 </div>
 
                                 <div class="form-group {% if new_form.fileName.errors %} has-error {% endif %}">
@@ -196,7 +207,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-4 col-lg-4 col-lg-4">
+                <div class="col-sm-12 col-md-6 col-lg-4">
                     <div class="card" id="selectorCard">
                         <div class="card-header" id="editFormCardHead">Update an Existing Dataset
                             <div class="card-actions">
@@ -238,7 +249,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-4 col-lg-4 col-lg-4">
+                <div class="col-sm-12 col-md-6 col-lg-4">
                     <div class="card" id="selectorCard">
                         <div class="card-header" id="deleteFormCardHead">Delete an Existing Dataset
                             <div class="card-actions">

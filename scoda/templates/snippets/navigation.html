@@ -26,7 +26,7 @@ from flask_login import current_user
             <ul class="nav navbar-nav float-xs-right hidden-md-down">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        <span class="hidden-md-down">User {{ current_user.id }}</span>
+                        <span class="hidden-md-down">{{ current_user.first_name }}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
 

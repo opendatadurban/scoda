@@ -4,6 +4,7 @@ from flask import request, url_for, redirect, flash, make_response, session, ren
 from flask_security import current_user
 from .models import db
 from .models.user import UserAnalysis
+from .models.files import UserSet
 from itertools import izip_longest
 
 def grouper(iterable, n, fillvalue=None):
@@ -18,11 +19,17 @@ def city_dashboard():
     query = db.session.query(UserAnalysis.id, UserAnalysis.ds_name, UserAnalysis.description) \
         .filter(UserAnalysis.user_id == current_user.id).order_by(UserAnalysis.id.desc())
 
+    query2 = db.session.query(UserSet.id, UserSet.ds_title, UserSet.description).filter(UserSet.user_id == current_user.id).order_by(
+        UserSet.ds_title)
+
     analyses = []
+
+    datasets = []
 
     for i in grouper(query, 4):
         analyses.append(i)
 
-    print analyses
+    for i in grouper(query2, 4):
+        datasets.append(i)
 
-    return render_template('city/city_dashboard.html', analyses=analyses)
+    return render_template('city/city_dashboard.html', analyses=analyses, datasets=datasets)

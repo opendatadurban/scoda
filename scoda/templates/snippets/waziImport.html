@@ -561,7 +561,7 @@
         <div class="animated fadeIn">
 
             <div class="row">
-                <div class="col-sm-12 col-lg-12 col-lg-12">
+                <div class="col-sm-12 col-md-12 col-lg-12">
                     {% if warning != 3 %}
                         {% with messages = get_flashed_messages(category_filter=["error"]) %}
                             {% if messages %}
@@ -655,15 +655,19 @@
                                     <p class="help-block">
                                         {{ explore_form.indicator_id.errors[0] }}
                                 </div>
-                                <row>
-                                    <button class="btn btn-success" id="exploreButton" type="submit" disabled style="width:50%">Select
-                                        an indicator...
+                                <div  style="text-align: center">
+                                    <div class="row">
+                                    <button class="btn btn-success btn-responsive" id="exploreButton" type="submit" disabled style="width:80%">Select
+                                        indicator...
                                     </button>
-
+                                    </div>
+                                    <br>
+                                    <div class="row">
                                     <a href="/constructor/{{ analysis_id }}">
-                                        <button class="btn btn-primary" id="clearForm" type="button" style="width:25%">Reset Form</button>
+                                        <button class="btn btn-primary btn-responsive" id="clearForm" type="button" style="width:80%">Reset Form</button>
                                     </a>
-                                </row>
+                                    </div>
+                                </div>
                             </form>
 
                         </div>
@@ -836,7 +840,7 @@
 
                     <div id="dashboard">
                         <div class="row">
-                            <div class="col-sm-12 col-lg-12 col-lg-12">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
                                 <div class="card" id="selectCard">
                                     <div class="card-header">Select Your Data</div>
                                     <div class="card-block">
@@ -848,7 +852,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-12 col-lg-12 col-lg-12">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
                                 <div class="card">
                                     <div class="card-header">Selected Data</div>
                                     <div class="card-block">
@@ -864,7 +868,7 @@
                     </div>
 
                     <div class="row">
-                            <div class="col-sm-12 col-lg-12 col-lg-12">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
                                 <div class="card" id="selectCard">
                                     <div class="card-header" id="currentCardHead">Your Current Analysis Data Set</div>
                                     <div class="card-block">
@@ -896,7 +900,7 @@
 
                     <div class="row" style="text-align: center">
 
-                        <div class="col-sm-12 col-md-6 col-lg-2">
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xlg-2">
                             <div class="card" id="mapSelect">
                                 <div class="card-header" id="modifyCardHead">Modify Analysis</div>
                                 <div class="card-block" style="text-align: center">
@@ -910,7 +914,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-6 col-lg-2">
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xlg-2">
                             <div class="card" id="mapSelect">
                                 <div class="card-header" id="undoCardHead">Undo recent add</div>
                                 <div class="card-block" style="text-align: center">
@@ -922,7 +926,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-6 col-lg-2">
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xlg-2">
                             <div class="card" id="mapSelect">
                                 <div class="card-header" id="downloadCardHead">Download data</div>
                                 <div class="card-block" style="text-align: center">
@@ -934,7 +938,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-6 col-lg-2">
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xlg-2">
                             <div class="card" id="mapSelect">
                                 <div class="card-header" id="visualizeCardHead">Visualize</div>
                                 <div class="card-block" style="text-align: center">
@@ -946,7 +950,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-6 col-lg-2">
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xlg-2">
                             <div class="card" id="mapSelect">
                                 <div class="card-header" id="timeCardHead">Convert to Time Series</div>
                                 <div class="card-block" style="text-align: center">
@@ -957,7 +961,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-6 col-lg-2">
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xlg-2">
                             <div class="card" id="mapSelect">
                                 <div class="card-header" id="deleteCardHead">Delete This Dataset</div>
                                 <div class="card-block" style="text-align: center">

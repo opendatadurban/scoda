@@ -9,13 +9,17 @@ def seed_db(db):
     """ Add ETH seed entities to the database. """
     with app.app_context():
 
-        data = geojson.load(open('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/metro_salc_geo.json'))
+        data = geojson.load(open('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/DBN2016_SHP.json'))
 
-        data2 = genfromtxt('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/exporteth_old_2.csv', delimiter=',',
+        data2 = genfromtxt('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/exporteth16.csv', delimiter=',',
                            skip_header=1)
 
         parser = {}
-        for i, I in enumerate(range(59500001, 59500111)):
+
+        Ws = [52102003, 52102015, 52102016, 52102018, 52201006, 52201008, 52206002, 52206003, 52206004, 52206005,
+              52206006, 52206007, 52902021, 52903012, 52903013, 52903014, 52903016, 52903017, 52903018]
+
+        for i, I in enumerate(range(59500001, 59500111) + Ws):
             parser[int(I)] = {}
             parser[int(I)]['includes'] = []
             parser[int(I)]['city_ref'] = i - 1
@@ -26,7 +30,7 @@ def seed_db(db):
         parser2 = {}
 
         for i in data2:
-            parser2[int(i[1])] = list(i[18:])
+            parser2[int(i[1])] = list(i[20:])
 
         print 'Populating ETH enumerator GIS data...'
         for poly in data['features']:

@@ -476,7 +476,7 @@
     <div id="ui-view" style="opacity: 1;">
         <div class="animated fadeIn">
             <div class="row">
-                <div class="col-sm-5 col-lg-5 col-lg-5">
+                <div class="col-sm-12 col-md-12 col-lg-5">
                     <div class="card" id="selectorCard">
                         <div class="card-header" id="formCardHead">Indicator Selector</div>
                         <div class="card-block" id="formCard">
@@ -548,15 +548,19 @@
                                     <p class="help-block">
                                         {{ form.indicator_id.errors[0] }}
                                 </div>
-                                    <row>
-                                        <button class="btn btn-success" id="exploreButton" type="submit" disabled>Please select
+                                <div style="text-align: center">
+                                    <div class="row">
+                                        <button class="btn btn-success btn-responsive" id="exploreButton" type="submit" style="width: 80%" disabled>Select
                                             an indicator...
                                         </button>
-
+                                    </div>
+                                    <div class="row">
+                                        <br>
                                         <a href="{{ url_for('explore') }}">
-                                            <button class="btn btn-primary" type="button" id="clearForm">Reset Form</button>
+                                            <button class="btn btn-primary btn-responsive" type="button" id="clearForm" style="width: 80%">Reset Form</button>
                                         </a>
-                                    </row>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -578,20 +582,20 @@
 
                     {% endif %}
 
-                    <div class="col-sm-7 col-lg-7 col-lg-7">
+                    <div class="col-sm-12 col-md-12 col-lg-7">
                         <div class="card" id="geoCard">
                             <div class="card-header">
                                 Geographic Representation
                             </div>
                             <div class="card-block" style="padding: 0;">
-                                <div id="geochart"></div>
+                                <div id="geochart" style="width: 100%"></div>
                             </div>
                         </div>
                     </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-5 col-lg-5 col-lg-5">
+                        <div class="col-sm-12 col-md-12 col-lg-5">
                             <div class="card" id="mapSelect">
                                 <div class="card-header">Data on Map</div>
                                 <div class="card-block" style="text-align: center">
@@ -621,7 +625,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-7 col-lg-7 col-lg-7">
+                        <div class="col-sm-12 col-md-12 col-lg-7">
                             <div class="card" id="descriptionCard">
                                 <div class="card-header">About This Indicator</div>
                                 <div class="card-block" style="text-align: justify">
@@ -644,7 +648,7 @@
 
                     <div id="dashboard">
                         <div class="row">
-                            <div class="col-sm-2 col-lg-2 col-lg-2">
+                            <div class="col-sm-12 col-md-12 col-lg-3">
                                 <div class="card" id="selectCard">
                                     <div class="card-header">Select Your Data</div>
                                     <div class="card-block">
@@ -654,7 +658,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-10 col-lg-10 col-lg-10">
+                            <div class="col-sm-12 col-md-12 col-lg-9">
                                 <div class="card" id="chartCard">
                                     <div class="card-header">Plotting Window</div>
                                     <div class="card-block">
@@ -668,7 +672,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-12 col-lg-12 col-lg-12">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
                                 <div class="card">
                                     <div class="card-header">Selected Data</div>
                                     <div class="card-block">
@@ -688,12 +692,10 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-6 col-lg-2">
                             <div class="card" id="mapSelect">
-                                <div class="card-header">Download data</div>
+                                <div class="card-header">Download Data</div>
                                 <div class="card-block" style="text-align: center">
                                         <a id="Export" href="data.csv" target="_blank" download="data.csv">
-                                            <button class="btn btn-primary" style="margin-right: 10px">Download table
-                                                data
-                                                as a CSV file
+                                            <button class="btn btn-primary" style="margin-right: 10px">Download as CSV
                                             </button>
                                         </a>
                                 </div>
@@ -702,12 +704,11 @@
 
                         <div class="col-sm-12 col-md-6 col-lg-2">
                             <div class="card" id="mapSelect">
-                                <div class="card-header">Download Image</div>
+                                <div class="card-header">Download Chart</div>
                                 <div class="card-block" style="text-align: center">
                                         <a download="chart.png" id="image_download"
                                            onclick="saveAsImg(document.getElementById('chart_img'));">
-                                            <button class="btn btn-primary" style="margin-left: 10px">Save chart as a
-                                                PNG image
+                                            <button class="btn btn-primary" style="margin-left: 10px">Download as PNG
                                             </button>
                                         </a>
                                 </div>

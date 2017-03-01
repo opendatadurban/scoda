@@ -107,7 +107,7 @@
             'chartType': 'Line',
             'containerId': 'chart',
             'options': {
-                legend: {position: 'right'},
+                legend: {position: {% if request.MOBILE %}'none'{% else %}'right'{% endif %} },
                 axes: {
                     y: {
                         all: {
@@ -137,7 +137,7 @@
                 theme: 'material',
                 colorAxis: {colors: ['#FED976', '#FC4E2A', '#800026']},
                 height: cardHeight,
-                width: cardWidth,
+                width: '100%',
                 keepAspectRatio: true
             }
         });
@@ -227,13 +227,30 @@
             document.getElementById("error_msg").innerHTML = "Message removed = '" + googleError.message + "'";
         });
 
-        if (window.addEventListener) {
-            window.addEventListener('resize', resize);
-        }
+        function resize () {
+               dashboard.draw(data);
 
-        else {
-            window.attachEvent('onresize', resize);
-        }
+               var dataset = Number($('#dataSelect').find("option:selected").val());
+               dataset += 1;
+               var year = $('#yearSelect').find("option:selected").val();
+
+                var dt = table1.getDataTable();
+               var myView = new google.visualization.DataView(dt);
+
+               myView.setColumns([0, dataset]);
+
+               geochart1.setDataTable(myView);
+               geochart1.draw();
+
+           }
+
+       if (window.addEventListener) {
+           window.addEventListener('resize', resize);
+       }
+
+       else {
+           window.attachEvent('onresize', resize);
+       }
 
 
     }
