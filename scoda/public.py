@@ -425,14 +425,14 @@ def demographics():
                 row = [val for val in list(r)[0]]
                 results.append(row)
 
-            df = pd.DataFrame(results).fillna(value=0)
+        df = pd.DataFrame(results).fillna(value=0)
 
-            table1 = [['Year', 'Johannesburg']]
+        table1 = [['Year', 'Johannesburg']]
 
-            for y, val in zip(range(1996, 2031), df.sum(axis=0).tolist()):
-                table1.append([str(y), val])
+        for y, val in zip(range(1996, 2031), df.sum(axis=0).tolist()):
+            table1.append([str(y), val])
 
-            m = 1.05 * max(df.sum(axis=0).tolist())
+        m = 1.05 * max(df.sum(axis=0).tolist())
 
         query = db.session.query(Ward.geom.ST_AsGeoJSON(), Ward.data, Ward.city_ward_code). \
             filter(Ward.region_id == 4)
@@ -445,22 +445,22 @@ def demographics():
                                                                               "year": 1997},
                                             "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
 
-            query = db.session.query(Ward.data).filter(Ward.region_id == 4).all()
+        query = db.session.query(Ward.data).filter(Ward.region_id == 4).all()
 
-            results = []
+        results = []
 
-            for r in query:
-                row = [val for val in list(r)[0]]
-                results.append(row)
+        for r in query:
+            row = [val for val in list(r)[0]]
+            results.append(row)
 
-            df = pd.DataFrame(results).fillna(value=0)
+        df = pd.DataFrame(results).fillna(value=0)
 
-            table2 = [['Year', 'EThekwini']]
+        table2 = [['Year', 'EThekwini']]
 
-            for y, val in zip(range(1996, 2031), df.sum(axis=0).tolist()):
-                table2.append([str(y), val])
+        for y, val in zip(range(1996, 2031), df.sum(axis=0).tolist()):
+            table2.append([str(y), val])
 
-            m2 = 1.05 * max(df.sum(axis=0).tolist())
+        m2 = 1.05 * max(df.sum(axis=0).tolist())
 
         return render_template('demographics/demographics.html', form1=form1, form2=form2, geometries1=geometries1,
                                geometries2=geometries2, tour=tour, table1=table1, table2=table2, max1=m, max2=m2,
@@ -731,7 +731,6 @@ def demographics_night_eth():
 
                 geometries = {"type": "FeatureCollection",
                               "features": []}
-
 
                 for g in query:
 
