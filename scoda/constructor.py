@@ -27,7 +27,7 @@ import os
 import random
 import string
 import zipfile
-
+from math import ceil
 from flask_mail import Message
 from app import mail
 from config import MAIL_DEFAULT_SENDER
@@ -840,8 +840,15 @@ def constructor_vis(id):
 
         cities = [c.encode('utf-8') for c in df['City'].unique()]
         years = [str(c) for c in df['Year'].unique()]
-        colours = ['#f44336', '#03a9f4', '#4caf50', '#ffc107', '#03a9f4', '#ff5722', '#9c27b0', '#8bc34a',
+
+        C = ['#f44336', '#03a9f4', '#4caf50', '#ffc107', '#03a9f4', '#ff5722', '#9c27b0', '#8bc34a',
                    '#ffeb3b', '#9e9e9e', '#3f51b5', '#e91e63']
+
+        colours = []
+
+        for i in range(int(ceil(float(len(head[2:])) / float(len(C))))):
+            colours += C
+
         series = {i: {'color': colours[i]} for i in range(len(head[2:]))}
 
     view = range(2, len(head))
@@ -850,9 +857,11 @@ def constructor_vis(id):
     minVal = min(mins)
     maxVal = max(maxs) * 1.1
 
+    modHeight = (len(head) - 1) * 40
+
     return render_template('constructor/constructor_vis.html', table=table_master, analysis_id=id,
                            cities=cities, colours=colours, series=series, min=minVal, max=maxVal,
-                           view=view, year=years, analyses=analyses)
+                           view=view, year=years, analyses=analyses, modHeight=modHeight)
 
 
 @app.route('/_parse_wazi', methods=['GET'])
