@@ -1878,21 +1878,21 @@ fieldset[disabled] a.btn {
 
 .btn-danger {
   color: #fff;
-  background-color: #f86c6b;
-  border-color: #f86c6b; }
+  background-color: #ff292f;
+  border-color: #ff292f; }
   .btn-danger:hover {
     color: #fff;
-    background-color: #f63c3a;
-    border-color: #f53231; }
+    background-color: #c8272d;
+    border-color: #c8272d; }
   .btn-danger:focus, .btn-danger.focus {
     color: #fff;
-    background-color: #f63c3a;
-    border-color: #f53231; }
+    background-color: #c8272d;
+    border-color: #c8272d; }
   .btn-danger:active, .btn-danger.active,
   .open > .btn-danger.dropdown-toggle {
     color: #fff;
-    background-color: #f63c3a;
-    border-color: #f53231;
+    background-color: #c8272d;
+    border-color: #c8272d;
     background-image: none; }
     .btn-danger:active:hover, .btn-danger:active:focus, .btn-danger:active.focus, .btn-danger.active:hover, .btn-danger.active:focus, .btn-danger.active.focus,
     .open > .btn-danger.dropdown-toggle:hover,

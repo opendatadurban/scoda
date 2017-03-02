@@ -432,6 +432,96 @@
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>'
     }).addTo(map1);
 
+function getColor(d) {
+        return d > 5000 ? '#b2182b' :
+            d > 2500 ? '#d6604d' :
+                d > 500 ? '#d6604d' :
+                    d > 100 ? '#f4a582' :
+                        d > 0 ? '#f4a582' :
+                            d > -100 ? '#92c5de' :
+                                d > -500 ? '#92c5de' :
+                                    d > -2500 ? '#2166ac':
+                                        d > -5000 ? '#2166ac':
+                                            '#053061';
+
+    }
+
+    {% if geometries2 %}
+
+{#    WARD POLYGON#}
+
+    var info3 = L.control();
+
+    info3.onAdd = function (map1) {
+        this._div = L.DomUtil.create('div', 'info');
+        this.update();
+        return this._div;
+    };
+
+    info3.update = function (props) {
+        this._div.innerHTML = '<h4>Ward {{ ward|safe }} shown below grid with dark border </h4>';
+    };
+
+    info3.addTo(map1);
+
+    function style2(feature) {
+        return {
+            weight: 5,
+            opacity: 1,
+            color: 'black',
+            dashArray: '3',
+            fillOpacity: 0.7,
+            fillColor: 'white'
+        };
+    }
+
+    function highlightFeature2(e) {
+        var layer = e.target;
+
+        layer.setStyle({
+            weight: 5,
+            color: '#666',
+            dashArray: '',
+            fillOpacity: 0.7
+        });
+
+        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+            layer.bringToFront();
+        }
+
+        info3.update(layer.feature.properties);
+    }
+
+
+    function resetHighlight2(e) {
+        geojson2.resetStyle(e.target);
+        info3.update();
+    }
+
+    function zoomToFeature2(e) {
+        map1.fitBounds(e.target.getBounds());
+    }
+
+    function onEachFeature2(feature, layer) {
+        layer.on({
+            mouseover: highlightFeature2,
+            mouseout: resetHighlight2,
+            click: zoomToFeature2
+        });
+    }
+
+    var statesData2 = {{ geometries2|tojson }}
+
+        geojson2 = L.geoJson(statesData2, {
+            style: style2,
+            onEachFeature: onEachFeature2
+        }).addTo(map1);
+
+{#    WARD POLYGON#}
+
+    map1.fitBounds(geojson2.getBounds());
+
+    {% endif %}
 
     // listen for when all features have been retrieved from the server
 
@@ -446,19 +536,19 @@
 
     info1.update = function (props) {
         this._div.innerHTML = '<h4>Demographic Model Data</h4>' + (props ?
-            '<b>' + props.name + '</b><br />Nightlights Value for <b>' + props.year + '</b>: ' + props.density
+            '<b>' + props.name + '</b><br />Nightlights Flow Value for <b>' + props.year + '</b>: ' + props.density
                 : 'Hover over a region');
     };
 
     info1.addTo(map1);
 
-    function getColor(d) {
-        return d > 1000 ? '#253494' :
-            d > 500 ? '#2c7fb8' :
-                d > 200 ? '#41b6c4' :
-                    d > 100 ? '#a1dab4' :
-                        '#ffffcc';
-    }
+{#    function getColor(d) {#}
+{#        return d > 1000 ? '#253494' :#}
+{#            d > 500 ? '#2c7fb8' :#}
+{#                d > 200 ? '#41b6c4' :#}
+{#                    d > 100 ? '#a1dab4' :#}
+{#                        '#ffffcc';#}
+{#    }#}
 
     function style(feature) {
         return {
@@ -515,89 +605,9 @@
             onEachFeature: onEachFeature
         }).addTo(map1);
 
-
-
-    {% if geometries2 %}
-
-{#    WARD POLYGON#}
-
-    var info3 = L.control();
-
-    info3.onAdd = function (map1) {
-        this._div = L.DomUtil.create('div', 'info');
-        this.update();
-        return this._div;
-    };
-
-    info3.update = function (props) {
-        this._div.innerHTML = '<h4>Ward {{ ward|safe }} shown in white </h4>';
-    };
-
-    info3.addTo(map1);
-
-    function style2(feature) {
-        return {
-            weight: 3,
-            opacity: 1,
-            color: 'black',
-            dashArray: '3',
-            fillOpacity: 0.7,
-            fillColor: 'white'
-        };
-    }
-
-    function highlightFeature2(e) {
-        var layer = e.target;
-
-        layer.setStyle({
-            weight: 5,
-            color: '#666',
-            dashArray: '',
-            fillOpacity: 0.7
-        });
-
-        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-            layer.bringToFront();
-        }
-
-        info3.update(layer.feature.properties);
-    }
-
-
-    function resetHighlight2(e) {
-        geojson2.resetStyle(e.target);
-        info3.update();
-    }
-
-    function zoomToFeature2(e) {
-        map1.fitBounds(e.target.getBounds());
-    }
-
-    function onEachFeature2(feature, layer) {
-        layer.on({
-            mouseover: highlightFeature2,
-            mouseout: resetHighlight2,
-            click: zoomToFeature2
-        });
-    }
-
-    var statesData2 = {{ geometries2|tojson }}
-
-        geojson2 = L.geoJson(statesData2, {
-            style: style2,
-            onEachFeature: onEachFeature2
-        }).addTo(map1);
-
-{#    WARD POLYGON#}
-
-    {% endif %}
-
     map1.fitBounds(geojson.getBounds());
 
 
-    {% if request.MOBILE %}
-
-    {% else %}
 
     var legend = L.control({position: 'bottomright'});
 
@@ -605,7 +615,8 @@
 
         var div = L.DomUtil.create('div', 'info legend'),
 {#            grades = [0, 1000, 2000, 5000, 10000, 20000, 50000, 100000],#}
-            grades = [0, 100, 200, 500, 1000],
+{#            grades = [0, 100, 200, 500, 1000],#}
+            grades = [-5000, -2500, -500, -100, 0, 100, 500, 2500, 5000],
             labels = [],
             from, to;
 
@@ -623,7 +634,5 @@
     };
 
     legend.addTo(map1);
-
-    {% endif %}
 
 </script>

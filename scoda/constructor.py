@@ -1,5 +1,5 @@
 from scoda.app import app
-from flask import render_template, request, flash, redirect, session, jsonify, url_for, send_file, Response
+from flask import render_template, request, flash, redirect, session, jsonify, url_for, send_file, Response, make_response
 from flask_security import current_user
 from werkzeug.utils import secure_filename
 from .models.files import NewFileForm, EditFileForm, DeleteFileForm
@@ -123,7 +123,25 @@ def grouper(iterable, n, fillvalue=None):
 @app.route('/return-template/')
 def template_download():
 
-    return send_file('static/template.csv', filename='template.csv', as_attachment=True)
+    return send_file('static/template.csv', as_attachment=True)
+
+
+@app.route('/return-scoda/')
+def scoda_download():
+
+    return send_file('data/metadata/SACN_Indicators_Metadata.xlsx', as_attachment=True)
+
+
+@app.route('/return-wazi/')
+def wazi_download():
+
+    return send_file('data/metadata/Census2011-Metadata.pdf', as_attachment=True)
+
+
+@app.route('/return-muni/')
+def muni_download():
+
+    return send_file('data/metadata/MuniMoney-TermsofUse.pdf', as_attachment=True)
 
 
 @app.route('/my_datasets', methods=['GET', 'POST'])
@@ -255,7 +273,7 @@ def series_download(id, ds_id):
     dataset = s['head'][int(ds_id)]
     series = df.pivot(index='City', columns='Year', values=dataset)
 
-    return Response(series.to_csv(), mimetype="text/csv",
+    return Response(series.to_csv(index=False), mimetype="text/csv",
                     headers={"Content-disposition": "attachment; filename=series.csv"})
 
 
@@ -361,7 +379,7 @@ def constructor_download(id):
     from config import basedir
 
     s = StringIO.StringIO()
-    df.to_csv(s)
+    df.to_csv(s, index=False)
 
     memory_file = BytesIO()
 
@@ -674,7 +692,10 @@ def constructor(id):
                                 data[i] = 0
 
                         values.append(float(sum(data)))
-                        new_datasets.append(form.lower_tier.data)
+
+                        name = M[form.top_tier.data][form.lower_tier.data]
+
+                        new_datasets.append(name)
 
                         if yind == 0 and ind == 0:
                             table = []
@@ -930,3 +951,23 @@ def contact():
     else:
         return render_template('constructor/constructor_email.html', form=form, analyses=analyses)
 
+
+from xhtml2pdf import pisa
+
+
+def create_pdf(pdf_data):
+    pdf = StringIO.StringIO()
+    pisa.CreatePDF(StringIO.StringIO(pdf_data.encode('utf-8')), pdf)
+    return pdf
+
+
+@app.route('/report')
+def report_gen():
+    from config import basedir
+    pdf = create_pdf(render_template('report/report.html', basedir=basedir))
+    pdf_out = pdf.getvalue()
+    response = make_response(pdf_out)
+    response.headers['Content-Type'] = "application/pdf"
+    response.headers['Content-Disposition'] = "attachment; filename=report.pdf"
+
+    return response

@@ -663,7 +663,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+        </div>
 
         <div class="row">
                 <div class="col-sm-12 col-lg-12 col-lg-12">
@@ -798,8 +798,8 @@
                     <div class="card">
                         <div class="card-header" id="jhbNightFormCardHead">Johannesburg Nightlights
                         </div>
-                        <div class="card-block" style="text-align: justify" id="jhbNightFormCard">
-                            <p>You can explore the Johannesburg Nightlights data by clicking on the button below.</p>
+                        <div class="card-block" style="text-align: left" id="jhbNightFormCard">
+                            <p>You can explore the JHB Nightlights data by clicking on the button below.</p>
                             <div class="row" style="text-align: center;">
                                 <a href="{{ url_for('demographics_night_jhb') }}"><button class="btn btn-primary btn-responsive" type="button" id="submitButton1">JHB</button></a>
                             </div>
@@ -811,14 +811,28 @@
                     <div class="card">
                         <div class="card-header" id="ethNightFormCardHead">EThekwini Nightlights
                         </div>
-                        <div class="card-block" style="text-align: justify" id="jhbNightFormCard">
-                            <p>You can explore the EThekwini Nightlights data by clicking on the button below.</p>
+                        <div class="card-block" style="text-align: left" id="jhbNightFormCard">
+                            <p>You can explore the ETH Nightlights data by clicking on the button below.</p>
                             <div class="row" style="text-align: center;">
                                 <a href="{{ url_for('demographics_night_eth') }}"><button class="btn btn-primary btn-responsive" type="button" id="submitButton2">ETH</button></a>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="card">
+                        <div class="card-header" id="ethNightFormCardHead">Download The Methodology
+                        </div>
+                        <div class="card-block" style="text-align: left" id="jhbNightFormCard">
+                            <p>You can download a PDF version of the information contained on this page by clicking on the button below.</p>
+                            <div class="row" style="text-align: center;">
+                                <a href="{{ url_for('report_gen') }}"><button class="btn btn-primary btn-responsive" type="button" id="submitButton2">Download</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>

@@ -563,7 +563,7 @@ def demographics_night_jhb():
                                                                                      "year": 2016},
                                                    "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
 
-                query = db.session.query(Ward.city_ward_code).filter(Ward.region_id == form.region_id.data).order_by(
+                query = db.session.query(Ward.city_ward_code).filter(Ward.region_id == 1).order_by(
                     Ward.city_ward_code).distinct()
 
                 form.city_ward_code.choices = [[str(i), 'Ward %s' % row.city_ward_code] for i, row in
@@ -726,7 +726,7 @@ def demographics_night_eth():
 
             if form.city_ward_code.data == '':
 
-                query = db.session.query(Grid.geom.ST_AsGeoJSON(), Grid.data, Grid.city_grid_id). \
+                query = db.session.query(Grid.geom.ST_AsGeoJSON(), Grid.data, Grid.city_grid_id, Grid.reference). \
                     filter(Grid.region_id == 4)
 
                 geometries = {"type": "FeatureCollection",
@@ -737,12 +737,12 @@ def demographics_night_eth():
 
                     d = json.loads(g[0])
 
-                    geometries['features'].append({"type": "Feature", "properties": {"density": g[1],
+                    geometries['features'].append({"type": "Feature", "properties": {"density": round(g[1][0]-g[3]),
                                                                                      "name": 'Grid %s' % g[2],
                                                                                      "year": 2016},
                                                    "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
 
-                query = db.session.query(Ward.city_ward_code).filter(Ward.region_id == form.region_id.data).order_by(
+                query = db.session.query(Ward.city_ward_code).filter(Ward.region_id == 4).order_by(
                     Ward.city_ward_code).distinct()
 
                 form.city_ward_code.choices = [[str(i), 'Ward %s' % row.city_ward_code] for i, row in
@@ -754,12 +754,13 @@ def demographics_night_eth():
 
             else:
 
-                w = db.session.query(Ward.id).filter(Ward.city_ward_code == form.city_ward_code.data).first()
+                w = db.session.query(Ward.id).filter(Ward.city_ward_code == form.city_ward_code.data)\
+                    .filter(Ward.region_id == 4).first()
 
                 w = Ward.query.get(w[0])
 
-                query = db.session.query(Grid.geom.ST_AsGeoJSON(), Grid.data, Grid.city_grid_id) \
-                    .filter(Grid.geom.intersects(w.geom))
+                query = db.session.query(Grid.geom.ST_AsGeoJSON(), Grid.data, Grid.city_grid_id, Grid.reference) \
+                    .filter(Grid.geom.intersects(w.geom)).filter(Grid.region_id == 4)
 
                 geometries = {"type": "FeatureCollection",
                               "features": []}
@@ -768,13 +769,13 @@ def demographics_night_eth():
                     d = json.loads(g[0])
 
                     geometries['features'].append(
-                        {"type": "Feature", "properties": {"density": round(g[1]),
+                        {"type": "Feature", "properties": {"density": round(g[1][0]-g[3]),
                                                            "name": 'Grid %s' % g[2],
                                                            "year": 2016},
                          "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
 
                 query = db.session.query(Ward.geom.ST_AsGeoJSON(), Ward.data, Ward.city_ward_code)\
-                    .filter(Ward.city_ward_code == form.city_ward_code.data)
+                    .filter(Ward.city_ward_code == form.city_ward_code.data).filter(Ward.region_id == 4)
 
                 geometries2 = {"type": "FeatureCollection",
                                "features": []}
@@ -788,14 +789,14 @@ def demographics_night_eth():
                                                            "year": 2016},
                          "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
 
-                query = db.session.query(Ward.city_ward_code).filter(Ward.region_id == form.region_id.data).order_by(
+                query = db.session.query(Ward.city_ward_code).filter(Ward.region_id == 4).order_by(
                     Ward.city_ward_code).distinct()
 
                 form.city_ward_code.choices = [[str(i), 'Ward %s' % row.city_ward_code] for i, row in enumerate(query.all()
                                                                                                                 , start=1)]
                 form.city_ward_code.choices.insert(0, ('', 'View All'))
 
-                return render_template('demographics/demographics_night.html', form=form, geometries=geometries,
+                return render_template('demographics/demographics_night_ETH.html', form=form, geometries=geometries,
                                    geometries2=geometries2, ward=form.city_ward_code.data)
 
         else:
@@ -806,8 +807,8 @@ def demographics_night_eth():
 
     else:
 
-        query = db.session.query(Grid.geom.ST_AsGeoJSON(), Grid.data, Grid.city_grid_id). \
-            filter(Grid.region_id == 1)
+        query = db.session.query(Grid.geom.ST_AsGeoJSON(), Grid.data, Grid.city_grid_id, Grid.reference). \
+            filter(Grid.region_id == 4)
 
         geometries = {"type": "FeatureCollection",
                       "features": []}
@@ -815,12 +816,12 @@ def demographics_night_eth():
         for g in query:
             d = json.loads(g[0])
 
-            geometries['features'].append({"type": "Feature", "properties": {"density": g[1][0],
+            geometries['features'].append({"type": "Feature", "properties": {"density": round(g[1][0]-g[3]),
                                                                              "name": 'Grid %s' % g[2],
                                                                              "year": 2016},
                                            "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
 
-        return render_template('demographics/demographics_night.html', form=form, bias_val=0.5, geometries=geometries,
+        return render_template('demographics/demographics_night_ETH.html', form=form, geometries=geometries,
                                analyses=analyses)
 
     if not request.is_xhr:

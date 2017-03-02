@@ -119,6 +119,46 @@
                 ]
             });
 
+            tour.addStep('welcome4', {
+                title: 'Using the your navigation...',
+                text: 'Your left-hand navigation also provides quick access to the Data Explorer, where you can explore, visualize and download all 102 SCODA datasets.',
+                attachTo: '#sideNav right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('welcome7', {
+                title: 'Using the rest of your navigation...',
+                text: 'Clicking on "Demographics" will take you to the demographics model explorer.',
+                attachTo: '#sideNav right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    }
+                ]
+            });
+
             tour.addStep('form', {
                 title: 'The Selection Form',
                 text: 'This form is here to help you find the indicator you are interested in. The various selection blocks help to narrow down your choices from the 102 possible indicators available. When you make a selection in one or more of the fields, it will change which options are available in the others. Finally, each field can be searched through, just start typing what you are looking for!',
@@ -297,48 +337,10 @@
                 }
             });
 
-            tour.addStep('map', {
-                title: 'Geographic Depiction',
-                text: 'This map gives a geographic comparison of data values. The size of the circles and their colours act as a comparative scale, hovering over the points themselves will give the numerical values. This map is purely for comparative purposes and so cannot be zoomed or moved.',
-                attachTo: '#geoCard left',
-                advanceOn: '.docs-link click',
-                buttons: [
-                    {
-                        text: 'Exit',
-                        action: tour.complete
-                    },
-                    {
-                        text: 'Next',
-                        action: tour.next
-                    }
-                ]
-            });
-
-            tour.addStep('map_select', {
-                title: 'Changing Map Data',
-                text: 'Depending on the indicator selected, there will often be multiple data layers that cannot be effectively displayed simultaneously on the map. The selection fields here allow you to choose the data values to be represented on the map. For some indicators this will involve changing the dataset, and others the year.',
-                attachTo: '#mapSelect right',
-                advanceOn: '.docs-link click',
-                buttons: [
-                    {
-                        text: 'Back',
-                        action: tour.back
-                    },
-                    {
-                        text: 'Exit',
-                        action: tour.complete
-                    },
-                    {
-                        text: 'Next',
-                        action: tour.next
-                    }
-                ]
-            });
-
-            tour.addStep('about', {
-                title: 'Indicator Description',
-                text: 'This area contains all the details of the indicator.',
-                attachTo: '#descriptionCard left',
+            tour.addStep('table', {
+                title: 'Data Table',
+                text: 'This table contains all the data being displayed across the various visualizations',
+                attachTo: '#table top',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -399,10 +401,27 @@
                 ]
             });
 
-            tour.addStep('table', {
-                title: 'Data Table',
-                text: 'This table contains all the data being displayed across the various visualizations',
-                attachTo: '#table top',
+            tour.addStep('map', {
+                title: 'Geographic Depiction',
+                text: 'This map gives a geographic comparison of data values. The size of the circles and their colours act as a comparative scale, hovering over the points themselves will give the numerical values. This map is purely for comparative purposes and so cannot be zoomed or moved.',
+                attachTo: '#geoCard left',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('map_select', {
+                title: 'Changing Map Data',
+                text: 'Depending on the indicator selected, there will often be multiple data layers that cannot be effectively displayed simultaneously on the map. The selection fields here allow you to choose the data values to be represented on the map. For some indicators this will involve changing the dataset, and others the year.',
+                attachTo: '#mapSelect right',
                 advanceOn: '.docs-link click',
                 buttons: [
                     {
@@ -464,6 +483,27 @@
                 ]
             });
 
+             tour.addStep('about', {
+                title: 'Indicator Description',
+                text: 'This area contains all the details of the indicator.',
+                attachTo: '#descriptionCard above',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
             tour.start();
 
         {% endif %}
@@ -475,6 +515,24 @@
 <div class="container-fluid">
     <div id="ui-view" style="opacity: 1;">
         <div class="animated fadeIn">
+        <div id="dashboard">
+
+            <div class="row">
+                <div class="col-sm-12 col-lg-12 col-lg-12">
+                    <div class="card">
+                        <div class="card-header" id="p1FormCardHead">An Introduction To The SCODA Indicator Explorer
+                            <div class="card-actions">
+                                <a class="btn-minimize" data-toggle="collapse" href="#p1FormCard" aria-expanded="true"
+                                   aria-controls="p1FormCard"><i class="icon-arrow-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-block collapse" style="text-align: justify"  id="p1FormCard">
+                            <p>Welcome to the online data exploration system for the State of Cities Open Data Almanac (SCODA)! </p>
+                        </div>
+                    </div>
+                </div>
+         </div>
+
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-5">
                     <div class="card" id="selectorCard">
@@ -483,6 +541,17 @@
                             <form action="{{ url_for('explore') }}" id="Form" class="form-horizontal" method="POST">
                                 {{ form.csrf_token }}
                                 {{ form.hidden_tag() }}
+                            <div class="form-group {% if form.indicator_id.errors %} has-error {% endif %}">
+                                    <div class="control-label" id="indicator_label">
+                                        Indicator:
+                                    </div>
+                                    <div>
+                                        {{ form.indicator_id(id='indicator_id',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
+                                    </div>
+                                    <p class="help-block">
+                                        {{ form.indicator_id.errors[0] }}
+                                </div>
+
                                 <div class="form-group {% if form.dataset_id.errors %} has-error {% endif %}">
                                     <div class="control-label" id="dataset_label">
                                         Data Set:
@@ -538,16 +607,6 @@
                                         {{ form.year.errors[0] }}
                                 </div>
 
-                                <div class="form-group {% if form.indicator_id.errors %} has-error {% endif %}">
-                                    <div class="control-label" id="indicator_label">
-                                        Indicator:
-                                    </div>
-                                    <div>
-                                        {{ form.indicator_id(id='indicator_id',class="js-example-basic-single js-example-responsive",style="width: 100%") }}
-                                    </div>
-                                    <p class="help-block">
-                                        {{ form.indicator_id.errors[0] }}
-                                </div>
                                 <div style="text-align: center">
                                     <div class="row">
                                         <button class="btn btn-success btn-responsive" id="exploreButton" type="submit" style="width: 80%" disabled>Select
@@ -566,37 +625,60 @@
                     </div>
                 </div>
 
-                {# Plotting Card #}
-
                 {% if plot %}
 
-                    {% include 'snippets/image_export.html' %}
+                {% include 'snippets/image_export.html' %}
 
-                    {% if plot_type == 2 %}
+                {% if plot_type == 2 %}
 
-                        {% include 'snippets/charts_bar.html' %}
+                {% include 'snippets/charts_bar.html' %}
 
-                    {% else %}
+                {% else %}
 
-                        {% include 'snippets/charts_line.html' %}
+                {% include 'snippets/charts_line.html' %}
 
-                    {% endif %}
+                {% endif %}
 
-                    <div class="col-sm-12 col-md-12 col-lg-7">
-                        <div class="card" id="geoCard">
-                            <div class="card-header">
-                                Geographic Representation
-                            </div>
-                            <div class="card-block" style="padding: 0;">
-                                <div id="geochart" style="width: 100%"></div>
-                            </div>
+                <div class="col-sm-12 col-md-12 col-lg-7">
+                    <div class="card" id="tableCard">
+                        <div class="card-header">Selected Data</div>
+                        <div class="card-block">
+                            <div id="table"
+                                 style="display: inline-block; margin: 0 auto; width: 100%;"></div>
+                            <div id="table2"
+                                 style="display: none; margin: 0 auto; width: 100%;"></div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-3">
+                    <div class="card" id="selectCard">
+                        <div class="card-header">Select Your Data</div>
+                        <div class="card-block">
+                            <div id="categorySelector2"></div>
+                            <div id="categorySelector1"></div>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="row">
-                        <div class="col-sm-12 col-md-12 col-lg-5">
-                            <div class="card" id="mapSelect">
+                <div class="col-sm-12 col-md-12 col-lg-9">
+                    <div class="card" id="chartCard">
+                        <div class="card-header">Plotting Window</div>
+                        <div class="card-block">
+                            <div id="chart"
+                                 style="display: inline-block; margin: 0 auto; width: 100%;"></div>
+                            <div id="chart_img" class="hidden"
+                                 style="display: none; margin: 0 auto; width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-6" id="buttonColumn">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="card" id="mapSelect">
                                 <div class="card-header">Data on Map</div>
                                 <div class="card-block" style="text-align: center">
                                     <select id="dataSelect" class="js-example-basic-single"
@@ -623,100 +705,70 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
+                    </div>
 
-                        <div class="col-sm-12 col-md-12 col-lg-7">
-                            <div class="card" id="descriptionCard">
-                                <div class="card-header">About This Indicator</div>
-                                <div class="card-block" style="text-align: justify">
-                                    <p style="text-decoration: underline"><b>Definition:</b></p>
-                                    <p>{{ indicator.definition }}</p>
-                                    <p style="text-decoration: underline"><b>Unit:</b></p>
-                                    <p>{{ indicator.unit }}</p>
-                                    <p style="text-decoration: underline"><b>Frequency:</b></p>
-                                    <p>{{ indicator.frequency }}</p>
-                                    <p style="text-decoration: underline"><b>Theme:</b></p>
-                                    <p>{{ indicator.theme }}</p>
-                                    <p style="text-decoration: underline"><b>Sub-Theme:</b></p>
-                                    <p>{{ indicator.sub_theme }}</p>
-                                    <p style="text-decoration: underline"><b>Source:</b></p>
-                                    <p>{{ indicator.source }}</p>
-                                </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="card" id="mapSelect">
+                            <div class="card-header">Download Data</div>
+                            <div class="card-block" style="text-align: center">
+                                    <a id="Export" href="data.csv" target="_blank" download="data.csv">
+                                        <button class="btn btn-primary">Download as CSV
+                                        </button>
+                                    </a>
                             </div>
                         </div>
                     </div>
 
-                    <div id="dashboard">
-                        <div class="row">
-                            <div class="col-sm-12 col-md-12 col-lg-3">
-                                <div class="card" id="selectCard">
-                                    <div class="card-header">Select Your Data</div>
-                                    <div class="card-block">
-                                        <div id="categorySelector2"></div>
-                                        <div id="categorySelector1"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-12 col-md-12 col-lg-9">
-                                <div class="card" id="chartCard">
-                                    <div class="card-header">Plotting Window</div>
-                                    <div class="card-block">
-                                        <div id="chart"
-                                             style="display: inline-block; margin: 0 auto; width: 100%;"></div>
-                                        <div id="chart_img" class="hidden"
-                                             style="display: none; margin: 0 auto; width: 100%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                <div class="card">
-                                    <div class="card-header">Selected Data</div>
-                                    <div class="card-block">
-                                        <div id="table"
-                                             style="display: inline-block; margin: 0 auto; width: 100%;"></div>
-                                        <div id="table2"
-                                             style="display: none; margin: 0 auto; width: 100%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-2">
-                            <div class="card" id="mapSelect">
-                                <div class="card-header">Download Data</div>
-                                <div class="card-block" style="text-align: center">
-                                        <a id="Export" href="data.csv" target="_blank" download="data.csv">
-                                            <button class="btn btn-primary" style="margin-right: 10px">Download as CSV
-                                            </button>
-                                        </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-6 col-lg-2">
-                            <div class="card" id="mapSelect">
-                                <div class="card-header">Download Chart</div>
-                                <div class="card-block" style="text-align: center">
-                                        <a download="chart.png" id="image_download"
-                                           onclick="saveAsImg(document.getElementById('chart_img'));">
-                                            <button class="btn btn-primary" style="margin-left: 10px">Download as PNG
-                                            </button>
-                                        </a>
-                                </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="card" id="mapSelect">
+                            <div class="card-header">Download Chart</div>
+                            <div class="card-block" style="text-align: center">
+                                    <a download="chart.png" id="image_download"
+                                       onclick="saveAsImg(document.getElementById('chart_img'));">
+                                        <button class="btn btn-primary">Download as PNG
+                                        </button>
+                                    </a>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                {% endif %}
+                <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="card" id="geoCard">
+                        <div class="card-header">
+                            Geographic Representation
+                        </div>
+                        <div class="card-block" style="padding: 0;">
+                            <div id="geochart" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="card" id="descriptionCard">
+                        <div class="card-header">About This Indicator</div>
+                        <div class="card-block" style="text-align: justify">
+                            <p style="text-decoration: underline"><b>Definition:</b></p>
+                            <p>{{ indicator.definition }}</p>
+                            <p style="text-decoration: underline"><b>Unit:</b></p>
+                            <p>{{ indicator.unit }}</p>
+                            <p style="text-decoration: underline"><b>Frequency:</b></p>
+                            <p>{{ indicator.frequency }}</p>
+                            <p style="text-decoration: underline"><b>Theme:</b></p>
+                            <p>{{ indicator.theme }}</p>
+                            <p style="text-decoration: underline"><b>Sub-Theme:</b></p>
+                            <p>{{ indicator.sub_theme }}</p>
+                            <p style="text-decoration: underline"><b>Source:</b></p>
+                            <p>{{ indicator.source }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endif %}
 
     </div>
 

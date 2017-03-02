@@ -145,7 +145,7 @@
                         <div class="card-header" id="formCardHead">Upload a New Dataset
                         </div>
                          <div class="card-block collapse in " id="newFormCard" aria-expanded="true">
-                            <p>Submission successful!</p>
+                            <p>Submission successful! You can check out your data in the Analysis Constructor...</p>
                             <br>
                             <a href="{{ url_for('my_datasets') }}"><button class="btn btn-success">Back to My Datasets</button></a>
                          </div>
@@ -173,7 +173,7 @@
                                         Dataset name:
                                     </div>
                                     <div>
-                                        {{ new_form.ds_name(id='new_ds_name',placeholder="Type name (optional)...", styl="width: 100%", class="form-control") }}
+                                        {{ new_form.ds_name(id='new_ds_name',placeholder="Type name (required)...", styl="width: 100%", class="form-control") }}
                                     </div>
                                     <p class="help-block">
                                         {{ new_form.ds_name.errors[0] }}
@@ -184,11 +184,13 @@
                                         Dataset description:
                                     </div>
                                     <div>
-                                        {{ new_form.description(id='new_description',placeholder="Type description (optional)...", styl="width: 100%", class="form-control") }}
+                                        {{ new_form.description(id='new_description',placeholder="Type description (required)...", styl="width: 100%", class="form-control") }}
                                     </div>
                                     <p class="help-block">
                                         {{ new_form.description.errors[0] }}
                                 </div>
+
+                                <p style="color: #FF8E29">In order for your data to be usable on this platform, uploaded files <b>MUST</b> adopt a specific format. An exemplary template can be downloaded <a href="/return-template/" download="template.csv"><b>here</b></a>.</p>
 
                                 <div class="form-group {% if new_form.fileName.errors %} has-error {% endif %}">
                                     <div class="control-label" id="new_filename_label">
@@ -231,7 +233,7 @@
                                     <p class="help-block">
                                         {{ edit_form.ds_id.errors[0] }}
                                 </div>
-
+                                <p style="color: #FF8E29">In order for your data to be usable on this platform, uploaded files <b>MUST</b> adopt a specific format. An exemplary template can be downloaded <a href="/return-template/" download="template.csv"><b>here</b></a>.</p>
                                 <div class="form-group {% if edit_form.fileName.errors %} has-error {% endif %}">
                                     <div class="control-label" id="edit_filename_label">
                                         Upload file:
