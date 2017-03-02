@@ -380,7 +380,7 @@ def constructor_download(id):
 @app.route('/constructor/<id>/edit', methods=['POST'])
 def constructor_mod(id):
     session['warning'] = 0
-    data = StringIO(request.json['info'])
+    data = StringIO.StringIO(request.json['info'])
     head = [str(h) for h in list(request.json['head'])]
     df = pd.read_csv(data, sep=",", thousands=',', names=head)
     types = df.apply(lambda x: pd.lib.infer_dtype(x.values))
