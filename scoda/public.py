@@ -417,13 +417,13 @@ def demographics():
                                                                               "year": 1997},
                                             "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
 
-            query = db.session.query(Ward.data).filter(Ward.region_id == 1).all()
+        query = db.session.query(Ward.data).filter(Ward.region_id == 1).all()
 
-            results = []
+        results = []
 
-            for r in query:
-                row = [val for val in list(r)[0]]
-                results.append(row)
+        for r in query:
+            row = [val for val in list(r)[0]]
+            results.append(row)
 
         df = pd.DataFrame(results).fillna(value=0)
 
