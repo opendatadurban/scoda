@@ -142,7 +142,7 @@
         var tour = new Shepherd.Tour({
                 defaults: {
                     classes: 'shepherd-theme-dark',
-                    scrollTo: true
+                    scrollTo: false
                 }
             });
 
@@ -486,7 +486,7 @@
                                    aria-controls="formCard"><i class="icon-arrow-down"></i></a>
                             </div>
                         </div>
-                        <div class="card-block collapse" style="text-align: justify"  id="formCard">
+                        <div class="card-block" style="text-align: justify"  id="formCard">
                             {% include 'paragraphs/demo_introduction.html' %}
                         </div>
                     </div>
@@ -825,7 +825,7 @@
                         <div class="card-header" id="ethNightFormCardHead">Download The Methodology
                         </div>
                         <div class="card-block" style="text-align: left" id="jhbNightFormCard">
-                            <p>You can download a PDF version of the information contained on this page by clicking on the button below.</p>
+                            <p>You can download a PDF version of this page by clicking on the button below.</p>
                             <div class="row" style="text-align: center;">
                                 <a href="{{ url_for('report_gen') }}"><button class="btn btn-primary btn-responsive" type="button" id="submitButton2">Download</button></a>
                             </div>
