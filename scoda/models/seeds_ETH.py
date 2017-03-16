@@ -22,7 +22,7 @@ def seed_db(db):
         for i, I in enumerate(range(59500001, 59500111) + Ws):
             parser[int(I)] = {}
             parser[int(I)]['includes'] = []
-            parser[int(I)]['city_ref'] = i - 1
+            parser[int(I)]['city_ref'] = i
 
         for i in range(len(data2)):
             parser[int(data2[i, 2])]['includes'].append(data2[i, 1])
