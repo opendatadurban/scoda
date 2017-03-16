@@ -464,7 +464,7 @@ def demographics():
 
         return render_template('demographics/demographics.html', form1=form1, form2=form2, geometries1=geometries1,
                                geometries2=geometries2, tour=tour, table1=table1, table2=table2, max1=m, max2=m2,
-                               region1=1, region2=1,
+                               region1=1, region2=4,
                                ward1=None, ward2=None, analyses=analyses
                                )
 
