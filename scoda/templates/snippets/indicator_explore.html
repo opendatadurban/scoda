@@ -119,9 +119,9 @@
                 ]
             });
 
-            tour.addStep('welcome4', {
-                title: 'Using the your navigation...',
-                text: 'Your left-hand navigation also provides quick access to the Data Explorer, where you can explore, visualize and download all 102 SCODA datasets.',
+            tour.addStep('welcome7', {
+                title: 'Using the rest of your navigation...',
+                text: 'These links on the left-hand sidebar will allow you to navigate to the other parts of the platform, including the demographics modelling system.',
                 attachTo: '#sideNav right',
                 advanceOn: '.docs-link click',
                 buttons: [
@@ -134,27 +134,10 @@
                         text: 'Exit',
                         action: tour.complete
                     },
+
                     {
                         text: 'Next',
                         action: tour.next
-                    }
-                ]
-            });
-
-            tour.addStep('welcome7', {
-                title: 'Using the rest of your navigation...',
-                text: 'Clicking on "Demographics" will take you to the demographics model explorer.',
-                attachTo: '#sideNav right',
-                advanceOn: '.docs-link click',
-                buttons: [
-                    {
-                        text: 'Back',
-                        action: tour.back
-                    },
-
-                    {
-                        text: 'Exit',
-                        action: tour.complete
                     }
                 ]
             });
@@ -320,10 +303,6 @@
                         text: 'Exit',
                         action: tour.complete
                     },
-                    {
-                        text: 'Next',
-                        action: tour.next
-                    }
                 ]
             });
 
