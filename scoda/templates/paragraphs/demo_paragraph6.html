@@ -1,3 +1,10 @@
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
 <p>The methodology adopted here rests on the ability to project population for sub-national entities for three points in time - namely the 1996, 2001 and 2011 censi. To do this it was necessary to derive reliable 1996 and 2001 population estimates for each enumerator area as they were defined in 2011. Once again "second order polynomial curves" were fit to these points. This curve was then projected and used to derive population estimates for each enumerator area for the period 2012 to 2030.</p>
 
 <p>The projections (inevitably) resulted in some implausible estimates for some, as ward downward sloping projections eventually result in population estimates that are below zero (negative). Conversely the projections based on an increasing trend could result in rapid population growth and, by implication, implausible population densities. For this reason limits are placed on projections. The two basic rules applied were:
@@ -14,3 +21,37 @@
 <p>Like wards the projections of enumerator area populations gave rise to implausible or, at least, questionable results. However the essence of this method is to aggregate the enumerator areas to wards (or similar level). To determine the ward population the over five thousand enumerator areas in Johannesburg are combined to reflect trends in 130 wards – with an average of 43 enumerator areas in each ward.</p>
 
 <p>Although estimates are made for every enumerator area these are, on their own, unreliable and often misleading. By contrast the aggregated result are treated as reliable and should be verified as such. Unfortunately projections, almost by definition cannot be verified timeously. The next census will be in 2021. Only a year or so after that will new population estimates at ward level become available. Verification of the projections has to be sought elsewhere. One candidate for verification are the returns for voting districts in each city.</p>
+
+<p>The fundamental equations used to generate the data for this model are detailed below:</p>
+<br>
+<p><b>Stage 1:</b></p>
+<p>$$salpop_{y} = max\bigg(0, min\Big(f(y) = ax_{k} + bx^2_{k} + c_{k}, area_{k} \times quantile\big(0.99, maxden_{hm}\big)\Big)\bigg)$$</p>
+<p><b>Stage 2:</b></p>
+<p>$$wardpop_{y} = \sum_{1}^{k}\Bigg(\frac{salpop_{ky}}{\big(\sum_{j = w}^{w} salpop_{wy}\big)^2} \times metropop_{my}\Bigg)$$</p>
+<p><b>Population estimate for 1996:</b></p>
+<p>$$salpop_{96} = \sum_{1}^{m \in sal}\big(eapop_{m} \times segmentsize_{m}/totaleaarea\big)$$</p>
+<br>
+<p><b>WHERE:</b></p>
+<br>
+<p><b>Stage 1</b> is the population estimate for enumerator area/sals in any given year</p>
+<p>$salpop_{y}$ is the enumerator area/ sal population in year $y$</p>
+<p>$ax_{2} + bx + c$ is the formula for fitting a polynomial curve to the 1996, 2001, and 2011 population of that enumerator area/ small area level</p>
+<p>$f(y)$ represents the projection of that formula to the year $y$</p>
+<p>$area_{k}$ is the physical size of the enumerator area/sal</p>
+<p>$maxden_{hm}$ is the maximum population density of enumerator areas/sals also dominated by housing type $h$ in that metro ($m$)</p>
+<p>$quantile(0.99, maxden_{h})$ is the 99th quantile of the population densities seen in enumerator areas /sals dominated by housing type $h$</p>
+<br>
+<p><b>Stage 2</b> is the estimation of the ward or pseudo wards population</p>
+<p>$k$ refers to the number of enumerator areas/ sals in that ward</p>
+<p>$salpop_{ky}$ is the population for enumerator area/sal $k$ in year $y$ (derived from <b>Stage 1</b>)</p>
+<p>$w$ refers to each enumerator area/sal falling to the ward in question</p>
+<p>$salpop_{wy}$:  refers to the estimated population of all enumerator areas/sals in ward $w$ in year $y$</p>
+<p>$metropop_{my}$ is the estimate of the population of the entire metropole $m$ in year $y$</p>
+<br>
+<p>Between the censi the way in which enumerator areas and small area levels were defined changed. To bring the 1996 enumerator areas and 2001 small area levels into alignment with those used in 2011 the following approach was used. The first step was to segment the 2011 small area levels by the 1996 (then 2001) enumerator areas</p>
+<br>
+<p>$salpop_{96}$ refers to the estimate of the 1996 population in the small area level as defined in 2011</p>
+<p>$m$ refers to each enumerator area/sal in 1996 (or 2001) that fell  into the small area level</p>
+<p>$eapop_{m}$ is the population of the enumerator area as per the 1996 (or 2001) census</p>
+<p>$segmentsize_{m}$: is the proportion (in area) of enumerator area $m$ that falls into that 2011 small area level</p>
+<p>$totaleaarea$ is the physical size of the 1996 enumerator area in question</p>
