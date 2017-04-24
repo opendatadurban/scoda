@@ -32,6 +32,10 @@
 
             {% if current_user.is_authenticated %}
 
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('contact') }}" target="_blank"><i class="fa fa-envelope-o fa-lg m-t-2"></i>Contact Us</a>
+                </li>
+
             {% else %}
 
                 <li class="nav-item">
