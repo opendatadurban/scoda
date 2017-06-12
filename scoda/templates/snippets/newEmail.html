@@ -16,28 +16,31 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-      var tour = new Shepherd.Tour({
-                defaults: {
-                    classes: 'shepherd-theme-dark',
-                    scrollTo: true
-                }
-            });
 
-            tour.addStep('welcome', {
-                title: 'Please Give Us Feedback!',
-                text: 'Your feedback is critical to our ensuring that this platform is both user-friendly and impactful. Please detail your comment / challenge in the box provided.',
-                attachTo: '#selectorCard right',
-                advanceOn: '.docs-link click',
-                buttons: [
-                    {
-                        text: 'Exit',
-                        action: tour.complete
+        {% if current_user.tours == True %}
+          var tour = new Shepherd.Tour({
+                    defaults: {
+                        classes: 'shepherd-theme-dark',
+                        scrollTo: true
                     }
-                ]
-            });
+                });
 
-            tour.start();
-    });
+                tour.addStep('welcome', {
+                    title: 'Please Give Us Feedback!',
+                    text: 'Your feedback is critical to our ensuring that this platform is both user-friendly and impactful. Please detail your comment / challenge in the box provided.',
+                    attachTo: '#selectorCard right',
+                    advanceOn: '.docs-link click',
+                    buttons: [
+                        {
+                            text: 'Exit',
+                            action: tour.complete
+                        }
+                    ]
+                });
+
+                tour.start();
+          });
+    {% endif %}
 
 </script>
 
