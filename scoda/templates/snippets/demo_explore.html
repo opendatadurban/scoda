@@ -137,260 +137,519 @@
                 });
         });
 
-        {% if tour %}
+        {% if current_user.is_authenticated %}
 
-        var tour = new Shepherd.Tour({
-                defaults: {
-                    classes: 'shepherd-theme-dark',
-                    scrollTo: false
-                }
-            });
+            {% if current_user.tours == True %}
 
-            tour.addStep('welcome', {
-                title: 'Welcome to the Demographics Explorer!',
-                text: 'This short tour will guide you through the necessary steps to explore the demographic modelling data contained in this almanac. You can exit the tour at any stage by clicking on the "Exit" button.',
-                attachTo: '#breadCrumb bottom',
-                advanceOn: '.docs-link click',
-                buttons: [
-                    {
-                        text: 'Exit',
-                        action: tour.complete
-                    },
-                    {
-                        text: 'Next',
-                        action: tour.next
-                    }
-                ]
-            });
+                var tour = new Shepherd.Tour({
+                        defaults: {
+                            classes: 'shepherd-theme-dark',
+                            scrollTo: false
+                        }
+                    });
 
-            tour.addStep('Intro', {
-                title: 'Details of the Model...',
-                text: 'An extensive description of the demographics model used on this platform, along with details of its derivation and implementation are provided in the sections below. Clicking on the arrows located in the right corners of each section will drop down the information.',
-                attachTo: '#introFormCardHead top',
-                advanceOn: '.docs-link click',
-                buttons: [
-                    {
-                        text: 'Exit',
-                        action: tour.complete
-                    },
-                    {
-                        text: 'Next',
-                        action: tour.next
-                    }
-                ]
-            });
+                    tour.addStep('welcome', {
+                        title: 'Welcome to the Demographics Explorer!',
+                        text: 'This short tour will guide you through the necessary steps to explore the demographic modelling data contained in this almanac. You can exit the tour at any stage by clicking on the "Exit" button.',
+                        attachTo: '#breadCrumb bottom',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
 
-            tour.addStep('form', {
-                title: 'The Selection Form',
-                text: 'This form is here to help you find the region you are interested in exploring. The selection fields will allow you to find the city, ward and year that you would like to explore. ',
-                attachTo: '#formCardHead1 right',
-                advanceOn: '.docs-link click',
-                buttons: [
-                    {
-                        text: 'Back',
-                        action: tour.back
-                    },
-                    {
-                        text: 'Exit',
-                        action: tour.complete
-                    },
-                    {
-                        text: 'Next',
-                        action: tour.next
-                    }
-                ]
-            });
+                    tour.addStep('Intro', {
+                        title: 'Details of the Model...',
+                        text: 'An extensive description of the demographics model used on this platform, along with details of its derivation and implementation are provided in the sections below. Clicking on the arrows located in the right corners of each section will drop down the information.',
+                        attachTo: '#introFormCardHead top',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
 
-            tour.addStep('city', {
-                title: 'City Selector',
-                text: 'This field allows you to select the the city you would like to look at.',
-                attachTo: '#city_label right',
-                advanceOn: '.docs-link click',
-                buttons: [
-                    {
-                        text: 'Back',
-                        action: tour.back
-                    },
-                    {
-                        text: 'Exit',
-                        action: tour.complete
-                    },
-                    {
-                        text: 'Next',
-                        action: tour.next
-                    }
-                ]
-            });
+                    tour.addStep('form', {
+                        title: 'The Selection Form',
+                        text: 'This form is here to help you find the region you are interested in exploring. The selection fields will allow you to find the city, ward and year that you would like to explore. ',
+                        attachTo: '#formCardHead1 right',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Back',
+                                action: tour.back
+                            },
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
 
-            tour.addStep('ward', {
-                title: 'Ward Selector',
-                text: 'This field allows you to select the ward that you would like to look at. Initially, and when "View All" is selected, the aggregated ward data will be shown. Selecting a particular ward and clicking "Submit" will zoom to that Ward and will show the small enumerator areas along with their data values.',
-                attachTo: '#ward_label right',
-                advanceOn: '.docs-link click',
-                buttons: [
-                    {
-                        text: 'Back',
-                        action: tour.back
-                    },
-                    {
-                        text: 'Exit',
-                        action: tour.complete
-                    },
-                    {
-                        text: 'Next',
-                        action: tour.next
-                    }
-                ]
-            });
+                    tour.addStep('city', {
+                        title: 'City Selector',
+                        text: 'This field allows you to select the the city you would like to look at.',
+                        attachTo: '#city_label right',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Back',
+                                action: tour.back
+                            },
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
 
-            tour.addStep('year', {
-                title: 'Year Selector',
-                text: 'This field allows you to choose which year\'s data values you would like to explore.',
-                attachTo: '#year_label right',
-                advanceOn: '.docs-link click',
-                buttons: [
-                    {
-                        text: 'Back',
-                        action: tour.back
-                    },
-                    {
-                        text: 'Exit',
-                        action: tour.complete
-                    },
-                    {
-                        text: 'Next',
-                        action: tour.next
-                    }
-                ]
-            });
+                    tour.addStep('ward', {
+                        title: 'Ward Selector',
+                        text: 'This field allows you to select the ward that you would like to look at. Initially, and when "View All" is selected, the aggregated ward data will be shown. Selecting a particular ward and clicking "Submit" will zoom to that Ward and will show the small enumerator areas along with their data values.',
+                        attachTo: '#ward_label right',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Back',
+                                action: tour.back
+                            },
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
 
-            tour.addStep('submit', {
-                title: 'Submit Button',
-                text: 'Once you have made your selections, click "Submit" to view the data!',
-                attachTo: '#submitButton1 right',
-                advanceOn: '.docs-link click',
-                buttons: [
-                    {
-                        text: 'Back',
-                        action: tour.back
-                    },
-                    {
-                        text: 'Exit',
-                        action: tour.complete
-                    },
-                    {
-                        text: 'Next',
-                        action: tour.next
-                    }
-                ]
-            });
+                    tour.addStep('year', {
+                        title: 'Year Selector',
+                        text: 'This field allows you to choose which year\'s data values you would like to explore.',
+                        attachTo: '#year_label right',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Back',
+                                action: tour.back
+                            },
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
 
-             tour.addStep('download', {
-                title: 'Download Button',
-                text: 'Clicking on this button will download all total population data for the selected region (city or ward) from 1996 to 2030.',
-                attachTo: '#downloadButton1 right',
-                advanceOn: '.docs-link click',
-                buttons: [
-                    {
-                        text: 'Back',
-                        action: tour.back
-                    },
-                    {
-                        text: 'Exit',
-                        action: tour.complete
-                    },
-                    {
-                        text: 'Next',
-                        action: tour.next
-                    }
-                ]
-            });
+                    tour.addStep('submit', {
+                        title: 'Submit Button',
+                        text: 'Once you have made your selections, click "Submit" to view the data!',
+                        attachTo: '#submitButton1 right',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Back',
+                                action: tour.back
+                            },
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
 
-            tour.addStep('plot', {
-                title: 'Map Area',
-                text: 'This map shows projected migration model values at the ward and small enumerator area levels for each metro. Clicking on an area will zoom to it, though clicking on a ward will NOT reveal its underlying enumerators.',
-                attachTo: '#geoCardHead1 left',
-                advanceOn: '.docs-link click',
-                buttons: [
-                    {
-                        text: 'Back',
-                        action: tour.back
-                    },
-                    {
-                        text: 'Exit',
-                        action: tour.complete
-                    },
-                    {
-                        text: 'Next',
-                        action: tour.next
-                    }
-                ]
-            });
+                     tour.addStep('download', {
+                        title: 'Download Button',
+                        text: 'Clicking on this button will download all total population data for the selected region (city or ward) from 1996 to 2030.',
+                        attachTo: '#downloadButton1 right',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Back',
+                                action: tour.back
+                            },
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
 
-            tour.addStep('plot2', {
-                title: 'Map Area',
-                text: 'Map polygons are coloured according to the total calculated flow of people into or out of the area over the course of the preceeding year. Consequently, 1996 values will register 0 net flow as there is no prior data to compare to. The calculated total number of people in an area is also shown within the tooltip that appears when you hover over an area.',
-                attachTo: '#geoCardHead1 left',
-                advanceOn: '.docs-link click',
-                buttons: [
-                    {
-                        text: 'Back',
-                        action: tour.back
-                    },
-                    {
-                        text: 'Exit',
-                        action: tour.complete
-                    },
-                    {
-                        text: 'Next',
-                        action: tour.next
-                    }
-                ]
-            });
+                    tour.addStep('plot', {
+                        title: 'Map Area',
+                        text: 'This map shows projected migration model values at the ward and small enumerator area levels for each metro. Clicking on an area will zoom to it, though clicking on a ward will NOT reveal its underlying enumerators.',
+                        attachTo: '#geoCardHead1 left',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Back',
+                                action: tour.back
+                            },
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
 
-            tour.addStep('time', {
-                title: 'Time-series',
-                text: 'This plot gives the values for the selected region (city or ward) from 1996 to 2030.',
-                attachTo: '#chartCard1 left',
-                advanceOn: '.docs-link click',
-                buttons: [
-                    {
-                        text: 'Back',
-                        action: tour.back
-                    },
-                    {
-                        text: 'Exit',
-                        action: tour.complete
-                    },
-                    {
-                        text: 'Next',
-                        action: tour.next
-                    }
-                ]
-            });
+                    tour.addStep('plot2', {
+                        title: 'Map Area',
+                        text: 'Map polygons are coloured according to the total calculated flow of people into or out of the area over the course of the preceeding year. Consequently, 1996 values will register 0 net flow as there is no prior data to compare to. The calculated total number of people in an area is also shown within the tooltip that appears when you hover over an area.',
+                        attachTo: '#geoCardHead1 left',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Back',
+                                action: tour.back
+                            },
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
 
-            tour.addStep('time2', {
-                title: 'Comparative Plotting',
-                text: 'A second demographics explorer row is provided to allow for comparisons between regions to be made.',
-                attachTo: '#geoCardHead2 top',
-                advanceOn: '.docs-link click',
-                buttons: [
-                    {
-                        text: 'Back',
-                        action: tour.back
-                    },
-                    {
-                        text: 'Exit',
-                        action: tour.complete
-                    },
-                    {
-                        text: 'Next',
-                        action: tour.next
-                    }
-                ]
-            });
+                    tour.addStep('time', {
+                        title: 'Time-series',
+                        text: 'This plot gives the values for the selected region (city or ward) from 1996 to 2030.',
+                        attachTo: '#chartCard1 left',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Back',
+                                action: tour.back
+                            },
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
 
-            tour.start();
+                    tour.addStep('time2', {
+                        title: 'Comparative Plotting',
+                        text: 'A second demographics explorer row is provided to allow for comparisons between regions to be made.',
+                        attachTo: '#geoCardHead2 top',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Back',
+                                action: tour.back
+                            },
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
+
+                    tour.start();
+
+            {% endif %}
+
+        {% else %}
+
+            var tour = new Shepherd.Tour({
+                        defaults: {
+                            classes: 'shepherd-theme-dark',
+                            scrollTo: false
+                        }
+                    });
+
+                    tour.addStep('welcome', {
+                        title: 'Welcome to the Demographics Explorer!',
+                        text: 'This short tour will guide you through the necessary steps to explore the demographic modelling data contained in this almanac. You can exit the tour at any stage by clicking on the "Exit" button.',
+                        attachTo: '#breadCrumb bottom',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
+
+                    tour.addStep('Intro', {
+                        title: 'Details of the Model...',
+                        text: 'An extensive description of the demographics model used on this platform, along with details of its derivation and implementation are provided in the sections below. Clicking on the arrows located in the right corners of each section will drop down the information.',
+                        attachTo: '#introFormCardHead top',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
+
+                    tour.addStep('form', {
+                        title: 'The Selection Form',
+                        text: 'This form is here to help you find the region you are interested in exploring. The selection fields will allow you to find the city, ward and year that you would like to explore. ',
+                        attachTo: '#formCardHead1 right',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Back',
+                                action: tour.back
+                            },
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
+
+                    tour.addStep('city', {
+                        title: 'City Selector',
+                        text: 'This field allows you to select the the city you would like to look at.',
+                        attachTo: '#city_label right',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Back',
+                                action: tour.back
+                            },
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
+
+                    tour.addStep('ward', {
+                        title: 'Ward Selector',
+                        text: 'This field allows you to select the ward that you would like to look at. Initially, and when "View All" is selected, the aggregated ward data will be shown. Selecting a particular ward and clicking "Submit" will zoom to that Ward and will show the small enumerator areas along with their data values.',
+                        attachTo: '#ward_label right',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Back',
+                                action: tour.back
+                            },
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
+
+                    tour.addStep('year', {
+                        title: 'Year Selector',
+                        text: 'This field allows you to choose which year\'s data values you would like to explore.',
+                        attachTo: '#year_label right',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Back',
+                                action: tour.back
+                            },
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
+
+                    tour.addStep('submit', {
+                        title: 'Submit Button',
+                        text: 'Once you have made your selections, click "Submit" to view the data!',
+                        attachTo: '#submitButton1 right',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Back',
+                                action: tour.back
+                            },
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
+
+                     tour.addStep('download', {
+                        title: 'Download Button',
+                        text: 'Clicking on this button will download all total population data for the selected region (city or ward) from 1996 to 2030.',
+                        attachTo: '#downloadButton1 right',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Back',
+                                action: tour.back
+                            },
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
+
+                    tour.addStep('plot', {
+                        title: 'Map Area',
+                        text: 'This map shows projected migration model values at the ward and small enumerator area levels for each metro. Clicking on an area will zoom to it, though clicking on a ward will NOT reveal its underlying enumerators.',
+                        attachTo: '#geoCardHead1 left',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Back',
+                                action: tour.back
+                            },
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
+
+                    tour.addStep('plot2', {
+                        title: 'Map Area',
+                        text: 'Map polygons are coloured according to the total calculated flow of people into or out of the area over the course of the preceeding year. Consequently, 1996 values will register 0 net flow as there is no prior data to compare to. The calculated total number of people in an area is also shown within the tooltip that appears when you hover over an area.',
+                        attachTo: '#geoCardHead1 left',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Back',
+                                action: tour.back
+                            },
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
+
+                    tour.addStep('time', {
+                        title: 'Time-series',
+                        text: 'This plot gives the values for the selected region (city or ward) from 1996 to 2030.',
+                        attachTo: '#chartCard1 left',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Back',
+                                action: tour.back
+                            },
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
+
+                    tour.addStep('time2', {
+                        title: 'Comparative Plotting',
+                        text: 'A second demographics explorer row is provided to allow for comparisons between regions to be made.',
+                        attachTo: '#geoCardHead2 top',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Back',
+                                action: tour.back
+                            },
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            },
+                            {
+                                text: 'Next',
+                                action: tour.next
+                            }
+                        ]
+                    });
+
+                    tour.start();
 
         {% endif %}
     });

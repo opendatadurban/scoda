@@ -980,3 +980,14 @@ def report_gen():
     response.headers['Content-Disposition'] = "attachment; filename=report.pdf"
 
     return response
+
+
+@app.route('/tours')
+def tours():
+    user = User.query.get_or_404(current_user.id)
+    if current_user.tours:
+        user.tours = False
+    else:
+        user.tours = True
+    db.session.commit()
+    return redirect('/dashboard')
