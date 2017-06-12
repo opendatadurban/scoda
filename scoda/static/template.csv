@@ -1,1 +1,9 @@
-City,Year,Data_Column_1,Data_Column_2,Data_Column_3
+City,Year,Data_Column_1 [rename],Data_Column_2 [rename],Data_Column_3 [rename]
+Buffalo City,add year here,add data here,add data here,add data here
+Cape Town,add year here,add data here,add data here,add data here
+EThekwini,add year here,add data here,add data here,add data here
+Ekurhuleni,add year here,add data here,add data here,add data here
+Johannesburg,add year here,add data here,add data here,add data here
+Mangaung,add year here,add data here,add data here,add data here
+Nelson Mandela Bay,add year here,add data here,add data here,add data here
+Tshwane,add year here,add data here,add data here,add data here

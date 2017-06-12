@@ -126,6 +126,12 @@ def template_download():
     return send_file('static/template.csv', as_attachment=True)
 
 
+@app.route('/return-model/')
+def model_gen():
+
+    return send_file('static/model.zip', as_attachment=True)
+
+
 @app.route('/return-scoda/')
 def scoda_download():
 
