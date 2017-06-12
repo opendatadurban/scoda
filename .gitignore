@@ -87,7 +87,6 @@ ENV/
 
 # Rope project settings
 .ropeproject
-/scoda/data/Manicured_Final.csv
 *.xml
 .idea/dataSources/7906e1ad-c6de-4980-b442-f563044942ad/_metadata_/metadata
 *.keystream
@@ -117,5 +116,3 @@ scoda/static/vendor/grChartImg/
 /scoda/static/css/style.css.old
 /scoda/data/JHB_Grid.json
 /scoda/data/jhbgridmodel.csv
-!/scoda/data/JHB_Grid.json
-!/scoda/data/jhbgridmodel.csv
