@@ -18,8 +18,9 @@ CsrfProtect(app)
 # Database
 from flask_sqlalchemy import SQLAlchemy
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://scoda:scoda@localhost/scoda'
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://scoda:scoda@localhost/scoda'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://klgbmkjzcikjgo:72da7f860dfd10584e1e0aa1f1a982418bde78d05fa8731ab745ad3c7b286e3b@ec2-54-225-240-168.compute-1.amazonaws.com:5432/d4mc5odij5h1se'
 db = SQLAlchemy(app)
 
 # Mail

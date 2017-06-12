@@ -30,7 +30,7 @@
 
         });
 
-        {% if tour %}
+        {% if current_user.tours == True %}
 
             var tour = new Shepherd.Tour({
                 defaults: {

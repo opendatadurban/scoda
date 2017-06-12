@@ -13,31 +13,35 @@
 </script>
 
 <link rel="stylesheet" href="../../static/vendor/shepherd/css/shepherd-theme-dark.css"/>
+
 <script type="text/javascript">
 
     $(document).ready(function () {
-      var tour = new Shepherd.Tour({
-                defaults: {
-                    classes: 'shepherd-theme-dark',
-                    scrollTo: true
-                }
-            });
 
-            tour.addStep('welcome', {
-                title: 'Creating a new analysis',
-                text: 'You can use this form to start a new custom analysis. Please provide a name and a description, click on the "Create Analysis" button and you will be taken to the analysis construction page.',
-                attachTo: '#selectorCard right',
-                advanceOn: '.docs-link click',
-                buttons: [
-                    {
-                        text: 'Exit',
-                        action: tour.complete
-                    }
-                ]
-            });
+        {% if current_user.tours == True %}
+              var tour = new Shepherd.Tour({
+                        defaults: {
+                            classes: 'shepherd-theme-dark',
+                            scrollTo: true
+                        }
+                    });
 
-            tour.start();
-    });
+                    tour.addStep('welcome', {
+                        title: 'Creating a new analysis',
+                        text: 'You can use this form to start a new custom analysis. Please provide a name and a description, click on the "Create Analysis" button and you will be taken to the analysis construction page.',
+                        attachTo: '#selectorCard right',
+                        advanceOn: '.docs-link click',
+                        buttons: [
+                            {
+                                text: 'Exit',
+                                action: tour.complete
+                            }
+                        ]
+                    });
+
+                    tour.start();
+              });
+        {% endif %}
 
 </script>
 

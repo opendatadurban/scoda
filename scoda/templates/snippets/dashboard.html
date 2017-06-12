@@ -1,6 +1,10 @@
 <link rel="stylesheet" href="../../static/vendor/shepherd/css/shepherd-theme-dark.css"/>
 <script type="text/javascript">
 
+$(document).ready(function () {
+
+    {% if current_user.tours == True %}
+
      var tour = new Shepherd.Tour({
                 defaults: {
                     classes: 'shepherd-theme-dark',
@@ -136,9 +140,31 @@
                 ]
             });
 
-             tour.addStep('welcome7', {
+            tour.addStep('welcome7', {
                 title: 'Using the rest of your navigation...',
                 text: 'Finally, clicking on "Demographics" will take you to the demographics model explorer.',
+                attachTo: '#sideNav right',
+                advanceOn: '.docs-link click',
+                buttons: [
+                    {
+                        text: 'Back',
+                        action: tour.back
+                    },
+
+                    {
+                        text: 'Exit',
+                        action: tour.complete
+                    },
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('welcome8', {
+                title: 'Still want tours?',
+                text: 'Lastly, when you feel you know your way around the SCODA system, you can switch these guided tours off by clicking on this button. ',
                 attachTo: '#sideNav right',
                 advanceOn: '.docs-link click',
                 buttons: [
@@ -156,7 +182,9 @@
 
             tour.start();
 
+    {% endif %}
 
+})
 </script>
 
 <div class="row">
@@ -228,3 +256,23 @@
         </div>
     {% endfor %}
 {% endif %}
+
+<ol id="breadCrumb" class="breadcrumb">
+        <li class="breadcrumb-item">Tours</li>
+        </li>
+</ol>
+
+
+<div class="col-sm-12 col-md-6 col-lg-3">
+<div class="card" id="selectorCard">
+    <div class="card-header" id="analysis-toursCardHead">Toggle Guided Tours</div>
+    <div class="card-block" id="analysis-toursCardBlock">
+        <div class="row" style="text-align: center">
+            <a href="{{ url_for('tours') }}">
+                <button class="btn btn-primary" id="tourToggle">{% if current_user.tours == True%}Switch Tours Off{% else %}Switch Tours On{% endif %}</button>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+

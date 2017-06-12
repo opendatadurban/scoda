@@ -37,6 +37,8 @@ class User(db.Model, UserMixin):
     first_name = Column(String(50))
     last_name = Column(String(50))
 
+    tours = Column(Boolean(), default=True)
+
     created_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.current_timestamp())
 

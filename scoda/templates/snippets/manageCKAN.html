@@ -20,6 +20,7 @@
         $('#editButton').click(function(){$('input[id=edit_submitted]').val('1');});
         $('#deleteButton').click(function(){$('input[id=delete_submitted]').val('1');});
 
+        {% if current_user.tours == True %}
             var tour = new Shepherd.Tour({
                 defaults: {
                     classes: 'shepherd-theme-dark',
@@ -129,6 +130,8 @@
             });
 
             tour.start();
+
+        {% endif %}
     });
 
 </script>

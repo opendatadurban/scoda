@@ -18,7 +18,7 @@
         $('.js-example-basic-single').select2();
         $('.js-example-basic-multiple').select2();
 
-        {% if tour %}
+        {% if current_user.tours == True %}
 
         var tour = new Shepherd.Tour({
                 defaults: {
