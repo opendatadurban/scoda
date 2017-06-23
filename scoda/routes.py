@@ -1,11 +1,10 @@
 from scoda.app import app
-from flask import url_for, redirect, session, render_template
+from flask import url_for, redirect, session, render_template, request
 from flask_security import current_user
 from scoda.models import db, User
 import scoda.city
 import scoda.researcher
-
-import urllib2
+from flask_wtf.csrf import CSRFError
 from json import loads
 from pandas.io.json import json_normalize
 import pandas as pd
@@ -334,6 +333,7 @@ def sanitation():
 
     return json
 
+
 @app.route('/')
 def home_public():
     json1 = pyramid()
@@ -354,6 +354,7 @@ def home_public():
                            json7=json7, json8=json8, json9=json9,
                            json10=json10, json11=json11)
 
+
 @app.route('/registered')
 def home_user():
     if current_user.is_authenticated:
@@ -366,6 +367,11 @@ def home_user():
         return render_template('security/noperms.html')
     else:
         return redirect(url_for('security.login'))
+
+
+@app.errorhandler(CSRFError)
+def csrf_error(e):
+    return render_template('errors/400.html', base=request.base_url), 400
 
 
 @app.errorhandler(404)
