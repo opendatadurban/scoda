@@ -187,92 +187,115 @@ $(document).ready(function () {
 })
 </script>
 
-<div class="row">
-                <div class="col-sm-12 col-lg-12 col-lg-12">
-                        {% with messages = get_flashed_messages(category_filter=["email"]) %}
-                            {% if messages %}
-                                <div class="alert alert-success">
-                                    {% for message in messages %}
-                                       {{ message }}
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
-                        {% endwith %}
-                </div>
-            </div>
+<div class="container-fluid">
+    <div id="ui-view" style="opacity: 1;">
+        <div class="animated fadeIn">
 
-            {% if analyses %}
-                {% for group in analyses %}
-                    <div class="row" style="padding-left: 30px; padding-right: 30px">
-                        {% for analysis in group %}
-                            {% if analysis %}
-                                <div class="col-sm-12 col-md-6 col-lg-3">
-                                    <div class="card" id="selectorCard">
-                                        <div class="card-header" id="analysis-{{ analysis[0] }}CardHead">{{ analysis[1] }}</div>
-                                        <div class="card-block" id="analysis-{{ analysis[0] }}CardBlock">
-                                            <p>{{ analysis[2] }}</p>
-                                            <div class="row" style="text-align: center">
-                                                <a href="/constructor/{{ analysis[0] }}">
-                                                    <button class="btn btn-primary" id="openAnalysis">Open</button>
-                                                </a>
-                                                <a href="/constructor/{{ analysis[0] }}/delete">
-                                                    <button class="btn btn-danger" id="deleteAnalysis">Delete</button>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endif %}
+<div>
+    <ol id="breadCrumb" class="breadcrumb">
+        <li class="breadcrumb-item">My Analyses</li>
+        </li>
+    </ol>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 col-lg-12 col-lg-12">
+            {% with messages = get_flashed_messages(category_filter=["email"]) %}
+                {% if messages %}
+                    <div class="alert alert-success">
+                        {% for message in messages %}
+                           {{ message }}
                         {% endfor %}
                     </div>
-                {% endfor %}
-            {% endif %}
+                {% endif %}
+            {% endwith %}
+    </div>
+</div>
 
-<ol id="breadCrumb" class="breadcrumb">
-        <li class="breadcrumb-item">My Datasets</li>
-        </li>
-</ol>
-
-{% if datasets %}
-    {% for group in datasets %}
-        <div class="row" style="padding-left: 30px; padding-right: 30px ">
-            {% for analysis in group %}
-                {% if analysis %}
-                    <div class="col-sm-12 col-md-6 col-lg-3">
-                        <div class="card" id="selectorCard">
-                            <div class="card-header" id="analysis-{{ analysis[0] }}CardHead">{{ analysis[1] }}</div>
-                            <div class="card-block" id="analysis-{{ analysis[0] }}CardBlock">
-                                <p>{{ analysis[2] }}</p>
-                                <div class="row" style="text-align: center">
-                                    <a href="{{ url_for('my_datasets') }}">
-                                        <button class="btn btn-primary" id="openAnalysis">Go To Datasets</button>
-                                    </a>
+<div>
+    {% if analyses %}
+        {% for group in analyses %}
+            <div class="row" style="padding-left: 30px; padding-right: 30px">
+                {% for analysis in group %}
+                    {% if analysis %}
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="card" id="selectorCard">
+                                <div class="card-header" id="analysis-{{ analysis[0] }}CardHead">{{ analysis[1] }}</div>
+                                <div class="card-block" id="analysis-{{ analysis[0] }}CardBlock">
+                                    <p>{{ analysis[2] }}</p>
+                                    <div class="row" style="text-align: center">
+                                        <a href="/constructor/{{ analysis[0] }}">
+                                            <button class="btn btn-primary" id="openAnalysis">Open</button>
+                                        </a>
+                                        <a href="/constructor/{{ analysis[0] }}/delete">
+                                            <button class="btn btn-danger" id="deleteAnalysis">Delete</button>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
-        </div>
-    {% endfor %}
-{% endif %}
-
-<ol id="breadCrumb" class="breadcrumb">
-        <li class="breadcrumb-item">Tours</li>
-        </li>
-</ol>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
 
 
-<div class="col-sm-12 col-md-6 col-lg-3">
-<div class="card" id="selectorCard">
-    <div class="card-header" id="analysis-toursCardHead">Toggle Guided Tours</div>
-    <div class="card-block" id="analysis-toursCardBlock">
-        <div class="row" style="text-align: center">
-            <a href="{{ url_for('tours') }}">
-                <button class="btn btn-primary" id="tourToggle">{% if current_user.tours == True%}Switch Tours Off{% else %}Switch Tours On{% endif %}</button>
-            </a>
+<div>
+    <ol id="breadCrumb" class="breadcrumb">
+            <li class="breadcrumb-item">My Datasets</li>
+            </li>
+    </ol>
+</div>
+
+<div>
+    {% if datasets %}
+        {% for group in datasets %}
+            <div class="row" style="padding-left: 30px; padding-right: 30px ">
+                {% for analysis in group %}
+                    {% if analysis %}
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <div class="card" id="selectorCard">
+                                <div class="card-header" id="analysis-{{ analysis[0] }}CardHead">{{ analysis[1] }}</div>
+                                <div class="card-block" id="analysis-{{ analysis[0] }}CardBlock">
+                                    <p>{{ analysis[2] }}</p>
+                                    <div class="row" style="text-align: center">
+                                        <a href="{{ url_for('my_datasets') }}">
+                                            <button class="btn btn-primary" id="openAnalysis">Go To Datasets</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<div>
+    <ol id="breadCrumb" class="breadcrumb">
+            <li class="breadcrumb-item">Tours</li>
+            </li>
+    </ol>
+</div>
+
+
+<div class="col-sm-12 col-md-6 col-lg-4">
+    <div class="card" id="selectorCard">
+        <div class="card-header" id="analysis-toursCardHead">Toggle Guided Tours</div>
+        <div class="card-block" id="analysis-toursCardBlock">
+            <div class="row" style="text-align: center">
+                <a href="{{ url_for('tours') }}">
+                    <button class="btn btn-primary" id="tourToggle">{% if current_user.tours == True%}Switch Tours Off{% else %}Switch Tours On{% endif %}</button>
+                </a>
+            </div>
         </div>
     </div>
 </div>
-</div>
 
+        </div>
+    </div>
+</div>

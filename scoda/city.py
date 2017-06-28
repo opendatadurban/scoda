@@ -26,10 +26,10 @@ def city_dashboard():
 
     datasets = []
 
-    for i in grouper(query, 4):
+    for i in grouper(query, 3):
         analyses.append(i)
 
-    for i in grouper(query2, 4):
+    for i in grouper(query2, 3):
         datasets.append(i)
 
     return render_template('city/city_dashboard.html', analyses=analyses, datasets=datasets)
