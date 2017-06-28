@@ -9,6 +9,7 @@ from json import loads
 from pandas.io.json import json_normalize
 import pandas as pd
 import gviz_api
+import urllib2
 
 
 def pyramid():
