@@ -899,7 +899,11 @@ def parse_data():
 
     response = {}
 
-    dataset_list = [(i[0], str(DataSet.query.filter_by(id=i).first().ds_name)) for i in datasets]
+    remove_list = ['Poverty rate', 'Gini Coefficient', 'Gross Value Add', 'Exports', 'Multiple deprivation index',
+                   'Human Development Index']
+
+    dataset_list = [(i[0], str(DataSet.query.filter_by(id=i).first().ds_name)) for i in datasets if
+                    str(DataSet.query.filter_by(id=i).first().ds_name) not in remove_list]
     if 'dataset_id' not in session['explore']:
         dataset_list.insert(0, ('', 'Empty'))
     else:
@@ -907,7 +911,8 @@ def parse_data():
 
     response['dataset'] = dataset_list
 
-    indicator_list = [[i[0], str(Indicator.query.filter_by(id=i).first().in_name)] for i in indicators]
+    indicator_list = [[i[0], str(Indicator.query.filter_by(id=i).first().in_name)] for i in indicators if
+                      str(Indicator.query.filter_by(id=i).first().in_name) not in remove_list]
 
     if 'indicator_id' not in session['explore']:
         indicator_list.insert(0, ('', 'Empty'))

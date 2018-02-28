@@ -569,9 +569,11 @@ class ExploreForm(Form):
 
     def __init__(self, *args, **kwargs):
         super(ExploreForm, self).__init__(*args, **kwargs)
-        self.dataset_id.choices = [[str(c.id), c.ds_name] for c in DataSet.all()]
+        remove_list = ['Poverty rate', 'Gini Coefficient', 'Gross Value Add', 'Exports', 'Multiple deprivation index',
+                       'Human Development Index']
+        self.dataset_id.choices = [[str(c.id), c.ds_name] for c in DataSet.all() if c.ds_name not in remove_list]
         self.dataset_id.choices.insert(0, ('', 'Empty'))
-        self.indicator_id.choices = [[str(c.id), c.in_name] for c in Indicator.all()]
+        self.indicator_id.choices = [[str(c.id), c.in_name] for c in Indicator.all() if c.in_name not in remove_list]
         self.indicator_id.choices.insert(0, ['', 'Empty'])
         self.region_id.choices = [[str(c.id), c.re_name] for c in Region.all()]
         self.region_id.choices.insert(0, ('', 'Empty'))

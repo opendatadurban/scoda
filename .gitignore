@@ -88,15 +88,6 @@ ENV/
 # Rope project settings
 .ropeproject
 *.xml
-.idea/dataSources/7906e1ad-c6de-4980-b442-f563044942ad/_metadata_/metadata
-*.keystream
-.idea/dataSources/7906e1ad-c6de-4980-b442-f563044942ad/_metadata_/metadata.len
-*.at
-.idea/dataSources/7906e1ad-c6de-4980-b442-f563044942ad/_metadata_/metadata_i
-*.len
-.idea/scoda.iml
-*.xml
-.idea/vcs.xml
 /scoda/data/process_test.py
 /scoda/data/Indicators.csv
 /scoda/data/UniqueIndicators.csv
@@ -105,14 +96,17 @@ ENV/
 /scoda/data/pandasTest.py
 .idea/
 out.csv
-scoda/data/jhbpopests_clean.csv
-scoda/data/metro_salc_geo.json
 scoda/data/pandasTest.py
 scoda/static/vendor/blockUI/
 scoda/static/vendor/grChartImg/
 /scoda/templates/demographics/testMap.html
 /scoda/data/MunicipalWards2016.json
-/scoda/data/archive/exporteth.csv
 /scoda/static/css/style.css.old
 /scoda/data/JHB_Grid.json
 /scoda/data/jhbgridmodel.csv
+scoda-env1/
+scoda/blueprints/
+scoda/data/Indicators.xlsx
+scoda/data/archive/
+scoda/data/metadata/GCRO_QoL.zip
+scoda/data/new_data/
