@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from scoda.app import app
-from flask import request, url_for, redirect, flash, make_response, session, render_template, jsonify, Response
+from flask import request, url_for, redirect, flash, make_response, session, render_template, jsonify, Response, \
+    send_file
 from flask_security import current_user
 from itertools import izip_longest
 from sqlalchemy.sql import select
@@ -872,6 +873,12 @@ def demographics_night_eth():
     return (resp, status,
             # ensure the browser refreshes the page when Back is pressed
             {'Cache-Control': 'no-cache, no-store, must-revalidate'})
+
+
+@app.route('/return-land/')
+def land_gen():
+
+    return send_file('data/Ethekwini_Region_Data.xlsx', as_attachment=True)
 
 
 @app.route('/_parse_data', methods=['GET'])
