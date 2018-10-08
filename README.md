@@ -54,9 +54,9 @@ Then do the following:
 Setup the PostgreSQL database (minimum version 9.6.*)
 ```
 psql -U postgres
-=# CREATE USER SCODA WITH PASSWORD 'SCODA';
-=# CREATE DATABASE SCODA;
-=# GRANT ALL PRIVILEGES ON DATABASE SCODA TO SCODA;
+=# CREATE USER scoda WITH PASSWORD 'scoda';
+=# CREATE DATABASE scoda;
+=# GRANT ALL PRIVILEGES ON DATABASE scoda TO scoda;
 =# \q
 ```
 Construct your db app-side:
