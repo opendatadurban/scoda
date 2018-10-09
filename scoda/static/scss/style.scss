@@ -10,6 +10,7 @@
 @import "bootstrap_src/variables";
 @import "custom-variables";
 @import "bootstrap_src/mixins";
+@import "bootstrap_src/mixins/border-radius";
 @import "core/mixins";
 
 // Reset and dependencies
@@ -67,7 +68,7 @@
 @import "bootstrap_src/utilities";
 
 // Vendors Styles
-@import "vendors/vendors";
+// @import "vendors/vendors"; have removed chart.js, making this import redundant
 
 // CoreUI Styles
 // Additional typography

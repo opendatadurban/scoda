@@ -110,3 +110,7 @@ scoda/data/Indicators.xlsx
 scoda/data/archive/
 scoda/data/metadata/GCRO_QoL.zip
 scoda/data/new_data/
+
+#node-modules
+scoda/static/node_modules
+
