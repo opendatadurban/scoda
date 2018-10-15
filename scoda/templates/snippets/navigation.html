@@ -1,57 +1,28 @@
-<!-- BODY options, add following classes to body to change options
-		1. 'compact-nav'     	  - Switch sidebar to minified version (width 50px)
-		2. 'sidebar-nav'		  - Navigation on the left
-			2.1. 'sidebar-off-canvas'	- Off-Canvas
-				2.1.1 'sidebar-off-canvas-push'	- Off-Canvas which move content
-				2.1.2 'sidebar-off-canvas-with-shadow'	- Add shadow to body elements
-		3. 'fixed-nav'			  - Fixed navigation
-		4. 'navbar-fixed'		  - Fixed navbar
-		5. 'footer-fixed'		  - Fixed navbar
--->
 
-from flask_login import current_user
-
-<header class="navbar">
-        <div class="container-fluid">
-            <button class="navbar-toggler mobile-toggler hidden-lg-up" type="button">☰</button>
-            <a class="navbar-brand" href="https://scoda-dev.herokuapp.com" target="_blank"></a>
-            <ul class="nav navbar-nav hidden-md-down">
-                <li class="nav-item" id="analysisNav">
-                    <a class="nav-link navbar-toggler layout-toggler" href="#">☰</a>
-                </li>
-            </ul>
-
-            {% if current_user.is_authenticated %}
-
-            <ul class="nav navbar-nav float-xs-right hidden-md-down">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        <span class="hidden-md-down">{{ current_user.first_name }}</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-
-                        <div class="dropdown-header text-xs-center">
-                            <strong>Account</strong>
-                        </div>
-
-                        <a class="dropdown-item" href="{{ url_for('contact') }}"><i class="fa fa-envelope-o"></i>Contact Us</a>
-                        <a class="dropdown-item" href="{{ url_for('security.logout') }}"><i class="fa fa-lock"></i> Logout</a>
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link aside-toggle" href="#">☰</a>
-                </li>
-            </ul>
-
-            {% else %}
-
-                 <ul class="nav navbar-nav float-xs-right hidden-md-down">
-                    <li class="nav-item px-1">
-                        <a type="button" class="btn btn-primary px-2" href="{{ url_for('home_user') }}">Login</a>
-                    </li>
-                 </ul>
-
-            {% endif %}
+{% set firstNavItem="Data Portal" %}
+{% set secondNavItem="About" %}
+{% set theme="light" %}
+{% set imgPath="light" %}
+{% set align="center" %}
+<div class="account-masthead-static"></div>
+<div class="header--navigation dropshadow">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-{{ theme }} header-navigation">
+        <!-- <a class="navbar-brand d-flex align-items-center" href="/"><img src="{{ imgPath }}/open-data-durban.svg" /></a> -->
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-{{ align }}" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link {{ firstNavItem }}" href="#">{{ firstNavItem }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{ secondNavItem }}" target="blank" href="#">{{ secondNavItem }}</a>
+            </li>
+          </ul>
         </div>
-    </header>
+
+      </nav>
+  </div>
+</div>

@@ -72,27 +72,27 @@ $(document).ready(function($){
 	}
 
 	/* ---------- Main Menu Open/Close, Min/Full ---------- */
-	$('.navbar-toggler').click(function(){
+	// $('.navbar-toggler').click(function(){
 
-		var bodyClass = localStorage.getItem('body-class');
+	// 	var bodyClass = localStorage.getItem('body-class');
 
-		if ($(this).hasClass('layout-toggler') && $('body').hasClass('sidebar-off-canvas')) {
-			$('body').toggleClass('sidebar-opened').parent().toggleClass('sidebar-opened');
-			//resize charts
-			resizeBroadcast();
+	// 	if ($(this).hasClass('layout-toggler') && $('body').hasClass('sidebar-off-canvas')) {
+	// 		$('body').toggleClass('sidebar-opened').parent().toggleClass('sidebar-opened');
+	// 		//resize charts
+	// 		resizeBroadcast();
 
-		} else if ($(this).hasClass('layout-toggler') && ($('body').hasClass('sidebar-nav') || bodyClass == 'sidebar-nav')) {
-			$('body').toggleClass('sidebar-nav');
-			localStorage.setItem('body-class', 'sidebar-nav');
-			if (bodyClass == 'sidebar-nav') {
-				localStorage.clear();
-			}
-			//resize charts
-			resizeBroadcast();
-		} else {
-			$('body').toggleClass('mobile-open');
-		}
-	});
+	// 	} else if ($(this).hasClass('layout-toggler') && ($('body').hasClass('sidebar-nav') || bodyClass == 'sidebar-nav')) {
+	// 		$('body').toggleClass('sidebar-nav');
+	// 		localStorage.setItem('body-class', 'sidebar-nav');
+	// 		if (bodyClass == 'sidebar-nav') {
+	// 			localStorage.clear();
+	// 		}
+	// 		//resize charts
+	// 		resizeBroadcast();
+	// 	} else {
+	// 		$('body').toggleClass('mobile-open');
+	// 	}
+	// });
 
 	$('.aside-toggle').click(function(){
 		$('body').toggleClass('aside-menu-open');
