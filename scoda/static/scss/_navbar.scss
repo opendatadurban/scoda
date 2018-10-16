@@ -16,7 +16,10 @@
  /*# sourceMappingURL=bootstrap.min.css.map */
 
     // General styling
-
+.container {
+  max-width: 940px;
+  padding: 0;
+}
     .navbar {
       padding: 0;
       height: $navigation-height-desktop;
@@ -24,8 +27,6 @@
         height: $navigation-height-desktop;
         position: absolute;
         img {
-          height: $navigation-height-desktop;
-          position: absolute;
           bottom: 0;
           width: 173px;
         }

@@ -2,13 +2,13 @@
 {% set firstNavItem="Data Portal" %}
 {% set secondNavItem="About" %}
 {% set theme="light" %}
-{% set imgPath="light" %}
+{% set imgPath="/static/img" %}
 {% set align="center" %}
 <div class="account-masthead-static"></div>
 <div class="header--navigation dropshadow">
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-{{ theme }} header-navigation">
-        <!-- <a class="navbar-brand d-flex align-items-center" href="/"><img src="{{ imgPath }}/open-data-durban.svg" /></a> -->
+        <a class="navbar-brand d-flex align-items-center" href="/"><img src="{{ imgPath }}/logo_header-nav.png" /></a>
         <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,6 +22,9 @@
             </li>
           </ul>
         </div>
+
+        {% include 'snippets/search-bar.html' %}
+
 
       </nav>
   </div>
