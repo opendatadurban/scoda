@@ -37,13 +37,18 @@
           display: block;
         }
         .nav-link {
-        font-size: 18px;
-        font-weight: 500;
-        line-height: 13px;
+          font-size: 18px;
+          font-weight: 500;
+          line-height: 13px;
           text-transform: capitalize;
           transition: .1s color ease-in;
+          color: #1E272E !important;
+          &.Data {
+            color: $brand-primary !important;
+            font-weight: 700;
+          }
           &:hover {
-            color: $brand-primary;
+             color: $brand-primary !important;
           }
         }
       }

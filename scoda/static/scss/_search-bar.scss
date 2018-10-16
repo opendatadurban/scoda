@@ -27,7 +27,8 @@
 #sb-search-input {
 	position: absolute;
 	top: 0;
-	right: 0;
+    right: 0;
+    padding-left: 9px !important;
 	border: none;
 	outline: none;
 	background: #fff;
@@ -160,6 +161,11 @@
       line-height: 27px !important;
       height: 27px;
       width: 27px;
+       i {
+        top: -1px;
+        position: relative;
+        font-size: 16px;
+       }
     }
       &.sb-search-open {
         width: 200px;
