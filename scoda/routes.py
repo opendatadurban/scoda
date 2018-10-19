@@ -357,7 +357,7 @@ def sanitation():
 
 @app.route('/')
 def home_public():
-    return redirect(url_for('explorer'))
+    return redirect(url_for('explore'))
 
 
 @app.route('/registered')
