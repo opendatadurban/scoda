@@ -177,12 +177,12 @@ def demographics():
         session['maps'] = {0: {}, 1: {}}
 
     form1 = MapForm(prefix='form1', region_id='1', year=1)
-    form2 = MapForm(prefix='form2', region_id='4', year=1)
+
     status = 200
     tour = 1
     geometries1 = {}
-    geometries2 = {}
-    forms = [form1, form2]
+
+    forms = [form1]
     if request.method == 'POST':
 
         if all(f.validate() for f in forms):
@@ -198,9 +198,6 @@ def demographics():
             # query = db.session.query(Area.geom.ST_AsGeoJSON(), Area.data)
             year1 = int(form1.year.data)
             year_ind1 = range(1996, 2031)
-
-            year2 = int(form2.year.data)
-            year_ind2 = range(1996, 2031)
 
             if form1.city_ward_code.data == '':
 
@@ -286,90 +283,6 @@ def demographics():
 
                 m1 = 1.05 * max(df.sum(axis=0).tolist())
 
-            if form2.city_ward_code.data == '':
-
-                query = db.session.query(Ward.geom.ST_AsGeoJSON(), Ward.data, Ward.city_ward_code). \
-                    filter(Ward.region_id == form2.region_id.data)
-
-                geometries2 = {"type": "FeatureCollection",
-                               "features": []}
-                for g in query:
-                    d = json.loads(g[0])
-
-                    if year2 == 0:
-                        flow = 0
-                    else:
-                        flow = round(g[1][year2] - g[1][year2 - 1])
-
-                    geometries2['features'].append({"type": "Feature", "properties": {"density": round(g[1][year2]),
-                                                                                      "flow": flow,
-                                                                                      "name": 'Ward %s' % g[2],
-                                                                                      "year": year_ind2[year2]},
-                                                    "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
-
-                query = db.session.query(Ward.data).filter(Ward.region_id == form2.region_id.data).all()
-                region = db.session.query(Region.re_name).filter(Region.id == form2.region_id.data).first()
-
-                results = []
-
-                for r in query:
-                    row = [val for val in list(r)[0]]
-                    results.append(row)
-
-                df = pd.DataFrame(results).fillna(value=0)
-
-                table2 = [['Year', '%s' % str(region[0])]]
-
-                for y, val in zip(range(1996, 2031), df.sum(axis=0).tolist()):
-                    table2.append([str(y), val])
-
-                m2 = 1.05 * max(df.sum(axis=0).tolist())
-
-            else:
-                query = db.session.query(Area.geom.ST_AsGeoJSON(), Area.data, Area.city_ward_code) \
-                    .filter(Area.city_ward_code == form2.city_ward_code.data) \
-                    .filter(Area.region_id == form2.region_id.data)
-
-                geometries2 = {"type": "FeatureCollection",
-                               "features": []}
-
-                for g in query:
-                    d = json.loads(g[0])
-
-                    if year2 == 0:
-                        flow = 0
-                    else:
-                        flow = round(g[1][year2] - g[1][year2 - 1])
-
-                    geometries2['features'].append(
-                        {"type": "Feature", "properties": {"density": round(g[1][year2]),
-                                                           "flow": flow,
-                                                           "name": 'Area %s' % g[2],
-                                                           "year": year_ind2[year2]},
-                         "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
-
-                query = db.session.query(Ward.data).filter(Ward.city_ward_code == form2.city_ward_code.data). \
-                    filter(Ward.region_id == form2.region_id.data).first()
-
-                region = db.session.query(Region.re_name).filter(Region.id == form2.region_id.data).first()
-                region2 = db.session.query(Ward.city_ward_code).filter(Ward.city_ward_code == form2.city_ward_code.data) \
-                    .first()
-
-                results = []
-
-                for r in query:
-                    row = [val for val in list(r)]
-                    results.append(row)
-
-                df = pd.DataFrame(results).fillna(value=0)
-
-                table2 = [['Year', '%s - Ward %s' % (str(region[0]), str(region2[0]))]]
-
-                for y, val in zip(range(1996, 2031), df.sum(axis=0).tolist()):
-                    table2.append([str(y), val])
-
-                m2 = 1.05 * max(df.sum(axis=0).tolist())
-
             query = db.session.query(Ward.city_ward_code).filter(Ward.region_id == form1.region_id.data).order_by(
                 Ward.city_ward_code).distinct()
 
@@ -377,18 +290,9 @@ def demographics():
                                                                                                              , start=1)]
             form1.city_ward_code.choices.insert(0, ('', 'View All'))
 
-            query = db.session.query(Ward.city_ward_code).filter(Ward.region_id == form2.region_id.data).order_by(
-                Ward.city_ward_code).distinct()
-
-            form2.city_ward_code.choices = [[str(i), 'Ward %s' % row.city_ward_code] for i, row in enumerate(query.all()
-                                                                                                             , start=1)]
-            form2.city_ward_code.choices.insert(0, ('', 'View All'))
-
-            return render_template('demographics/demographics.html', form1=form1, form2=form2, geometries1=geometries1,
-                                   geometries2=geometries2, table1=table1, table2=table2, tour=tour, max1=m1, max2=m2,
-                                   region1=form1.region_id.data, region2=form2.region_id.data,
-                                   ward1=form1.city_ward_code.data, ward2=form2.city_ward_code.data,
-                                   analyses=analyses)
+            return render_template('demographics/demographics.html', form1=form1, geometries1=geometries1,
+                                   table1=table1, tour=tour, max1=m1, region1=form1.region_id.data,
+                                   ward1=form1.city_ward_code.data, analyses=analyses)
 
         else:
             if request.is_xhr:
