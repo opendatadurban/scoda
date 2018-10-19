@@ -156,6 +156,7 @@
           legend: {position:'none'},
           chartArea: {top: "10%"},
           lineWidth: 5,
+          tooltip: { isHtml: true },
           hAxis: {gridlines: {count: 4}},
           axes: {
                     y: {
@@ -170,6 +171,28 @@
           colors: ['#BD0026'],
         };
 
+<<<<<<< HEAD
+        var options2 = {
+          curveType: 'function',
+          legend: {position:'none'},
+          chartArea: {top: "10%"},
+          tooltip: { isHtml: true },
+          hAxis: {gridlines: {count: 4}},
+          axes: {
+                    y: {
+                        all: {
+                            range: {
+                                max: {{ max2 }},
+                                min: 0
+                            }
+                        }
+                    }
+                },
+            colors: ['#BD0026'],
+        };
+
+=======
+>>>>>>> 87b350d84f28b5845090fbb9623a9d392bbe5b7b
         var chart1 = new google.charts.Line(document.getElementById('chart1'));
 
         chart1.draw(data1, google.charts.Line.convertOptions(options1));
@@ -261,6 +284,7 @@
                     <div class="card" id="geoCard1">
                         <div class="card-header" id="geoCardHead1">
                             Geographic Representation
+                            <a class="btn explore" href="/demographics/{{ region1 }}/{{ ward1 }}/download" download="demographics.csv" id="downloadButton1">Download</a>
                         </div>
                         <div class="card-block" style="padding: 0; height: 300px;">
                             <div id='map1'></div>
@@ -276,8 +300,9 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-block" style="text-align: left" id="jhbNightFormCard">
-                            <div class="row" style="text-align: center;">
-                                <a href="{{ url_for('demographics_night_jhb') }}"><button class="btn btn-primary btn-responsive" type="button" id="submitButton1">View Nightlights Explorer</button></a>
+                            <div class="row">
+                                <a href="{{ url_for('demographics_night_jhb') }}" class="btn nightlights" id="submitButton1">View Nightlights Explorer</a>
+                                <a href="/report" class="btn methodology explore" id="submitButton2">Download Methodology</a>
                             </div>
                         </div>
                     </div>

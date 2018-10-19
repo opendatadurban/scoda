@@ -165,7 +165,10 @@
 
                 <div class="col-sm-12">
                     <div class="card" id="tableCard">
-                        <div class="card-header">Selected Data</div>
+                        <div class="card-header">Selected Data
+                            <a class="btn explore" id="Export" href="data.csv" target="_blank" download="data.csv">
+                            Download as CSV
+                        </a></div>
                         <div class="card-block">
                             <div id="table"
                                  style="display: inline-block; margin: 0 auto; width: 100%;"></div>
@@ -189,7 +192,12 @@
 
                 <div class="col-sm-12 col-md-12 col-lg-9">
                     <div class="card" id="chartCard">
-                        <div class="card-header">Plotting Window</div>
+                        <div class="card-header">Plotting Window
+                            <a class="btn explore" download="chart.png" id="image_download" onclick="saveAsImg(document.getElementById('chart_img'));">
+                                Download as PNG
+                            </a>
+                        </div>
+
                         <div class="card-block">
                             <div id="chart"
                                  style="display: inline-block; margin: 0 auto; width: 100%;"></div>
