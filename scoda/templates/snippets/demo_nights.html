@@ -352,9 +352,12 @@
 
 </style>
 
-<div class="container-fluid">
+<div class="container nightlights">
     <div id="ui-view" style="opacity: 1;">
         <div class="animated fadeIn">
+            
+        <span class="breadcrumbs-global"><h1>Demographics Model <strong>/ Nightlights Explorer</strong></h1><a href="/demographics" class="btn btn-outline"><i class=
+            "fas fa-arrow-left"></i> Back to Demographics Model</a></span>
 
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-3">
@@ -420,7 +423,7 @@
                                         {{ form.year.errors[0] }}
                                 </div>
 
-                                <div class="row" style="text-align: center">
+                                <div class="row area-submit" style="text-align: center">
                                     <button class="btn btn-success btn-responsive" type="submit" id="submitButton1">Submit</button>
                                     <a href="{{ url_for('demographics') }}"><button class="btn btn-primary btn-responsive" type="button" id="submitButton1">Back</button></a>
                                 </div>

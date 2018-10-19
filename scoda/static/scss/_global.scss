@@ -1,3 +1,36 @@
 main {
     background: #F7F7F7;
 }
+.container {
+    max-width: 940px;
+}
+.btn {
+    border-radius: 30px;
+}
+.card {
+    &-header {
+        background-color: #808E9B;
+        color: white;
+        font-weight: 500;
+    }
+}
+.breadcrumbs-global {
+    * {
+        display: inline-block;
+    }
+    h1 {
+        color: $font-general;
+        font-size: 24px;
+        padding: 30px 0;
+    }
+    .btn-outline {
+        border: 1px solid $font-general;
+        border-radius: 15px;
+        line-height: 13px;
+        float: right;
+        margin-top: 30px;
+        font-weight: 700;
+        color: $font-general;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.3);
+    }
+}

@@ -17570,10 +17570,14 @@ base-chart.chart {
   text-transform: capitalize;
   transition: 0.1s color ease-in;
   color: #1E272E !important;
+  right: 1px;
+  position: relative;
+  padding-bottom: 7px;
 }
 .header--navigation .navbar-nav .nav-link.Data {
   color: #FF8430 !important;
   font-weight: 700;
+  left: -1px;
 }
 .header--navigation .navbar-nav .nav-link:hover {
   color: #FF8430 !important;
@@ -17625,6 +17629,65 @@ base-chart.chart {
   background: #333334 !important;
   height: 30px;
   top: 0;
+}
+.account-masthead-static .container {
+  max-width: 940px;
+  padding: 0;
+  height: 100%;
+}
+.account-masthead-static .icon-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  height: 100%;
+}
+.account-masthead-static .icon-wrapper a {
+  color: white;
+  padding: 0 10px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.account-masthead-static .icon-wrapper a:nth-of-type(1) {
+  margin-right: 65px;
+}
+.account-masthead-static .icon-wrapper a:hover {
+  text-decoration: none;
+  background-color: #00232e;
+}
+.account-masthead-static .icon-wrapper a i {
+  font-size: 16px;
+  font-size: 16px;
+  position: relative;
+  margin-bottom: 2px;
+}
+
+.sub-nav {
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.1);
+  background-color: #ededed;
+  position: fixed;
+  cursor: default;
+  z-index: 5;
+  width: 100%;
+}
+.sub-nav ul {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.sub-nav ul li {
+  display: inline-block;
+  filter: blur(5px);
+}
+.sub-nav ul li a {
+  padding: 10px 12.5px;
+  font-size: 14px;
+  display: block;
+  font-weight: 500;
+  pointer-events: none;
+}
+.sub-nav ul li a.active {
+  color: #FF8430;
 }
 
 /* Search icon by IcoMoon, made with http://icomoon.io/app/ */
@@ -17890,6 +17953,132 @@ base-chart.chart {
 }
 main {
   background: #F7F7F7;
+}
+
+.container {
+  max-width: 940px;
+}
+
+.btn {
+  border-radius: 30px;
+}
+
+.card-header {
+  background-color: #808E9B;
+  color: white;
+  font-weight: 500;
+}
+
+.breadcrumbs-global * {
+  display: inline-block;
+}
+.breadcrumbs-global h1 {
+  color: #4A4A4A;
+  font-size: 24px;
+  padding: 30px 0;
+}
+.breadcrumbs-global .btn-outline {
+  border: 1px solid #4A4A4A;
+  border-radius: 15px;
+  line-height: 13px;
+  float: right;
+  margin-top: 30px;
+  font-weight: 700;
+  color: #4A4A4A;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.explore.container {
+  max-width: 940px;
+}
+.explore .control-label {
+  font-size: 10px;
+  margin-bottom: 3px;
+}
+.explore .google-visualization-table {
+  width: 100%;
+}
+.explore .google-visualization-table-table {
+  width: 100%;
+}
+.explore .google-visualization-controls-categoryfilter li {
+  border-radius: 14px !important;
+  background: rgba(207, 221, 232, 0.6) !important;
+  border: 0 !important;
+  font-size: 10px;
+  display: table;
+  padding: 4px 8px !important;
+  margin: 10px 0 !important;
+}
+.explore .google-visualization-controls-categoryfilter li:hover {
+  border: 0 !important;
+}
+.explore .btn {
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.1);
+  font-weight: 700;
+}
+.explore .btn.search {
+  float: left;
+}
+.explore a.reset {
+  float: right;
+}
+.explore a.reset .btn {
+  background: white;
+  color: #4A4A4A;
+  border: 0;
+}
+.explore h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #485460;
+  margin: 30px 0;
+}
+.explore #selectorCard {
+  background: #485460;
+  color: white;
+}
+.explore #selectorCard .container {
+  max-width: 100%;
+}
+.explore #selectorCard form {
+  border-right: 1px solid white;
+  padding-right: 30px;
+}
+.explore #selectorCard p {
+  color: #CACACA;
+  font-weight: 500;
+  font-size: 16px;
+  margin-top: 12px;
+}
+.explore #selectorCard .select2-container--default .select2-selection--single {
+  border-radius: 20px;
+  height: 40px;
+}
+.explore #selectorCard .select2-container--default .select2-selection--single .select2-selection__arrow b {
+  border-width: 9px 7px 0 8px;
+  height: 0;
+  right: 0;
+  margin-right: 3%;
+  margin-top: 0;
+  position: absolute;
+  top: 39%;
+  width: 0;
+}
+.explore #selectorCard .select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 40px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.select2-container--default .select2-selection--single {
+  border-radius: 14px;
+}
+
+.nightlights .area-submit {
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
 }
 
 /*# sourceMappingURL=style.css.map */
