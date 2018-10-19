@@ -171,28 +171,6 @@
           colors: ['#BD0026'],
         };
 
-<<<<<<< HEAD
-        var options2 = {
-          curveType: 'function',
-          legend: {position:'none'},
-          chartArea: {top: "10%"},
-          tooltip: { isHtml: true },
-          hAxis: {gridlines: {count: 4}},
-          axes: {
-                    y: {
-                        all: {
-                            range: {
-                                max: {{ max2 }},
-                                min: 0
-                            }
-                        }
-                    }
-                },
-            colors: ['#BD0026'],
-        };
-
-=======
->>>>>>> 87b350d84f28b5845090fbb9623a9d392bbe5b7b
         var chart1 = new google.charts.Line(document.getElementById('chart1'));
 
         chart1.draw(data1, google.charts.Line.convertOptions(options1));
