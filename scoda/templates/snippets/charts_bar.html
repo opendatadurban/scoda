@@ -70,7 +70,7 @@
             view: {'columns': {{ view|safe }}}
         });
 
-        var cardHeight = $("#formCard").height() + $("#formCardHead").height() + 20;
+        var cardHeight = 500;
         var cardWidth = $("#geoCard").width();
         var cardHeight2 = $("#buttonColumn").height() - 70;
 
@@ -109,7 +109,7 @@
                 resolution: 'provinces',
                 theme: 'material',
                 colorAxis: {colors: ['#FED976', '#FC4E2A', '#800026']},
-                height: cardHeight2 - 2,
+                height: cardHeight,
                 keepAspectRatio: true
             }
         });
@@ -119,9 +119,9 @@
         dashboard.bind([categoryPicker1, categoryPicker2], [bar1, bar2, table1]);
         dashboard.draw(data);
 
-{#        $("#tableCard").css({height: cardHeight * 1.2});#}
-        $("#selectCard").css({height: cardHeight * 1.2});
-        $("#chartCard").css({height: cardHeight * 1.2});
+        // $("#tableCard").css({height: cardHeight * 1.2});
+         $("#selectCard").css({height: cardHeight * 1.2});
+          $("#chartCard").css({height: cardHeight * 1.2});
 
         google.visualization.events.addListener(table1, 'ready', function () {
 
