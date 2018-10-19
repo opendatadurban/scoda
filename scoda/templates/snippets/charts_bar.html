@@ -65,6 +65,7 @@
                 isStacked: true,
                 vAxis: {minValue: 0},
                 hAxis: {slantedText: true},
+                tooltip: { isHtml: true },
                 series: {{ series|safe }}
             },
             view: {'columns': {{ view|safe }}}
@@ -95,6 +96,7 @@
                 hAxis: {slantedText: true},
                 height: cardHeight,
                 bar: {groupWidth: '99%'},
+                tooltip: { isHtml: true },
                 series: {{ series|safe }}
             },
             view: {'columns': {{ view|safe }}}
@@ -110,6 +112,7 @@
                 theme: 'material',
                 colorAxis: {colors: ['#FED976', '#FC4E2A', '#800026']},
                 height: cardHeight,
+                tooltip: { isHtml: true },
                 keepAspectRatio: true
             }
         });

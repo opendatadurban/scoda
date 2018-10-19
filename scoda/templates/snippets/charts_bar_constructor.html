@@ -65,6 +65,7 @@
                 isStacked: true,
                 vAxis: {minValue: 0},
                 hAxis: {slantedText: true},
+                tooltip: { isHtml: true },
                 series: {{ series|safe }}
             },
             view: {'columns': {{ view|safe }}}
@@ -89,6 +90,7 @@
                 bars: 'vertical',
                 vAxis: {minValue: 0},
                 hAxis: {slantedText: true},
+                tooltip: { isHtml: true },
             {% if modHeight %}
                 height: '{{ modHeight }}',
             {% else %}

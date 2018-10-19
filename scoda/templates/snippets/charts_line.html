@@ -82,12 +82,13 @@
                 vAxis: {minValue: {{ min }}, maxValue: {{ max }}},
                 hAxis: {slantedText: true},
                 interpolateNulls: true,
+                tooltip: { isHtml: true },
                 pointSize: 5
                 }
 
         });
 
-        var cardHeight = $("#formCard").height() + $("#formCardHead").height() + 20;
+        var cardHeight = 400;
         var cardWidth = $("#geoCard").width();
         var cardHeight2 = $("#buttonColumn").height() - 70;
 
@@ -124,6 +125,7 @@
                 height: cardHeight,
                 lineWidth: 4,
                 interpolateNulls: true,
+                tooltip: { isHtml: true },
                 pointSize: 5
 
             }
@@ -140,6 +142,7 @@
                 colorAxis: {colors: ['#FED976', '#FC4E2A', '#800026']},
                 height: cardHeight2,
                 width: '100%',
+                tooltip: { isHtml: true },
                 keepAspectRatio: true
             }
         });

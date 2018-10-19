@@ -157,6 +157,7 @@
           legend: {position:'none'},
           chartArea: {top: "10%"},
           lineWidth: 5,
+          tooltip: { isHtml: true },
           hAxis: {gridlines: {count: 4}},
           axes: {
                     y: {
@@ -175,6 +176,7 @@
           curveType: 'function',
           legend: {position:'none'},
           chartArea: {top: "10%"},
+          tooltip: { isHtml: true },
           hAxis: {gridlines: {count: 4}},
           axes: {
                     y: {
@@ -285,6 +287,7 @@
                     <div class="card" id="geoCard1">
                         <div class="card-header" id="geoCardHead1">
                             Geographic Representation
+                            <a class="btn explore" href="/demographics/{{ region1 }}/{{ ward1 }}/download" download="demographics.csv" id="downloadButton1">Download</a>
                         </div>
                         <div class="card-block" style="padding: 0; height: 300px;">
                             <div id='map1'></div>
@@ -300,8 +303,9 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-block" style="text-align: left" id="jhbNightFormCard">
-                            <div class="row" style="text-align: center;">
-                                <a href="{{ url_for('demographics_night_jhb') }}"><button class="btn btn-primary btn-responsive" type="button" id="submitButton1">View Nightlights Explorer</button></a>
+                            <div class="row">
+                                <a href="{{ url_for('demographics_night_jhb') }}" class="btn nightlights" id="submitButton1">View Nightlights Explorer</a>
+                                <a href="/report" class="btn methodology explore" id="submitButton2">Download Methodology</a>
                             </div>
                         </div>
                     </div>
