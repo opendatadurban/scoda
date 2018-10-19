@@ -367,10 +367,8 @@ def demographics():
 
         m2 = 1.05 * max(df.sum(axis=0).tolist())
 
-        return render_template('demographics/demographics.html', form1=form1, form2=form2, geometries1=geometries1,
-                               geometries2=geometries2, tour=tour, table1=table1, table2=table2, max1=m, max2=m2,
-                               region1=1, region2=4,
-                               ward1=None, ward2=None, analyses=analyses
+        return render_template('demographics/demographics.html', form1=form1, geometries1=geometries1,
+                               tour=tour, table1=table1, max1=m, region1=1, ward1=None, ward2=None, analyses=analyses
                                )
 
     if not request.is_xhr:
@@ -411,10 +409,10 @@ def demographics():
 
         m = 1.05 * max(df.sum(axis=0).tolist())
 
-        resp = make_response(render_template('demographics/demographics.html', form1=form1, form2=form2,
-                                             geometries1=geometries1, geometries2=geometries2, table1=table1,
-                                             table2=table1, tour=tour, max1=m, max2=m, region1=1, region2=1,
-                                             ward1=None, ward2=None, analyses=analyses))
+        resp = make_response(render_template('demographics/demographics.html', form1=form1,
+                                             geometries1=geometries1, table1=table1,
+                                             tour=tour, max1=m, region1=1,
+                                             ward1=None, analyses=analyses))
 
     else:
         resp = ''
