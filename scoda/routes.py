@@ -335,25 +335,29 @@ def sanitation():
     return json
 
 
+# @app.route('/')
+# def home_public():
+#     json1 = pyramid()
+#     json2 = finances()
+#     json3 = motion()
+#     json4 = households()
+#     json5 = education()
+#     json6 = energy()
+#     json7 = water()
+#     json8 = economic()
+#     json9 = unemployment()
+#     json10 = electricity()
+#     json11 = sanitation()
+#
+#     return render_template('index.html',
+#                            json1=json1, json2=json2, json3=json3,
+#                            json4=json4, json5=json5, json6=json6,
+#                            json7=json7, json8=json8, json9=json9,
+#                            json10=json10, json11=json11)
+
 @app.route('/')
 def home_public():
-    json1 = pyramid()
-    json2 = finances()
-    json3 = motion()
-    json4 = households()
-    json5 = education()
-    json6 = energy()
-    json7 = water()
-    json8 = economic()
-    json9 = unemployment()
-    json10 = electricity()
-    json11 = sanitation()
-
-    return render_template('index.html',
-                           json1=json1, json2=json2, json3=json3,
-                           json4=json4, json5=json5, json6=json6,
-                           json7=json7, json8=json8, json9=json9,
-                           json10=json10, json11=json11)
+    return redirect(url_for('explorer'))
 
 
 @app.route('/registered')
