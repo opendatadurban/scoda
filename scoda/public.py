@@ -105,11 +105,12 @@ def explore():
                                     float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
                                     df["ds_name"] == d), "value"]))
                         table.append(row)
+            yrs = ['Year'] + [str(y) for y in years[::-1]]
 
             return render_template('explore/explore.html', form=form, plot=plot, table=table, colours=colours,
                                    year=str(max(years)), series=series, view=view, plot_type=plot_type, min=minVal,
                                    max=maxVal, cities=cities, options_list=options_list, years_list=years_list,
-                                   tour=tour, indicator=indicator, analyses=analyses)
+                                   tour=tour, indicator=indicator, analyses=analyses, years=yrs)
         else:
             if request.is_xhr:
                 status = 412
