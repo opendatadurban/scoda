@@ -135,8 +135,12 @@
             var dt = table1.getDataTable();
             var csv = google.visualization.dataTableToCsv(dt);
 
+            var arr = {{ table|safe }};
+
+            var meta = 'Definition:' + ',{{ indicator.definition }}' + '\n' + 'Unit:' + ',{{ indicator.unit }}' + '\n'  +'Frequency:' + ',{{ indicator.frequency }}' + '\n' + 'Theme:' + ',{{ indicator.theme }}' + '\n' + 'Sub-theme:' + ',{{ indicator.sub_theme }}' + '\n' + 'Source' + ',{{ indicator.source }}' + '\n';
+
             $('#Export').click(function () {
-                this.href = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+                this.href = 'data:application/csv;charset=utf-8,' + encodeURIComponent(arr[0].join(',') + '\n' + csv + '\n' + meta);
             });
 
             var myView = new google.visualization.DataView(dt);

@@ -140,7 +140,7 @@
                 resolution: 'provinces',
                 theme: 'material',
                 colorAxis: {colors: ['#FED976', '#FC4E2A', '#800026']},
-                height: cardHeight2,
+                height: cardHeight,
                 width: '100%',
                 tooltip: { isHtml: true },
                 keepAspectRatio: true
@@ -162,8 +162,7 @@
 
         google.visualization.events.addListener(table1, 'ready', function () {
 
-            var dataset = $('#dataSelect').find("option:selected").val();
-            var year = $('#yearSelect').find("option:selected").val();
+            var year = Number($('#dataSelect').find("option:selected").val());
 
             var filteredData = table1.getDataTable();
             var group = filteredData.getDistinctValues(0);
@@ -200,8 +199,14 @@
             var dt = transposeDataTable(groupedData);
             var csv = google.visualization.dataTableToCsv(dt);
 
+            var arr = {{ years|safe }};
+
+            console.log(arr);
+
+            var meta = 'Definition:' + ',{{ indicator.definition }}' + '\n' + 'Unit:' + ',{{ indicator.unit }}' + '\n'  +'Frequency:' + ',{{ indicator.frequency }}' + '\n' + 'Theme:' + ',{{ indicator.theme }}' + '\n' + 'Sub-theme:' + ',{{ indicator.sub_theme }}' + '\n' + 'Source' + ',{{ indicator.source }}' + '\n';
+
             $('#Export').click(function () {
-                this.href = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+                this.href = 'data:application/csv;charset=utf-8,' + encodeURIComponent(arr.join(',') + '\n' + csv + '\n' + meta);
             });
 
             var myView = new google.visualization.DataView(dt);
@@ -211,9 +216,9 @@
             geochart1.setDataTable(myView);
             geochart1.draw();
 
-            $('#yearSelect').on('change', function () {
+            $('#dataSelect').on('change', function () {
 
-                var year = $('#yearSelect').find("option:selected").val();
+                var year = Number($('#dataSelect').find("option:selected").val());
 
                 var myView = new google.visualization.DataView(dt);
 
@@ -236,14 +241,12 @@
         function resize () {
                dashboard.draw(data);
 
-               var dataset = Number($('#dataSelect').find("option:selected").val());
-               dataset += 1;
-               var year = $('#yearSelect').find("option:selected").val();
+               var year = Number($('#dataSelect').find("option:selected").val());
 
                 var dt = table1.getDataTable();
                var myView = new google.visualization.DataView(dt);
 
-               myView.setColumns([0, dataset]);
+               myView.setColumns([0, year]);
 
                geochart1.setDataTable(myView);
                geochart1.draw();

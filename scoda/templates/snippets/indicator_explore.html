@@ -213,15 +213,18 @@
                         <div class="card" id="mapSelect">
                                 <div class="card-header">Data on Map</div>
                                 <div class="card-block" style="text-align: center">
-                                    <select id="dataSelect" class="js-example-basic-single"
-                                            {% if plot_type == 1 %}disabled{% endif %} style="width: 80%">
+                                    <select id="dataSelect" class="js-example-basic-single" style="width: 80%">
+                                        {% if plot_type == 1 %}
+                                            {% for o in years_list %}
+                                                <option value="{{ o.optid }}">{{ o.optname }}</option>
+                                            {% endfor %}
+                                        {% endif %}
                                         {% if plot_type == 2 %}
                                             {% for o in options_list %}
                                                 <option value="{{ o.optid }}">{{ o.optname }}</option>
                                             {% endfor %}
-                                        {% else %}
-                                            <option value="-">-</option>
-                                        {% endif %}
+                                        {%  endif %}
+
                                     </select>
                                     <br>
                                     <br>
