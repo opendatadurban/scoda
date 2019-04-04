@@ -17,82 +17,6 @@
         $('.js-example-basic-single').select2();
         $('.js-example-basic-multiple').select2();
 
-        $('#Form').on('change', function () {
-
-            var dataset_input = $('#dataset_id').find("option:selected").val();
-            var indicator_input = $('#indicator_id').find("option:selected").val();
-            var region_input = $('#region_id').find("option:selected").val();
-            var type_input = $("#type_id").find("option:selected").val();
-            var theme_input = $("#theme_id").find("option:selected").val();
-            var year_input = $("#year").find("option:selected").text();
-
-            $.getJSON('/_parse_data', {
-
-                    dataset_id: dataset_input,
-                    indicator_id: indicator_input,
-                    region_id: region_input,
-                    type_id: type_input,
-                    theme_id: theme_input,
-                    year: year_input
-
-                },
-                function (data) {
-                    var datasets = data.dataset;
-                    var indicators = data.indicator;
-                    var regions = data.region;
-                    var types = data.type;
-                    var themes = data.theme;
-                    var years = data.year;
-                    var ind_ready = data.ind_ready;
-
-                    if (ind_ready) {
-                        document.getElementById("exploreButton").disabled = false;
-                    }
-                    $("#dataset_id").empty();
-                    $("#indicator_id").empty();
-                    $("#region_id").empty();
-                    $("#type_id").empty();
-                    $("#theme_id").empty();
-                    $("#year").empty();
-
-                    var options = $("#dataset_id");
-                    options.empty()
-                    datasets.forEach(function (item) {
-                        options.append($('<option>', {value: item[0], text: item[1]}));
-                    });
-
-                    var options = $("#indicator_id");
-                    options.empty()
-                    indicators.forEach(function (item) {
-                        options.append($('<option>', {value: item[0], text: item[1]}));
-                    });
-
-                    options = $("#region_id");
-                    options.empty()
-                    regions.forEach(function (item) {
-                        options.append($('<option>', {value: item[0], text: item[1]}));
-                    });
-
-                    options = $("#type_id");
-                    options.empty()
-                    types.forEach(function (item) {
-                        options.append($('<option>', {value: item[0], text: item[1]}));
-                    });
-
-                    options = $("#theme_id");
-                    options.empty()
-                    themes.forEach(function (item) {
-                        options.append($('<option>', {value: item[0], text: item[1]}));
-                    });
-
-                    options = $("#year");
-                    options.empty();
-                    years.forEach(function (item) {
-                        options.append($('<option>', {value: item[0], text: item[1]}));
-                    });
-                });
-        });
-
     });
 
 </script>
@@ -129,7 +53,7 @@
                                                 <div style="text-align: center">
                                                     <div class="row">
                                                         <div class="col-xs-12">
-                                                        <button class="btn btn-success btn-responsive search" id="exploreButton" type="submit" disabled>Search
+                                                        <button class="btn btn-success btn-responsive search" id="exploreButton" type="submit">Search
                                                         </button>
                                                         <a href="{{ url_for('explore') }}" class="reset">
                                                             <button class="btn btn-primary btn-responsive" type="button" id="clearForm">Reset Form</button>
