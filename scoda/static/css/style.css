@@ -10170,6 +10170,49 @@ base-chart.chart {
   border-color: #555555 #555555 #555555 #555555 !important;
 }
 
+.help {
+  color: #4A4A4A;
+  background-color: #FFFFFF;
+}
+.help a {
+  color: #4A90E2;
+}
+.help img {
+  width: 100%;
+  padding-right: 174px;
+  padding-left: 60px;
+  margin: 15px 0px;
+}
+.help .viewing-data-story ol[type=i], .help .process-accessing-dashbord ol[type=i], .help .indicators ol[type=i] {
+  font-weight: 400;
+  padding: 15px 70px;
+}
+.help .viewing-data-story ol[type="1"], .help .process-accessing-dashbord ol[type="1"], .help .indicators ol[type="1"] {
+  font-weight: 600;
+}
+.help .viewing-data-story ol[type="1"] li p, .help .process-accessing-dashbord ol[type="1"] li p, .help .indicators ol[type="1"] li p {
+  font-weight: 400;
+}
+.help .how-to-use p {
+  margin-bottom: 0;
+}
+.help hr {
+  border-top: 1px solid #000000;
+}
+.help h1 {
+  font-size: 26px;
+  font-weight: 700;
+}
+.help h2 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 30px;
+}
+.help h4 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
 .header--navigation {
   position: sticky;
   top: 30px;
@@ -17663,12 +17706,13 @@ base-chart.chart {
 }
 
 .sub-nav {
-  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.1);
-  background-color: #ededed;
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2);
+  background-color: #FFFFFF;
   position: fixed;
   cursor: default;
   z-index: 5;
   width: 100%;
+  /* height: 30px; */
 }
 .sub-nav ul {
   margin: 0;
@@ -17677,10 +17721,10 @@ base-chart.chart {
 }
 .sub-nav ul li {
   display: inline-block;
-  filter: blur(5px);
 }
 .sub-nav ul li a {
   padding: 10px 12.5px;
+  color: #4A4A4A;
   font-size: 14px;
   display: block;
   font-weight: 500;
@@ -17952,7 +17996,7 @@ base-chart.chart {
   }
 }
 main {
-  background: #F7F7F7;
+  background: #FFFFFF;
 }
 
 .container {
