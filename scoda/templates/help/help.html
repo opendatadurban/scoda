@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="help wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 how-to-use">
+                <h1>How To Use SCODA</h1>
+                <hr>
+                <p>SCODA can be used to:</p>
+                <ol type="A">
+                    <li>Obtain City Indicators</li>
+                    <li>Access City Dashboards</li>
+                    <li>View Data Stories.</li>
+                </ol>
+            </div>
+            <div class="col-xs-12 ">
+                <h2>A. Obtain City Indicators</h2>
+                <p>City Indicators are a set of data developed and adopted by cities seeking to measure and monitor various aspects of city development. Indicators include raw data and manipulated data in excel sheets and are mainly understood by data scientists.</p>
+            </div>
+            <div class="col-xs-12 indicators">
+                <h4>The process of obtaining city indicators on SCODA</h4>
+                <ol type="1">
+                    <li>
+                        <p>Click on <a href="http://www.scoda.co.za/dataset">http://www.scoda.co.za/dataset</a></p>
+                    </li>
+                    <li>
+                        <p>You will be redirected to the Data Portal which shows all datasets uploaded to the SCODA database.</p>
+                        <img src="/static/img/image_help_city-ind_pt-2.jpg">
+                    </li>
+                    <li>
+                        <p><span>Examples of a Data Set:</span> Click on “State of Cities Report 2016” to access that collection of datasets.</p>
+                        <img src="/static/img/image_help_city-ind_pt-3.jpg">
+                        <ol type="i">
+                            <li>You will be directed to the dataset collection for “State of Cities Report 2016”.</li>
+                            <li>From this list, choose which dataset you would like to download.  In this example we have selected the dataset called: “Inclusive Cities Data”</li>
+                            <img src="/static/img/image_help_city-ind_pt-3-ii.jpg">
+                        </ol>
+                    </li>
+                    <li>
+                        <p>This is an example of what a downloaded dataset and its format look like:</p>
+                        <img src="/static/img/image_help_city-ind_pt-4.jpg">
+                    </li>
+                </ol>
+            </div>
+            <div class="col-xs-12">
+                <h2>B. Access City Dashboards</h2>
+                <p>City dashboards are a visual way to showcase municipal measures and progress. Dashboards are used to profile a city and provide an overview of city development according to a set of key areas e.g. levels of education in a city, access to social services, city finance, economic development, etc.  Dashboards are useful for those involved in policy development, researchers, data scientist, and anybody interested in an overview of their city’s development.</p>
+            </div>
+            <div class="col-xs-12 process-accessing-dashbord">
+                <h4>The process of accessing city dashboards on SCODA</h4>
+                <ol type="1">
+                    <li>
+                        <p>Click on <a href="http://www.scoda.co.za">http://www.scoda.co.za</a></p>
+                    </li>
+                    <li>
+                        <p>You will be directed to the SCODA landing page.<br>
+                                Scroll down to the map at the bottom of the page.  In this example we have selected the “City  of Tshwane”</p>
+                        <img src="/static/img/image_help_dash_pt-4.jpg">
+                    </li>
+                    <li>
+                        <p>When you have selected a city, a City Profile pops up.<br>
+                                To view the City Dashboard, scroll down on the city profile pop up and select: “Click Here” under the heading: City Dashboard.</p>
+                        <img src="/static/img/image_help_dash_pt-5.jpg">                                
+                    </li>
+                    <li>
+                        <p>The relevant City Dashboard will open in a new browser tab as a downloadable PDF.</p>
+                        <img src="/static/img/image_help_dash_pt-6.jpg">     
+                    </li>
+                </ol>
+            </div>
+            <div class="col-xs-12">
+                <h2>C. View Data Stories</h2>
+                <p>Showing city indicators and dashboards can be overwhelming for people that are not data scientists or policy makers without adding a narrative to the data.  Dashboards and spreadsheets only tell you what is happening. But, they do not tell you why. Data storytelling is a methodology for communicating information, tailored to a specific audience, with a compelling narrative.</p>
+            </div>
+            <div class="col-xs-12 viewing-data-story">
+                <h4>The process of viewing a data story</h4>
+                <ol type="1">
+                    <li>
+                        <p>Click on <a href="http://www.scoda.co.za">http://www.scoda.co.za</a></p>
+                    </li>
+                    <li>
+                        <p>You will be redirected to the SCODA landing page.</p>
+                        <img src="/static/img/image_help_data-story_pt-2.jpg"> 
+                    </li>
+                    <li>
+                        <p>On the landing page, choose one of the data stories.<br>  
+                                In this example we have selected: “State of City Finances 2018: Financing Infrastructure.</p>
+                            <img src="/static/img/image_help_data-story_pt-3.jpg">
+                    </li>
+                    <li>
+                        <p>The relevant Data Story will open in a pop up window like the following example.</p>
+                        <img src="/static/img/image_help_data-story_pt-4.jpg">
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

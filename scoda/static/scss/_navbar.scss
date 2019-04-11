@@ -165,8 +165,8 @@
   }
 
   .sub-nav {
-    box-shadow: $box-shadow;
-    background-color:rgba(237,237,237,1);
+    box-shadow: 1px 1px 4px 0 rgba(0,0,0,0.2);
+    background-color: #FFFFFF;
     position: fixed;
     cursor:default;
     z-index: 5;
@@ -177,9 +177,10 @@
       text-align:center;
       li {
         display:inline-block;
-        filter: blur(5px);
+        // filter: blur(5px);
         a {
           padding: 10px 12.5px;
+          color: #4A4A4A;
           font-size: 14px;
           display: block;
           font-weight: 500;
