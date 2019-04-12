@@ -30,7 +30,7 @@ import zipfile
 from math import ceil
 from flask_mail import Message
 from app import mail
-from config import MAIL_DEFAULT_SENDER
+# from config import MAIL_DEFAULT_SENDER
 
 
 def create_package(base_url, data=None, api_key=None):
