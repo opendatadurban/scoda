@@ -2,18 +2,19 @@ import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-DEBUG = False
+DEBUG = True
 TESTING = False
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 CSRF_ENABLED = True
-SECRET_KEY = os.environ['SECRET_KEY']
-MAIL_SERVER = os.environ['MAIL_SERVER']
-MAIL_DEFAULT_SENDER = os.environ['MAIL_DEFAULT_SENDER']
-MAIL_USERNAME = os.environ['MAIL_USERNAME']
-MAIL_PASSWORD = os.environ['MAIL_PASSWORD']
-MAIL_PORT = 465
-MAIL_USE_TLS = False
-MAIL_USE_SSL = True
+# SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = 'secret'
+# MAIL_SERVER = os.environ['MAIL_SERVER']
+# MAIL_DEFAULT_SENDER = os.environ['MAIL_DEFAULT_SENDER']
+# MAIL_USERNAME = os.environ['MAIL_USERNAME']
+# MAIL_PASSWORD = os.environ['MAIL_PASSWORD']
+# MAIL_PORT = 465
+# MAIL_USE_TLS = False
+# MAIL_USE_SSL = True
 
 # Flask-Security config
 SECURITY_URL_PREFIX = "/user"

@@ -24,6 +24,10 @@ def grouper(iterable, n, fillvalue=None):
     args = [iter(iterable)] * n
     return izip_longest(*args, fillvalue=fillvalue)
 
+@app.route('/help')
+def help():
+    return render_template('help/help.html')
+
 
 @app.route('/explore', methods=['GET', 'POST'])
 def explore():

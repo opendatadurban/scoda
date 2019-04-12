@@ -1,0 +1,67 @@
+.help{
+    color: #4A4A4A;
+    background-color: #FFFFFF;
+    margin-top: 30px;
+    a{
+        color: #4A90E2;
+    }
+    img{
+        width: 100%;
+        padding-right: 174px;
+        padding-left: 60px;
+        margin: 15px 30px;
+    }
+    .viewing-data-story, .process-accessing-dashbord, .indicators{
+        ol[type="i"] {
+            padding: 15px;
+            font-weight: 600;
+            li{
+                p{
+                    font-weight: 400;
+                    margin-left: 30px;
+                }
+            }
+        }
+        ol[type="1"]{
+            font-weight: 600;
+            li{
+                p{
+                    font-weight: 400;
+                    margin-left: 30px;
+                }
+            }
+        }
+    }
+    .how-to-use{
+        p{
+            margin-bottom: 0;
+        }
+    }
+    hr{
+        border-top: 1px solid #000000;
+        margin-top: 0;
+    }
+    h1{
+        font-size: 26px;
+        font-weight: 700;
+    }
+    h2{
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 30px;
+    }
+    h4{
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 24px;
+    }
+
+    // Desktop specific styling
+    @media (min-width: $tablet) {
+    }
+        
+    // Mobile specific styling
+    @media (max-width: $tablet) {
+
+    }
+}
