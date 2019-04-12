@@ -10173,6 +10173,7 @@ base-chart.chart {
 .help {
   color: #4A4A4A;
   background-color: #FFFFFF;
+  margin-top: 30px;
 }
 .help a {
   color: #4A90E2;
@@ -10181,23 +10182,29 @@ base-chart.chart {
   width: 100%;
   padding-right: 174px;
   padding-left: 60px;
-  margin: 15px 0px;
+  margin: 15px 30px;
 }
 .help .viewing-data-story ol[type=i], .help .process-accessing-dashbord ol[type=i], .help .indicators ol[type=i] {
+  padding: 15px;
+  font-weight: 600;
+}
+.help .viewing-data-story ol[type=i] li p, .help .process-accessing-dashbord ol[type=i] li p, .help .indicators ol[type=i] li p {
   font-weight: 400;
-  padding: 15px 70px;
+  margin-left: 30px;
 }
 .help .viewing-data-story ol[type="1"], .help .process-accessing-dashbord ol[type="1"], .help .indicators ol[type="1"] {
   font-weight: 600;
 }
 .help .viewing-data-story ol[type="1"] li p, .help .process-accessing-dashbord ol[type="1"] li p, .help .indicators ol[type="1"] li p {
   font-weight: 400;
+  margin-left: 30px;
 }
 .help .how-to-use p {
   margin-bottom: 0;
 }
 .help hr {
   border-top: 1px solid #000000;
+  margin-top: 0;
 }
 .help h1 {
   font-size: 26px;
@@ -17712,7 +17719,6 @@ base-chart.chart {
   cursor: default;
   z-index: 5;
   width: 100%;
-  /* height: 30px; */
 }
 .sub-nav ul {
   margin: 0;
