@@ -1,6 +1,7 @@
 .help{
     color: #4A4A4A;
     background-color: #FFFFFF;
+    margin-top: 30px;
     a{
         color: #4A90E2;
     }
@@ -8,18 +9,25 @@
         width: 100%;
         padding-right: 174px;
         padding-left: 60px;
-        margin: 15px 0px;
+        margin: 15px 30px;
     }
     .viewing-data-story, .process-accessing-dashbord, .indicators{
         ol[type="i"] {
-            font-weight: 400;
-            padding: 15px 70px;
+            padding: 15px;
+            font-weight: 600;
+            li{
+                p{
+                    font-weight: 400;
+                    margin-left: 30px;
+                }
+            }
         }
         ol[type="1"]{
             font-weight: 600;
             li{
                 p{
                     font-weight: 400;
+                    margin-left: 30px;
                 }
             }
         }
@@ -31,6 +39,7 @@
     }
     hr{
         border-top: 1px solid #000000;
+        margin-top: 0;
     }
     h1{
         font-size: 26px;
