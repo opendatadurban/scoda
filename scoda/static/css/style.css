@@ -17624,9 +17624,11 @@ base-chart.chart {
   position: relative;
   padding-bottom: 7px;
 }
-.header--navigation .navbar-nav .nav-link.Data {
+.header--navigation .navbar-nav .nav-link.active {
   color: #FF8430 !important;
   font-weight: 700;
+}
+.header--navigation .navbar-nav .nav-link.Data {
   left: -1px;
 }
 .header--navigation .navbar-nav .nav-link:hover {
