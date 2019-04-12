@@ -17729,6 +17729,7 @@ base-chart.chart {
 }
 .sub-nav ul li {
   display: inline-block;
+  filter: blur(5px);
 }
 .sub-nav ul li a {
   padding: 10px 12.5px;
