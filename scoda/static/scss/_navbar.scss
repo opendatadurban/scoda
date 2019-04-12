@@ -48,9 +48,11 @@
           right: 1px;
           position: relative;
           padding-bottom: 7px;
-          &.Data {
+          &.active{
             color: $brand-primary !important;
             font-weight: 700;
+          }
+          &.Data {
             left: -1px;
           }
           &:hover {
