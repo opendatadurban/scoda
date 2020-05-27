@@ -4,7 +4,7 @@ from scoda.app import app
 from flask import request, url_for, redirect, flash, make_response, session, render_template, jsonify, Response, \
     send_file
 from flask_security import current_user
-from itertools import izip_longest
+from itertools import zip_longest
 from sqlalchemy.sql import select
 from sqlalchemy import func
 from .models import db
@@ -22,7 +22,7 @@ def grouper(iterable, n, fillvalue=None):
     "Collect data into fixed-length chunks or blocks"
     # grouper('ABCDEFG', 3, 'x') --> ABC DEF Gxx"
     args = [iter(iterable)] * n
-    return izip_longest(*args, fillvalue=fillvalue)
+    return zip_longest(*args, fillvalue=fillvalue)
 
 @app.route('/help')
 def help():
@@ -76,7 +76,7 @@ def explore():
             colours = ['#f44336', '#03a9f4', '#4caf50', '#ffc107', '#03a9f4', '#ff5722', '#9c27b0', '#8bc34a',
                        '#ffeb3b', '#9e9e9e', '#3f51b5', '#e91e63']
             series = {i: {'color': colours[i]} for i in range(len(datasets))}
-            view = range(2, len(datasets) + 2)
+            view = list(range(2, len(datasets) + 2))
             view.insert(0, 0)
 
             minVal = min(map(float, list(df.value.unique())))

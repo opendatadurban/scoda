@@ -12,7 +12,7 @@ SCODA Website Repository
 - [Caveats, Dev Notes and or Outstanding Bugs](/README.md#caveats-dev-notes-and-or-outstanding-bugs)
 
 #### Information Resources
-- Needs info
+- [Larger Data for DB seeds can be found here](https://drive.google.com/drive/folders/1tnI_EveGeeJg8-WnP5Js2doMDsQGT2Vh?usp=sharing)
 
 ## Creative Resources
 - [SCODA UI](https://projects.invisionapp.com/d/main#/projects/prototypes/15567383)

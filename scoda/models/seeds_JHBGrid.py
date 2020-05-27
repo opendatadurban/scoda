@@ -9,14 +9,14 @@ def seed_db(db):
     """ Add JHB grid seed entities to the database. """
     with app.app_context():
 
-        data = geojson.load(open('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/JHB_Grid.json'))
+        data = geojson.load(open('C:/Users/Wasim/Documents/GitHub/scoda/scoda/data/JHB_Grid.json'))
 
-        data2 = genfromtxt('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/jhbgridmodel.csv', delimiter=',',
+        data2 = genfromtxt('C:/Users/Wasim/Documents/GitHub/scoda/scoda/data/jhbgridmodel.csv', delimiter=',',
                            skip_header=1)
 
-        print 'Populating JHB grid data...'
+        print('Populating JHB grid data...')
         for D, poly in zip(data2, data['features']):
-                print D[1:]
+                print(D[1:])
                 grid = Grid()
                 grid.city_grid_id = D[1]
                 grid.region_id = 1

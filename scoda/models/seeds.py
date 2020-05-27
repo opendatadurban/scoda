@@ -39,9 +39,9 @@ themes = {'Demographics': 1,
           'Well-governed': 5
           }
 
-dfi = pd.read_csv('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/Indicators.csv')
-df = pd.read_csv('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/Manicured_final.csv')
-dfm = pd.read_csv('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/Indicators_Metadata.csv').\
+dfi = pd.read_csv('C:/Users/Wasim/Documents/GitHub/scoda/scoda/data/Indicators.csv')
+df = pd.read_csv('C:/Users/Wasim/Documents/GitHub/scoda/scoda/data/Manicured_final.csv')
+dfm = pd.read_csv('C:/Users/Wasim/Documents/GitHub/scoda/scoda/data/Indicators_Metadata.csv').\
     fillna(value='Unspecified')
 
 def seed_db(db):
@@ -49,13 +49,13 @@ def seed_db(db):
     with app.app_context():
         for x in User.create_defaults():
             db.session.add(x)
-        print 'Created user table...'
+        print ('Created user table...')
         for x in Role.create_defaults():
             db.session.add(x)
-        print 'Created role table...'
+        print ('Created role table...')
         for x in DataSet.create_defaults():
             db.session.add(x)
-        print 'Created dataset table...'
+        print ('Created dataset table...')
         # for x in Indicator.create_defaults():
         #     db.session.add(x)
         for x in dfm.values.tolist():
@@ -68,23 +68,23 @@ def seed_db(db):
             ind.source = x[5]
             ind.frequency = x[6]
             db.session.add(ind)
-        print 'Created indicator table...'
+        print ('Created indicator table...')
         for x in Region.create_defaults():
             db.session.add(x)
-        print 'Created region table...'
+        print ('Created region table...')
         for x in WaziRegion.create_defaults():
             db.session.add(x)
-        print 'Created Wazi-region table...'
+        print ('Created Wazi-region table...')
         for x in Type.create_defaults():
             db.session.add(x)
-        print 'Created type table...'
+        print ('Created type table...')
         for x in Theme.create_defaults():
             db.session.add(x)
 
-        print 'Created theme table...'
+        print ('Created theme table...')
         db.session.flush()
         db.session.commit()
-        print 'Populating datapoints...'
+        print ('Populating datapoints...')
 
         mapping = {}
         mapping_theme = {}
@@ -120,9 +120,9 @@ def seed_db(db):
         db.session.flush()
         db.session.commit()
 
-        data = geojson.load(open('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/metro_salc_geo.json'))
+        data = geojson.load(open('C:/Users/Wasim/Documents/GitHub/scoda/scoda/data/metro_salc_geo.json'))
 
-        data2 = genfromtxt('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/jhbpopests_clean.csv', delimiter=',')
+        data2 = genfromtxt('C:/Users/Wasim/Documents/GitHub/scoda/scoda/data/jhbpopests_clean.csv', delimiter=',')
 
         parser = {}
         for i, I in enumerate(sort(list(set(data2[:, 2])))):
@@ -138,7 +138,7 @@ def seed_db(db):
         for i in data2:
             parser2[int(i[1])] = list(i[21:])
 
-        print 'Populating city enumerator GIS data...'
+        print ('Populating city enumerator GIS data...')
         for poly in data['features']:
             if poly['properties']['dc_mdb_c'] == 'JHB':
                 area = Area()
@@ -160,8 +160,8 @@ def seed_db(db):
         del data
         del data2
 
-        print 'Populating city ward GIS data...'
-        data3 = geojson.load(open('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/MunicipalWards2016.json', 'r'))
+        print ('Populating city ward GIS data...')
+        data3 = geojson.load(open('C:/Users/Wasim/Documents/GitHub/scoda/scoda/data/MunicipalWards2016.json', 'r'))
 
         for i in data3['features']:
             if 'Johannesburg' in i['properties']['MunicName']:

@@ -1,5 +1,5 @@
 /**
- * Created by mrade_000 on 25-Jan-17.
+ * Created by Wasim on 25-Jan-17.
  */
 /*
 * canvg.js - Javascript SVG parser and renderer on Canvas

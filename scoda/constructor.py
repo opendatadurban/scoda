@@ -6,10 +6,10 @@ from .models.files import NewFileForm, EditFileForm, DeleteFileForm
 from .models.wazi import WaziForm, MuniForm, MyDataForm, PivotForm
 from .models.datasets import ExploreForm
 from .models.user import UserSet, UserAnalysis, NewAnalysisForm, EmailForm
-from itertools import izip_longest
+from itertools import zip_longest
 from .models import db
 from .models import *
-import StringIO
+from io import StringIO
 import shutil
 from io import BytesIO
 from pandas import read_sql_query
@@ -18,8 +18,9 @@ from ckanapi import RemoteCKAN
 from pandas.io.json import json_normalize
 import pandas as pd
 import gviz_api
-import urlparse
-import urllib2
+from urllib.parse import urljoin
+import urllib
+from urllib.request import urlopen,Request
 import urllib
 import json
 import requests
@@ -29,7 +30,7 @@ import string
 import zipfile
 from math import ceil
 from flask_mail import Message
-from app import mail
+from .app import mail
 # from config import MAIL_DEFAULT_SENDER
 
 
@@ -60,18 +61,18 @@ def create_package(base_url, data=None, api_key=None):
         # have to send an empty dict.
         data = {}
     path = '/api/3/action/package_create'
-    url = urlparse.urljoin(base_url, path)
-    request = urllib2.Request(url)
+    url = urljoin(base_url, path)
+    request = Request(url)
     if api_key is not None:
         request.add_header('Authorization', api_key)
     try:
-        response = urllib2.urlopen(request, urllib.quote(json.dumps(data)))
+        response = urlopen(request, urllib.quote(json.dumps(data)))
         # The CKAN API returns a dictionary (in the form of a JSON string)
         # with three keys 'success' (True or False), 'result' and 'help'.
         d = json.loads(response.read())
         assert d['success'] is True
         return d
-    except urllib2.HTTPError, e:
+    except urllib2.HTTPError as e:
         # For errors, the CKAN API also returns a dictionary with three
         # keys 'success', 'error' and 'help'.
         error_string = e.read()
@@ -91,7 +92,7 @@ def create_package(base_url, data=None, api_key=None):
 
 def upload_resource(base_url, files, data=None, api_key=None):
     path = '/api/3/action/resource_create'
-    r = requests.post(urlparse.urljoin(base_url, path),
+    r = requests.post(urljoin(base_url, path),
                       data=data,
                       headers={"X-CKAN-API-Key": api_key},
                       files=files)
@@ -100,7 +101,7 @@ def upload_resource(base_url, files, data=None, api_key=None):
 
 def update_resource(base_url, files, data=None, api_key=None):
     path = '/api/3/action/resource_update'
-    r = requests.post(urlparse.urljoin(base_url, path),
+    r = requests.post(urljoin(base_url, path),
                       data=data,
                       headers={"X-CKAN-API-Key": api_key},
                       files=files)
@@ -117,7 +118,7 @@ def grouper(iterable, n, fillvalue=None):
     "Collect data into fixed-length chunks or blocks"
     # grouper('ABCDEFG', 3, 'x') --> ABC DEF Gxx"
     args = [iter(iterable)] * n
-    return izip_longest(*args, fillvalue=fillvalue)
+    return zip_longest(*args, fillvalue=fillvalue)
 
 
 @app.route('/return-template/')
@@ -382,7 +383,7 @@ def constructor_download(id):
     for col in types[types == 'unicode'].index:
         df[col] = df[col].astype(str)
 
-    from config import basedir
+    from .config import basedir
 
     s = StringIO.StringIO()
     df.to_csv(s, index=False)
@@ -742,9 +743,9 @@ def constructor(id):
 
                 API = '2d59ff29-673d-4cb8-9233-daf0c353f158'
                 url = 'http://almanac.opendata.durban/api/action/datastore_search?resource_id=%s&limit=100' % query[1]
-                req = urllib2.Request(url)
+                req = Request(url)
                 req.add_header('Authorization', API)
-                resp = urllib2.urlopen(req)
+                resp = urlopen(req)
                 content = json.loads(resp.read())
 
                 dataFrame = json_normalize(content['result']['records'])

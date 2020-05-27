@@ -5,13 +5,13 @@ from flask_security import current_user
 from .models import db
 from .models.user import UserAnalysis
 from .models.files import UserSet
-from itertools import izip_longest
+from itertools import zip_longest
 
 def grouper(iterable, n, fillvalue=None):
     "Collect data into fixed-length chunks or blocks"
     # grouper('ABCDEFG', 3, 'x') --> ABC DEF Gxx"
     args = [iter(iterable)] * n
-    return izip_longest(*args, fillvalue=fillvalue)
+    return zip_longest(*args, fillvalue=fillvalue)
 
 @app.route('/dashboard')
 def city_dashboard():
