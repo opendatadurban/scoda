@@ -1,6 +1,6 @@
 from ..app import db
 from scoda.app import app
-from datasets import WaziRegion
+from .datasets import WaziRegion
 from flask_security import current_user
 from ..forms import Form
 from wtforms import validators, SelectField, SelectMultipleField, IntegerField

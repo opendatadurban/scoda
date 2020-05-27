@@ -9,16 +9,16 @@ from json import loads
 from pandas.io.json import json_normalize
 import pandas as pd
 import gviz_api
-import urllib2
-
+import urllib
+from urllib.request import urlopen,Request
 
 def pyramid():
     API = '989e1c94-6dfd-4bc1-af04-9c64e59d96b3'
     ID = '663dd642-fbf3-4c5e-92e8-b76b07df2847'
     url = 'http://data.opendata.durban/api/action/datastore_search?resource_id=%s&limit=500' % ID
-    req = urllib2.Request(url)
+    req = Request(url)
     req.add_header('Authorization', API)
-    resp = urllib2.urlopen(req)
+    resp = urlopen(req)
     content = loads(resp.read())
 
     dataFrame = json_normalize(content['result']['records'])
@@ -44,9 +44,9 @@ def finances():
     API = '989e1c94-6dfd-4bc1-af04-9c64e59d96b3'
     ID = '002a0d5d-d7c7-44e0-94b5-f9325477c3c6'
     url = 'http://data.opendata.durban/api/action/datastore_search?resource_id=%s&limit=100' % ID
-    req = urllib2.Request(url)
+    req = Request(url)
     req.add_header('Authorization', API)
-    resp = urllib2.urlopen(req)
+    resp = urlopen(req)
     content = loads(resp.read())
 
     dataFrame = json_normalize(content['result']['records'])
@@ -75,9 +75,9 @@ def motion():
     API = '989e1c94-6dfd-4bc1-af04-9c64e59d96b3'
     ID = 'f47e6ba8-f65a-411d-806c-17acc26b51b0'
     url = 'http://data.opendata.durban/api/action/datastore_search?resource_id=%s&limit=500' % ID
-    req = urllib2.Request(url)
+    req = Request(url)
     req.add_header('Authorization', API)
-    resp = urllib2.urlopen(req)
+    resp = urlopen(req)
     content = loads(resp.read())
 
     dataFrame = json_normalize(content['result']['records'])
@@ -105,9 +105,9 @@ def households():
     API = '989e1c94-6dfd-4bc1-af04-9c64e59d96b3'
     ID = 'dadc5d5d-a72f-4811-ad62-799980ca9eca'
     url = 'http://data.opendata.durban/api/action/datastore_search?resource_id=%s&limit=500' % ID
-    req = urllib2.Request(url)
+    req = Request(url)
     req.add_header('Authorization', API)
-    resp = urllib2.urlopen(req)
+    resp = urlopen(req)
     content = loads(resp.read())
 
     dataFrame = json_normalize(content['result']['records'])
@@ -132,9 +132,9 @@ def education():
     API = '989e1c94-6dfd-4bc1-af04-9c64e59d96b3'
     ID = 'f2f2a37f-c000-49c1-8aa2-6dc7e20621ae'
     url = 'http://data.opendata.durban/api/action/datastore_search?resource_id=%s&limit=500' % ID
-    req = urllib2.Request(url)
+    req = Request(url)
     req.add_header('Authorization', API)
-    resp = urllib2.urlopen(req)
+    resp = urlopen(req)
     content = loads(resp.read())
 
     dataFrame = json_normalize(content['result']['records'])
@@ -164,9 +164,9 @@ def energy():
     API = '989e1c94-6dfd-4bc1-af04-9c64e59d96b3'
     ID = '72d11985-94ea-42bc-a5b6-0662d8ff459c'
     url = 'http://data.opendata.durban/api/action/datastore_search?resource_id=%s&limit=500' % ID
-    req = urllib2.Request(url)
+    req = Request(url)
     req.add_header('Authorization', API)
-    resp = urllib2.urlopen(req)
+    resp = urlopen(req)
     content = loads(resp.read())
 
     dataFrame = json_normalize(content['result']['records'])
@@ -196,9 +196,9 @@ def water():
     API = '989e1c94-6dfd-4bc1-af04-9c64e59d96b3'
     ID = '0e4bee46-fabd-4d74-a9a2-42fb56984fe7'
     url = 'http://data.opendata.durban/api/action/datastore_search?resource_id=%s&limit=500' % ID
-    req = urllib2.Request(url)
+    req = Request(url)
     req.add_header('Authorization', API)
-    resp = urllib2.urlopen(req)
+    resp = urlopen(req)
     content = loads(resp.read())
 
     dataFrame = json_normalize(content['result']['records'])
@@ -223,9 +223,9 @@ def economic():
     API = '989e1c94-6dfd-4bc1-af04-9c64e59d96b3'
     ID = '741a3fc9-9595-4907-b5c2-07c361c2df40'
     url = 'http://data.opendata.durban/api/action/datastore_search?resource_id=%s&limit=500' % ID
-    req = urllib2.Request(url)
+    req = Request(url)
     req.add_header('Authorization', API)
-    resp = urllib2.urlopen(req)
+    resp = urlopen(req)
     content = loads(resp.read())
 
     dataFrame = json_normalize(content['result']['records'])
@@ -251,9 +251,9 @@ def unemployment():
     API = '989e1c94-6dfd-4bc1-af04-9c64e59d96b3'
     ID = '7703662d-5da9-4723-a596-8d089dd19183'
     url = 'http://data.opendata.durban/api/action/datastore_search?resource_id=%s&limit=500' % ID
-    req = urllib2.Request(url)
+    req = Request(url)
     req.add_header('Authorization', API)
-    resp = urllib2.urlopen(req)
+    resp = urlopen(req)
     content = loads(resp.read())
 
     dataFrame = json_normalize(content['result']['records'])
@@ -278,9 +278,9 @@ def electricity():
     API = '989e1c94-6dfd-4bc1-af04-9c64e59d96b3'
     ID = '93e78c69-1aae-44e6-9946-c0478b1f4639'
     url = 'http://data.opendata.durban/api/action/datastore_search?resource_id=%s&limit=500' % ID
-    req = urllib2.Request(url)
+    req = Request(url)
     req.add_header('Authorization', API)
-    resp = urllib2.urlopen(req)
+    resp = urlopen(req)
     content = loads(resp.read())
 
     dataFrame = json_normalize(content['result']['records'])
@@ -307,9 +307,9 @@ def sanitation():
     API = '989e1c94-6dfd-4bc1-af04-9c64e59d96b3'
     ID = '92299119-da69-4ebd-a366-42006fe2b737'
     url = 'http://data.opendata.durban/api/action/datastore_search?resource_id=%s&limit=500' % ID
-    req = urllib2.Request(url)
+    req = Request(url)
     req.add_header('Authorization', API)
-    resp = urllib2.urlopen(req)
+    resp = urlopen(req)
     content = loads(resp.read())
 
     dataFrame = json_normalize(content['result']['records'])
