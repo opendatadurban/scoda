@@ -57,7 +57,7 @@ def explore():
             query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value). \
                 filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
                 filter(DataPoint.region_id == Region.id)
-
+            print(query.all())
             indicator = Indicator.query.get(ind)
 
             df = read_sql_query(query.statement, query.session.bind)
@@ -110,7 +110,10 @@ def explore():
                                     df["ds_name"] == d), "value"]))
                         table.append(row)
             yrs = ['Year'] + [str(y) for y in years[::-1]]
-
+            print(table)
+            print(years_list)
+            print("Analysis below")
+            print(analyses)
             return render_template('explore/explore.html', form=form, plot=plot, table=table, colours=colours,
                                    year=str(max(years)), series=series, view=view, plot_type=plot_type, min=minVal,
                                    max=maxVal, cities=cities, options_list=options_list, years_list=years_list,
