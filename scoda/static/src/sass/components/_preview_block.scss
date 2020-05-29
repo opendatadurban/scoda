@@ -1,0 +1,82 @@
+.preview_block{
+    color: #FFFFFF;
+    font-family: 'Montserrat';
+    background-color: #131421;
+    box-shadow: 0 0 6px 7px rgba(0,0,0,0.2);
+    padding: 60px;
+
+    .icon{
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 138px;
+        width: 142px;
+    }
+    .product-evidence{
+        h5{
+            color: #F64343;
+        }
+        i{
+            text-transform: capitalize;
+            color: #F64343;
+        }
+        .icon{
+            background-image: url('/static/dist/img/SCODA Assets V3_0/1 Landing Page/1_2 What Products Do We Offer/icon_products_evidence.png');
+        }
+    }
+    .product-analysis{
+        h5{
+            color: #FFB665;
+        }
+        i{
+            text-transform: capitalize;
+            color: #FFB665;
+        }
+        .icon{
+            background-image: url('/static/dist/img/SCODA Assets V3_0/1 Landing Page/1_2 What Products Do We Offer/icon_products_analysis.png');
+        }
+    }
+    .product-insight{
+        h5{
+            color: #4F9DA6;
+        }
+        
+        i{
+            text-transform: capitalize;
+            color: #4F9DA6;
+        }
+        .icon{
+            background-image: url('/static/dist/img/SCODA Assets V3_0/1 Landing Page/1_2 What Products Do We Offer/icon_products_insight.png');
+        }
+    }
+    h2{
+        font-size: 30px;
+        font-weight: bold;
+        line-height: 32px;
+    }
+    h5{
+        font-family: 'Montserrat';
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 30px;
+    }
+    p{
+        font-size: 18px;
+        line-height: 28px;
+
+    }
+    // Mobile specific styling
+    @media (max-width: $tablet) {
+        padding: 30px;
+        h2{
+            margin-bottom: 30px;
+        }
+        .icon{
+            display: block;
+            margin: auto;
+        }
+        h5,p{
+            text-align: center;
+        }
+    }
+}

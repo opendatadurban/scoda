@@ -1,0 +1,85 @@
+.cta_block{
+    background-color: #FFFFFF;
+    box-shadow: 0 0 6px 7px rgba(0,0,0,0.2);
+    font-family: 'Montserrat';
+    background: linear-gradient(60deg, #F05252 calc(38% - 1px), #F05252, #fff calc(38% + 1px));
+    .cta-info{
+        margin-top: 60px;
+        margin-bottom: 60px;
+        .btn{
+            border: 2px solid #F05252;
+            border-radius: 25px;
+            background-color: #FFFFFF;
+            box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
+            color: #F64343;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 24px;
+            text-align: center;          
+        }
+        p{
+            color: #4A4A4A;
+            font-size: 18px;
+            line-height: 28px;
+            text-align: center;
+        }
+        h5{
+            color: #F64343;
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 30px;
+            text-align: center;
+        }
+        .cta-image{
+            background-image: url('/static/dist/img/SCODA Assets V3_0/1 Landing Page/1_3 Evidence Tools/image_evidence_data-manage.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 258px;
+            width: 300px;
+        }
+    }
+    .info-block{
+        padding: 25px;
+        border-radius: 10px 0 0 10px;
+        background-color: #121425;
+        box-shadow: 0 0 6px 2px rgba(0,0,0,0.2);
+        margin-top: 60px;
+        margin-bottom: 60px;
+        p{
+            color: #FFFFFF;
+            font-size: 18px;
+            line-height: 28px;
+        }
+        h2{
+            color: #F64343;
+            font-size: 50px;
+            font-weight: 600;
+            line-height: 32px;
+        }
+        .icon{
+            background-image: url('/static/dist/img/SCODA Assets V3_0/1 Landing Page/1_3 Evidence Tools/icon_products_evidence-small.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 69px;
+            max-width: 71px;
+        }
+    }
+    // Mobile specific styling
+    @media (max-width: 768px) {
+        .info-block{
+            p{
+                font-size: 11px;
+                line-height: 17px;
+            }
+            h2{
+                font-size: 17px;
+            }
+            .icon{
+                height: 30px;
+                max-width: 24px;
+            }
+        }
+    }
+}

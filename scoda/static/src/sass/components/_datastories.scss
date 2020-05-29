@@ -1,0 +1,439 @@
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.nav-stretch {
+    width: 20%;
+    outline: none;
+}
+
+.nav-tabs .nav-link:hover {
+    border: 1px solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    outline: none;
+    text-align: center;
+    color: $scoda-inactive-tab;
+}
+
+.nav-tabs {
+  color: $scoda-inactive-tab;
+  font-family:  $scoda-font;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 32px;
+  text-align: center;
+  border-bottom: 1px solid #131421;
+  
+}
+
+.nav-link {
+    color: $scoda-inactive-tab;
+    font-family:  $scoda-font;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 32px;
+    text-align: center;
+}
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    background-color: $scoda-white;
+    border-color: $scoda-black $scoda-black $scoda-white;
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 32px;
+    text-align: center;
+    
+}
+
+.ds-content-vspacer {
+    width:5%;
+}
+
+.ds-content-hspacer {
+    height:25px;
+}
+
+.ds-banner-logo {
+    height: 85px;
+    width: 85px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+}
+
+.ds-banner-title {
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 32px;
+}
+
+.ds-banner-content {
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 15px;
+    letter-spacing: 0;
+    line-height: 25px;
+}
+
+.ds-banner-content-hspacer {
+    height:10px;
+}
+
+.ds-banner-content-vspacer {
+    width:10px;
+}
+
+.ds-banner-view-button {
+  height: 21px;
+  width: 230px;
+  color: $scoda-grey-dark;
+  font-family: $scoda-font;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 24px;
+  text-align: center;
+  box-sizing: border-box;
+  height: 28px;
+  width: 235px;
+  border: 1px solid $scoda-grey-dark;
+  border-radius: 25px;
+}
+
+.ds-banner-hr {
+    box-sizing: border-box;
+    height: 1px;
+    border: 1px solid $scoda-hr;
+}
+
+.ds-filter-title {
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 25px;
+}
+
+.ds-content-title {
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 28px;
+    width:90%;
+}
+
+.ds-content-subtitle {
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: 28px;
+}
+
+.ds-content {
+    color: $scoda-content;
+    font-family: $scoda-font;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 24px;
+    text-align: justify;
+    width: 360px;
+}
+
+.ds-content-image {
+    width:64%;
+    height:30%;
+}
+
+.ds-right-content {
+    width: 35%;
+}
+
+.ds-top-content {
+    width: 80%;
+    color: $scoda-content;
+    font-family: $scoda-font;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 24px;
+    text-align: justify;
+}
+
+.ds-right-content-vspacer {
+    width:10px;
+}
+
+.ds-right-content-hspacer {
+    height:3%;
+}
+
+.ds-right-content-width {
+    padding-left: 52px;
+    width:360px;
+}
+
+.ds-info-banner-title {
+    color: $scoda-info;
+    font-family: $scoda-font;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 24px;
+}
+
+.ds-info-banner-detail-width {
+    width: 235px;
+}
+
+.ds-info-banner-subtitle {
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 13px;
+    letter-spacing: 0;
+    line-height: 20px;
+}
+
+.ds-info-banner-image {
+    height: 40px;
+    width: 40px;
+    background-color: $scoda-white;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.5);
+}
+
+.ds-info-banner-width {
+    width:360px;
+}
+
+.ds-info-banner-vspacer {
+    width:10%;
+}
+
+.ds-info-banner-vspacer-edge {
+    width:125px;
+}
+
+.ds-info-banner-indicator {
+    text-align: center;
+}
+
+.ds-right {
+    float:right;
+}
+
+.ds-content-top-image {
+    width:93%;
+    height:85%;
+}
+
+.ds-main-navigation-button-back {
+    box-sizing: border-box;
+    height: 30px;
+    width: 200px;
+    border: 1px solid $scoda-grey-dark;
+    border-radius: 5px;
+    background-color: $scoda-white;
+    box-shadow: 0 1px 5px 0 rgba(0,0,0,0.3);
+}
+
+.ds-main-navigation-button-back-text {
+    height: 19px;
+    width: 116px;
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 26px;
+    text-align: center;
+}
+
+.ds-main-navigation-button-back-icon {
+    line-height: 26px;
+}
+
+.ds-main-navigation-button-explorer {
+    box-sizing: border-box;
+    height: 30px;
+    width: 265px;
+    border: 1px solid $scoda-grey-dark;
+    border-radius: 14px;
+    background-color: $scoda-white;
+    color: $scoda-black-light;
+    font-family: $scoda-font;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 25px;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.ds-w {
+    width: 95%;
+}
+
+.ds-s {
+    width:60%;
+}
+
+.ds-content-card {
+    box-sizing: border-box;
+    border: 1px solid $scoda-content;
+    border-radius: 10px 10px 0 0;
+    background-color:$scoda-white;
+}
+
+.ds-content-card-header {
+    border-radius: 10px 10px 0 0;
+    background-color: $scoda-black-light;
+    box-shadow: 1px 1px 4px 0 rgba(0,0,0,0.2);
+    height: 230px;
+}
+
+.ds-content-story-title {
+    color: $scoda-white;
+    font-family: $scoda-font;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 32px;
+  }
+
+  .ds-content-story-subtitle {
+    height: 50px;
+    color: $scoda-white;
+    font-family: $scoda-font;
+    font-size: 38px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 50px;
+  }
+
+  .ds-content-card-header-hr {
+    box-sizing: border-box;
+    height: 1px;
+    border-top: 5px dotted $scoda-white;
+  }
+
+  .ds-content-card-header-sub {
+    color: $scoda-white;
+    font-family: $scoda-font;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 12px;
+  }
+
+  .ds-content-card-header-main {
+    color: $scoda-white;
+    font-family: $scoda-font;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 24px;
+  }
+
+  .ds-content-card-highlight-block {
+    height: 110px;
+    width: 80%;
+    border-radius: 10px;
+    background-color:$scoda-orange;
+    color:$scoda-white;
+    font-family: $scoda-font;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 35px;
+    text-align: center;
+  }
+
+  .ds-content-card-content-block {
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 15px;
+    letter-spacing: 0;
+    line-height: 24px;
+  }
+
+  .ds-content-card-content-block-heading {
+    color:$scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 30px;
+  }
+
+  .ds-content-card-data-description {
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 19px;
+    font-style: italic;
+    letter-spacing: 0;
+    line-height: 30px;
+  }
+
+  .ds-content-card-data-description-title {
+   font-weight: 600;
+  }
+
+  .ds-vertical-tabs-active {
+    color: $scoda-black;
+    font-family: $scoda-font;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 24px;
+    height: 60px;
+    width: 181px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 4px 1px rgba(0,0,0,0.1);
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 5px;
+  }
+
+  .ds-vertical-tabs-none {
+    color: $scoda-black;
+    font-family: $scoda-font;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 22px;
+    width: 181px;
+    background-color: #FFFFFF;
+    text-align: left;
+    margin-bottom: 2px;
+  }
+
+  .ds-vertical-tabs-box {
+    width: 181px;
+    background-color: $scoda-white;
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
+  }
+
+  .ds-tabs-filter-header {
+    height: 49px;
+    width: 100%;
+    border-radius: 5px;
+    background-color:$scoda-white;
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
+    color: #000000;
+    font-family: $scoda-font;
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 41px;
+  }
+
+
+
+  o {
+      color: $scoda-orange;
+      font-weight: 600;
+  }

@@ -1,0 +1,164 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+
+/// Event wrapper
+/// @author Harry Roberts
+/// @param {Bool} $self [false] - Whether or not to include current selector
+/// @link https://twitter.com/csswizardry/status/478938530342006784 Original tweet from Harry Roberts
+@mixin on-event($self: false) {
+  @if $self {
+
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  }
+
+  @else {
+
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  }
+}
+
+/// Make a context based selector a little more friendly
+/// @author Hugo Giraudel
+/// @param {String} $context
+@mixin when-inside($context) {
+  #{$context} & {
+    @content;
+  }
+}
+
+// Module padding
+@mixin module {
+  padding: $s-m;
+  margin-top: 0;
+  margin-right: -$s-s;
+  // margin-bottom: $s-m;
+  margin-left: -$s-s;
+}
+
+@mixin no-margin-padding {
+  padding: 0;
+  margin: 0;
+}
+
+@mixin margin-bottom {
+  margin-bottom: $s-m;
+}
+
+@mixin padding-bottom {
+  padding-bottom: $s-m;
+}
+
+@mixin circle-frame($diameter, $border-thickness, $border-colour) {
+  height: $diameter;
+  width: $diameter;
+  min-width: $diameter;
+  border-radius: calc(#{$diameter} / 2);
+  border: $border-thickness solid $border-colour;
+  margin: auto;
+  display: block;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@mixin border ($dimension, $colour, $radius) {
+  border: $dimension solid $colour;
+  border-radius: $radius;
+}
+
+@mixin form ($height, $font-size) {
+  height: $height !important;
+  border-radius: 3px !important;
+  font-size: $font-size;
+  border: 1px solid #B2BEC3;
+}
+
+@mixin custom-scrollbar ($colour) {
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+  &::-webkit-scrollbar-track {
+    padding-right: 5px;
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $colour;
+    border-radius: 10px;
+    height: 10px;
+    &:hover {
+      background: #4a4a4a;
+    }
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}
+@mixin guest-list {
+  .guest-list {
+    width: 100%;
+
+    li {
+      width: 100%;
+      list-style-type: none;
+
+      &:after {
+        float: right;
+        text-transform: uppercase;
+        font-size: 10px;
+        line-height: 16px;
+        border-radius: 10px;
+        padding: 0px 6px;
+        top: 4px;
+        position: relative;
+        color: white;
+      }
+
+      &.accepted {
+        &:after {
+          content: 'accepted';
+          background-color: #8EC988;
+        }
+      }
+
+      &.pending {
+        &:after {
+          content: 'pending';
+          background-color: #FCC389;
+        }
+      }
+
+      &.declined {
+        &:after {
+          content: 'declined';
+          background-color: #FF8795;
+        }
+      }
+    }
+  }
+}
+
+@mixin dissapear {
+  position: absolute; 
+  top: -9999px; 
+  left: -9999px;
+  height: 0;
+}
+
+@mixin ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

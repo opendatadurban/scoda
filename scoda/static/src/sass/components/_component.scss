@@ -1,0 +1,10 @@
+.component {
+
+  // General styling
+
+  // Desktop specific styling
+  @media (min-width: $tablet) {}
+
+  // Mobile specific styling
+  @media (max-width: $tablet) {}
+}

@@ -1,0 +1,248 @@
+// All buttons
+.btn {
+  transition: .2s all ease-in-out;
+  font-weight: 500;
+  font-size: $btn-font-size;
+  border: 1px solid transparent;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 $s-s;
+  cursor: pointer;
+  position: relative;
+  box-shadow: $box-shadow;
+  height: $btn-h_l;
+  border-radius: 20px;
+  margin-top: $s-s;
+  text-transform: $btn-text-transform;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: .5;
+  }
+
+  &:hover {
+    box-shadow: $box-shadow-hover;
+  }
+
+  &:active, &:focus {
+    background: $brand-primary_darker;
+    &::before {
+      background: $brand-primary_darker !important;
+    }
+  }
+
+  // General styling
+  &_primary {
+    background-color: $brand-primary;
+    color: white !important;
+  }
+
+  &_secondary {
+    border: 1px solid white;
+    color: white !important;
+  }
+
+  &_highlight {
+    position: relative;
+    border: 1px solid $font-general;
+    color: $font-general !important;
+    z-index: 0;
+    border: 0;
+    display: flexbox;
+    transition: .2s box-shadow ease-in;
+    &::before, &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+    }
+    &::before {
+      transition: .2s left ease-in-out;
+      left: 7px;
+      z-index: -1;
+      background-color: $brand-primary;
+    }
+    &::after {
+      border: 1px solid $font-general;
+      z-index: 1;
+      top: 0;
+      left: 0;
+    }
+    &:hover {
+      &::before {
+        left: 0;
+      }
+    }
+    &.light {
+      &::after {
+        left: 0;
+        border: 1px solid white;
+      }
+    }
+  }
+
+  &_link {
+    color: $brand-primary !important;
+    text-decoration: underline;
+    text-transform: uppercase;
+    box-shadow: none;
+    @include border(0,0,0);
+    &:hover, &:focus, &:active {
+      background: transparent;
+      box-shadow: none;
+    }
+    &:active {
+      color: $brand-primary_darker !important;
+    }
+  }
+
+  &_light {
+    background: $background-colour;
+    box-shadow: $box-shadow;
+    height: $btn_h;
+    @include border (1px, $font-general, 15px);
+
+    &:active {
+      background: $brand-primary;
+      color: white !important;
+      border: none;
+      box-shadow: 0 0 0 0.2rem $brand-primary;
+    }
+  }
+
+  &_large {
+    height: $btn-h_l;
+    border-radius: 25px;
+    color: white !important;
+    max-width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &_giant {
+    height: $btn-h_g;
+    border-radius: 25px;
+    color: white !important;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: $btn_lh;
+  }
+
+  &_clear {
+    background: transparent;
+    position: relative;
+
+    &::after {
+      content: "";
+      display: block;
+      border-bottom: 1px solid $font-general;
+      width: calc(100% - #{$s-s});
+      margin: auto;
+      position: absolute;
+      bottom: 0;
+    }
+  }
+
+  &_dark {
+    background-color: $brand-tertiary;
+    color: white;
+    @include border (1px, $font-general, 15px);
+  }
+
+  &_success {
+    color: white !important;
+    background: $success;
+    border-color: $success;
+  }
+
+  &_failure {
+    color: white !important;
+    background: $failure;
+    border-color: $failure;
+  }
+
+  &_inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+
+    +label {
+      font-size: 1.25em;
+      font-weight: 700;
+      color: white;
+      background-color: black;
+      display: inline-block;
+      cursor: pointer;
+      /* "hand" cursor */
+    }
+
+    &:focus+label,
+    +label:hover {
+      background-color: red;
+    }
+  }
+
+  &--icon{
+    &_top {
+      position: relative;
+      top: -20px;
+      left: -50%;
+      right: 0;
+    }
+  }
+  .spinner-border {
+    display: none !important;
+  }
+
+  &.show {
+    .spinner-border {
+      display: inline-block !important;
+      margin-bottom: 2px;
+      margin-right: 5px !important;
+    }
+
+    .btn_text {
+      display: none;
+    }
+
+    &.request-invite {
+      .spinner-border {
+        margin-bottom: -3px;
+      }
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.3;
+    box-shadow: none;
+    transition: .2s all ease-in-out;
+  }
+
+  &.square {
+    border-radius: 3px;
+  }
+
+  span {
+    font: unset;
+  }
+
+  // Desktop specific styling
+  @media (min-width: $tablet) {}
+
+  // Mobile specific styling
+  @media (max-width: $tablet) {
+    &.fas {
+      display: inline-flex;
+      padding: 0 18px;
+    }
+  }
+}

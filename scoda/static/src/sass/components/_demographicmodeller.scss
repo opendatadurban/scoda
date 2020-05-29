@@ -1,0 +1,71 @@
+
+.dm-box-card-header {
+    height: 40px;
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+    background-color:$scoda-dm-header;
+    color: $scoda-white;
+    font-family: $scoda-font;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 37px;
+}
+
+.dm-line-width {
+    width: 90%;
+}
+
+.dm-dropdown-small {
+    box-sizing: border-box;
+    height: 25px;
+    width: 95%;
+    border: 1px solid $scoda-grey-dark;
+    border-radius: 12.5px;
+    background-color: $scoda-white;
+    color:$scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 13px;
+}
+
+.dm-box-card {
+    width: 95%;
+    height: 100%;
+    border-radius: 5px;
+    background-color: $scoda-white;
+}
+
+.dm-footer-button-green {
+    height: 25px;
+    width: 230px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.3);
+    color: $scoda-white;
+    font-family: $scoda-font;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 24px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 12.5px;
+    background-color: $scoda-action;
+}
+
+.dm-footer-button-white {
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 24px;
+    text-align: center;
+    box-sizing: border-box;
+    height: 25px;
+    width: 230px;
+    border: 1px solid $scoda-grey-dark;
+    border-radius: 12.5px;
+    background-color: $scoda-white;
+    cursor: pointer;
+}
