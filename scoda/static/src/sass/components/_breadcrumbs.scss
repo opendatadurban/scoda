@@ -1,0 +1,44 @@
+.breadcrumbs {
+
+  // General styling
+a {
+  background-color: $brand_primary;
+  color: white;
+  width: 90px;
+  height: 40px;
+  text-align: center;
+  position: relative;
+  font-size: 10px;
+  display: table-cell;
+  vertical-align: middle;
+  text-transform: capitalize;
+  padding: 0 10px;
+  filter: drop-shadow(1px -2px 3px rgba(0, 0, 0, 0.5));
+  &:before, &:last-of-type:after {
+    width: 10px;
+    height: 0;
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+  }
+  &:before {
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 10px solid $brand_primary;
+    left: -10px;
+  }
+  &:last-of-type:after{
+    border-top: 20px solid $brand_primary;
+    border-bottom: 20px solid $brand_primary;
+    border-right: 10px solid transparent;
+    right: -10px;
+  } 
+}
+  // Desktop specific styling
+  @media (min-width: $tablet) {}
+
+  // Mobile specific styling
+  @media (max-width: $tablet) {}
+}

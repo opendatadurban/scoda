@@ -1,0 +1,118 @@
+.hero {
+  padding: 0;
+  position: relative;
+  text-align: center;
+  z-index: 0;
+  &::after {
+    content: '';
+    background: url(/wp-content/themes/understrap-child/img/green-curved-element.png);
+    display: block;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 24px;
+    z-index: 9;
+    position: absolute;
+    bottom: -1px;
+  }
+  &--image {
+    // image stylign
+  }
+  &--content {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+  }
+  &--cta {
+    color: white;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 2px 5px;
+    pointer-events: all;
+    &:hover {
+      text-decoration: underline;
+      color: white;
+    }
+  }
+  &--title {
+    font-family: Roboto !important;
+    color: white;
+    font-size: 40px;
+    font-weight: 700;
+    text-transform: uppercase; 
+    background: transparent !important;
+    letter-spacing: 3px;
+    display: inline-block;
+    margin: auto;
+    &::after {
+      content: '';
+      background: url(/wp-content/themes/understrap-child/img/Green-Underline-Element.png);
+      display: block;
+      background-position: center;
+      background-size: cover;
+      width: 100%;
+      height: 40px;
+      margin: auto;
+    }
+  }
+  &--subtitle {
+    font-family: Roboto !important;
+    color: white;
+    font-size: 18px;
+    max-width: 700px;
+    margin: auto;
+    line-height: 1.5;
+    padding: 30px;
+    text-align: left;
+    font-weight: 400;
+    letter-spacing: 2px;
+    flex-direction: column;
+    span{
+      position: unset !important;
+      font-weight: 600;
+    }
+    a{
+      font-family: Roboto !important;
+      background-color: #70c4a3;
+      color: #fff !important;
+      font-weight: 400;
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
+  span {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: white;
+    font-size: 12px;
+    padding: 15px 5px;
+    z-index: 1;
+    i {
+      margin-right: 10px;
+    }
+    a {
+      color: white;
+      font-size: 12px;
+      font-weight: 400;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+
+  @media (max-width: $tablet) {
+    &--title{
+      font-size: 24px;
+    }
+    h2 {
+      display: none;
+    }
+  }
+  @media (min-width: $tablet) {
+    #btn {
+      display: flex!important;
+    }
+  }
+}

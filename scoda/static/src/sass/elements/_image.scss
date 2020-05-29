@@ -1,0 +1,12 @@
+// All buttons
+img {
+
+  // General styling
+  width: 100%;
+
+  // Desktop specific styling
+  @media (min-width: $tablet) {}
+
+  // Mobile specific styling
+  @media (max-width: $tablet) {}
+}

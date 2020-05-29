@@ -1,0 +1,59 @@
+.hero-mini {
+    // General styling
+    color: #4A4A4A;
+    font-family: Montserrat;
+    text-align: center;
+    padding: 120px;
+    .logo{
+      background-image: url('/static/dist/img/SCODA Assets V3_0/1 Landing Page/1_1 Hero Banner/logo_hero-banner_round-font.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 124px;
+      width: 535px;
+    }
+    .hero-image{
+      background-image: url('/static/dist/img/SCODA Assets V3_0/1 Landing Page/1_1 Hero Banner/image_hero-banner_island.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    h5{
+        font-size: 22px;
+        font-weight: bold;
+        line-height: 32px;
+        margin: 15px 0px;
+        text-transform: none;
+    }
+    p{
+      font-size: 16px;
+      line-height: 24px;
+      margin: 15px 0px;
+      span{
+        &:nth-of-type(1){
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+        &:nth-of-type(2){
+          font-weight: 600;
+          color: #F64343;
+        }
+        &:nth-of-type(3){
+          font-weight: 600;
+          color: #FFAD5A;
+        }
+        &:nth-of-type(4){
+          font-weight: 600;
+          color: #4F9DA6;
+        }
+      }
+    }
+    
+    // Desktop specific styling
+    @media (min-width: $tablet) {
+    }
+    
+      // Mobile specific styling
+      @media (max-width: $tablet) {
+      }
+    }

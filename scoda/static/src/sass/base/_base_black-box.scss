@@ -1,0 +1,143 @@
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+/**
+ * Set up a decent box model on the root element
+ */
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: $font;
+  overflow-x: hidden;
+  @include custom-scrollbar($font-general);
+}
+
+body {
+  background: $yellow;
+  padding-bottom: 0 !important; // Overrides sharethis inline styles
+  background-image:url("../../../../static/dist/img/blackbox/background.png");
+}
+
+h1,h2,h3,h4,h5,h6, p, span, label, input, ul {
+  @include no-margin-padding;
+}
+
+
+/**
+* Make all elements from the DOM inherit from the parent box-sizing
+* Since `*` has a specificity of 0, it does not override the `html` value
+* making all elements inheriting from the root box-sizing value
+* See: https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+*/
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+
+/**
+ * Basic styles for links
+ */
+a {
+  color: $brand-primary;
+  text-decoration: none;
+
+  @include on-event {
+    color: $font-general;
+    text-decoration: underline;
+  }
+}
+
+input {
+  width: 100%;
+  outline: none;
+  // Hide the default date picker arrow
+  &::-webkit-calendar-picker-indicator, 
+  &::-webkit-inner-spin-button,
+  &::-webkit-clear-button {
+    display: none;
+  }
+  // Hide the default date picker prompt
+  &[type="date"]::-webkit-input-placeholder{ 
+    visibility: hidden !important;
+  }
+}
+
+hr {
+  border-top: 2px solid;
+  opacity: .5;
+  width: 100%;
+  &.dashed {
+    background-image: linear-gradient(to right, black 33%, rgba(255,255,255,0) 0%);
+    background-position: bottom;
+    background-size: 11px 2px;
+    background-repeat: repeat-x;
+    border-top: unset !important;
+    border: unset;
+    height: 2px;
+    opacity: .3 !important;
+    margin: $s-s 0;
+  }
+  &.light {
+    border-color: #B2BEC3 !important;
+  }
+  &.requests {
+    margin-bottom: 20px;
+    margin-top: 20px !important;
+  }
+}
+
+a {
+  cursor: pointer;
+}
+
+.module {
+  padding-top: $s-m;
+  padding-bottom: $s-m;
+}
+
+.component {
+  margin: $s-s 0;
+}
+
+label {
+//   font-size: 11px;
+//    text-transform: uppercase;
+//   font-weight: 300;
+//   margin-bottom: 0;
+//   margin-right: 5px;
+//   color: #636E72;
+}
+
+.show {
+  display: block !important;
+}
+
+.highlight {
+  color: $brand-primary !important;
+  font-weight: 500 !important;
+}
+
+.anchor {
+  top: -$navigation-height-desktop - $s-t;
+  position: relative;
+  visibility: hidden;
+  display: block;
+}
+
+.component-background {
+  background-color: $background-colour-component;
+}
+  // Desktop specific styling
+  @media (min-width: $tablet) {
+  }
+  
+  // Mobile specific styling
+  @media (max-width: $tablet) {
+    .daterangepicker {
+      display: none !important;
+    }
+  }
+  

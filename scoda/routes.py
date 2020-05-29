@@ -12,6 +12,15 @@ import gviz_api
 import urllib
 from urllib.request import urlopen,Request
 
+from .blueprints import *
+
+app.register_blueprint(REACT, url_prefix='/react')
+app.register_blueprint(SCODA, url_prefix='/scoda')
+
+@app.route('/bundle.js', methods=['GET'])
+def bundle():
+    return app.send_static_file('public/bundle.js')
+
 def pyramid():
     API = '989e1c94-6dfd-4bc1-af04-9c64e59d96b3'
     ID = '663dd642-fbf3-4c5e-92e8-b76b07df2847'

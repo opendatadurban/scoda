@@ -1,0 +1,115 @@
+//Basic reset
+body {
+    margin: 0;
+	  padding: 0;
+    border: 0;
+
+}
+
+ .hero-block {
+  box-sizing: border-box;
+    border-bottom: 1.4px solid $scoda-black;
+  }
+
+.hero-block-text {
+  width: 652px;
+  color: $scoda-grey-dark;
+  font-family: $scoda-font;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 20px;
+}
+
+.hero-block-background {
+    height: 525px;
+    width: 90%;
+    transform: scaleX(-1);
+  }
+
+  .hero-block-info-display {
+    height: 72px;
+    width: 70%;
+    border-radius: 10px 0 0 10px;
+    background-color: $scoda-black;
+    box-shadow: 0 0 6px 2px rgba(0,0,0,0.2);
+    float:right;
+    position: absolute;
+    transform: scaleX(-1);
+  }
+
+  .hero-block-info-display-text {
+    height: 24px;
+    width: 341px;
+    font-family: $scoda-font;
+    font-size: 37px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 24px;
+    text-transform: uppercase;
+    margin-top: 23px;
+  }
+
+  .hero-block-spacer {
+    height: 20%;
+  }
+
+  .hero-block-info-logo {
+      box-sizing: border-box;
+      height: 52.02px;
+      width: 53.41px;
+      opacity: 0.59;
+      box-shadow: 0 0 3px 0 rgba(255,255,255,0.5);
+      height: 45px;
+      margin-top: 13px;
+  }
+
+  .hero-block-info-logo-title {
+    height: 45px;
+    width: 49.13px;
+    font-family: $scoda-font;
+    font-size: 26.63px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 43px;
+    text-align: center;
+    margin-top: 13px;
+  }
+
+  .hero-block-info-hspacer {
+    width:10px;
+  }
+
+  .hero-block-title {
+    height: 32px;
+    width: 336px;
+    font-family: $scoda-font;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 32px
+  }
+
+  .hero-block-vspacer {
+    height:5%;
+  }
+
+  .hero-block-arrow-expand {
+    cursor: pointer;
+  }
+
+  .hero-block-button  {
+    position:absolute;
+    box-sizing: border-box;
+    height: 50px;
+    width: 170px;
+    border-radius: 25px;
+    background-color: $scoda-white;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
+    font-family: $scoda-font;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 24px;
+    text-align: center;
+  }
+  

@@ -1,0 +1,52 @@
+.content-block {
+  // General styling
+  color: white;
+  padding: $s-m 0;
+  
+  h2 {
+    margin-bottom: $s-s;
+  }
+
+&--text {
+  p{
+    max-height: 350px;
+    overflow-y: scroll;
+    padding-right: $s-s;
+    @include custom-scrollbar($brand-primary);
+  }
+
+  }
+  &--image {
+    img {
+      margin-left: $s-s;
+      top: 30px;
+      position: absolute;
+      width: 670px;
+      left: 0;
+    }
+  }
+
+  // Desktop specific styling
+  @media (min-width: $tablet) {}
+
+  // Mobile specific styling
+  @media (max-width: $tablet) {
+    &--image {
+      img {
+        position: relative;
+        width: 100%;
+      }
+    }
+    &--text {
+      p {
+        max-height: fit-content;
+        overflow-y: visible;
+      }
+    }
+    &--button {
+      margin: $s-m auto;
+      display: flex;
+      width: 180px;
+    }
+  }
+}

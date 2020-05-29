@@ -105,7 +105,6 @@ scoda/static/vendor/grChartImg/
 /scoda/data/JHB_Grid.json
 /scoda/data/jhbgridmodel.csv
 scoda-env1/
-scoda/blueprints/
 scoda/data/Indicators.xlsx
 scoda/data/archive/
 scoda/data/metadata/GCRO_QoL.zip
@@ -113,4 +112,4 @@ scoda/data/new_data/
 
 #node-modules
 scoda/static/node_modules
-
+scoda/templates/static/node_modules

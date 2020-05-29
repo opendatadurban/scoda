@@ -1,0 +1,47 @@
+.footer_mobile_light {
+    // General styling
+    background: $brand-dark;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    left: 0;
+    [class*="col-"]{
+      // height: $s-m - 8px;
+      padding-bottom: 2px;
+      padding-top: 2px;
+    }
+    .footer-content {
+      max-width: 650px;
+    }
+    span {
+      line-height: 10px;
+      font-size: 7px;
+      text-transform: capitalize;
+      a {
+        font-size: 10px;
+        text-transform: uppercase;
+        text-decoration: underline !important;
+        color: white;
+      }
+    }
+    img {
+      width: 32px;
+      height: 32px;
+    }
+    // Desktop specific styling
+    @media (min-width: $tablet) {
+      .footer-content { 
+        .col-10 {
+          text-align: center;
+          left: -32px;
+        }
+      }
+    }
+    
+      // Mobile specific styling
+      @media (max-width: $tablet) {
+
+      }
+    } 
