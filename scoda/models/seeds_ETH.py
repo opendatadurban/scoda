@@ -9,9 +9,11 @@ def seed_db(db):
     """ Add ETH seed entities to the database. """
     with app.app_context():
 
-        data = geojson.load(open('C:/Users/Wasim/Documents/GitHub/scoda/scoda/data/DBN2016_SHP.json'))
 
-        data2 = genfromtxt('C:/Users/Wasim/Documents/GitHub/scoda/scoda/data/exporteth16.csv', delimiter=',',
+        # data = geojson.load(open('C:/Users/Wasim/Documents/GitHub/scoda/scoda/data/DBN2016_SHP.json'))
+        data = geojson.load(open('%s/data/%s' % (app.root_path, "DBN2016_SHP.json")))
+
+        data2 = genfromtxt('%s/data/%s' % (app.root_path, "exporteth16.csv"), delimiter=',',
                            skip_header=1)
 
         parser = {}
@@ -55,7 +57,7 @@ def seed_db(db):
         del data2
 
         print ('Populating ETH ward GIS data...')
-        data3 = geojson.load(open('C:/Users/Wasim/Documents/GitHub/scoda/scoda/data/MunicipalWards2016.json', 'r'))
+        data3 = geojson.load(open('%s/data/%s' % (app.root_path, "MunicipalWards2016.json"), 'r'))
 
         for i in data3['features']:
             if 'eThekwini' in i['properties']['MunicName']:

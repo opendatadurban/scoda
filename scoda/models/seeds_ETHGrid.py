@@ -9,9 +9,9 @@ def seed_db(db):
     """ Add JHB grid seed entities to the database. """
     with app.app_context():
 
-        data = geojson.load(open('C:/Users/Wasim/Documents/GitHub/scoda/scoda/data/ETH_Grid.json'))
+        data = geojson.load(open('%s/data/%s' % (app.root_path, "ETH_Grid.json")))
 
-        data2 = nan_to_num(genfromtxt('C:/Users/Wasim/Documents/GitHub/scoda/scoda/data/ethgridplot.csv', delimiter=',',
+        data2 = nan_to_num(genfromtxt('%s/data/%s' % (app.root_path, "ethgridplot.csv"), delimiter=',',
                            skip_header=1))
 
         print('Populating ETH grid data...')
