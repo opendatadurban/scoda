@@ -105,6 +105,7 @@ body {
   width: 235px;
   border: 1px solid $scoda-grey-dark;
   border-radius: 25px;
+  cursor: pointer;
 }
 
 .ds-banner-hr {
@@ -472,6 +473,25 @@ body {
     font-style: italic;
     letter-spacing: 0;
     line-height: 21px;
+}
+
+.ds-filter-tabs-chart-button {
+    height: 27px;
+    width: 223px;
+    color: $scoda-white;
+    font-family: $scoda-font;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 25px;
+    text-align: center;
+    box-sizing: border-box;
+    height: 28px;
+    width: 235px;
+    border: 1px solid $scoda-black;
+    border-radius: 25px;
+    background-color: $scoda-black;
+    cursor: pointer;
 }
 
 o {
