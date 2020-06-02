@@ -419,7 +419,7 @@ body {
 
   .ds-tabs-filter-header {
     height: 49px;
-    width: 100%;
+    width: 101.1%;
     border-radius: 5px;
     background-color:$scoda-white;
     box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
@@ -428,12 +428,53 @@ body {
     font-size: 21px;
     font-weight: 600;
     letter-spacing: 0;
-    line-height: 41px;
+    line-height: 45px;
   }
 
+  .ds-tabs-filter-card {
+    height:100%;
+    width: 100%;
+    border-radius: 5px;
+    background-color:$scoda-white;
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
+  }
 
+.ds-tabs-filter-subheading {
+    height: 25px;
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 25px;
+}
 
-  o {
+.ds-filter-tabs-context-border {
+    height: 35px;
+    border-radius: 5px 5px 0 0;
+    background-color: $scoda-white;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+}
+
+.ds-filter-tabs-context-header {
+    height: 29px;
+    color:$scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: 24px;
+}
+
+.ds-filter-tabs-context-content {
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 14px;
+    font-style: italic;
+    letter-spacing: 0;
+    line-height: 21px;
+}
+
+o {
       color: $scoda-orange;
       font-weight: 600;
   }

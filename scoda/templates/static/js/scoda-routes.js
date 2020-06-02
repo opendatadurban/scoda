@@ -26,13 +26,10 @@ const _heroSecondaryColor = '#F64343';
 
 const _tabs = [
   {
-      name: 'SACN', mode:'active'
+      name: 'SACN', mode:'active',url: 'http://www.sacn.co.za'
   },
   {
-      name: 'eThekwini', mode: 'none'
-  },
-  {
-      name: 'Three', mode: 'none'
+      name: 'eThekwini', mode: 'none', url: 'http://www.google.com'
   }
 ]
 
