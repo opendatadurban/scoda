@@ -41,41 +41,73 @@ export default class TabAndFilters extends Component {
 
         switch(parent) {
             case 'SACN':
-                let resultSet = [
-                    {
+                let resultSet = { 
+                    "data":
+                    [{
                         id:1,
                         value: 'People and Households',
                         mode:  'active',
                         display:'show',
                         chart: 'Growth: Number of Households: 9 Major Cities',
                         notes: 'The population of Johannesburg has doubled between 2001 and 2011. Fewer people are living in more houses which means the City has to provide infrastructure at a rate faster than the city is growing.',
-                        notesSubject: 'Johannesburg'
+                        city: 'Johannesburg',
+                        year: '2011',
+                        subchart: [
+                            {
+                                url:'http://stepsa.org',
+                                link: 'See More at: StepSA.org'
+                            },
+                            {
+                                url:'http://www.jhbsocr.org.za',
+                                link: 'View JHB SoCR'
+                            },
+                        ]
                     },
                     {
                         id:2,
                         value: 'City Finance',
                         mode: 'none',
-                        display:'none'
+                        display:'none',
+                        subchart: [
+                            {
+                                url:'http://stepsa.org',
+                                link: 'See More at: StepSA.org'
+                            },
+                            {
+                                url:'http://www.jhbsocr.org.za',
+                                link: 'View JHB SoCR'
+                            },
+                        ]
                     },
                     {
                         id:3,
                         value: 'Service Delivery',
                         mode:'none',
-                        display:'none'
-                    }
-                ];
+                        display:'none',
+                        subchart: [
+                            {
+                                url:'http://stepsa.org',
+                                link: 'See More at: StepSA.org'
+                            },
+                            {
+                                url:'http://www.jhbsocr.org.za',
+                                link: 'View JHB SoCR'
+                            },
+                        ]
+                    }]
+                };
 
-                tabs = resultSet.map((result,index) =>(
+                tabs = resultSet.data.map((result,index) =>(
                     <a id={`pill-${result.value.split(' ').join('-')}`} key={`pill-${result.value.split(' ').join('-')}`}  className={`nav-link ds-vertical-tabs-${result.mode}`} id={`v-pills-${result.value.split(' ').join('-')}-tab`} data-toggle="pill" href={`#v-pills-${result.value.split(' ').join('-')}`} role="tab" aria-controls={`v-pills-${result.value.split(' ').join('-')}`} aria-selected="true" onClick={this.toggleFilterStyle.bind(this,`v-pills-${result.value.split(' ').join('-')}-tab`)}>{result.value}</a>
                   ));
 
-                panes = resultSet.map((result,index) =>(
+                panes = resultSet.data.map((result,index) =>(
                     <div key={`pill-pane-${result.value.split(' ').join('-')}`} className={`tab-pane fade ${result.display} ${result.mode}`} id={`v-pills-${result.value.split(' ').join('-')}`} role="tabpanel" aria-labelledby={`v-pills-${result.value.split(' ').join('-')}-tab`}>
                         <div className="row ml-0 ds-tabs-filter-header mt-4">
                             <div id="title" className="col-8">{result.value}</div>
                             <div className="col-0 float-right"><i className="fas fa-download"></i></div>
                             <div className="col-2 float-right ml-1 mt-2">
-                             <div className="ds-banner-view-button"><a href={`${websiteUrl}`} target="_new">View the {parent} Website</a></div>
+                             <div className="ds-banner-view-button" onClick={()=>window.open(`${websiteUrl}`,'_new')}>View the {parent} Website</div>
                             </div>
                         </div>
                         <div className="row ml-0 mt-4">
@@ -95,28 +127,36 @@ export default class TabAndFilters extends Component {
                                 <div className="row">
                                     <div className="col ml-3 ds-tabs-filter-card">
                                         <div className="row">
-                                            <div className="mt-3 ml-3 ds-tabs-filter-subheading">
-                                                {result.chart}
-                                            </div>
+                                        <div className="mt-2 text-break ml-3 ds-filter-tabs-context-header">
+                                            <b>Dwelling Types: </b> <br/>{result.city}
+                                        </div>
                                         </div>
                                         <div className="row">
                                             <div className="mt-2 ml-3">
                                                 chart
                                             </div>
+                                        </div>
+                                        <div className="row ml-4 mt-2 mb-3">
+                                    
+                                            <div className="ds-filter-tabs-chart-button" onClick={()=>window.open(`${result.subchart[0].url}`,'_new')}>{result.subchart[0].link}</div>
+                                   
                                         </div>
                                     </div>
                                 </div>
                                 <div className="row mt-4">
                                     <div className="col ml-3 ds-tabs-filter-card">
                                         <div className="row">
-                                            <div className="mt-3 ml-3 ds-tabs-filter-subheading">
-                                                {result.chart}
-                                            </div>
+                                         <div className="mt-2 text-break ml-3 ds-filter-tabs-context-header">
+                                            <b>Population Density {result.year}: </b><br/> {result.city}
+                                         </div>
                                         </div>
                                         <div className="row">
                                             <div className="mt-2 ml-3">
                                                 chart
                                             </div>
+                                        </div>
+                                        <div className="row ml-4 mt-2 mb-3">
+                                          <div className="ds-filter-tabs-chart-button" onClick={()=>window.open(`${result.subchart[1].url}`,'_new')}>{result.subchart[1].link}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -126,7 +166,7 @@ export default class TabAndFilters extends Component {
                         <div className="col-8 ds-tabs-filter-card">
                               <div className="row ds-filter-tabs-context-border">
                                   <div className="mt-2 ml-3 ds-filter-tabs-context-header">
-                                    <b>Context Notes:</b> {result.notesSubject}
+                                    <b>Context Notes:</b> {result.city}
                                   </div>
                               </div>
                               <div className="row">
