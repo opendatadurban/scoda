@@ -47,13 +47,13 @@ export default class DataStoriesContentCard extends Component {
                                     publishedDate={this.props.publishedDate}
                                />
                             </div>
-                            <div className="card-body">
+                            <div className="card-body pt-4 pb-5">
                                <div className="row">
                                 <DataStoriesContentCardHighlightBlock 
                                     infoBlockText={this.props.infoBlockText}
                                 />
                                </div>
-                               <div className="row">
+                               <div className="row mt-2">
                                    <Image imgSrc={imgOne} />
                                </div>
                                <div className="row">

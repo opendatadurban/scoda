@@ -14,8 +14,7 @@ export default class DataStoriesContentCardContentBlock extends Component {
                             <div className="col-0 mt-3 ds-content-card-content-block-heading">{this.props.contentHeading}</div>
                         </div>
                         <div className="row">
-                            <div className="col-0 w-100 mt-3" dangerouslySetInnerHTML={{__html:this.props.content}}>
-                            </div>
+                            <div className="col-0 w-100 mt-2" dangerouslySetInnerHTML={{__html:this.props.content}}></div>
                         </div>
                     </div> 
         )
