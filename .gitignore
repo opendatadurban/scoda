@@ -113,3 +113,4 @@ scoda/data/new_data/
 #node-modules
 scoda/static/node_modules
 scoda/templates/static/node_modules
+scoda/data/data_test.csv
