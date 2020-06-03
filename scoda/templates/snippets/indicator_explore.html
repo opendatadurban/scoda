@@ -73,6 +73,7 @@
                     </div>
                 </div>
 
+                    <script>console.log({{ table|safe }});</script>
                 {% if plot %}
 
                 {% include 'snippets/image_export.html' %}
@@ -86,7 +87,6 @@
                 {% include 'snippets/charts_line.html' %}
 
                 {% endif %}
-
                 <div class="col-sm-12">
                     <div class="card" id="tableCard">
                         <div class="card-header">Selected Data
