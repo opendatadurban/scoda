@@ -1,0 +1,73 @@
+.about-us{
+    h3{
+        color: #131421;
+        font-family: Montserrat;
+        font-size: 24px;
+        font-weight: bold;
+        letter-spacing: 0;
+        line-height: 32px;
+    }
+    p{
+        color: #131421;
+        font-family: Montserrat;
+        font-size: 18px;
+        letter-spacing: 0;
+        line-height: 28px;
+        font-weight: 400;
+    }
+    img{
+        width: 100%;
+    }
+    .heading{
+        h2{
+            color: #131421;
+            font-family: Montserrat;
+            font-size: 30px;
+            font-weight: bold;
+            letter-spacing: 0;
+            line-height: 32px;
+        }
+    }
+    .what-is-scoda{
+        p{
+            i{
+                font-weight: 500;
+                color: #FC8749;
+            }
+        }
+    }
+    .what-do-we-do{
+        img{
+            margin-top: 60px;
+            margin-bottom: 60px;
+        }
+    }
+    .how-was-scoda-developed{
+        img{
+            margin-top: 60px;
+            margin-bottom: 60px;
+        }
+    }
+    .box{
+        border: 1px solid #F9874A;
+        border-radius: 3px;
+        background-color: #FFFFFF;
+        padding: 20px 30px;
+        p{
+            font-style: italic;
+            text-align: center;
+            color: #F9874A;
+        }
+    }
+    .important-links{
+        .item{
+            margin-top: 60px;
+        }
+    }
+    line{
+        hr{
+            border-top: 1px solid;
+            opacity: 1;
+        }
+    }
+}
