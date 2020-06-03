@@ -60,7 +60,7 @@ Here are some of our core trusted sources:</p>
                         <div className="col item">
                             <img src="/static/dist/img/SCODA Assets V3_1/3 About Us/Important Links/logo_important-links_statssa.png" alt=""/>
                         </div>
-                        <div className="col-12 line  mt-5 mb-5">
+                        <div className="col-12 line  mt-5">
                             <hr/>
                         </div>
                     </div>
