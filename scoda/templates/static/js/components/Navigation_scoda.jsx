@@ -28,14 +28,10 @@ export default class Navigation_scoda extends Component {
                             Toolkits
                             </a>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a className="dropdown-item" href="#">Action</a>
-                            <a className="dropdown-item" href="#">Another action</a>
-                            <div className="dropdown-divider"></div>
-                            <a className="dropdown-item" href="#">Something else here</a>
                             </div>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">About Us </a>
+                            <a className="nav-link" href="/scoda/#/about-us">About Us </a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#">Help</a>

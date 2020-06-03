@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import Sub_Footer from './components/Sub_Footer';
 import Hero_collapsable from './components/Hero_collapsable';
 import Navigation_scoda from './components/Navigation_scoda';
+import About from './components/About';
 
 
 import Hero_Collapsable from './components/Hero.Collapsible';
@@ -71,5 +72,10 @@ export default (
       <Route path='/home' component={CTA_block_insights} />
       <Route path='/home' component={Sub_Footer} />
       <Route path='/home' component={Footer} />
+
+      <Route path='/about-us' component={Navigation_scoda} />
+      <Route path='/about-us' component={About} />
+      <Route path='/about-us' component={Sub_Footer} />
+      <Route path='/about-us' component={Footer} />
     </HashRouter>
 );
