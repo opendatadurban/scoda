@@ -433,7 +433,23 @@ body {
   }
 
   .ds-tabs-filter-card {
-    height:100%;
+    height:auto;
+    width: 100%;
+    border-radius: 5px;
+    background-color:$scoda-white;
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
+  }
+
+  .ds-tabs-filter-card-chart {
+    height:423px;
+    width: 100%;
+    border-radius: 5px;
+    background-color:$scoda-white;
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
+  }
+
+  .ds-tabs-filter-card-bottom {
+    height:132px;
     width: 100%;
     border-radius: 5px;
     background-color:$scoda-white;
@@ -492,6 +508,29 @@ body {
     border-radius: 25px;
     background-color: $scoda-black;
     cursor: pointer;
+}
+
+.ds-filter-tabs-textreport-header {
+    height: 50px;
+    width: 142px;
+    color: #45B7D9;
+    font-family: $scoda-font;
+    font-size: 50px;
+    font-weight: 800;
+    letter-spacing: 0;
+    line-height: 50px;
+    text-align: center;
+}
+
+.ds-filter-tabs-textreport-footer {
+    height: 25px;
+    width: 142px;
+    color: #45B7D9;
+    font-family: Montserrat;
+    font-size: 21px;
+    letter-spacing: 0;
+    line-height: 25px;
+    text-align: center;
 }
 
 o {
