@@ -223,13 +223,13 @@ export default class DataStoriesContentCardSpacial extends Component {
                                         dataDescription="State of City Finances Chapter 3, p. 78" 
                                    />
                                </div>
-                               <div className="row mt-3"></div>
+                              
                                <div className="row mt-3">
                                    <DataStoriesContentCardContentBlock 
                                      content={contentBlockTwo}
                                    />
                                </div>
-                               <div className="row mt-3"></div>
+                               <div className="row mt-5"></div>
                                <div className="row">
                                 <DataStoriesContentCardHighlightBlock 
                                     infoBlockText="This clearly indicates a fiscal incentive for municipalities to promote greenfield developments over brownfield developments: sprawl is incentivised and densification not."
@@ -267,7 +267,6 @@ export default class DataStoriesContentCardSpacial extends Component {
                                         dataDescription="State of City Finances Chapter 3, p. 81" 
                                    />
                                </div>
-                               <div className="row mt-3"></div>
                                <div className="row mt-3">
                                    <DataStoriesContentCardContentBlock 
                                      content={contentBlockFour}
