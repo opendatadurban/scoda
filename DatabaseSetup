@@ -1,0 +1,18 @@
+These are the steps to get the db setup
+
+1. Download and install postgis locally http://download.osgeo.org/postgis/windows/pg96/
+
+2. Setup the db on your local Postgres with the following commands:
+cd C:\Program Files\PostgreSQL\9.6
+psql -U postgres
+CREATE DATABASE scoda;
+CREATE USER scoda;
+GRANT ALL PRIVILEGES ON DATABASE scoda TO scoda;
+ALTER USER scoda WITH ENCRYPTED PASSWORD 'scoda';
+psql -d scoda -c "CREATE EXTENSION postgis;"
+psql -U postgres -d scoda -c "CREATE EXTENSION postgis;"
+psql -U postgres -d scoda -c "CREATE EXTENSION postgis_topology;"
+
+3. From the app side download the additional data from the google drive and copy it to the data folder in the scoda project
+
+4. After installing requirements and activating your local environment run "python rebuild_db.py"
