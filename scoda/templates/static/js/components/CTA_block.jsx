@@ -20,9 +20,9 @@ export default class CTA_block extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="container ">
+                <div className="container cta-container">
                     <div className="row ">
-                        <div className="col-md-10 offset-md-2">
+                        <div className="col-md-10 offset-md-1">
                             <div className="row cta-info">
                                 <div className="col-md-6">
                                     <div className="cta-image"></div>
