@@ -28,6 +28,80 @@ def grouper(iterable, n, fillvalue=None):
 def help():
     return render_template('help/help.html')
 
+@app.route('/api/explore', methods=['GET', 'POST'])
+def api_explore():
+    form = ExploreForm()
+    status = 200
+    plot = 0
+    tour = 1
+    if request.method == 'POST':
+        if form.validate():
+            plot = 1
+            tour = 2
+
+            ind = form.indicator_id.data
+
+            query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value). \
+                filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
+                filter(DataPoint.region_id == Region.id)
+            print(query.all())
+            indicator = Indicator.query.get(ind)
+
+            df = read_sql_query(query.statement, query.session.bind)
+            # df.to_csv('%s/data/%s' % (app.root_path, "data_test.csv"), index=False)
+            table = []
+            years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
+            cities = [c for c in cities]
+
+            options_list = [{'optid': i, 'optname': d} for i, d in enumerate(datasets, start=1)]
+            years_list = [{'optid': i, 'optname': 'Year: %s' % d} for i, d in enumerate(sorted(years), start=1)]
+
+            plot_type = 1
+            if (len(datasets) > 1) or (len(years) == 1):
+                plot_type = 2
+
+            colours = ['#f44336', '#03a9f4', '#4caf50', '#ffc107', '#03a9f4', '#ff5722', '#9c27b0', '#8bc34a',
+                       '#ffeb3b', '#9e9e9e', '#3f51b5', '#e91e63']
+            series = {i: {'color': colours[i]} for i in range(len(datasets))}
+            view = list(range(2, len(datasets) + 2))
+            view.insert(0, 0)
+
+            minVal = min(map(float, list(df.value.unique())))
+            maxVal = max(map(float, list(df.value.unique()))) * 1.1
+
+            head = ['City', 'Year']
+            for i in datasets:
+                head.append(str(i))
+            table.append(head)
+            print(df)
+            # df.re_name = df.re_name.str.encode('utf-8')
+            if plot_type == 1:
+                df = df.iloc[:, (0, 1, 3)]
+
+                schema = [('City', 'string'), ('Year', 'string'), ('%s' % datasets[0], 'number')]
+
+                data_table = gviz_api.DataTable(schema)
+                data_table.LoadData(df.values)
+                table = data_table.ToJSon(columns_order=('City', '%s' % datasets[0], 'Year'))
+
+            else:
+                for c in cities:
+                    for y in years:
+                        row = [str(c), str(y)]
+                        for d in datasets:
+                            datapoint = df.loc[(df["re_name"] == c) & (df["year"] == y) & (df["ds_name"] == d), "value"]
+                            if len(datapoint) == 0:
+                                row.append(None)
+                            else:
+                                row.append(
+                                    float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
+                                    df["ds_name"] == d), "value"]))
+                        table.append(row)
+            yrs = ['Year'] + [str(y) for y in years[::-1]]
+            return render_template('explore/explore.html', form=form, plot=plot, table=table, colours=colours,
+                                   year=str(max(years)), series=series, view=view, plot_type=plot_type, min=minVal,
+                                   max=maxVal, cities=cities, options_list=options_list, years_list=years_list,
+                                   tour=tour, indicator=indicator, years=yrs)
 
 @app.route('/explore', methods=['GET', 'POST'])
 def explore():
@@ -61,10 +135,10 @@ def explore():
             indicator = Indicator.query.get(ind)
 
             df = read_sql_query(query.statement, query.session.bind)
+            # df.to_csv('%s/data/%s' % (app.root_path, "data_test.csv"), index=False)
             table = []
             years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
-
-            cities = [c.encode('utf-8') for c in cities]
+            cities = [c for c in cities]
 
             options_list = [{'optid': i, 'optname': d} for i, d in enumerate(datasets, start=1)]
             years_list = [{'optid': i, 'optname': 'Year: %s' % d} for i, d in enumerate(sorted(years), start=1)]
@@ -86,7 +160,8 @@ def explore():
             for i in datasets:
                 head.append(str(i))
             table.append(head)
-
+            print(df)
+            # df.re_name = df.re_name.str.encode('utf-8')
             if plot_type == 1:
                 df = df.iloc[:, (0, 1, 3)]
 
@@ -110,10 +185,6 @@ def explore():
                                     df["ds_name"] == d), "value"]))
                         table.append(row)
             yrs = ['Year'] + [str(y) for y in years[::-1]]
-            print(table)
-            print(years_list)
-            print("Analysis below")
-            print(analyses)
             return render_template('explore/explore.html', form=form, plot=plot, table=table, colours=colours,
                                    year=str(max(years)), series=series, view=view, plot_type=plot_type, min=minVal,
                                    max=maxVal, cities=cities, options_list=options_list, years_list=years_list,
