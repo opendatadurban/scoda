@@ -13,6 +13,7 @@ import Hero_collapsable from './components/Hero_collapsable';
 import Hero_Collapsable from './components/Hero.Collapsible';
 import DataStoriesDetails from './components/DataStoriesDetails';
 import DataStories from './components/DataStories';
+import DataStoriesSpacial from './components/DataStories.Spacial';
 import IndicatorExplorer from './components/IndicatorExplorer';
 import TabsAndFilters from './components/TabsAndFilters'
 import DemographicModeller from './components/DemographicModeller';
@@ -49,8 +50,11 @@ export default (
       <Route exact path="/data-stories-details" component={()=>
             <DataStoriesDetails />} />
       
-      <Route path="/state-of-finance-2018" component={()=> <DataStories />} />
-      <Route path="/state-of-finance-2018" component={Footer} />
+      <Route path="/ds-state-of-finance-2018" component={()=> <DataStories />} />
+      <Route path="/ds-state-of-finance-2018" component={Footer} />
+
+      <Route path="/ds-spatial-transformation-2018" component={()=> <DataStoriesSpacial />} />
+      <Route path="/ds-spatial-transformation-2018" component={Footer} />
       
 
       <Route exact path="/indicator-explorer" component={()=> <IndicatorExplorer />}/>
