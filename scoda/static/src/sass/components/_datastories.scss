@@ -243,6 +243,7 @@ body {
     border-radius: 5px;
     background-color: $scoda-white;
     box-shadow: 0 1px 5px 0 rgba(0,0,0,0.3);
+    cursor: pointer;
 }
 
 .ds-main-navigation-button-back-text {
@@ -275,6 +276,7 @@ body {
     line-height: 25px;
     text-align: center;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .ds-w {
@@ -533,7 +535,23 @@ body {
     text-align: center;
 }
 
+.ds-download-button {
+    height: 22px;
+    width: 160px;
+    border-radius: 11px;
+    background-color: $scoda-grey-dark;
+    color:$scoda-white;
+    font-family: $scoda-font;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 22px;
+    text-align: center;
+    cursor: pointer;
+}
+
 o {
       color: $scoda-orange;
       font-weight: 600;
+      cursor: pointer;
   }
