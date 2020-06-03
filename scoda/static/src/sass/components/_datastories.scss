@@ -357,6 +357,15 @@ body {
     text-align: center;
   }
 
+  .ds-content-card-highlight-block-text {
+    font-family: $scoda-font;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 24px;
+    text-align: center;
+    width:90%;
+  }
+
   .ds-content-card-content-block {
     color: $scoda-grey-dark;
     font-family: $scoda-font;
