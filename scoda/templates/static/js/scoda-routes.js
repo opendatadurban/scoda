@@ -48,7 +48,11 @@ export default (
             secondaryColor={_heroSecondaryColor}/>}/>
       <Route exact path="/data-stories-details" component={()=>
             <DataStoriesDetails />} />
-      <Route exact path="/data-story" component={()=> <DataStories />} />
+      
+      <Route path="/state-of-finance-2018" component={()=> <DataStories />} />
+      <Route path="/state-of-finance-2018" component={Footer} />
+      
+
       <Route exact path="/indicator-explorer" component={()=> <IndicatorExplorer />}/>
       <Route exact path="/tabs-and-filters" component={()=><TabsAndFilters tabs={_tabs}/>} />
       <Route exact path="/demographic-modeller" component={()=><DemographicModeller />} />
@@ -63,8 +67,5 @@ export default (
       <Route path='/home' component={CTA_block} />
       <Route path='/home' component={Sub_Footer} />
       <Route path='/home' component={Footer} />
-
-
-            <br/>
     </HashRouter>
 );

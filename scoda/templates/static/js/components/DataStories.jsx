@@ -30,6 +30,7 @@ export default class DataStories extends Component {
                         />
                    </div>
                </div>
+               <div className="row p-5"></div>
             </div>
         )
     }
