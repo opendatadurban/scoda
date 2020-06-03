@@ -278,7 +278,7 @@ body {
 }
 
 .ds-w {
-    width: 95%;
+    width: 50%;
 }
 
 .ds-s {
@@ -296,7 +296,7 @@ body {
     border-radius: 10px 10px 0 0;
     background-color: $scoda-black-light;
     box-shadow: 1px 1px 4px 0 rgba(0,0,0,0.2);
-    height: 230px;
+    height: auto;
 }
 
 .ds-content-story-title {
@@ -309,7 +309,7 @@ body {
   }
 
   .ds-content-story-subtitle {
-    height: 50px;
+    height: auto;
     color: $scoda-white;
     font-family: $scoda-font;
     font-size: 38px;
@@ -342,7 +342,7 @@ body {
   }
 
   .ds-content-card-highlight-block {
-    height: 110px;
+    height: auto;
     width: 80%;
     border-radius: 10px;
     background-color:$scoda-orange;

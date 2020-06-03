@@ -10,17 +10,17 @@ export default class DataStoriesNavigation extends Component {
     render() {
 
         return (
-            <div className="container-fluid mt-3 ml-5 pr-5">
+            <div className="container-fluid mt-3">
                <div className="row">
-                    <div className="col-0 float-left ds-main-navigation-button-back">
+                    <div className="col-0 ml-5 ds-main-navigation-button-back">
                         <div className="row">
                             <div className="col-2"></div>
                             <div className="col-0 ds-main-navigation-button-back-icon"><DataStoriesSVGIcon/></div>
                             <div className="col-0 ds-main-navigation-button-back-text">Back to Home</div>
                        </div>
                     </div>
-                    <div className="col w-75"></div>
-                    <div className="col-0 float-right ds-main-navigation-button-explorer">
+                    <div className="col"></div>
+                    <div className="col-0 mr-5 float-right ds-main-navigation-button-explorer">
                         View This in the Data Explorer
                     </div>
                 </div>
