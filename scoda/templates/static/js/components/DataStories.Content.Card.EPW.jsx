@@ -545,18 +545,18 @@ export default class DataStoriesContentCardEPW extends Component {
                               <div className="col-5 tabs_vertical--pills">
                                 <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                             
-                                  <a className="tabs_vertical--pills--pill nav-link active" id="v-pills-top-1a-tab" data-toggle="pill" href="#v-pills-top-1a" role="tab" aria-controls="v-pills-top-1a" aria-selected="true">show</a>
+                                  <a className="tabs_vertical--pills--pill nav-link-2 active" id="v-pills-top-1a-tab" data-toggle="pill" href="#v-pills-top-1a" role="tab" aria-controls="v-pills-top-1a" aria-selected="true">show</a>
                                   <span className="tabs_vertical--tooltips--tooltip">Overview</span>
                            
-                                  <a className="tabs_vertical--pills--pill nav-link" id="v-pills-top-2a-tab" data-toggle="pill" href="#v-pills-top-2a" role="tab" aria-controls="v-pills-top-2a" aria-selected="false">show</a>
+                                  <a className="tabs_vertical--pills--pill nav-link-2" id="v-pills-top-2a-tab" data-toggle="pill" href="#v-pills-top-2a" role="tab" aria-controls="v-pills-top-2a" aria-selected="false">show</a>
                                   <span className="tabs_vertical--tooltips--tooltip">The majority of young people between ages 15-24 are NEETs</span>
-                                  <a className="tabs_vertical--pills--pill nav-link" id="v-pills-top-3a-tab" data-toggle="pill" href="#v-pills-top-3a" role="tab" aria-controls="v-pills-top-3a" aria-selected="false">show</a>
+                                  <a className="tabs_vertical--pills--pill nav-link-2" id="v-pills-top-3a-tab" data-toggle="pill" href="#v-pills-top-3a" role="tab" aria-controls="v-pills-top-3a" aria-selected="false">show</a>
                                   <span className="tabs_vertical--tooltips--tooltip">If we focus on young people that are NEETs, we begin to see a gender disparity.</span>
-                                    <a className="tabs_vertical--pills--pill nav-link" id="v-pills-top-4a-tab" data-toggle="pill" href="#v-pills-top-4a" role="tab" aria-controls="v-pills-top-4a" aria-selected="false">show</a>
+                                    <a className="tabs_vertical--pills--pill nav-link-2" id="v-pills-top-4a-tab" data-toggle="pill" href="#v-pills-top-4a" role="tab" aria-controls="v-pills-top-4a" aria-selected="false">show</a>
                                   <span className="tabs_vertical--tooltips--tooltip">The overall NEET rate did not change from Q1: 2017 to Q1: 2018</span>
-                                    <a className="tabs_vertical--pills--pill nav-link" id="v-pills-top-5a-tab" data-toggle="pill" href="#v-pills-top-5a" role="tab" aria-controls="v-pills-top-5a" aria-selected="false">show</a>
+                                    <a className="tabs_vertical--pills--pill nav-link-2" id="v-pills-top-5a-tab" data-toggle="pill" href="#v-pills-top-5a" role="tab" aria-controls="v-pills-top-5a" aria-selected="false">show</a>
                                   <span className="tabs_vertical--tooltips--tooltip">However, the male NEET rate dropped by 0,9 percentage pts</span>
-                                    <a className="tabs_vertical--pills--pill nav-link" id="v-pills-top-6a-tab" data-toggle="pill" href="#v-pills-top-6a" role="tab" aria-controls="v-pills-top-6a" aria-selected="false">show</a>
+                                    <a className="tabs_vertical--pills--pill nav-link-2" id="v-pills-top-6a-tab" data-toggle="pill" href="#v-pills-top-6a" role="tab" aria-controls="v-pills-top-6a" aria-selected="false">show</a>
                                   <span className="tabs_vertical--tooltips--tooltip">While, the female NEET rate rose by 1,0 percentage pt</span>
                                 </div>
                               </div>
