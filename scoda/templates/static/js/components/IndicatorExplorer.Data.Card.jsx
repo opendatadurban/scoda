@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,useState, useEffect } from 'react';
 
 import IndicatorExplorerDataCardHeader from './IndicatorExplorer.Data.Card.Header';
 import IndicatorExplorerDataBox from '../components/IndicatorExplorer.Data.Box';
@@ -105,6 +105,14 @@ const _mapData = [
     }
 ];
   
+const [currentTime, setCurrentTime] = useState(0);
+
+useEffect(() => {
+fetch('/api/explore').then(res => res.json()).then(data => {
+  console.log(data);
+  console.log('%c color message', 'color: #f0c002');
+});
+}, []);
 
 export default class IndicatorExplorerDataCard extends Component {
     constructor(props) {

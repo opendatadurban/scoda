@@ -5,11 +5,17 @@ import Home from './components/Home';
 import Hero from './components/Hero';
 import Preview_block from './components/Preview_block';
 import CTA_block from './components/CTA_block';
+import CTA_block_analysis from './components/CTA_block_analysis';
+import CTA_block_insights from './components/CTA_block_insights';
 import Footer from './components/Footer';
 import Sub_Footer from './components/Sub_Footer';
 import Hero_collapsable from './components/Hero_collapsable';
 import Navigation_scoda from './components/Navigation_scoda';
+<<<<<<< HEAD
 
+=======
+import About from './components/About';
+>>>>>>> 5adac0f7511d2649bf1ab9ffc55cb140fc9cf5ba
 
 
 import Hero_Collapsable from './components/Hero.Collapsible';
@@ -79,12 +85,22 @@ export default (
       <Route path='/cta-block' component={CTA_block} />
       <Route path='/sub-footer' component={Sub_Footer} />
       <Route path='/footer' component={Footer} />
-
+      
+      <Route path='/home' component={Navigation_scoda} />
       <Route path='/home' component={Hero} />
-      <Route path='/home' component={Hero_collapsable} />
       <Route path='/home' component={Preview_block} />
       <Route path='/home' component={CTA_block} />
+      <Route path='/home' component={CTA_block_analysis} />
+      <Route path='/home' component={CTA_block_insights} />
       <Route path='/home' component={Sub_Footer} />
       <Route path='/home' component={Footer} />
+<<<<<<< HEAD
+=======
+
+      <Route path='/about-us' component={Navigation_scoda} />
+      <Route path='/about-us' component={About} />
+      <Route path='/about-us' component={Sub_Footer} />
+      <Route path='/about-us' component={Footer} />
+>>>>>>> 5adac0f7511d2649bf1ab9ffc55cb140fc9cf5ba
     </HashRouter>
 );

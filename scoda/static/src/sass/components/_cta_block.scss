@@ -1,0 +1,181 @@
+.cta_block{
+    background-color: #FFFFFF;
+    box-shadow: 0 0 6px 7px rgba(0,0,0,0.2);
+    font-family: 'Montserrat';
+    background: linear-gradient(60deg, #F05252 calc(38% - 1px), #F05252, #fff calc(38% + 1px));
+    padding-bottom: 60px;
+    &.cta_block_insight{
+        background: linear-gradient(62deg, #61A7B0 calc(38% - 1px), #61A7B0, #fff calc(38% + 1px));
+        .cta-info{
+            margin-bottom: -26px;
+            .cta-image{
+                background-image: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_5 Insight Tools/image_evidence_data-stories.png');
+                height: 455px;
+                width: 455px;
+            }
+            .btn{
+                border: 2px solid #61A7B0;
+                background-color: #61A7B0;
+            }
+            h5{
+                color: #61A7B0;
+            }
+        }
+        .info-block{
+            color: #61A7B0;
+            h2{
+                color: #61A7B0;
+            }
+            .icon{
+                background-image: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_5 Insight Tools/icon_products_insight-small.png');
+            }
+        }
+    }
+    &.cta_block_analysis{
+        background: linear-gradient(103deg, #FBB65B calc(38% - 1px), #FBB65B, #fff calc(38% + 1px));
+        .cta-info{
+            
+            .cta-image-analysis-dashboard{
+                background-image: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_4 Analysis Tools/image_analysis-tools_dashboard.png');
+                height: 275px;
+                width: 455px;
+                box-shadow: 0 0 6px 2px rgba(0,0,0,0.2);
+            }
+            .cta-image-analysis-data-explore{
+                background-image: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_4 Analysis Tools/image_analysis-tools_data-explore.png');
+                height: 140px;
+                width: 455px;
+                box-shadow: 0 0 6px 2px rgba(0,0,0,0.2);
+            }
+            .cta-image-analysis-demo{
+                background-image: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_4 Analysis Tools/image_analysis_demo-modeller.png');
+                height: 416px;
+                width: 455px;
+                box-shadow: 0 0 6px 2px rgba(0,0,0,0.2);
+            }
+            .cta-image-analysis-constructor{
+                background-image: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_4 Analysis Tools/image_analysis-tools_-constructor.png');
+                height: 345px;
+                width: 459px;
+            }
+            .btn{
+                border: 2px solid #FBB65B;
+                background-color: #FBB65B;
+            }
+            h5{
+                color: #FBB65B;
+            }
+        }
+        .info-block{
+            color: #FBB65B;
+            h2{
+                color: #FBB65B;
+            }
+            .icon{
+                background-image: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_4 Analysis Tools/icon_products_analysis-small.png');
+            }
+        }
+    }
+    .cta-container{
+        border-radius: 10px;
+        background-color: rgba(255,255,255,0.5);
+        box-shadow: 0 0 6px 2px rgba(0,0,0,0.2);
+        margin-bottom: 60px;
+    }
+    .cta-info{
+        margin-top: 30px;
+        margin-bottom: 30px;
+        .cta-info-content{
+            flex-direction: column;
+        }
+        .btn{
+            border: 2px solid #F05252;
+            border-radius: 25px;
+            background-color: #F64343;
+            box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
+            color: #FFFFFF;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 24px;
+            text-align: center;          
+        }
+        p{
+            color: #4A4A4A;
+            font-size: 18px;
+            line-height: 28px;
+            text-align: center;
+            font-weight: 400;
+        }
+        h5{
+            color: #F64343;
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 30px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .cta-image{
+            background-image: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_3 Evidence Tools/image_evidence_data-manage.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 258px;
+            width: 300px;
+            display: block;
+            margin: auto;
+        }
+    }
+    .info-block{
+        padding: 25px;
+        border-radius: 10px 0 0 10px;
+        background-color: #121425;
+        box-shadow: 0 0 6px 2px rgba(0,0,0,0.2);
+        margin-top: 60px;
+        margin-bottom: 60px;
+        p{
+            color: #FFFFFF;
+            font-size: 18px;
+            line-height: 28px;
+        }
+        h2{
+            color: #F64343;
+            font-size: 50px;
+            font-weight: 600;
+            line-height: 32px;
+        }
+        .icon{
+            background-image: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_3 Evidence Tools/icon_products_evidence-small.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 69px;
+            max-width: 71px;
+        }
+    }
+    // Mobile specific styling
+    @media (max-width: 768px) {
+        .cta-container{
+            width: 90%;
+        }
+        .cta-info{
+            .cta-image{
+                width: 100% !important;
+                background-size: 100% 100%;
+                margin-bottom: 30px;
+            }
+        }
+        .info-block{
+            p{
+                font-size: 11px;
+                line-height: 17px;
+            }
+            h2{
+                font-size: 17px;
+            }
+            .icon{
+                height: 30px;
+                max-width: 24px;
+            }
+        }
+    }
+}
