@@ -11,11 +11,7 @@ import Footer from './components/Footer';
 import Sub_Footer from './components/Sub_Footer';
 import Hero_collapsable from './components/Hero_collapsable';
 import Navigation_scoda from './components/Navigation_scoda';
-<<<<<<< HEAD
-
-=======
 import About from './components/About';
->>>>>>> 5adac0f7511d2649bf1ab9ffc55cb140fc9cf5ba
 
 
 import Hero_Collapsable from './components/Hero.Collapsible';
@@ -24,7 +20,7 @@ import DataStories from './components/DataStories';
 import DataStoriesSpacial from './components/DataStories.Spacial';
 import DataStoriesUrbanSafety from './components/DataStories.UrbanSafety';
 import DataStoriesEPW from './components/DataStories.EPW';
-import IndicatorExplorer from './components/IndicatorExplorer';
+//import IndicatorExplorer from './components/IndicatorExplorer';
 import TabsAndFilters from './components/TabsAndFilters'
 import DemographicModeller from './components/DemographicModeller';
 
@@ -76,9 +72,7 @@ export default (
       <Route path="/ds-epw-metro-2018" component={()=> <DataStoriesEPW />} />
       <Route path="/ds-epw-metro-2018" component={Footer} />
 
-      
-
-      <Route exact path="/indicator-explorer" component={()=> <IndicatorExplorer />}/>
+      {/*<Route exact path="/indicator-explorer" component={()=> <IndicatorExplorer />}/>*/}
       <Route exact path="/tabs-and-filters" component={()=><TabsAndFilters tabs={_tabs}/>} />
       <Route exact path="/demographic-modeller" component={()=><DemographicModeller />} />
       <Route path='/preview-block' component={Preview_block} />
@@ -94,13 +88,10 @@ export default (
       <Route path='/home' component={CTA_block_insights} />
       <Route path='/home' component={Sub_Footer} />
       <Route path='/home' component={Footer} />
-<<<<<<< HEAD
-=======
 
       <Route path='/about-us' component={Navigation_scoda} />
       <Route path='/about-us' component={About} />
       <Route path='/about-us' component={Sub_Footer} />
       <Route path='/about-us' component={Footer} />
->>>>>>> 5adac0f7511d2649bf1ab9ffc55cb140fc9cf5ba
     </HashRouter>
 );
