@@ -559,8 +559,82 @@ body {
     cursor: pointer;
 }
 
+.ds-urban-header {
+    height: 31px;
+    width: auto;
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 31px;
+    text-align: center;
+}
+
+.ds-urban-addressing-block {
+    height: auto;
+    width: 45%;
+    border-radius: 10px;
+    background-color: #FFE9C5;
+}
+
+.ds-urban-addressing-heading {
+    height: 60px;
+    width: 328px;
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 30px;
+    text-align: center;
+}
+
+.ds-urban-addressng-text {
+    height: 480px;
+    width: 328px;
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 24px;
+}
+
+
+.data-stories {
+    padding: 40px 0; }
+    .data-stories .data-stories--map {
+      display: none; }
+    .data-stories [class*="span"] {
+      margin: 0 5px;
+      width: calc(100% - 10px); }
+    .data-stories .data-stories--story {
+      pointer-events: none; } 
+.data-stories .red {
+  background-color: #E0635D; }
+.data-stories .light-green {
+  background-color: #91CF60; }
+.data-stories .lime {
+  background-color: #D9EF8B; }
+.data-stories .green {
+  background-color: #1A9850; }
+.data-stories .yellow {
+  background-color: #FEE08B; }
+.data-stories .orange {
+  background-color: #FC8D59; }
+.data-stories .white {
+  background-color: #ffffff; }
+  .data-stories li.dash {
+    list-style-type: none; }
+
 o {
       color: $scoda-orange;
       font-weight: 600;
       cursor: pointer;
   }
+
+  a {
+    color: $scoda-orange;
+    font-weight: 600;
+    cursor: pointer;
+}
