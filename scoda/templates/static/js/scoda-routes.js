@@ -64,6 +64,8 @@ export default (
       <Route path='/sub-footer' component={Sub_Footer} />
       <Route path='/footer' component={Footer} />
       
+      <Route path='/datastory' component={DataStories} />
+
       <Route path='/home' component={Navigation_scoda} />
       <Route path='/home' component={Hero} />
       <Route path='/home' component={Preview_block} />
