@@ -314,13 +314,14 @@ body {
     height: auto;
     color: $scoda-white;
     font-family: $scoda-font;
-    font-size: 38px;
+    font-size: 40px;
     font-weight: 600;
     letter-spacing: 0;
     line-height: 50px;
   }
 
   .ds-content-card-header-hr {
+    border-top: 5px dotted $scoda-white;
     box-sizing: border-box;
     height: 1px;
     border-top: 5px dotted $scoda-white;
@@ -369,7 +370,7 @@ body {
   .ds-content-card-content-block {
     color: $scoda-grey-dark;
     font-family: $scoda-font;
-    font-size: 15px;
+    font-size: 16px;
     letter-spacing: 0;
     line-height: 24px;
   }
@@ -386,7 +387,7 @@ body {
   .ds-content-card-data-description {
     color: $scoda-grey-dark;
     font-family: $scoda-font;
-    font-size: 17px;
+    font-size: 20px;
     font-style: italic;
     letter-spacing: 0;
     line-height: 30px;

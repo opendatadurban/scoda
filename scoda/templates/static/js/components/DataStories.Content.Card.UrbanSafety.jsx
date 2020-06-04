@@ -82,7 +82,7 @@ export default class DataStoriesContentCardUrbanSafety extends Component {
                                     publishedDate={this.props.publishedDate}
                                />
                             </div>
-                            <div className="card-body pt-4 pb-5">
+                            <div className="card-body pt-4 pb-5 mt-5">
                                <div className="row">
                                 <DataStoriesContentCardHighlightBlock 
                                     infoBlockText={this.props.infoBlockText}
