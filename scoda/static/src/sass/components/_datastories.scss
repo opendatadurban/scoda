@@ -601,7 +601,7 @@ body {
 }
 
 
-.data-stories {
+/*.data-stories {
     padding: 40px 0; }
     .data-stories .data-stories--map {
       display: none; }
@@ -626,6 +626,7 @@ body {
   background-color: #ffffff; }
   .data-stories li.dash {
     list-style-type: none; }
+*/
 
 o {
       color: $scoda-orange;
@@ -638,3 +639,75 @@ o {
     font-weight: 600;
     cursor: pointer;
 }
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    height: 22px;
+    width: 68px;
+    border-radius: 11px;
+    background-color: #485460;
+    color: #FFFFFF;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 6px;
+    text-align: center;
+    outline: none;
+}
+
+.nav-link  {
+    height: 22px;
+    width: 68px;
+    border-radius: 11px;
+    border: 1px solid #525F6B;
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 6px;
+    text-align: center;
+}
+
+.nav-pills .nav-link {
+    border-radius: 11px;
+}
+
+.tabs_vertical--tooltips--tooltip {
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 16px;
+    letter-spacing: 0;
+    
+    display: block;
+    margin:-14px 0 27px 0;
+    padding: 0 0 0 100px;
+    transition: .2s all ease-in-out;
+    position: relative;
+}
+
+.tabs_vertical--pills--pill.active + span {
+    font-weight: 500;
+}
+
+.ds-light-highlight {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #FFE9C5;
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 24px;
+}
+
+.ds-subheader {
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 31px;
+    text-align: center;
+}
+
