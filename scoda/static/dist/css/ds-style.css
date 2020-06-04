@@ -1,0 +1,158 @@
+
+  .modal-body-2 {
+   
+    overflow-y: unset;
+    max-height: unset; 
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 40px;
+    text-align: center;
+   
+     }
+    .modal-body-2 .data-explore {
+      padding: 5px;
+      border-radius: 14px;
+      background-color: #485460;
+      color: #FFFFFF;
+      display: block;
+      position: absolute;
+      width: 125px;
+      text-align: center;
+      right: 0;
+      cursor: pointer; }
+      .modal-body-2 .data-explore:hover {
+        color: white !important; }
+    .modal-body-2 .visual-point p span {
+      font-weight: 500; }
+    .modal-body-2 .visual-point thead tr th {
+      color: #FFFFFF;
+      text-align: center;
+      background: #647586;
+      border: 2px solid #647586; }
+    .modal-body-2 .visual-point table {
+      margin-top: 30px;
+      border-bottom: 1px solid #485460 !important;
+      background: #ffffff; 
+    }
+      .modal-body-2 .visual-point table.table-one {
+        border: 2px solid #647586 !important; }
+        .modal-body-2 .visual-point table.table-one th {
+          background-color: #647586 !important;
+          border: 2px solid #647586; }
+        .modal-body-2 .visual-point table.table-one td {
+          border-top: 1px solid #485460;
+          border-right: 3px solid #647586;
+          border-bottom:3px solid #485460;
+          border-left: 2px solid #647586;
+          background: #ffffff; }
+          .modal-body-2 .visual-point table.table-one td.type-a, .modal-body-2 .visual-point table.table-one td.type-b, .modal-body-2 .visual-point table.table-one td.type-c, .modal-body-2 .visual-point table.table-one td.type {
+            border-bottom: 0;
+            border-top: 0; }
+      .modal-body-2 .visual-point table tbody tr th {
+        color: #FFFFFF;
+        text-align: center;
+        background: #647586; 
+        vertical-align: text-top;
+        width: 98px;
+      }
+      .modal-body-2 .visual-point table tbody tr td {
+        border-top: .5px solid #485460;
+        border-right: 2px solid #485460;
+        border-bottom: 1px solid #485460;
+        border-left: 2px solid #485460;
+        background: #ffffff; }
+        .modal-body-2 .visual-point table tbody tr td:last-of-type {
+          border-right: 2px solid #485460 !important; }
+      .modal-body-2 .visual-point table tbody .type-a {
+        background-color: #FFC969; }
+        .modal-body-2 .visual-point table tbody .type-a-row {
+          background-color: #FFE9C3; }
+      .modal-body-2 .visual-point table tbody .type-b {
+        background-color: #71C778; }
+        .modal-body-2 .visual-point table tbody .type-b-row {
+          background-color: #C6E9C9; }
+      .modal-body-2 .visual-point table tbody .type-c {
+        background-color: #8CABE4; }
+        .modal-body-2 .visual-point table tbody .type-c-row {
+          background-color: #D1DDF4; }
+      .modal-body-2 .visual-point table tbody .type-d {
+        background-color: #DC7B87; }
+        .modal-body-2 .visual-point table tbody .type-d-row {
+          background-color: #F1CACF; }
+    .modal-body-2 .dataTables_wrapper {
+      position: relative; }
+    .modal-body-2 .dt-button {
+      margin-top: 35px;
+      height: 30px;
+      width: 160px;
+      border:0;
+      border-radius: 15px;
+      background: #485460 !important;
+      color: white;
+      font-weight: 500;
+      display: inline-flex;
+      flex-flow: row;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      font-family: Montserrat;
+      font-size: 14px;
+    }
+    .modal-body-2 .dataTables_filter {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin-top: 15px; }
+      .modal-body-2 .dataTables_filter label {
+        color:#ffffff;
+      }
+      .modal-body-2 .dataTables_filter label::after {
+        display: none; }
+      .modal-body-2 .dataTables_filter input {
+        height: 30px;
+        width: 400px;
+        border: 1px solid #485460;
+        border-radius: 15px;
+        padding: 0 10px; 
+    }
+    .modal-body-2 h4 {
+      color: #4A4A4A;
+      font-size: 24px;
+      line-height: 32px;
+      font-weight: bold; }
+    .modal-body-2 a {
+      color: #FF8430; }
+    .modal-body-2 h6 {
+      color: #4A4A4A;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 30px; }
+    .modal-body-2 p {
+      font-size: 14px;
+      line-height: 21px; }
+    .modal-body-2 form .form-control {
+      height: 27px;
+      width: 376px;
+      border: 1px solid #4A4A4A;
+      border-radius: 7px;
+      background-color: #FFFFFF; }
+    .modal-body-2 form .btn-primary {
+      width: 85px;
+      border-radius: 7px;
+      width: 200px !important;
+      background-color: #F5A623;
+      box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.08);
+      color: #FFFFFF;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 13px;
+      text-align: center;
+      border: transparent;
+      top: 20px;
+      margin-top: 20px;
+      height: 30px; }
+    .modal-body-2 form .input-group-addon {
+      border: 0; }
+  

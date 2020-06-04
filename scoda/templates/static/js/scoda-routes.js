@@ -23,6 +23,7 @@ import DataStoriesEPW from './components/DataStories.EPW';
 //import IndicatorExplorer from './components/IndicatorExplorer';
 import TabsAndFilters from './components/TabsAndFilters'
 import DemographicModeller from './components/DemographicModeller';
+import DataStoriesAffordability from './components/DataStories.Affordability';
 
 const _heroTitle = 'Data Management System';
 const _heroContent = ' Central to activities on this platform is the Data Management System, where our evidence base is securely housed. We use the CKAN data portal framework, the same system used by various governments around the world, to store, manage, and share data across the SCODA ecosystem. From this dynamic, version-controlled and API-responsive data-store, we can efficiently gather and process the myriad sources required for insight generation.Central to activities on this platform is the Data Management System, where our evidence base is securely housed. We use the CKAN data portal framework, the same system used by various governments around the world, to store, manage, and share data across the SCODA ecosystem. From this dynamic, version-controlled and API-responsive data-store, we can efficiently gather and process the myriad sources required for insight generation.';
@@ -71,6 +72,10 @@ export default (
       <Route path="/ds-epw-metro-2018" component={Navigation_scoda} />
       <Route path="/ds-epw-metro-2018" component={()=> <DataStoriesEPW />} />
       <Route path="/ds-epw-metro-2018" component={Footer} />
+
+      <Route path="/ds-affordability-2018" component={Navigation_scoda} />
+      <Route path="/ds-affordability-2018" component={()=> <DataStoriesAffordability />} />
+      <Route path="/ds-affordability-2018" component={Footer} />
 
       {/*<Route exact path="/indicator-explorer" component={()=> <IndicatorExplorer />}/>*/}
       <Route exact path="/tabs-and-filters" component={()=><TabsAndFilters tabs={_tabs}/>} />

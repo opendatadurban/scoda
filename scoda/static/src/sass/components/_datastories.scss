@@ -638,9 +638,9 @@ o {
     color: $scoda-orange;
     font-weight: 600;
     cursor: pointer;
-}
+ }
 
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+.nav-pills .nav-link-2.active, .nav-pills .show>.nav-link-2 {
     height: 22px;
     width: 68px;
     border-radius: 11px;
@@ -650,12 +650,13 @@ o {
     font-size: 12px;
     font-weight: bold;
     letter-spacing: 0;
-    line-height: 6px;
+    line-height: 20px;
     text-align: center;
     outline: none;
+    text-decoration: none;
 }
 
-.nav-link  {
+.nav-link-2  {
     height: 22px;
     width: 68px;
     border-radius: 11px;
@@ -664,12 +665,14 @@ o {
     font-family: Montserrat;
     font-size: 12px;
     letter-spacing: 0;
-    line-height: 6px;
+    line-height: 20px;
     text-align: center;
+    text-decoration: none;
 }
 
-.nav-pills .nav-link {
+.nav-pills .nav-link-2 {
     border-radius: 11px;
+    text-decoration: none;
 }
 
 .tabs_vertical--tooltips--tooltip {
