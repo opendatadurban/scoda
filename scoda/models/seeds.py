@@ -39,9 +39,9 @@ themes = {'Demographics': 1,
           'Well-governed': 5
           }
 
-dfi = pd.read_csv('C:/Users/Dell/Documents/GitHub/scoda/scoda/data/Indicators.csv')
-df = pd.read_csv('C:/Users/Dell/Documents/GitHub/scoda/scoda/data/Manicured_final.csv')
-dfm = pd.read_csv('C:/Users/Dell/Documents/GitHub/scoda/scoda/data/Indicators_Metadata.csv').\
+dfi = pd.read_csv('%s/data/%s' % (app.root_path, "Indicators.csv"))
+df = pd.read_csv('%s/data/%s' % (app.root_path, "Manicured_final.csv"))
+dfm = pd.read_csv('%s/data/%s' % (app.root_path, "Indicators_Metadata.csv")).\
     fillna(value='Unspecified')
 
 def seed_db(db):
@@ -120,9 +120,9 @@ def seed_db(db):
         db.session.flush()
         db.session.commit()
 
-        data = geojson.load(open('C:/Users/Dell/Documents/GitHub/scoda/scoda/data/metro_salc_geo.json'))
+        data = geojson.load(open('%s/data/%s' % (app.root_path, "metro_salc_geo.json")))
 
-        data2 = genfromtxt('C:/Users/Dell/Documents/GitHub/scoda/scoda/data/jhbpopests_clean.csv', delimiter=',')
+        data2 = genfromtxt('%s/data/%s' % (app.root_path, "jhbpopests_clean.csv"), delimiter=',')
 
         parser = {}
         for i, I in enumerate(sort(list(set(data2[:, 2])))):
@@ -161,7 +161,7 @@ def seed_db(db):
         del data2
 
         print ('Populating city ward GIS data...')
-        data3 = geojson.load(open('C:/Users/Dell/Documents/GitHub/scoda/scoda/data/MunicipalWards2016.json', 'r'))
+        data3 = geojson.load(open('%s/data/%s' % (app.root_path, "MunicipalWards2016.json"), 'r'))
 
         for i in data3['features']:
             if 'Johannesburg' in i['properties']['MunicName']:
