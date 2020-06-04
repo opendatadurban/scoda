@@ -9,7 +9,7 @@ export default class DataStoriesContentCardHighlightBlock extends Component {
     render() {
 
         return (
-                    <div className="col ds-content-card-highlight-block">
+                    <div className="col ds-content-card-highlight-block pb-3">
                         <div className="row">
                             <div className="col-10 mt-4 ml-5 mx-5">
                             {this.props.infoBlockText}
