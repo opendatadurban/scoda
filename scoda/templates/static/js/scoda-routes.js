@@ -8,6 +8,8 @@ import CTA_block from './components/CTA_block';
 import Footer from './components/Footer';
 import Sub_Footer from './components/Sub_Footer';
 import Hero_collapsable from './components/Hero_collapsable';
+import Navigation_scoda from './components/Navigation_scoda';
+
 
 
 import Hero_Collapsable from './components/Hero.Collapsible';
@@ -52,17 +54,23 @@ export default (
       <Route exact path="/data-stories-details" component={()=>
             <DataStoriesDetails />} />
       
+      <Route path="/ds-state-of-finance-2018" component={Navigation_scoda} />
       <Route path="/ds-state-of-finance-2018" component={()=> <DataStories />} />
       <Route path="/ds-state-of-finance-2018" component={Footer} />
 
+      <Route path="/ds-spatial-transformation-2018" component={Navigation_scoda} />
       <Route path="/ds-spatial-transformation-2018" component={()=> <DataStoriesSpacial />} />
       <Route path="/ds-spatial-transformation-2018" component={Footer} />
       
+      <Route path="/ds-urban-safety-2018" component={Navigation_scoda} />
       <Route path="/ds-urban-safety-2018" component={()=> <DataStoriesUrbanSafety />} />
       <Route path="/ds-urban-safety-2018" component={Footer} />
 
+      <Route path="/ds-epw-metro-2018" component={Navigation_scoda} />
       <Route path="/ds-epw-metro-2018" component={()=> <DataStoriesEPW />} />
       <Route path="/ds-epw-metro-2018" component={Footer} />
+
+      
 
       <Route exact path="/indicator-explorer" component={()=> <IndicatorExplorer />}/>
       <Route exact path="/tabs-and-filters" component={()=><TabsAndFilters tabs={_tabs}/>} />
