@@ -65,7 +65,7 @@ export default class DataStoriesContentCardUrbanSafety extends Component {
         let imgTwo = `/static/dist/img/scoda/datastories/ds-urban-percapita.svg`;
         let imgThree = `/static/dist/img/scoda/datastories/ds-urban-murder.svg`;
         let imgFour = `/static/dist/img/scoda/datastories/ds-urban-nummurders.svg`;
-        let imgFive = `/static/dist/img/scoda/datastories/ds-urban-table.png`;
+        let imgFive = `/static/dist/img/scoda/datastories/ds-urban-table.PNG`;
 
         return (
             <div className="mt-4 ml-2 pr-2">

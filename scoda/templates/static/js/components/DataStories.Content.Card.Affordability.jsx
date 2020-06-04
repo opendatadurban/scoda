@@ -654,7 +654,7 @@ export default class DataStoriesContentCardAffordability extends Component {
         If you have any queries and further comment on this datastory, please email <o onClick="javascript:window.location='mailto:danga@sacities.net'">Danga Mughogho</o> at SACN.`;
 
         let imgOne = `/static/dist/img/scoda/datastories/ds-mun.svg`;
-        let imgTwo = `/static/dist/img/scoda/datastories/muntable.png`;
+        let imgTwo = `/static/dist/img/scoda/datastories/muntable.PNG`;
 
         return (
           
