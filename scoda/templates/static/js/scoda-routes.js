@@ -32,6 +32,13 @@ const _heroPrimaryColor = '#F05252';
 const _heroSecondaryColor = '#F64343';
 
 
+const _heroTitle_insight = 'Data Stories';
+const _heroContent_insight = 'More detailed writeup about data stories More detailed writeup about data stories More detailed writeup about data stories More detailed writeup about data stories. More detailed writeup about data stories More detailed writeup about data stories More detailed writeup about data stories More detailed writeup about data stories.';
+const _heroInfoTitle_insight = 'INSIGHT TOOLS';
+const _heroPrimaryColor_insight = '#4F9DA6';
+const _heroSecondaryColor_insight = '#4F9DA6';
+
+
 const _tabs = [
   {
       name: 'SACN', mode:'active',url: 'http://www.sacn.co.za'
@@ -54,26 +61,35 @@ export default (
             infoTitle={_heroInfoTitle}
             primaryColor={_heroPrimaryColor} 
             secondaryColor={_heroSecondaryColor}/>}/>
+
+    <Route path='/data-stories-details'  component={()=> <Navigation_scoda box_shadow={true} />}/>
+    <Route exact path="/data-stories-details" component={()=> <Hero_Collapsable title={_heroTitle_insight} 
+            content={_heroContent_insight} 
+            infoTitle={_heroInfoTitle_insight}
+            primaryColor={_heroPrimaryColor_insight} 
+            secondaryColor={_heroSecondaryColor_insight}/>}/>
+
       <Route exact path="/data-stories-details" component={()=>
             <DataStoriesDetails />} />
+      <Route path='/data-stories-details' component={Footer} />
       
-      <Route path="/ds-state-of-finance-2018" component={Navigation_scoda} />
+      <Route path="/ds-state-of-finance-2018" component={()=> <Navigation_scoda box_shadow={true} />} />
       <Route path="/ds-state-of-finance-2018" component={()=> <DataStories />} />
       <Route path="/ds-state-of-finance-2018" component={Footer} />
 
-      <Route path="/ds-spatial-transformation-2018" component={Navigation_scoda} />
+      <Route path="/ds-spatial-transformation-2018" component={()=> <Navigation_scoda box_shadow={true} />} />
       <Route path="/ds-spatial-transformation-2018" component={()=> <DataStoriesSpacial />} />
       <Route path="/ds-spatial-transformation-2018" component={Footer} />
       
-      <Route path="/ds-urban-safety-2018" component={Navigation_scoda} />
+      <Route path="/ds-urban-safety-2018" component={()=> <Navigation_scoda box_shadow={true} />} />
       <Route path="/ds-urban-safety-2018" component={()=> <DataStoriesUrbanSafety />} />
       <Route path="/ds-urban-safety-2018" component={Footer} />
 
-      <Route path="/ds-epw-metro-2018" component={Navigation_scoda} />
+      <Route path="/ds-epw-metro-2018" component={()=> <Navigation_scoda box_shadow={true} />} />
       <Route path="/ds-epw-metro-2018" component={()=> <DataStoriesEPW />} />
       <Route path="/ds-epw-metro-2018" component={Footer} />
 
-      <Route path="/ds-affordability-2018" component={Navigation_scoda} />
+      <Route path="/ds-affordability-2018" component={()=> <Navigation_scoda box_shadow={true} />} />
       <Route path="/ds-affordability-2018" component={()=> <DataStoriesAffordability />} />
       <Route path="/ds-affordability-2018" component={Footer} />
 
@@ -87,7 +103,7 @@ export default (
       
       <Route path='/datastory' component={DataStories} />
 
-      <Route path='/home' component={Navigation_scoda} />
+      <Route path='/home' component={()=> <Navigation_scoda box_shadow={false} />} />
       <Route path='/home' component={Hero} />
       <Route path='/home' component={Preview_block} />
       <Route path='/home' component={CTA_block} />
@@ -96,7 +112,7 @@ export default (
       <Route path='/home' component={Sub_Footer} />
       <Route path='/home' component={Footer} />
 
-      <Route path='/about-us' component={Navigation_scoda} />
+      <Route path='/about-us' component={()=> <Navigation_scoda box_shadow={false} />} />
       <Route path='/about-us' component={About} />
       <Route path='/about-us' component={Sub_Footer} />
       <Route path='/about-us' component={Footer} />
