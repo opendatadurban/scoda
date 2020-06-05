@@ -10,7 +10,7 @@ export default class DataStoriesNavigation extends Component {
     render() {
 
         let explorerUrl = 'http://scoda.herokuapp.com/explore';
-        let homeUrl = '/';
+        let homeUrl = '/scoda/#/data-stories-details';
 
         return (
             <div className="container-fluid mt-3">

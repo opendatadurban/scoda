@@ -62,9 +62,12 @@ export default class DataStoriesDetails extends Component {
                                         filterColor="#F05252"
                                         filter="Productive Cities"
                                         imageTag="P"
+                                        filter_type = "data-story-card-productive"
                                         infoBannerTitle="The Durban EDGE"
                                         infoBannerDate="August 2018"
                                         infoBannerMins="9"
+                                        filter_type = "data-story-card-productive"
+                                        href_ = '/scoda/#/ds-spatial-transformation-2018'
                                 />
                                 <div className="row">
                                     <div className="col-4">
@@ -76,6 +79,8 @@ export default class DataStoriesDetails extends Component {
                                         filterColor="#FFC057"
                                         filter="Inclusive Cities"
                                         imageTag="I"
+                                        filter_type = "data-story-card-inclusives"
+                                        href_ = '/scoda/#/ds-epw-metro-2018'
                                     />
                                     </div>
                                     <div className="col-4">
@@ -87,6 +92,8 @@ export default class DataStoriesDetails extends Component {
                                         filterColor="#FFC057"
                                         filter="Inclusive Cities"
                                         imageTag="I"
+                                        filter_type = "data-story-card-inclusives"
+                                        href_ = '/scoda/#/ds-affordability-2018'
                                     />
                                     </div>
                                     <div className="col-4">
@@ -97,7 +104,10 @@ export default class DataStoriesDetails extends Component {
                                         content="Cities worldwide generate about 80% of the gross value added in their respective countries. Due to their association with opp..."
                                         filterColor="#196CDB"
                                         filter="Well Governed Cities"
+                                        filter_type = "data-story-card-well"
                                         imageTag="W"
+                                        href_ = '/scoda/#/ds-urban-safety-2018'
+                                        
                                     />
                                     </div>
                                 </div>
@@ -107,6 +117,7 @@ export default class DataStoriesDetails extends Component {
                                         title="South African Cities Network"
                                         subtitle="July 2018"
                                         minutes="8"
+                                        filter_type = "data-story-card-inclusives"
                                     />
                                     </div>
                                     <div className="col-4">
@@ -114,6 +125,7 @@ export default class DataStoriesDetails extends Component {
                                         title="South African Cities Network"
                                         subtitle="July 2018"
                                         minutes="5"
+                                        filter_type = "data-story-card-inclusives"
                                     />
                                     </div>
                                     <div className="col-4">
@@ -121,6 +133,7 @@ export default class DataStoriesDetails extends Component {
                                         title="South African Cities Network"
                                         subtitle="July 2018"
                                         minutes="6"
+                                        filter_type = "data-story-card-well"
                                     />
                                     </div>
                                 </div>
@@ -132,9 +145,12 @@ export default class DataStoriesDetails extends Component {
                                         filterColor="#196CDB"
                                         filter="Well Governed Cities"
                                         imageTag="W"
+                                        filter_type = "data-story-card-well"
                                         infoBannerTitle="The Durban EDGE"
                                         infoBannerDate="August 2018"
                                         infoBannerMins="7"
+                                        filter_type = "data-story-card-well"
+                                        href_ = '/scoda/#/ds-state-of-finance-2018'
                                 />
                              </div>
                              <div className="ds-content-vspacer"></div>
@@ -167,6 +183,8 @@ export default class DataStoriesDetails extends Component {
                                         filterColor="#F05252"
                                         filter="Employment"
                                         imageTag="E"
+                                        filter_type = "data-story-card-employment"
+                                        href_ = 'https://data-stories.edge.durban/edge/unemployed_around_major_citiies'
                                     />
                                     </div>
                                     <div className="col-4">
@@ -178,6 +196,8 @@ export default class DataStoriesDetails extends Component {
                                         filterColor="#196CDB"
                                         filter="Economy"
                                         imageTag="Ec"
+                                        filter_type = "data-story-card-economy"
+                                        href_ = 'https://data-stories.edge.durban/edge/durban_economy_2nd_Q'
                                     />
                                     </div>
                                     <div className="col-4">
@@ -189,6 +209,8 @@ export default class DataStoriesDetails extends Component {
                                         filterColor="#FFC057"
                                         filter="Service"
                                         imageTag="S"
+                                        filter_type = "data-story-card-service"
+                                        href_ = ''
                                     />
                                     </div>
                                 </div>
@@ -198,6 +220,7 @@ export default class DataStoriesDetails extends Component {
                                         title="The Durban EDGE"
                                         subtitle="2 August 2019"
                                         minutes="5"
+                                        filter_type = "data-story-card-employment"
                                     />
                                     </div>
                                     <div className="col-4">
@@ -205,6 +228,7 @@ export default class DataStoriesDetails extends Component {
                                         title="The Durban EDGE"
                                         subtitle="14 October 2019"
                                         minutes="4"
+                                        filter_type = "data-story-card-economy"
                                     />
                                     </div>
                                     <div className="col-4">
@@ -212,6 +236,7 @@ export default class DataStoriesDetails extends Component {
                                         title="The Durban EDGE"
                                         subtitle="June 2019"
                                         minutes="6"
+                                        filter_type = "data-story-card-service"
                                     />
                                     </div>
                                 </div>
@@ -226,6 +251,8 @@ export default class DataStoriesDetails extends Component {
                                         infoBannerTitle="The Durban EDGE"
                                         infoBannerDate="June 2019"
                                         infoBannerMins="8"
+                                        filter_type = "data-story-card-economy"
+                                        href_ = 'https://data-stories.edge.durban/edge/durban_economy'
                                 />
                              </div>
                              <div className="ds-content-vspacer"></div>
