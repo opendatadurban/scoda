@@ -29,7 +29,7 @@ export default class CTA_block extends Component {
                                 <div className="col-md-6 cta-info-content d-flex justify-content-center">
                                     <h5>Data Stories</h5>
                                     <p>Data stories are a way to understand complex information and data using a narrative that appeals to interested readers.</p>
-                                    <a href="/scoda/#//data-stories-details" className="btn">See Our Data Stories</a>
+                                    <a href="/scoda/#/data-stories-details" className="btn">See Our Data Stories</a>
                                 </div>
                             </div>
                         </div>
