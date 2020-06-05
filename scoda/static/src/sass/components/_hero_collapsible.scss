@@ -114,3 +114,16 @@ body {
     text-align: center;
   }
   
+  .hero-block{
+    // Mobile specific styling
+        @media (max-width: $tablet) {
+          margin-bottom: 0px;
+          margin-bottom: 130px;
+          #contentContainer{
+            margin-bottom: 60px;
+          }
+          #infoBlock{
+            display: none;
+          }
+        }
+    }

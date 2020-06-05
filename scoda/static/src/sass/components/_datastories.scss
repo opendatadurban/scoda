@@ -151,7 +151,6 @@ body {
 }
 
 .ds-content-image {
-    width:64%;
     height:30%;
 }
 
@@ -178,8 +177,7 @@ body {
 }
 
 .ds-right-content-width {
-    padding-left: 52px;
-    width:360px;
+    padding-left: 100px;
 }
 
 .ds-info-banner-title {
@@ -715,3 +713,18 @@ o {
     text-align: center;
 }
 
+.data-story-card{
+// Mobile specific styling
+    @media (max-width: $tablet) {
+        width: 100%;
+        .ds-right-content-width{
+            padding-left: unset;
+        }
+    }
+}
+
+.ds-banner-view-button{
+    @media (max-width: $tablet) {
+        display: none;
+    }
+}
