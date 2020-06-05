@@ -104,15 +104,6 @@ const _mapData = [
         city: 'Pietermaritzburg', long: '29.61679' , lat: '-30.39278'
     }
 ];
-  
-const [currentTime, setCurrentTime] = useState(0);
-
-useEffect(() => {
-fetch('/api/explore').then(res => res.json()).then(data => {
-  console.log(data);
-  console.log('%c color message', 'color: #f0c002');
-});
-}, []);
 
 export default class IndicatorExplorerDataCard extends Component {
     constructor(props) {
