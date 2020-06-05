@@ -71,4 +71,21 @@
             }
         }
     }
+    // Desktop specific styling
+    @media (max-width: $tablet) {
+        h3{
+            font-size: 18px;
+            line-height: 25px;
+        }
+        p{
+            font-size: 14px;
+            line-height: 20px;
+        }
+        .heading{
+            h2{
+                font-size: 25px;
+                line-height: 32px;
+            }
+        }
+    }
 }

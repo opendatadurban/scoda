@@ -34,23 +34,23 @@ export default class ContentSectionTop extends Component {
         return (
             <div className={main_class}>
                 <a href={this.props.href_} className="card-trigger"></a>
-               <div className="row">
+               <div className="row m-0">
                    <div className="col-0 ds-content-top-image">
                        <div style={filterTag}>{this.props.imageTag}</div>
                        <Image imgSrc={sectionImage} />
                    </div>
                 </div>
-                <div className="row">
+                <div className="row m-0">
                    <div className="col-0 pl-3">
-                       <div className="row">
+                       <div className="row m-0">
                            <div className="col-0 ds-content-title"><br/>{this.props.title}</div>
                        </div>
                        <div className="ds-right-content-hspacer"></div>
-                       <div className="row">
+                       <div className="row m-0">
                            <div className="col-0 ds-content-subtitle">{this.props.subtitle}</div>
                        </div>
                        <div className="ds-right-content-hspacer"></div>
-                       <div className="row">
+                       <div className="row m-0">
                             <div className="col-0 ds-top-content">{this.props.content}</div>
                        </div>
                        <div className="ds-right-content-hspacer"></div>
