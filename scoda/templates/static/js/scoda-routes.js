@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { HashRouter, Route, hashHistory } from 'react-router-dom';
 
 import Home from './components/Home';
@@ -18,6 +18,7 @@ import Hero_Collapsable from './components/Hero.Collapsible';
 import DataStoriesDetails from './components/DataStoriesDetails';
 import DataStories from './components/DataStories';
 import IndicatorExplorer from './components/IndicatorExplorer';
+import IndicatorExplorerData from './indicator/IndicatorExplorerData';
 import TabsAndFilters from './components/TabsAndFilters'
 import DemographicModeller from './components/DemographicModeller';
 
@@ -38,7 +39,7 @@ const _tabs = [
   {
       name: 'Three', mode: 'none'
   }
-]
+];
 
 // import more components
 export default (
@@ -59,6 +60,7 @@ export default (
       <Route exact path="/indicator-explorer" component={()=> <IndicatorExplorer />}/>
       <Route exact path="/tabs-and-filters" component={()=><TabsAndFilters tabs={_tabs}/>} />
       <Route exact path="/demographic-modeller" component={()=><DemographicModeller />} />
+    <Route exact path="/data" component={()=> <IndicatorExplorerData />}/>
       <Route path='/preview-block' component={Preview_block} />
       <Route path='/cta-block' component={CTA_block} />
       <Route path='/sub-footer' component={Sub_Footer} />
