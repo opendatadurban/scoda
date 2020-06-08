@@ -12,7 +12,7 @@ export default class ContentSectionTop extends Component {
     render() {
 
         let sectionImage = `/static/dist/img/scoda/datastories/${this.props.img}`;
-
+        let main_class = `container-fluid ml-0 mt-3 p-0 data-story-card ${this.props.filter_type}`
         let filterTag = {
             boxSizing: 'border-box',
             height: '34px',
@@ -32,24 +32,25 @@ export default class ContentSectionTop extends Component {
         };
 
         return (
-            <div className="container-fluid ml-0 mt-3 p-0">
-               <div className="row">
+            <div className={main_class}>
+                <a href={this.props.href_} className="card-trigger"></a>
+               <div className="row m-0">
                    <div className="col-0 ds-content-top-image">
                        <div style={filterTag}>{this.props.imageTag}</div>
                        <Image imgSrc={sectionImage} />
                    </div>
                 </div>
-                <div className="row">
+                <div className="row m-0">
                    <div className="col-0 pl-3">
-                       <div className="row">
+                       <div className="row m-0">
                            <div className="col-0 ds-content-title"><br/>{this.props.title}</div>
                        </div>
                        <div className="ds-right-content-hspacer"></div>
-                       <div className="row">
+                       <div className="row m-0">
                            <div className="col-0 ds-content-subtitle">{this.props.subtitle}</div>
                        </div>
                        <div className="ds-right-content-hspacer"></div>
-                       <div className="row">
+                       <div className="row m-0">
                             <div className="col-0 ds-top-content">{this.props.content}</div>
                        </div>
                        <div className="ds-right-content-hspacer"></div>

@@ -71,7 +71,7 @@ export default class Hero extends Component {
             <div id="hero" className="hero-block">
             <div className="container-fluid mt-0 p-0">
                 <div className="row ml-0 mr-0 p-0">
-                    <div className="col-5">
+                    <div className="col-md-5">
                         <div className="hero-block-vspacer"></div>
                         <div className="row ml-5">
                             <div className="col-0 hero-block-title" style={primaryColor}>{this.props.title}</div>
@@ -79,7 +79,7 @@ export default class Hero extends Component {
                         </div>
                         <div className="hero-block-vspacer"></div>
                         <div id="contentContainer" className="row ml-5">
-                            <div className="col-0 hero-block-text">
+                            <div className="col hero-block-text">
                            {this.props.content}
                             </div>
                         </div>
@@ -90,7 +90,7 @@ export default class Hero extends Component {
                         </div>
                     </div>
                     {/*Info bar and background*/}
-                    <div id="infoBlock" className="col-7 hero-block-background p-0 mr-0" style={infoBlockBackground}>
+                    <div id="infoBlock" className="col-md-7 hero-block-background p-0 mr-0" style={infoBlockBackground}>
                         <div className="hero-block-spacer"></div>
                         <div id="infoBlockContainer" className="row ml-0 p-0 hero-block-info-display">
                             <div className="col-0 hero-block-info-hspacer"></div>

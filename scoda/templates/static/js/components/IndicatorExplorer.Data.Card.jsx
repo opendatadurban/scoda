@@ -105,8 +105,6 @@ const _mapData = [
     }
 ];
 
-
-
 export default class IndicatorExplorerDataCard extends Component {
     constructor(props) {
         super(props);
