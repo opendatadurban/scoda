@@ -11,10 +11,10 @@ export default class DataStoriesInfoBanner extends Component {
     render() {
 
         let bannerImage = `/static/dist/img/scoda/datastories/edge.png`;
-
+        let main_class = `ds-info-banner-width ml-0 mt-2 p-0 mt-4 data-story-card ${this.props.filter_type}`
         return (
-            <div className="ds-info-banner-width ml-0 mt-2 p-0">
-               <div className="row">
+            <div className={main_class}>
+               <div className="row m-0">
                    <div className="col-0 ds-info-banner-image">
                        <Image imgSrc={bannerImage}/>
                    </div>

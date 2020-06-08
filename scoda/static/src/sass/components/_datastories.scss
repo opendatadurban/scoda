@@ -105,6 +105,7 @@ body {
   width: 235px;
   border: 1px solid $scoda-grey-dark;
   border-radius: 25px;
+  cursor: pointer;
 }
 
 .ds-banner-hr {
@@ -150,7 +151,6 @@ body {
 }
 
 .ds-content-image {
-    width:64%;
     height:30%;
 }
 
@@ -177,8 +177,7 @@ body {
 }
 
 .ds-right-content-width {
-    padding-left: 52px;
-    width:360px;
+    padding-left: 100px;
 }
 
 .ds-info-banner-title {
@@ -242,6 +241,7 @@ body {
     border-radius: 5px;
     background-color: $scoda-white;
     box-shadow: 0 1px 5px 0 rgba(0,0,0,0.3);
+    cursor: pointer;
 }
 
 .ds-main-navigation-button-back-text {
@@ -274,10 +274,11 @@ body {
     line-height: 25px;
     text-align: center;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .ds-w {
-    width: 95%;
+    width: 50%;
 }
 
 .ds-s {
@@ -295,7 +296,7 @@ body {
     border-radius: 10px 10px 0 0;
     background-color: $scoda-black-light;
     box-shadow: 1px 1px 4px 0 rgba(0,0,0,0.2);
-    height: 230px;
+    height: auto;
 }
 
 .ds-content-story-title {
@@ -308,16 +309,17 @@ body {
   }
 
   .ds-content-story-subtitle {
-    height: 50px;
+    height: auto;
     color: $scoda-white;
     font-family: $scoda-font;
-    font-size: 38px;
+    font-size: 40px;
     font-weight: 600;
     letter-spacing: 0;
     line-height: 50px;
   }
 
   .ds-content-card-header-hr {
+    border-top: 5px dotted $scoda-white;
     box-sizing: border-box;
     height: 1px;
     border-top: 5px dotted $scoda-white;
@@ -341,7 +343,7 @@ body {
   }
 
   .ds-content-card-highlight-block {
-    height: 110px;
+    height: auto;
     width: 80%;
     border-radius: 10px;
     background-color:$scoda-orange;
@@ -354,10 +356,19 @@ body {
     text-align: center;
   }
 
+  .ds-content-card-highlight-block-text {
+    font-family: $scoda-font;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 24px;
+    text-align: center;
+    width:90%;
+  }
+
   .ds-content-card-content-block {
     color: $scoda-grey-dark;
     font-family: $scoda-font;
-    font-size: 15px;
+    font-size: 16px;
     letter-spacing: 0;
     line-height: 24px;
   }
@@ -374,7 +385,7 @@ body {
   .ds-content-card-data-description {
     color: $scoda-grey-dark;
     font-family: $scoda-font;
-    font-size: 19px;
+    font-size: 20px;
     font-style: italic;
     letter-spacing: 0;
     line-height: 30px;
@@ -419,7 +430,7 @@ body {
 
   .ds-tabs-filter-header {
     height: 49px;
-    width: 100%;
+    width: 101.1%;
     border-radius: 5px;
     background-color:$scoda-white;
     box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
@@ -428,12 +439,292 @@ body {
     font-size: 21px;
     font-weight: 600;
     letter-spacing: 0;
-    line-height: 41px;
+    line-height: 45px;
   }
 
+  .ds-tabs-filter-card {
+    height:auto;
+    width: 100%;
+    border-radius: 5px;
+    background-color:$scoda-white;
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
+  }
+
+  .ds-tabs-filter-card-chart {
+    height:423px;
+    width: 100%;
+    border-radius: 5px;
+    background-color:$scoda-white;
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
+  }
+
+  .ds-tabs-filter-card-bottom {
+    height:132px;
+    width: 100%;
+    border-radius: 5px;
+    background-color:$scoda-white;
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
+  }
+
+.ds-tabs-filter-subheading {
+    height: 25px;
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 25px;
+}
+
+.ds-filter-tabs-context-border {
+    height: 35px;
+    border-radius: 5px 5px 0 0;
+    background-color: $scoda-white;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+}
+
+.ds-filter-tabs-context-header {
+    height: 29px;
+    color:$scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: 24px;
+}
+
+.ds-filter-tabs-context-content {
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 14px;
+    font-style: italic;
+    letter-spacing: 0;
+    line-height: 21px;
+}
+
+.ds-filter-tabs-chart-button {
+    height: 27px;
+    width: 223px;
+    color: $scoda-white;
+    font-family: $scoda-font;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 25px;
+    text-align: center;
+    box-sizing: border-box;
+    height: 28px;
+    width: 235px;
+    border: 1px solid $scoda-black;
+    border-radius: 25px;
+    background-color: $scoda-black;
+    cursor: pointer;
+}
+
+.ds-filter-tabs-textreport-header {
+    height: 50px;
+    width: 142px;
+    color: #45B7D9;
+    font-family: $scoda-font;
+    font-size: 50px;
+    font-weight: 800;
+    letter-spacing: 0;
+    line-height: 50px;
+    text-align: center;
+}
+
+.ds-filter-tabs-textreport-footer {
+    height: 25px;
+    width: 142px;
+    color: #45B7D9;
+    font-family: Montserrat;
+    font-size: 21px;
+    letter-spacing: 0;
+    line-height: 25px;
+    text-align: center;
+}
+
+.ds-download-button {
+    height: 22px;
+    width: 160px;
+    border-radius: 11px;
+    background-color: $scoda-grey-dark;
+    color:$scoda-white;
+    font-family: $scoda-font;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 22px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.ds-urban-header {
+    height: 31px;
+    width: auto;
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 31px;
+    text-align: center;
+}
+
+.ds-urban-addressing-block {
+    height: auto;
+    width: 45%;
+    border-radius: 10px;
+    background-color: #FFE9C5;
+}
+
+.ds-urban-addressing-heading {
+    height: 60px;
+    width: 328px;
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 30px;
+    text-align: center;
+}
+
+.ds-urban-addressng-text {
+    height: 480px;
+    width: 328px;
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 24px;
+}
 
 
-  o {
+/*.data-stories {
+    padding: 40px 0; }
+    .data-stories .data-stories--map {
+      display: none; }
+    .data-stories [class*="span"] {
+      margin: 0 5px;
+      width: calc(100% - 10px); }
+    .data-stories .data-stories--story {
+      pointer-events: none; } 
+.data-stories .red {
+  background-color: #E0635D; }
+.data-stories .light-green {
+  background-color: #91CF60; }
+.data-stories .lime {
+  background-color: #D9EF8B; }
+.data-stories .green {
+  background-color: #1A9850; }
+.data-stories .yellow {
+  background-color: #FEE08B; }
+.data-stories .orange {
+  background-color: #FC8D59; }
+.data-stories .white {
+  background-color: #ffffff; }
+  .data-stories li.dash {
+    list-style-type: none; }
+*/
+
+o {
       color: $scoda-orange;
       font-weight: 600;
+      cursor: pointer;
   }
+
+  a {
+    color: $scoda-orange;
+    font-weight: 600;
+    cursor: pointer;
+ }
+
+.nav-pills .nav-link-2.active, .nav-pills .show>.nav-link-2 {
+    height: 22px;
+    width: 68px;
+    border-radius: 11px;
+    background-color: #485460;
+    color: #FFFFFF;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 20px;
+    text-align: center;
+    outline: none;
+    text-decoration: none;
+}
+
+.nav-link-2  {
+    height: 22px;
+    width: 68px;
+    border-radius: 11px;
+    border: 1px solid #525F6B;
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 20px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.nav-pills .nav-link-2 {
+    border-radius: 11px;
+    text-decoration: none;
+}
+
+.tabs_vertical--tooltips--tooltip {
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 16px;
+    letter-spacing: 0;
+    
+    display: block;
+    margin:-14px 0 27px 0;
+    padding: 0 0 0 100px;
+    transition: .2s all ease-in-out;
+    position: relative;
+}
+
+.tabs_vertical--pills--pill.active + span {
+    font-weight: 500;
+}
+
+.ds-light-highlight {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #FFE9C5;
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 24px;
+}
+
+.ds-subheader {
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 31px;
+    text-align: center;
+}
+
+.data-story-card{
+// Mobile specific styling
+    @media (max-width: $tablet) {
+        width: 100%;
+        .ds-right-content-width{
+            padding-left: unset;
+        }
+    }
+}
+
+.ds-banner-view-button{
+    @media (max-width: $tablet) {
+        display: none;
+    }
+}

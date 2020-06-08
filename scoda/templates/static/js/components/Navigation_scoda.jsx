@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 export default class Navigation_scoda extends Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
+        let style_ = ""
+        if( this.props.box_shadow == true ){
+             style_ = "navbar navbar-expand-lg navbar-light bg-light box-shadow" 
+        }
+        else{
+            style_ = "navbar navbar-expand-lg navbar-light bg-light "
+        }
         return (
             <div className="navigation-scoda">
                 <div className="top-header d-flex align-items-center justify-content-end">
@@ -13,7 +23,7 @@ export default class Navigation_scoda extends Component {
                         </div>
                     </div>
                 </div>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className={style_}>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
