@@ -34,13 +34,13 @@ def api_explore():
     status = 200
     plot = 0
     tour = 1
-    # if request.method == 'POST':
-    #     if form.validate():
+    ind = 76
+    if request.method == 'POST':
+        if form.validate():
+            data_json = request.get_json()
+            ind = data_json["indicator_id"]
     plot = 1
     tour = 2
-
-    # ind = form.indicator_id.data
-    ind = 76
     query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value). \
         filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
         filter(DataPoint.region_id == Region.id)

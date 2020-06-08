@@ -111,7 +111,6 @@ export default class IndicatorExplorerDataCard extends Component {
     }
 
     render() {
-
         return (
             <div className="mt-4 ml-5 pr-5">
                 <div className="row">

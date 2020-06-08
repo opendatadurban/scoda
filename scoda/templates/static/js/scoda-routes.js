@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { HashRouter, Route, hashHistory } from 'react-router-dom';
 
 import Home from './components/Home';
@@ -17,10 +17,15 @@ import About from './components/About';
 import Hero_Collapsable from './components/Hero.Collapsible';
 import DataStoriesDetails from './components/DataStoriesDetails';
 import DataStories from './components/DataStories';
+
+import IndicatorExplorer from './components/IndicatorExplorer';
+import IndicatorExplorerData from './indicator/IndicatorExplorerData';
+
 import DataStoriesSpacial from './components/DataStories.Spacial';
 import DataStoriesUrbanSafety from './components/DataStories.UrbanSafety';
 import DataStoriesEPW from './components/DataStories.EPW';
 //import IndicatorExplorer from './components/IndicatorExplorer';
+
 import TabsAndFilters from './components/TabsAndFilters'
 import DemographicModeller from './components/DemographicModeller';
 import DataStoriesAffordability from './components/DataStories.Affordability';
@@ -46,7 +51,7 @@ const _tabs = [
   {
       name: 'eThekwini', mode: 'none', url: 'http://www.google.com'
   }
-]
+];
 
 // import more components
 export default (
@@ -96,6 +101,7 @@ export default (
       {/*<Route exact path="/indicator-explorer" component={()=> <IndicatorExplorer />}/>*/}
       <Route exact path="/tabs-and-filters" component={()=><TabsAndFilters tabs={_tabs}/>} />
       <Route exact path="/demographic-modeller" component={()=><DemographicModeller />} />
+    <Route exact path="/data" component={()=> <IndicatorExplorerData />}/>
       <Route path='/preview-block' component={Preview_block} />
       <Route path='/cta-block' component={CTA_block} />
       <Route path='/sub-footer' component={Sub_Footer} />
