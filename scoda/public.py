@@ -28,6 +28,14 @@ def grouper(iterable, n, fillvalue=None):
 def help():
     return render_template('help/help.html')
 
+@app.route('/api/indicators-list', methods=['GET', 'POST'])
+def api_indicators_list():
+    remove_list = ['Poverty rate', 'Gini Coefficient', 'Gross Value Add', 'Exports', 'Multiple deprivation index',
+                   'Human Development Index']
+    indicators_list = [[str(c.id), c.in_name] for c in Indicator.all() if c.in_name not in remove_list]
+    # payload = {"indicators_list": indicators_list}
+    return jsonify(indicators_list)
+
 @app.route('/api/explore', methods=['GET', 'POST'])
 def api_explore():
     form = ExploreForm()
