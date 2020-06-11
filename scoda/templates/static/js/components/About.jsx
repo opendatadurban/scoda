@@ -19,7 +19,7 @@ export default class CTA_block extends Component {
                         <div className="col-12">
                             <h3>What Do We Do?</h3>
                             <p>With the fast-changing and increasingly complex dynamics of contemporary South Africa where the majority of people now live in cities, monitoring how cities are planned and managed is important. Indicators are critical to effective planning and management in urban contexts, organising information sets into simpler, and easier to understand and compare ‘measures’ of what is happening. Good urban indicator sets allow for a longitudinal perspective (i.e. change over time) and comparisons between cities locally and internationally, enabling cities to see whether or not they are adequately achieving their objectives. </p>
-                            <img src="/static/dist/img/SCODA Assets V3_1/3 About Us/What We Do/image_about_what-do-we-do.svg" alt=""/>
+                            <img src="/static/dist/img/SCODA Assets V3_2 Desktop/3 About Us/What We Do/image_about_what-do-we-do.svg" alt=""/>
                         </div>
                     </div>
                     <div className="row how-was-scoda-developed mt-5 mb-5">
