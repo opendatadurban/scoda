@@ -11,7 +11,7 @@ export default class DataStories extends Component {
     render() {
 
         return (
-            <div className="container px-3">
+            <div className="container px-3 data-story-page">
                <div className="row">
                     <div className="col w-50 d-flex justify-content-center">
                         <DataStoriesNavigation />

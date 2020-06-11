@@ -728,3 +728,21 @@ o {
         display: none;
     }
 }
+
+.data-story-page{
+    @media (max-width: $tablet) {
+        #filter_{
+            position: absolute;
+            right: 33px;
+            top: 11px;
+        }
+        .ds-content-story-subtitle{
+            font-size: 21px;
+            font-weight: 500;
+            line-height: 26px;
+        }
+        .ds-urban-addressing-block {
+            width: 100%;
+        }
+    }
+}

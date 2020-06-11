@@ -27,6 +27,15 @@
         z-index: 1;
         #navbarSupportedContent{
             .navbar-nav{
+                .dropdown-menu{
+                    .dropdown-item{
+                        color: #F9874A;
+                        font-family: Montserrat;
+                        font-size: 18px;
+                        letter-spacing: 0;
+                        line-height: 13px;
+                    }
+                }
                 .nav-item{
                     &.active{
                         .nav-link{
