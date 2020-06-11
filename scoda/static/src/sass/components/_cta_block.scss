@@ -157,6 +157,11 @@
         .cta-container{
             width: 90%;
         }
+        &.cta_block_insight{
+            .cta-container{
+                padding-bottom: 50px;
+            }
+        }
         .cta-info{
             .cta-image{
                 width: 100% !important;

@@ -133,7 +133,7 @@ export default class DataStoriesContentCardEPW extends Component {
                           }
                       }
                   },
-                  responsive: true,
+                  maintainAspectRatio : false,
                   xAxes: [{
                                   stacked: false,
                                   ticks: {fontStyle: 'bold'},
@@ -515,7 +515,7 @@ export default class DataStoriesContentCardEPW extends Component {
                         <div className="container-fluid">
                             <div className="row">
                            
-                                <div className="col-7 tabs_vertical--content">
+                                <div className="col-md-7 tabs_vertical--content">
                                     <div className="tab-content" id="v-pills-tabContent">
                                     <div className="tab-pane fade show active" id="v-pills-top-1a" role="tabpanel" aria-labelledby="v-pills-top-1a-tab">
                                         <img src="/static/dist/img/scoda/datastories/diagram_sa-neets_slide-1.png" />
@@ -542,7 +542,7 @@ export default class DataStoriesContentCardEPW extends Component {
                                     </div>
                                 </div>
                               </div>
-                              <div className="col-5 tabs_vertical--pills">
+                              <div className="col-md-5 tabs_vertical--pills">
                                 <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                             
                                   <a className="tabs_vertical--pills--pill nav-link-2 active" id="v-pills-top-1a-tab" data-toggle="pill" href="#v-pills-top-1a" role="tab" aria-controls="v-pills-top-1a" aria-selected="true">show</a>
@@ -575,7 +575,7 @@ export default class DataStoriesContentCardEPW extends Component {
 
                            <div className="row mt-4"></div>
                            
-                               <div className="row mt-4">
+                               <div className="row mt-4 chart-heights-mobile">
                                    <div className="col-10"></div>
                                    <div className="col-0 float-right ds-download-button" onClick={this.downloadChart}>
                                        <a id="download" download="chart.png" style={{color:'#fff',textDecoration:'none'}}>
@@ -619,10 +619,10 @@ export default class DataStoriesContentCardEPW extends Component {
                                  <div className="ds-subheader">Work opportunities created by the EPWP, Phase 1-3</div>
                                </div>
                                <br/><br/>
-                               <div className="col">
+                               <div className="col chart-heights-mobile">
                                     <canvas
                                      id="mainChart2"
-                                    className="w-100 h-100"
+                                    className=""
                                     />
                                     </div>
                                     <div className="col ml-3">
