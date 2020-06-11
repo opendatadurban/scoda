@@ -28,19 +28,27 @@ def grouper(iterable, n, fillvalue=None):
 def help():
     return render_template('help/help.html')
 
+@app.route('/api/indicators-list', methods=['GET', 'POST'])
+def api_indicators_list():
+    remove_list = ['Poverty rate', 'Gini Coefficient', 'Gross Value Add', 'Exports', 'Multiple deprivation index',
+                   'Human Development Index']
+    indicators_list = [[str(c.id), c.in_name] for c in Indicator.all() if c.in_name not in remove_list]
+    # payload = {"indicators_list": indicators_list}
+    return jsonify(indicators_list)
+
 @app.route('/api/explore', methods=['GET', 'POST'])
 def api_explore():
     form = ExploreForm()
     status = 200
     plot = 0
     tour = 1
-    # if request.method == 'POST':
-    #     if form.validate():
+    ind = 76
+    if request.method == 'POST':
+        if form.validate():
+            data_json = request.get_json()
+            ind = data_json["indicator_id"]
     plot = 1
     tour = 2
-
-    # ind = form.indicator_id.data
-    ind = 76
     query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value). \
         filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
         filter(DataPoint.region_id == Region.id)
