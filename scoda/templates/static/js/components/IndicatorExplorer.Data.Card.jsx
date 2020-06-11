@@ -1,26 +1,11 @@
-import React, { Component,useState, useEffect } from 'react';
+import React, { Component } from 'react';
 
-import IndicatorExplorerDataCardHeader from './IndicatorExplorer.Data.Card.Header';
+import axios from 'axios';
+
+import IndicatorExplorerDataCardHeader from '../components/IndicatorExplorer.Data.Card.Header';
 import IndicatorExplorerDataBox from '../components/IndicatorExplorer.Data.Box';
 import IndicatorExplorerDataBoxChartFilter from '../components/IndicatorExplorer.Data.Box.Small.ChartFilter';
 import IndicatorExplorerDataBoxMapFilter from '../components/IndicatorExplorer.Data.Box.Small.MapFilter';
-
-const _indicatorDataSet = [
-    {
-        Key: 1,
-        Value:'Crime',
-
-    },
-    {
-        Key:2,
-        Value: 'Age'
-    },
-    {
-        Key:3,
-        Value: 'Race'
-    }
-
-];
 
 const _yearDataSet = [
     {
@@ -108,59 +93,110 @@ const _mapData = [
 export default class IndicatorExplorerDataCard extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            indicators:[],
+            dataset:[],
+            display:false
+        }
+
+        this.filterIndicatorData = this.filterIndicatorData.bind(this);
+        this.toggleComponentDisplay = this.toggleComponentDisplay.bind(this);
+    }
+
+    componentDidMount() {
+       this.init();
+
+       this.loadIndicators();
+    }
+
+    init() {
+        this.toggleComponentDisplay(false);
+    }
+
+    toggleComponentDisplay(show) {
+        if(show) {
+            document.getElementById('explorer-details').style.display='block';
+        }
+        else {
+            document.getElementById('explorer-details').style.display='none'; 
+        }
+    }
+
+    loadIndicators() {
+        axios.get('/api/indicators-list').then(res => {
+            this.setState({ indicators:res.data });
+        });
+    }
+
+    filterIndicatorData(indicatorId) {
+        axios.get(`/api/explore?indicator_id=${indicatorId}`).then(res => {
+            let resultSet = res.data;
+
+            if(resultSet !== null) {
+                this.toggleComponentDisplay(true);
+            }
+            else {
+                this.toggleComponentDisplay(false);
+            }
+
+            console.log(resultSet);
+        });
     }
 
     render() {
         return (
             <div className="mt-4 ml-5 pr-5">
                 <div className="row">
-                    <div className="col-10">
+                    <div className="col-sm-12">
                         <div className="ie-content-card">
                             <div className="ie-content-card-header">
                               <div className="row">
-                                  <div className="col-12">
+                                  <div className="col-sm-12">
                                       <IndicatorExplorerDataCardHeader
-                                        datasetOptions={_indicatorDataSet}
+                                        datasetOptions={this.state.indicators}
+                                        filterHook={this.filterIndicatorData}
+                                        toggle = {this.toggleComponentDisplay}
                                       />
                                   </div>
                               </div>
                             </div>
-                            <div className="col mt-3 ml-3 mr-3">
+                            <div id="explorer-details" className="col mt-3 ml-3 mr-3">
                                 <div className="row ml-1">
-                                    <IndicatorExplorerDataBox 
+                                    {/*<IndicatorExplorerDataBox 
                                             resultTitle="Selected Data"
                                             results={_selectedData}
                                             resultType="table"
-                                    />
+                                    />*/}
                                 </div>
                                 <div className="row mt-4">
                                     <div className="col-3">
-                                        <IndicatorExplorerDataBoxChartFilter 
+                                       {/*} <IndicatorExplorerDataBoxChartFilter 
                                          yearOptions={_yearDataSet}
                                          cityOptions={_cityDataSet}
                                          filters="Johannesburg,Pretoria,Durban,Cape Town"
-                                        />
+                                        />*/}
                                     </div>
                                     <div className="col">
-                                    <IndicatorExplorerDataBox 
+                                    {/*<IndicatorExplorerDataBox 
                                             resultTitle="Plotting Window"
                                             results={_plottingWindowData}
                                             resultType="chart"
-                                    />
+                                    />*/}
                                     </div>
                                 </div>   
                                 <div className="row mt-4">
                                     <div className="col-3">
-                                      <IndicatorExplorerDataBoxMapFilter 
+                                      {/*<IndicatorExplorerDataBoxMapFilter 
                                       datasetOptions={_indicatorDataSet}
-                                      />
+                                      />*/}
                                     </div>
                                     <div className="col">
-                                    <IndicatorExplorerDataBox 
+                                    {/*<IndicatorExplorerDataBox 
                                             resultTitle="Geographic Representation"
                                             results={_mapData}
                                             resultType="map"
-                                    />
+                                    />*/}
                                     </div>
                                 </div>  
                                 <div className="row mt-3"></div>                    

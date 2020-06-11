@@ -7,21 +7,21 @@
 
 .ie-content-card-header {
     width: 100%;
-    height: 160px;
+    height: 100%;
     border-radius: 5px 5px 0 0;
     background-color: $scoda-ie-header;
 }
 
 .ie-content-card-header-vl {
     box-sizing: border-box;
-    height: 108px;
+    height: 110px;
     width: 2px;
     border: 1px solid $scoda-white;
 }
 
 .ie-content-card-header-info {
-    height: 75px;
-    width: 230px;
+    height: 90%;
+    width: 50%;
     color: $scoda-ie-info;
     font-family: $scoda-font;
     font-size: 16px;
@@ -88,14 +88,14 @@
     font-size: 14px;
     font-weight: bold;
     letter-spacing: 0;
-    line-height: 30px;
+    line-height: 28px;
     text-align: center;
     cursor: pointer;
 }
 
 .ie-dropdown {
-    height: 40px;
-    width: 350px;
+    height: 100%;
+    width: 100%;
     border-radius: 20px;
     background-color: #FFFFFF;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
@@ -108,7 +108,7 @@
     -webkit-appearance: none; 
     //Use png at assets/selectArrow.png for the arrow on the right
     //Set the background color to a BadAss Green color 
-    background: url('/static/dist/img/scoda/dropdown_caret.png') no-repeat 95% #FFFFFF;
+    background: url('/static/dist/img/scoda/dropdown_caret.png') no-repeat 98% 80% #FFFFFF;
 }
 
 .ie-dropdown-small {
@@ -166,4 +166,24 @@
     font-size: 13px;
     letter-spacing: 0;
     line-height: 24px;
+}
+
+//Mobile
+@media (max-width: $tablet) {
+        .ie-content-card-header-vl {
+            box-sizing: border-box;
+            height: 0px;
+            width: 0px;
+        }
+
+        .ie-content-card-header-info {
+            height: 100%;
+            width: 100%;
+            color: $scoda-ie-info;
+            font-family: $scoda-font;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0;
+            line-height: 24px;
+        }
 }
