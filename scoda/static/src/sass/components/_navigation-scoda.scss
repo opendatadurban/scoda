@@ -57,6 +57,7 @@
 // Desktop specific styling
     @media (min-width: $tablet) {
       nav{
+        justify-content: flex-end;
         #navbarSupportedContent{
             justify-content: center;
             .navbar-nav{
@@ -67,5 +68,10 @@
             }
         }
       }
+    }
+    @media (max-width: $tablet) {
+        nav{
+            justify-content: flex-end;
+        }
     }
 }

@@ -1111,21 +1111,21 @@ export default class DataStoriesContentCardAffordability extends Component {
                                </div>
 
                                <div className="row mt-4">
-                               <div className="col">
+                               <div className="col-md-6">
 
                                   <canvas id="barChartTypeA" className="w-100"></canvas>
                               </div>
-                              <div className="col">
+                              <div className="col-md-6">
 
                                   <canvas id="barChartTypeB" className="w-100"></canvas>
 
                               </div>
                               </div>
                               <div className="row">
-                              <div className="col">
+                              <div className="col-md-6">
                                   <canvas id="barChartTypeC" className="w-100"></canvas>
                               </div>
-                              <div className="col">
+                              <div className="col-md-6">
                                   <canvas id="barChartTypeD" className="w-100"></canvas>
                               </div>   
 
