@@ -18,13 +18,10 @@ import Hero_Collapsable from './components/Hero.Collapsible';
 import DataStoriesDetails from './components/DataStoriesDetails';
 import DataStories from './components/DataStories';
 
-import IndicatorExplorer from './components/IndicatorExplorer';
-import IndicatorExplorerData from './indicator/IndicatorExplorerData';
-
 import DataStoriesSpacial from './components/DataStories.Spacial';
 import DataStoriesUrbanSafety from './components/DataStories.UrbanSafety';
 import DataStoriesEPW from './components/DataStories.EPW';
-//import IndicatorExplorer from './components/IndicatorExplorer';
+import IndicatorExplorer from './components/IndicatorExplorer';
 
 import TabsAndFilters from './components/TabsAndFilters'
 import DemographicModeller from './components/DemographicModeller';
@@ -98,10 +95,9 @@ export default (
       <Route path="/ds-affordability-2018" component={()=> <DataStoriesAffordability />} />
       <Route path="/ds-affordability-2018" component={Footer} />
 
-      {/*<Route exact path="/indicator-explorer" component={()=> <IndicatorExplorer />}/>*/}
       <Route exact path="/tabs-and-filters" component={()=><TabsAndFilters tabs={_tabs}/>} />
       <Route exact path="/demographic-modeller" component={()=><DemographicModeller />} />
-    <Route exact path="/data" component={()=> <IndicatorExplorerData />}/>
+   
       <Route path='/preview-block' component={Preview_block} />
       <Route path='/cta-block' component={CTA_block} />
       <Route path='/sub-footer' component={Sub_Footer} />
@@ -122,5 +118,8 @@ export default (
       <Route path='/about-us' component={About} />
       <Route path='/about-us' component={Sub_Footer} />
       <Route path='/about-us' component={Footer} />
+
+      <Route exact path="/explorer" component={()=> <IndicatorExplorer />}/>
+
     </HashRouter>
 );
