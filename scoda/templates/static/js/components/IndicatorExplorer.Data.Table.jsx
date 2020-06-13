@@ -1,46 +1,63 @@
 import React, { Component } from 'react';
-
+import $ from 'jquery';
 
 export default class IndicatorExplorerDataTable extends Component {
     constructor(props) {
         super(props);
     }
 
-    renderDataTable(dataSet) {
-        let keyArray = Object.keys(dataSet);
+    componentDidMount() {
+        if(this.props.results.length > 0) {
+           this.loadGoogleVizApi(this.props.results);
+        }
+    }
 
-        return keyArray.map((key,index) =>(
-            <td key={dataSet[key]}>{dataSet[key]}</td>
-        ));
+    componentDidUpdate() {
+        if(this.props.results.length > 0) {
+            this.loadGoogleVizApi(this.props.results);
+        }
+    }
+
+    loadGoogleVizApi(dataSet) {
+        var options = {
+            dataType: "script",
+            cache: true,
+            url: "https://www.google.com/jsapi",
+          };
+
+          $.ajax(options).done(function(){
+            google.load("visualization", "1", {
+              packages:["corechart"],
+              callback: function() {
+                    var data = new google.visualization.DataTable();
+                
+                    for(let i=0;i<dataSet[0].length;i++) {
+                        data.addColumn('string',dataSet[0][i]);
+                    }
+                    
+                    for(let j=1;j<dataSet.length;j++) {
+                        let rowItem = dataSet[j];
+                        let row = [];
+                        for(let k=0;k<rowItem.length;k++) {
+                        row.push(rowItem[k].toString());
+                        }
+                        data.addRow(row);
+                    }
+
+                    var table = new google.visualization.Table(document.getElementById('table'));
+
+                    table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+                }
+            });
+        });
     }
 
     render() {
 
-        let resultSet = this.props.results;
-
-        let keyArray = Object.keys(resultSet[0]);
-
-        const tableHeader = keyArray.map((result,index) =>(
-                <th key={result} scope="col">{result}</th>
-        ));
-
-        const tableData = resultSet.map((result,index) =>(
-            <tr>                
-                {this.renderDataTable(result)}
-            </tr>
-        ));
-
         return (
-            <table className="table w-100">
-            <thead>
-                <tr>
-                 {tableHeader}
-                </tr>
-            </thead>
-            <tbody>
-                {tableData}
-            </tbody>
-            </table>
+            <div>
+                <div id="table"></div>
+            </div>
         )
     }
 }

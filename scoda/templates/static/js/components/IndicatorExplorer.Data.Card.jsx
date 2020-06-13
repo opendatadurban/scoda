@@ -41,18 +41,6 @@ const _cityDataSet = [
 
 ];
 
-const _selectedData = [
-    { 
-        City: 'Cape Town', Year: '2013', DataField1: '105', DataField2: '105', DataField3:'105',  DataField4: '105', DataField5:'105'
-    },
-    { 
-        City: 'Pretoria', Year: '2013', DataField1: '105', DataField2: '105', DataField3:'105',  DataField4: '105', DataField5:'105'
-    },
-    { 
-        City: 'Johannesburg', Year: '2013', DataField1: '105', DataField2: '105', DataField3:'105',  DataField4: '105', DataField5:'105'
-    }
-];
-
 const _plottingWindowData = [
     {
       name: 'Page A', uv: 4000, pv: 2400, amt: 2400,
@@ -97,6 +85,7 @@ export default class IndicatorExplorerDataCard extends Component {
         this.state = {
             indicators:[],
             dataset:[],
+            table:[],
             display:false
         }
 
@@ -129,19 +118,17 @@ export default class IndicatorExplorerDataCard extends Component {
         });
     }
 
-    filterIndicatorData(indicatorId) {
-        axios.get(`/api/explore?indicator_id=${indicatorId}`).then(res => {
-            let resultSet = res.data;
+    async filterIndicatorData(indicatorId) {
+        let resultSet = await axios.get(`/api/explore?indicator_id=${indicatorId}`);
 
-            if(resultSet !== null) {
-                this.toggleComponentDisplay(true);
-            }
-            else {
+        if(resultSet !== null) {
+            this.setState({table: resultSet.data.table});
+            this.toggleComponentDisplay(true);
+        }
+        else {
+                this.setState({table: []});
                 this.toggleComponentDisplay(false);
-            }
-
-            console.log(resultSet);
-        });
+        }
     }
 
     render() {
@@ -163,11 +150,11 @@ export default class IndicatorExplorerDataCard extends Component {
                             </div>
                             <div id="explorer-details" className="col mt-3 ml-3 mr-3">
                                 <div className="row ml-1">
-                                    {/*<IndicatorExplorerDataBox 
+                                    <IndicatorExplorerDataBox 
                                             resultTitle="Selected Data"
-                                            results={_selectedData}
+                                            results={this.state.table}
                                             resultType="table"
-                                    />*/}
+                                    />
                                 </div>
                                 <div className="row mt-4">
                                     <div className="col-3">
