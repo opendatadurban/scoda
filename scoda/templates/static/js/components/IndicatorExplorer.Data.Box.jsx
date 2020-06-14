@@ -106,8 +106,8 @@ export default class IndicatorExplorerDataBox extends Component {
                                   </div>
                               </div>
                             </div>
-                            <div className="col pt-3 pl-3 pr-3">
-                                <div className="ie-box-results mtp-2 ml-2 mr-2">
+                            <div className="col ie-results pt-3 pl-2 pr-3">
+                                <div className="ie-results mt-2 ml-2 mr-2">
                                   {this.renderDataSet(this.props.resultType)}
                                 </div>  
                                 <input type="hidden" id="csv"></input>                      

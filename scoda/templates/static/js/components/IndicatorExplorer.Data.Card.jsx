@@ -148,8 +148,8 @@ export default class IndicatorExplorerDataCard extends Component {
                                   </div>
                               </div>
                             </div>
-                            <div id="explorer-details" className="col mt-3 ml-3 mr-3">
-                                <div className="row ml-1">
+                            <div id="explorer-details" className="col-sm-12 mt-3">
+                                <div className="row">
                                     <IndicatorExplorerDataBox 
                                             resultTitle="Selected Data"
                                             results={this.state.table}
