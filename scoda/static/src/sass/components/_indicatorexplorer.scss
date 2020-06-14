@@ -126,9 +126,11 @@
 }
 
 .ie-box-card {
-    width: 95%;
+    width: 97%;
     border-radius: 5px;
     background-color: $scoda-white;
+    margin-left: 1.5%;
+    overflow: hidden;
 }
 
 .ie-box-card-header {
@@ -161,11 +163,47 @@
 }
 
 .table  {
+    width: 98%;
+    height: 100%;
+}
+
+
+.table-container  {
+    width:98%;
+    height: 100%;
+    overflow:hidden;
+}
+
+.table-header-cell {
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 13px;
+    text-align: left;
+    width:20%;
+    border-left : hidden!important;
+    border-top : hidden!important;
+    border-right : hidden!important;
+    border-bottom : 1px solid #808E9B;
+}
+
+.table-cell {
     color: $scoda-grey-dark;
     font-family: $scoda-font;
     font-size: 13px;
     letter-spacing: 0;
     line-height: 24px;
+    width:20%;
+    text-align: left;
+    padding:5px;
+    border-style : hidden!important;
+}
+
+.ie-results {
+    overflow: hidden;
+    clear: both;
 }
 
 //Mobile
@@ -186,4 +224,75 @@
             letter-spacing: 0;
             line-height: 24px;
         }
+
+        .table-header-cell {
+            color: $scoda-grey-dark;
+            font-family: $scoda-font;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0;
+            line-height: 13px;
+            text-align: left;
+            width:5%;
+            border-left : hidden!important;
+            border-top : hidden!important;
+            border-right : hidden!important;
+            border-bottom : 1px solid #808E9B;
+            overflow:hidden;
+        }
+        
+        .table-cell {
+            color: $scoda-grey-dark;
+            font-family: $scoda-font;
+            font-size: 8px;
+            letter-spacing: 0;
+            line-height: 24px;
+            width:5%;
+            text-align: left;
+            border-style : hidden!important;
+            overflow:hidden;
+        }
+
+        .table-container  {
+            width:97%;
+            height: 100%;
+            overflow:hidden;
+        }
+        .table  {
+            width: 97%;
+            height: 100%;
+            overflow:hidden;
+        }
+
+        .ie-box-card {
+            width: 98.5%;
+            border-radius: 5px;
+            background-color: $scoda-white;
+            margin-left: 2px;
+            overflow: hidden;
+        }
+
+        .ie-dropdown {
+            height: 100%;
+            width: 100%;
+            border-radius: 20px;
+            background-color: #FFFFFF;
+            box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+            color: $scoda-grey-dark;
+            font-family: $scoda-font;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 0;
+            line-height: 32px;
+            -webkit-appearance: none; 
+            //Use png at assets/selectArrow.png for the arrow on the right
+            //Set the background color to a BadAss Green color 
+            background: url('/static/dist/img/scoda/dropdown_caret.png') no-repeat 98% 80% #FFFFFF;
+        }
+        
+}
+
+table {
+    overflow: hidden;
+    clear: both;
 }

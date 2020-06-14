@@ -32,7 +32,7 @@ export default class IndicatorExplorerDataTable extends Component {
                     var data = new google.visualization.DataTable();
                 
                     for(let i=0;i<dataSet[0].length;i++) {
-                        data.addColumn('string',dataSet[0][i]);
+                        data.addColumn('string',dataSet[0][i] + '<br/><br/>');
                     }
                     
                     for(let j=1;j<dataSet.length;j++) {
@@ -44,9 +44,24 @@ export default class IndicatorExplorerDataTable extends Component {
                         data.addRow(row);
                     }
 
+                    data.addRow();
+
+                    var cssClassNames = {
+                        'headerRow': 'table-header-cell',
+                        'tableRow': 'table-cell',
+                        'oddTableRow': 'table-cell',
+                        'selectedTableRow': 'table-cell',
+                        'hoverTableRow': 'table-cell',
+                        'headerCell': 'table-header-cell',
+                        'tableCell': 'table-cell',
+                        'table':'table'
+                    };
+
+                    var options = {'showRowNumber': false, 'allowHtml': true, 'cssClassNames': cssClassNames};
+                        
                     var table = new google.visualization.Table(document.getElementById('table'));
 
-                    table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+                    table.draw(data, options);
                 }
             });
         });
@@ -56,7 +71,7 @@ export default class IndicatorExplorerDataTable extends Component {
 
         return (
             <div>
-                <div id="table"></div>
+                <div id="table" className="table-container"></div>
             </div>
         )
     }
