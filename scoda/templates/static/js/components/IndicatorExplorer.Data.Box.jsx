@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import $, { data } from 'jquery';
 
 import IndicatorExplorerDataChart from '../components/IndicatorExplorer.Data.Charts';
 import IndicatorExplorerDataTable from '../components/IndicatorExplorer.Data.Table';
@@ -64,16 +65,20 @@ export default class IndicatorExplorerDataBox extends Component {
             case "table" :
                     return <IndicatorExplorerDataTable 
                              results={this.props.results}
+                             key={dataSetType}
                             />
                 break;
             case "chart": 
               return <IndicatorExplorerDataChart 
                         data={this.props.results}
+                        key={dataSetType}
                     />
             break;
             case "map":
                 return <IndicatorExplorerDataMap
-                        data={this.props.results}/>
+                        geo={this.props.results}
+                        key={dataSetType}
+                        />
              break;
         }
     }
@@ -82,7 +87,7 @@ export default class IndicatorExplorerDataBox extends Component {
         let encodedUri = 'data:application/csv;charset=utf-8,' + encodeURIComponent(document.getElementById('csv').value);
 
         let link = document.createElement("a");
-        link.download = 'table-data.csv';
+        link.download = 'data.csv';
         let uri = encodedUri;
         link.href = uri;
         link.target = '_blank';

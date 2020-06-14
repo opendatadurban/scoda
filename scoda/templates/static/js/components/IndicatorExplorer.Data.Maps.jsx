@@ -1,14 +1,5 @@
 import React, { Component } from 'react';
-
-import {
-    ComposableMap,
-    Geographies,
-    Geography,
-    Marker,
-    ZoomableGroup
-  } from "react-simple-maps";
-  
-   const geoUrl = "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
+import $ from 'jquery';
 
 export default class IndicatorExplorerDataMap extends Component {
   
@@ -16,44 +7,79 @@ export default class IndicatorExplorerDataMap extends Component {
         super(props);
     }
 
-  render() {
-
-    let resultSet = this.props.data;
-
-    const coords = resultSet.map((result,index) =>(
-        <Marker key={index} coordinates={[result.long, result.lat]}>
-                <circle r={4} fill="#A11A32" />
-        </Marker>
-    ));
-
-
-    return (
-           <ComposableMap
-            projection="geoMercator"
-            projectionConfig={{
-                scale: 900
-            }}>
-            <ZoomableGroup  zoom={3} center={[25,-29.8]}>
-            <Geographies geography={geoUrl}>
-            {({ geographies }) =>
-            geographies
-            .filter(d => d.properties.NAME=== "South Africa")
-            .map(geo => (
-                <Geography
-                key={geo.rsmKey}
-                geography={geo}
-                fill="#0BE881"
-                stroke="#727272"
-                />
-            ))
-            }
-            </Geographies>
-            {coords}
-            </ZoomableGroup>
-            </ComposableMap>
+    componentDidUpdate() {
+      try
+      {
+        //if(typeof this.props.geo !== undefined) {
+              this.loadGoogleVizApi(this.props.geo);
+        //}
+      }
+      catch(e) {
         
-    );
-  }
+      }
+    }
+  
+    loadGoogleVizApi(resultSet) {
+
+        var options = {
+            dataType: "script",
+            cache: true,
+            url: "https://www.google.com/jsapi",
+          };
+    
+          $.ajax(options).done(function(){
+            google.load("visualization", "1", {
+              packages:['controls', 'bar', 'corechart', 'geochart'],
+              callback: function() {
+                    var dataSet = resultSet.table;
+    
+                    var selectedYear = resultSet.year;
+
+                    var data = new google.visualization.DataTable();
+                    
+                    
+                    data.addColumn('string',dataSet[0][0]);
+                
+                    for(let j=1;j<dataSet.length;j++) {
+                        let rowItem = dataSet[j];
+                        let row = [];
+                        if(rowItem[1].toString() === selectedYear) {
+                          data.addRow([rowItem[0].toString()]);
+                         }
+                    }
+                    
+                    var map = new google.visualization.ChartWrapper({
+                      'chartType': 'GeoChart',
+                      'containerId': 'map',
+                      'options': {
+                          region: 'ZA',
+                          displayMode: 'markers',
+                          resolution: 'provinces',
+                          theme: 'material',
+                          colorAxis: {colors: ['#FED976', '#FC4E2A', '#800026']},
+                          height: '100%',
+                          width:'100%',
+                          tooltip: { isHtml: true },
+                          keepAspectRatio: true
+                      }
+                  });
+
+                  map.setDataTable(data);
+          
+                  map.draw();
+                }
+            });
+        });
+    }
+    
+    render() {
+    
+        return (
+          <div>
+              <div id="map"></div>
+          </div>
+        );
+      }
 }
 
 
