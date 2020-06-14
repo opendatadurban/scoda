@@ -30,6 +30,8 @@ export default class IndicatorExplorerDataTable extends Component {
               packages:["corechart"],
               callback: function() {
                     var data = new google.visualization.DataTable();
+
+                    var selectedYear = dataSet[1][1];
                 
                     for(let i=0;i<dataSet[0].length;i++) {
                         data.addColumn('string',dataSet[0][i] + '<br/><br/>');
@@ -38,10 +40,12 @@ export default class IndicatorExplorerDataTable extends Component {
                     for(let j=1;j<dataSet.length;j++) {
                         let rowItem = dataSet[j];
                         let row = [];
+                        if(rowItem[1].toString() === selectedYear) {
                         for(let k=0;k<rowItem.length;k++) {
                         row.push(rowItem[k].toString());
                         }
                         data.addRow(row);
+                      }
                     }
 
                     data.addRow();
@@ -70,7 +74,7 @@ export default class IndicatorExplorerDataTable extends Component {
     render() {
 
         return (
-            <div>
+            <div style={{overflow:'hidden'}}>
                 <div id="table" className="table-container"></div>
             </div>
         )
