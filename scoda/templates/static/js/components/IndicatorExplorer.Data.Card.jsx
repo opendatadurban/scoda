@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
 
 import axios from 'axios';
 
@@ -122,11 +123,15 @@ export default class IndicatorExplorerDataCard extends Component {
         let resultSet = await axios.get(`/api/explore?indicator_id=${indicatorId}`);
 
         if(resultSet !== null) {
+            this.setState({dataset: resultSet.data});
             this.setState({table: resultSet.data.table});
+
             this.toggleComponentDisplay(true);
         }
         else {
+                this.setState({dataset:[]});
                 this.setState({table: []});
+
                 this.toggleComponentDisplay(false);
         }
     }
@@ -165,11 +170,11 @@ export default class IndicatorExplorerDataCard extends Component {
                                         />*/}
                                     </div>
                                     <div className="col">
-                                    {/*<IndicatorExplorerDataBox 
+                                    <IndicatorExplorerDataBox 
                                             resultTitle="Plotting Window"
-                                            results={_plottingWindowData}
+                                            results={this.state.dataset}
                                             resultType="chart"
-                                    />*/}
+                                    />
                                     </div>
                                 </div>   
                                 <div className="row mt-4">
@@ -179,11 +184,11 @@ export default class IndicatorExplorerDataCard extends Component {
                                       />*/}
                                     </div>
                                     <div className="col">
-                                    {/*<IndicatorExplorerDataBox 
+                                    <IndicatorExplorerDataBox 
                                             resultTitle="Geographic Representation"
-                                            results={_mapData}
+                                            results={this.state.dataset}
                                             resultType="map"
-                                    />*/}
+                                    />
                                     </div>
                                 </div>  
                                 <div className="row mt-3"></div>                    
