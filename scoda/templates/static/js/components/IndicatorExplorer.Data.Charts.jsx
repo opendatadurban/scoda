@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
+
 import $ from 'jquery';
+import canvg from 'canvg';
 
 export default class IndicatorExplorerDataChart extends PureComponent {
   constructor(props) {
@@ -28,7 +30,7 @@ loadGoogleVizApi(resultSet,selectedYear) {
                 let rows = [];
                 let rowHeader = [];
                 for(let i=0;i<dataSet[0].length;i++) {
-                  rowHeader.push(dataSet[0][i]);
+                    rowHeader.push(dataSet[0][i]);
                 }
                 
                 rows.push(rowHeader);
@@ -38,43 +40,74 @@ loadGoogleVizApi(resultSet,selectedYear) {
                     let row = [];
                     if(rowItem[1].toString() === selectedYear) {
                       for(let k=0;k<rowItem.length;k++) {
-                         row.push(rowItem[k].toString());
+                         row.push(rowItem[k]);
                       }
                       rows.push(row);
                     }
                 }
 
-                var bar = new google.visualization.ChartWrapper({
+                var options = {
                   'chartType': 'Bar',
-                  'containerId': 'chart',
                   'dataTable': rows,
                   'options': {
                       stacked: true,
                       legend: {position: 'right'},
                       bars: 'vertical',
-                      vAxis: {minValue: 0},
+                      vAxis: {minValue:0},
                       hAxis: {slantedText: true},
-                      height: '461px',
-                      width:'296px',
                       bar: {groupWidth: '99%'},
                       tooltip: { isHtml: true },
-                      series: resultSet.series
+                      chartArea: {left:'10%',right:'60%'},
+                      height:'450',
+                      width:'100%',
+                      fontfamily: 'Montserrat',
+                      fontsize:'10',
+                      series: resultSet.series,
                   },
                   view: {'columns': resultSet.view}
-              });
+              };
 
-              bar.draw();
-              
+              var bar = new google.visualization.ChartWrapper(options);
+              bar.draw(document.getElementById('chart'));
+
+              let tmpDiv = document.createElement('div');
+              tmpDiv.setAttribute('style','width:2000px;height:800px;font-size:10px,fontFamily:Montserrat,visibility:hidden');
+              document.body.appendChild(tmpDiv);
+
+              var barTmp = new google.visualization.ChartWrapper(options);
+              barTmp.draw(tmpDiv);
+
+              google.visualization.events.addListener(barTmp, 'ready',
+              function(event) {
+                var chartArea = tmpDiv.children[0];
+
+                var svgObject = chartArea.children[0].children[0];
+
+                var svg = svgObject.outerHTML;
+
+                let canvas = document.querySelector('canvas');
+                let ctx = canvas.getContext('2d');
+
+                let renderObject = canvg.fromString(ctx, svg);
+
+                renderObject.start();
+
+                let dataUri = canvas.toDataURL("image/png");
+
+                document.getElementById('chartPng').value = dataUri;
+
+                document.body.removeChild(tmpDiv);
+              });
             }
         });
     });
 }
 
 render() {
-
     return (
       <div>
-          <div id="chart" style={{height:'461px'}}></div>
+          <div id="chart" style={{fontSize:'9px',fontFamily:'Montserrat',fontWeight:'500',width:'100%',height:'100%'}}></div>
+          <input type="hidden" id="chartPng"></input>
       </div>
     );
   }
