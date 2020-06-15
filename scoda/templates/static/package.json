@@ -28,6 +28,7 @@
     "@babel/core": "^7.9.6",
     "axios": "^0.19.2",
     "babel-jest": "^26.0.1",
+    "canvg": "^3.0.6",
     "chart.js": "^2.9.3",
     "css-loader": "^3.4.2",
     "file-loader": "^6.0.0",
