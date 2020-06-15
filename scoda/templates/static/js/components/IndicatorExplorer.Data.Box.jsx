@@ -37,13 +37,17 @@ export default class IndicatorExplorerDataBox extends Component {
 
           $.ajax(options).done(function(){
             google.load("visualization", "1", {
-              packages:["corechart"],
+              packages:['controls', 'bar', 'corechart', 'geochart'],
               callback: function() {
                     var data = new google.visualization.DataTable();
-    
+
+                    let rows = [];
+                    let rowHeader = [];
                     for(let i=0;i<dataSet[0].length;i++) {
-                        data.addColumn('string',dataSet[0][i]);
+                        rowHeader.push(dataSet[0][i]);
                     }
+                
+                    rows.push(rowHeader);
                     
                     for(let j=1;j<dataSet.length;j++) {
                         let rowItem = dataSet[j];
@@ -52,13 +56,19 @@ export default class IndicatorExplorerDataBox extends Component {
                         for(let k=0;k<rowItem.length;k++) {
                         row.push(rowItem[k].toString());
                         }
-                        data.addRow(row);
+                        rows.push(row);
                       }
                     }
 
+                    var data = new google.visualization.arrayToDataTable(rows);
+
                     var csvData = google.visualization.dataTableToCsv(data);
+
+                    //var meta = 'Definition:' + ',{{ indicator.definition }}' + '\n' + 'Unit:' + ',{{ indicator.unit }}' + '\n'  +'Frequency:' + ',{{ indicator.frequency }}' + '\n' + 'Theme:' + ',{{ indicator.theme }}' + '\n' + 'Sub-theme:' + ',{{ indicator.sub_theme }}' + '\n' + 'Source' + ',{{ indicator.source }}' + '\n';
+
+                    var csvString = rowHeader.join(',') + '\n' + csvData + '\n';
                     
-                    document.getElementById('csv').value=csvData;
+                    document.getElementById('csv').value=csvString;
                 }
             });
         });
@@ -118,25 +128,16 @@ export default class IndicatorExplorerDataBox extends Component {
     }
 
     downloadChart() {
-       let chartDiv = document.getElementById('chart');
-
-       var chartArea = chartDiv.children[0];
-       var svg = chartArea.innerHTML.substring(chartArea.innerHTML.indexOf("<svg"),
-            chartArea.innerHTML.indexOf("</svg>") + 6);
-
-        let canvas = document.querySelector('canvas');
-        let ctx = canvas.getContext('2d');
-            
-        let renderObject = canvg.fromString(ctx, svg);
-
-        renderObject.start();
-
-        let dataUri = canvas.toDataURL("image/png");
+        let dataUri = document.getElementById('chartPng').value;
 
         this.downloadData(dataUri,'chart.png');
     }
 
     render() {
+        let downloadEvent = '';
+        if(this.props.resultType !== 'map') {
+          downloadEvent = <div className="ie-button-download" onClick={()=>this.download(this.props.resultType)}>Download</div>;
+        }
 
         return (
                         <div className="ie-box-card">
@@ -146,12 +147,12 @@ export default class IndicatorExplorerDataBox extends Component {
                                       {this.props.resultTitle}
                                   </div>
                                   <div className="col-0 mt-2 mr-4 float-right">
-                                      <div className="ie-button-download" onClick={()=>this.download(this.props.resultType)}>Download</div>
+                                      {downloadEvent}
                                   </div>
                               </div>
                             </div>
                             <div className="col ie-results pt-3 pl-2 pr-3">
-                                <div className="ie-results mt-2 ml-2 mr-2">
+                                <div className="ie-results mt-2 ml-2 mr-2 mb-4">
                                   {this.renderDataSet(this.props.resultType)}
                                 </div>  
 

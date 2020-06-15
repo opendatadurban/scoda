@@ -19,6 +19,7 @@ export default class IndicatorExplorerDataTable extends Component {
     }
 
     loadGoogleVizApi(dataSet,selectedYear) {
+
         var options = {
             dataType: "script",
             cache: true,
@@ -46,7 +47,6 @@ export default class IndicatorExplorerDataTable extends Component {
                       }
                     }
 
-                    data.addRow();
 
                     var cssClassNames = {
                         'headerRow': 'table-header-cell',
