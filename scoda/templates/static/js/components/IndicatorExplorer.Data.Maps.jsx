@@ -5,15 +5,57 @@ export default class IndicatorExplorerDataMap extends Component {
   
     constructor(props) {
         super(props);
+
+        this.state = {
+            containerWidth:'100%',
+            containerHeight: '450px'
+        }
+
+        this.handleResize = this.handleResize.bind(this);
+    }
+
+    componentDidMount() {
+        window.addEventListener('resize', this.handleResize);
+
+        this.handleResize();
     }
 
     componentDidUpdate() {
+        window.addEventListener('resize', this.handleResize);
+
         if(this.props.geo.length !== 0) {
-          this.loadGoogleVizApi(this.props.geo,this.props.filterYear);
+            this.loadGoogleVizApi(this.props.geo,this.props.filterYear,'100%','100%');
+        }
+    }
+
+    handleResize() {
+
+        let windowWidth = document.body.clientWidth;
+        let windowHeight = document.body.clientHeight;
+
+        var element = document.getElementById('map');
+        var positionInfo = element.getBoundingClientRect();
+        var height = positionInfo.height;
+        var width = positionInfo.width;
+
+        if(windowWidth <= 768) {
+            windowWidth = width;
+            windowHeight = '225px';
+        }
+        else {
+            windowWidth = '100%';
+            windowHeight = '450px';
+        }
+
+        document.getElementById('map').style.height = windowHeight;
+        document.getElementById('map').style.width = windowWidth;
+        
+        if(this.props.geo.length !== 0) {
+            this.loadGoogleVizApi(this.props.geo,this.props.filterYear,windowWidth,windowHeight);
         }
     }
   
-    loadGoogleVizApi(resultSet,selectedYear) {
+    loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
         var options = {
             dataType: "script",
             cache: true,
@@ -24,22 +66,29 @@ export default class IndicatorExplorerDataMap extends Component {
             google.load("visualization", "1", {
               packages:['controls', 'bar', 'corechart', 'geochart'],
               callback: function() {
-                    var dataSet = resultSet.table;
+                     var dataSet = resultSet.table;
 
-                    var data = new google.visualization.DataTable();
-                    
-                      data.addColumn('string',dataSet[0][0]);
-                    
-
+                      let rows = [];
+                      let rowHeader = [];
+                      for(let i=0;i<3;i++) {
+                            if(dataSet[0][i].toString() !== 'Year') {
+                              rowHeader.push(dataSet[0][i]);
+                            }
+                      }
+                      
+                      rows.push(rowHeader);
+      
                       for(let j=1;j<dataSet.length;j++) {
-
                           let rowItem = dataSet[j];
-
                           let row = [];
                           if(rowItem[1].toString() === selectedYear) {
-                              data.addRow([rowItem[0].toString()]);
+                            for(let k=0;k<3;k++) {
+                                if(rowItem[k].toString() !== selectedYear) {
+                                   row.push(rowItem[k]);
+                                }
+                            }
+                            rows.push(row);
                           }
-                        
                       }
                         
                       var map = new google.visualization.ChartWrapper({
@@ -51,14 +100,14 @@ export default class IndicatorExplorerDataMap extends Component {
                               resolution: 'provinces',
                               theme: 'material',
                               colorAxis: {colors: ['#FED976', '#FC4E2A', '#800026']},
-                              height: '100%',
-                              width:'100%',
+                              height: winHeight,
+                              width:winWidth,
                               tooltip: { isHtml: true },
                               keepAspectRatio: true
                           }
                       });
 
-                      map.setDataTable(data);
+                      map.setDataTable(rows);
               
                       map.draw();
                   }
@@ -70,7 +119,7 @@ export default class IndicatorExplorerDataMap extends Component {
     
         return (
           <div>
-              <div id="map"></div>
+              <div id="map" style={{fontSize:'9px',fontFamily:'Montserrat',fontWeight:'500',marginTop:'0px'}}></div>
           </div>
         );
       }

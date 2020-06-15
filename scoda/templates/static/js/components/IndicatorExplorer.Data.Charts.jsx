@@ -6,15 +6,58 @@ import canvg from 'canvg';
 export default class IndicatorExplorerDataChart extends PureComponent {
   constructor(props) {
         super(props);
+
+        this.state = {
+          containerWidth:'100%',
+          containerHeight: '450px'
+      }
+
+      this.handleResize = this.handleResize.bind(this);
+}
+
+componentDidMount() {
+  window.addEventListener('resize', this.handleResize);
+
+  this.handleResize();
 }
 
 componentDidUpdate() {
-    if(this.props.data.length !== 0) {
-        this.loadGoogleVizApi(this.props.data, this.props.filterYear);
+   this.handleResize = this.handleResize.bind(this);
+
+   if(this.props.data.length !== 0) {
+    this.loadGoogleVizApi(this.props.data, this.props.filterYear,'100%','100%');
     }
+
 }
 
-loadGoogleVizApi(resultSet,selectedYear) {
+handleResize() {
+
+  var element = document.getElementById('chart');
+  var positionInfo = element.getBoundingClientRect();
+  var height = positionInfo.height;
+  var width = positionInfo.width;
+
+  let windowWidth = document.body.clientWidth;
+  let windowHeight = document.body.clientHeight;
+
+  if(windowWidth <= 768) {
+      windowWidth = width;
+      windowHeight = '225px';
+  }
+  else {
+      windowWidth = '100%';
+      windowHeight = '450px';
+  }
+
+  document.getElementById('chart').style.height = windowHeight;
+  document.getElementById('chart').style.width = windowWidth;
+  
+  if(this.props.data.length !== 0) {
+      this.loadGoogleVizApi(this.props.data,this.props.filterYear,windowWidth,windowHeight);
+  }
+}
+
+loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
     var options = {
         dataType: "script",
         cache: true,
@@ -58,8 +101,8 @@ loadGoogleVizApi(resultSet,selectedYear) {
                       bar: {groupWidth: '99%'},
                       tooltip: { isHtml: true },
                       chartArea: {left:'10%',right:'60%'},
-                      height:'450',
-                      width:'100%',
+                      height:winHeight,
+                      width:winWidth,
                       fontfamily: 'Montserrat',
                       fontsize:'10',
                       series: resultSet.series,
@@ -106,7 +149,7 @@ loadGoogleVizApi(resultSet,selectedYear) {
 render() {
     return (
       <div>
-          <div id="chart" style={{fontSize:'9px',fontFamily:'Montserrat',fontWeight:'500',width:'100%',height:'100%'}}></div>
+          <div id="chart" style={{fontSize:'9px',fontFamily:'Montserrat',fontWeight:'500'}}></div>
           <input type="hidden" id="chartPng"></input>
       </div>
     );
