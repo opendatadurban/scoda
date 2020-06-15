@@ -7,12 +7,12 @@ export default class IndicatorExplorerDataChart extends PureComponent {
 }
 
 componentDidUpdate() {
-    if(typeof this.props.data !== undefined) {
-        this.loadGoogleVizApi(this.props.data);
+    if(this.props.data.length !== 0) {
+        this.loadGoogleVizApi(this.props.data, this.props.filterYear);
     }
 }
 
-loadGoogleVizApi(resultSet) {
+loadGoogleVizApi(resultSet,selectedYear) {
     var options = {
         dataType: "script",
         cache: true,
@@ -24,8 +24,6 @@ loadGoogleVizApi(resultSet) {
           packages:['controls', 'bar', 'corechart', 'geochart'],
           callback: function() {
                 var dataSet = resultSet.table;
-
-                var selectedYear = resultSet.year;
 
                 let rows = [];
                 let rowHeader = [];
@@ -42,7 +40,6 @@ loadGoogleVizApi(resultSet) {
                       for(let k=0;k<rowItem.length;k++) {
                          row.push(rowItem[k].toString());
                       }
-
                       rows.push(row);
                     }
                 }
@@ -67,6 +64,7 @@ loadGoogleVizApi(resultSet) {
               });
 
               bar.draw();
+              
             }
         });
     });

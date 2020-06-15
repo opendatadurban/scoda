@@ -8,17 +8,17 @@ export default class IndicatorExplorerDataTable extends Component {
 
     componentDidMount() {
         if(this.props.results.length > 0) {
-           this.loadGoogleVizApi(this.props.results);
+           this.loadGoogleVizApi(this.props.results, this.props.filterYear);
         }
     }
 
     componentDidUpdate() {
         if(this.props.results.length > 0) {
-            this.loadGoogleVizApi(this.props.results);
+            this.loadGoogleVizApi(this.props.results,this.props.filterYear);
         }
     }
 
-    loadGoogleVizApi(dataSet) {
+    loadGoogleVizApi(dataSet,selectedYear) {
         var options = {
             dataType: "script",
             cache: true,
@@ -31,8 +31,6 @@ export default class IndicatorExplorerDataTable extends Component {
               callback: function() {
                     var data = new google.visualization.DataTable();
 
-                    var selectedYear = dataSet[1][1];
-                
                     for(let i=0;i<dataSet[0].length;i++) {
                         data.addColumn('string',dataSet[0][i] + '<br/><br/>');
                     }
