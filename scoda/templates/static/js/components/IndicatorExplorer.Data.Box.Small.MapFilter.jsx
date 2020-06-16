@@ -30,7 +30,7 @@ export default class IndicatorExplorerDataBoxMapFilter extends Component {
                               </div>
                             </div>
                             <div className="col-0 pt-2 pl-1 pr-1">
-                                <div className="ie-box-results mtp-2 ml-2 mr-2">
+                                <div className="ie-box-results mtp-2 mr-2 ml-2">
                                 <select id="map-selector" className="mt-2 mr-2 ie-dropdown-small" onChange={()=>this.reBindMap()}>
                                   {selectorOptions}
                                 </select>

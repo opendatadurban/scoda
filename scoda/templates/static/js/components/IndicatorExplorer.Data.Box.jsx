@@ -15,7 +15,7 @@ export default class IndicatorExplorerDataBox extends Component {
             csv:[]
         }
     }
-
+  
     componentDidMount() {
         if(this.props.results.length > 0) {
             this.loadGoogleVizApi(this.props.results,this.props.filterYear);
@@ -146,7 +146,7 @@ export default class IndicatorExplorerDataBox extends Component {
 
         return (
             <div id="dashboard">
-                        <div className="ie-box-card">
+                        <div id="card" className="ie-box-card">
                             <div className="ie-box-card-header">
                               <div className="row">
                                   <div className="col ml-3">
@@ -157,8 +157,8 @@ export default class IndicatorExplorerDataBox extends Component {
                                   </div>
                               </div>
                             </div>
-                            <div className="col ie-results pt-3">
-                                <div className="ie-results mt-2 ml-3 mb-4">
+                            <div className="col pt-3">
+                                <div className="mt-2 ml-3 mb-4">
                                   {this.renderDataSet(this.props.resultType,this.props.filter)}
                                 </div>  
 

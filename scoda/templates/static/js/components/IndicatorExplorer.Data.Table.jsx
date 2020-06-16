@@ -13,6 +13,7 @@ export default class IndicatorExplorerDataTable extends Component {
     }
 
     componentDidUpdate() {
+
         if(this.props.results.length !== 0) {
             this.loadGoogleVizApi(this.props.results,this.props.filterYear);
         }
@@ -73,10 +74,9 @@ export default class IndicatorExplorerDataTable extends Component {
     }
 
     render() {
-
         return (
-            <div style={{overflow:'hidden'}}>
-                <div id="table" className="table-container"></div>
+            <div>
+                <div id="tableD"></div>
             </div>
         )
     }

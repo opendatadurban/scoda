@@ -124,7 +124,7 @@
 
 .ie-dropdown-small {
     height: 25px;
-    width: 180px;
+    width: 95%;
     border: 0.5px solid $scoda-grey-dark;
     border-radius: 12.5px;
     background-color: $scoda-white;
@@ -150,7 +150,7 @@
 
 .goog-menu-button-inner-box {
     height: 25px;
-    width: 180px;
+    width:11vw;
     border: 0px;
     outline: none;
     background-color: #ffffff;
@@ -185,7 +185,7 @@
     letter-spacing: 0;
     line-height: 16px;
     text-align:left;
-    width:70%;
+    width:97%;
     height:21px;
     border:0px;
     margin-top: 10px;
@@ -206,7 +206,7 @@
     letter-spacing: 0;
     line-height: 16px;
     text-align:left;
-    width:134px;
+    width:97%;
     height:21px;
     border:0px;
 }
@@ -220,13 +220,13 @@
     letter-spacing: 0;
     line-height: 16px;
     text-align:left;
-    width:134px;
+    width:97%;
     height:21px;
     border:0px;
 }
 
 .ie-box-card {
-    width: 97%;
+    width: 93%;
     border-radius: 5px;
     background-color: $scoda-white;
     margin-left: 1.5%;
@@ -338,7 +338,6 @@
             border-top : hidden!important;
             border-right : hidden!important;
             border-bottom : 1px solid #808E9B;
-            overflow:hidden;
         }
         
         .table-cell {
@@ -350,22 +349,21 @@
             width:5%;
             text-align: left;
             border-style : hidden!important;
-            overflow:hidden;
         }
 
         .table-container  {
-            width:97%;
+            width:50%;
             height: 100%;
-            overflow:hidden;
+            overflow:auto;
         }
         .table  {
-            width: 97%;
+            width: 50%;
             height: 100%;
-            overflow:hidden;
+            overflow:auto;
         }
 
         .ie-box-card {
-            width: 98.5%;
+            width: 90%;
             border-radius: 5px;
             background-color: $scoda-white;
             margin-left: 2px;
@@ -389,6 +387,36 @@
             //Set the background color to a BadAss Green color 
             background: url('/static/dist/img/scoda/dropdown_caret.png') no-repeat 98% 80% #FFFFFF;
         }
+
+        .ie-box-card-header {
+            height: 40px;
+            width: 100%;
+            border-radius: 5px 5px 0 0;
+            background-color:$scoda-box-header;
+            color: $scoda-white;
+            font-family: $scoda-font;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0;
+            line-height: 37px;
+        }
+
+        .goog-menu-button-inner-box {
+            height: 25px;
+            width:180px;
+            border: 0px;
+            outline: none;
+            background-color: #ffffff;
+            font-family: $scoda-font;
+            font-size: 12px;
+            letter-spacing: 0;
+            line-height: 20px;
+            -webkit-appearance: none; 
+            background: url('/static/dist/img/scoda/dropdown_caret_small.png') no-repeat 96% 50% #FFFFFF;
+        }
+
+        
+        
 
 }
 
