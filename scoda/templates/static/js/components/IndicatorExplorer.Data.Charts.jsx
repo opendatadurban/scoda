@@ -235,11 +235,11 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                    let dataUri = canvas.toDataURL("image/png");
    
                    document.getElementById('chartPng').value = dataUri;
-   
+
                    document.body.removeChild(tmpDiv);
+  
                  });
               });
-
 
             }
         });
