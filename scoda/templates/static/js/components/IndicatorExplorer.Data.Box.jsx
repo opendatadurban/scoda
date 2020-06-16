@@ -18,12 +18,12 @@ export default class IndicatorExplorerDataBox extends Component {
 
     componentDidMount() {
         if(this.props.results.length > 0) {
-           this.loadGoogleVizApi(this.props.results,this.props.filterYear);
+            this.loadGoogleVizApi(this.props.results,this.props.filterYear);
         }
     }
 
     componentDidUpdate() {
-        if(this.props.results.length > 0) {
+        if(this.props.results.length !== 0) {
             this.loadGoogleVizApi(this.props.results,this.props.filterYear);
         }
     }
@@ -41,15 +41,17 @@ export default class IndicatorExplorerDataBox extends Component {
               callback: function() {
                     var data = new google.visualization.DataTable();
 
+                    dataSet = dataSet.table;
+
                     let rows = [];
                     let rowHeader = [];
-                    for(let i=0;i<dataSet[0].length;i++) {
+                    for(let i=0;i<=dataSet[0].length-1;i++) {
                         rowHeader.push(dataSet[0][i]);
                     }
                 
                     rows.push(rowHeader);
                     
-                    for(let j=1;j<dataSet.length;j++) {
+                    for(let j=1;j<=dataSet.length-1;j++) {
                         let rowItem = dataSet[j];
                         let row = [];
                         if(rowItem[1].toString() === selectedYear) {
@@ -60,21 +62,22 @@ export default class IndicatorExplorerDataBox extends Component {
                       }
                     }
 
-                    var data = new google.visualization.arrayToDataTable(rows);
+                    //var data = new google.visualization.arrayToDataTable(rows);
 
+                    var data = new google.visualization.DataTable(document.getElementById('table'));
                     var csvData = google.visualization.dataTableToCsv(data);
 
                     //var meta = 'Definition:' + ',{{ indicator.definition }}' + '\n' + 'Unit:' + ',{{ indicator.unit }}' + '\n'  +'Frequency:' + ',{{ indicator.frequency }}' + '\n' + 'Theme:' + ',{{ indicator.theme }}' + '\n' + 'Sub-theme:' + ',{{ indicator.sub_theme }}' + '\n' + 'Source' + ',{{ indicator.source }}' + '\n';
 
-                    var csvString = rowHeader.join(',') + '\n' + csvData + '\n';
+                    //var csvString = rowHeader.join(',') + '\n' + csvData + '\n';
                     
-                    document.getElementById('csv').value=csvString;
+                    //document.getElementById('csv').value=csvString;
                 }
             });
         });
     }
 
-    renderDataSet(dataSetType) {
+    renderDataSet(dataSetType,filter) {
         switch(dataSetType) {
             case "table" :
                     return <IndicatorExplorerDataTable 
@@ -95,6 +98,7 @@ export default class IndicatorExplorerDataBox extends Component {
                         geo={this.props.results}
                         key={dataSetType}
                         filterYear={this.props.filterYear}
+                        filter={filter}
                         />
              break;
         }
@@ -128,6 +132,7 @@ export default class IndicatorExplorerDataBox extends Component {
     }
 
     downloadChart() {
+
         let dataUri = document.getElementById('chartPng').value;
 
         this.downloadData(dataUri,'chart.png');
@@ -140,6 +145,7 @@ export default class IndicatorExplorerDataBox extends Component {
         }
 
         return (
+            <div id="dashboard">
                         <div className="ie-box-card">
                             <div className="ie-box-card-header">
                               <div className="row">
@@ -151,15 +157,16 @@ export default class IndicatorExplorerDataBox extends Component {
                                   </div>
                               </div>
                             </div>
-                            <div className="col ie-results pt-3 pl-2 pr-3">
-                                <div className="ie-results mt-2 ml-2 mr-2 mb-4">
-                                  {this.renderDataSet(this.props.resultType)}
+                            <div className="col ie-results pt-3">
+                                <div className="ie-results mt-2 ml-3 mb-4">
+                                  {this.renderDataSet(this.props.resultType,this.props.filter)}
                                 </div>  
 
                                 <input type="hidden" id="csv"></input>   
                                 <canvas style={{display:'none'}}></canvas>          
                             </div>
                         </div>
+                </div>
         )
     }
 }

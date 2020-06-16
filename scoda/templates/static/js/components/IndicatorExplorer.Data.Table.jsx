@@ -7,13 +7,13 @@ export default class IndicatorExplorerDataTable extends Component {
     }
 
     componentDidMount() {
-        if(this.props.results.length > 0) {
+        if(this.props.results.length !== 0) {
            this.loadGoogleVizApi(this.props.results, this.props.filterYear);
         }
     }
 
     componentDidUpdate() {
-        if(this.props.results.length > 0) {
+        if(this.props.results.length !== 0) {
             this.loadGoogleVizApi(this.props.results,this.props.filterYear);
         }
     }
@@ -30,7 +30,10 @@ export default class IndicatorExplorerDataTable extends Component {
             google.load("visualization", "1", {
               packages:["corechart"],
               callback: function() {
+
                     var data = new google.visualization.DataTable();
+
+                    dataSet = dataSet.table;
 
                     for(let i=0;i<dataSet[0].length;i++) {
                         data.addColumn('string',dataSet[0][i] + '<br/><br/>');
@@ -61,9 +64,9 @@ export default class IndicatorExplorerDataTable extends Component {
 
                     var options = {'showRowNumber': false, 'allowHtml': true, 'cssClassNames': cssClassNames};
                         
-                    var table = new google.visualization.Table(document.getElementById('table'));
+                    //var table = new google.visualization.Table(document.getElementById('table'));
 
-                    table.draw(data, options);
+                    //table.draw(data, options);
                 }
             });
         });

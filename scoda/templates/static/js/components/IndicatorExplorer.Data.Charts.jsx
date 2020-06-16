@@ -92,6 +92,7 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                 var options = {
                   'chartType': 'Bar',
                   'dataTable': rows,
+                  'containerId':'chart',
                   'options': {
                       stacked: true,
                       legend: {position: 'right'},
@@ -111,36 +112,126 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
               };
 
               var bar = new google.visualization.ChartWrapper(options);
-              bar.draw(document.getElementById('chart'));
 
-              let tmpDiv = document.createElement('div');
-              tmpDiv.setAttribute('style','width:2000px;height:800px;font-size:10px,fontFamily:Montserrat,visibility:hidden');
-              document.body.appendChild(tmpDiv);
-
-              var barTmp = new google.visualization.ChartWrapper(options);
-              barTmp.draw(tmpDiv);
-
-              google.visualization.events.addListener(barTmp, 'ready',
-              function(event) {
-                var chartArea = tmpDiv.children[0];
-
-                var svgObject = chartArea.children[0].children[0];
-
-                var svg = svgObject.outerHTML;
-
-                let canvas = document.querySelector('canvas');
-                let ctx = canvas.getContext('2d');
-
-                let renderObject = canvg.fromString(ctx, svg);
-
-                renderObject.start();
-
-                let dataUri = canvas.toDataURL("image/png");
-
-                document.getElementById('chartPng').value = dataUri;
-
-                document.body.removeChild(tmpDiv);
+              //bar.draw(document.getElementById('chart'));
+              var cssClassNames = {
+                'headerRow': 'table-header-cell',
+                'tableRow': 'table-cell',
+                'oddTableRow': 'table-cell',
+                'selectedTableRow': 'table-cell',
+                'hoverTableRow': 'table-cell',
+                'headerCell': 'table-header-cell',
+                'tableCell': 'table-cell',
+                'table':'table'
+            };
+ 
+            var table = new google.visualization.ChartWrapper({
+                'chartType': 'Table',
+                'containerId': 'table',
+                'options': {
+                    'showRowNumber': false, 'allowHtml': true, 'cssClassNames': cssClassNames
+                  }
               });
+
+              var categoryPicker1 = new google.visualization.ControlWrapper({
+                'controlType': 'CategoryFilter',
+                'containerId': 'categorySelector1',
+                'state': {'selectedValues':resultSet.cities},
+                'options': {
+                    'filterColumnLabel': 'City',
+                    'ui': {
+                        'labelStacking': 'vertical',
+                        'allowMultiple': true,
+                        'allowNone': false,
+                        'allowTyping': false,
+                        'caption': 'Choose a city...'
+                    }
+                }
+            });
+
+            var categoryPicker2 = new google.visualization.ControlWrapper({
+                'controlType': 'CategoryFilter',
+                'containerId': 'categorySelector2',
+                'state': {'selectedValues': resultSet.years},
+                'options': {
+                    'filterColumnLabel': 'Year',
+                    'ui': {
+                        'labelStacking': 'vertical',
+                        'allowTyping': false,
+                        'allowMultiple': false,
+                        'allowNone': false
+                    }
+                }
+            });
+
+              var data = google.visualization.arrayToDataTable(resultSet.table);
+
+              var dashboard = new google.visualization.Dashboard();
+              dashboard.bind([categoryPicker1,categoryPicker2],[bar,table]);
+              dashboard.draw(data);
+
+              google.visualization.events.addListener(table,'ready', function(event) {
+    
+                var tableData = table.getDataTable();
+                var csvData = google.visualization.dataTableToCsv(tableData);
+ 
+                var csvString = rowHeader.join(',') + '\n' + csvData + '\n';
+                     
+                document.getElementById('csv').value=csvString;
+
+                let tmpDiv = document.createElement('div');
+                tmpDiv.setAttribute('style','width:2000px;height:800px;font-size:10px,fontFamily:Montserrat,visibility:hidden');
+                document.body.appendChild(tmpDiv);
+
+                var optionsTmp = {
+                  'chartType': 'Bar',
+                  'dataTable': table.getDataTable(),
+                  'options': {
+                      stacked: true,
+                      legend: {position: 'right'},
+                      bars: 'vertical',
+                      vAxis: {minValue:0},
+                      hAxis: {slantedText: true},
+                      bar: {groupWidth: '99%'},
+                      tooltip: { isHtml: true },
+                      chartArea: {left:'10%',right:'60%'},
+                      height:winHeight,
+                      width:winWidth,
+                      fontfamily: 'Montserrat',
+                      fontsize:'10',
+                      series: resultSet.series,
+                  },
+                  view: {'columns': resultSet.view}
+                };
+                
+                 var barTmp = new google.visualization.ChartWrapper(optionsTmp);
+                 barTmp.draw(tmpDiv);
+
+                 google.visualization.events.addListener(barTmp, 'ready',
+                 function(event) {
+               
+                   var chartArea = tmpDiv.children[0];
+   
+                   var svgObject = chartArea.children[0].children[0];
+   
+                   var svg = svgObject.outerHTML;
+   
+                   let canvas = document.querySelector('canvas');
+                   let ctx = canvas.getContext('2d');
+   
+                   let renderObject = canvg.fromString(ctx, svg);
+   
+                   renderObject.start();
+   
+                   let dataUri = canvas.toDataURL("image/png");
+   
+                   document.getElementById('chartPng').value = dataUri;
+   
+                   document.body.removeChild(tmpDiv);
+                 });
+              });
+
+
             }
         });
     });

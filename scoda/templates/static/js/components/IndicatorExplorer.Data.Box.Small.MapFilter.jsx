@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
 
 
-
 export default class IndicatorExplorerDataBoxMapFilter extends Component {
     constructor(props) {
         super(props);
+
+        this.reBindMap = this.reBindMap.bind(this);
+    }
+
+    reBindMap() {
+        this.props.changeHook(document.getElementById('map-selector').value);
     }
 
     render() {
-
-        const selectorOptions = this.props.datasetOptions.map((dataset,index) =>(
-            <option key={index} value={dataset.Value}>{dataset.Value}</option>
-        ));
+        let selectorOptions = [];
+        if(this.props.results.length !== 0) {
+            selectorOptions = this.props.results.options_list.map((dataset,index) =>(
+                <option key={index} value={dataset.optname}>{dataset.optname}</option>
+            ));
+        }
 
         return (
                         <div className="ie-box-card">
@@ -24,7 +31,7 @@ export default class IndicatorExplorerDataBoxMapFilter extends Component {
                             </div>
                             <div className="col-0 pt-2 pl-1 pr-1">
                                 <div className="ie-box-results mtp-2 ml-2 mr-2">
-                                <select id="map-selector" className="pl-3 mt-2 mr-2 ie-dropdown-small">
+                                <select id="map-selector" className="mt-2 mr-2 ie-dropdown-small" onChange={()=>this.reBindMap()}>
                                   {selectorOptions}
                                 </select>
                                 </div>                        
