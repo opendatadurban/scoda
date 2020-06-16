@@ -22,11 +22,14 @@ componentDidMount() {
 }
 
 componentDidUpdate() {
-   this.handleResize = this.handleResize.bind(this);
+  window.addEventListener('resize', this.handleResize);
+  this.handleResize();
 
    if(this.props.data.length !== 0) {
     this.loadGoogleVizApi(this.props.data, this.props.filterYear,'100%','100%');
     }
+
+
 
 }
 
@@ -37,6 +40,11 @@ handleResize() {
   var height = positionInfo.height;
   var width = positionInfo.width;
 
+  var elementT = document.getElementById('tableD');
+  var positionInfoT = elementT.getBoundingClientRect();
+  var heightT = positionInfoT.height;
+  var widthT = positionInfoT.width;
+
   let windowWidth = document.body.clientWidth;
   let windowHeight = document.body.clientHeight;
 
@@ -45,6 +53,7 @@ handleResize() {
       windowHeight = '225px';
   }
   else {
+      widthT = '96%';
       windowWidth = '100%';
       windowHeight = '450px';
   }
@@ -127,7 +136,7 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
  
             var table = new google.visualization.ChartWrapper({
                 'chartType': 'Table',
-                'containerId': 'table',
+                'containerId': 'tableD',
                 'options': {
                     'showRowNumber': false, 'allowHtml': true, 'cssClassNames': cssClassNames
                   }
@@ -236,6 +245,8 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
         });
     });
 }
+
+
 
 render() {
     return (
