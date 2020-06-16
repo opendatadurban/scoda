@@ -48,10 +48,21 @@
     line-height: 13px;
 }
 
+.google-visualization-controls-label {
+    height: 13px;
+    width: 25px;
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 10px;
+    letter-spacing: 0;
+    line-height: 13px;
+    text-transform: capitalize;
+}
+
 .ie-small-border {
     box-sizing: border-box;
-    height: 2px;
-    width: 145px;
+    height: 1px;
+    width: 90%;
     border: 1px dashed $scoda-box-header;
 }
 
@@ -112,10 +123,9 @@
 }
 
 .ie-dropdown-small {
-    box-sizing: border-box;
     height: 25px;
-    width: 138px;
-    border: 1px solid $scoda-grey-dark;
+    width: 180px;
+    border: 0.5px solid $scoda-grey-dark;
     border-radius: 12.5px;
     background-color: $scoda-white;
     color:$scoda-grey-dark;
@@ -123,6 +133,96 @@
     font-size: 12px;
     letter-spacing: 0;
     line-height: 13px;
+    //-webkit-appearance: none; 
+    //background: url('/static/dist/img/scoda/dropdown_caret_small.png') no-repeat 96% 80% #FFFFFF;
+}
+.goog-menu-button {
+    border-style: none;
+    border:0px;
+    background-color: #ffffff;
+    background: none;
+}
+
+.goog-inline-block {
+    border:2px $scoda-grey-dark;
+    border-radius: 12.5px;
+}
+
+.goog-menu-button-inner-box {
+    height: 25px;
+    width: 180px;
+    border: 0px;
+    outline: none;
+    background-color: #ffffff;
+    font-family: $scoda-font;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 20px;
+    -webkit-appearance: none; 
+    background: url('/static/dist/img/scoda/dropdown_caret_small.png') no-repeat 96% 50% #FFFFFF;
+}
+
+.goog-inline-block.goog-menu-button-dropdown {
+    font-family: $scoda-font;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 20px;
+    padding: 3px;
+    background: none;
+    vertical-align: top;
+}
+
+.box-height {
+    height: 535px;
+}
+
+.google-visualization-controls-categoryfilter li {
+    border-radius: 12.5px;
+    background-color: rgba(207,221,232,0.6);
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 10px;
+    letter-spacing: 0;
+    line-height: 16px;
+    text-align:left;
+    width:70%;
+    height:21px;
+    border:0px;
+    margin-top: 10px;
+}
+
+.google-visualization-controls-categoryfilter li:hover {
+    border-radius: 12.5px;
+    background-color: red;
+    border: 0px;
+}
+
+.google-visualization-controls-categoryfilter li.goog-inline-block { 
+    border-radius: 12.5px;
+    background-color: rgba(207,221,232,0.6);
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 10px;
+    letter-spacing: 0;
+    line-height: 16px;
+    text-align:left;
+    width:134px;
+    height:21px;
+    border:0px;
+}
+
+.google-visualization-controls-categoryfilter li.goog-inline-block:hover { 
+    border-radius: 12.5px;
+    background-color: rgba(207,221,232,0.6);
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 10px;
+    letter-spacing: 0;
+    line-height: 16px;
+    text-align:left;
+    width:134px;
+    height:21px;
+    border:0px;
 }
 
 .ie-box-card {
@@ -169,7 +269,7 @@
 
 
 .table-container  {
-    width:98%;
+    width:97%;
     height: 100%;
     overflow:hidden;
 }
@@ -289,7 +389,7 @@
             //Set the background color to a BadAss Green color 
             background: url('/static/dist/img/scoda/dropdown_caret.png') no-repeat 98% 80% #FFFFFF;
         }
-        
+
 }
 
 table {

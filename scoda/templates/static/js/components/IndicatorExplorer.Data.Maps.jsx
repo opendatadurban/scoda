@@ -24,7 +24,7 @@ export default class IndicatorExplorerDataMap extends Component {
         window.addEventListener('resize', this.handleResize);
 
         if(this.props.geo.length !== 0) {
-            this.loadGoogleVizApi(this.props.geo,this.props.filterYear,'100%','100%');
+            this.loadGoogleVizApi(this.props.geo,this.props.filterYear,this.props.filter,'100%','100%');
         }
     }
 
@@ -51,11 +51,11 @@ export default class IndicatorExplorerDataMap extends Component {
         document.getElementById('map').style.width = windowWidth;
         
         if(this.props.geo.length !== 0) {
-            this.loadGoogleVizApi(this.props.geo,this.props.filterYear,windowWidth,windowHeight);
+            this.loadGoogleVizApi(this.props.geo,this.props.filterYear,this.props.filter,windowWidth,windowHeight);
         }
     }
   
-    loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
+    loadGoogleVizApi(resultSet,selectedYear,filter,winWidth,winHeight) {
         var options = {
             dataType: "script",
             cache: true,
@@ -68,29 +68,45 @@ export default class IndicatorExplorerDataMap extends Component {
               callback: function() {
                      var dataSet = resultSet.table;
 
+                     var filterItem = '';
+
+                     if(filter === 'NA') {
+                         filterItem = dataSet[0][2];
+                     }
+                     else {
+                         filterItem = filter;
+                     }
+
+
+                      let filterRow = 0;
                       let rows = [];
                       let rowHeader = [];
-                      for(let i=0;i<3;i++) {
+                      rowHeader.push(dataSet[0][0]);
+                      for(let i=0;i<=dataSet[0].length-1;i++) {
                             if(dataSet[0][i].toString() !== 'Year') {
-                              rowHeader.push(dataSet[0][i]);
+                                if(dataSet[0][i].toString() === filterItem) {
+                                  filterRow = i;
+                                  rowHeader.push(dataSet[0][i]);
+                                }
                             }
                       }
                       
                       rows.push(rowHeader);
       
-                      for(let j=1;j<dataSet.length;j++) {
+                      for(let j=1;j<=dataSet.length-1;j++) {
                           let rowItem = dataSet[j];
                           let row = [];
                           if(rowItem[1].toString() === selectedYear) {
-                            for(let k=0;k<3;k++) {
+                              rows.push([rowItem[0],rowItem[filterRow]]);
+                           /* for(let k=0;k<rowItem[k].length;k++) {
                                 if(rowItem[k].toString() !== selectedYear) {
                                    row.push(rowItem[k]);
                                 }
-                            }
-                            rows.push(row);
+                            }*/
                           }
+
                       }
-                        
+
                       var map = new google.visualization.ChartWrapper({
                           'chartType': 'GeoChart',
                           'containerId': 'map',

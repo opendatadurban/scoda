@@ -8,40 +8,6 @@ import IndicatorExplorerDataBox from '../components/IndicatorExplorer.Data.Box';
 import IndicatorExplorerDataBoxChartFilter from '../components/IndicatorExplorer.Data.Box.Small.ChartFilter';
 import IndicatorExplorerDataBoxMapFilter from '../components/IndicatorExplorer.Data.Box.Small.MapFilter';
 
-const _yearDataSet = [
-    {
-        Key: 1,
-        Value:'2013',
-
-    },
-    {
-        Key:2,
-        Value: '2019'
-    },
-    {
-        Key:3,
-        Value: '2020'
-    }
-
-];
-
-const _cityDataSet = [
-    {
-        Key: 1,
-        Value:'Pretoria',
-
-    },
-    {
-        Key:2,
-        Value: 'Cape Town'
-    },
-    {
-        Key:3,
-        Value: 'Pietermaritzburg'
-    }
-
-];
-
 
 export default class IndicatorExplorerDataCard extends Component {
     constructor(props) {
@@ -52,11 +18,13 @@ export default class IndicatorExplorerDataCard extends Component {
             dataset:[],
             table:[],
             selectedYear:'2010',
+            mapFilter:'NA',
             display:false
         }
 
         this.filterIndicatorData = this.filterIndicatorData.bind(this);
         this.toggleComponentDisplay = this.toggleComponentDisplay.bind(this);
+        this.setMapFilter = this.setMapFilter.bind(this);
     }
 
     componentDidMount() {
@@ -90,6 +58,7 @@ export default class IndicatorExplorerDataCard extends Component {
         if(resultSet !== null) {
             console.log(resultSet.data.year);
 
+            this.setState({mapFilter: 'NA'});
             this.setState({selectedYear: resultSet.data.year});
             this.setState({dataset: resultSet.data});
             this.setState({table: resultSet.data.table});
@@ -97,12 +66,17 @@ export default class IndicatorExplorerDataCard extends Component {
             this.toggleComponentDisplay(true);
         }
         else {
+                this.setState({mapFilter: 'NA'});
                 this.setState({selectedYear:'2010'})
                 this.setState({dataset:[]});
                 this.setState({table: []});
 
                 this.toggleComponentDisplay(false);
         }
+    }
+
+    setMapFilter(optionId) {
+        this.setState({mapFilter:optionId});
     }
 
     render() {
@@ -127,18 +101,18 @@ export default class IndicatorExplorerDataCard extends Component {
                                 <div className="row">
                                     <IndicatorExplorerDataBox 
                                             resultTitle="Selected Data"
-                                            results={this.state.table}
+                                            results={this.state.dataset}
                                             resultType="table"
                                             filterYear={this.state.selectedYear}
                                     />
                                 </div>
                                 <div className="row mt-4">
-                                    <div className="col-3">
-                                       {/*} <IndicatorExplorerDataBoxChartFilter 
-                                         yearOptions={_yearDataSet}
-                                         cityOptions={_cityDataSet}
-                                         filters="Johannesburg,Pretoria,Durban,Cape Town"
-                                        />*/}
+                                    <div className="col-sm-3">
+                                       <IndicatorExplorerDataBoxChartFilter 
+                                         results={this.state.dataset}
+                                         filterYear={this.state.selectedYear}
+                                        />
+                                        
                                     </div>
                                     <div className="col">
                                     <IndicatorExplorerDataBox 
@@ -150,10 +124,12 @@ export default class IndicatorExplorerDataCard extends Component {
                                     </div>
                                 </div>   
                                 <div className="row mt-4">
-                                    <div className="col-3">
-                                      {/*<IndicatorExplorerDataBoxMapFilter 
-                                      datasetOptions={_indicatorDataSet}
-                                      />*/}
+                                    <div className="col-sm-3">
+                                      <IndicatorExplorerDataBoxMapFilter 
+                                      results={this.state.dataset}
+                                      filterYear={this.state.selectedYear}
+                                      changeHook={this.setMapFilter}
+                                      />
                                     </div>
                                     <div className="col">
                                     <IndicatorExplorerDataBox 
@@ -161,6 +137,7 @@ export default class IndicatorExplorerDataCard extends Component {
                                             results={this.state.dataset}
                                             resultType="map"
                                             filterYear={this.state.selectedYear}
+                                            filter={this.state.mapFilter}
                                     />
                                     </div>
                                 </div>  
