@@ -150,7 +150,7 @@
 
 .goog-menu-button-inner-box {
     height: 25px;
-    width:11vw;
+    width:180px;
     border: 0px;
     outline: none;
     background-color: #ffffff;
@@ -305,6 +305,24 @@
     overflow: hidden;
     clear: both;
 }
+
+//Desktop
+@media (max-width: $desktop) { 
+    .goog-menu-button-inner-box {
+        height: 25px;
+        width:10vw;
+        border: 0px;
+        outline: none;
+        background-color: #ffffff;
+        font-family: $scoda-font;
+        font-size: 12px;
+        letter-spacing: 0;
+        line-height: 20px;
+        -webkit-appearance: none; 
+        background: url('/static/dist/img/scoda/dropdown_caret_small.png') no-repeat 96% 50% #FFFFFF;
+    }
+}
+
 
 //Mobile
 @media (max-width: $tablet) {
