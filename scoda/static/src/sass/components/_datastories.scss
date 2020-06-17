@@ -734,15 +734,57 @@ o {
         #filter_{
             position: absolute;
             right: 33px;
-            top: 11px;
+            top: 25px;
+        }
+        .ds-content-card-header-main{
+            line-height: 16px;
+            font-size: 13px;
+            font-weight: 300;
         }
         .ds-content-story-subtitle{
-            font-size: 21px;
+            font-size: 13px;
             font-weight: 500;
-            line-height: 26px;
+            line-height: 21px;
+        }
+        .ds-main-navigation-button-explorer{
+            display: block;
+            margin: auto !important;
+            margin-top: 15px !important;
+        }
+        .ds-content-story-title{
+            margin-top: 90px !important;
+            line-height: 21px;
+        }
+        #tabs_vertical{
+            .tabs_vertical--content{
+                order: 2;
+            }
+            .tabs_vertical--pill{
+                order: 1;
+            }
+        }
+        .chart-heights-mobile{
+            min-height: 250px;
+            canvas{
+                height: 250px !important;
+            }
+        }
+        .ds-content-card-highlight-block{
+            .row{
+                .col-10{
+                    margin: 15px !important;
+                }
+            }
+        }
+        .visual-point{
+            display: none;
         }
         .ds-urban-addressing-block {
             width: 100%;
+            .ds-urban-addressing-heading{
+                height: unset;
+                width: unset;
+            }
         }
     }
 }

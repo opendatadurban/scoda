@@ -214,7 +214,7 @@ export default class DataStoriesContentCardUrbanSafety extends Component {
                                 />
                                </div>
                                <div className="row mt-5">
-                                   <div className="col-4">
+                                   <div className="col-md-4">
                                    <DataStoriesContentCardContentBlock 
                                      contentHeading="How do fear and perception of danger affect urban residents? "
                                      content="Fear and perceptions often trump actual rates of crime. This has a direct effect on how urban residents engage in public life and their feelings of safety in public space."
