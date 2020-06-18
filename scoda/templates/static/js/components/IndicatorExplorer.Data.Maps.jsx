@@ -17,7 +17,7 @@ export default class IndicatorExplorerDataMap extends Component {
     componentDidMount() {
         window.addEventListener('resize', this.handleResize);
 
-        this.handleResize();
+       this.handleResize();
     }
 
     componentDidUpdate() {

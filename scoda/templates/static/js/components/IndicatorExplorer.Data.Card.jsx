@@ -136,7 +136,7 @@ export default class IndicatorExplorerDataCard extends Component {
                         <div className="ie-content-card">
                             <div className="ie-content-card-header">
                               <div className="row">
-                                  <div className="col-sm-12">
+                                  <div className="col-md-12">
                                       <IndicatorExplorerDataCardHeader
                                         datasetOptions={this.state.indicators}
                                         filterHook={this.filterIndicatorData}
@@ -146,24 +146,26 @@ export default class IndicatorExplorerDataCard extends Component {
                                   </div>
                               </div>
                             </div>
-                            <div id="explorer-details" className="col-sx-4 col-md-12 col-sm-4 mt-3">
+                            <div id="explorer-details" className="col-md-12 col-lg-12 col-xl-12 mt-3">
                                 <div className="row">
+                                <div className="col-md-12 col-lg-12 col-xl-12">
                                 <IndicatorExplorerDataBox 
                                             resultTitle="Selected Data"
                                             results={this.state.dataset}
                                             resultType="table"
                                             filterYear={this.state.selectedYear}
                                     />
+                                    </div>
                                 </div>
                                 <div className="row mt-4">
-                                    <div className="col-sx-12 col-md-3">
+                                    <div className="col-md-12 col-lg-3 col-xl-3">
                                        <IndicatorExplorerDataBoxChartFilter 
                                          results={this.state.dataset}
                                          filterYear={this.state.selectedYear}
                                         />
                                         
                                     </div>
-                                    <div className="col-sx-12 col-md-9">
+                                    <div className="col-md-12 col-lg-9 col-xl-9">
                                     <IndicatorExplorerDataBox 
                                             resultTitle="Plotting Window"
                                             results={this.state.dataset}
@@ -173,14 +175,14 @@ export default class IndicatorExplorerDataCard extends Component {
                                     </div>
                                 </div>   
                                 <div className="row mt-4">
-                                    <div className="col-sx-12 col-md-3">
+                                    <div className="col-md-12 col-lg-3 col-xl-3">
                                       <IndicatorExplorerDataBoxMapFilter 
                                       results={this.state.dataset}
                                       filterYear={this.state.selectedYear}
                                       changeHook={this.setMapFilter}
                                       />
                                     </div>
-                                    <div className="col-sx-12 col-md-9">
+                                    <div className="col-md-12 col-lg-9 col-xl-9">
                                     <IndicatorExplorerDataBox 
                                             resultTitle="Geographic Representation"
                                             results={this.state.dataset}
