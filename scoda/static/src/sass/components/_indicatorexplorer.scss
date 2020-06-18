@@ -228,7 +228,7 @@
 .ie-box-card {
     border-radius: 5px;
     background-color: $scoda-white;
-    margin-left: 1.5%;
+
 	width:97%;
 	overflow:hidden;
 }
@@ -360,7 +360,7 @@
 @media (max-width: $desktop) { 
     .goog-menu-button-inner-box {
         height: 25px;
-        width:10vw;
+        width:12vw;
         border: 0px;
         outline: none;
         background-color: #ffffff;
@@ -371,6 +371,24 @@
         -webkit-appearance: none; 
         background: url('/static/dist/img/scoda/dropdown_caret_small.png') no-repeat 96% 50% #FFFFFF;
     }
+	
+	     .ie-dropdown {
+            height: 100%;
+            width: 100%;
+            border-radius: 20px;
+            background-color: #FFFFFF;
+            box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+            color: $scoda-grey-dark;
+            font-family: $scoda-font;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 0;
+            line-height: 32px;
+            -webkit-appearance: none; 
+            //Use png at assets/selectArrow.png for the arrow on the right
+            //Set the background color to a BadAss Green color 
+            background: url('/static/dist/img/scoda/dropdown_caret.png') no-repeat 98% 80% #FFFFFF;
+        }
 }
 
 
@@ -434,7 +452,7 @@
 
         .goog-menu-button-inner-box {
             height: 25px;
-            width:180px;
+            width:37vw;
             border: 0px;
             outline: none;
             background-color: #ffffff;
@@ -451,7 +469,3 @@
 
 }
 
-table {
-    overflow: hidden;
-    clear: both;
-}
