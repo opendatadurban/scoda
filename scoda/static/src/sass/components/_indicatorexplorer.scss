@@ -333,6 +333,12 @@
     font-size: 14px;
 }
 
+.loader-body:{
+		width:200px;
+		vertical-align: middle;
+}
+
+
 //Desktop
 @media (max-width: $desktop) { 
     .goog-menu-button-inner-box {
