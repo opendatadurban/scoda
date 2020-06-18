@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Alert } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, Spinner } from 'reactstrap';
 
 import $ from 'jquery';
 
@@ -22,13 +22,16 @@ export default class IndicatorExplorerDataCard extends Component {
             selectedYear:'2010',
             mapFilter:'NA',
             display:false,
-            modal: false
+            modal: false,
+            loader:false
         }
 
         this.filterIndicatorData = this.filterIndicatorData.bind(this);
         this.toggleComponentDisplay = this.toggleComponentDisplay.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
         this.setMapFilter = this.setMapFilter.bind(this);
+        this.showLoader = this.showLoader.bind(this);
+        this.hideLoader = this.hideLoader.bind(this);
     }
 
     componentDidMount() {
@@ -59,16 +62,25 @@ export default class IndicatorExplorerDataCard extends Component {
         }
     }
 
-
     loadIndicators() {
         axios.get('/api/indicators-list').then(res => {
             this.setState({ indicators:res.data });
         });
     }
 
+    showLoader() {
+        this.setState({loader:true});
+    }
+      
+    hideLoader() {
+        this.setState({loader:false});
+    }
+
     async filterIndicatorData(indicatorId) {
+        this.showLoader();
 
         let resultSet = await axios.get(`/api/explore?indicator_id=${indicatorId}`).catch(error => {
+            this.hideLoader();
             this.setState({modal:true, toggle:true});
         });
 
@@ -90,9 +102,23 @@ export default class IndicatorExplorerDataCard extends Component {
 
                         this.toggleComponentDisplay(false);
                 }
+
+                validateDocumentReady();
         }
         catch(error) {
           //For now we just swallow any errors. Any data errors get handled above in axios call.
+          this.hideLoader();
+        }
+    }
+
+    validateDocumentReady() {
+        var isLoaded = setInterval(validateLoaded,2000);
+        
+        function validateLoaded() {
+            if(document.getElementById('chartPng').value !== '') {
+                clearInterval(isLoaded);
+                this.hideLoader();
+            }
         }
     }
 
@@ -170,13 +196,29 @@ export default class IndicatorExplorerDataCard extends Component {
                     </div>
                 </div>
                 
-                <Modal isOpen={this.state.modal} toggle={this.toggleModal} modalClassName="fade">
-                <ModalHeader toggle={this.toggleModal} modalClassName="modal-header" close={modalCloseIcon}><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Server Error</ModalHeader>
+                <Modal isOpen={this.state.modal} toggle={this.toggleModal} modalclassname="fade">
+                <ModalHeader toggle={this.toggleModal} modalclassname="modal-header" close={modalCloseIcon}><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Server Error</ModalHeader>
                     <ModalBody className="modal-body">
                         <br/>
                         There is currently no data available for the selected indicator!<br/><br/>
                     </ModalBody>
                 </Modal>
+
+                <Modal isOpen={this.state.loader} className="modal-dialog-centered loader">
+                <ModalBody>
+                  <div className="row">
+                    <div className="col-2"></div>
+                    <div className="col-0 ml-3 pt-4"> 
+                      <Spinner type="grow" color="secondary" size="sm"/>
+                      <Spinner type="grow" color="success" size="sm"/>
+                      <Spinner type="grow" color="danger" size="sm"/>
+                      <Spinner type="grow" color="warning" size="sm"/>
+                      </div>
+                    <div className="col-0 pt-4 pl-4 float-left">Loading Content...</div>
+                  </div>
+                  <br/>
+                </ModalBody>
+               </Modal>
 
             </div>
         )

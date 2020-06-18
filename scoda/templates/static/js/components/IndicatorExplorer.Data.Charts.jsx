@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react';
 import $ from 'jquery';
 import canvg from 'canvg';
 
+
 export default class IndicatorExplorerDataChart extends PureComponent {
   constructor(props) {
         super(props);
@@ -28,8 +29,6 @@ componentDidUpdate() {
    if(this.props.data.length !== 0) {
     this.loadGoogleVizApi(this.props.data, this.props.filterYear,'100%','100%');
     }
-
-
 
 }
 
@@ -73,10 +72,12 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
         url: "https://www.google.com/jsapi",
       };
 
-      $.ajax(options).done(function(){
+     $.ajax(options).done(function(){
         google.load("visualization", "1", {
           packages:['controls', 'bar', 'corechart', 'geochart'],
           callback: function() {
+                document.getElementById('chartPng').value = '';
+
                 var dataSet = resultSet.table;
 
                 let rows = [];
@@ -122,7 +123,6 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
 
               var bar = new google.visualization.ChartWrapper(options);
 
-              //bar.draw(document.getElementById('chart'));
               var cssClassNames = {
                 'headerRow': 'table-header-cell',
                 'tableRow': 'table-cell',
@@ -237,16 +237,12 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                    document.getElementById('chartPng').value = dataUri;
 
                    document.body.removeChild(tmpDiv);
-  
                  });
               });
-
             }
-        });
+        })
     });
 }
-
-
 
 render() {
     return (
