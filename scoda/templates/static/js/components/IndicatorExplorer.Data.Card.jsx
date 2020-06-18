@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Alert } from 'reactstrap';
+
 import $ from 'jquery';
 
 import axios from 'axios';
@@ -7,7 +9,7 @@ import IndicatorExplorerDataCardHeader from '../components/IndicatorExplorer.Dat
 import IndicatorExplorerDataBox from '../components/IndicatorExplorer.Data.Box';
 import IndicatorExplorerDataBoxChartFilter from '../components/IndicatorExplorer.Data.Box.Small.ChartFilter';
 import IndicatorExplorerDataBoxMapFilter from '../components/IndicatorExplorer.Data.Box.Small.MapFilter';
-
+import { AElement } from 'canvg';
 
 export default class IndicatorExplorerDataCard extends Component {
     constructor(props) {
@@ -19,11 +21,13 @@ export default class IndicatorExplorerDataCard extends Component {
             table:[],
             selectedYear:'2010',
             mapFilter:'NA',
-            display:false
+            display:false,
+            modal: false
         }
 
         this.filterIndicatorData = this.filterIndicatorData.bind(this);
         this.toggleComponentDisplay = this.toggleComponentDisplay.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
         this.setMapFilter = this.setMapFilter.bind(this);
     }
 
@@ -46,6 +50,16 @@ export default class IndicatorExplorerDataCard extends Component {
         }
     }
 
+    toggleModal() {
+        if(!this.state.modal) {
+            this.setState({modal:true});
+        }
+        else {
+            this.setState({modal:false});
+        }
+    }
+
+
     loadIndicators() {
         axios.get('/api/indicators-list').then(res => {
             this.setState({ indicators:res.data });
@@ -53,25 +67,32 @@ export default class IndicatorExplorerDataCard extends Component {
     }
 
     async filterIndicatorData(indicatorId) {
-        let resultSet = await axios.get(`/api/explore?indicator_id=${indicatorId}`);
 
-        if(resultSet !== null) {
-            console.log(resultSet.data.year);
+        let resultSet = await axios.get(`/api/explore?indicator_id=${indicatorId}`).catch(error => {
+            this.setState({modal:true, toggle:true});
+        });
 
-            this.setState({mapFilter: 'NA'});
-            this.setState({selectedYear: resultSet.data.year});
-            this.setState({dataset: resultSet.data});
-            this.setState({table: resultSet.data.table});
+        try
+        {
+                if(resultSet !== null) {
+                    this.setState({mapFilter: 'NA'});
+                    this.setState({selectedYear: resultSet.data.year});
+                    this.setState({dataset: resultSet.data});
+                    this.setState({table: resultSet.data.table});
 
-            this.toggleComponentDisplay(true);
+                    this.toggleComponentDisplay(true);
+                }
+                else {
+                        this.setState({mapFilter: 'NA'});
+                        this.setState({selectedYear:'2010'})
+                        this.setState({dataset:[]});
+                        this.setState({table: []});
+
+                        this.toggleComponentDisplay(false);
+                }
         }
-        else {
-                this.setState({mapFilter: 'NA'});
-                this.setState({selectedYear:'2010'})
-                this.setState({dataset:[]});
-                this.setState({table: []});
-
-                this.toggleComponentDisplay(false);
+        catch(error) {
+          //For now we just swallow any errors. Any data errors get handled above in axios call.
         }
     }
 
@@ -80,6 +101,8 @@ export default class IndicatorExplorerDataCard extends Component {
     }
 
     render() {
+        let modalCloseIcon = <i className="modal-close fa fa-times" aria-hidden="true" onClick={this.toggleModal}></i>;
+
         return (
             <div className="mt-4 ml-5 pr-5">
                 <div className="row">
@@ -146,6 +169,15 @@ export default class IndicatorExplorerDataCard extends Component {
                         </div>
                     </div>
                 </div>
+                
+                <Modal isOpen={this.state.modal} toggle={this.toggleModal} modalClassName="fade">
+                <ModalHeader toggle={this.toggleModal} modalClassName="modal-header" close={modalCloseIcon}><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Server Error</ModalHeader>
+                    <ModalBody className="modal-body">
+                        <br/>
+                        There is currently no data available for the selected indicator!<br/><br/>
+                    </ModalBody>
+                </Modal>
+
             </div>
         )
     }
