@@ -127,13 +127,13 @@ export default (
       <Route path='/about-us' component={Sub_Footer} />
       <Route path='/about-us' component={Footer} />
 
-      <Route path="/explorer" component={()=> <Navigation_scoda box_shadow={true} />} />
+      {/*<Route path="/explorer" component={()=> <Navigation_scoda box_shadow={true} />} />
       <Route exact path="/explorer" component={()=> <Hero_Collapsable title={_heroTitle_explore} 
             content={_heroContent_explore} 
             infoTitle={_heroInfoTitle_explore}
             primaryColor={_heroPrimaryColor_explore} 
             secondaryColor={_heroSecondaryColor_explore}/>}/>
-      <br/><br/>
+      <br/><br/>*/}
       <Route exact path="/explorer" component={()=> <IndicatorExplorer />}/>
       <br/><br/>
       <Route path="/explorer" component={Footer} />
