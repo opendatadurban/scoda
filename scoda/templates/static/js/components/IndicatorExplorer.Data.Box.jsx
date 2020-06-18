@@ -145,7 +145,7 @@ export default class IndicatorExplorerDataBox extends Component {
         }
 
         return (
-            <div id="dashboard">
+            <div id="dashboard" style={{width:'100%'}}>
                         <div id="card" className="ie-box-card">
                             <div className="ie-box-card-header">
                               <div className="row">

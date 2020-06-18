@@ -124,14 +124,13 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
               var bar = new google.visualization.ChartWrapper(options);
 
               var cssClassNames = {
-                'headerRow': 'table-header-cell',
+                 'headerRow': 'google-visualization-table-table',
                 'tableRow': 'table-cell',
                 'oddTableRow': 'table-cell',
                 'selectedTableRow': 'table-cell',
                 'hoverTableRow': 'table-cell',
-                'headerCell': 'table-header-cell',
                 'tableCell': 'table-cell',
-                'table':'table'
+                'table':'google-visualization-table-table'
             };
  
             var table = new google.visualization.ChartWrapper({
