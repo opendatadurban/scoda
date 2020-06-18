@@ -226,11 +226,11 @@
 }
 
 .ie-box-card {
-    width: 93%;
     border-radius: 5px;
     background-color: $scoda-white;
     margin-left: 1.5%;
-    overflow: hidden;
+	width:97%;
+	overflow:hidden;
 }
 
 .ie-box-card-header {
@@ -263,15 +263,30 @@
 }
 
 .table  {
-    width: 98%;
+	width: 95%;
     height: 100%;
+	overflow:scroll;
+	display:inline-block;
+	border-style : hidden!important; 
 }
-
+.google-visualization-table-table {
+    font-family: $scoda-font;
+    cursor: default;
+    margin: 0;
+    background: white;
+    border-spacing: 0;
+    border-style : hidden!important; 
+}
+.google-visualization-table-table th {
+	border-left : hidden!important;
+    border-top : hidden!important;
+    border-right : hidden!important;
+    border-bottom : 1px solid #808E9B;
+}
 
 .table-container  {
     width:97%;
     height: 100%;
-    overflow:hidden;
 }
 
 .table-header-cell {
@@ -282,12 +297,14 @@
     letter-spacing: 0;
     line-height: 13px;
     text-align: left;
-    width:20%;
-    border-left : hidden!important;
+	padding:3px;
+	border-left : hidden!important;
     border-top : hidden!important;
     border-right : hidden!important;
     border-bottom : 1px solid #808E9B;
+    
 }
+
 
 .table-cell {
     color: $scoda-grey-dark;
@@ -295,7 +312,6 @@
     font-size: 13px;
     letter-spacing: 0;
     line-height: 24px;
-    width:20%;
     text-align: left;
     padding:5px;
     border-style : hidden!important;
@@ -318,6 +334,7 @@
 	text-transform: none;
 	font-weight:600;
 }
+
 .modal-title{
 	color: #b4787e;
     font-family: $scoda-font;
@@ -333,7 +350,7 @@
     font-size: 14px;
 }
 
-.loader-body:{
+.loader-body {
 		width:200px;
 		vertical-align: middle;
 }
@@ -374,43 +391,6 @@
             font-weight: 600;
             letter-spacing: 0;
             line-height: 24px;
-        }
-
-        .table-header-cell {
-            color: $scoda-grey-dark;
-            font-family: $scoda-font;
-            font-size: 10px;
-            font-weight: 500;
-            letter-spacing: 0;
-            line-height: 13px;
-            text-align: left;
-            width:5%;
-            border-left : hidden!important;
-            border-top : hidden!important;
-            border-right : hidden!important;
-            border-bottom : 1px solid #808E9B;
-        }
-        
-        .table-cell {
-            color: $scoda-grey-dark;
-            font-family: $scoda-font;
-            font-size: 8px;
-            letter-spacing: 0;
-            line-height: 24px;
-            width:5%;
-            text-align: left;
-            border-style : hidden!important;
-        }
-
-        .table-container  {
-            width:50%;
-            height: 100%;
-            overflow:auto;
-        }
-        .table  {
-            width: 50%;
-            height: 100%;
-            overflow:auto;
         }
 
         .ie-box-card {
