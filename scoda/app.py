@@ -5,10 +5,11 @@ import os
 
 app = Flask(__name__, static_folder='static')
 
-env = 'production'
-app.config['ENV'] = env
-app.config.from_pyfile('config.py')
+# setup configs
+env = os.environ.get('FLASK_ENV', 'development')
 
+app.config['ENV'] = env
+app.config.from_pyfile('config/%s.cfg' % env)
 # app.config['SECURITY_USER_IDENTITY_ATTRIBUTES'] = ('name', 'email')
 
 # CSRF protection
