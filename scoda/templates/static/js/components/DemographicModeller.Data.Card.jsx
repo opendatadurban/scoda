@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Modal, ModalHeader, ModalBody, Spinner } from 'reactstrap';
 
 import $, { data } from 'jquery';
 
@@ -109,42 +110,76 @@ export default class DemographicModellerDataCard extends Component {
         super(props);
 
         this.state = {
-            timeData: _timeData,
-            mapData: _mapData,
-            zoom:3,
-            center:[25,-29.8],
-            dataset:[]
+            dataset:[],
+            years:[],
+            cities:[],
+            wards:[],
+            table:[]
         }
 
-        this.setTimeData = this.setTimeData.bind(this);
-
         this.loadData = this.loadData.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
+        this.showLoader = this.showLoader.bind(this);
+        this.hideLoader = this.hideLoader.bind(this);
     }
 
-    componentDidMount() {
-       this.loadData();
+    async componentDidMount() {
+       await this.loadData();
     }
 
-    setTimeData(data,map,zoom,center) {
-        this.setState({timeData:data});
-        this.setState({mapData:map});
-        this.setState({zoom:zoom});
-        this.setState({center:center});
-    }
-
-    getTimeData() {
-        return this.state.timeData;
-    }
-
-    loadData() {
-        axios.get('/_parse_data').then(res => {
-          console.log(res.data);
-
-          this.setState({ dataset:res.data });
+    async loadData() {
+       let result = await axios.get('/api/demographics').catch(error => {
+          this.hideLoader();
+          this.setState({modal:true, toggle:true});
         });
+       
+       try
+       {
+          if(result !== null) {
+              console.log(result.data);
+
+              this.setState({ dataset:result.data});
+              this.setState({ years: result.data.from_year});
+              this.setState({ cities: result.data.from_city});
+              this.setState({ wards: result.data.from_ward});
+              this.setState({ table: result.data.table1});
+            }
+            else {
+              this.setState({ dataset:[]});
+              this.setState({ years: [1,'1996']});
+              this.setState({ cities: [1,'Johannesburg']});
+              this.setState({ wards: [1,'Ward 1']});
+              this.setState({ table: []});
+            }
+       }
+       catch(error) {
+         //For now we just swallow any errors. Any data errors get handled above in axios call.
+         this.hideLoader();
+       }
     }
+
+    
+  toggleModal() {
+      if(!this.state.modal) {
+          this.setState({modal:true});
+      }
+      else {
+          this.setState({modal:false});
+      }
+  }
+
+  showLoader() {
+    this.setState({loader:true});
+  }
+  
+  hideLoader() {
+    this.setState({loader:false});
+  }
+
 
     render() {
+
+      let modalCloseIcon = <i className="modal-close fa fa-times" aria-hidden="true" onClick={this.toggleModal}></i>;
 
         return (
             <div className="mt-4 ml-5 pr-5">
@@ -155,23 +190,23 @@ export default class DemographicModellerDataCard extends Component {
                                 <div className="row mt-4">
                                     <div className="col-4 mt-4">
                                         <DemographicModellerDataBoxMapFilter 
-                                         yearOptions={_yearDataSet}
-                                         cityOptions={_cityDataSet}
-                                         setTimeData={this.setTimeData}
+                                         yearOptions={this.state.years}
+                                         cityOptions={this.state.cities}
+                                         wardOptions={this.state.wards}
                                         />
-                                        <DemographicModellerDataBoxSmallChart 
+                                        {/*<DemographicModellerDataBoxSmallChart 
                                             title="Time Series"
                                             data={this.state.timeData}
-                                        />
+                                        />*/}
                                     </div>
                                     <div className="col mt-4">
-                                    <DemographicModellerDataBox 
+                                    {/*<DemographicModellerDataBox 
                                             resultTitle="Geographic Representation"
                                             results={this.state.mapData}
                                             zoom={this.state.zoom}
                                             center={this.state.center}
                                             resultType="map"
-                                    />
+                                    />*/}
                                     
                                     </div>
                                 </div>   
@@ -180,6 +215,32 @@ export default class DemographicModellerDataCard extends Component {
                         </div>
                     </div>
                 </div>
+
+                <Modal isOpen={this.state.modal} toggle={this.toggleModal} modalclassname="fade">
+                <ModalHeader toggle={this.toggleModal} modalclassname="modal-header" close={modalCloseIcon}><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Server Error</ModalHeader>
+                    <ModalBody className="modal-body">
+                        <br/>
+                        There is currently no data available for the selected indicator!<br/><br/>
+                    </ModalBody>
+                </Modal>
+
+                <Modal isOpen={this.state.loader} className="modal-dialog-centered loader">
+                <ModalBody>
+                  <div className="row">
+                    <div className="col-2"></div>
+                    <div className="col-0 ml-3 pt-4"> 
+                      <Spinner type="grow" color="secondary" size="sm"/>
+                      <Spinner type="grow" color="success" size="sm"/>
+                      <Spinner type="grow" color="danger" size="sm"/>
+                      <Spinner type="grow" color="warning" size="sm"/>
+                      </div>
+                    <div className="col-0 pt-4 pl-4 float-left">Loading Content...</div>
+                  </div>
+                  <br/>
+                </ModalBody>
+               </Modal>
+
+
             </div>
         )
     }
