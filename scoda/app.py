@@ -5,11 +5,10 @@ import os
 
 app = Flask(__name__, static_folder='static')
 
-# setup configs
-env = os.environ.get('FLASK_ENV', 'development')
-
+env = 'production'
 app.config['ENV'] = env
-app.config.from_pyfile('config/%s.cfg' % env)
+app.config.from_pyfile('config.py')
+
 # app.config['SECURITY_USER_IDENTITY_ATTRIBUTES'] = ('name', 'email')
 
 # CSRF protection
@@ -21,7 +20,7 @@ CsrfProtect(app)
 from flask_sqlalchemy import SQLAlchemy
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://scoda:scoda@localhost/scoda'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://scoda:scoda@localhost/scoda'
 db = SQLAlchemy(app)
 
 # Mail
