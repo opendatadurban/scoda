@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 
+import $, { data } from 'jquery';
+
+import axios from 'axios';
+
+
 import DemographicModellerDataBox from '../components/DemographicModeller.Data.Box';
 import DemographicModellerDataBoxMapFilter from '../components/DemographicModeller.Data.Box.Small.MapFilter';
 import DemographicModellerDataBoxSmallChart from '../components/DemographicModeller.Data.Box.Small.Charts';
@@ -107,10 +112,17 @@ export default class DemographicModellerDataCard extends Component {
             timeData: _timeData,
             mapData: _mapData,
             zoom:3,
-            center:[25,-29.8]
+            center:[25,-29.8],
+            dataset:[]
         }
 
         this.setTimeData = this.setTimeData.bind(this);
+
+        this.loadData = this.loadData.bind(this);
+    }
+
+    componentDidMount() {
+       this.loadData();
     }
 
     setTimeData(data,map,zoom,center) {
@@ -122,6 +134,14 @@ export default class DemographicModellerDataCard extends Component {
 
     getTimeData() {
         return this.state.timeData;
+    }
+
+    loadData() {
+        axios.get('/_parse_data').then(res => {
+          console.log(res.data);
+
+          this.setState({ dataset:res.data });
+        });
     }
 
     render() {

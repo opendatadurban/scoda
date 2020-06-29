@@ -61,6 +61,7 @@ const _tabs = [
 // import more components
 export default (
     <HashRouter history={hashHistory}>
+
        <Route exact path="/hero_collapsible" component={()=> <Hero_Collapsable title={_heroTitle} 
             content={_heroContent} 
             infoTitle={_heroInfoTitle}
@@ -104,7 +105,6 @@ export default (
       <Route path="/ds-affordability-2018" component={Footer} />
 
       <Route exact path="/tabs-and-filters" component={()=><TabsAndFilters tabs={_tabs}/>} />
-      <Route exact path="/demographic-modeller" component={()=><DemographicModeller />} />
    
       <Route path='/preview-block' component={Preview_block} />
       <Route path='/cta-block' component={CTA_block} />
@@ -137,6 +137,8 @@ export default (
       <Route exact path="/explorer" component={()=> <IndicatorExplorer />}/>
       <br/><br/>
       <Route path="/explorer" component={Footer} />
+      
+      <Route exact path="/demographic-modeller" component={()=><DemographicModeller />} />
 
     </HashRouter>
 );
