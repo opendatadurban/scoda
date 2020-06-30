@@ -17,8 +17,6 @@ export default class DemographicModellerDataBoxMapFilter extends Component {
 
     render() {
 
-      console.log(this.props.yearOptions);
-
         const yearOptions = this.props.yearOptions.map((dataset,index) =>(
             <option key={index} value={dataset[0]}>{dataset[1]}</option>
         ));
