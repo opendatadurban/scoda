@@ -10,111 +10,19 @@ import DemographicModellerDataBox from '../components/DemographicModeller.Data.B
 import DemographicModellerDataBoxMapFilter from '../components/DemographicModeller.Data.Box.Small.MapFilter';
 import DemographicModellerDataBoxSmallChart from '../components/DemographicModeller.Data.Box.Small.Charts';
 
-const _yearDataSet = [
-    {
-        Key: 1,
-        Value:'2013',
-
-    },
-    {
-        Key:2,
-        Value: '2019'
-    },
-    {
-        Key:3,
-        Value: '2020'
-    }
-
-];
-
-const _cityDataSet = [
-    {
-        Key: 1,
-        Value:'Pretoria',
-
-    },
-    {
-        Key:2,
-        Value: 'Cape Town'
-    },
-    {
-        Key:3,
-        Value: 'Pietermaritzburg'
-    }
-
-];
-
-const _plottingWindowData = [
-    {
-      name: 'Page A', uv: 4000, pv: 2400, amt: 2400,
-    },
-    {
-      name: 'Page B', uv: 3000, pv: 1398, amt: 2210,
-    },
-    {
-      name: 'Page C', uv: 2000, pv: 9800, amt: 2290,
-    },
-    {
-      name: 'Page D', uv: 2780, pv: 3908, amt: 2000,
-    },
-    {
-      name: 'Page E', uv: 1890, pv: 4800, amt: 2181,
-    },
-    {
-      name: 'Page F', uv: 2390, pv: 3800, amt: 2500,
-    },
-    {
-      name: 'Page G', uv: 3490, pv: 4300, amt: 2100,
-    },
-  ];
-
-
-const _mapData = [
-    {
-      city: 'Cape Town', lat: '-33.92584', long: '18.42322',count:5
-    },
-    {
-      city: 'Pretoria', long: '25.74486',lat:'-28.18783',count:1
-    },
-    {
-      city: 'Pietermaritzburg', long: '29.61679' , lat: '-30.39278', count:1
-    }
-];
-
-const _timeData = [
-    {
-      name: 'Page A', uv: 4000,
-    },
-    {
-      name: 'Page B', uv: 3000,
-    },
-    {
-      name: 'Page C', uv: 2000,
-    },
-    {
-      name: 'Page D', uv: 2780, 
-    },
-    {
-      name: 'Page E', uv: 1890,
-    },
-    {
-      name: 'Page F', uv: 2390,
-    },
-    {
-      name: 'Page G', uv: 3490,
-    },
-  ];
-
 export default class DemographicModellerDataCard extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             dataset:[],
-            years:[],
-            cities:[],
-            wards:[],
-            table:[]
+            years: [1,'1996'],
+            cities:[1,'Johannesburg'],
+            wards:[1,'Ward 1'],
+            table:[],
+            geometries:[],
+            max:1,
+            region:1
         }
 
         this.loadData = this.loadData.bind(this);
@@ -132,17 +40,18 @@ export default class DemographicModellerDataCard extends Component {
           this.hideLoader();
           this.setState({modal:true, toggle:true});
         });
-       
+
        try
        {
-          if(result !== null) {
-              console.log(result.data);
-
+          if(result) {
               this.setState({ dataset:result.data});
-              this.setState({ years: result.data.from_year});
-              this.setState({ cities: result.data.from_city});
-              this.setState({ wards: result.data.from_ward});
+              this.setState({ years: result.data.form_year});
+              this.setState({ cities: result.data.form_city});
+              this.setState({ wards: result.data.form_ward});
               this.setState({ table: result.data.table1});
+              this.setState({ max: result.data.max1});
+              this.setState({ region: result.data.region1});
+              this.setState({ geometries: result.data.geometries1});
             }
             else {
               this.setState({ dataset:[]});
@@ -150,6 +59,9 @@ export default class DemographicModellerDataCard extends Component {
               this.setState({ cities: [1,'Johannesburg']});
               this.setState({ wards: [1,'Ward 1']});
               this.setState({ table: []});
+              this.setState({ max: 1});
+              this.setState({ region: 1});
+              this.setState({ geometries: []});
             }
        }
        catch(error) {
@@ -179,7 +91,7 @@ export default class DemographicModellerDataCard extends Component {
 
     render() {
 
-      let modalCloseIcon = <i className="modal-close fa fa-times" aria-hidden="true" onClick={this.toggleModal}></i>;
+       let modalCloseIcon = <i className="modal-close fa fa-times" aria-hidden="true" onClick={this.toggleModal}></i>;
 
         return (
             <div className="mt-4 ml-5 pr-5">
