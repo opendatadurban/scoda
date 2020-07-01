@@ -14,7 +14,7 @@ app.config.from_pyfile('config.py')
 # CSRF protection
 from flask_wtf.csrf import CsrfProtect
 
-CsrfProtect(app)
+#CsrfProtect(app)
 
 # Database
 from flask_sqlalchemy import SQLAlchemy
