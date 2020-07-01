@@ -6,6 +6,10 @@ export default class DemographicModellerDataBoxSmallChart extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            chartHeight:'310px'
+        }
+
         this.download = this.download.bind(this);
     }
 
@@ -102,7 +106,7 @@ export default class DemographicModellerDataBoxSmallChart extends Component {
                             </div>
                             <div className="col-0 pt-2 pl-2 pr-1">
                               <canvas style={{display:'none'}}></canvas>
-                              <div id="timechart" style={{height:'100%'}}></div>
+                              <div id="timechart" style={{height:this.state.chartHeight}}></div>
                               <input type="hidden" id="timeChartPng"></input>
                             </div>
                             <div className="row mt-3"></div>

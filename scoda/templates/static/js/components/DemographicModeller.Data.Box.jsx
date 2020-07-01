@@ -28,7 +28,7 @@ export default class DemographicModellerDataBox extends Component {
                                       {this.props.resultTitle}
                                   </div>
                                   <div className="col-0 mt-2 mr-4 float-right">
-                                      <div className="ie-button-download">Download</div>
+                                      <div className="ie-button-download" onClick={this.props.downloadEvent}>Download</div>
                                   </div>
                               </div>
                             </div>

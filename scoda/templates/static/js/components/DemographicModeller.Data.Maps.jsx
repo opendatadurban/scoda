@@ -23,7 +23,7 @@ export default class DemographicModellerDataMap extends Component {
     if(this.props.data.length !== 0) {
       let container = L.DomUtil.get('map');
 
-      if(container != null){
+     if(container != null){
          container._leaflet_id = null;
       }
 
@@ -34,12 +34,18 @@ export default class DemographicModellerDataMap extends Component {
   loadMap() {
     let geojson;
 
-    let map = L.map('map').setView([-26.195246, 28.034088], 19);
-
-    L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>'
-    }).addTo(map);
+    let map = L.map('map').setView([-26.195246, 28.034088], 10);
+   
+    //Note: HACK to prevent 404 tile errors
+    //Riaan Snyders - 1 July 2020
+    try
+    {
+        L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>'
+        }).addTo(map);
+    }
+    catch(e) {}
 
     var info1 = L.control();
 
@@ -232,6 +238,7 @@ export default class DemographicModellerDataMap extends Component {
       click: this.zoomToFeature
    });
  }
+
 
   render() {
     
