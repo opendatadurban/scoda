@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import { Modal, ModalHeader, ModalBody, Spinner } from 'reactstrap';
 
-import $, { data } from 'jquery';
-
 import axios from 'axios';
-import querystring from 'querystring';
 
 import DemographicModellerDataBox from '../components/DemographicModeller.Data.Box';
 import DemographicModellerDataBoxMapFilter from '../components/DemographicModeller.Data.Box.Small.MapFilter';
 import DemographicModellerDataBoxSmallChart from '../components/DemographicModeller.Data.Box.Small.Charts';
-import { request } from 'https';
-import { runInThisContext } from 'vm';
 
 export default class DemographicModellerDataCard extends Component {
     constructor(props) {
@@ -24,7 +19,8 @@ export default class DemographicModellerDataCard extends Component {
             table:[],
             geometries:[],
             max:1,
-            region:1
+            region:1,
+            ward:'None',
         }
 
         this.loadData = this.loadData.bind(this);
@@ -32,6 +28,7 @@ export default class DemographicModellerDataCard extends Component {
         this.showLoader = this.showLoader.bind(this);
         this.hideLoader = this.hideLoader.bind(this);
         this.rebind = this.rebind.bind(this);
+        this.downloadMapData = this.downloadMapData.bind(this);
     }
 
     async componentDidMount() {
@@ -81,6 +78,12 @@ export default class DemographicModellerDataCard extends Component {
       this.showLoader();
 
       let data = {'city_ward_code': ward, 'region_id': city, 'year': year};
+
+      if(ward === '') {
+        ward = 'None';
+      }
+
+      this.setState({region:city,ward:ward});
 
       let result = await axios({
         method: 'post',
@@ -135,6 +138,9 @@ export default class DemographicModellerDataCard extends Component {
     this.setState({loader:false});
   }
 
+  downloadMapData() {
+    this.props.downloadMapEvent(this.state.region,this.state.ward);
+  }
 
     render() {
 
@@ -165,6 +171,7 @@ export default class DemographicModellerDataCard extends Component {
                                     <DemographicModellerDataBox 
                                             resultTitle="Geographic Representation"
                                             results={this.state.geometries}
+                                            downloadEvent={this.downloadMapData}
                                             resultType="map"
                                     />
                                     

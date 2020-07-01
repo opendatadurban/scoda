@@ -9,6 +9,14 @@ export default class DemographicModeller extends Component {
 
         this.downloadMethodology = this.downloadMethodology.bind(this);
         this.downloadTimeChart = this.downloadTimeChart.bind(this);
+        this.downloadMapData = this.downloadMapData.bind(this);
+    }
+
+    downloadMapData(region,ward) {
+        let fileName = 'demographics.csv';
+        let dataUrl = '/demographics/' + region + '/' + ward + '/download';
+
+        this.downloadData(dataUrl,fileName);
     }
 
     downloadTimeChart() {
@@ -40,6 +48,7 @@ export default class DemographicModeller extends Component {
                    <div className="col-sm-12">
                         <DemographicModellerDataCard
                          downloadEvent={this.downloadTimeChart}
+                         downloadMapEvent={this.downloadMapData}
                         />
                    </div>
                </div>
