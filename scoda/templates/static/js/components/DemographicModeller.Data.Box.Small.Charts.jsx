@@ -32,9 +32,7 @@ export default class DemographicModellerDataBoxSmallChart extends Component {
             google.load("visualization", "1", {
               packages:['controls', 'bar', 'corechart', 'geochart','line'],
               callback: function() {
-                
-                console.log('in');
-
+            
                 let data = google.visualization.arrayToDataTable(table);
 
                 let options = {
@@ -104,7 +102,7 @@ export default class DemographicModellerDataBoxSmallChart extends Component {
                             </div>
                             <div className="col-0 pt-2 pl-2 pr-1">
                               <canvas style={{display:'none'}}></canvas>
-                              <div id="timechart"></div>
+                              <div id="timechart" style={{height:'100%'}}></div>
                               <input type="hidden" id="timeChartPng"></input>
                             </div>
                             <div className="row mt-3"></div>

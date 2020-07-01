@@ -164,7 +164,7 @@ export default class DemographicModellerDataCard extends Component {
                                     <div className="col mt-4">
                                     <DemographicModellerDataBox 
                                             resultTitle="Geographic Representation"
-                                            results={this.state. geometries}
+                                            results={this.state.geometries}
                                             resultType="map"
                                     />
                                     

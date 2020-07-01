@@ -11,6 +11,10 @@ export default class DemographicModellerDataBoxMapFilter extends Component {
         this.rebind = this.rebind.bind(this);
     }
 
+    componentDidMount() {
+        document.getElementById('year-selector').selectedIndex = 1;
+    }
+
     rebind() {
         let city = document.getElementById('city-selector').value;
         let year = document.getElementById('year-selector').value;
