@@ -4,11 +4,13 @@ import { Modal, ModalHeader, ModalBody, Spinner } from 'reactstrap';
 import $, { data } from 'jquery';
 
 import axios from 'axios';
-
+import querystring from 'querystring';
 
 import DemographicModellerDataBox from '../components/DemographicModeller.Data.Box';
 import DemographicModellerDataBoxMapFilter from '../components/DemographicModeller.Data.Box.Small.MapFilter';
 import DemographicModellerDataBoxSmallChart from '../components/DemographicModeller.Data.Box.Small.Charts';
+import { request } from 'https';
+import { runInThisContext } from 'vm';
 
 export default class DemographicModellerDataCard extends Component {
     constructor(props) {
@@ -29,6 +31,7 @@ export default class DemographicModellerDataCard extends Component {
         this.toggleModal = this.toggleModal.bind(this);
         this.showLoader = this.showLoader.bind(this);
         this.hideLoader = this.hideLoader.bind(this);
+        this.rebind = this.rebind.bind(this);
     }
 
     async componentDidMount() {
@@ -36,6 +39,8 @@ export default class DemographicModellerDataCard extends Component {
     }
 
     async loadData() {
+       this.showLoader();
+
        let result = await axios.get('/api/demographics').catch(error => {
           this.hideLoader();
           this.setState({modal:true, toggle:true});
@@ -63,6 +68,8 @@ export default class DemographicModellerDataCard extends Component {
               this.setState({ region: 1});
               this.setState({ geometries: []});
             }
+
+            this.hideLoader();
        }
        catch(error) {
          //For now we just swallow any errors. Any data errors get handled above in axios call.
@@ -70,8 +77,48 @@ export default class DemographicModellerDataCard extends Component {
        }
     }
 
+    async rebind(year,city,ward){
+      this.showLoader();
+
+      let data = {'city_ward_code': ward, 'region_id': city, 'year': year};
+
+      let result = await axios({
+        method: 'post',
+        url: '/api/demographics',
+        data: data,
+        headers: { 'Content-Type': 'application/json' }
+        }).catch(error => {
+          this.hideLoader();
+          this.setState({modal:true, toggle:true});
+        });;
+                      
+      try
+      {
+          if(result) {
+                        this.setState({ dataset:result.data});
+                        this.setState({ table: result.data.table1});
+                        this.setState({ max: result.data.max1});
+                        this.setState({ region: result.data.region1});
+                        this.setState({ geometries: result.data.geometries1});
+          }
+          else {
+                        this.setState({ dataset:[]});
+                        this.setState({ table: []});
+                        this.setState({ max: 1});
+                        this.setState({ region: 1});
+                        this.setState({ geometries: []});
+         }
+
+         this.hideLoader();
+      }
+      catch(error) {
+                    //For now we just swallow any errors. Any data errors get handled above in axios call.
+                    this.hideLoader();
+      }
+      
+    }
     
-  toggleModal() {
+    toggleModal() {
       if(!this.state.modal) {
           this.setState({modal:true});
       }
@@ -105,20 +152,21 @@ export default class DemographicModellerDataCard extends Component {
                                          yearOptions={this.state.years}
                                          cityOptions={this.state.cities}
                                          wardOptions={this.state.wards}
+                                         dataBindEvent={this.rebind}
                                         />
-                                        {/*<DemographicModellerDataBoxSmallChart 
+                                        <DemographicModellerDataBoxSmallChart 
                                             title="Time Series"
-                                            data={this.state.timeData}
-                                        />*/}
+                                            table={this.state.table}
+                                            max={this.state.max}
+                                            downloadEvent={this.props.downloadEvent}
+                                        />
                                     </div>
                                     <div className="col mt-4">
-                                    {/*<DemographicModellerDataBox 
+                                    <DemographicModellerDataBox 
                                             resultTitle="Geographic Representation"
-                                            results={this.state.mapData}
-                                            zoom={this.state.zoom}
-                                            center={this.state.center}
+                                            results={this.state. geometries}
                                             resultType="map"
-                                    />*/}
+                                    />
                                     
                                     </div>
                                 </div>   

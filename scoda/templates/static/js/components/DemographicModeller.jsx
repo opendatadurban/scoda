@@ -8,6 +8,13 @@ export default class DemographicModeller extends Component {
         super(props);
 
         this.downloadMethodology = this.downloadMethodology.bind(this);
+        this.downloadTimeChart = this.downloadTimeChart.bind(this);
+    }
+
+    downloadTimeChart() {
+        let dataUri = document.getElementById('timeChartPng').value;
+
+        this.downloadData(dataUri,'chart.png');
     }
 
     downloadMethodology() {
@@ -32,6 +39,7 @@ export default class DemographicModeller extends Component {
                <div className="row">
                    <div className="col-sm-12">
                         <DemographicModellerDataCard
+                         downloadEvent={this.downloadTimeChart}
                         />
                    </div>
                </div>
