@@ -5,11 +5,11 @@ export default class Preview_block extends Component {
             <div className="preview_block module-wrapper">
                 <div className="container">
                     <div className="row">
-                        <div className="col-12 mt-5 mb-5">
+                        <div className="col-12">
                             <h2>What Products Do We Offer?</h2>
                             <p>South African Cities Network (SACN) are continually developing our range of tools to help cities employees perform their functions more effecively and efficiently.  These tools are built around our core research concepts:</p>
                         </div>
-                        <div className="col-md-10 offset-md-1">
+                        <div className="col-md-10 offset-md-1 preview-elements">
                             <div className="row product-evidence mt-5 mb-5 d-flex align-items-center">
                                 <div className="col-md-2 icon"></div>
                                 <div className="col-md-9">

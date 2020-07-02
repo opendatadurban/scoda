@@ -288,8 +288,8 @@ export default class TabAndFilters extends Component {
 
         return (
             <div className="row ml-0">
-                <div className="col-0 ml-0">
-                    <div className="nav flex-column ds-vertical-tabs-box" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <div className="col-0 ml-0 ds-vertical-tabs-box">
+                    <div className="nav flex-column " id="v-pills-tab" role="tablist" aria-orientation="vertical">
                         {tabs}
                     </div>
                 </div>
@@ -309,7 +309,7 @@ export default class TabAndFilters extends Component {
 
         const tabPanes = this.props.tabs.map((result,index) =>(
             <div key={`tab-content-${result.name}`}  className={`tab-pane fade show ${result.mode}`} id={`nav-${result.name}-content`} role="tabpanel" aria-labelledby={`nav-${result.name}-tab`}>
-                <div key={`tab-container-${result.name}`} className="container-fluid">
+                <div key={`tab-container-${result.name}`} className="container-flui pl-0 container-fluid-max-width">
                     {this.renderTabPane(result.name, result.url)}
                 </div>
           </div>
