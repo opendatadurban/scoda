@@ -93,7 +93,7 @@ export default class DemographicModellerDataCard extends Component {
         }).catch(error => {
           this.hideLoader();
           this.setState({modal:true, toggle:true});
-        });;
+        });
                       
       try
       {
