@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from scoda.app import app
 from flask import request, url_for, redirect, flash, make_response, session, render_template, jsonify, Response, \
     send_file
@@ -16,6 +14,7 @@ from pandas import read_sql_query
 import gviz_api
 import geojson, json
 import pandas as pd
+from .app import csrf
 from werkzeug.datastructures import MultiDict
 from urllib.parse import urlencode, urlparse, parse_qsl, urlsplit, parse_qs
 
@@ -518,6 +517,7 @@ def demographics():
             {'Cache-Control': 'no-cache, no-store, must-revalidate'})
 
 @app.route('/api/demographics', methods=['GET', 'POST'])
+@csrf.exempt
 def api_demographics():
     analyses = []
 
@@ -531,6 +531,7 @@ def api_demographics():
 
     if request.method == 'POST':
         data = request.get_json()
+        print(data)
         #data = request.data.decode('utf-8')
         #object = parse_qs(urlsplit('?' + data).query)
         #object = {key: str(value[0]) for key, value in object.items()}
