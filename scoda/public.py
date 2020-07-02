@@ -42,11 +42,16 @@ def api_explore():
     status = 200
     plot = 0
     tour = 1
-    ind = 76
-    if request.method == 'POST':
-        if form.validate():
-            data_json = request.get_json()
-            ind = data_json["indicator_id"]
+    #ind = 76
+    #Note: Riaan Snyders: 10 June 2020 - Removed for now. Only functions on GET at the moment.
+    #if request.method == 'POST':
+        #if form.validate():
+            #data_json = request.get_json()
+            #ind = data_json["indicator_id"]
+    if request.args.get('indicator_id'):
+        ind = request.args.get('indicator_id')
+    else:
+        ind = 76
     plot = 1
     tour = 2
     query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value). \

@@ -9,7 +9,7 @@ export default class Footer extends Component {
                             <a href="https://ckan.org/" target="blank__"><img className="ckan" src="../../../../static/dist/img/ckan-logo.png" alt="ckan logo" /></a>
                             <span><span className="sacn">SACN</span> in partnership with <span className="sacn">ODD</span> <br/> <span className="ccl"> Creative Commons License</span></span>
                         </div>
-                        <div class="span4 footer--col_two">
+                        <div className="span4 footer--col_two">
                             <span>
                                 <p>email us:</p>
                                     <a href="mailto:scoda@sacities.net">scoda@sacities.net</a>
