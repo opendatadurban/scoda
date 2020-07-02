@@ -13,8 +13,7 @@ export default class DemographicModellerDataBox extends Component {
             case "map":
                 return <DemographicModellerDataMap 
                        data={this.props.results}
-                       zoom={this.props.zoom}
-                       center={this.props.center}/>
+                       />
              break;
         }
     }
@@ -29,12 +28,12 @@ export default class DemographicModellerDataBox extends Component {
                                       {this.props.resultTitle}
                                   </div>
                                   <div className="col-0 mt-2 mr-4 float-right">
-                                      <div className="ie-button-download">Download</div>
+                                      <div className="ie-button-download" onClick={this.props.downloadEvent}>Download</div>
                                   </div>
                               </div>
                             </div>
-                            <div className="col pt-3 pl-3 pr-3">
-                                <div className="mtp-2 ml-2 mr-2">
+                            <div className="col pt-1 pl-1 pr-1 mb-2">
+                                <div>
                                   {this.renderDataSet(this.props.resultType)}
                                 </div>                        
                             </div>

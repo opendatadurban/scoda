@@ -86,7 +86,7 @@ class MapForm(Form):
     city_ward_code = SelectField('Ward Number', [validators.Optional()])
     region_id = SelectField('Region', [validators.Optional()])
     year = SelectField('Year', [validators.Optional()])
-
+    
     def __init__(self, *args, **kwargs):
         super(MapForm, self).__init__(*args, **kwargs)
         query = db.session.query(Ward.city_ward_code).filter(Ward.region_id == 1).order_by(Ward.city_ward_code).distinct()
@@ -97,6 +97,7 @@ class MapForm(Form):
         self.year.choices = [[str(i), str(y)] for i, y in enumerate(range(1996, 2031))]
 
     def validate(self):
+        #return self
         return super(MapForm, self).validate()
 
     def populate_obj(self, obj):
