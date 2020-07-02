@@ -11,7 +11,7 @@ export default class CTA_block extends Component {
                                 <div className="col-10 d-flex align-items-center">
                                     <h2>ANALYSIS TOOLS</h2>
                                 </div>
-                                <div className="col-12 mt-3">
+                                <div className="col-md-9 pl-0 mt-3">
                                     <p>Data requires context to provide meanginful analysis.  We offer a range of public and city management friendly data analysis tools which feed directly from a central management system to allow overlays of comparable data to help users build contextual analyses which are easy to share with relevant people, groups and organisations.</p>
                                 </div>
                             </div>
@@ -38,7 +38,7 @@ export default class CTA_block extends Component {
                     <div className="row ">
                         <div className="col-md-10 offset-md-1">
                             <div className="row cta-info">
-                                <div className="col-md-6">
+                                <div className="col-md-6 d-flex align-items-center justify-content-center">
                                     <div className="cta-image cta-image-analysis-data-explore"></div>
                                 </div>
                                 <div className="col-md-6 cta-info-content d-flex justify-content-center">

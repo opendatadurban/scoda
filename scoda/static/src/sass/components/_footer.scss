@@ -40,10 +40,14 @@
           margin: auto;
           width: 280px;
           line-height: 16px;
+          color: #FFFFFF;
           &.sacn {
             display: inline;
-            color: #ffffff;
+            color: #FF8430;
             font-weight: 500;
+          }
+          &.ccl{
+            color: #9B9B9B;
           }
         }
         a {
@@ -66,6 +70,7 @@
           display: inline;
           color: white !important;
           font-size: 10px;
+          margin-right: 8px;
         }
         a {
           font-size: 16px;
