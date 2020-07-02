@@ -530,24 +530,29 @@ def api_demographics():
     geometries1 = {}
 
     if request.method == 'POST':
-        data = request.data.decode('utf-8')
-        object = parse_qs(urlsplit('?' + data).query)
-        object = {key: str(value[0]) for key, value in object.items()}
-        if 'csrf_token' in object: del object['csrf_token']
-        # print(object)
-        form1 = MapForm(MultiDict(object))
+        data = request.get_json()
+        #data = request.data.decode('utf-8')
+        #object = parse_qs(urlsplit('?' + data).query)
+        #object = {key: str(value[0]) for key, value in object.items()}
+        
+        #if 'csrf_token' in object: del object['csrf_token']
+        #form1 = MapForm(MultiDict(object))
+        form1 = data
 
-        if form1.validate():
+        print(form1['year'])
 
+        #if form1.validate():
+        if form1:
             tour = 0
             # query = db.session.query(Area.geom.ST_AsGeoJSON(), Area.data)
-            year1 = int(form1.year.data)
+            #year1 = int(form1.year)
+            year1 = int(form1['year'])
             year_ind1 = range(1996, 2031)
 
-            if form1.city_ward_code.data == '':
-
+            #if form1.city_ward_code.data == '':
+            if form1['city_ward_code'] == '':
                 query = db.session.query(Ward.geom.ST_AsGeoJSON(), Ward.data, Ward.city_ward_code). \
-                    filter(Ward.region_id == form1.region_id.data)
+                    filter(Ward.region_id == form1['region_id'])
 
                 geometries1 = {"type": "FeatureCollection",
                                "features": []}
@@ -565,8 +570,8 @@ def api_demographics():
                                                                                       "year": year_ind1[year1]},
                                                     "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
 
-                query = db.session.query(Ward.data).filter(Ward.region_id == form1.region_id.data).all()
-                region = db.session.query(Region.re_name).filter(Region.id == form1.region_id.data).first()
+                query = db.session.query(Ward.data).filter(Ward.region_id == form1['region_id']).all()
+                region = db.session.query(Region.re_name).filter(Region.id == form1['region_id']).first()
 
                 results = []
 
@@ -585,8 +590,8 @@ def api_demographics():
 
             else:
                 query = db.session.query(Area.geom.ST_AsGeoJSON(), Area.data, Area.city_ward_code) \
-                    .filter(Area.city_ward_code == form1.city_ward_code.data) \
-                    .filter(Area.region_id == form1.region_id.data)
+                    .filter(Area.city_ward_code == int(form1['city_ward_code'])) \
+                    .filter(Area.region_id == int(form1['region_id']))
 
                 geometries1 = {"type": "FeatureCollection",
                                "features": []}
@@ -606,11 +611,11 @@ def api_demographics():
                                                            "year": year_ind1[year1]},
                          "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
 
-                query = db.session.query(Ward.data).filter(Ward.city_ward_code == form1.city_ward_code.data). \
-                    filter(Ward.region_id == form1.region_id.data).first()
+                query = db.session.query(Ward.data).filter(Ward.city_ward_code == int(form1['city_ward_code'])). \
+                    filter(Ward.region_id == int(form1['region_id'])).first()
 
-                region = db.session.query(Region.re_name).filter(Region.id == form1.region_id.data).first()
-                region2 = db.session.query(Ward.city_ward_code).filter(Ward.city_ward_code == form1.city_ward_code.data) \
+                region = db.session.query(Region.re_name).filter(Region.id == int(form1['region_id'])).first()
+                region2 = db.session.query(Ward.city_ward_code).filter(Ward.city_ward_code == int(form1['city_ward_code'])) \
                     .first()
 
                 results = []
@@ -628,16 +633,16 @@ def api_demographics():
 
                 m1 = 1.05 * max(df.sum(axis=0).tolist())
 
-            query = db.session.query(Ward.city_ward_code).filter(Ward.region_id == form1.region_id.data).order_by(
+            query = db.session.query(Ward.city_ward_code).filter(Ward.region_id == int(form1['region_id'])).order_by(
                 Ward.city_ward_code).distinct()
 
-            form1.city_ward_code.choices = [[str(i), 'Ward %s' % row.city_ward_code] for i, row in enumerate(query.all()
-                                                                                                             , start=1)]
-            form1.city_ward_code.choices.insert(0, ('', 'View All'))
+            #form1.city_ward_code.choices = [[str(i), 'Ward %s' % row.city_ward_code] for i, row in enumerate(query.all()
+                                                                                                             #, start=1)]
+            #form1.city_ward_code.choices.insert(0, ('', 'View All'))
 
 
             resp = jsonify({'success': True, 'geometries1': geometries1,'table1':table1,
-                            'tour':tour, 'max1':m1, 'region1':form1.region_id.data,'ward1':form1.city_ward_code.data})
+                            'tour':tour, 'max1':m1, 'region1':form1['region_id'],'ward1':form1['city_ward_code']})
             resp.status_code = 200
             return resp
         else:
