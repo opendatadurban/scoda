@@ -38,7 +38,7 @@ export default class Navigation_scoda extends Component {
                             Toolkits
                             </a>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/scoda/#/data-stories-details">Data stories</a>
+                                <a className="dropdown-item" href="/scoda/#/data-stories-details">Data stories</a>
                             </div>
                         </li>
                         <li className="nav-item">

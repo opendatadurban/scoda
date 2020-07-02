@@ -79,8 +79,7 @@ export default class Hero extends Component {
                         </div>
                         <div className="hero-block-vspacer"></div>
                         <div id="contentContainer" className="row ml-5">
-                            <div className="col hero-block-text">
-                           {this.props.content}
+                            <div className="col hero-block-text" dangerouslySetInnerHTML={{__html:this.props.content}}>
                             </div>
                         </div>
                         <div className="hero-block-vspacer"></div>
