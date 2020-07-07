@@ -32,3 +32,4 @@ mail = Mail(app)
 from flask_mobility import Mobility
 
 mobility = Mobility(app)
+

@@ -25,6 +25,7 @@ var jsSources = [
   'src/js/vendor/bootstrap4/bootstrap.min.js',
   'src/js/vendor/daterangepicker/daterangepicker.js',
   'src/js/vendor/select2/select2.min.js',
+  'src/js/vendor/leaflet1_0_2/leaflet.js',
   // 'src/js/vendor/chart/chart.min.js',
   'src/js/vendor/bootstrap-filestyle/bootstrap-filestyle.min.js',
   // 'src/js/custom/charts-config.js',
@@ -38,10 +39,10 @@ sassSources = [
   'src/sass/vendor/bootstrap4/bootstrap.scss',
   // 'src/sass/vendor/chartjs/chart.min.css',
   'src/sass/vendor/select2/select2.min.css',
+  'src/js/vendor/leaflet1_0_2/leaflet.css',
   'src/sass/vendor/daterangepicker/daterangepicker.css',
   'src/sass/**/*.scss'
 ]
-
 
 // SASS
 gulp.task('sass', function() {
@@ -157,6 +158,14 @@ gulp.task('copy-assets', function() {
   // Copy Select2 CSS file
       gulp.src(basePaths.node + 'select2/dist/css/select2.min.css')
           .pipe(gulp.dest(basePaths.dev + '/sass/vendor/select2'));
+
+  // Copy Leaflet JS file
+  gulp.src(basePaths.node + 'leaflet/dist/js/leaflet.js')
+    .pipe(gulp.dest(basePaths.dev + 'js/vendor/leaflet1_0_2'));
+
+// Copy Leaflet CSS file
+  gulp.src(basePaths.node + 'leaflet/dist/css/leaflet.css')
+    .pipe(gulp.dest(basePaths.dev + '/js/vendor/leaflet1_0_2'));
           
   });
 
