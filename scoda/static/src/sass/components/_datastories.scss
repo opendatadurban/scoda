@@ -789,3 +789,15 @@ o {
         }
     }
 }
+
+.data-story-landig-page{
+    @media (min-width: $tablet) {
+        top: -109px;
+        position: relative;
+        z-index: 2;
+
+        .nav-tabs{
+            border-bottom: none;
+        }
+    }
+}

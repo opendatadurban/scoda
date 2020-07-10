@@ -30,22 +30,22 @@ export default class Navigation_scoda extends Component {
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav">
-                        <li className="nav-item active">
-                            <a className="nav-link" href="/scoda/#/home">Home</a>
+                        <li className="nav-item home_">
+                            <a className="nav-link " href="/scoda/#/home">Home</a>
                         </li>
-                        <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li className="nav-item tookit_ dropdown">
+                            <a className="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Toolkits
                             </a>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a className="dropdown-item" href="/scoda/#/data-stories-details">Data stories</a>
                             </div>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/scoda/#/about-us">About Us </a>
+                        <li className="nav-item about_">
+                            <a className="nav-link " href="/scoda/#/about-us">About Us </a>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">Help</a>
+                        <li className="nav-item help_">
+                            <a className="nav-link " href="#">Help</a>
                         </li>
                     </ul>
                 </div>

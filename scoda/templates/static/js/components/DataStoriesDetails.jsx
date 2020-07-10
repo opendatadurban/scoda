@@ -29,7 +29,7 @@ export default class DataStoriesDetails extends Component {
         let sacnSectionOneContent = 'Despite the fact that South Africa’s national urban agenda prioritises urban densification, the municipal revenue mode…';
 
         return (
-            <div className="container-fluid ml-0 mt-0 p-0">
+            <div className="container-fluid ml-0 mt-0 p-0 data-story-landig-page">
                 <nav>
                     <div className="nav nav-tabs" id="nav-tab" role="tablist">
                         <span className="nav-stretch"></span>

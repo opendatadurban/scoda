@@ -44,7 +44,7 @@ export default class CTA_block extends Component {
                                 <div className="col-md-6 cta-info-content d-flex justify-content-center">
                                     <h5>Data Explorer</h5>
                                     <p>The data explorer provides access to the 102 indicators used by the South African Cities Network in the State of Cities Report.</p>
-                                    <a href="" className="btn">See Our Data Explorer</a>
+                                    <a href="/scoda/#/explorer" className="btn">See Our Data Explorer</a>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +76,7 @@ export default class CTA_block extends Component {
                                 <div className="col-md-6 cta-info-content d-flex justify-content-center">
                                     <h5>Demographics Modeller</h5>
                                     <p>With the demographic projection tool we provide both a powerful predictor of internal migration within South African metros, as well as a framework for the development of open, collaborative model building that is based on diverse and novel data sources.</p>
-                                    <a href="" className="btn">See Our Demographics Modeller</a>
+                                    <a href="/scoda/#/demographic-modeller" className="btn">See Our Demographics Modeller</a>
                                 </div>
                             </div>
                         </div>

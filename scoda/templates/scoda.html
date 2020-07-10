@@ -121,6 +121,33 @@ $("#filter_ .data-story-trigger").each(function() {
 });
     </script>
 
+    <script>
+          if(document.location.href == window.location.origin + '/scoda/#/home' ){
+        $('.home_').addClass('active');
+        $('.toolkit_').removeClass('active');
+        $('.about_').removeClass('active');
+        $('.help_').removeClass('active');
+    }
+    if(document.location.href == window.location.origin + '/scoda/#/about-us' ){
+        $('.about_').addClass('active');
+        $('.toolkit_').removeClass('active');
+        $('.home_').removeClass('active');
+        $('.help_').removeClass('active');
+    }
+    if(document.location.href == window.location.origin + '/scoda/#/help' ){
+        $('.help_').addClass('active');
+        $('.toolkit_').removeClass('active');
+        $('.home_').removeClass('active');
+        $('.about_').removeClass('active');
+    }
+    if(document.location.href == window.location.origin + '/scoda/#/data-stories-details' ||  document.location.href == window.location.origin + '/scoda/#/demographic-modeller' || document.location.href == window.location.origin + '/scoda/#/explorer'  ){
+        $('.toolkit_').addClass('active');
+        $('.about_').removeClass('active');
+        $('.home_').removeClass('active');
+        $('.help_').removeClass('active');
+    }
+    </script>
+
    
   </body>
 </html>
