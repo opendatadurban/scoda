@@ -69,37 +69,36 @@ export default class Hero extends Component {
 
         return (
             <div id="hero" className="hero-block">
-            <div className="container-fluid mt-0 p-0">
-                <div className="row ml-0 mr-0 p-0">
-                    <div className="col-md-5">
-                        <div className="hero-block-vspacer"></div>
-                        <div className="row ml-5">
-                            <div className="col-0 hero-block-title" style={primaryColor}>{this.props.title}</div>
-                            <div className="col-1"><i className={this.state.hero_caret} style={primaryColor} aria-hidden="true" onClick={this.toggleHero}></i></div>
-                        </div>
-                        <div className="hero-block-vspacer"></div>
-                        <div id="contentContainer" className="row ml-5">
-                            <div className="col hero-block-text" dangerouslySetInnerHTML={{__html:this.props.content}}>
+                <div className="container-fluid mt-0 p-0">
+                    <div className="row ml-0 mr-0 p-0">
+                        <div className="col-md-5">
+                            <div className="row hero-title">
+                                <div className="col-0 hero-block-title" style={primaryColor}>{this.props.title}</div>
+                                <div className="col-1"><i className={this.state.hero_caret} style={primaryColor} aria-hidden="true" onClick={this.toggleHero}></i></div>
+                            </div>
+                            <div id="contentContainer" className="row">
+                                <div className="col hero-block-text" dangerouslySetInnerHTML={{__html:this.props.content}}>
+                                </div>
+                            </div>
+                            <div id="buttonContainer" className="row">
+                                <div className="col-12">
+                                    <button className="hero-block-button" style={buttonPrimaryColor}>Got It!</button>
+
+                                </div>
                             </div>
                         </div>
-                        <div className="hero-block-vspacer"></div>
-                        <div className="hero-block-vspacer"></div>
-                        <div id="buttonContainer" className="row ml-5">
-                            <button className="hero-block-button" style={buttonPrimaryColor}>Got It!</button>
-                        </div>
-                    </div>
-                    {/*Info bar and background*/}
-                    <div id="infoBlock" className="col-md-7 hero-block-background p-0 mr-0" style={infoBlockBackground}>
-                        <div className="hero-block-spacer"></div>
-                        <div id="infoBlockContainer" className="row ml-0 p-0 hero-block-info-display">
-                            <div className="col-0 hero-block-info-hspacer"></div>
-                            <div className="col-0 hero-block-info-logo hero-block-info-logo-title" style={infoBlock}>{infoTitleCaps}</div>
-                            <div className="col-0 hero-block-info-hspacer"></div>
-                            <div className="col-0 hero-block-info-display-text" style={secondaryColor}>{this.props.infoTitle}</div>
+                        {/*Info bar and background*/}
+                        <div id="infoBlock" className="col-md-7 hero-block-background p-0 mr-0" style={infoBlockBackground}>
+                            <div className="hero-block-spacer"></div>
+                            <div id="infoBlockContainer" className="row ml-0 p-0 hero-block-info-display">
+                                <div className="col-0 hero-block-info-hspacer"></div>
+                                <div className="col-0 hero-block-info-logo hero-block-info-logo-title" style={infoBlock}>{infoTitleCaps}</div>
+                                <div className="col-0 hero-block-info-hspacer"></div>
+                                <div className="col-0 hero-block-info-display-text" style={secondaryColor}>{this.props.infoTitle}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
         )
     }

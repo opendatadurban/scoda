@@ -3,7 +3,7 @@
     font-family: 'Montserrat';
     background-color: #131421;
     box-shadow: 0 0 6px 7px rgba(0,0,0,0.2);
-    padding: 60px;
+    padding: 80px 60px;
 
     .icon{
         background-size: cover;
@@ -11,6 +11,10 @@
         background-repeat: no-repeat;
         height: 138px;
         width: 142px;
+    }
+    .preview-elements{
+        padding-top: 50px;
+        padding-bottom: 50px;
     }
     .product-evidence{
         h5{
@@ -53,6 +57,7 @@
         font-size: 30px;
         font-weight: bold;
         line-height: 32px;
+        margin-bottom: 12px;
     }
     h5{
         font-family: 'Montserrat';

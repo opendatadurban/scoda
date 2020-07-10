@@ -400,9 +400,9 @@ body {
     font-family: $scoda-font;
     font-size: 16px;
     letter-spacing: 0;
-    line-height: 24px;
-    height: 60px;
+    line-height: 22px;
     width: 181px;
+    height: 60px;
     background-color: #FFFFFF;
     box-shadow: 0 0 4px 1px rgba(0,0,0,0.1);
     font-weight: 600;
@@ -416,6 +416,7 @@ body {
     font-size: 16px;
     letter-spacing: 0;
     line-height: 22px;
+    height: 60px;
     width: 181px;
     background-color: #FFFFFF;
     text-align: left;
@@ -436,7 +437,7 @@ body {
     box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
     color: #000000;
     font-family: $scoda-font;
-    font-size: 21px;
+    font-size: 22px;
     font-weight: 600;
     letter-spacing: 0;
     line-height: 45px;
@@ -804,6 +805,18 @@ o {
                 height: unset;
                 width: unset;
             }
+        }
+    }
+}
+
+.data-story-landig-page{
+    top: -109px;
+    position: relative;
+    z-index: 2;
+    @media (min-width: $tablet) {
+
+        .nav-tabs{
+            border-bottom: none;
         }
     }
 }
