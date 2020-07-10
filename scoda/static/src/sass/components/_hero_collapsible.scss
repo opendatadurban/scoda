@@ -126,6 +126,10 @@ body {
     #buttonContainer{
       padding-left: 20px;
     padding-top: 30px;
+
+    @media (max-width: $tablet) {
+      padding-bottom: 60px;
+    }
       
     }
     // Mobile specific styling
