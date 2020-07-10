@@ -11,7 +11,7 @@ export default class CTA_block extends Component {
                                 <div className="col-10 d-flex align-items-center">
                                     <h2>EVIDENCE TOOLS</h2>
                                 </div>
-                                <div className="col-12 mt-3">
+                                <div className="col-md-9 pl-0 mt-3">
                                     <p>Our data management system forms the framework for evidence-based learnings.
                                         This powerful tool allows users to process complex raw data in an understandable way.
                                         By building understanding, users are now able to prove or disprove analyses and insights based on empirical data which can then be verified and tested in the real world with our city partners.</p>

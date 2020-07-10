@@ -34,9 +34,9 @@ export default class CTA_block extends Component {
                             <p>SCODA is a long standing partnership between the South African Cities Network and Open Cities Lab.  Over the years, major South African cities have turned to SACN as a trusted source of data collection, analysis and report building which manifests as the yearly State of Cities Report.  SACN partnered with OCL to translate these reports into bite-sized and actionable pieces of information culminating in the form of SCODA, our joint flagship that we are proud to work together on in the interest of capacitating governing bodies to understand themselves and their constituents and vice versa.</p>
                         </div>
                     </div>
-                    <div className="row box mt-5 mb-5">
+                    <div className="row box">
                         <div className="col-12">
-                            <p>Further information about the development of SCODA is available at  <strong>www.sacities.net</strong> </p>
+                            <p>Further information about the development of SCODA is available at  <a href="https://www.sacities.net"><strong>www.sacities.net</strong></a> </p>
                         </div>
                     </div>
                     <div className="row important-links mt-5 mb-5">
@@ -60,7 +60,7 @@ Here are some of our core trusted sources:</p>
                         <div className="col item">
                             <img src="/static/dist/img/SCODA Assets V3_1/3 About Us/Important Links/logo_important-links_statssa.png" alt=""/>
                         </div>
-                        <div className="col-12 line  mt-5">
+                        <div className="col-12 line ">
                             <hr/>
                         </div>
                     </div>

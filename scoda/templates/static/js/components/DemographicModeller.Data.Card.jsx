@@ -147,13 +147,13 @@ export default class DemographicModellerDataCard extends Component {
        let modalCloseIcon = <i className="modal-close fa fa-times" aria-hidden="true" onClick={this.toggleModal}></i>;
 
         return (
-            <div className="mt-4 ml-5 pr-5">
+            <div className="demographic-card">
                 <div className="row">
                     <div className="col-12">
                         <div className="ie-content-card">
-                            <div className="col mt-3 ml-3 mr-3">
-                                <div className="row mt-4">
-                                    <div className="col-4 mt-4">
+                            <div className="col ">
+                                <div className="row">
+                                    <div className="col-md-4">
                                         <DemographicModellerDataBoxMapFilter 
                                          yearOptions={this.state.years}
                                          cityOptions={this.state.cities}
@@ -167,7 +167,7 @@ export default class DemographicModellerDataCard extends Component {
                                             downloadEvent={this.props.downloadEvent}
                                         />
                                     </div>
-                                    <div className="col mt-4">
+                                    <div className="col">
                                     <DemographicModellerDataBox 
                                             resultTitle="Geographic Representation"
                                             results={this.state.geometries}
@@ -176,8 +176,7 @@ export default class DemographicModellerDataCard extends Component {
                                     />
                                     
                                     </div>
-                                </div>   
-                                <div className="row mt-4"></div>                    
+                                </div>                   
                             </div>
                         </div>
                     </div>

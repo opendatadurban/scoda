@@ -20,6 +20,35 @@
     <link rel="stylesheet" href="/static/dist/fonts/fontawesome-free/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Megrim&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/dist/css/ds-style.css" />
+    <style>
+      .data-story-trigger.selected{
+        opacity: .5;
+      }
+      .data-story-trigger{
+        padding: 5px 10px;
+      }
+      .data-story-card{
+        position: relative;
+      }
+      .data-story-card .card-trigger{
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        z-index: 2;
+      }
+    </style>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127209646-5"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-127209646-5');
+</script>
   </head>
   <body>
     <!--[if lt IE 7]>
@@ -90,6 +119,33 @@ $("#filter_ .data-story-trigger").each(function() {
     
   });
 });
+    </script>
+
+    <script>
+          if(document.location.href == window.location.origin + '/scoda/#/home' ){
+        $('.home_').addClass('active');
+        $('.toolkit_').removeClass('active');
+        $('.about_').removeClass('active');
+        $('.help_').removeClass('active');
+    }
+    if(document.location.href == window.location.origin + '/scoda/#/about-us' ){
+        $('.about_').addClass('active');
+        $('.toolkit_').removeClass('active');
+        $('.home_').removeClass('active');
+        $('.help_').removeClass('active');
+    }
+    if(document.location.href == window.location.origin + '/scoda/#/help' ){
+        $('.help_').addClass('active');
+        $('.toolkit_').removeClass('active');
+        $('.home_').removeClass('active');
+        $('.about_').removeClass('active');
+    }
+    if(document.location.href == window.location.origin + '/scoda/#/data-stories-details' ||  document.location.href == window.location.origin + '/scoda/#/demographic-modeller' || document.location.href == window.location.origin + '/scoda/#/explorer'  ){
+        $('.toolkit_').addClass('active');
+        $('.about_').removeClass('active');
+        $('.home_').removeClass('active');
+        $('.help_').removeClass('active');
+    }
     </script>
 
    
