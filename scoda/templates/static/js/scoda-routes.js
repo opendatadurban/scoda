@@ -48,6 +48,13 @@ const _heroInfoTitle_explore = 'ANALYSIS TOOLS';
 const _heroPrimaryColor_explore = '#FFAD5A';
 const _heroSecondaryColor_explore = '#FFAD5A';
 
+const _heroTitle_demo = 'Demographics Modeller';
+const _heroContent_demo = 'With the demographic projection tool we provide both a powerful predictor of internal migration within South African metros, as well as a framework for the development of open, collaborative model building that is based on diverse and novel data sources.';
+const _heroInfoTitle_demo = 'ANALYSIS TOOLS';
+const _heroPrimaryColor_demo = '#FFAD5A';
+const _heroSecondaryColor_demo = '#FFAD5A';
+
+
 
 const _tabs = [
   {
@@ -104,7 +111,7 @@ export default (
       <Route path="/ds-affordability-2018" component={Footer} />
 
       <Route exact path="/tabs-and-filters" component={()=><TabsAndFilters tabs={_tabs}/>} />
-      <Route exact path="/demographic-modeller" component={()=><DemographicModeller />} />
+      
    
       <Route path='/preview-block' component={Preview_block} />
       <Route path='/cta-block' component={CTA_block} />
@@ -127,15 +134,22 @@ export default (
       <Route path='/about-us' component={Sub_Footer} />
       <Route path='/about-us' component={Footer} />
 
+      <Route path='/demographic-modeller' component={()=> <Navigation_scoda box_shadow={false} />} />
+      <Route exact path="/demographic-modeller" component={()=> <Hero_Collapsable title={_heroTitle_demo} 
+            content={_heroContent_demo} 
+            infoTitle={_heroInfoTitle_demo}
+            primaryColor={_heroPrimaryColor_demo} 
+            secondaryColor={_heroSecondaryColor_demo}/>}/>
+      <Route exact path="/demographic-modeller" component={()=><DemographicModeller />} />
+      <Route path="/demographic-modeller" component={Footer} />
+
       <Route path="/explorer" component={()=> <Navigation_scoda box_shadow={true} />} />
       <Route exact path="/explorer" component={()=> <Hero_Collapsable title={_heroTitle_explore} 
             content={_heroContent_explore} 
             infoTitle={_heroInfoTitle_explore}
             primaryColor={_heroPrimaryColor_explore} 
             secondaryColor={_heroSecondaryColor_explore}/>}/>
-      <br/><br/>
       <Route exact path="/explorer" component={()=> <IndicatorExplorer />}/>
-      <br/><br/>
       <Route path="/explorer" component={Footer} />
 
     </HashRouter>

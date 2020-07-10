@@ -48,7 +48,7 @@ export default class IndicatorExplorerDataCardHeader extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-0 mt-1 ml-2 mr-2">
+                            <div className="col-12 mt-1 ml-2 mr-2">
                               <select id="selector" className="pl-3 mt-2 mr-2 ie-dropdown" onChange={this.enableFilter}>
                                   <option value="0">Empty</option>
                                   {selectorOptions}
@@ -59,9 +59,8 @@ export default class IndicatorExplorerDataCardHeader extends Component {
                             <div className="col float-left">
                                 <div id="button-search" className="ie-button-search ie-button-inactive" onClick={this.filterData}>Search</div>
                             </div>
-                            <div style={{width:'33%'}}></div>
-                            <div className="col pt-2 float-right">
-                                 <div className="ie-button-reset" onClick={this.resetForm}>Reset Form</div>
+                            <div className="col pt-2">
+                                 <div className="ie-button-reset float-right" onClick={this.resetForm}>Reset Form</div>
                             </div>
                         </div>
                     </div>

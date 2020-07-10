@@ -31,7 +31,6 @@
 }
 
 .dm-box-card {
-    width: 95%;
     height: 100%;
     border-radius: 5px;
     background-color: $scoda-white;
@@ -68,4 +67,42 @@
     border-radius: 12.5px;
     background-color: $scoda-white;
     cursor: pointer;
+    float: right;
+}
+
+.demographic-card{
+    @media (min-width: $tablet) {
+        // padding-right: 3rem;
+        // margin-left: 3rem;
+    }
+    @media (max-width: $tablet) {
+        .recharts-wrapper{
+            width: 100% !important;
+        }
+        svg{
+            font-size: 10px;
+            width: 100%;
+        }
+        .dm-box-card-header{
+            font-size: 10px;
+        }
+    }
+}
+
+
+.ie-content-card{
+
+    padding: 30px;
+    @media (max-width: $tablet) {
+        padding: 30px 10px;
+        .dm-footer-button-green{
+            width: 100%;
+        }
+        .dm-footer-button-white{
+            float: unset;
+            margin-top: 15px;
+            width: 100%;
+        }
+    }
+
 }

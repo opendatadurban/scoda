@@ -55,4 +55,4 @@ $("#filter .btn").each(function() {
    });
 
 // End of document ready function
-});
+}); 

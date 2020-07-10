@@ -9,7 +9,7 @@ body {
  .hero-block {
   box-sizing: border-box;
     border-bottom: 1.4px solid $scoda-black;
-    margin-bottom: -49px;
+    margin-bottom: 60px;
   }
 
 .hero-block-text {
@@ -115,12 +115,26 @@ body {
   }
   
   .hero-block{
+    .hero-title{
+      padding-left: 32px;
+      padding-top: 60px;
+    padding-bottom: 20px;
+    }
+    #contentContainer{
+      padding-left: 20px;
+    }
+    #buttonContainer{
+      padding-left: 20px;
+    padding-top: 30px;
+      
+    }
     // Mobile specific styling
+
         @media (max-width: $tablet) {
           margin-bottom: 0px;
-          margin-bottom: 130px;
+          padding-bottom: 130px;
           #contentContainer{
-            margin-bottom: 60px;
+            padding-bottom: 60px;
           }
           #infoBlock{
             display: none;
