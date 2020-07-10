@@ -730,6 +730,25 @@ o {
     }
 }
 
+.data-story-trigger.selected{
+    opacity: .5;
+  }
+  .data-story-trigger{
+    padding: 5px 10px;
+  }
+  .data-story-card{
+    position: relative;
+  }
+  .data-story-card .card-trigger{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 2;
+  }
+
 .data-story-page{
     @media (max-width: $tablet) {
         #filter_{

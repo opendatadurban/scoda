@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from scoda.app import app
 from flask import request, url_for, redirect, flash, make_response, session, render_template, jsonify, Response, \
     send_file
@@ -16,7 +14,9 @@ from pandas import read_sql_query
 import gviz_api
 import geojson, json
 import pandas as pd
-
+from .app import csrf
+from werkzeug.datastructures import MultiDict
+from urllib.parse import urlencode, urlparse, parse_qsl, urlsplit, parse_qs
 
 def grouper(iterable, n, fillvalue=None):
     "Collect data into fixed-length chunks or blocks"
@@ -272,7 +272,7 @@ def demographics():
         session['maps'] = {0: {}, 1: {}}
 
     form1 = MapForm(prefix='form1', region_id='1', year=1)
-
+    print(form1.city_ward_code.choices)
     status = 200
     tour = 1
     geometries1 = {}
@@ -516,6 +516,182 @@ def demographics():
             # ensure the browser refreshes the page when Back is pressed
             {'Cache-Control': 'no-cache, no-store, must-revalidate'})
 
+@app.route('/api/demographics', methods=['GET', 'POST'])
+@csrf.exempt
+def api_demographics():
+    analyses = []
+
+    session['demo'] = []
+
+    if 'maps' not in session.keys():
+        session['maps'] = {0: {}, 1: {}}
+
+    form1 = MapForm(prefix='form1', region_id='1', year=1)
+    geometries1 = {}
+
+    if request.method == 'POST':
+        data = request.get_json()
+        print(data)
+        #data = request.data.decode('utf-8')
+        #object = parse_qs(urlsplit('?' + data).query)
+        #object = {key: str(value[0]) for key, value in object.items()}
+        
+        #if 'csrf_token' in object: del object['csrf_token']
+        #form1 = MapForm(MultiDict(object))
+        form1 = data
+
+        print(form1['year'])
+
+        #if form1.validate():
+        if form1:
+            tour = 0
+            # query = db.session.query(Area.geom.ST_AsGeoJSON(), Area.data)
+            #year1 = int(form1.year)
+            year1 = int(form1['year'])
+            year_ind1 = range(1996, 2031)
+
+            #if form1.city_ward_code.data == '':
+            if form1['city_ward_code'] == '':
+                query = db.session.query(Ward.geom.ST_AsGeoJSON(), Ward.data, Ward.city_ward_code). \
+                    filter(Ward.region_id == form1['region_id'])
+
+                geometries1 = {"type": "FeatureCollection",
+                               "features": []}
+                for g in query:
+                    d = json.loads(g[0])
+
+                    if year1 == 0:
+                        flow = 0
+                    else:
+                        flow = round(g[1][year1] - g[1][year1 - 1])
+
+                    geometries1['features'].append({"type": "Feature", "properties": {"density": round(g[1][year1]),
+                                                                                      "flow": flow,
+                                                                                      "name": 'Ward %s' % g[2],
+                                                                                      "year": year_ind1[year1]},
+                                                    "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
+
+                query = db.session.query(Ward.data).filter(Ward.region_id == form1['region_id']).all()
+                region = db.session.query(Region.re_name).filter(Region.id == form1['region_id']).first()
+
+                results = []
+
+                for r in query:
+                    row = [val for val in list(r)[0]]
+                    results.append(row)
+
+                df = pd.DataFrame(results).fillna(value=0)
+
+                table1 = [['Year', '%s' % str(region[0])]]
+
+                for y, val in zip(range(1996, 2031), df.sum(axis=0).tolist()):
+                    table1.append([str(y), val])
+
+                m1 = 1.05 * max(df.sum(axis=0).tolist())
+
+            else:
+                query = db.session.query(Area.geom.ST_AsGeoJSON(), Area.data, Area.city_ward_code) \
+                    .filter(Area.city_ward_code == int(form1['city_ward_code'])) \
+                    .filter(Area.region_id == int(form1['region_id']))
+
+                geometries1 = {"type": "FeatureCollection",
+                               "features": []}
+
+                for g in query:
+                    d = json.loads(g[0])
+
+                    if year1 == 0:
+                        flow = 0
+                    else:
+                        flow = round(g[1][year1] - g[1][year1 - 1])
+
+                    geometries1['features'].append(
+                        {"type": "Feature", "properties": {"density": round(g[1][year1]),
+                                                           "flow": flow,
+                                                           "name": 'Area %s' % g[2],
+                                                           "year": year_ind1[year1]},
+                         "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
+
+                query = db.session.query(Ward.data).filter(Ward.city_ward_code == int(form1['city_ward_code'])). \
+                    filter(Ward.region_id == int(form1['region_id'])).first()
+
+                region = db.session.query(Region.re_name).filter(Region.id == int(form1['region_id'])).first()
+                region2 = db.session.query(Ward.city_ward_code).filter(Ward.city_ward_code == int(form1['city_ward_code'])) \
+                    .first()
+
+                results = []
+
+                for r in query:
+                    row = [val for val in list(r)]
+                    results.append(row)
+
+                df = pd.DataFrame(results).fillna(value=0)
+
+                table1 = [['Year', '%s - Ward %s' % (str(region[0]), str(region2[0]))]]
+
+                for y, val in zip(range(1996, 2031), df.sum(axis=0).tolist()):
+                    table1.append([str(y), val])
+
+                m1 = 1.05 * max(df.sum(axis=0).tolist())
+
+            query = db.session.query(Ward.city_ward_code).filter(Ward.region_id == int(form1['region_id'])).order_by(
+                Ward.city_ward_code).distinct()
+
+            #form1.city_ward_code.choices = [[str(i), 'Ward %s' % row.city_ward_code] for i, row in enumerate(query.all()
+                                                                                                             #, start=1)]
+            #form1.city_ward_code.choices.insert(0, ('', 'View All'))
+
+
+            resp = jsonify({'success': True, 'geometries1': geometries1,'table1':table1,
+                            'tour':tour, 'max1':m1, 'region1':form1['region_id'],'ward1':form1['city_ward_code']})
+            resp.status_code = 200
+            return resp
+        else:
+            message = 'Please correct the problems below and try again.'
+            resp = jsonify(message=message)
+            resp.status_code = 500
+            return resp
+
+    else:
+        session['maps'][0] = {'city_ward_code': '', 'region_id': 1, 'year': 1}
+        session['maps'][1] = {'city_ward_code': '', 'region_id': 4, 'year': 1}
+
+        query = db.session.query(Ward.geom.ST_AsGeoJSON(), Ward.data, Ward.city_ward_code). \
+            filter(Ward.region_id == 1)
+
+        geometries1 = {"type": "FeatureCollection",
+                       "features": []}
+
+        for g in query:
+            d = json.loads(g[0])
+            geometries1['features'].append({"type": "Feature", "properties": {"density": round(g[1][1]),
+                                                                              "flow": round(g[1][1] - g[1][0]),
+                                                                              "name": 'Ward %s' % g[2],
+                                                                              "year": 1997},
+                                            "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
+
+        query = db.session.query(Ward.data).filter(Ward.region_id == 1).all()
+
+        results = []
+
+        for r in query:
+            row = [val for val in list(r)[0]]
+            results.append(row)
+
+        df = pd.DataFrame(results).fillna(value=0)
+
+        table1 = [['Year', 'Johannesburg']]
+
+        for y, val in zip(range(1996, 2031), df.sum(axis=0).tolist()):
+            table1.append([str(y), val])
+
+        m = 1.05 * max(df.sum(axis=0).tolist())
+
+        resp = jsonify({'success': True, 'table1': table1,
+                         'max1': m, 'region1': 1, 'ward1': None,'ward2':None, 'geometries1': geometries1,
+                        'form_year':form1.year.choices,'form_ward':form1.city_ward_code.choices,'form_city':form1.region_id.choices})
+        resp.status_code = 200
+        return resp
 
 @app.route('/nightlights_jhb', methods=['GET', 'POST'])
 def demographics_night_jhb():

@@ -68,7 +68,18 @@ const _tabs = [
 // import more components
 export default (
     <HashRouter history={hashHistory}>
-       <Route exact path="/hero_collapsible" component={()=> <Hero_Collapsable title={_heroTitle} 
+
+      <Route exact path="/demographic-modeller" component={()=> <Navigation_scoda box_shadow={true} />} />
+      <Route exact path="/demographic-modeller" component={()=> <Hero_Collapsable title={_heroTitle_demographics} 
+            content={_heroContent_demographics} 
+            infoTitle={_heroInfoTitle_demographics}
+            primaryColor={_heroPrimaryColor_demographics} 
+            secondaryColor={_heroSecondaryColor_demographics}/>}/>
+            <br/><br/>
+            <Route exact path="/demographic-modeller" component={()=><DemographicModeller />} />
+      
+
+       {/*<Route exact path="/hero_collapsible" component={()=> <Hero_Collapsable title={_heroTitle} 
             content={_heroContent} 
             infoTitle={_heroInfoTitle}
             primaryColor={_heroPrimaryColor} 
@@ -77,7 +88,7 @@ export default (
             content={_heroContent} 
             infoTitle={_heroInfoTitle}
             primaryColor={_heroPrimaryColor} 
-            secondaryColor={_heroSecondaryColor}/>}/>
+secondaryColor={_heroSecondaryColor}/>}/>*/}
 
     <Route path='/data-stories-details'  component={()=> <Navigation_scoda box_shadow={true} />}/>
     <Route exact path="/data-stories-details" component={()=> <Hero_Collapsable title={_heroTitle_insight} 
@@ -151,6 +162,6 @@ export default (
             secondaryColor={_heroSecondaryColor_explore}/>}/>
       <Route exact path="/explorer" component={()=> <IndicatorExplorer />}/>
       <Route path="/explorer" component={Footer} />
-
+      <Route exact path="/demographic-modeller" component={Footer} />
     </HashRouter>
 );
