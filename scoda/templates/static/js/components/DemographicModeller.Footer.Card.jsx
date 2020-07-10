@@ -3,6 +3,12 @@ import React, { Component } from 'react';
 export default class DemographicModellerFooterCard extends Component {
     constructor(props) {
         super(props);
+
+        this.downloadEvent = this.downloadEvent.bind(this);
+    }
+
+    downloadEvent() {
+        this.props.downloadEvent();
     }
 
     render() {
@@ -10,7 +16,7 @@ export default class DemographicModellerFooterCard extends Component {
         return (
             <div className="mt-1 ">
                 <div className="row">
-                    <div className="col-12">
+                    <div className="col-sm-12">
                         <div className="ie-content-card">
                             <div className="col">
                                 <div className="row">

@@ -13,8 +13,7 @@ export default class DemographicModellerDataBox extends Component {
             case "map":
                 return <DemographicModellerDataMap 
                        data={this.props.results}
-                       zoom={this.props.zoom}
-                       center={this.props.center}/>
+                       />
              break;
         }
     }
