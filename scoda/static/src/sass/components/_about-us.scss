@@ -6,6 +6,7 @@
         font-weight: bold;
         letter-spacing: 0;
         line-height: 32px;
+        margin-bottom: 10px;
     }
     p{
         color: #131421;
@@ -44,8 +45,12 @@
     }
     .how-was-scoda-developed{
         img{
+            margin: auto;
+            display: block;
             margin-top: 60px;
             margin-bottom: 60px;
+            width: 85%;
+
         }
     }
     .box{
@@ -53,10 +58,15 @@
         border-radius: 3px;
         background-color: #FFFFFF;
         padding: 20px 30px;
+        margin-top: 80px;
+        margin-bottom: 80px;
         p{
             font-style: italic;
             text-align: center;
             color: #F9874A;
+            a{
+                color: #F9874A;
+            }
         }
     }
     .important-links{
@@ -68,6 +78,7 @@
                 border-top: 1px solid;
                 opacity: 1;
                 margin: 0;
+                margin-top: 120px;
             }
         }
     }
@@ -95,6 +106,7 @@
         .how-was-scoda-developed{
             img{
                 content: url('/static/dist/img/SCODA Assets V3_1 Mobile/3 About Us_Mobile/image_about_how-was-scoda-developed_mobile.svg');
+                width: 100%;
             }
         }
     }

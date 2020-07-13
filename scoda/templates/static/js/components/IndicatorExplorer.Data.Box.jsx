@@ -146,27 +146,26 @@ export default class IndicatorExplorerDataBox extends Component {
 
         return (
             <div id="dashboard" style={{width:'100%'}}>
-                        <div id="card" className="ie-box-card">
-                            <div className="ie-box-card-header">
-                              <div className="row">
-                                  <div className="col ml-3">
-                                      {this.props.resultTitle}
-                                  </div>
-                                  <div className="col-0 mt-2 mr-4 float-right">
-                                      {downloadEvent}
-                                  </div>
-                              </div>
+                <div id="card" className="ie-box-card">
+                    <div className="ie-box-card-header">
+                        <div className="row">
+                            <div className="col ml-3">
+                                {this.props.resultTitle}
                             </div>
-                            <div className="col pt-3">
-                                <div className="mt-2 ml-3 mb-4">
-                                  {this.renderDataSet(this.props.resultType,this.props.filter)}
-                                </div>  
-
-                                <input type="hidden" id="csv"></input>   
-                                <canvas style={{display:'none'}}></canvas>          
+                            <div className="col-0 mt-2 mr-4 float-right">
+                                {downloadEvent}
                             </div>
                         </div>
+                    </div>
+                    <div className="col pt-3">
+                        <div className="mt-2 ml-3 mb-4">
+                            {this.renderDataSet(this.props.resultType,this.props.filter)}
+                        </div>
+                        <input type="hidden" id="csv"></input>   
+                        <canvas style={{display:'none'}}></canvas>          
+                    </div>
                 </div>
+            </div>
         )
     }
 }

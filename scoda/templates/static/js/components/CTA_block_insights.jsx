@@ -11,7 +11,7 @@ export default class CTA_block extends Component {
                                 <div className="col-10 d-flex align-items-center">
                                     <h2>INSIGHT TOOLS</h2>
                                 </div>
-                                <div className="col-12 mt-3">
+                                <div className="col-md-9 pl-0 mt-3">
                                     <p>Effective output of data is critical to information reaching and being absorbed by the correct audience so that actions can come from research.  We understand that data outputs can sometimes appear to be complicated which has led to the development of our insight tools.  These tools are designed to simplify complex datasets into bite size and interesting pieces of information.</p>
                                 </div>
                             </div>

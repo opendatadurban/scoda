@@ -11,7 +11,7 @@ export default class CTA_block extends Component {
                                 <div className="col-10 d-flex align-items-center">
                                     <h2>ANALYSIS TOOLS</h2>
                                 </div>
-                                <div className="col-12 mt-3">
+                                <div className="col-md-9 pl-0 mt-3">
                                     <p>Data requires context to provide meanginful analysis.  We offer a range of public and city management friendly data analysis tools which feed directly from a central management system to allow overlays of comparable data to help users build contextual analyses which are easy to share with relevant people, groups and organisations.</p>
                                 </div>
                             </div>
@@ -38,13 +38,13 @@ export default class CTA_block extends Component {
                     <div className="row ">
                         <div className="col-md-10 offset-md-1">
                             <div className="row cta-info">
-                                <div className="col-md-6">
+                                <div className="col-md-6 d-flex align-items-center justify-content-center">
                                     <div className="cta-image cta-image-analysis-data-explore"></div>
                                 </div>
                                 <div className="col-md-6 cta-info-content d-flex justify-content-center">
                                     <h5>Data Explorer</h5>
                                     <p>The data explorer provides access to the 102 indicators used by the South African Cities Network in the State of Cities Report.</p>
-                                    <a href="" className="btn">See Our Data Explorer</a>
+                                    <a href="/scoda/#/explorer" className="btn">See Our Data Explorer</a>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +76,7 @@ export default class CTA_block extends Component {
                                 <div className="col-md-6 cta-info-content d-flex justify-content-center">
                                     <h5>Demographics Modeller</h5>
                                     <p>With the demographic projection tool we provide both a powerful predictor of internal migration within South African metros, as well as a framework for the development of open, collaborative model building that is based on diverse and novel data sources.</p>
-                                    <a href="" className="btn">See Our Demographics Modeller</a>
+                                    <a href="/scoda/#/demographic-modeller" className="btn">See Our Demographics Modeller</a>
                                 </div>
                             </div>
                         </div>

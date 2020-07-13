@@ -31,7 +31,6 @@
 }
 
 .dm-box-card {
-    width: 95%;
     height: 100%;
     border-radius: 5px;
     background-color: $scoda-white;
@@ -68,72 +67,42 @@
     border-radius: 12.5px;
     background-color: $scoda-white;
     cursor: pointer;
+    float: right;
 }
 
-#map {
-    width: 100%;
-    height: 642px;
-}
-
-.info {
-    padding: 6px 8px;
-    font: 14px/16px Arial, Helvetica, sans-serif;
-    background: white;
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-}
-
-.info h4 {
-    margin: 0 0 5px;
-    color: #777;
-}
-
-.legend {
-    text-align: left;
-    line-height: 18px;
-    color: #555;
-}
-
-.legend i {
-    width: 18px;
-    height: 18px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.7;
+.demographic-card{
+    @media (min-width: $tablet) {
+        // padding-right: 3rem;
+        // margin-left: 3rem;
+    }
+    @media (max-width: $tablet) {
+        .recharts-wrapper{
+            width: 100% !important;
+        }
+        svg{
+            font-size: 10px;
+            width: 100%;
+        }
+        .dm-box-card-header{
+            font-size: 10px;
+        }
+    }
 }
 
 
-#map2 {
-    width: 100%;
-    height: 300px;
-}
+.ie-content-card{
 
-.info {
-    padding: 6px 8px;
-    font: 14px/16px Arial, Helvetica, sans-serif;
-    background: white;
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-}
+    padding: 30px;
+    @media (max-width: $tablet) {
+        padding: 30px 10px;
+        .dm-footer-button-green{
+            width: 100%;
+        }
+        .dm-footer-button-white{
+            float: unset;
+            margin-top: 15px;
+            width: 100%;
+        }
+    }
 
-.info h4 {
-    margin: 0 0 5px;
-    color: #777;
 }
-
-.legend {
-    text-align: left;
-    line-height: 18px;
-    color: #555;
-}
-
-.legend i {
-    width: 18px;
-    height: 18px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.7;
-}
-   

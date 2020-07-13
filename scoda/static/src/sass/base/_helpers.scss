@@ -6,6 +6,9 @@
     top: 0;
     opacity: .8;
 }
+.flex-direction-column{
+    flex-direction: column;
+}
 
 hr.dotted {
     border-top: none;
@@ -112,6 +115,9 @@ hr.dotted {
 // Fonts
 .thin-weight {
     font-weight: 200 !important;
+}
+.container-fluid-max-width{
+    max-width: 99vw;
 }
 
 
