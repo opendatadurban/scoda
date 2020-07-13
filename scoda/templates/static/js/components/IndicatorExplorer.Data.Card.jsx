@@ -130,7 +130,7 @@ export default class IndicatorExplorerDataCard extends Component {
         let modalCloseIcon = <i className="modal-close fa fa-times" aria-hidden="true" onClick={this.toggleModal}></i>;
 
         return (
-            <div className="mt-4 ml-5 pr-5">
+            <div className="mt-4 ">
                 <div className="row">
                     <div className="col-sm-12">
                         <div className="ie-content-card">
