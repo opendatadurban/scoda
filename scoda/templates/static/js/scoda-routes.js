@@ -69,14 +69,13 @@ const _tabs = [
 export default (
     <HashRouter history={hashHistory}>
 
-      <Route exact path="/demographic-modeller" component={()=> <Navigation_scoda box_shadow={true} />} />
+      {/* <Route exact path="/demographic-modeller" component={()=> <Navigation_scoda box_shadow={true} />} />
       <Route exact path="/demographic-modeller" component={()=> <Hero_Collapsable title={_heroTitle_demographics} 
             content={_heroContent_demographics} 
             infoTitle={_heroInfoTitle_demographics}
             primaryColor={_heroPrimaryColor_demographics} 
             secondaryColor={_heroSecondaryColor_demographics}/>}/>
-            <br/><br/>
-            <Route exact path="/demographic-modeller" component={()=><DemographicModeller />} />
+            <Route exact path="/demographic-modeller" component={()=><DemographicModeller />} /> */}
       
 
        {/*<Route exact path="/hero_collapsible" component={()=> <Hero_Collapsable title={_heroTitle} 
