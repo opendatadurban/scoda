@@ -5,7 +5,6 @@
     text-align: center;
     min-height: unset;
     padding: 10px 0;
-    margin-top: 90px;
     span{
         font-size: 10px;
     }
@@ -46,9 +45,15 @@
             display: inline;
             color: #FF8430;
             font-weight: 500;
+            a{
+              text-decoration: none;
+            }
           }
           &.ccl{
             color: #9B9B9B;
+            a{
+              text-decoration: none;
+            }
           }
         }
         a {

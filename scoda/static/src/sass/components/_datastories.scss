@@ -63,6 +63,9 @@ body {
     height: 85px;
     width: 85px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+    @media (max-width: $tablet) {
+        margin-left: 15px;
+    }
 }
 
 .ds-banner-title {
@@ -569,6 +572,9 @@ body {
     letter-spacing: 0;
     line-height: 31px;
     text-align: center;
+    @media (max-width: $tablet) {
+        margin-bottom: 60px;
+    }
 }
 
 .ds-urban-addressing-block {

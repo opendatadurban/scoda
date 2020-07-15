@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {Pie} from 'react-chartjs-2';
 import Chart from 'chart.js';
 
 import Image from '../components/Image';
@@ -12,6 +12,34 @@ import DataStoriesContentCardDataInformation from '../components/DataStories.Con
 export default class DataStoriesContentCardEPW extends Component {
     constructor(props) {
         super(props);
+        this.pie_data = {
+          labels: ["Professionals", "Service & sales workers ", "Plant & machine operators & assemblers", "Technicians & associate professionals", "Clerical support workers", "Elementary occupations", "Managers", "Skilled agricultural, forestry, fishery, craft & related trades workers"],
+          datasets: [{
+            label: '2016',
+            data: [58, 2, 0, 18, 6, 1, 13, 2],
+            fill: false, // Prevents line graph fill, while keeping legend box fill -->
+            backgroundColor: [
+            'rgba(121, 169, 182, 1)',
+            'rgba(240, 147, 65, 1)',
+            'rgba(107, 111, 156, 1)',
+            'rgba(117, 43, 38, 1)',
+            'rgba(78, 127, 185, 1)',
+            'rgba(186, 77, 83, 1)',
+            'rgba(153, 185, 86, 1)',
+            'rgba(35, 78, 122, 1)'
+          ],
+          borderColor: [
+            'rgba(121, 169, 182, 1)',
+            'rgba(240, 147, 65, 1)',
+            'rgba(107, 111, 156, 1)',
+            'rgba(117, 43, 38, 1)',
+            'rgba(78, 127, 185, 1)',
+            'rgba(186, 77, 83, 1)',
+            'rgba(153, 185, 86, 1)',
+            'rgba(35, 78, 122, 1)'
+          ]
+          }]
+        }
     }
 
     componentDidMount() {
@@ -20,6 +48,9 @@ export default class DataStoriesContentCardEPW extends Component {
         this.renderChart();
         this.renderChart2();
         this.renderChart3();
+
+
+        
     }
 
     renderChart() {
@@ -586,10 +617,20 @@ export default class DataStoriesContentCardEPW extends Component {
                                      <div className="ds-subheader">Skill levels required in South Africa</div>
                                    </div>
                                    <br/><br/>
+                                   <div className="container-fluid justify-content-center desktop">
                                         <canvas
                                          id="mainChart"
                                         className="w-100"
                                         />
+                                   </div>
+                                   <div className="container-fluid justify-content-center mobile">
+                                   <Pie
+                                    data={this.pie_data}
+                                    width={"30%"}
+                                    height={"250"}
+                                    options={{ maintainAspectRatio: false }}
+/>
+                                   </div>
                                </div>
                                <div className="row mt-3">
                                    <DataStoriesContentCardDataInformation
