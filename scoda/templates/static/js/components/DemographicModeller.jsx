@@ -43,7 +43,7 @@ export default class DemographicModeller extends Component {
 
     render() {
         return (
-            <div className="container pt-5">
+            <div className="container pt-5 pb-5">
                <div className="row">
                    <div className="col-sm-12">
                         <DemographicModellerDataCard

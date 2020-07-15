@@ -17,8 +17,8 @@ export default class Navigation_scoda extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col d-flex align-items-center justify-content-end">
-                                <a href="">Log In</a>
-                                <a href="" className="register">Register</a>
+                                <a href="https://scoda.co.za/user/login">Log In</a>
+                                <a href="https://scoda.co.za/user/register" className="register">Register</a>
                             </div>
                         </div>
                     </div>
@@ -46,9 +46,9 @@ export default class Navigation_scoda extends Component {
                         <li className="nav-item about_">
                             <a className="nav-link " href="/scoda/#/about-us">About Us </a>
                         </li>
-                        <li className="nav-item help_">
+                        {/* <li className="nav-item help_">
                             <a className="nav-link " href="#">Help</a>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
             </nav>

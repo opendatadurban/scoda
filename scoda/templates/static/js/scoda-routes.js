@@ -161,6 +161,5 @@ secondaryColor={_heroSecondaryColor}/>}/>*/}
             secondaryColor={_heroSecondaryColor_explore}/>}/>
       <Route exact path="/explorer" component={()=> <IndicatorExplorer />}/>
       <Route path="/explorer" component={Footer} />
-      <Route exact path="/demographic-modeller" component={Footer} />
     </HashRouter>
 );
