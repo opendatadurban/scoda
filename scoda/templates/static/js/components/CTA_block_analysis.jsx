@@ -28,7 +28,7 @@ export default class CTA_block extends Component {
                                 <div className="col-md-6 cta-info-content d-flex justify-content-center">
                                     <h5>City Dashboards</h5>
                                     <p>The city dashboards provide a visual snapshot of key information surrounding cities in South Africa.</p>
-                                    <a href="" className="btn">See Our Dashboards</a>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -60,7 +60,6 @@ export default class CTA_block extends Component {
                                 <div className="col-md-6 cta-info-content d-flex justify-content-center">
                                     <h5>Analysis Constructor</h5>
                                     <p>The analysis constructor allows for individual indicators to be combined with one another in a structure-preserving manner. It also allows for the separation of indicators into their various time-series.</p>
-                                    <a href="" className="btn">See Our Analysis Constructor</a>
                                 </div>
                             </div>
                         </div>
