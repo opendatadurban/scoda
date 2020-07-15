@@ -32,8 +32,8 @@ export default class DemographicModellerDataBox extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="col pt-3 pl-3 pr-3">
-                        <div className="mtp-2 ml-2 mr-2">
+                    <div className="col p-0">
+                        <div className="">
                             {this.renderDataSet(this.props.resultType)}
                         </div>                        
                     </div>

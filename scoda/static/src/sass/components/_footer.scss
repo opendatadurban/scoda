@@ -45,9 +45,15 @@
             display: inline;
             color: #FF8430;
             font-weight: 500;
+            a{
+              text-decoration: none;
+            }
           }
           &.ccl{
             color: #9B9B9B;
+            a{
+              text-decoration: none;
+            }
           }
         }
         a {

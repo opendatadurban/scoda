@@ -10,8 +10,8 @@ export default class IndicatorExplorer extends Component {
     render() {
 
         return (
-            <div className="container">
-               <div className="row">
+            <div className="container pb-5">
+               <div className="row pb-5">
                    <div className="col-12">
                         <IndicatorExplorerDataCard
                         />
