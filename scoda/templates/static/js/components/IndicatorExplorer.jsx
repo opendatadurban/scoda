@@ -11,7 +11,7 @@ export default class IndicatorExplorer extends Component {
 
         return (
             <div className="container pb-5">
-               <div className="row pb-5">
+               <div className="row pb-5 ">
                    <div className="col-12">
                         <IndicatorExplorerDataCard
                         />

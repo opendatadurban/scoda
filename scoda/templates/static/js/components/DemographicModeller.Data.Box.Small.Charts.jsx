@@ -33,7 +33,7 @@ export default class DemographicModellerDataBoxSmallChart extends Component {
           };
     
          $.ajax(options).done(function(){
-            google.load("visualization", "1", {
+            google.charts.load("visualization", "1", {
               packages:['controls', 'bar', 'corechart', 'geochart','line'],
               callback: function() {
             
