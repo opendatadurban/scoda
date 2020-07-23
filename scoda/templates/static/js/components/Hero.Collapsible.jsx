@@ -24,6 +24,9 @@ export default class Hero extends Component {
             document.getElementById('infoBlockContainer').style.visibility = 'hidden';
 
             document.getElementById('infoBlock').style.height = '80px';
+            document.getElementById('hero-content-column').style.paddingBottom = '0px';
+            document.getElementById('hero-title').style.paddingTop = '30px';
+            document.getElementById('hero-title').style.paddingBottom = '10px';
         }
         else {
             this.setState({hero_state: 'expand'});
@@ -33,7 +36,8 @@ export default class Hero extends Component {
             document.getElementById('buttonContainer').style.display = 'block';
             document.getElementById('infoBlockContainer').style.visibility = 'visible';
 
-            document.getElementById('infoBlock').style.height = '525px';
+            document.getElementById('infoBlock').style.height = '393px';
+            document.getElementById('hero-content-column').style.paddingBottom = '90px';
         }
     }
 
@@ -71,20 +75,19 @@ export default class Hero extends Component {
             <div id="hero" className="hero-block">
                 <div className="container-fluid mt-0 p-0">
                     <div className="row ml-0 mr-0 p-0">
-                        <div className="col-md-5">
-                            <div className="row hero-title">
+                        <div className="col-md-5 hero-content-column" id="hero-content-column">
+                            <div className="row hero-title" id="hero-title">
                                 <div className="col-0 hero-block-title" style={primaryColor}>{this.props.title}</div>
                                 <div className="col-1 tooglebtn"><i className={this.state.hero_caret} style={primaryColor} aria-hidden="true" onClick={this.toggleHero}></i></div>
                             </div>
                             <div id="contentContainer" className="row">
                                 <div className="col hero-block-text" dangerouslySetInnerHTML={{__html:this.props.content}}>
                                 </div>
+                                <div className="col-12">
+                                    <button className="hero-block-button" style={buttonPrimaryColor} onClick={this.toggleHero}>Got It!</button>
+                                </div>
                             </div>
                             <div id="buttonContainer" className="row">
-                                <div className="col-12">
-                                    <button className="hero-block-button" style={buttonPrimaryColor}>Got It!</button>
-
-                                </div>
                             </div>
                         </div>
                         {/*Info bar and background*/}

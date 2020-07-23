@@ -765,7 +765,7 @@ export default class DataStoriesContentCardAffordability extends Component {
                                <div className="row modal-body-2 mt-2">
                                 <div className="col-0 w-100 visual-point">
 
-                                <table id="example" className="table table-striped table-bordered">
+                                <table id="example" className="tabl table-striped table-bordered">
                                 <thead>
                                     <tr>
                                       <th style={{verticalAlign:'top',width:'98px'}}>CITY</th>

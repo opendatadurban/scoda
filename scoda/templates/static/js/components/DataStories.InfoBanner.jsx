@@ -18,19 +18,18 @@ export default class DataStoriesInfoBanner extends Component {
                    <div className="col-0 ds-info-banner-image">
                        <Image imgSrc={bannerImage}/>
                    </div>
-                   <div className="ds-info-banner-vspacer"></div>
-                   <div className="col-0">
+                   <div className="col pl-3">
                        <div className="row">
-                           <div className="col-0 ds-info-banner-detail-width">
+                           <div className="col-10 ds-info-banner-detail-width">
                                <div className="row">
-                                    <div className="col-0 ds-info-banner-title">{this.props.title}</div>
+                                    <div className="col ds-info-banner-title">{this.props.title}</div>
                                 </div>
                                 <div className="row">
-                                    <div className="col-0 ds-info-banner-subtitle">{this.props.subtitle}</div>
+                                    <div className="col ds-info-banner-subtitle">{this.props.subtitle}</div>
                                </div>
                            </div>
                           
-                           <div className="col-0 pl-1">
+                           <div className="col pl-1">
                                <div className="row">
                                  <div className="col-0 ds-info-banner-title">&nbsp;&nbsp;{this.props.minutes}</div>
                                </div>
