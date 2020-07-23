@@ -615,7 +615,6 @@ def constructor(id):
 
                     r = requests.get('https://wazimap.co.za/profiles/municipality-%s-%s.json' % (query[0], query[1]))
                     keys = M[form.top_tier.data][form.lower_tier.data]['keys']
-
                     data = getFromDict(r.json(), keys)
 
                     if M[form.top_tier.data][form.lower_tier.data]['type'] == 'name':

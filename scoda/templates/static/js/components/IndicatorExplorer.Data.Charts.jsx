@@ -73,7 +73,7 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
       };
 
      $.ajax(options).done(function(){
-        google.load("visualization", "1", {
+        google.charts.load("visualization", "1", {
           packages:['controls', 'bar', 'corechart', 'geochart'],
           callback: function() {
                 document.getElementById('chartPng').value = '';
