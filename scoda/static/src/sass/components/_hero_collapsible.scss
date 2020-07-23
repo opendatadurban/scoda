@@ -19,6 +19,7 @@ body {
   font-size: 14px;
   letter-spacing: 0;
   line-height: 20px;
+  padding-bottom: 50px;
 }
 
 .hero-block-background {
@@ -116,9 +117,11 @@ body {
     letter-spacing: 0;
     line-height: 24px;
     text-align: center;
+    margin-bottom: 100px !important;
   }
   
   .hero-block{
+    padding-top: 115px;
     .hero-title{
       padding-left: 32px;
       padding-top: 60px;
@@ -148,4 +151,12 @@ body {
             display: none;
           }
         }
+    }
+
+    #infoBlock{
+      height: unset;
+    }
+
+    .hero-content-column{
+      padding-bottom: 90px;
     }

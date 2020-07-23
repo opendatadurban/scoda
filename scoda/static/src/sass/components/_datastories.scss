@@ -180,20 +180,20 @@ body {
 }
 
 .ds-right-content-width {
-    padding-left: 100px;
+    padding-left: 30px;
 }
 
 .ds-info-banner-title {
     color: $scoda-info;
     font-family: $scoda-font;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
     letter-spacing: 0;
     line-height: 24px;
 }
 
 .ds-info-banner-detail-width {
-    width: 235px;
+    // width: 235px;
 }
 
 .ds-info-banner-subtitle {
@@ -212,7 +212,7 @@ body {
 }
 
 .ds-info-banner-width {
-    width:360px;
+    // width:360px;
 }
 
 .ds-info-banner-vspacer {
@@ -732,7 +732,7 @@ o {
 
 .ds-banner-view-button{
     @media (max-width: $tablet) {
-        display: none;
+        width: unset;
     }
 }
 
@@ -754,7 +754,22 @@ o {
     left: 0;
     z-index: 2;
   }
+  .data-story-page{
+    padding-top: 140px;
+  }
 
+  #filter_{
+      a{
+          cursor: unset;
+      }
+  }
+  .tabs_vertical--pills--pill{
+      z-index: 3;
+  }
+
+  .modal-body-2 .visual-point table{
+      width: 100%;
+  }
 .data-story-page{
     @media (max-width: $tablet) {
         #filter_{
@@ -813,6 +828,16 @@ o {
             }
         }
     }
+}
+
+.card-trigger{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 2;
 }
 
 .data-story-landig-page{

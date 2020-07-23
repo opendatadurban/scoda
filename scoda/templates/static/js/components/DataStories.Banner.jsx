@@ -20,11 +20,11 @@ export default class Banner extends Component {
                        <Image className="ds-banner-logo" imgSrc={bannerImage}/>
                    </div>
                    <div className="ds-banner-content-vspacer"></div>
-                   <div className="col-10">
+                   <div className="col">
                        <div className="row">
-                           <div className="col-8 ds-banner-title">{this.props.title}</div>
-                           <div className="col-2">
-                                <div className="ds-banner-view-button">View the {viewButtonTitle}</div>
+                           <div className="col-md-8 ds-banner-title">{this.props.title}</div>
+                           <div className="col-md-2">
+                                <div className="ds-banner-view-button"> <a href="http://www.sacities.net" target="blank__" className="card-trigger"></a> View the {viewButtonTitle}</div>
                            </div>
                        </div>
                        <div className="ds-banner-content-hspacer"></div>

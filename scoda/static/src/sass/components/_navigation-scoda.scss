@@ -1,4 +1,11 @@
 .navigation-scoda{
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    &.fill{
+        box-shadow: 1px 1px 4px 0 rgba(0,0,0,0.2);
+
+    }
     .top-header{
         background-color: #131421;
         padding: 10px 0px;
@@ -22,7 +29,7 @@
             box-shadow: 1px 1px 4px 0 rgba(0,0,0,0.2);
         }
         background: white !important;
-        padding: 30px; 
+        padding: 15px; 
         
         z-index: 1;
         #navbarSupportedContent{
