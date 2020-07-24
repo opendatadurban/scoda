@@ -4,7 +4,7 @@ export default class CTA_block extends Component {
         return (
             <div className="about-us module-wrapper">
                 <div className="container">
-                    <div className="row heading  mt-5 mb-5">
+                    <div className="row heading  pt-5 mb-5">
                         <div className="col-12">
                             <h2>About Us</h2>
                         </div>

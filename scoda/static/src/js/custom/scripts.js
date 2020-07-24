@@ -1,6 +1,14 @@
 $(document).ready(function () {
-    console.log('Log');
-    var root_url = window.location.origin + '/#/'
-    console.log(document.location.href );
+    var navHeight = '50';
+    $(window).scroll(
+        function(){
+         if ($(window).scrollTop() >= navHeight) {
+                 $('.navigation-scoda').addClass('fill');
+             }
+        else {
+                 $('.navigation-scoda').removeClass('fill');
+             }
+        }
+      );
 
 }); 
