@@ -63,7 +63,7 @@ export default class IndicatorExplorerDataMap extends Component {
           };
     
           $.ajax(options).done(function(){
-            google.charts.load("visualization", "1", {
+            google.load("visualization", "1", {
               packages:['controls', 'bar', 'corechart', 'geochart'],
               callback: function() {
                      var dataSet = resultSet.table;
