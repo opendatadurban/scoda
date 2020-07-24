@@ -163,7 +163,7 @@ export default class DataStoriesContentCardUrbanSafety extends Component {
                                    <DataStoriesContentCardContentBlock 
                                      contentHeading="What are South Africa’s murder rate figures?"
                                      content="South Africa records among the highest murder rates in the world. Although the country has almost halved its murder rates since 1994, they remain worryingly high. In the past 4 years, following an all-time low in 2011, murder rates have steadily climbed. This is cause for concern."
-                                   />
+                                     />
                                </div>
 
                                <div className="row mt-5">
