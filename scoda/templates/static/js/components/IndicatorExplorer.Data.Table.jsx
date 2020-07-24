@@ -28,7 +28,7 @@ export default class IndicatorExplorerDataTable extends Component {
           };
 
           $.ajax(options).done(function(){
-            google.charts.load("visualization", "1", {
+            google.load("visualization", "1", {
               packages:["corechart"],
               callback: function() {
 
