@@ -144,7 +144,7 @@ secondaryColor={_heroSecondaryColor}/>}/>*/}
       <Route path='/about-us' component={Sub_Footer} />
       <Route path='/about-us' component={Footer} />
 
-      <Route path='/demographic-modeller' component={()=> <Navigation_scoda box_shadow={false} />} />
+      <Route path='/demographic-modeller' component={()=> <Navigation_scoda box_shadow={true} />} />
       <Route exact path="/demographic-modeller" component={()=> <Hero_Collapsable title={_heroTitle_demo} 
             content={_heroContent_demo} 
             infoTitle={_heroInfoTitle_demo}

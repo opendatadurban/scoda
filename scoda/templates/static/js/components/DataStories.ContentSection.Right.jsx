@@ -53,7 +53,7 @@ export default class ContentSectionRight extends Component {
                        </div>
                        <div className="ds-right-content-hspacer"></div>
                        <div className="row m-0">
-                            <div className="col">
+                            <div className="col pl-0">
                                 <DataStoriesInfoBanner 
                                   title={this.props.infoBannerTitle}
                                   subtitle={this.props.infoBannerDate}

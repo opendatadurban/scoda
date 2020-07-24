@@ -163,7 +163,7 @@ export default class DataStoriesContentCardUrbanSafety extends Component {
                                    <DataStoriesContentCardContentBlock 
                                      contentHeading="What are South Africa’s murder rate figures?"
                                      content="South Africa records among the highest murder rates in the world. Although the country has almost halved its murder rates since 1994, they remain worryingly high. In the past 4 years, following an all-time low in 2011, murder rates have steadily climbed. This is cause for concern."
-                                   />
+                                     />
                                </div>
 
                                <div className="row mt-5">
@@ -214,13 +214,14 @@ export default class DataStoriesContentCardUrbanSafety extends Component {
                                 />
                                </div>
                                <div className="row mt-5">
-                                   <div className="col-md-4">
+                                   <div className="col-md-4 mt-3 mb-3">
                                    <DataStoriesContentCardContentBlock 
                                      contentHeading="How do fear and perception of danger affect urban residents? "
                                      content="Fear and perceptions often trump actual rates of crime. This has a direct effect on how urban residents engage in public life and their feelings of safety in public space."
                                    />
+
                                    </div>
-                                   <div className="col ml-2">
+                                   <div className="col ml-2 mt-3 mb-3">
                                     <Image imgSrc={imgFive} />
                                    </div>
                                </div>
