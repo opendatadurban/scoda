@@ -89,7 +89,7 @@ def api_explore():
     print(df)
     # df.re_name = df.re_name.str.encode('utf-8')
     if plot_type == 1:
-        df = df.iloc[:, (0, 1, 3)]
+        df = df.iloc[:, [0, 1, 3]]
 
         schema = [('City', 'string'), ('Year', 'string'), ('%s' % datasets[0], 'number')]
 
@@ -179,7 +179,7 @@ def explore():
             print(df)
             # df.re_name = df.re_name.str.encode('utf-8')
             if plot_type == 1:
-                df = df.iloc[:, (0, 1, 3)]
+                df = df.iloc[:, [0, 1, 3]]
 
                 schema = [('City', 'string'), ('Year', 'string'), ('%s' % datasets[0], 'number')]
 
