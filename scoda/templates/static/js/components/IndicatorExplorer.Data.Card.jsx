@@ -36,7 +36,7 @@ export default class IndicatorExplorerDataCard extends Component {
 
     componentDidMount() {
        this.init();
-
+       
        this.loadIndicators();
     }
 
@@ -79,6 +79,13 @@ export default class IndicatorExplorerDataCard extends Component {
     async filterIndicatorData(indicatorId) {
         this.showLoader();
 
+        this.setState({mapFilter: 'NA'});
+        this.setState({selectedYear:'2010'})
+        this.setState({dataset:[]});
+        this.setState({table: []});
+
+        this.toggleComponentDisplay(false);
+
         let resultSet = await axios.get(`/api/explore?indicator_id=${indicatorId}`).catch(error => {
             this.hideLoader();
             this.setState({modal:true, toggle:true});
@@ -87,14 +94,34 @@ export default class IndicatorExplorerDataCard extends Component {
         try
         {
                 if(resultSet !== null) {
+
+                    if(resultSet.data.plot_type === 2) {
+                        this.setState({selectedYear: resultSet.data.year});
+                    }
+                    if(resultSet.data.plot_type === 1) {
+                        var year = resultSet.data.year;
+                       
+                        let years = [];
+                        resultSet.data.years_list.map((dataset,index) =>(
+                            years.push({'id': dataset.optid,'val':dataset.optname.replace('Year:','').trim()})
+                        ));
+
+                        for(let i=0;i<years.length;i++) {
+                            if(years[i].val === year) {
+                                this.setState({selectedYear: years[i].id});
+                                break;
+                            }
+                        }
+                    }
+                   
                     this.setState({mapFilter: 'NA'});
-                    this.setState({selectedYear: resultSet.data.year});
                     this.setState({dataset: resultSet.data});
                     this.setState({table: resultSet.data.table});
 
                     this.toggleComponentDisplay(true);
                 }
                 else {
+
                         this.setState({mapFilter: 'NA'});
                         this.setState({selectedYear:'2010'})
                         this.setState({dataset:[]});
@@ -103,27 +130,34 @@ export default class IndicatorExplorerDataCard extends Component {
                         this.toggleComponentDisplay(false);
                 }
 
-                validateDocumentReady();
+                this.validateDocumentReady().then(() => {
+                    this.hideLoader();
+                });
         }
         catch(error) {
+            console.log(error);
           //For now we just swallow any errors. Any data errors get handled above in axios call.
           this.hideLoader();
         }
     }
 
-    validateDocumentReady() {
+    async validateDocumentReady() {
         var isLoaded = setInterval(validateLoaded,2000);
         
         function validateLoaded() {
             if(document.getElementById('chartPng').value !== '') {
                 clearInterval(isLoaded);
-                this.hideLoader();
             }
-        }
+        };
     }
 
-    setMapFilter(optionId) {
-        this.setState({mapFilter:optionId});
+    setMapFilter(optionId,plot) {
+        if(plot === 2) {
+            this.setState({mapFilter:optionId});
+        }
+        if(plot === 1) {
+            this.setState({selectedYear: optionId});
+        }
     }
 
     render() {
@@ -206,7 +240,7 @@ export default class IndicatorExplorerDataCard extends Component {
                     </ModalBody>
                 </Modal>
 
-                <Modal isOpen={this.state.loader} className="modal-dialog-centered loader">
+                <Modal id="loader" isOpen={this.state.loader} className="modal-dialog-centered loader">
                 <ModalBody>
                   <div className="row">
                     <div className="col-2"></div>

@@ -101,7 +101,7 @@ export default class IndicatorExplorerDataBoxChartFilter extends Component {
                             </div>
                             <div className="mt-2 ml-2 mr-2">
                                 <div id="categorySelector2"></div>
-                                <div className="ml-2 mr-2 mt-4 mb-2 ie-small-border"></div>
+                                <div id="cat-spacer" className="ml-2 mr-2 mt-4 mb-2 ie-small-border"></div>
                                 <div id="categorySelector1"></div>
                             </div>
                             
