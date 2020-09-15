@@ -74,11 +74,14 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
 
      $.ajax(options).done(function(){
         google.load("visualization", "1", {
-          packages:['controls', 'bar', 'corechart', 'geochart'],
+          packages:['controls', 'bar', 'corechart', 'geochart','line'],
           callback: function() {
                 document.getElementById('chartPng').value = '';
 
                 var dataSet = resultSet.table;
+
+                
+                var options = {};
 
                 let rows = [];
                 let rowHeader = [];
@@ -98,28 +101,62 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                       rows.push(row);
                     }
                 }
+              
+               
+                if(resultSet.plot_type === 2) {
+                  $('#categorySelector2').show();
+                  $('#cat-spacer').show();
 
-                var options = {
-                  'chartType': 'Bar',
-                  'dataTable': rows,
-                  'containerId':'chart',
-                  'options': {
-                      stacked: true,
-                      legend: {position: 'right'},
-                      bars: 'vertical',
-                      vAxis: {minValue:0},
+                  options = {
+                    'chartType': 'Bar',
+                    'dataTable': rows,
+                    'containerId':'chart',
+                    'options': {
+                        stacked: true,
+                        legend: {position: 'right'},
+                        bars: 'vertical',
+                        vAxis: {minValue:0},
+                        hAxis: {slantedText: true},
+                        bar: {groupWidth: '99%'},
+                        tooltip: { isHtml: true },
+                        chartArea: {left:'10%',right:'60%'},
+                        height:winHeight,
+                        width:winWidth,
+                        fontfamily: 'Montserrat',
+                        fontsize:'10',
+                        series: resultSet.series,
+                    },
+                    view: {'columns': resultSet.view}
+                };
+
+              }
+
+                if(resultSet.plot_type === 1) {
+                  options = {
+                    'chartType': 'Line',
+                    'containerId': 'chart',
+                    'options': {
+                      legend: {position: 'right' },
+                      axes: {
+                          y: {
+                              all: {
+                                  range: {
+                                      max: resultSet.max,
+                                      min: resultSet.min
+                                  }
+                              }
+                          }
+                      },
                       hAxis: {slantedText: true},
-                      bar: {groupWidth: '99%'},
+                      height: winHeight,
+                      lineWidth: 4,
+                      interpolateNulls: true,
                       tooltip: { isHtml: true },
-                      chartArea: {left:'10%',right:'60%'},
-                      height:winHeight,
-                      width:winWidth,
-                      fontfamily: 'Montserrat',
-                      fontsize:'10',
-                      series: resultSet.series,
-                  },
-                  view: {'columns': resultSet.view}
-              };
+                      pointSize: 5     
+                   }
+                  };
+
+              }
 
               var bar = new google.visualization.ChartWrapper(options);
 
@@ -160,6 +197,7 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
             var categoryPicker2 = new google.visualization.ControlWrapper({
                 'controlType': 'CategoryFilter',
                 'containerId': 'categorySelector2',
+                'id':'dateSelector',
                 'state': {'selectedValues': resultSet.years},
                 'options': {
                     'filterColumnLabel': 'Year',
@@ -173,15 +211,92 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
             });
 
               var data = google.visualization.arrayToDataTable(resultSet.table);
-
+             
               var dashboard = new google.visualization.Dashboard();
-              dashboard.bind([categoryPicker1,categoryPicker2],[bar,table]);
-              dashboard.draw(data);
+              
+              if(resultSet.plot_type === 2) {
+                dashboard.bind([categoryPicker1,categoryPicker2],[bar,table]);
+                dashboard.draw(data);
+              }
+              else {
+                categoryPicker2.setDataTable(data);
+                categoryPicker2.draw();
+
+
+                table = new google.visualization.ChartWrapper({
+                  'chartType': 'Table',
+                  'containerId': 'tableD',
+                  'options': {
+                    'allowHtml': true, 'cssClassNames': cssClassNames
+                  }
+                });
+
+                data = new google.visualization.DataTable(resultSet.table_plot);
+                dashboard.bind([categoryPicker1],[table]);
+          
+                dashboard.draw(data);
+              }
 
               google.visualization.events.addListener(table,'ready', function(event) {
     
                 var tableData = table.getDataTable();
                 var csvData = google.visualization.dataTableToCsv(tableData);
+
+                if(resultSet.plot_type === 1) {
+                  $('#categorySelector2').hide();
+                  $('#cat-spacer').hide();
+
+                  var filteredData = tableData;
+                  var group = filteredData.getDistinctValues(0);
+      
+                  var columns = [2], groupColumns = [];
+                  for (var i = 0; i < group.length; i++) {
+                      var label = group[i];
+                      columns.push({
+                          type: 'number',
+                          label: label,
+                          calc: (function (name) {
+                              return function (dt, row) {
+                                  return (dt.getValue(row, 0) == name) ? dt.getValue(row, 1) : null;
+                              }
+                          })(label)
+                      });
+                      groupColumns.push({
+                          type: 'number',
+                          label: label,
+                          column: i + 1,
+                          aggregation: google.visualization.data.sum
+                      });
+                  }
+
+                  rowHeader = [];
+                  rowHeader.push('Year');
+                  for(let i=0;i<groupColumns.length;i++) {
+                    rowHeader.push(groupColumns[i].label);
+                  }
+
+                  var view = new google.visualization.DataView(filteredData);
+                  view.setColumns(columns);
+
+                  var groupedData = google.visualization.data.group(view, [0], groupColumns);
+  
+                  bar.setDataTable(groupedData);
+                  bar.draw();
+
+                  table = new google.visualization.ChartWrapper({
+                    'chartType': 'Table',
+                    'containerId': 'tableD',
+                    'options': {
+                      'allowHtml': true, 'cssClassNames': cssClassNames
+                    }
+                  });
+
+                  table.setDataTable(groupedData);
+                  table.draw();
+
+                  tableData = table.getDataTable();
+                  csvData = google.visualization.dataTableToCsv(tableData);
+                }
  
                 var csvString = rowHeader.join(',') + '\n' + csvData + '\n';
                      
@@ -190,8 +305,11 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                 let tmpDiv = document.createElement('div');
                 tmpDiv.setAttribute('style','width:2000px;height:800px;font-size:10px,fontFamily:Montserrat,visibility:hidden');
                 document.body.appendChild(tmpDiv);
-
-                var optionsTmp = {
+                
+                var optionsTmp = {};
+                
+                if(resultSet.plot_type === 2) {
+                  optionsTmp = {
                   'chartType': 'Bar',
                   'dataTable': table.getDataTable(),
                   'options': {
@@ -211,9 +329,67 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                   },
                   view: {'columns': resultSet.view}
                 };
+
+                var barTmp = new google.visualization.ChartWrapper(optionsTmp);
+                barTmp.draw(tmpDiv);
+              }
                 
-                 var barTmp = new google.visualization.ChartWrapper(optionsTmp);
-                 barTmp.draw(tmpDiv);
+              if(resultSet.plot_type === 1) {
+                  var filteredData = tableData;
+                  var group = filteredData.getDistinctValues(0);
+
+                  var columns = [2], groupColumns = [];
+                  for (var i = 0; i < group.length; i++) {
+                      var label = group[i];
+                      columns.push({
+                          type: 'number',
+                          label: label,
+                          calc: (function (name) {
+                              return function (dt, row) {
+                                  return (dt.getValue(row, 0) == name) ? dt.getValue(row, 1) : null;
+                              }
+                          })(label)
+                      });
+                      groupColumns.push({
+                          type: 'number',
+                          label: label,
+                          column: i + 1,
+                          aggregation: google.visualization.data.sum
+                      });
+                  }
+
+                  optionsTmp = {
+                    'chartType': 'Line',
+                    'containerId': 'chart',
+                    'options': {
+                      legend: {position: 'right' },
+                      axes: {
+                          y: {
+                              all: {
+                                  range: {
+                                      max: resultSet.max,
+                                      min: resultSet.min
+                                  }
+                              }
+                          }
+                      },
+                      hAxis: {slantedText: true},
+                      height: '100%',
+                      width:'100%',
+                      lineWidth: 4,
+                      interpolateNulls: true,
+                      tooltip: { isHtml: true },
+                      pointSize: 5     
+                   }
+                  };
+
+                  var view = new google.visualization.DataView(filteredData);
+                  view.setColumns(columns);
+                  
+                  var barTmp = new google.visualization.ChartWrapper(optionsTmp);
+                  barTmp.setDataTable(groupedData);
+                  barTmp.draw(tmpDiv);
+                }
 
                  google.visualization.events.addListener(barTmp, 'ready',
                  function(event) {
@@ -237,6 +413,38 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
 
                    document.body.removeChild(tmpDiv);
                  });
+
+                function transposeDataTable(dataTable) {
+                        //step 1: let us get what the columns would be
+                        var rows = [];//the row tip becomes the column header and the rest become
+                        for (var rowIdx=0; rowIdx < dataTable.getNumberOfRows(); rowIdx++) {
+                            var rowData = [];
+                            for( var colIdx = 0; colIdx < dataTable.getNumberOfColumns(); colIdx++) {
+                                rowData.push(dataTable.getValue(rowIdx, colIdx));
+                            }
+                            rows.push( rowData);
+                        }
+                        var newTB = new google.visualization.DataTable();
+                        newTB.addColumn('string', dataTable.getColumnLabel(0));
+                        newTB.addRows(dataTable.getNumberOfColumns()-1);
+                        var colIdx = 1;
+                        for(var idx=0; idx < (dataTable.getNumberOfColumns() -1);idx++) {
+                            var colLabel = dataTable.getColumnLabel(colIdx);
+                            newTB.setValue(idx, 0, colLabel);
+                            colIdx++;
+                        }
+                        for (var i=0; i< rows.length; i++) {
+                            var rowData = rows[i];
+                            newTB.addColumn('number',rowData[0]); //assuming the first one is always a header
+                            var localRowIdx = 0;
+            
+                            for(var j=1; j< rowData.length; j++) {
+                                newTB.setValue(localRowIdx, (i+1), rowData[j]);
+                                localRowIdx++;
+                            }
+                        }
+                        return newTB;
+                    }
               });
             }
         })

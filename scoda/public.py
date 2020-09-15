@@ -63,6 +63,7 @@ def api_explore():
     df = read_sql_query(query.statement, query.session.bind)
     # df.to_csv('%s/data/%s' % (app.root_path, "data_test.csv"), index=False)
     table = []
+    table_plot = []
     years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
     cities = [c for c in cities]
 
@@ -70,6 +71,7 @@ def api_explore():
     years_list = [{'optid': i, 'optname': 'Year: %s' % d} for i, d in enumerate(sorted(years), start=1)]
 
     plot_type = 1
+    print(len(years))
     if (len(datasets) > 1) or (len(years) == 1):
         plot_type = 2
 
@@ -86,17 +88,31 @@ def api_explore():
     for i in datasets:
         head.append(str(i))
     table.append(head)
+    table_plot.append(head);
+
     print(df)
     # df.re_name = df.re_name.str.encode('utf-8')
     if plot_type == 1:
-        df = df.iloc[:, [0, 1, 3]]
+        df_i = df.iloc[:, [0, 1, 3]]
 
         schema = [('City', 'string'), ('Year', 'string'), ('%s' % datasets[0], 'number')]
 
         data_table = gviz_api.DataTable(schema)
-        data_table.LoadData(df.values)
-        table = data_table.ToJSon(columns_order=('City', '%s' % datasets[0], 'Year'))
+        data_table.LoadData(df_i.values)
+        table_plot = data_table.ToJSon(columns_order=('City', '%s' % datasets[0], 'Year'))
 
+        for c in cities:
+            for y in years:
+                row = [str(c), str(y)]
+                for d in datasets:
+                    datapoint = df.loc[(df["re_name"] == c) & (df["year"] == y) & (df["ds_name"] == d), "value"]
+                    if len(datapoint) == 0:
+                        row.append(None)
+                    else:
+                        row.append(
+                            float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
+                            df["ds_name"] == d), "value"]))
+                table.append(row)
     else:
         for c in cities:
             for y in years:
@@ -111,7 +127,7 @@ def api_explore():
                             df["ds_name"] == d), "value"]))
                 table.append(row)
     yrs = ['Year'] + [str(y) for y in years[::-1]]
-    payload = {"plot":plot, "table":table, "colours":colours,"year":str(max(years)), "series":series,
+    payload = {"plot":plot, "table":table, "table_plot":table_plot,"colours":colours,"year":str(max(years)), "series":series,
              "view":view, "plot_type":plot_type,"min":minVal,"max":maxVal, "cities":cities, "options_list":options_list,
              "years_list":years_list,"tour":tour, "years":yrs}
     return jsonify(payload)
