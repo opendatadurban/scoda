@@ -61,7 +61,7 @@ handleResize() {
   document.getElementById('chart').style.width = windowWidth;
   
   if(this.props.data.length !== 0) {
-      this.loadGoogleVizApi(this.props.data,this.props.filterYear,windowWidth,windowHeight);
+      //this.loadGoogleVizApi(this.props.data,this.props.filterYear,windowWidth,windowHeight);
   }
 }
 
@@ -225,11 +225,20 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
 
                 table = new google.visualization.ChartWrapper({
                   'chartType': 'Table',
-                  'containerId': 'tableD',
+                  'containerId': 'tableD2',
                   'options': {
                     'allowHtml': true, 'cssClassNames': cssClassNames
                   }
                 });
+
+                
+              var table2 = new google.visualization.ChartWrapper({
+                'chartType': 'Table',
+                'containerId': 'tableD',
+                'options': {
+                    'showRowNumber': false, 'allowHtml': true, 'cssClassNames': cssClassNames
+                  }
+              });
 
                 data = new google.visualization.DataTable(resultSet.table_plot);
                 dashboard.bind([categoryPicker1],[table]);
@@ -243,6 +252,9 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                 var csvData = google.visualization.dataTableToCsv(tableData);
 
                 if(resultSet.plot_type === 1) {
+                  tableData = table.getDataTable();
+                  csvData = google.visualization.dataTableToCsv(tableData);
+
                   $('#categorySelector2').hide();
                   $('#cat-spacer').hide();
 
@@ -283,7 +295,7 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                   bar.setDataTable(groupedData);
                   bar.draw();
 
-                  table = new google.visualization.ChartWrapper({
+                  var table2 = new google.visualization.ChartWrapper({
                     'chartType': 'Table',
                     'containerId': 'tableD',
                     'options': {
@@ -291,10 +303,10 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                     }
                   });
 
-                  table.setDataTable(groupedData);
-                  table.draw();
+                  table2.setDataTable(groupedData);
+                  table2.draw();
 
-                  tableData = table.getDataTable();
+                  tableData = table2.getDataTable();
                   csvData = google.visualization.dataTableToCsv(tableData);
                 }
  
