@@ -17,6 +17,8 @@
 
   &-body {
     padding: 75px 60px;
+    padding-top: 0 !important;
+    margin-top:50px !important;
     .btn {
       transition: none;
       &::after, &::before {

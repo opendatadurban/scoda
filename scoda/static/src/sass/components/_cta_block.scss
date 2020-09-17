@@ -4,9 +4,9 @@
     font-family: 'Montserrat';
     background: linear-gradient(60deg, #F05252 calc(38% - 1px), #F05252, #fff calc(38% + 1px));
     padding-bottom: 100px;
-    padding-top: 100px;
+    padding-top: 0px;
     &.cta_block_insight{
-        background: linear-gradient(62deg, #61A7B0 calc(38% - 1px), #61A7B0, #fff calc(38% + 1px));
+        background: linear-gradient(61.8deg, #61A7B0 calc(38% - 1px), #61A7B0, #fff calc(38% + 1px));
         .cta-info{
             margin-bottom: -26px;
             .cta-image{
@@ -14,6 +14,7 @@
                 height: 455px;
                 width: 455px;
                 box-shadow: 0 0 6px 2px rgba(0,0,0,0.2);
+
             }
             .btn{
                 border: 2px solid #61A7B0;
@@ -34,7 +35,7 @@
         }
     }
     &.cta_block_analysis{
-        background: linear-gradient(103deg, #FBB65B calc(38% - 1px), #FBB65B, #fff calc(38% + 1px));
+        background: linear-gradient(104.4deg, #FBB65B calc(38% - 1px), #FBB65B, #fff calc(38% + 1px));
         .cta-info{
             
             .cta-image-analysis-dashboard{
@@ -84,12 +85,13 @@
         background-color: rgba(255,255,255,0.5);
         box-shadow: 0 0 6px 2px rgba(0,0,0,0.2);
         margin-bottom: 50px;
+        width:Calc(60%);
+      
+        margin-right: 23.3%;
     }
     .cta-info{
-        margin-top: 30px;
-        margin-bottom: 30px;
-        padding-top: 100px;
-        padding-bottom: 100px;
+        margin-top: 20px;
+        margin-bottom: 20px;
         .cta-info-content{
             flex-direction: column;
         }
@@ -103,7 +105,7 @@
             font-weight: 600;
             line-height: 24px;
             text-align: center; 
-            width: 370px;
+            width: 74% !important;
             margin: auto;         
         }
         p{
@@ -130,6 +132,9 @@
             width: 300px;
             display: block;
             margin: auto;
+            margin-top:20px;
+            margin-bottom:20px ;
+            margin-left: 20px;
         }
     }
     .info-block{
@@ -137,7 +142,7 @@
         border-radius: 10px 0 0 10px;
         background-color: #121425;
         box-shadow: 0 0 6px 2px rgba(0,0,0,0.2);
-        margin-top: 60px;
+        margin-top: 100px;
         margin-bottom: 60px;
         p{
             color: #FFFFFF;
@@ -167,10 +172,64 @@
         } 
             
     }
+    .cta-field-description{
+        &-list{
+            list-style: none;
+            display: flex;
+            margin-left: 20px;
+            li{
+                display: inline;
+              
+            }
+         &-detailed{
+             margin-left: 41px;
+             margin-top:20px !important;
+             margin-bottom:20px ;
+             margin-right: 20px;
+             width: 87%;
+             margin: 0 auto;
+             &-btn{
+                 margin-top:80px !important;
+             }
+         }
+        }
+
+    }
+    .cta-search{
+        height: 403px ;
+    }
+
     // Mobile specific styling
     @media (max-width: 768px) {
+
+        .cta-search{
+            position: relative;
+            margin-top: 28px !important;
+            margin-left: -10px !important;
+        }
+      
+        .cta-field-description{
+            margin-left: 20px;
+            &-list{
+                list-style: none;
+                display: block;
+                
+                
+             
+             &-detailed{
+                
+                 margin-top:20px;
+                 margin-bottom:20px ;
+                 &-btn{
+                     margin-top:80px !important;
+                 }
+             }
+            }
+    
+        }
         .cta-container{
             width: 90%;
+            margin-left: 20px !important;
         }
         &.cta_block_insight{
             .cta-container{
@@ -178,13 +237,15 @@
             }
         }
         .cta-info{
+            
             .cta-image{
                 width: 100% !important;
                 background-size: 100% 100%;
                 margin-bottom: 30px;
+                margin-left:0px;
             }
             .btn{
-                width: 100%;
+                width: 100% !important;
             }
         }
         .info-block{
