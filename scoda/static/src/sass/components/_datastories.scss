@@ -62,6 +62,7 @@ body {
 .ds-banner-logo {
     height: 85px;
     width: 85px;
+    margin-left: 14px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
     @media (max-width: $tablet) {
         margin-left: 15px;
@@ -83,10 +84,12 @@ body {
     font-size: 15px;
     letter-spacing: 0;
     line-height: 25px;
+    width: 95% !important;
+    margin-left: 14px;
 }
 
 .ds-banner-content-hspacer {
-    height:10px;
+    height:5px;
 }
 
 .ds-banner-content-vspacer {
@@ -115,6 +118,10 @@ body {
     box-sizing: border-box;
     height: 1px;
     border: 1px solid $scoda-hr;
+    width: 96% !important;
+    margin-left: 13px;
+    margin-right: 13px;
+
 }
 
 .ds-filter-title {
@@ -133,6 +140,7 @@ body {
     letter-spacing: 0;
     line-height: 28px;
     width:90%;
+    
 }
 
 .ds-content-subtitle {
@@ -141,6 +149,7 @@ body {
     font-size: 18px;
     letter-spacing: 0;
     line-height: 28px;
+  
 }
 
 .ds-content {
@@ -151,6 +160,7 @@ body {
     line-height: 24px;
     text-align: justify;
     width: 360px;
+   
 }
 
 .ds-content-image {
@@ -162,14 +172,16 @@ body {
 }
 
 .ds-top-content {
-    width: 80%;
+    width: 95%;
     color: $scoda-content;
     font-family: $scoda-font;
     font-size: 16px;
     letter-spacing: 0;
     line-height: 24px;
     text-align: justify;
+   
 }
+
 
 .ds-right-content-vspacer {
     width:10px;
@@ -186,16 +198,25 @@ body {
 .ds-info-banner-title {
     color: $scoda-info;
     font-family: $scoda-font;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     letter-spacing: 0;
     line-height: 24px;
+    &-num{
+        margin-left:24px;
+
+    }
+    &-mins{
+        margin-left:10px;
+    }
 }
 
 .ds-info-banner-detail-width {
-    // width: 235px;
+    width: 235px;
 }
-
+.info-banner-mins{
+    padding-left: 1.25rem !important;
+}
 .ds-info-banner-subtitle {
     color: $scoda-grey-dark;
     font-family: $scoda-font;
@@ -209,6 +230,7 @@ body {
     width: 40px;
     background-color: $scoda-white;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,0.5);
+    margin-left: 17px;
 }
 
 .ds-info-banner-width {
@@ -234,6 +256,7 @@ body {
 .ds-content-top-image {
     width:93%;
     height:85%;
+    margin-left:15px;
 }
 
 .ds-main-navigation-button-back {
@@ -244,6 +267,9 @@ body {
     border-radius: 5px;
     background-color: $scoda-white;
     box-shadow: 0 1px 5px 0 rgba(0,0,0,0.3);
+    margin-top: 30px !important;
+    margin-left: 57px !important;
+    padding-top:1px;
     cursor: pointer;
 }
 
@@ -267,6 +293,9 @@ body {
     box-sizing: border-box;
     height: 30px;
     width: 265px;
+    margin-top: 30px !important;
+    margin-right:  57px !important;
+    padding-top: 1px;
     border: 1px solid $scoda-grey-dark;
     border-radius: 14px;
     background-color: $scoda-white;
@@ -322,10 +351,14 @@ body {
   }
 
   .ds-content-card-header-hr {
-    border-top: 5px dotted $scoda-white;
-    box-sizing: border-box;
-    height: 1px;
-    border-top: 5px dotted $scoda-white;
+    padding: 1em;
+    background-image:
+        radial-gradient(circle at 2.5px, #fff 1.25px, rgba(255,255,255,0) 2.5px),
+        radial-gradient(circle, #fff 1.25px, rgba(255,255,255,0) 2.5px),
+        radial-gradient(circle at 2.5px, #fff 1.25px, rgba(255,255,255,0) 2.5px),
+        radial-gradient(circle, #fff 1.25px, rgba(255,255,255,0) 2.5px);
+    background-size: 43px 30px, 0px 0px;
+    background-repeat: repeat-x, repeat-y;
   }
 
   .ds-content-card-header-sub {
@@ -343,6 +376,7 @@ body {
     font-weight: 500;
     letter-spacing: 0;
     line-height: 24px;
+    margin-right: 17px;
   }
 
   .ds-content-card-highlight-block {
@@ -574,6 +608,8 @@ body {
     text-align: center;
     @media (max-width: $tablet) {
         margin-bottom: 60px;
+
+   
     }
 }
 
@@ -727,12 +763,15 @@ o {
         .ds-right-content-width{
             padding-left: unset;
         }
+
+        
     }
 }
 
 .ds-banner-view-button{
     @media (max-width: $tablet) {
         width: unset;
+
     }
 }
 
@@ -744,6 +783,7 @@ o {
   }
   .data-story-card{
     position: relative;
+   //ds margin-left: -15px !important;
   }
   .data-story-card .card-trigger{
     height: 100%;
@@ -761,6 +801,7 @@ o {
   #filter_{
       a{
           cursor: unset;
+          margin-right:17px;
       }
   }
   .tabs_vertical--pills--pill{
@@ -791,6 +832,7 @@ o {
             display: block;
             margin: auto !important;
             margin-top: 15px !important;
+            margin-right: 57px !important;
         }
         .ds-content-story-title{
             margin-top: 90px !important;
@@ -805,7 +847,11 @@ o {
             }
         }
         .chart-heights-mobile{
+            position: relative;
             min-height: 250px;
+            padding-left:0;
+            left:-13px;
+
             canvas{
                 height: 250px !important;
             }
@@ -827,6 +873,7 @@ o {
                 width: unset;
             }
         }
+  
     }
 }
 
@@ -849,5 +896,6 @@ o {
         .nav-tabs{
             border-bottom: none;
         }
+
     }
 }

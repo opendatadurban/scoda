@@ -28,7 +28,7 @@ export default class ContentSectionTop extends Component {
             borderRadius:'50px',
             position:'relative',
             top:'45px',
-            left:'8px'
+            left:'10px'
         };
 
         return (

@@ -29,12 +29,12 @@ export default class Banner extends Component {
                        </div>
                        <div className="ds-banner-content-hspacer"></div>
                        <div className="row">
-                            <div className="col-12 ds-banner-content">{this.props.content}</div>
+                            <div className="ds-banner-content">{this.props.content}</div>
                        </div>
                    </div>
                </div>
                <div className="row">
-                   <div className="col-12 mt-3 ds-banner-hr"></div>
+                   <div className="mt-3 ds-banner-hr"></div>
                </div>
             </div>
         )

@@ -29,7 +29,7 @@ export default class Navigation_scoda extends Component {
                 </button>
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav">
+                    <ul className="navbar-nav ">
                         <li className="nav-item home_">
                             <a className="nav-link " href="/scoda/#/home">Home</a>
                         </li>
