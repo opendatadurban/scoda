@@ -56,9 +56,14 @@ export default class IndicatorExplorerDataTable extends Component {
     }
 
     render() {
+        var hiddenTable  = {
+            display:'none'
+        };
+
         return (
             <div>
                 <div id="tableD"></div>
+                <div id="tableD2" style={hiddenTable}></div>
             </div>
         )
     }
