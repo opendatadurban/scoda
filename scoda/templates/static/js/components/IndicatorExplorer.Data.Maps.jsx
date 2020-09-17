@@ -64,7 +64,7 @@ export default class IndicatorExplorerDataMap extends Component {
     
           $.ajax(options).done(function(){
             google.load("visualization", "1", {
-              packages:['controls', 'bar', 'corechart', 'geochart'],
+              packages:['controls', 'bar', 'corechart', 'geochart','table'],
               callback: function() {
                      var dataSet = resultSet.table;
 
@@ -76,7 +76,6 @@ export default class IndicatorExplorerDataMap extends Component {
                      else {
                          filterItem = filter;
                      }
-
 
                       let filterRow = 0;
                       let rows = [];
@@ -107,25 +106,118 @@ export default class IndicatorExplorerDataMap extends Component {
 
                       }
 
-                      var map = new google.visualization.ChartWrapper({
-                          'chartType': 'GeoChart',
-                          'containerId': 'map',
-                          'options': {
-                              region: 'ZA',
-                              displayMode: 'markers',
-                              resolution: 'provinces',
-                              theme: 'material',
-                              colorAxis: {colors: ['#FED976', '#FC4E2A', '#800026']},
-                              height: winHeight,
-                              width:winWidth,
-                              tooltip: { isHtml: true },
-                              keepAspectRatio: true
-                          }
-                      });
+                      if(resultSet.plot_type === 2) {
+                        var map = new google.visualization.ChartWrapper({
+                            'chartType': 'GeoChart',
+                            'containerId': 'map',
+                            'options': {
+                                region: 'ZA',
+                                displayMode: 'markers',
+                                resolution: 'provinces',
+                                theme: 'material',
+                                colorAxis: {colors: ['#FED976', '#FC4E2A', '#800026']},
+                                height: winHeight,
+                                width:winWidth,
+                                tooltip: { isHtml: true },
+                                keepAspectRatio: true
+                            }
+                        });
+  
+                        map.setDataTable(rows);
+                
+                        map.draw();
+                      }
+                      
+                      if(resultSet.plot_type === 1) {
+                            var dataTable = new google.visualization.DataTable(resultSet.table_plot);
 
-                      map.setDataTable(rows);
-              
-                      map.draw();
+                            var group = dataTable.getDistinctValues(0);
+
+                            var columns = [2], groupColumns = [];
+                            for (var i = 0; i < group.length; i++) {
+                                var label = group[i];
+                                columns.push({
+                                    type: 'number',
+                                    label: label,
+                                    calc: (function (name) {
+                                        return function (dt, row) {
+                                            return (dt.getValue(row, 0) == name) ? dt.getValue(row, 1) : null;
+                                        }
+                                    })(label)
+                                });
+                                groupColumns.push({
+                                    type: 'number',
+                                    label: label,
+                                    column: i + 1,
+                                    aggregation: google.visualization.data.sum
+                                });
+                            }
+
+                            var view = new google.visualization.DataView(dataTable);
+                            view.setColumns(columns);
+
+                            var groupedData = google.visualization.data.group(view, [0], groupColumns);
+
+                            var dt = transposeDataTable(groupedData);
+                            //var csv = google.visualization.dataTableToCsv(dt);
+                            
+                            var myView = new google.visualization.DataView(dt);
+
+                            myView.setColumns([0, Number(selectedYear)]);
+
+                            var map = new google.visualization.ChartWrapper({
+                                'chartType': 'GeoChart',
+                                'containerId': 'map',
+                                'options': {
+                                    region: 'ZA',
+                                    displayMode: 'markers',
+                                    resolution: 'provinces',
+                                    theme: 'material',
+                                    colorAxis: {colors: ['#FED976', '#FC4E2A', '#800026']},
+                                    height: winHeight,
+                                    width:winWidth,
+                                    tooltip: { isHtml: true },
+                                    keepAspectRatio: true
+                                }
+                            });
+
+                            map.setDataTable(myView);
+                            map.draw();
+
+                            $('#map-selector').val(selectedYear);
+                      }
+
+                      function transposeDataTable(dataTable) {
+                        //step 1: let us get what the columns would be
+                        var rows = [];//the row tip becomes the column header and the rest become
+                        for (var rowIdx=0; rowIdx < dataTable.getNumberOfRows(); rowIdx++) {
+                            var rowData = [];
+                            for( var colIdx = 0; colIdx < dataTable.getNumberOfColumns(); colIdx++) {
+                                rowData.push(dataTable.getValue(rowIdx, colIdx));
+                            }
+                            rows.push( rowData);
+                        }
+                        var newTB = new google.visualization.DataTable();
+                        newTB.addColumn('string', dataTable.getColumnLabel(0));
+                        newTB.addRows(dataTable.getNumberOfColumns()-1);
+                        var colIdx = 1;
+                        for(var idx=0; idx < (dataTable.getNumberOfColumns() -1);idx++) {
+                            var colLabel = dataTable.getColumnLabel(colIdx);
+                            newTB.setValue(idx, 0, colLabel);
+                            colIdx++;
+                        }
+                        for (var i=0; i< rows.length; i++) {
+                            var rowData = rows[i];
+                            newTB.addColumn('number',rowData[0]); //assuming the first one is always a header
+                            var localRowIdx = 0;
+            
+                            for(var j=1; j< rowData.length; j++) {
+                                newTB.setValue(localRowIdx, (i+1), rowData[j]);
+                                localRowIdx++;
+                            }
+                        }
+                        return newTB;
+                    }
                   }
             });
         });
