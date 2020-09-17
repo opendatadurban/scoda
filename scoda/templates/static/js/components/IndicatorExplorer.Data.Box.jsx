@@ -127,8 +127,11 @@ export default class IndicatorExplorerDataBox extends Component {
         link.href = uri;
         link.target = '_blank';
         document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        link.click(function(e) {
+            e.preventDefault();
+            document.body.removeChild(link);
+        });
+        
     }
 
     downloadChart() {
