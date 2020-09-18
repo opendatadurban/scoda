@@ -13,10 +13,10 @@ export default class IndicatorExplorerDataBoxMapFilter extends Component {
             this.props.changeHook(document.getElementById('map-selector').value,2);
         }
 
-        if(this.props.results.plot_type === 1) {
+        /*if(this.props.results.plot_type === 1) {
             var year = Number(document.getElementById('map-selector').value);
             this.props.changeHook(year,1);
-        }
+        }*/
     }
 
     render() {

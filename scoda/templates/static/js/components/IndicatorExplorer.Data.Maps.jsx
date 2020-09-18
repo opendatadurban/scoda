@@ -51,7 +51,7 @@ export default class IndicatorExplorerDataMap extends Component {
         document.getElementById('map').style.width = windowWidth;
         
         if(this.props.geo.length !== 0) {
-            this.loadGoogleVizApi(this.props.geo,this.props.filterYear,this.props.filter,windowWidth,windowHeight);
+            //this.loadGoogleVizApi(this.props.geo,this.props.filterYear,this.props.filter,windowWidth,windowHeight);
         }
     }
   
@@ -123,9 +123,14 @@ export default class IndicatorExplorerDataMap extends Component {
                             }
                         });
   
-                        map.setDataTable(rows);
+                        try
+                        {
+                            map.setDataTable(rows);
                 
-                        map.draw();
+                            map.draw();
+                        }catch {}
+                        
+
                       }
                       
                       if(resultSet.plot_type === 1) {
@@ -185,6 +190,69 @@ export default class IndicatorExplorerDataMap extends Component {
                             map.draw();
 
                             $('#map-selector').val(selectedYear);
+
+                            $('#map-selector').on('change', function(event) {
+                                event.preventDefault();
+                                var year = Number(document.getElementById('map-selector').value);
+                                
+
+                                var dataTable = new google.visualization.DataTable(resultSet.table_plot);
+
+                                var group = dataTable.getDistinctValues(0);
+    
+                                var columns = [2], groupColumns = [];
+                                for (var i = 0; i < group.length; i++) {
+                                    var label = group[i];
+                                    columns.push({
+                                        type: 'number',
+                                        label: label,
+                                        calc: (function (name) {
+                                            return function (dt, row) {
+                                                return (dt.getValue(row, 0) == name) ? dt.getValue(row, 1) : null;
+                                            }
+                                        })(label)
+                                    });
+                                    groupColumns.push({
+                                        type: 'number',
+                                        label: label,
+                                        column: i + 1,
+                                        aggregation: google.visualization.data.sum
+                                    });
+                                }
+    
+                                var view = new google.visualization.DataView(dataTable);
+                                view.setColumns(columns);
+    
+                                var groupedData = google.visualization.data.group(view, [0], groupColumns);
+    
+                                var dt = transposeDataTable(groupedData);
+                                //var csv = google.visualization.dataTableToCsv(dt);
+                                
+                                var myView = new google.visualization.DataView(dt);
+    
+                                myView.setColumns([0, Number(year)]);
+    
+                                var map = new google.visualization.ChartWrapper({
+                                    'chartType': 'GeoChart',
+                                    'containerId': 'map',
+                                    'options': {
+                                        region: 'ZA',
+                                        displayMode: 'markers',
+                                        resolution: 'provinces',
+                                        theme: 'material',
+                                        colorAxis: {colors: ['#FED976', '#FC4E2A', '#800026']},
+                                        height: winHeight,
+                                        width:winWidth,
+                                        tooltip: { isHtml: true },
+                                        keepAspectRatio: true
+                                    }
+                                });
+    
+                                map.setDataTable(myView);
+                                map.draw();
+    
+                                $('#map-selector').val(year);
+                            });
                       }
 
                       function transposeDataTable(dataTable) {
