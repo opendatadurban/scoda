@@ -27,8 +27,8 @@ componentDidUpdate() {
   this.handleResize();
 
    if(this.props.data.length !== 0) {
-    this.loadGoogleVizApi(this.props.data, this.props.filterYear,'100%','100%');
-    }
+      this.loadGoogleVizApi(this.props.data, this.props.filterYear,'100%','100%');
+  }
 
 }
 
