@@ -24,7 +24,7 @@ export default class IndicatorExplorerDataBoxMapFilter extends Component {
         if(this.props.results.length !== 0) {
             if(this.props.results.plot_type === 2) {
                 selectorOptions = this.props.results.options_list.map((dataset,index) =>(
-                    <option key={index} value={dataset.optname}>{dataset.optname}</option>
+                    <option key={index} value={dataset.optid}>{dataset.optname}</option>
                 ));
             }
             if(this.props.results.plot_type === 1) {
