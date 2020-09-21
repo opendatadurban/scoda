@@ -39,6 +39,9 @@ body {
 }
 
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    margin-top:5px;
+    padding-top:3px;
+    height:45px;
     background-color: $scoda-white;
     border-color: $scoda-black $scoda-black $scoda-white;
     color: $scoda-grey-dark;
@@ -46,7 +49,7 @@ body {
     font-size: 16px;
     font-weight: bold;
     letter-spacing: 0;
-    line-height: 32px;
+    line-height: 31px;
     text-align: center;
     
 }
@@ -72,7 +75,7 @@ body {
 .ds-banner-title {
     color: $scoda-grey-dark;
     font-family: $scoda-font;
-    font-size: 22px;
+    font-size: 25px;
     font-weight: bold;
     letter-spacing: 0;
     line-height: 32px;
@@ -81,10 +84,10 @@ body {
 .ds-banner-content {
     color: $scoda-grey-dark;
     font-family: $scoda-font;
-    font-size: 15px;
+    font-size: 18px;
     letter-spacing: 0;
     line-height: 25px;
-    width: 95% !important;
+    width: 100% !important;
     margin-left: 14px;
 }
 
@@ -101,7 +104,7 @@ body {
   width: 230px;
   color: $scoda-grey-dark;
   font-family: $scoda-font;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: bold;
   letter-spacing: 0;
   line-height: 24px;
@@ -112,6 +115,8 @@ body {
   border: 1px solid $scoda-grey-dark;
   border-radius: 25px;
   cursor: pointer;
+  padding-top:1px;
+  margin-left:58px;
 }
 
 .ds-banner-hr {
@@ -130,8 +135,9 @@ body {
     font-size: 12px;
     letter-spacing: 0;
     line-height: 25px;
+    margin-top:33px;
+    margin-left:10px;
 }
-
 .ds-content-title {
     color: $scoda-grey-dark;
     font-family: $scoda-font;
@@ -215,12 +221,12 @@ body {
     width: 235px;
 }
 .info-banner-mins{
-    padding-left: 1.25rem !important;
+ 
 }
 .ds-info-banner-subtitle {
     color: $scoda-grey-dark;
     font-family: $scoda-font;
-    font-size: 13px;
+    font-size: 14px;
     letter-spacing: 0;
     line-height: 20px;
 }
@@ -771,6 +777,7 @@ o {
 .ds-banner-view-button{
     @media (max-width: $tablet) {
         width: unset;
+        margin-left:0px;
 
     }
 }
@@ -793,9 +800,6 @@ o {
     top: 0;
     left: 0;
     z-index: 2;
-  }
-  .data-story-page{
-    padding-top: 140px;
   }
 
   #filter_{
@@ -899,3 +903,28 @@ o {
 
     }
 }
+
+.data-story-card-productive-filter:hover{
+    color:black !important;
+    background:white !important;
+   }
+   .data-story-card-inclusives-filter:hover{
+    color:black !important;
+    background:white !important;
+   }
+   .data-story-card-well-filter:hover{
+    color:black !important;
+    background:white  !important;
+   }
+   .data-story-card-sustainable-filter:hover{
+    color:black !important;
+    background:white !important;
+   }
+   .data-story-card-built-filter:hover{
+    color:black !important;
+    background:white  !important;
+   }
+   .data-story-card-city-filter:hover{
+    color:black !important;
+    background:white !important;
+   }

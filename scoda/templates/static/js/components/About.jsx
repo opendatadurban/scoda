@@ -68,7 +68,7 @@ export default class CTA_block extends Component {
             </div>
           </div>
           <a href="https://www.sacities.net">
-            <div className="row box">
+            <div className="row box container">
               <div className="col-12">
                 <p>
                   Further information about the development of SCODA is
@@ -88,7 +88,7 @@ export default class CTA_block extends Component {
               </p>
             </div>
             <div className="important-links-logos-container">
-              <ul className="important-links-logos-list">
+              <ul className="important-links-logos-list container">
                 <li>
                   <div className="item">
                     <img

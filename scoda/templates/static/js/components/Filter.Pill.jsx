@@ -10,25 +10,25 @@ export default class FilterPill extends Component {
         let main_class ='data-story-trigger';
 
         if(this.props.filter == 'Productive Cities'){
-            main_class = 'data-story-trigger data-story-card-productive';
+            main_class = 'data-story-trigger data-story-card-productive data-story-card-productive-filter';
         }
         else if(this.props.filter == 'Inclusive Cities'){
-            main_class = 'data-story-trigger data-story-card-inclusives';
+            main_class = 'data-story-trigger data-story-card-inclusives data-story-card-inclusives-filter';
         }
         else if(this.props.filter == 'Well Governed Cities'){
-            main_class = 'data-story-trigger data-story-card-well';
+            main_class = 'data-story-trigger data-story-card-well data-story-card-well-filter';
         }
         else if(this.props.filter == 'Sustainable Cities'){
-            main_class = 'data-story-trigger data-story-card-sustainable';
+            main_class = 'data-story-trigger data-story-card-sustainable data-story-card-sustainable-filter';
         }
         else if(this.props.filter == 'Built Enviroment'){
-            main_class = 'data-story-trigger data-story-card-built';
+            main_class = 'data-story-trigger data-story-card-built data-story-card-built-filter';
         }
         else if(this.props.filter == 'City Demographics'){
-            main_class = 'data-story-trigger data-story-card-city';
+            main_class = 'data-story-trigger data-story-card-city data-story-card-city-filter';
         }
         else if(this.props.filter == 'Employment'){
-            main_class = 'data-story-trigger data-story-card-employment';
+            main_class = 'data-story-trigger data-story-card-employment data-story-card-employment-filter';
         }
         else if(this.props.filter == 'Services'){
             main_class = 'data-story-trigger data-story-card-service';
