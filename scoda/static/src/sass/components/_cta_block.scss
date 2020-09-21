@@ -2,11 +2,19 @@
     background-color: #FFFFFF;
     box-shadow: 0 0 6px 7px rgba(0,0,0,0.2);
     font-family: 'Montserrat';
-    background: linear-gradient(60deg, #F05252 calc(38% - 1px), #F05252, #fff calc(38% + 1px));
+     background: linear-gradient(  53deg, 
+                                   red 41.9%,
+                                   rgb(255, 0, 0) 36.1%,
+                                   rgb(255, 0, 0) 43.1%,
+                                   white 10%,
+                                   white 4%,
+                       
+                                   );
+
     padding-bottom: 100px;
     padding-top: 0px;
     &.cta_block_insight{
-        background: linear-gradient(61.8deg, #61A7B0 calc(38% - 1px), #61A7B0, #fff calc(38% + 1px));
+        background: linear-gradient(61.8deg, #61A7B0 38%, #fff 38%);
         .cta-info{
             margin-bottom: -26px;
             .cta-image{
@@ -35,7 +43,16 @@
         }
     }
     &.cta_block_analysis{
-        background: linear-gradient(104.4deg, #FBB65B calc(38% - 1px), #FBB65B, #fff calc(38% + 1px));
+        background: linear-gradient(108.8deg,
+                                      #FBB65B 11%,
+                                      #FBB65B 4%, 
+                                      #FBB65B 42.6%,
+                                      white 4%,
+                                      white 10%,
+        );
+
+
+
         .cta-info{
             
             .cta-image-analysis-dashboard{
@@ -156,7 +173,8 @@
             line-height: 32px;
         }
         .icon{
-            background-image: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_3 Evidence Tools/icon_products_evidence-small.png');
+      
+            background-image: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_2 What Products Do We Offer/icon_products_evidence.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -198,7 +216,29 @@
     .cta-search{
         height: 403px ;
     }
+    
+    @media (max-width:1550px){
+        .cta-info{
+            .btn{
+                width: 100% !important;  
+            }
+    }
+    }
+    @media (max-width: 1376px){
+        .cta-container{
+          
+            width:Calc(73%);
+            margin-right: 10.3%;
+        }
+        .cta-info{
+            .btn{
+                width: 100% !important;  
+            }
+    }
+}
+    @media (max-width: 1260px){
 
+    }
     // Mobile specific stylings
     @media (max-width: 768px) {
 

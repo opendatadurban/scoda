@@ -58,6 +58,7 @@
         padding: 20px 30px;
         margin-top: 80px;
         margin-bottom: 80px;
+        margin: auto;
     
         p{
             font-style: italic;
@@ -134,7 +135,15 @@
                    
                }
             }
-           
+            .line{
+                hr{
+                    margin-top: 47px;
+                }
+            }           
+        }
+        .important-links-logos-list{
+          margin-top: 30px;
+            
         }
         .important-links-logos-container{
             margin: auto;
