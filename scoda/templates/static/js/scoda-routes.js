@@ -1,3 +1,4 @@
+//Imports
 import React, {useEffect, useState} from 'react';
 import { HashRouter, Route, hashHistory } from 'react-router-dom';
 
