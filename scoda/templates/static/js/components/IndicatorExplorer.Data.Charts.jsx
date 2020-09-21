@@ -3,7 +3,6 @@ import React, { PureComponent } from 'react';
 import $ from 'jquery';
 import canvg from 'canvg';
 
-
 export default class IndicatorExplorerDataChart extends PureComponent {
   constructor(props) {
         super(props);
@@ -27,8 +26,8 @@ componentDidUpdate() {
   this.handleResize();
 
    if(this.props.data.length !== 0) {
-    this.loadGoogleVizApi(this.props.data, this.props.filterYear,'100%','100%');
-    }
+      this.loadGoogleVizApi(this.props.data, this.props.filterYear,'100%','100%');
+  }
 
 }
 
@@ -60,9 +59,9 @@ handleResize() {
   document.getElementById('chart').style.height = windowHeight;
   document.getElementById('chart').style.width = windowWidth;
   
-  if(this.props.data.length !== 0) {
-      //this.loadGoogleVizApi(this.props.data,this.props.filterYear,windowWidth,windowHeight);
-  }
+  /*if(this.props.data.length !== 0) {
+      this.loadGoogleVizApi(this.props.data,this.props.filterYear,windowWidth,windowHeight);
+  }*/
 }
 
 loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
@@ -158,9 +157,9 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
 
               }
 
-              var bar = new google.visualization.ChartWrapper(options);
+              let bar = new google.visualization.ChartWrapper(options);
 
-              var cssClassNames = {
+              let cssClassNames = {
                  'headerRow': 'google-visualization-table-table',
                 'tableRow': 'table-cell',
                 'oddTableRow': 'table-cell',
@@ -170,7 +169,7 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                 'table':'google-visualization-table-table'
             };
  
-            var table = new google.visualization.ChartWrapper({
+            let table = new google.visualization.ChartWrapper({
                 'chartType': 'Table',
                 'containerId': 'tableD',
                 'options': {
@@ -178,7 +177,7 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                   }
               });
 
-              var categoryPicker1 = new google.visualization.ControlWrapper({
+              let categoryPicker1 = new google.visualization.ControlWrapper({
                 'controlType': 'CategoryFilter',
                 'containerId': 'categorySelector1',
                 'state': {'selectedValues':resultSet.cities},
@@ -194,7 +193,7 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                 }
             });
 
-            var categoryPicker2 = new google.visualization.ControlWrapper({
+           let categoryPicker2 = new google.visualization.ControlWrapper({
                 'controlType': 'CategoryFilter',
                 'containerId': 'categorySelector2',
                 'id':'dateSelector',
@@ -210,9 +209,9 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                 }
             });
 
-              var data = google.visualization.arrayToDataTable(resultSet.table);
+             let data = google.visualization.arrayToDataTable(resultSet.table);
              
-              var dashboard = new google.visualization.Dashboard();
+             let dashboard = new google.visualization.Dashboard();
               
               if(resultSet.plot_type === 2) {
                 dashboard.bind([categoryPicker1,categoryPicker2],[bar,table]);
@@ -232,14 +231,6 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                 });
 
                 
-              var table2 = new google.visualization.ChartWrapper({
-                'chartType': 'Table',
-                'containerId': 'tableD',
-                'options': {
-                    'showRowNumber': false, 'allowHtml': true, 'cssClassNames': cssClassNames
-                  }
-              });
-
                 data = new google.visualization.DataTable(resultSet.table_plot);
                 dashboard.bind([categoryPicker1],[table]);
           
@@ -252,17 +243,15 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                 var csvData = google.visualization.dataTableToCsv(tableData);
 
                 if(resultSet.plot_type === 1) {
-                  tableData = table.getDataTable();
-                  csvData = google.visualization.dataTableToCsv(tableData);
-
                   $('#categorySelector2').hide();
                   $('#cat-spacer').hide();
 
-                  var filteredData = tableData;
-                  var group = filteredData.getDistinctValues(0);
+                  tableData = table.getDataTable();
+                  let filteredData = tableData;
+                  let group = filteredData.getDistinctValues(0);
       
                   var columns = [2], groupColumns = [];
-                  for (var i = 0; i < group.length; i++) {
+                  for (let i = 0; i < group.length; i++) {
                       var label = group[i];
                       columns.push({
                           type: 'number',
@@ -287,15 +276,15 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                     rowHeader.push(groupColumns[i].label);
                   }
 
-                  var view = new google.visualization.DataView(filteredData);
+                  let view = new google.visualization.DataView(filteredData);
                   view.setColumns(columns);
 
-                  var groupedData = google.visualization.data.group(view, [0], groupColumns);
+                  let groupedData = google.visualization.data.group(view, [0], groupColumns);
   
                   bar.setDataTable(groupedData);
                   bar.draw();
 
-                  var table2 = new google.visualization.ChartWrapper({
+                  let table2 = new google.visualization.ChartWrapper({
                     'chartType': 'Table',
                     'containerId': 'tableD',
                     'options': {
@@ -308,12 +297,130 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
 
                   tableData = table2.getDataTable();
                   csvData = google.visualization.dataTableToCsv(tableData);
+                  
+                  //map
+                  $('#map-selector').val(selectedYear);
+
+                  let dataTable = table.getDataTable();
+                  group = dataTable.getDistinctValues(0);
+
+                  columns = [2], groupColumns = [];
+                                for (let i = 0; i < group.length; i++) {
+                                    let label = group[i];
+                                    columns.push({
+                                        type: 'number',
+                                        label: label,
+                                        calc: (function (name) {
+                                            return function (dt, row) {
+                                                return (dt.getValue(row, 0) == name) ? dt.getValue(row, 1) : null;
+                                            }
+                                        })(label)
+                                    });
+                                    groupColumns.push({
+                                        type: 'number',
+                                        label: label,
+                                        column: i + 1,
+                                        aggregation: google.visualization.data.sum
+                                    });
+                                }
+
+                  view = new google.visualization.DataView(dataTable);
+                  view.setColumns(columns);
+
+                  groupedData = google.visualization.data.group(view, [0], groupColumns);
+                  
+                  let dt = transposeDataTable(groupedData);
+                  
+                  let myView = new google.visualization.DataView(dt);
+                  myView.setColumns([0, Number(selectedYear)]);
+
+                  let map = new google.visualization.ChartWrapper({
+                    'chartType': 'GeoChart',
+                    'containerId': 'map',
+                    'options': {
+                        region: 'ZA',
+                        displayMode: 'markers',
+                        resolution: 'provinces',
+                        theme: 'material',
+                        colorAxis: {colors: ['#FED976', '#FC4E2A', '#800026']},
+                        height: winHeight,
+                        width:winWidth,
+                        tooltip: { isHtml: true },
+                        keepAspectRatio: true
+                    }
+                });
+
+                map.setDataTable(myView);
+                map.draw();
+
+                $('#map-selector').on('change', function(event) {
+                    event.preventDefault();
+                    var year = Number(document.getElementById('map-selector').value);
+                    
+
+                    var tableData = table.getDataTable();
+
+                    var group = tableData.getDistinctValues(0);
+
+                    var columns = [2], groupColumns = [];
+                    for (var i = 0; i < group.length; i++) {
+                        var label = group[i];
+                        columns.push({
+                            type: 'number',
+                            label: label,
+                            calc: (function (name) {
+                                return function (dt, row) {
+                                    return (dt.getValue(row, 0) == name) ? dt.getValue(row, 1) : null;
+                                }
+                            })(label)
+                        });
+                        groupColumns.push({
+                            type: 'number',
+                            label: label,
+                            column: i + 1,
+                            aggregation: google.visualization.data.sum
+                        });
+                    }
+
+                    var view = new google.visualization.DataView(tableData);
+                    view.setColumns(columns);
+
+                    var groupedData = google.visualization.data.group(view, [0], groupColumns);
+
+                    var dt = transposeDataTable(groupedData);
+                    
+                    var myView = new google.visualization.DataView(dt);
+
+                    myView.setColumns([0, Number(year)]);
+
+                    var map = new google.visualization.ChartWrapper({
+                        'chartType': 'GeoChart',
+                        'containerId': 'map',
+                        'options': {
+                            region: 'ZA',
+                            displayMode: 'markers',
+                            resolution: 'provinces',
+                            theme: 'material',
+                            colorAxis: {colors: ['#FED976', '#FC4E2A', '#800026']},
+                            height: winHeight,
+                            width:winWidth,
+                            tooltip: { isHtml: true },
+                            keepAspectRatio: true
+                        }
+                    });
+
+                    map.setDataTable(myView);
+                    map.draw();
+
+                    $('#map-selector').val(year);
+                 });
                 }
- 
+                
                 var csvString = rowHeader.join(',') + '\n' + csvData + '\n';
                      
                 document.getElementById('csv').value=csvString;
 
+               
                 let tmpDiv = document.createElement('div');
                 tmpDiv.setAttribute('style','width:2000px;height:800px;font-size:10px,fontFamily:Montserrat,visibility:hidden');
                 document.body.appendChild(tmpDiv);
@@ -342,11 +449,69 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                   view: {'columns': resultSet.view}
                 };
 
-                var barTmp = new google.visualization.ChartWrapper(optionsTmp);
-                barTmp.draw(tmpDiv);
+                  var barTmp = new google.visualization.ChartWrapper(optionsTmp);
+                  barTmp.draw(tmpDiv);
+
+                  //var dataSet = Number(document.getElementById('map-selector').value);
+
+                  var dataSet = resultSet.table[0][2];
+                  var dt = table.getDataTable();
+                  var myView = new google.visualization.DataView(dt);
+
+                  myView.setColumns([0, dataSet]);
+
+                  let map = new google.visualization.ChartWrapper({
+                    'chartType': 'GeoChart',
+                    'containerId': 'map',
+                    'options': {
+                        region: 'ZA',
+                        displayMode: 'markers',
+                        resolution: 'provinces',
+                        theme: 'material',
+                        colorAxis: {colors: ['#FED976', '#FC4E2A', '#800026']},
+                        height: winHeight,
+                        width:winWidth,
+                        tooltip: { isHtml: true },
+                        keepAspectRatio: true
+                    }
+                });
+
+               map.setDataTable(myView);
+               map.draw();
+
+               $('#map-selector').on('change', function(event) {
+                      event.preventDefault();
+                      var dataSet = Number(document.getElementById('map-selector').value);
+                      dataSet = dataSet + 1;
+
+                      var dt = table.getDataTable();
+                      var myView = new google.visualization.DataView(dt);
+
+                      myView.setColumns([0, dataSet]);
+
+                      let map = new google.visualization.ChartWrapper({
+                        'chartType': 'GeoChart',
+                        'containerId': 'map',
+                        'options': {
+                            region: 'ZA',
+                            displayMode: 'markers',
+                            resolution: 'provinces',
+                            theme: 'material',
+                            colorAxis: {colors: ['#FED976', '#FC4E2A', '#800026']},
+                            height: winHeight,
+                            width:winWidth,
+                            tooltip: { isHtml: true },
+                            keepAspectRatio: true
+                        }
+                    });
+
+                    map.setDataTable(myView);
+                    map.draw();
+               });
               }
                 
               if(resultSet.plot_type === 1) {
+                  var tableData = table.getDataTable();
                   var filteredData = tableData;
                   var group = filteredData.getDistinctValues(0);
 
@@ -372,7 +537,6 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
 
                   optionsTmp = {
                     'chartType': 'Line',
-                    'containerId': 'chart',
                     'options': {
                       legend: {position: 'right' },
                       axes: {
@@ -397,15 +561,18 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
 
                   var view = new google.visualization.DataView(filteredData);
                   view.setColumns(columns);
+
+                  let groupedData = google.visualization.data.group(view, [0], groupColumns);
                   
                   var barTmp = new google.visualization.ChartWrapper(optionsTmp);
                   barTmp.setDataTable(groupedData);
                   barTmp.draw(tmpDiv);
+
                 }
 
                  google.visualization.events.addListener(barTmp, 'ready',
                  function(event) {
-               
+      
                    var chartArea = tmpDiv.children[0];
    
                    var svgObject = chartArea.children[0].children[0];
@@ -424,6 +591,7 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                    document.getElementById('chartPng').value = dataUri;
 
                    document.body.removeChild(tmpDiv);
+
                  });
 
                 function transposeDataTable(dataTable) {
@@ -459,7 +627,7 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                     }
               });
             }
-        })
+        });
     });
 }
 
