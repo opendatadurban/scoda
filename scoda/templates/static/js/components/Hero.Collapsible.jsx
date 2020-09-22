@@ -20,24 +20,29 @@ export default class Hero extends Component {
             this.setState({hero_caret: 'fa fa-caret-down fa-2x hero-block-arrow-expand'});
 
             document.getElementById('contentContainer').style.display = 'none';
+            document.getElementById('contentContainer').style.height = '0px';
             document.getElementById('buttonContainer').style.display = 'none';
             document.getElementById('infoBlockContainer').style.visibility = 'hidden';
-
-            document.getElementById('infoBlock').style.height = '80px';
+            document.getElementById('infoBlock').style.height = '50px';
+            document.getElementById('hero-content-column').style.height = '50px';
             document.getElementById('hero-content-column').style.paddingBottom = '0px';
-            document.getElementById('hero-title').style.paddingTop = '30px';
-            document.getElementById('hero-title').style.paddingBottom = '10px';
+            document.getElementById('hero-title').style.paddingTop = '15px';
+            document.getElementById('hero-title').style.paddingBottom = '0px';
         }
         else {
             this.setState({hero_state: 'expand'});
             this.setState({hero_caret: 'fa fa-caret-up fa-2x hero-block-arrow-expand'});
 
             document.getElementById('contentContainer').style.display = 'block';
+            //document.getElementById('contentContainer').style.height = '560px';
             document.getElementById('buttonContainer').style.display = 'block';
             document.getElementById('infoBlockContainer').style.visibility = 'visible';
-
             document.getElementById('infoBlock').style.height = '393px';
+            document.getElementById('hero-content-column').style.height = '393px';
+           // document.getElementById('hero-content-column').style.transition = 'all 1.2s ease-in-out';
             document.getElementById('hero-content-column').style.paddingBottom = '90px';
+      
+            
         }
     }
 
@@ -73,7 +78,7 @@ export default class Hero extends Component {
 
         return (
             <div id="hero" className="hero-block">
-                <div className="container-fluid mt-0 p-0">
+                <div className="container-fluid mt-0 p-0 hero-tab-header">
                     <div className="row ml-0 mr-0 p-0">
                         <div className="col-md-5 hero-content-column" id="hero-content-column">
                             <div className="row hero-title" id="hero-title">

@@ -178,6 +178,16 @@ export default class DataStoriesDetails extends Component {
                                         filter_type = "data-story-card-employment"
                                         href_ = 'https://data-stories.edge.durban/edge/unemployed_around_major_citiies'
                                     />
+
+                                    {/**here */}
+                                 <div className="">
+                                    <DataStoriesInfoBanner 
+                                        title="The Durban EDGE"
+                                        subtitle="2 August 2019"
+                                        minutes="5"
+                                        filter_type = "data-story-card-employment"
+                                    />
+                                    </div>
                                     </div>
                                     <div className="col-md-4">
                                     <ContentSectionTop 
@@ -191,6 +201,14 @@ export default class DataStoriesDetails extends Component {
                                         filter_type = "data-story-card-economy"
                                         href_ = 'https://data-stories.edge.durban/edge/durban_economy_2nd_Q'
                                     />
+                                        <div className="">
+                                    <DataStoriesInfoBanner 
+                                        title="The Durban EDGE"
+                                        subtitle="14 October 2019"
+                                        minutes="4"
+                                        filter_type = "data-story-card-economy"
+                                    />
+                                    </div>
                                     </div>
                                     <div className="col-md-4">
                                     <ContentSectionTop 
@@ -204,26 +222,7 @@ export default class DataStoriesDetails extends Component {
                                         filter_type = "data-story-card-service"
                                         href_ = ''
                                     />
-                                    </div>
-                                </div>
-                                <div className="row mt-4">
-                                    <div className="col-md-4">
-                                    <DataStoriesInfoBanner 
-                                        title="The Durban EDGE"
-                                        subtitle="2 August 2019"
-                                        minutes="5"
-                                        filter_type = "data-story-card-employment"
-                                    />
-                                    </div>
-                                    <div className="col-md-4">
-                                    <DataStoriesInfoBanner 
-                                        title="The Durban EDGE"
-                                        subtitle="14 October 2019"
-                                        minutes="4"
-                                        filter_type = "data-story-card-economy"
-                                    />
-                                    </div>
-                                    <div className="col-md-4">
+                                               <div className="">
                                     <DataStoriesInfoBanner 
                                         title="The Durban EDGE"
                                         subtitle="June 2019"
@@ -231,6 +230,11 @@ export default class DataStoriesDetails extends Component {
                                         filter_type = "data-story-card-service"
                                     />
                                     </div>
+                                    
+                                    </div>
+                                </div>
+                                <div className="row mt-4">
+                            
                                 </div>
                                 <ContentSectionRight 
                                         img="economy.png" 
@@ -245,6 +249,8 @@ export default class DataStoriesDetails extends Component {
                                         infoBannerMins="8"
                                         filter_type = "data-story-card-economy"
                                         href_ = 'https://data-stories.edge.durban/edge/durban_economy'
+
+                                        
                                 />
                              </div>
                              <div className="ds-content-vspacer"></div>
