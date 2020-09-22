@@ -28,6 +28,9 @@ body {
     transform: scaleX(-1);
   }
 
+  .hero-tab-header{
+    margin-top:-14px !important;
+  }
   .hero-block-info-display {
     height: 72px;
     width: 70%;
@@ -112,7 +115,7 @@ body {
     background-color: $scoda-white;
     box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
     font-family: $scoda-font;
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 600;
     letter-spacing: 0;
     line-height: 24px;
@@ -132,7 +135,6 @@ body {
     }
     #buttonContainer{
       padding-left: 20px;
-    padding-top: 30px;
 
     @media (max-width: $tablet) {
       padding-bottom: 60px;
@@ -159,4 +161,5 @@ body {
 
     .hero-content-column{
       padding-bottom: 90px;
+    
     }

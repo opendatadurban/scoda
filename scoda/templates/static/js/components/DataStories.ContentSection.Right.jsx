@@ -28,7 +28,8 @@ export default class ContentSectionRight extends Component {
             borderRadius:'50px',
             position:'relative',
             top:'40px',
-            left:'8px'
+            left:'8px',
+            paddingTop:'1px',
         };
 
         return (

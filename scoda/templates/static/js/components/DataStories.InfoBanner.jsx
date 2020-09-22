@@ -7,14 +7,13 @@ export default class DataStoriesInfoBanner extends Component {
     constructor(props) {
         super(props);
     }
-
     render() {
 
         let bannerImage = `/static/dist/img/scoda/datastories/edge.png`;
-        let main_class = `ds-info-banner-width ml-0 mt-2 p-0 mt-4 data-story-card ${this.props.filter_type}`
+        let main_class = `ds-durban-edge-card ds-info-banner-width ml-0 mt-2 p-0 mt-4 data-story-card ${this.props.filter_type}`
         return (
             <div className={main_class}>
-               <div className="row m-0">
+               <div className="row m-0" >
                    <div className="col-0 ds-info-banner-image">
                        <Image imgSrc={bannerImage}/>
                    </div>
@@ -29,12 +28,12 @@ export default class DataStoriesInfoBanner extends Component {
                                </div>
                            </div>
                           
-                           <div className="col pl-1">
+                           <div className="col-0 info-banner-mins">
                                <div className="row">
-                                 <div className="col-0 ds-info-banner-title">&nbsp;&nbsp;{this.props.minutes}</div>
+                                 <div className="col-0 ds-info-banner-title"><span className="ds-info-banner-title-num">{this.props.minutes}</span></div>
                                </div>
                                <div className="row">
-                                        <div className="ds-info-banner-subtitle">MINS</div>
+                                        <div className="ds-info-banner-subtitle"><span className="ds-info-banner-title-mins">MINS</span></div>
                                </div>
                            </div>
                        </div>

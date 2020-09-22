@@ -663,10 +663,10 @@ export default class DataStoriesContentCardEPW extends Component {
                                <div className="col chart-heights-mobile">
                                     <canvas
                                      id="mainChart2"
-                                    className=""
+                                     
                                     />
                                     </div>
-                                    <div className="col ml-3">
+                                    <div className="col ml-3 ds-epwp">
                                     <DataStoriesContentCardContentBlock 
                                      content={contentBlockOne}
                                    />
