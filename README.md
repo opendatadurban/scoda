@@ -45,26 +45,34 @@ Then do the following:
 `gulp`
 
 ## Backend Setup
-### Setting up the Environment with Python and pip
+### Setting up the Environment with Python 3.6.8+ and pip
 * clone the repo
 * install a virtual env and activate it: `virtualenv --no-site-packages env; source env/bin/activate`
 * install requirements: `pip install -r requirements.txt`
+* Locate config folder copy example.development.cfg and paste it as development.cfg into the same config folder
+* If needed update any local credentials on the new development.cfg file you've just created
 
 ### Setting up the Database with PostgreSQL
-Setup the PostgreSQL database (minimum version 9.6.*)
+Setup the PostgreSQL database (version 9.6.*)
+Download and install postgis locally http://download.osgeo.org/postgis/windows/pg96/
 ```
 psql -U postgres
 =# CREATE USER scoda WITH PASSWORD 'scoda';
 =# CREATE DATABASE scoda;
 =# GRANT ALL PRIVILEGES ON DATABASE scoda TO scoda;
+=# psql -d scoda -c "CREATE EXTENSION postgis;"
+=# psql -U postgres -d scoda -c "CREATE EXTENSION postgis;"
+=# psql -U postgres -d scoda -c "CREATE EXTENSION postgis_topology;"
 =# \q
 ```
 Construct your db app-side:
+1. copy and unzip this [data](https://drive.google.com/drive/folders/1tnI_EveGeeJg8-WnP5Js2doMDsQGT2Vh) into the /scoda/data directory
+2. Request access to the drive data folder if unable to download data.
+3. Activate your local environment
 ```
-from opendatadurban.models import db
-from opendatadurban.models.seeds import seed_db
 run 'python rebuild_db.py'
 ```
+4. It will take some time to seed the data
 
 #### Deploying database changes
 * SCODA App uses Flask-Migrate (which uses Alembic) to handle database migrations.
