@@ -73,6 +73,10 @@ Construct your db app-side:
 run 'python rebuild_db.py'
 ```
 4. It will take some time to seed the data
+5. Once the seed has completed, start the server with the command:
+```
+python app.py runserver
+```
 
 #### Deploying database changes
 * SCODA App uses Flask-Migrate (which uses Alembic) to handle database migrations.
