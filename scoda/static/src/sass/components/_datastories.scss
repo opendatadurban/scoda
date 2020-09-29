@@ -6,7 +6,7 @@ body {
 
 .nav {
     &-stretch {
-        width: 20%;
+        width: 31%;
         outline: none;
     }
 
@@ -31,6 +31,10 @@ body {
     color: $scoda-inactive-tab;
 }
 
+.nav-tabs .nav-link {
+    padding-top: 14.5px;
+}
+
 .nav-link {
     color: $scoda-inactive-tab;
     font-family: $scoda-font;
@@ -42,9 +46,9 @@ body {
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-    margin-top: 5px;
-    padding-top: 3px;
-    height: 45px;
+    margin-top: 12px;
+    padding-top: 5px;
+    height: 37px;
     background-color: $scoda-white;
     border-color: $scoda-black $scoda-black $scoda-white;
     color: $scoda-grey-dark;
@@ -66,9 +70,19 @@ body {
         line-height: 25px;
         width: 100% !important;
         margin-left: 14px;
+        margin: 0;
+
+
+        &-cont {
+            margin: auto;
+        }
 
         &-image {
             height: 30%;
+
+            &-big {
+                width: 106%;
+            }
         }
 
         &-hspacer {
@@ -119,6 +133,14 @@ body {
                 letter-spacing: 0;
                 line-height: 32px;
             }
+
+            &-content {
+                &-hspacer {
+
+                    height: 25px;
+
+                }
+            }
         }
     }
 
@@ -141,7 +163,7 @@ body {
                 border-radius: 25px;
                 cursor: pointer;
                 padding-top: 1px;
-                margin-left: 58px;
+                margin-left: 113px;
             }
         }
 
@@ -150,8 +172,42 @@ body {
             height: 1px;
             border: 1px solid $scoda-hr;
             width: 96% !important;
-            margin-left: 13px;
-            margin-right: 13px;
+            margin-left: 28px;
+            margin-right: 28px;
+
+        }
+
+        &-title {
+            color: $scoda-grey-dark;
+            font-family: $scoda-font;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0;
+            line-height: 28px;
+            width: 90%;
+
+        }
+
+        &-content {
+            height: 50px;
+            width: 995px;
+            color: #4A4A4A;
+            font-family: Montserrat;
+            font-size: 18px;
+            letter-spacing: 0;
+            line-height: 25px;
+            margin-top: 5px;
+            margin-bottom: 25px;
+
+            &-hspacer {
+                height: 25px;
+            }
+        }
+
+        &-logo {
+            width: 85px;
+            margin-left: 28px;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
 
         }
     }
@@ -196,7 +252,10 @@ body {
 }
 
 .ds-right-content-width {
-    padding-left: 30px;
+    padding: 0;
+    position: relative;
+    left: 11vh;
+
 }
 
 .ds-info-banner-title {
@@ -271,7 +330,7 @@ body {
     border-radius: 5px;
     background-color: $scoda-white;
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.3);
-    margin-top: 30px !important;
+    margin-top: 115px !important;
     margin-left: 57px !important;
     padding-top: 1px;
     cursor: pointer;
@@ -297,7 +356,7 @@ body {
     box-sizing: border-box;
     height: 30px;
     width: 265px;
-    margin-top: 30px !important;
+    margin-top: 115px !important;
     margin-right: 57px !important;
     padding-top: 1px;
     border: 1px solid $scoda-grey-dark;
@@ -361,7 +420,7 @@ body {
         radial-gradient(circle, #fff 1.25px, rgba(255, 255, 255, 0) 2.5px),
         radial-gradient(circle at 2.5px, #fff 1.25px, rgba(255, 255, 255, 0) 2.5px),
         radial-gradient(circle, #fff 1.25px, rgba(255, 255, 255, 0) 2.5px);
-    background-size: 43px 30px, 0px 0px;
+    background-size: 23px 30px, 0px 0px;
     background-repeat: repeat-x, repeat-y;
 }
 
@@ -772,6 +831,10 @@ a {
             padding-left: unset;
         }
 
+        .ds-banner-content {
+            margin-bottom: 70px;
+        }
+
 
     }
 }
@@ -950,4 +1013,59 @@ a {
 .data-story-card-city-filter:hover {
     color: black !important;
     background: white !important;
+}
+
+
+// Mobile specific styling
+@media (max-width: $tablet) {
+
+    .ds-banner-content {
+        margin-bottom: 70px;
+    }
+
+    .nav-tabs .nav-link {
+        padding-top: 74px !important;
+        padding-bottom: 0px;
+    }
+
+    .ds-right-content-width {
+        position: relative;
+        left: 0 !important;
+    }
+
+    .nav-tabs .nav-link.active,
+    .nav-tabs .nav-item.show .nav-link {
+        margin-top: 71.5px;
+        padding-top: 5px !important;
+
+    }
+
+    .ds-banner-view-button {
+        margin-left: -20px;
+    }
+}
+
+@media screen and (max-width: 1662px) {
+    .ds-right-content-width {
+        position: relative;
+        left: 7vh;
+    }
+
+    .ds-content-image-big {
+        width: 99%;
+    }
+
+    .ds-banner-view-button {
+        margin-left: 26px;
+    }
+}
+
+@media screen and (max-width: 1334px) {
+    .ds-banner-view-button {
+        margin-left: 26px;
+    }
+}
+
+@media screen and (max-width: 1334px) {
+    .ds-banner-view-button {}
 }

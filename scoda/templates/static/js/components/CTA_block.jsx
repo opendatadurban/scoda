@@ -33,7 +33,7 @@ export default class CTA_block extends Component {
                 <ul className="cta-field-description-list">
                   <li>
                     <div className="container">
-                      <div className="cta-image"></div>
+                      <div className="cta-image cta-image-computer"></div>
                       <a  href="https://scoda.co.za/dataset">
                        <button className="btn cta-field-description-list-detailed-btn">Data Management System</button>
                       </a>
