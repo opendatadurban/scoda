@@ -12,7 +12,7 @@ export default class ContentSectionRight extends Component {
     render() {
 
         let sectionImage = `/static/dist/img/scoda/datastories/${this.props.img}`;
-        let main_class = `container ml-0 mt-3 p-0 data-story-card ${this.props.filter_type}`
+        let main_class = `justify-content-center ml-0 mt-3 p-0 data-story-card ${this.props.filter_type}`
         let filterTag = {
             boxSizing: 'border-box',
             height: '34px',
@@ -27,7 +27,7 @@ export default class ContentSectionRight extends Component {
             textAlign: 'center',
             borderRadius:'50px',
             position:'relative',
-            top:'40px',
+            top:'42px',
             left:'8px',
             paddingTop:'1px',
         };
@@ -35,10 +35,10 @@ export default class ContentSectionRight extends Component {
         return (
             <div className={main_class}>
                 <a href={this.props.href_} className="card-trigger"></a>
-               <div className="row m-0">
+               <div className="container row m-0">
                    <div className="col-md-8 p-0 ds-content-image">
                        <div style={filterTag}>{this.props.imageTag}</div>
-                       <Image imgSrc={sectionImage} />
+                       <Image imgSrc={sectionImage} className="ds-content-image-big" />
                    </div>
                    <div className="col-md-4 ds-right-content-width m-0">
                        <div className="row m-0">

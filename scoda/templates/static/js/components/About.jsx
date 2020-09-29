@@ -67,7 +67,7 @@ export default class CTA_block extends Component {
               </p>
             </div>
           </div>
-          <a href="https://www.sacities.net">
+          <a href="https://www.sacities.net" target="_blank">
             <div className="row box container">
               <div className="col-12">
                 <p>

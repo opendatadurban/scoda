@@ -41,8 +41,8 @@ export default class DataStoriesDetails extends Component {
                     <div className="tab-pane fade show active" id="nav-sacn-content" role="tabpanel" aria-labelledby="nav-sacn-tab">
                       <div className="container-fluid">
                           <div className="row">
-                             <div className="col-md-1"></div>
-                             <div className="col-md-10">
+                             <div className="col-md-2"></div>
+                             <div className="col-md-8">
                                 <div className="ds-content-hspacer"></div>
                                 <Banner 
                                   section="sacn"
@@ -155,8 +155,8 @@ export default class DataStoriesDetails extends Component {
                     <div className="tab-pane fade" id="nav-eThekwini-content" role="tabpanel" aria-labelledby="nav-eThekwini-tab">
                     <div className="container-fluid">
                           <div className="row">
-                          <div className="col-md-1"></div>
-                             <div className="col-md-10">
+                          <div className="col-md-2"></div>
+                             <div className="col-md-8">
                                 <div className="ds-content-hspacer"></div>
                                 <Banner 
                                   section="edge"
