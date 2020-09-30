@@ -15,12 +15,16 @@ export default class Banner extends Component {
 
         return (
             <div className="container-fluid ml-0 mt-0 p-0">
-               <div className="row">
-                   <div className="col-0">
-                       <Image className="ds-banner-logo" imgSrc={bannerImage}/>
-                   </div>
-                   <div className="ds-banner-content-vspacer"></div>
-                   <div className="col">
+               <div className="container row">
+
+                   <ul className="ds-top-header-contents">
+                       <li>
+                          <div className="container col-0">
+                              <Image className="ds-banner-logo" imgSrc={bannerImage}/>
+                         </div>
+                       </li>
+                       <li>
+                       <div className="col">
                        <div className="row">
                            <div className="col-md-8 ds-banner-title">{this.props.title}</div>
                            <div className="col-md-2">
@@ -29,9 +33,14 @@ export default class Banner extends Component {
                        </div>
 
                        <div className="row">
-                            <div className="col-md-8 ds-banner-content">{this.props.content}</div>
+                            <div className="container ds-banner-content">{this.props.content}</div>
                        </div>
                    </div>
+                       </li>
+                   </ul>
+
+                   <div className="ds-banner-content-vspacer"></div>
+
                </div>
                <div className="row">
                    <div className="mt-3 ds-banner-hr"></div>
