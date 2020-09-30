@@ -29,7 +29,7 @@ export default class DataStoriesDetails extends Component {
         let sacnSectionOneContent = 'Despite the fact that South Africa’s national urban agenda prioritises urban densification, the municipal revenue mode…';
 
         return (
-            <div className="container-fluid ml-0 mt-0 p-0 data-story-landig-page">
+            <div className="container data-story-landig-page">
                 <nav>
                     <div className="nav nav-tabs" id="nav-tab" role="tablist">
                         <span className="nav-stretch"></span>
@@ -41,8 +41,8 @@ export default class DataStoriesDetails extends Component {
                     <div className="tab-pane fade show active" id="nav-sacn-content" role="tabpanel" aria-labelledby="nav-sacn-tab">
                       <div className="container-fluid">
                           <div className="row">
-                             <div className="col-md-1 col-lg-1 col-xl-1"></div>
-                             <div className="col-md-10 col-lg-10 col-xl-10">
+                             <div className=""></div>
+                             <div className="">
                                 <div className="ds-content-hspacer"></div>
                                 <Banner 
                                   section="sacn"
@@ -155,8 +155,8 @@ export default class DataStoriesDetails extends Component {
                     <div className="tab-pane fade" id="nav-eThekwini-content" role="tabpanel" aria-labelledby="nav-eThekwini-tab">
                     <div className="container-fluid">
                           <div className="row">
-                          <div className="col-md-1"></div>
-                             <div className="col-md-10">
+                          <div className=""></div>
+                             <div className="">
                                 <div className="ds-content-hspacer"></div>
                                 <Banner 
                                   section="edge"
