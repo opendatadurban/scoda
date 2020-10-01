@@ -63,9 +63,9 @@ body {
 
 .ds {
     &-content {
-        color: $scoda-grey-dark;
+        color:#9B9B9B ;
         font-family: $scoda-font;
-        font-size: 18px;
+        font-size: 16px;
         letter-spacing: 0;
         line-height: 25px;
         width: 100% !important;
@@ -78,7 +78,7 @@ body {
         }
         &-diplay-text {
              position: relative;
-             left: calc(100% - 2088px/2);
+             left: calc(100% - 2148px/2);
         }
 
         &-image {
@@ -104,8 +104,7 @@ body {
             font-weight: 600;
             letter-spacing: 0;
             line-height: 28px;
-            width: 90%;
-            min-height: 84px;
+            width: 100%;
 
         }
 
@@ -289,7 +288,9 @@ body {
     }
 }
 
-.ds-info-banner-detail-width {}
+.ds-ecomomy-image {
+    padding : 1px;
+}
 
 .ds-info-banner-subtitle {
     color: $scoda-grey-dark;
@@ -298,7 +299,9 @@ body {
     letter-spacing: 0;
     line-height: 20px;
 }
-
+.ds-content-image-big {
+    width:98%;
+}
 .ds-info-banner-image {
     height: 40px;
     width: 40px;

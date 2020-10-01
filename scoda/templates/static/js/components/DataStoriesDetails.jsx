@@ -93,7 +93,7 @@ export default class DataStoriesDetails extends Component {
                                             <ContentSectionTop
                                                 img="affordability.png"
                                                 title="State of the City Finances 2018"
-                                                subtitle="Afordability"
+                                                subtitle="affordability"
                                                 content="A key message from the State of City Finances 2018 report is that citizens are in crisis. Although growth in the cost of munic..."
                                                 filterColor="#FFC057"
                                                 filter="Inclusive Cities"
@@ -153,9 +153,10 @@ export default class DataStoriesDetails extends Component {
                     </div>
                     {/*TAB2 Content*/}
                     <div className="tab-pane fade" id="nav-eThekwini-content" role="tabpanel" aria-labelledby="nav-eThekwini-tab">
+                    <div className="ds-content-hspacer"></div>
                         <div className="container-fluid">
                             <div className="row">
-                                <div className="ds-content-hspacer"></div>
+                            
                                 <Banner
                                     section="edge"
                                     title="eThekwini Data Stories (via the Durban EDGE)"
@@ -234,6 +235,8 @@ export default class DataStoriesDetails extends Component {
                                 <div className="row mt-4">
 
                                 </div>
+
+                                <div className="ds-ecomomy-image">
                                 <ContentSectionRight
                                     img="economy.png"
                                     title="Economic Overview: State of the Durban Economy"
@@ -248,6 +251,7 @@ export default class DataStoriesDetails extends Component {
                                     filter_type="data-story-card-economy"
                                     href_='https://data-stories.edge.durban/edge/durban_economy'
                                 />
+                                </div>
                             </div>
                             <div className="ds-content-vspacer"></div>
 
