@@ -51,7 +51,7 @@ export default class ContentSectionRight extends Component {
                        </div>
                        <div className="ds-right-content-hspacer"></div>
                        <div className="row m-0">
-                            <div className="col-0 p-3 ds-content">{this.props.content}</div>
+                            <div className="col-0 pl-3 ds-content">{this.props.content}</div>
                        </div>
                        <div className="ds-right-content-hspacer"></div>
                        <div className="row m-0">
