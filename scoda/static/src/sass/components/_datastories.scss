@@ -76,12 +76,16 @@ body {
         &-cont {
             margin: auto;
         }
+        &-diplay-text {
+             position: relative;
+             left: calc(100% - 2088px/2);
+        }
 
         &-image {
             height: 30%;
 
             &-big {
-                width: 106%;
+       
             }
         }
 
@@ -111,8 +115,12 @@ body {
             font-size: 18px;
             letter-spacing: 0;
             line-height: 28px;
+            //height: 50px;
 
         }
+        &-title {
+            //height: 100px;
+            }
 
         &-banner {
             &-logo {
@@ -164,7 +172,9 @@ body {
                 border-radius: 25px;
                 cursor: pointer;
                 padding-top: 1px;
-                margin-left: 26.5vw;
+                position: relative;
+                left: calc(100% - 235px/3);
+        
             }
         }
 
@@ -258,7 +268,6 @@ body {
 .ds-right-content-width {
     padding: 0;
     position: relative;
-    left: 22.5vw;
 
 }
 
@@ -389,6 +398,7 @@ body {
     border-radius: 10px 10px 0 0;
     background-color: $scoda-white;
 }
+
 
 .ds-content-card-header {
     border-radius: 10px 10px 0 0;
@@ -1046,162 +1056,26 @@ a {
     .ds-banner-view-button {
         margin-left: -20px;
         width: 223px;
+        left: -67px;
     }
+    .ds-content-diplay-text {
+        position: relative !important;
+        left: 0 !important;
+        flex: 49% ;
+        max-width: 49%;
+    }
+
 }
-
-@media screen and (max-width: 1770px) {
+@media (max-width: 540px) {
     .ds-banner-view-button {
-        margin-left: 22vw;
+      
+     
+        left: 0;
     }
-
-    .ds-right-content-width {
-        position: relative;
-        left: 18vw;
+    .ds-content-diplay-text {
+        position: relative !important;
+        left: 0 !important;
+        flex: 1%;
+        max-width:100%;
     }
-}
-
-@media screen and (max-width: 1758px) {
-    .ds-banner-view-button {
-        margin-left: 22vw;
-    }
-
-    .ds-right-content-width {
-        position: relative;
-        left: 18vw;
-    }
-}
-
-@media screen and (max-width: 1730px) {
-    .ds-banner-view-button {
-        margin-left: 21vw;
-    }
-}
-
-@media screen and (max-width: 1666px) {
-    .ds-right-content-width {
-        position: relative;
-        left: 15vw;
-    }
-
-    .ds-content-image-big {
-        width: 99%;
-    }
-
-    .ds-banner-view-button {
-        margin-left: 19vw;
-    }
-}
-
-@media screen and (max-width: 1600px) {
-    .ds-banner-view-button {
-        margin-left: 16vw;
-    }
-
-    .ds-right-content-width {
-        position: relative;
-        left: 11vw;
-    }
-}
-
-@media screen and (max-width: 1596px) {
-    .ds-banner-view-button {
-        margin-left: 16vw;
-    }
-
-    .ds-right-content-width {
-        position: relative;
-        left: 11vw;
-    }
-}
-
-@media screen and (max-width: 1566px) {
-    .ds-banner-view-button {
-        margin-left: 15vw;
-    }
-
-    .ds-right-content-width {
-        position: relative;
-        left: 10vw;
-    }
-}
-
-@media screen and (max-width: 1510px) {
-    .ds-banner-view-button {
-        margin-left: 12vw;
-    }
-
-    .ds-right-content-width {
-        position: relative;
-        left: 8vw;
-    }
-}
-
-@media screen and (max-width: 1468px) {
-    .ds-banner-view-button {
-        margin-left: 10vw;
-    }
-}
-
-@media screen and (max-width: 1372px) {
-    .ds-banner-view-button {
-        margin-left: 6.4vw;
-    }
-
-    .ds-right-content-width {
-        position: relative;
-        left: 2vw;
-    }
-}
-
-@media screen and (max-width: 1302px) {
-    .ds-banner-view-button {
-        margin-left: 5vw;
-    }
-}
-
-@media screen and (max-width: 1174px) {
-    .ds-banner-view-button {
-        margin-left: 3vw;
-    }
-}
-
-@media screen and (max-width: 1118px) {
-    .ds-banner-view-button {
-        margin-left: 2vw;
-    }
-}
-
-@media screen and (max-width: 992px) {
-    .ds-banner-view-button {
-        margin-left: -5vw;
-    }
-}
-
-@media screen and (max-width: 864px) {
-    .ds-banner-view-button {
-        margin-left: -5vw;
-    }
-}
-
-@media screen and (max-width: $tablet) {
-    .ds-banner-view-button {
-        margin-left: -9vw;
-    }
-
-    .ds-right-content-width {
-        position: relative;
-        left: 17vw !important;
-    }
-}
-
-@media screen and (max-width:540px) {
-    .ds-banner-view-button {
-        margin-left: 0vw;
-    }
-
-    .ds-right-content-width {
-        position: relative;
-        left: 0vw !important;
-    }
-
 }

@@ -41,7 +41,7 @@ export default class ContentSectionRight extends Component {
                        <div style={filterTag}>{this.props.imageTag}</div>
                        <Image imgSrc={sectionImage} className="ds-content-image-big" />
                    </div>
-                   <div className="col-md-4 ds-right-content-width m-0">
+                   <div className="col-md-4 ds-content-diplay-text">
                        <div className="row m-0">
                            <div className="col-0 mt-2 pl-3 ds-content-title"><br/>{this.props.title}</div>
                        </div>
