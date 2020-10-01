@@ -15,11 +15,11 @@ export default class Banner extends Component {
 
         return (
             <div className="container-fluid ml-0 mt-0 p-0">
-               <div className="container row">
+               <div className="row">
 
                    <ul className="ds-top-header-contents">
                        <li>
-                          <div className="container col-0">
+                          <div className="container ml-3 col-0">
                               <Image className="ds-banner-logo" imgSrc={bannerImage}/>
                          </div>
                        </li>
