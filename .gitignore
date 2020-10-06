@@ -115,3 +115,5 @@ scoda/templates/static/node_modules
 scoda/data/data_test.csv
 /scoda/config/development.cfg
 node_modules/
+scoda/Scripts/
+scoda/pyvenv.cfg
