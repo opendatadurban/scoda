@@ -117,3 +117,4 @@ scoda/data/data_test.csv
 node_modules/
 scoda/Scripts/
 scoda/pyvenv.cfg
+scoda/pip-selfcheck.json
