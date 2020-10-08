@@ -2,20 +2,26 @@
     background-color: #FFFFFF;
     box-shadow: 0 0 6px 7px rgba(0, 0, 0, 0.2);
     font-family: 'Montserrat';
-    background: linear-gradient(53deg,
-            red 41.9%,
-            rgb(255, 0, 0) 36.1%,
-            rgb(255, 0, 0) 43.1%,
-            white 10%,
-            white 4%,
+    background: linear-gradient(
+        71deg, 
+        red calc((100vw / 2 - 570px + 360px )), 
+        white 0px);
 
-        );
-
+        // 13inch laptop
+        @media (max-width: 1300px) {
+            background: linear-gradient(78deg, red calc((100vw / 2 - 461px + 360px )), white 0px);
+        }
+         
     padding-bottom: 100px;
     padding-top: 0;
 
     &.cta_block_insight {
-        background: linear-gradient(61.8deg, #61A7B0 38%, #fff 38%);
+        background: linear-gradient(65deg, #61A7B0 calc((100vw / 2 - 570px + 394px )), white 0);
+        
+        // 13inch laptop
+        @media (max-width: 1360px) {
+            background: linear-gradient(76deg, #61A7B0 calc((100vw / 2 - 461px + 335px )), white 0);
+        }
 
         .cta-info {
             margin-bottom: -26px;
@@ -52,13 +58,11 @@
     }
 
     &.cta_block_analysis {
-        background: linear-gradient(108.8deg,
-                #FBB65B 11%,
-                #FBB65B 4%,
-                #FBB65B 42.6%,
-                white 4%,
-                white 10%,
-            );
+        background: linear-gradient(100deg, #FBB65B calc((100vw / 2 - 570px + 390px )), white 0px);
+            @media (max-width: 1300px) {
+                    background: linear-gradient(97deg, #FBB65B calc((100vw / 2 - 461px + 368px )), white 0px);
+            }
+
 
         .cta-info {
 
