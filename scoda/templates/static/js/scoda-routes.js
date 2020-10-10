@@ -27,6 +27,7 @@ import IndicatorExplorer from './components/IndicatorExplorer';
 import TabsAndFilters from './components/TabsAndFilters'
 import DemographicModeller from './components/DemographicModeller';
 import DataStoriesAffordability from './components/DataStories.Affordability';
+import Codebook from './components/Codebook';
 
 const _heroTitle = 'Data Management System';
 const _heroContent = ' Central to activities on this platform is the Data Management System, where our evidence base is securely housed. We use the CKAN data portal framework, the same system used by various governments around the world, to store, manage, and share data across the SCODA ecosystem. From this dynamic, version-controlled and API-responsive data-store, we can efficiently gather and process the myriad sources required for insight generation.Central to activities on this platform is the Data Management System, where our evidence base is securely housed. We use the CKAN data portal framework, the same system used by various governments around the world, to store, manage, and share data across the SCODA ecosystem. From this dynamic, version-controlled and API-responsive data-store, we can efficiently gather and process the myriad sources required for insight generation.';
@@ -54,6 +55,12 @@ const _heroContent_demo = 'With the demographic projection tool we provide both 
 const _heroInfoTitle_demo = 'ANALYSIS TOOLS';
 const _heroPrimaryColor_demo = '#FFAD5A';
 const _heroSecondaryColor_demo = '#FFAD5A';
+
+const _heroTitle_codebook = 'Codebook';
+const _heroContent_codebook = 'The codebook is a live list of common city indicators providing definitions, methodologies for collection, and data availability of comparable city data. The codebook can be used to locate city data, understand how indicators have been constructed, where data is sourced from, and linked to the data explorer where information can be visualised and analysed.';
+const _heroInfoTitle_codebook = 'ANALYSIS TOOLS';
+const _heroPrimaryColor_codebook = '#FFAD5A';
+const _heroSecondaryColor_codebook = '#FFAD5A';
 
 
 
@@ -100,6 +107,15 @@ secondaryColor={_heroSecondaryColor}/>}/>*/}
       <Route exact path="/data-stories-details" component={()=>
             <DataStoriesDetails />} />
       <Route path='/data-stories-details' component={Footer} />
+
+      <Route path="/codebook" component={() => <Navigation_scoda box_shadow={true} />} />
+      <Route exact path="/codebook" component={() => <Hero_Collapsable title={_heroTitle_codebook}
+            content={_heroContent_codebook}
+            infoTitle={_heroInfoTitle_codebook}
+            primaryColor={_heroPrimaryColor_codebook}
+            secondaryColor={_heroSecondaryColor_codebook} /> } />
+      <Route exact path="/codebook" component={() => <Codebook />} />      
+      <Route path="/codebook" component={Footer} />
       
       <Route path="/ds-state-of-finance-2018" component={()=> <Navigation_scoda box_shadow={true} />} />
       <Route path="/ds-state-of-finance-2018" component={()=> <DataStories />} />
