@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Row, Col, Container } from 'reactstrap';
+import CodebookDatatable from './Codebook_Datatable';
 
 export default class Codebook extends Component {
     constructor(props) {
@@ -7,9 +9,16 @@ export default class Codebook extends Component {
     
     render() {
         return(
-            <>
-                <h2>Hey there</h2>
-            </>
+           <div>
+                <Row>
+                    <Col xs="8">
+                        <CodebookDatatable />
+                    </Col>
+                    <Col xs="4">
+                        
+                    </Col>
+                </Row>
+           </div>
         );
     }
-}
+} 
