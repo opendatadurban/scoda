@@ -97,3 +97,33 @@ def seed_codebook_data(db):
         db.session.commit()
     except Exception as e:
         print(e)
+
+def seed_indicator_data(db):
+    df = pd.read_excel('%s/data/%s' % (app.root_path, "codebook-data/Full_codebook_circular_88_SOCR.xlsx")). \
+        fillna(value='')
+    for index, row in df.iterrows():
+        indicator_code = str(row["Variable_Code"]).strip()
+        indicator = db.session.query(CbIndicator).filter(CbIndicator.code == indicator_code).first()
+        if not indicator:
+            indicator = CbIndicator()
+            indicator.code = str(row["Variable_Code"]).strip()
+            indicator.name = str(row["Indicator_short_name"]).strip()
+            db.session.add(indicator)
+            db.session.flush()
+            message = F"Indicator  {indicator.name} created"
+        else:
+            message = F"Indicator  {indicator.name} Updated"
+        indicator.group_code = str(row["Indicator_Group"]).strip()
+        indicator.sub_number = str(row["Sub_Number"]).strip()
+        indicator.in_codebook = str(row["In_Codebook"]).strip()
+        indicator.c88_theme = str(row["C88_theme"]).strip()
+        indicator.socr_theme = str(row["SOCR_theme"]).strip()
+        indicator.sdg_theme = str(row["SDG_theme"]).strip()
+        indicator.indicator_formula = str(row["Indicator_formula"]).strip()
+        indicator.notes_on_calculation = str(row["Notes_on_calculation"]).strip()
+        indicator.frequency_of_collection = str(row["Frequency_of_collection"]).strip()
+        indicator.readiness = str(row["Readiness"]).strip()
+        indicator.reporting_responsibility = str(row["Reporting_responsibility"]).strip()
+        indicator.reporting_requirement = str(row["Reporting_requirement"]).strip()
+        print(message)
+    db.session.commit()
