@@ -9,16 +9,14 @@ export default class Codebook extends Component {
     
     render() {
         return(
-           <div>
-                <Row>
-                    <Col xs="8">
-                        <CodebookDatatable />
-                    </Col>
-                    <Col xs="4">
-                        
-                    </Col>
-                </Row>
-           </div>
+            <Row>
+                <Col xs="8">
+                    <CodebookDatatable />
+                </Col>
+                <Col xs="4">
+
+                </Col>
+            </Row>
         );
     }
 } 
