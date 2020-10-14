@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table } from 'reactstrap';
+import { Table, Collapse } from 'reactstrap';
 
 const mockData = [
     {
@@ -58,61 +58,95 @@ const mockData = [
 export default class CodebookDatatable extends Component {
     constructor(props) {
         super(props);
+
+        this.state ={
+            data: []
+        };
     }
 
-    renderTable() {
-        return(
-            <Table hover size="sm">
-                <thead>
-                    <tr>
-                        <th>VAR CODE</th>
-                        <th>INDICATOR SHORT NAME</th>
-                        <th>THEMES:</th>
-                        <th>C88</th>
-                        <th>SOCR</th>
-                        <th>SDG</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        mockData.map(item => {
-                            return (
-                                <div>
-                                    <tr>
-                                        <td>{ item.varCode }</td>
-                                        <td colSpan="2">{ item.indicator }</td>
-                                        <td>{ item.c88 }</td>
-                                        <td>{ item.socr }</td>
-                                        <td>{ item.sdg }</td>
-                                        <td> </td>
-                                    </tr>
-                                    {this.renderChildren(item.children)}
-                                </div>
-                            );
-                        })
-                    }
-                </tbody>
-            </Table>
-        );
+    async componentDidMount() {
+        // First clone mockData
+        const mockDataClone = mockData.slice();
+
+        // Append open property to each parent item
+        for(let item of mockDataClone) {
+            item.open = false;
+        }
+
+        this.setState({
+            data: mockDataClone
+        });
     }
 
-    renderChildren(children) {
-        if (children.length > 0) {
-            return children.map(item => {
+    renderChildren(parent) {
+        if (parent.children.length > 0) {
+            return parent.children.map(item => {
                 return(
-                    <tr>
-                        <td>{ item.varCode }</td>
-                        <td colSpan="5">{ item.indicator }</td>
-                    </tr>
+                   <Collapse isOpen={parent.open}>
+                       <tr>
+                           <td>{ item.varCode }</td>
+                           <td colSpan="5">{ item.indicator }</td>
+                       </tr>
+                   </Collapse>
                 );
             })
         }
     }
+
+    toggleAccordion(index) {
+        // copy data from state
+        const copyData = this.state.data;
+
+        // set the open property to true/false one the selected item
+        copyData[index].open = !copyData[index].open;
+
+        this.setState({
+            data: copyData
+        });
+    }
     
     render() {
-        return (
-            this.renderTable()
+        if (this.state.data.length < 1) return "Loading data"
+
+        return(
+            <Table hover>
+                <thead>
+                <tr>
+                    <th>VAR CODE</th>
+                    <th>INDICATOR SHORT NAME</th>
+                    <th>THEMES:</th>
+                    <th>C88</th>
+                    <th>SOCR</th>
+                    <th>SDG</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {
+                    mockData.map((parentItem, index) => {
+                        return (
+                            <div>
+                                <tr>
+                                    <td>{ parentItem.varCode }</td>
+                                    <td colSpan="2">{ parentItem.indicator }</td>
+                                    <td><i className="circle">{ parentItem.c88 }</i></td>
+                                    <td><i className="circle">{ parentItem.socr }</i></td>
+                                    <td><i className="circle">{ parentItem.sdg }</i></td>
+                                    <td className="col-1 tooglebtn">
+                                        <i
+                                            className={parentItem.open ? 'fa fa-caret-left fa-2x hero-block-arrow-expand' : 'fa fa-caret-down fa-2x hero-block-arrow-expand'}
+                                            style={{color: '#2F3442'}}
+                                            aria-hidden="true"
+                                            onClick={() => this.toggleAccordion(index)}></i>
+                                    </td>
+                                </tr>
+                                { this.renderChildren(parentItem) }
+                            </div>
+                        );
+                    })
+                }
+                </tbody>
+            </Table>
         );
     }
 }
