@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Table, Collapse } from 'reactstrap';
 
 const mockData = [
@@ -81,21 +81,28 @@ export default class CodebookDatatable extends Component {
     renderChildren(parent) {
         if (parent.children.length > 0) {
             return parent.children.map(item => {
-                return(
-                   <Collapse isOpen={parent.open}>
-                       <tr>
-                           <td>{ item.varCode }</td>
-                           <td colSpan="5">{ item.indicator }</td>
-                       </tr>
-                   </Collapse>
-                );
+                if (parent.open) {
+                    return(
+                        <Fragment>
+                            <tr>
+                                <td>{ item.varCode }</td>
+                                <td>{ item.indicator }</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </Fragment>
+                    );
+                }
             })
         }
     }
 
     toggleAccordion(index) {
         // copy data from state
-        const copyData = this.state.data;
+        const copyData = this.state.data.slice();
 
         // set the open property to true/false one the selected item
         copyData[index].open = !copyData[index].open;
@@ -106,10 +113,9 @@ export default class CodebookDatatable extends Component {
     }
     
     render() {
-        if (this.state.data.length < 1) return "Loading data"
 
         return(
-            <Table hover>
+            <Table>
                 <thead>
                 <tr>
                     <th>VAR CODE</th>
@@ -125,23 +131,25 @@ export default class CodebookDatatable extends Component {
                 {
                     mockData.map((parentItem, index) => {
                         return (
-                            <div>
+                            <Fragment>
                                 <tr>
                                     <td>{ parentItem.varCode }</td>
-                                    <td colSpan="2">{ parentItem.indicator }</td>
-                                    <td><i className="circle">{ parentItem.c88 }</i></td>
-                                    <td><i className="circle">{ parentItem.socr }</i></td>
-                                    <td><i className="circle">{ parentItem.sdg }</i></td>
+                                    <td>{ parentItem.indicator }</td>
+                                    <td></td>
+                                    <td>{ parentItem.c88 }</td>
+                                    <td>{ parentItem.socr }</td>
+                                    <td>{ parentItem.sdg }</td>
                                     <td className="col-1 tooglebtn">
                                         <i
-                                            className={parentItem.open ? 'fa fa-caret-left fa-2x hero-block-arrow-expand' : 'fa fa-caret-down fa-2x hero-block-arrow-expand'}
+                                            className={parentItem.open ? "fa fa-caret-left fa-2x hero-block-arrow-expand" : "fa fa-caret-down fa-2x hero-block-arrow-expand"}
                                             style={{color: '#2F3442'}}
                                             aria-hidden="true"
-                                            onClick={() => this.toggleAccordion(index)}></i>
+                                            onClick={() => this.toggleAccordion(index)}>
+                                        </i>
                                     </td>
                                 </tr>
                                 { this.renderChildren(parentItem) }
-                            </div>
+                            </Fragment>
                         );
                     })
                 }
