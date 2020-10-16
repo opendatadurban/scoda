@@ -1,8 +1,159 @@
 import React, { Component, Fragment } from 'react';
-import { Table, Collapse } from 'reactstrap';
+import { Table } from 'reactstrap';
+import '../../css/styles.css';
 
 const mockData = [
     {
+        varCode: 'EE1.1.0',
+        indicator: 'Percentage of households with access to electricity',
+        c88: 'EE',
+        socr: 'WC',
+        sdg: 7,
+        children: [
+            {
+                varCode: 'EE1.1.1',
+                indicator: 'Number of households having access to electricity',
+            },
+            {
+                varCode: 'EE1.1.2',
+                indicator: 'Total number of households in the municipality',
+            },
+        ]
+    },
+    {
+        varCode: 'EE1.1.0',
+        indicator: 'Percentage of households with access to electricity',
+        c88: 'EE',
+        socr: 'WC',
+        sdg: 7,
+        children: [
+            {
+                varCode: 'EE1.1.1',
+                indicator: 'Number of households having access to electricity',
+            },
+            {
+                varCode: 'EE1.1.2',
+                indicator: 'Total number of households in the municipality',
+            },
+        ]
+    },
+    {
+        varCode: 'EE1.1.0',
+        indicator: 'Percentage of households with access to electricity',
+        c88: 'EE',
+        socr: 'WC',
+        sdg: 7,
+        children: [
+            {
+                varCode: 'EE1.1.1',
+                indicator: 'Number of households having access to electricity',
+            },
+            {
+                varCode: 'EE1.1.2',
+                indicator: 'Total number of households in the municipality',
+            },
+        ]
+    },{
+        varCode: 'EE1.1.0',
+        indicator: 'Percentage of households with access to electricity',
+        c88: 'EE',
+        socr: 'WC',
+        sdg: 7,
+        children: [
+            {
+                varCode: 'EE1.1.1',
+                indicator: 'Number of households having access to electricity',
+            },
+            {
+                varCode: 'EE1.1.2',
+                indicator: 'Total number of households in the municipality',
+            },
+        ]
+    },
+    {
+        varCode: 'EE1.1.0',
+        indicator: 'Percentage of households with access to electricity',
+        c88: 'EE',
+        socr: 'WC',
+        sdg: 7,
+        children: [
+            {
+                varCode: 'EE1.1.1',
+                indicator: 'Number of households having access to electricity',
+            },
+            {
+                varCode: 'EE1.1.2',
+                indicator: 'Total number of households in the municipality',
+            },
+        ]
+    },
+    {
+        varCode: 'EE1.1.0',
+        indicator: 'Percentage of households with access to electricity',
+        c88: 'EE',
+        socr: 'WC',
+        sdg: 7,
+        children: [
+            {
+                varCode: 'EE1.1.1',
+                indicator: 'Number of households having access to electricity',
+            },
+            {
+                varCode: 'EE1.1.2',
+                indicator: 'Total number of households in the municipality',
+            },
+        ]
+    },{
+        varCode: 'EE1.1.0',
+        indicator: 'Percentage of households with access to electricity',
+        c88: 'EE',
+        socr: 'WC',
+        sdg: 7,
+        children: [
+            {
+                varCode: 'EE1.1.1',
+                indicator: 'Number of households having access to electricity',
+            },
+            {
+                varCode: 'EE1.1.2',
+                indicator: 'Total number of households in the municipality',
+            },
+        ]
+    },
+    {
+        varCode: 'EE1.1.0',
+        indicator: 'Percentage of households with access to electricity',
+        c88: 'EE',
+        socr: 'WC',
+        sdg: 7,
+        children: [
+            {
+                varCode: 'EE1.1.1',
+                indicator: 'Number of households having access to electricity',
+            },
+            {
+                varCode: 'EE1.1.2',
+                indicator: 'Total number of households in the municipality',
+            },
+        ]
+    },
+    {
+        varCode: 'EE1.1.0',
+        indicator: 'Percentage of households with access to electricity',
+        c88: 'EE',
+        socr: 'WC',
+        sdg: 7,
+        children: [
+            {
+                varCode: 'EE1.1.1',
+                indicator: 'Number of households having access to electricity',
+            },
+            {
+                varCode: 'EE1.1.2',
+                indicator: 'Total number of households in the municipality',
+            },
+        ]
+    },{
         varCode: 'EE1.1.0',
         indicator: 'Percentage of households with access to electricity',
         c88: 'EE',
@@ -115,8 +266,8 @@ export default class CodebookDatatable extends Component {
     render() {
 
         return(
-            <Table>
-                <thead>
+            <Table className="codebook-table">
+                <thead className="codebook-table-header">
                 <tr>
                     <th>VAR CODE</th>
                     <th>INDICATOR SHORT NAME</th>
