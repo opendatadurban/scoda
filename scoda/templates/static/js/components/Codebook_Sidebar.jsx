@@ -70,7 +70,41 @@ export default class CodebookSidebar extends Component {
     }
 
     renderThirdColumn() {
+        return(
+            <Fragment>
+                <Row>UNIT OF MEASUREMENT</Row>
+                <Row>Number of households</Row>
+                <Row>NOTES ON CALCULATION</Row>
+                <Row>NA</Row>
+                <Row>FREQUENCY OF COLLECTION</Row>
+                <Row>Annual Midyear following year</Row>
+                <Row>PERIOD</Row>
+                <Row>January December</Row>
+            </Fragment>
+        );
+    }
 
+    renderFourthColumn() {
+        return(
+            <Fragment>
+                <Row>
+                    <Col>VARIABLE TYPE</Col>
+                    <Col>AUTOMATABILITY</Col>
+                </Row>
+                <Row>
+                    <Col>Float</Col>
+                    <Col>Yes</Col>
+                </Row>
+                <Row>
+                    <Col>GRANULARITY</Col>
+                    <Col>EXPANDABILITY</Col>
+                </Row>
+                <Row>
+                    <Col>No</Col>
+                    <Col>No</Col>
+                </Row>
+            </Fragment>
+        );
     }
 
     render() {
@@ -78,8 +112,8 @@ export default class CodebookSidebar extends Component {
             <Container>
                 { this.renderFirstColumn() }
                 { this.renderSecondColumn() }
-                <Row></Row>
-                <Row></Row>
+                { this.renderThirdColumn() }
+                { this.renderFourthColumn() }
             </Container>
         );
     }
