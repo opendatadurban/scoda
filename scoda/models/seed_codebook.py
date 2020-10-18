@@ -125,5 +125,6 @@ def seed_indicator_data(db):
         indicator.readiness = str(row["Readiness"]).strip()
         indicator.reporting_responsibility = str(row["Reporting_responsibility"]).strip()
         indicator.reporting_requirement = str(row["Reporting_requirement"]).strip()
+        indicator.definition = str(row["Definition"]).strip()
         print(message)
     db.session.commit()
