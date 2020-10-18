@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import { Table } from 'reactstrap';
-import '../../css/styles.css';
 
 const mockData = [
     {
@@ -204,9 +203,41 @@ const mockData = [
             },
         ]
     },
-]
+];
+
+const tableHeader = {
+    color: '#4A4A4A',
+    whiteSpace: 'nowrap',
+    fontFamily: 'Montserrat',
+    fontSize: '10px',
+    letterSpacing: '0',
+    lineHeight: '13px',
+};
+const codebookTableBody = {
+    color: '#4A4A4A',
+    fontFamily: 'Montserrat',
+    fontSize: '16px',
+    fontWeight: '600',
+    whiteSpace: 'nowrap'
+};
+const circleIcon = {
+    height: '20px',
+    width: '20px',
+    backgroundColor: '#F73E55',
+    borderRadius: '50%'
+};
+const circleIconText = {
+    color: '#FFFFFF',
+    fontFamily: 'Montserrat',
+    fontSize: '10px',
+    letterSpacing: '0',
+    lineHeight: '13px',
+    textAlign: 'center',
+    paddingTop: '15%',
+};
 
 export default class CodebookDatatable extends Component {
+
     constructor(props) {
         super(props);
 
@@ -235,14 +266,14 @@ export default class CodebookDatatable extends Component {
                 if (parent.open) {
                     return(
                         <Fragment>
-                            <tr>
-                                <td>{ item.varCode }</td>
-                                <td>{ item.indicator }</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                            <tr style={{ whiteSpace: 'nowrap' }}>
+                                <td><div>{item.varCode}</div></td>
+                                <td><div>{item.indicator}</div></td>
+                                <td><div></div></td>
+                                <td><div></div></td>
+                                <td><div></div></td>
+                                <td><div></div></td>
+                                <td><div></div></td>
                             </tr>
                         </Fragment>
                     );
@@ -266,16 +297,16 @@ export default class CodebookDatatable extends Component {
     render() {
 
         return(
-            <Table className="codebook-table">
-                <thead className="codebook-table-header">
-                <tr>
-                    <th>VAR CODE</th>
-                    <th>INDICATOR SHORT NAME</th>
-                    <th>THEMES:</th>
-                    <th>C88</th>
-                    <th>SOCR</th>
-                    <th>SDG</th>
-                    <th></th>
+            <Table hover responsive size="sm">
+                <thead>
+                <tr style={tableHeader}>
+                    <th><div>VAR CODE</div></th>
+                    <th><div>INDICATOR SHORT NAME</div></th>
+                    <th><div>THEMES:</div></th>
+                    <th><div>C88</div></th>
+                    <th><div>SOCR</div></th>
+                    <th><div>SDG</div></th>
+                    <th><div></div></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -283,20 +314,35 @@ export default class CodebookDatatable extends Component {
                     mockData.map((parentItem, index) => {
                         return (
                             <Fragment>
-                                <tr>
-                                    <td>{ parentItem.varCode }</td>
-                                    <td>{ parentItem.indicator }</td>
-                                    <td></td>
-                                    <td>{ parentItem.c88 }</td>
-                                    <td>{ parentItem.socr }</td>
-                                    <td>{ parentItem.sdg }</td>
+                                <tr style={codebookTableBody}>
+                                    <td><div>{parentItem.varCode}</div></td>
+                                    <td><div>{parentItem.indicator}</div></td>
+                                    <td><div></div></td>
+                                    <td><div style={{
+                                        height: '20px',
+                                        width: '20px',
+                                        backgroundColor: '#F73E55',
+                                        borderRadius: '50%'
+                                    }}><div style={circleIconText}>{parentItem.c88}</div></div></td>
+                                    <td><div style={{
+                                        height: '20px',
+                                        width: '20px',
+                                        backgroundColor: '#EAB04B',
+                                        borderRadius: '50%'
+                                    }}><div style={circleIconText}>{parentItem.socr}</div></div></td>
+                                    <td><div style={{
+                                        height: '20px',
+                                        width: '20px',
+                                        backgroundColor: '#4F9DA6',
+                                        borderRadius: '50%'
+                                    }}><div style={circleIconText}>{parentItem.sdg}</div></div></td>
                                     <td className="col-1 tooglebtn">
-                                        <i
+                                        <div><i
                                             className={parentItem.open ? "fa fa-caret-left fa-2x hero-block-arrow-expand" : "fa fa-caret-down fa-2x hero-block-arrow-expand"}
                                             style={{color: '#2F3442'}}
                                             aria-hidden="true"
                                             onClick={() => this.toggleAccordion(index)}>
-                                        </i>
+                                        </i></div>
                                     </td>
                                 </tr>
                                 { this.renderChildren(parentItem) }
