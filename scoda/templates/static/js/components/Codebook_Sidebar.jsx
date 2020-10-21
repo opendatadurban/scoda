@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 const sidebarStyle = {
   backgroundColor: '#1E272E',
+  padding:' 40px',
 };
 const circleIconText = {
     color: '#FFFFFF',
@@ -27,6 +28,7 @@ const itemDescription = {
     fontWeight: '600',
     letterSpacing: '0',
     lineHeight: '24px',
+    paddingBottom: '20px',
 };
 const itemCodes = {
     height: '20px',
@@ -53,6 +55,32 @@ const link = {
     letterSpacing: '0',
     lineHeight: '20px',
 };
+const borderLine = {
+    height: '1px',
+    width: '100%',
+    border: '1px solid #B2BEC3',
+};
+const padding = {
+    paddingBottom: '15px',
+};
+const actionButton = {
+    height: '24px',
+    width: '252px',
+    border: '1px solid #FFAD5A',
+    borderRadius: '11px',
+    backgroundColor: '#FFAD5A',
+};
+const actionButtonText = {
+    height: '14px',
+    width: '250px',
+    color: '#FFFFFF',
+    fontFamily: 'Montserrat',
+    fontSize: '14px',
+    fontWeight: '500',
+    letterSpacing: '0',
+    lineHeight: '14px',
+    textAlign: 'center',
+};
 
 export default class CodebookSidebar extends Component {
     constructor(props) {
@@ -68,7 +96,7 @@ export default class CodebookSidebar extends Component {
                 <div className="row" style={itemDescription}>
                     Number of households having access to electricity
                 </div>
-                <div className="row">
+                <div className="row" style={padding}>
                     <div className="col">
                         <div className="row" style={label}>VAR CODE</div>
                         <div className="row" style={itemCodes}>EE1.1.1</div>
@@ -119,7 +147,6 @@ export default class CodebookSidebar extends Component {
                         </div>
                     </div>
                 </div>
-                <hr />
             </div>
         );
     }
@@ -127,9 +154,13 @@ export default class CodebookSidebar extends Component {
     renderSecondColumn() {
         return(
             <div>
-                <div className="row" style={label}>DEFINITION</div>
-                <div className="row" style={itemInfo}>This is the total number of households that have access to electricity</div>
-                <div className="row">
+                <div style={padding}>
+                    <div className="row" style={label}>DEFINITION</div>
+                    <div className="row" style={itemInfo}>This is the total number of households that have access to
+                        electricity
+                    </div>
+                </div>
+                <div className="row" style={padding}>
                     <div className="col">
                         <div className="row" style={label}>REPORTING RESPONSIBILITY</div>
                         <div className="row" style={itemInfo}>National</div>
@@ -139,13 +170,12 @@ export default class CodebookSidebar extends Component {
                         <div className="row" style={itemInfo}>Webscrape</div>
                     </div>
                 </div>
-                <div className="row">
+                <div className="row" style={padding}>
                     <div className="col">
                         <div className="row" style={label}>SOURCE</div>
                         <div className="row" style={link}>Stats SA Superweb General Household Survey</div>
                     </div>
                 </div>
-                <hr />
             </div>
         );
     }
@@ -154,23 +184,22 @@ export default class CodebookSidebar extends Component {
         return(
             <div className="row">
                 <div className="col">
-                    <div>
+                    <div style={padding}>
                         <div className="row" style={label}>UNIT OF MEASUREMENT</div>
                         <div className="row" style={itemInfo}>Number of households</div>
                     </div>
-                    <div>
+                    <div style={padding}>
                         <div className="row" style={label}>NOTES ON CALCULATION</div>
                         <div className="row" style={itemInfo}>NA</div>
                     </div>
-                    <div>
+                    <div style={padding}>
                         <div className="row" style={label}>FREQUENCY OF COLLECTION</div>
                         <div className="row" style={itemInfo}>Annual Midyear following year</div>
                     </div>
-                    <div>
+                    <div style={padding}>
                         <div className="row" style={label}>PERIOD</div>
                         <div className="row" style={itemInfo}>January December</div>
                     </div>
-                    <hr/>
                 </div>
             </div>
         );
@@ -179,26 +208,42 @@ export default class CodebookSidebar extends Component {
     renderFourthColumn() {
         return(
             <div>
-                <div>
-                    <div className="row">
-                        <div className="col" style={label}>VARIABLE TYPE</div>
-                        <div className="col" style={label}>AUTOMATABILITY</div>
+                <div className="row">
+                    <div className="col" style={padding}>
+                        <div className="row">
+                            <div style={label}>VARIABLE TYPE</div>
+                        </div>
+                        <div className="row">
+                            <div style={itemInfo}>Float</div>
+                        </div>
                     </div>
-                    <div className="row">
-                        <div className="col" style={itemInfo}>Float</div>
-                        <div className="col" style={itemInfo}>Yes</div>
+                    <div className="col" style={padding}>
+                        <div className="row">
+                            <div style={label}>AUTOMATABILITY</div>
+                        </div>
+                        <div className="row">
+                            <div style={itemInfo}>Yes</div>
+                        </div>
                     </div>
                 </div>
-               <div>
-                   <div className="row">
-                       <div className="col" style={label}>GRANULARITY</div>
-                       <div className="col" style={label}>EXPANDABILITY</div>
-                   </div>
-                   <div className="row">
-                       <div className="col" style={itemInfo}>No</div>
-                       <div className="col" style={itemInfo}>No</div>
-                   </div>
-               </div>
+                <div className="row">
+                    <div className="col" style={padding}>
+                        <div className="row">
+                            <div style={label}>GRANULARITY</div>
+                        </div>
+                        <div className="row">
+                            <div style={itemInfo}>No</div>
+                        </div>
+                    </div>
+                    <div className="col" style={padding}>
+                        <div className="row">
+                            <div style={label}>EXPANDABILITY</div>
+                        </div>
+                        <div className="row">
+                            <div style={itemInfo}>No</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
@@ -207,9 +252,15 @@ export default class CodebookSidebar extends Component {
         return(
             <div className="table-cell" style={sidebarStyle}>
                 { this.renderFirstColumn() }
+                <hr style={padding} />
                 { this.renderSecondColumn() }
+                <hr style={padding} />
                 { this.renderThirdColumn() }
+                <hr style={padding} />
                 { this.renderFourthColumn() }
+                <button style={actionButton}>
+                    <div style={actionButtonText}>View in Data Explorer</div>
+                </button>
             </div>
         );
     }
