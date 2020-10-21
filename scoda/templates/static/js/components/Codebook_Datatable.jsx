@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { Table } from 'reactstrap';
+import { Modal, ModalBody, ModalHeader, Table } from 'reactstrap';
+import Codebook_Filter_Search from './Codebook_Filter_Search';
 
 const mockData = [
     {
@@ -338,6 +339,7 @@ export default class CodebookDatatable extends Component {
                     mockData.map((parentItem, index) => {
                         return (
                             <Fragment>
+                                <Codebook_Filter_Search />
                                 <tr style={codebookTableBody}>
                                     <td><div>{parentItem.varCode}</div></td>
                                     <td><div>{parentItem.indicator}</div></td>
