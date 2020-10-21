@@ -320,9 +320,8 @@ export default class CodebookDatatable extends Component {
     }
     
     render() {
-
         return(
-            <Table hover>
+            <Table>
                 <thead>
                 <tr style={tableHeader}>
                     <th><div>VAR CODE</div></th>

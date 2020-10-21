@@ -1,48 +1,125 @@
 import React, { Component } from 'react';
 
+const sidebarStyle = {
+  backgroundColor: '#1E272E',
+};
+const circleIconText = {
+    color: '#FFFFFF',
+    fontFamily: 'Montserrat',
+    fontSize: '10px',
+    letterSpacing: '0',
+    lineHeight: '13px',
+    textAlign: 'center',
+    paddingTop: '15%',
+};
+const label = {
+    height: '13px',
+    color: '#B2BEC3',
+    fontFamily: 'Montserrat',
+    fontSize: '10px',
+    letterSpacing: '0',
+    lineHeight: '13px',
+};
+const itemDescription = {
+    color: '#FFFFFF',
+    fontFamily: 'Montserrat',
+    fontSize: '20px',
+    fontWeight: '600',
+    letterSpacing: '0',
+    lineHeight: '24px',
+};
+const itemCodes = {
+    height: '20px',
+    width: '43px',
+    color: '#FFFFFF',
+    fontFamily: 'Montserrat',
+    fontSize: '14px',
+    fontWeight: 'bold',
+    letterSpacing: '0',
+    lineHeight: '20px',
+};
+const itemInfo = {
+    color: '#FFFFFF',
+    fontFamily: 'Montserrat',
+    fontSize: '14px',
+    letterSpacing: '0',
+    lineHeight: '20px',
+};
+const link = {
+    color: '#FFFFFF',
+    fontFamily: 'Montserrat',
+    fontSize: '14px',
+    fontStyle: 'italic',
+    letterSpacing: '0',
+    lineHeight: '20px',
+};
+
 export default class CodebookSidebar extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-
-        };
     }
 
     renderFirstColumn() {
         return (
             <div>
-                <div >
+                <div className="row" style={label}>
                     INDICATOR SHORT NAME
                 </div>
-                <div>
+                <div className="row" style={itemDescription}>
                     Number of households having access to electricity
                 </div>
-                <div>
-                    <div>
-                        <div >VAR CODE</div>
-                        <div >EE1.1.1</div>
+                <div className="row">
+                    <div className="col">
+                        <div className="row" style={label}>VAR CODE</div>
+                        <div className="row" style={itemCodes}>EE1.1.1</div>
                     </div>
-                    <div >
-                        <div >IND. GROUP</div>
-                        <div >EE1.1.1</div>
+                    <div className="col">
+                        <div className="row" style={label}>IND. GROUP</div>
+                        <div className="row" style={itemCodes}>EE1.1.1</div>
                     </div>
-                    <div >
-                        <div >THEMES:</div>
+                    <div className="col">
+                        <div className="row" style={label}>THEMES:</div>
                     </div>
-                    <div >
-                        <div >C88</div>
-                        <div >EE</div>
+                    <div className="col">
+                        <div className="row" style={label}>C88</div>
+                        <div className="row">
+                            <div style={{
+                                height: '20px',
+                                width: '20px',
+                                backgroundColor: '#F73E55',
+                                borderRadius: '50%' }}>
+                                <div style={circleIconText}>EE</div>
+                            </div>
+                        </div>
                     </div>
-                    <div >
-                        <div >SOCR</div>
-                        <div >WG</div>
+                    <div className="col">
+                        <div className="row" style={label}>SOCR</div>
+                        <div className="row">
+                            <div style={{
+                                height: '20px',
+                                width: '20px',
+                                backgroundColor: '#EAB04B',
+                                borderRadius: '50%'
+                            }}>
+                                <div style={circleIconText}>WG</div>
+                            </div>
+                        </div>
                     </div>
-                    <div >
-                        <div >SDG</div>
-                        <div >7</div>
+                    <div className="col">
+                        <div className="row" style={label}>SDG</div>
+                        <div className="row">
+                            <div style={{
+                                height: '20px',
+                                width: '20px',
+                                backgroundColor: '#4F9DA6',
+                                borderRadius: '50%'
+                            }}>
+                                <div style={circleIconText}>7</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <hr />
             </div>
         );
     }
@@ -50,44 +127,50 @@ export default class CodebookSidebar extends Component {
     renderSecondColumn() {
         return(
             <div>
-                <div >DEFINITION</div>
-                <div >This is the total number of households that have access to electricity</div>
-                <div >
-                    <div >
-                        <div >REPORTING RESPONSIBILITY</div>
-                        <div >National</div>
+                <div className="row" style={label}>DEFINITION</div>
+                <div className="row" style={itemInfo}>This is the total number of households that have access to electricity</div>
+                <div className="row">
+                    <div className="col">
+                        <div className="row" style={label}>REPORTING RESPONSIBILITY</div>
+                        <div className="row" style={itemInfo}>National</div>
                     </div>
-                    <div >
-                        <div >GATHERING METHOD</div>
-                        <div >Webscrape</div>
+                    <div className="col">
+                        <div className="row" style={label}>GATHERING METHOD</div>
+                        <div className="row" style={itemInfo}>Webscrape</div>
                     </div>
                 </div>
-                <div >
-                    <div >SOURCE</div>
-                    <div >Stats SA Superweb General Household Survey</div>
+                <div className="row">
+                    <div className="col">
+                        <div className="row" style={label}>SOURCE</div>
+                        <div className="row" style={link}>Stats SA Superweb General Household Survey</div>
+                    </div>
                 </div>
+                <hr />
             </div>
         );
     }
 
     renderThirdColumn() {
         return(
-            <div >
-                <div>
-                    <div>UNIT OF MEASUREMENT</div>
-                    <div >Number of households</div>
-                </div>
-                <div >
-                    <div >NOTES ON CALCULATION</div>
-                    <div >NA</div>
-                </div>
-                <div >
-                    <div >FREQUENCY OF COLLECTION</div>
-                    <div >Annual Midyear following year</div>
-                </div>
-                <div >
-                    <div >PERIOD</div>
-                    <div >January December</div>
+            <div className="row">
+                <div className="col">
+                    <div>
+                        <div className="row" style={label}>UNIT OF MEASUREMENT</div>
+                        <div className="row" style={itemInfo}>Number of households</div>
+                    </div>
+                    <div>
+                        <div className="row" style={label}>NOTES ON CALCULATION</div>
+                        <div className="row" style={itemInfo}>NA</div>
+                    </div>
+                    <div>
+                        <div className="row" style={label}>FREQUENCY OF COLLECTION</div>
+                        <div className="row" style={itemInfo}>Annual Midyear following year</div>
+                    </div>
+                    <div>
+                        <div className="row" style={label}>PERIOD</div>
+                        <div className="row" style={itemInfo}>January December</div>
+                    </div>
+                    <hr/>
                 </div>
             </div>
         );
@@ -97,23 +180,23 @@ export default class CodebookSidebar extends Component {
         return(
             <div>
                 <div>
-                    <div>
-                        <div>VARIABLE TYPE</div>
-                        <div>AUTOMATABILITY</div>
+                    <div className="row">
+                        <div className="col" style={label}>VARIABLE TYPE</div>
+                        <div className="col" style={label}>AUTOMATABILITY</div>
                     </div>
-                    <div>
-                        <div>Float</div>
-                        <div>Yes</div>
+                    <div className="row">
+                        <div className="col" style={itemInfo}>Float</div>
+                        <div className="col" style={itemInfo}>Yes</div>
                     </div>
                 </div>
                <div>
-                   <div>
-                       <div>GRANULARITY</div>
-                       <div>EXPANDABILITY</div>
+                   <div className="row">
+                       <div className="col" style={label}>GRANULARITY</div>
+                       <div className="col" style={label}>EXPANDABILITY</div>
                    </div>
-                   <div>
-                       <div>No</div>
-                       <div>No</div>
+                   <div className="row">
+                       <div className="col" style={itemInfo}>No</div>
+                       <div className="col" style={itemInfo}>No</div>
                    </div>
                </div>
             </div>
@@ -122,7 +205,7 @@ export default class CodebookSidebar extends Component {
 
     render() {
         return(
-            <div>
+            <div className="table-cell" style={sidebarStyle}>
                 { this.renderFirstColumn() }
                 { this.renderSecondColumn() }
                 { this.renderThirdColumn() }

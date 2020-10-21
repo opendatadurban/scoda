@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Row, Col, Container } from 'reactstrap';
 import CodebookDatatable from './Codebook_Datatable';
 import CodebookSidebar from './Codebook_Sidebar';
 
@@ -10,16 +9,16 @@ export default class Codebook extends Component {
     
     render() {
         return(
-            <Container fluid={true}>
-                <Row>
-                    <Col xs="8">
+            <div>
+                <div className="row">
+                    <div className="col-8">
                         <CodebookDatatable />
-                    </Col>
-                    <Col xs="4">
+                    </div>
+                    <div className="col-4">
                         <CodebookSidebar />
-                    </Col>
-                </Row>
-            </Container>
+                    </div>
+                </div>
+            </div>
         );
     }
 } 
