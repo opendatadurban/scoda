@@ -1,5 +1,4 @@
-import React, { Component, Fragment } from 'react';
-import { Col, Row, Container } from 'reactstrap';
+import React, { Component } from 'react';
 
 export default class CodebookSidebar extends Component {
     constructor(props) {
@@ -12,109 +11,123 @@ export default class CodebookSidebar extends Component {
 
     renderFirstColumn() {
         return (
-            <Fragment>
-                <Row>
+            <div>
+                <div >
                     INDICATOR SHORT NAME
-                </Row>
-                <Row>
+                </div>
+                <div>
                     Number of households having access to electricity
-                </Row>
-                <Row>
-                    <Col>
-                        <Row>VAR CODE</Row>
-                        <Row>EE1.1.1</Row>
-                    </Col>
-                    <Col>
-                        <Row>IND. GROUP</Row>
-                        <Row>EE1.1.1</Row>
-                    </Col>
-                    <Col>
-                        <Row>THEMES:</Row>
-                    </Col>
-                    <Col>
-                        <Row>C88</Row>
-                        <Row>EE</Row>
-                    </Col>
-                    <Col>
-                        <Row>SOCR</Row>
-                        <Row>WG</Row>
-                    </Col>
-                    <Col>
-                        <Row>SDG</Row>
-                        <Row>7</Row>
-                    </Col>
-                </Row>
-            </Fragment>
+                </div>
+                <div>
+                    <div>
+                        <div >VAR CODE</div>
+                        <div >EE1.1.1</div>
+                    </div>
+                    <div >
+                        <div >IND. GROUP</div>
+                        <div >EE1.1.1</div>
+                    </div>
+                    <div >
+                        <div >THEMES:</div>
+                    </div>
+                    <div >
+                        <div >C88</div>
+                        <div >EE</div>
+                    </div>
+                    <div >
+                        <div >SOCR</div>
+                        <div >WG</div>
+                    </div>
+                    <div >
+                        <div >SDG</div>
+                        <div >7</div>
+                    </div>
+                </div>
+            </div>
         );
     }
 
     renderSecondColumn() {
         return(
-            <Fragment>
-                <Row>DEFINITION</Row>
-                <Row>This is the total number of households that have access to electricity</Row>
-                <Row>
-                    <Col>
-                        <Row>REPORTING RESPONSIBILITY</Row>
-                        <Row>National</Row>
-                    </Col>
-                    <Col>
-                        <Row>GATHERING METHOD</Row>
-                        <Row>Webscrape</Row>
-                    </Col>
-                </Row>
-                <Row>SOURCE</Row>
-                <Row>Stats SA Superweb General Household Survey</Row>
-            </Fragment>
+            <div>
+                <div >DEFINITION</div>
+                <div >This is the total number of households that have access to electricity</div>
+                <div >
+                    <div >
+                        <div >REPORTING RESPONSIBILITY</div>
+                        <div >National</div>
+                    </div>
+                    <div >
+                        <div >GATHERING METHOD</div>
+                        <div >Webscrape</div>
+                    </div>
+                </div>
+                <div >
+                    <div >SOURCE</div>
+                    <div >Stats SA Superweb General Household Survey</div>
+                </div>
+            </div>
         );
     }
 
     renderThirdColumn() {
         return(
-            <Fragment>
-                <Row>UNIT OF MEASUREMENT</Row>
-                <Row>Number of households</Row>
-                <Row>NOTES ON CALCULATION</Row>
-                <Row>NA</Row>
-                <Row>FREQUENCY OF COLLECTION</Row>
-                <Row>Annual Midyear following year</Row>
-                <Row>PERIOD</Row>
-                <Row>January December</Row>
-            </Fragment>
+            <div >
+                <div>
+                    <div>UNIT OF MEASUREMENT</div>
+                    <div >Number of households</div>
+                </div>
+                <div >
+                    <div >NOTES ON CALCULATION</div>
+                    <div >NA</div>
+                </div>
+                <div >
+                    <div >FREQUENCY OF COLLECTION</div>
+                    <div >Annual Midyear following year</div>
+                </div>
+                <div >
+                    <div >PERIOD</div>
+                    <div >January December</div>
+                </div>
+            </div>
         );
     }
 
     renderFourthColumn() {
         return(
-            <Fragment>
-                <Row>
-                    <Col>VARIABLE TYPE</Col>
-                    <Col>AUTOMATABILITY</Col>
-                </Row>
-                <Row>
-                    <Col>Float</Col>
-                    <Col>Yes</Col>
-                </Row>
-                <Row>
-                    <Col>GRANULARITY</Col>
-                    <Col>EXPANDABILITY</Col>
-                </Row>
-                <Row>
-                    <Col>No</Col>
-                    <Col>No</Col>
-                </Row>
-            </Fragment>
+            <div>
+                <div>
+                    <div>
+                        <div>VARIABLE TYPE</div>
+                        <div>AUTOMATABILITY</div>
+                    </div>
+                    <div>
+                        <div>Float</div>
+                        <div>Yes</div>
+                    </div>
+                </div>
+               <div>
+                   <div>
+                       <div>GRANULARITY</div>
+                       <div>EXPANDABILITY</div>
+                   </div>
+                   <div>
+                       <div>No</div>
+                       <div>No</div>
+                   </div>
+               </div>
+            </div>
         );
     }
 
     render() {
         return(
-            <Container>
+            <div>
                 { this.renderFirstColumn() }
                 { this.renderSecondColumn() }
                 { this.renderThirdColumn() }
                 { this.renderFourthColumn() }
-            </Container>
+            </div>
         );
     }
 }
