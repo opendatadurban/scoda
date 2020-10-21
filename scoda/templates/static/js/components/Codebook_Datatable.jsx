@@ -220,11 +220,13 @@ const codebookTableBody = {
     fontWeight: '600',
     whiteSpace: 'nowrap'
 };
-const circleIcon = {
-    height: '20px',
-    width: '20px',
-    backgroundColor: '#F73E55',
-    borderRadius: '50%'
+const codebookTableChildItem = {
+    color: '#4A4A4A',
+    fontFamily: 'Montserrat',
+    fontSize: '14px',
+    letterSpacing: '0',
+    lineHeight:' 24px',
+    whiteSpace: 'nowrap'
 };
 const circleIconText = {
     color: '#FFFFFF',
@@ -235,6 +237,22 @@ const circleIconText = {
     textAlign: 'center',
     paddingTop: '15%',
 };
+const selectedElementRow = {
+    height: '24px',
+    width: '855px',
+    borderRadius: '3px 0 0 3px',
+    backgroundColor: '#1E272E',
+};
+const selectedItemText = {
+    height: '24px',
+    width: '101px',
+    color: '#FFFFFF',
+    fontFamily: 'Montserrat',
+    fontSize: '14px',
+    fontWeight: 'bold',
+    letterSpacing: '0',
+    lineHeight: '24px'
+};
 
 export default class CodebookDatatable extends Component {
 
@@ -242,7 +260,8 @@ export default class CodebookDatatable extends Component {
         super(props);
 
         this.state ={
-            data: []
+            data: [],
+            selected: null,
         };
     }
 
@@ -260,13 +279,19 @@ export default class CodebookDatatable extends Component {
         });
     }
 
+    setSelected(childItem) {
+        this.setState({
+            selected: childItem
+        });
+    }
+
     renderChildren(parent) {
         if (parent.children.length > 0) {
             return parent.children.map(item => {
                 if (parent.open) {
                     return(
                         <Fragment>
-                            <tr style={{ whiteSpace: 'nowrap' }}>
+                            <tr onClick={() => {this.setSelected(item)}}>
                                 <td><div>{item.varCode}</div></td>
                                 <td><div>{item.indicator}</div></td>
                                 <td><div></div></td>
@@ -297,7 +322,7 @@ export default class CodebookDatatable extends Component {
     render() {
 
         return(
-            <Table hover responsive size="sm">
+            <Table hover>
                 <thead>
                 <tr style={tableHeader}>
                     <th><div>VAR CODE</div></th>
