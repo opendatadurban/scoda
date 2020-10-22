@@ -338,8 +338,7 @@ export default class CodebookDatatable extends Component {
                 {
                     mockData.map((parentItem, index) => {
                         return (
-                            <Fragment>
-                                <Codebook_Filter_Search />
+                            <>
                                 <tr style={codebookTableBody}>
                                     <td><div>{parentItem.varCode}</div></td>
                                     <td><div>{parentItem.indicator}</div></td>
@@ -372,7 +371,7 @@ export default class CodebookDatatable extends Component {
                                     </td>
                                 </tr>
                                 { this.renderChildren(parentItem) }
-                            </Fragment>
+                            </>
                         );
                     })
                 }
