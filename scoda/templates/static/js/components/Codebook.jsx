@@ -29,9 +29,12 @@ export default class Codebook extends Component {
     render() {
         return(
             <div>
+
                 <div className="row">
                     {/*<Button color="danger" onClick={() =>this.toggleModal()}></Button>*/}
-                    <CodebookFilterModal visible={this.state.modalVisible}></CodebookFilterModal>
+                    <div>
+                        <CodebookFilterModal visible={this.state.modalVisible} toggle={this.toggleModal}></CodebookFilterModal>
+                    </div>
                     <div className="col-8">
                         <CodebookDatatable />
                     </div>
