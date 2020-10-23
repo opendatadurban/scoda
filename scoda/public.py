@@ -4,7 +4,7 @@ from flask import request, url_for, redirect, flash, make_response, session, ren
 from flask_security import current_user
 from itertools import zip_longest
 from sqlalchemy.sql import select
-from sqlalchemy import func
+from sqlalchemy import func, extract
 from .models import db
 from .models import *
 from .models.user import UserAnalysis
@@ -1181,3 +1181,20 @@ def parse_demo():
     response['wards'] = ward_list
 
     return jsonify(response)
+
+
+@app.route('/api/codebook/<int:page>', methods=['GET'])
+def api_codebook(page=1):
+    query = db.session.query(CbDataPoint).\
+        join(CbIndicator, CbIndicator.id == CbDataPoint.indicator_id).\
+        join(CbTheme, CbTheme.id == CbIndicator.theme_id). \
+        join(CbSource, CbSource.id == CbIndicator.source_id).\
+        join(CbUnit, CbUnit.id == CbIndicator.unit_id).limit(20).offset((page - 1) * 20).all()
+    data_list = [{"id": str(c.id), "varCode": c.indicator.code, "indicator": c.indicator.name,
+                  "c88": c.indicator.c88_theme, "socr": c.indicator.socr_theme, "sdg": c.indicator.theme.id,
+                  "definition": c.indicator.definition, "source": c.indicator.source.name, "children": [],
+                  "reportingResponsibility": c.indicator.reporting_responsibility,
+                  "notesOnCalculation": c.indicator.notes_on_calculation, "variableType": c.indicator.unit.name,
+                  "frequencyOfCollection": c.indicator.frequency_of_collection
+                  } for c in query]
+    return jsonify(data_list)
