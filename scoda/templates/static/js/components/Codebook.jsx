@@ -28,17 +28,20 @@ export default class Codebook extends Component {
     
     render() {
         return(
-            <div>
-
+            <div  className="codebook-components">
+                {
+                    <Button className="filter-toggle" color="danger" onClick={() =>this.toggleModal()}>
+                        <i className="fas fa-filter"></i>
+                    </Button>
+                }
                 <div className="row">
-                    {/*<Button color="danger" onClick={() =>this.toggleModal()}></Button>*/}
                     <div>
-                        <CodebookFilterModal visible={this.state.modalVisible} toggle={this.toggleModal}></CodebookFilterModal>
+                        {/*<CodebookFilterModal visible={false} toggle={this.toggleModal}></CodebookFilterModal>*/}
                     </div>
-                    <div className="col-8">
+                    <div className="col-8 no-padding">
                         <CodebookDatatable />
                     </div>
-                    <div className="col-4">
+                    <div className="col-4 no-padding">
                         <CodebookSidebar />
                     </div>
                 </div>

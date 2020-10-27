@@ -1,0 +1,129 @@
+.codebook-components {
+  margin-top: -60px;
+}
+
+.circle-icon-text {
+  color: #FFFFFF;
+  font-size: 10px;
+  letter-spacing: 0;
+  line-height: 13px;
+  text-align: center;
+  padding-top: 15%;
+}
+
+.circle-c88 {
+  height: 20px;
+  width: 20px;
+  background-color: #F73E55;
+  border-radius: 50%;
+}
+.circle-socr {
+  height: 20px;
+  width: 20px;
+  background-color: #EAB04B;
+  border-radius: 50%;
+}
+.circle-sdg {
+  height: 20px;
+  width: 20px;
+  background-color: #4F9DA6;
+  border-radius: 50%;
+}
+
+.selected-child-item {
+  color: #FFFFFF;
+  background-color: #000000;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.data-table {
+  font-family: Montserrat;
+
+  table {
+    padding-left: 60px;
+    width: 100%;
+  }
+
+  table::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  table::-webkit-scrollbar-track {
+    width: 4px;
+    opacity: 0.4;
+    border-radius: 5px;
+    background-color: #C5C5C5;
+  }
+
+  table::-webkit-scrollbar-thumb {
+    height: 40px;
+    width: 10px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
+  }
+
+  thead {
+    tr {
+      color: #4A4A4A;
+      white-space: nowrap;
+      font-size: 10px;
+      letter-spacing: 0;
+      line-height: 13px;
+    }
+  }
+
+  tbody {
+    tr td {
+      vertical-align: middle;
+    }
+  }
+}
+
+.parent-item {
+  color: #4A4A4A;
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.child-item {
+  color: #4A4A4A;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.filter-toggle {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  opacity: 0.95;
+  border-radius: 0 3px 3px 0;
+  background-color: #FFAD5A;
+  margin-top: 0;
+  z-index: 1;
+
+  i {
+    box-sizing: border-box;
+    height: 22px;
+    width: 16px;
+    border: 2px solid #FFFFFF;
+  }
+}
+
+.sidebar-label {
+  height: 13px;
+  color: #B2BEC3;
+  font-family: Montserrat;
+  font-size: 10px;
+  letter-spacing: 0;
+  line-height: 13px;
+}
