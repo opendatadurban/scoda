@@ -48,7 +48,7 @@ export default class CodebookFilterModal extends Component {
     render() {
         return(
             <>
-                <Modal isOpen={this.props.visible} size="lg" backdrop={true} toggle={() => this.props.toggle()}>
+                <Modal isOpen={true} size="lg" backdrop={true} toggle={() => this.props.toggle()}>
                     <ModalBody>
                         <div style={modalContainer}>
                             <div style={{padding: '0 5%'}}>
