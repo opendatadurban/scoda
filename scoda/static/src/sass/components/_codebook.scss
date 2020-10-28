@@ -50,7 +50,7 @@
   }
 
   table::-webkit-scrollbar {
-    width: 10px;
+    width: 4px;
   }
 
   table::-webkit-scrollbar-track {
@@ -66,6 +66,10 @@
     border-radius: 5px;
     background-color: #FFFFFF;
     box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
+  }
+
+  table {
+    height: 832px;
   }
 
   thead {
@@ -110,13 +114,6 @@
   background-color: #FFAD5A;
   margin-top: 0;
   z-index: 1;
-
-  i {
-    box-sizing: border-box;
-    height: 22px;
-    width: 16px;
-    border: 2px solid #FFFFFF;
-  }
 }
 
 .sidebar-label {
@@ -127,3 +124,5 @@
   letter-spacing: 0;
   line-height: 13px;
 }
+
+

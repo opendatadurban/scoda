@@ -219,20 +219,16 @@ export default class CodebookDatatable extends Component {
     }
 
     async componentDidMount() {
+        axios.get('/api/codebook/1').then(res => {
+            this.setState({data: res.data});
+        });
 
-        // get data
-        axios.get('/api/codebook/1').then(res => console.log(res));
-        // First clone mockData
         const mockDataClone = mockData.slice();
 
         // Append open property to each parent item
         for(let item of mockDataClone) {
             item.open = false;
         }
-
-        this.setState({
-            data: mockDataClone
-        });
     }
 
     setSelected(childItem) {
@@ -306,7 +302,7 @@ export default class CodebookDatatable extends Component {
                     </thead>
                     <tbody>
                         {
-                            mockData.map((parentItem, index) => {
+                            this.state.data.map((parentItem, index) => {
                                 return (
                                     <>
                                         <tr className="parent-item">
@@ -314,7 +310,7 @@ export default class CodebookDatatable extends Component {
                                                 <div>{parentItem.varCode}</div>
                                             </td>
                                             <td>
-                                                <div>{parentItem.indicator}</div>
+                                                <div style={{ whiteSpace: 'pre-wrap'}}>{parentItem.indicator}</div>
                                             </td>
                                             <td>
                                                 <div></div>
