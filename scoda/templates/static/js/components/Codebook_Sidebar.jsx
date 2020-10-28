@@ -48,11 +48,6 @@ const link = {
     letterSpacing: '0',
     lineHeight: '20px',
 };
-const borderLine = {
-    height: '1px',
-    width: '100%',
-    border: '1px solid #B2BEC3',
-};
 const padding = {
     paddingBottom: '15px',
 };
@@ -251,9 +246,11 @@ export default class CodebookSidebar extends Component {
                 { this.renderThirdColumn() }
                 <hr style={padding} />
                 { this.renderFourthColumn() }
-                <button style={actionButton}>
-                    <div style={actionButtonText}>View in Data Explorer</div>
-                </button>
+                <div className="row" style={{ justifyContent: 'space-around' }}>
+                    <button style={actionButton}>
+                        <div style={actionButtonText}>View in Data Explorer</div>
+                    </button>
+                </div>
             </div>
         );
     }

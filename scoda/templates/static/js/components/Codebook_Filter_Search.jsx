@@ -11,8 +11,6 @@ const modalContainer = {
     // zIndex: '1',
     // position: 'absolute',
 };
-const modalHeader = {};
-const modalFooter = {};
 const modalSubtitle = {
     color: '#FFFFFF',
     fontFamily: 'Montserrat',
@@ -21,7 +19,6 @@ const modalSubtitle = {
     letterSpacing: '0',
     lineHeight: '30px',
 };
-const toggleMainItem = {};
 const toggleSubItem = {
     color: '#FFFFFF',
     fontFamily: 'Montserrat',
@@ -41,14 +38,14 @@ export default class CodebookFilterModal extends Component {
         super(props);
 
         this.state = {
-          visible: this.props.visible,
+          visible: false,
         };
     }
 
     render() {
         return(
             <>
-                <Modal isOpen={true} size="lg" backdrop={true} toggle={() => this.props.toggle()}>
+                <Modal isOpen={this.props.visible} size="lg" backdrop={true} toggle={() => this.props.toggle()}>
                     <ModalBody>
                         <div style={modalContainer}>
                             <div style={{padding: '0 5%'}}>
