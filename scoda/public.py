@@ -1,10 +1,13 @@
+import itertools
+import operator
+
 from scoda.app import app
 from flask import request, url_for, redirect, flash, make_response, session, render_template, jsonify, Response, \
     send_file
 from flask_security import current_user
 from itertools import zip_longest
 from sqlalchemy.sql import select
-from sqlalchemy import func, extract
+from sqlalchemy import func, extract, desc
 from .models import db
 from .models import *
 from .models.user import UserAnalysis
@@ -1182,19 +1185,40 @@ def parse_demo():
 
     return jsonify(response)
 
-
-@app.route('/api/codebook/<int:page>', methods=['GET'])
-def api_codebook(page=1):
+@app.route('/api/codebook', methods=['GET'])
+def api_codebook():
     query = db.session.query(CbDataPoint).\
-        join(CbIndicator, CbIndicator.id == CbDataPoint.indicator_id).\
+        join(CbIndicator, CbIndicator.id == CbDataPoint.indicator_id). \
         join(CbTheme, CbTheme.id == CbIndicator.theme_id). \
         join(CbSource, CbSource.id == CbIndicator.source_id).\
-        join(CbUnit, CbUnit.id == CbIndicator.unit_id).limit(20).offset((page - 1) * 20).all()
-    data_list = [{"id": str(c.id), "varCode": c.indicator.code, "indicator": c.indicator.name,
-                  "c88": c.indicator.c88_theme, "socr": c.indicator.socr_theme, "sdg": c.indicator.theme.id,
-                  "definition": c.indicator.definition, "source": c.indicator.source.name, "children": [],
-                  "reportingResponsibility": c.indicator.reporting_responsibility,
-                  "notesOnCalculation": c.indicator.notes_on_calculation, "variableType": c.indicator.unit.name,
-                  "frequencyOfCollection": c.indicator.frequency_of_collection
-                  } for c in query]
-    return jsonify(data_list)
+        join(CbUnit, CbUnit.id == CbIndicator.unit_id).\
+        order_by(desc(CbIndicator.code)).all()
+
+    query.sort(key=lambda x:x.indicator.code)
+
+    result_list = []
+    for day, dicts_for_group_code in itertools.groupby(query, key=lambda x:x.indicator.group_code):
+        dicts_for_group_code = list(dicts_for_group_code)
+        day_dict = {
+            "id": str(dicts_for_group_code[0].id), "varCode": dicts_for_group_code[0].indicator.code,
+            "indicator": dicts_for_group_code[0].indicator.name, "c88": dicts_for_group_code[0].indicator.c88_theme,
+            "socr": dicts_for_group_code[0].indicator.socr_theme, "sdg": dicts_for_group_code[0].indicator.theme.id,
+            "definition": dicts_for_group_code[0].indicator.definition,
+            "source": dicts_for_group_code[0].indicator.source.name,
+            "reportingResponsibility": dicts_for_group_code[0].indicator.reporting_responsibility,
+            "notesOnCalculation": dicts_for_group_code[0].indicator.notes_on_calculation,
+            "variableType": dicts_for_group_code[0].indicator.unit.name,
+             "frequencyOfCollection": dicts_for_group_code[0].indicator.frequency_of_collection
+        }
+        children = []
+        dicts_for_group_code.pop(0)
+        for d in dicts_for_group_code:
+            child = {
+                "varCode": d.indicator.code,
+                "indicator": d.indicator.name
+            }
+            children.append(child)
+        day_dict.update({"children": children})
+        result_list.append(day_dict)
+
+    return jsonify(result_list)
