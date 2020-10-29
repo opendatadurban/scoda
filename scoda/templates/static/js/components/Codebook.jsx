@@ -60,7 +60,7 @@ export default class Codebook extends Component {
     renderModal() {
         return (
             <>
-                <Modal isOpen={this.state.modalVisible} size="lg" backdrop={true} toggle={() => this.toggleModal()}>
+                <Modal className="codebook-modal" isOpen={this.state.modalVisible} size="lg" backdrop={true} toggle={() => this.toggleModal()}>
                     <ModalBody style={{ padding: '0px' }}>
                         <div style={modalContainer}>
                             <div style={{padding: '0 5%'}}>
@@ -91,17 +91,57 @@ export default class Codebook extends Component {
                                                 fontWeight: 'bold',
                                                 letterSpacing: '0',
                                                 lineHeight: '20px',
-                                            }}>C88 Themes:
+                                                alignItems: 'flex-end'
+                                            }}>
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>
+                                                C88 Themes:
                                             </div>
 
-                                            <div className="row">City Transformation</div>
-                                            <div className="row">Energy & Electricity</div>
-                                            <div className="row">Environment & Waste</div>
-                                            <div className="row">Fire & Emergency</div>
-                                            <div className="row">Governance</div>
-                                            <div className="row">Housing & Community</div>
-                                            <div className="row">Transport & Roads</div>
-                                            <div className="row">Water & Sanitation</div>
+                                            <div className="row">
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>City Transformation
+                                            </div>
+                                            <div className="row">
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>
+                                                Energy & Electricity</div>
+                                            <div className="row">
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>Environment & Waste</div>
+                                            <div className="row">
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>Fire & Emergency</div>
+                                            <div className="row">
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>Governance</div>
+                                            <div className="row">
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>Housing & Community</div>
+                                            <div className="row">
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>Transport & Roads</div>
+                                            <div className="row">
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>Water & Sanitation</div>
                                         </div>
                                     </div>
 
@@ -114,13 +154,43 @@ export default class Codebook extends Component {
                                                 fontWeight: 'bold',
                                                 letterSpacing: '0',
                                                 lineHeight: '20px',
-                                            }}>SOCR Themes:</div>
-                                            <div className="row">Demography</div>
-                                            <div className="row">Inclusive Cities</div>
-                                            <div className="row">Poverty and Inequality</div>
-                                            <div className="row">Productive Cities</div>
-                                            <div className="row">Sustainable Cities</div>
-                                            <div className="row">Well Governed Cities</div>
+                                                alignItems: 'flex-end'
+                                            }}>
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>
+                                                SOCR Themes:</div>
+                                            <div className="row">
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>Demography</div>
+                                            <div className="row">
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>Inclusive Cities</div>
+                                            <div className="row">
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>Poverty and Inequality</div>
+                                            <div className="row">
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>Productive Cities</div>
+                                            <div className="row">
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>Sustainable Cities</div>
+                                            <div className="row">
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>Well Governed Cities</div>
                                         </div>
                                     </div>
 
@@ -133,13 +203,43 @@ export default class Codebook extends Component {
                                                 fontWeight: 'bold',
                                                 letterSpacing: '0',
                                                 lineHeight: '20px',
-                                            }}>SDG Themes:</div>
-                                            <div className="row">Goal 1. </div>
-                                            <div className="row">Goal 2. </div>
-                                            <div className="row">Goal 3. </div>
-                                            <div className="row">Goal 4. </div>
-                                            <div className="row">Goal 5. </div>
-                                            <div className="row">Goal 6. </div>
+                                                alignItems: 'flex-end'
+                                            }}>
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>
+                                                SDG Themes:</div>
+                                            <div className="row">
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>Goal 1. </div>
+                                            <div className="row">
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>Goal 2. </div>
+                                            <div className="row">
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>Goal 3. </div>
+                                            <div className="row">
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>Goal 4. </div>
+                                            <div className="row">
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>Goal 5. </div>
+                                            <div className="row">
+                                                <label className="switch">
+                                                    <input type="checkbox" />
+                                                    <span className="slider round"></span>
+                                                </label>Goal 6. </div>
                                         </div>
                                     </div>
                                 </div>
