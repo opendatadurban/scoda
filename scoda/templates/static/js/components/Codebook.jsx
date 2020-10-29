@@ -61,7 +61,7 @@ export default class Codebook extends Component {
         return (
             <>
                 <Modal isOpen={this.state.modalVisible} size="lg" backdrop={true} toggle={() => this.toggleModal()}>
-                    <ModalBody>
+                    <ModalBody style={{ padding: '0px' }}>
                         <div style={modalContainer}>
                             <div style={{padding: '0 5%'}}>
                                 <div className="row">
