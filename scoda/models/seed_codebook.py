@@ -2,7 +2,7 @@ from . import *  # noqa
 from ..app import app
 import pandas as pd
 import datetime
-
+import json
 
 def seed_codebook_data(db):
 
@@ -45,6 +45,7 @@ def seed_codebook_data(db):
             value_type = CbValueType()
             value_type.name = data.strip()
             db.session.add(value_type)
+
 
     # indicator_code = df["Indicator_code"].unique()
     # indicator_name = df["Indicator_name"].unique()
@@ -119,6 +120,8 @@ def seed_indicator_data(db):
         indicator.c88_theme = str(row["C88_theme"]).strip()
         indicator.socr_theme = str(row["SOCR_theme"]).strip()
         indicator.sdg_theme = str(row["SDG_theme"]).strip()
+        theme_id = db.session.query(CbTheme.id).filter(CbTheme.name == str(row["SOCR_theme"]).strip())
+        indicator.theme_id = theme_id
         indicator.indicator_formula = str(row["Indicator_formula"]).strip()
         indicator.notes_on_calculation = str(row["Notes_on_calculation"]).strip()
         indicator.frequency_of_collection = str(row["Frequency_of_collection"]).strip()
@@ -126,5 +129,60 @@ def seed_indicator_data(db):
         indicator.reporting_responsibility = str(row["Reporting_responsibility"]).strip()
         indicator.reporting_requirement = str(row["Reporting_requirement"]).strip()
         indicator.definition = str(row["Definition"]).strip()
+        print(message)
+    db.session.commit()
+
+# Next up
+def create_themes(db):
+    """"Use this to create additional theme tables"""
+    df_new = pd.read_excel('%s/data/%s' % (app.root_path, "codebook-data/Full_codebook_circular_88_SOCR.xlsx")). \
+        fillna(value='')
+    for data in df_new["C88_theme"].unique():
+        if data:
+            c_theme = CbCircularTheme()
+            c_theme.name = data.strip()
+            db.session.add(c_theme)
+    for data in df_new["SDG_theme"].unique():
+        if data:
+            sdg_theme = CbSDGTheme()
+            sdg_theme.name = data.strip()
+            db.session.add(sdg_theme)
+    indicator = CbIndicator()
+    row = {}
+    sdg_theme_id = db.session.query(CbSDGTheme.id).filter(CbSDGTheme.name == str(row["SDG_theme"]).strip())
+    indicator.sdg_theme_id = sdg_theme_id
+    c_theme_id = db.session.query(CbCircularTheme.id).filter(CbCircularTheme.name == str(row["C88_theme"]).strip())
+    indicator.circular_theme_id = c_theme_id
+
+def seed_indicator_json(db):
+    with open('%s/data/%s' % (app.root_path, "codebook-data/codebook.json"), encoding="utf8") as f:
+        data = json.load(f)
+
+    # indicators = data["codeBook_contents"]["dataDscr"]
+    for key, row in data["codeBook_contents"]["dataDscr"].items():
+        indicator_code = str(key).strip()
+        indicator = db.session.query(CbIndicator).filter(CbIndicator.code == indicator_code).first()
+        row = row["Metadata"]
+        if not indicator:
+            indicator = CbIndicator()
+            indicator.code = str(row["Variable_Code"]).strip()
+            indicator.name = str(row["Indicator_short_name"]).strip()
+            db.session.add(indicator)
+            db.session.flush()
+            message = F"Indicator  {indicator.name} created"
+        else:
+            message = F"Indicator  {indicator.name} Updated"
+        indicator.group_code = str(row["Indicator_Group"][0]).strip()
+        indicator.sub_number = str(row["Sub_Number"][0]).strip()
+        indicator.c88_theme = str(row["C88_theme"][0]).strip()
+        indicator.socr_theme = str(row["SOCR_theme"][0]).strip()
+        indicator.sdg_theme = str(row["SDG_theme"][0]).strip()
+        indicator.indicator_formula = str(row["Indicator_formula"][0]).strip()
+        indicator.notes_on_calculation = str(row["Notes_on_calculation"][0]).strip()
+        indicator.frequency_of_collection = str(row["Frequency_of_collection"][0]).strip()
+        indicator.readiness = str(row["Readiness"][0]).strip()
+        indicator.reporting_responsibility = str(row["Reporting_responsibility"][0]).strip()
+        indicator.reporting_requirement = str(row["Reporting_requirement"][0]).strip()
+        indicator.definition = str(row["Definition"][0]).strip()
         print(message)
     db.session.commit()
