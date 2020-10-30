@@ -220,7 +220,6 @@ export default class CodebookDatatable extends Component {
 
     async componentDidMount() {
         axios.get('/api/codebook/1').then(res => {
-            console.log(res);
             this.setState({data: res.data});
         });
 
@@ -245,8 +244,9 @@ export default class CodebookDatatable extends Component {
                     return(
                         <Fragment>
                             <tr className="child-item" onClick={() => {this.setSelected(item)}}>
+                                <td></td>
                                 <td><div>{item.varCode}</div></td>
-                                <td><div style={{ whiteSpace: 'pre-wrap '}}>{item.indicator}</div></td>
+                                <td><div style={{ whiteSpace: 'pre-wrap'}}>{item.indicator}</div></td>
                                 <td><div></div></td>
                                 <td><div></div></td>
                                 <td><div></div></td>
@@ -271,13 +271,30 @@ export default class CodebookDatatable extends Component {
             data: copyData
         });
     }
-    
+
+    getC88Code(code) {
+      return code.split(".")[0]
+    }
+
+    getSORCCode(code) {
+      const strArr = code.split(" ")
+
+      let sorc = ""
+
+      strArr.map((str) => {
+        sorc += str.charAt(0)
+      })
+
+      return sorc
+    }
+
     render() {
         return(
             <div className="data-table">
                 <Table hover responsive>
                     <thead>
                         <tr>
+                            <th width="7%"></th>
                             <th>
                                 <div>VAR CODE</div>
                             </th>
@@ -307,6 +324,7 @@ export default class CodebookDatatable extends Component {
                                 return (
                                     <>
                                         <tr className="parent-item">
+                                            <td></td>
                                             <td>
                                                 <div>{parentItem.varCode}</div>
                                             </td>
@@ -318,12 +336,12 @@ export default class CodebookDatatable extends Component {
                                             </td>
                                             <td>
                                                 <div className="circle-c88">
-                                                    <div className="circle-icon-text">{parentItem.c88}</div>
+                                                    <div className="circle-icon-text">{this.getC88Code(parentItem.varCode)}</div>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div className="circle-socr">
-                                                    <div className="circle-icon-text">{parentItem.socr}</div>
+                                                    <div className="circle-icon-text">{this.getSORCCode(parentItem.socr)}</div>
                                                 </div>
                                             </td>
                                             <td>
