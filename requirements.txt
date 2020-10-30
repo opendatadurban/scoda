@@ -28,7 +28,6 @@ intervals==0.8.0
 itsdangerous==0.24
 Jinja2==2.9.6
 Mako==1.0.6
-MarkupSafe==1.1.1
 numpy==1.18.4
 olefile==0.44
 pandas==1.0.3
@@ -50,7 +49,8 @@ requests==2.12.3
 sendgrid==3.6.3
 simplejson==3.10.0
 six==1.10.0
-SQLAlchemy==1.1.4
+SQLAlchemy==1.2.5
+SQLAlchemy-Searchable==1.0.3
 SQLAlchemy-Utils==0.32.11
 validators==0.11.1
 webassets==0.12.0
