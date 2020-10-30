@@ -43,14 +43,17 @@
 
 .data-table {
   font-family: Montserrat;
+  margin-right: 20px;
 
   table {
-    padding-left: 60px;
     width: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
   }
 
   table::-webkit-scrollbar {
-    width: 4px;
+    width: 10px;
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
   }
 
   table::-webkit-scrollbar-track {
@@ -114,6 +117,7 @@
   background-color: #FFAD5A;
   margin-top: 0;
   z-index: 1;
+  left: 0px;
 }
 
 .sidebar-label {
@@ -194,4 +198,3 @@ input:checked + .slider:before {
   box-shadow: 0 0 1px 0 rgba(0,0,0,0.12), 0 1px 1px 0 rgba(0,0,0,0.24);
   border-radius: 50%;
 }
-
