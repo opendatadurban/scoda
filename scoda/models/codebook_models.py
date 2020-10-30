@@ -18,7 +18,10 @@ from sqlalchemy import (
     event,
 DateTime
 )
-
+from sqlalchemy_utils.types import TSVectorType
+from sqlalchemy_searchable import make_searchable
+make_searchable(db.metadata)
+# configure_mappers()  # IMPORTANT!
 """"
 Code Book Database additions - Basically SCODA 2.0
 Added CB to all the models so we know it's the new codebook tables
@@ -72,13 +75,19 @@ class CbIndicator(db.Model):
     readiness  = Column(String, nullable=True)
     reporting_requirement  = Column(String, nullable=True)
 
+    search_vector = Column(TSVectorType('name'))
+
     unit_id = Column(Integer, ForeignKey('cb_unit.id'), index=True)
     source_id = Column(Integer, ForeignKey('cb_source.id'), index=True)
     theme_id = Column(Integer, ForeignKey('cb_theme.id'), index=True)
+    sdg_theme_id = Column(Integer, ForeignKey('cb_sdg_theme.id'), index=True)
+    circular_theme_id = Column(Integer, ForeignKey('cb_circular_theme.id'), index=True)
 
     unit = relationship("CbUnit")
     source = relationship("CbSource")
     theme = relationship("CbTheme")
+    sdg_theme_rel = relationship("CbSDGTheme")
+    circular_theme = relationship("CbCircularTheme")
 
     def __repr__(self):
         return "<CbIndicator='%s'>" % (self.name)
@@ -152,10 +161,34 @@ class CbTheme(db.Model):
     __tablename__ = "cb_theme"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(150), index=True, nullable=False, unique=True)
+    name = Column(String, index=True, nullable=False, unique=True)
 
     def __repr__(self):
         return "<CbTheme='%s'>" % (self.name)
+
+class CbSDGTheme(db.Model):
+    """
+    The Theme of an Indicator
+    """
+    __tablename__ = "cb_sdg_theme"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String, index=True, nullable=False, unique=True)
+
+    def __repr__(self):
+        return "<CbSDGTheme='%s'>" % (self.name)
+
+class CbCircularTheme(db.Model):
+    """
+    The Theme of an Indicator
+    """
+    __tablename__ = "cb_circular_theme"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String, index=True, nullable=False, unique=True)
+
+    def __repr__(self):
+        return "<CbCircularTheme='%s'>" % (self.name)
 
 class CbSource(db.Model):
     """
