@@ -219,7 +219,7 @@ export default class CodebookDatatable extends Component {
     }
 
     async componentDidMount() {
-        axios.get('/api/codebook').then(res => {
+        axios.get('/api/codebook/1').then(res => {
             this.setState({data: res.data});
         });
 
@@ -245,7 +245,7 @@ export default class CodebookDatatable extends Component {
                         <Fragment>
                             <tr className="child-item" onClick={() => {this.setSelected(item)}}>
                                 <td><div>{item.varCode}</div></td>
-                                <td><div>{item.indicator}</div></td>
+                                <td><div style={{ whiteSpace: 'pre-wrap '}}>{item.indicator}</div></td>
                                 <td><div></div></td>
                                 <td><div></div></td>
                                 <td><div></div></td>
