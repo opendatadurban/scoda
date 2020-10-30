@@ -127,6 +127,7 @@
 
 .codebook-modal {
   max-width: none;
+  opacity: 0.95
 }
 
 .switch {
@@ -134,6 +135,7 @@
   display: inline-block;
   height: 14px;
   width: 37px;
+  transform: translateY(-7px) translateX(-4px);
 }
 
 /* Hide default HTML checkbox */
