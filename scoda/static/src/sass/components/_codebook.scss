@@ -135,7 +135,11 @@
   display: inline-block;
   height: 14px;
   width: 37px;
-  transform: translateY(-7px) translateX(-4px);
+  transform: translateY(-3px) translateX(-10px);
+}
+
+.child-switch {
+  transform: scale(0.90) translateY(-8px);
 }
 
 /* Hide default HTML checkbox */
@@ -197,3 +201,29 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+.themes-c88-border {
+  position: absolute;
+  width: 30px;
+  height: 95%;
+  background-color: #F73E55;
+  transform: translateX(-70px) translateY(8px);
+  border-radius: 5px;
+}
+
+.themes-socr-border {
+  position: absolute;
+  width: 30px;
+  height: 74%;
+  background-color: #EAB04B;
+  transform: translateX(-70px) translateY(5px);
+  border-radius: 5px;
+}
+
+.themes-sdg-border {
+  position: absolute;
+  width: 30px;
+  height: 74%;
+  background-color: #4F9DA6;
+  transform: translateX(-70px) translateY(5px);
+  border-radius: 5px;
+}
