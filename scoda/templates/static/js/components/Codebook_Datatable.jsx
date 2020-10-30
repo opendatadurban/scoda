@@ -219,7 +219,7 @@ export default class CodebookDatatable extends Component {
     }
 
     async componentDidMount() {
-        axios.get('/api/codebook').then(res => {
+        axios.get('/api/codebook/1').then(res => {
             this.setState({data: res.data});
         });
 
