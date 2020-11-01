@@ -3,12 +3,10 @@ import {
     Button,
     Modal,
     ModalBody,
-    Container,
-    Row,
-    Col,
     Form,
     Input,
     FormGroup } from 'reactstrap';
+import filterData from '../data/filterData.js';
 
 const modalStyle = {
     width: '1366px',
@@ -48,20 +46,38 @@ export default class CodebookFilterModal extends Component {
         super(props);
 
         this.state = {
-          visible: false,
+            modalVisible: false,
+            filters: filterData
         };
+
+        console.log(this.state.filters);
     }
 
-    componentDidMount() {
+    toggleModal() {
         this.setState({
-            visible: this.props.isOpen
-        })
+            modalVisible: !this.state.modalVisible,
+        });
+    }
+
+    toggleParent() {
+        // TODO add toggle parent logic here
+    }
+
+    toggleChild() {
+        // TODO toggle child logic here
+    }
+
+    reset() {
+        // TODO add logic to clear search and reset filters
     }
 
     render() {
         return (
             <>
-                <Modal className="codebook-modal" isOpen={this.state.visible} size="lg" backdrop={true} toggle={() => this.props.toggleModal()}>
+                <Button className="filter-toggle" color="danger" onClick={() =>this.toggleModal()}>
+                    <i className="fas fa-filter"></i>
+                </Button>
+                <Modal className="codebook-modal" isOpen={this.state.modalVisible} size="lg" backdrop={true} toggle={() => this.toggleModal()}>
                     <ModalBody style={{ padding: '0px' }}>
                         <Form>
                             <div style={modalContainer}>
@@ -282,11 +298,11 @@ export default class CodebookFilterModal extends Component {
                                     </div>
                                     <div className="row">
                                         <div className="col">
-                                            <Button outline onClick={() => this.props.toggleModal()}>Apply Search & Filter</Button>
+                                            <Button outline onClick={() => this.toggleModal()}>Apply Search & Filter</Button>
                                         </div>
 
                                         <div className="col">
-                                            <Button outline>Clear Search & Reset Filters</Button>
+                                            <Button outline onClick={() => this.reset()}>Clear Search & Reset Filters</Button>
                                         </div>
 
                                         <div className="col">
