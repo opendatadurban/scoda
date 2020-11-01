@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
     Button,
     Modal,
@@ -47,10 +47,10 @@ export default class CodebookFilterModal extends Component {
 
         this.state = {
             modalVisible: false,
-            filters: filterData
+            c88: filterData[0],
+            socr: filterData[1],
+            sdg: filterData[2]
         };
-
-        console.log(this.state.filters);
     }
 
     toggleModal() {
@@ -59,16 +59,189 @@ export default class CodebookFilterModal extends Component {
         });
     }
 
-    toggleParent() {
-        // TODO add toggle parent logic here
+    toggleParent(event, isSelected) {
+        const copyObj = this.state[event.target.name];
+        const filterName = event.target.name;
+
+        copyObj[filterName].parentSelected = !isSelected;
+        copyObj[filterName].children.forEach(child => child.selected = !isSelected);
+
+        this.setState({
+            [this.state[filterName]]: copyObj
+        });
     }
 
-    toggleChild() {
-        // TODO toggle child logic here
+    toggleChild(event, index) {
+        const copyObj = this.state[event.target.name];
+        const filterName = event.target.name;
+
+        copyObj[filterName].children[index].selected = !copyObj[filterName].children[index].selected;
+
+        // if the parent is selected, this will deselect it when toggling a child
+        if (copyObj[filterName].parentSelected === true) {
+            copyObj[filterName].parentSelected = false;
+        }
+
+        // backwards logic to toggle parent item to true if all children are selected
+        const deselectedChildren = copyObj[filterName].children.filter(child => child.selected === false);
+        if (deselectedChildren.length === 0) {
+            copyObj[filterName].parentSelected = true;
+        }
+        this.setState({
+            [this.state[filterName]]: copyObj
+        });
     }
 
     reset() {
         // TODO add logic to clear search and reset filters
+    }
+
+    renderC88() {
+        return(
+            <Fragment>
+                <div className="row" style={{
+                    color: '#F73E55',
+                    fontFamily: 'Montserrat',
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    letterSpacing: '0',
+                    lineHeight: '20px',
+                    alignItems: 'flex-end'
+                }}>
+                    <label className="switch">
+                        <input
+                            type="checkbox"
+                            name="c88"
+                            onChange={(event) => this.toggleParent(event, this.state.c88.c88.parentSelected)}
+                            value={ this.state.c88.c88.parentSelected }
+                            checked={ this.state.c88.c88.parentSelected }
+                        />
+                        <span className="slider round"></span>
+                    </label>
+                    { this.state.c88.c88.label }:
+
+                </div>
+
+                {
+                    this.state.c88.c88.children.map((childItem, index) => {
+                        return(
+                            <Fragment>
+                                <div className="row">
+                                    <label className="switch  child-switch">
+                                        <input
+                                            type="checkbox"
+                                            value={childItem.selected}
+                                            name="c88"
+                                            checked={this.state.c88.c88.parentSelected || childItem.selected}
+                                            onChange={(event) => {this.toggleChild(event, index)}}
+                                        />
+                                        <span className="slider round"></span>
+                                    </label>
+                                    { childItem.label }
+                                </div>
+                            </Fragment>
+                        )
+                    })
+                }
+            </Fragment>
+        );
+    }
+
+    renderSOCR() {
+        return (
+            <Fragment>
+                <div className="row" style={{
+                    color: '#EAB04B',
+                    fontFamily: 'Montserrat',
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    letterSpacing: '0',
+                    lineHeight: '20px',
+                    alignItems: 'flex-end'
+                }}>
+                    <label className="switch">
+                        <input
+                            type="checkbox"
+                            name="socr"
+                            onChange={(event) => this.toggleParent(event, this.state.socr.socr.parentSelected)}
+                            value={ this.state.socr.socr.parentSelected }
+                            checked={ this.state.socr.socr.parentSelected }
+                        />
+                        <span className="slider round"></span>
+                    </label>
+                    { this.state.socr.socr.label }:
+                </div>
+
+                {
+                    this.state.socr.socr.children.map((childItem, index) => {
+                        return(
+                            <Fragment>
+                                <div className="row">
+                                    <label className="switch child-switch">
+                                        <input
+                                            type="checkbox"
+                                            name="socr"
+                                            checked={this.state.socr.socr.parentSelected || childItem.selected}
+                                            onChange={(event) => {this.toggleChild(event, index)}}
+                                        />
+                                        <span className="slider round"></span>
+                                    </label>
+                                    { childItem.label }
+                                </div>
+                            </Fragment>
+                        );
+                    })
+                }
+            </Fragment>
+        )
+    }
+
+    renderSDG() {
+        return(
+            <Fragment>
+                <div className="row" style={{
+                    color: '#4F9DA6',
+                    fontFamily: 'Montserrat',
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    letterSpacing: '0',
+                    lineHeight: '20px',
+                    alignItems: 'flex-end'
+                }}>
+                    <label className="switch">
+                        <input
+                            type="checkbox"
+                            name="sdg"
+                            onChange={(event) => this.toggleParent(event, this.state.sdg.sdg.parentSelected)}
+                            value={ this.state.sdg.sdg.parentSelected }
+                            checked={ this.state.sdg.sdg.parentSelected }
+                        />
+                        <span className="slider round"></span>
+                    </label>
+                    { this.state.sdg.sdg.label }:
+                </div>
+                {
+                    this.state.sdg.sdg.children.map((childItem, index) => {
+                        return(
+                            <Fragment>
+                                <div className="row">
+                                    <label className="switch child-switch">
+                                        <input
+                                            type="checkbox"
+                                            name="sdg"
+                                            checked={this.state.sdg.sdg.parentSelected || childItem.selected}
+                                            onChange={(event) => {this.toggleChild(event, index)}}
+                                        />
+                                        <span className="slider round"></span>
+                                    </label>
+                                    { childItem.label }
+                                </div>
+                            </Fragment>
+                        );
+                    })
+                }
+            </Fragment>
+        );
     }
 
     render() {
@@ -105,71 +278,7 @@ export default class CodebookFilterModal extends Component {
                                             <div className="themes-c88-border"></div>
                                             <div style={toggleSubItem}>
                                                 <FormGroup>
-                                                    <div className="row" style={{
-                                                        color: '#F73E55',
-                                                        fontFamily: 'Montserrat',
-                                                        fontSize: '14px',
-                                                        fontWeight: 'bold',
-                                                        letterSpacing: '0',
-                                                        lineHeight: '20px',
-                                                        alignItems: 'flex-end'
-                                                    }}>
-                                                        <label className="switch">
-                                                            <Input type="checkbox"/>
-                                                            <span className="slider round"></span>
-                                                        </label>
-                                                        C88 Themes:
-                                                    </div>
-
-                                                    <div className="row">
-                                                        <label className="switch  child-switch">
-                                                            <Input type="checkbox"/>
-                                                            <span className="slider round"></span>
-                                                        </label>City Transformation
-                                                    </div>
-                                                    <div className="row">
-                                                        <label className="switch child-switch">
-                                                            <Input type="checkbox"/>
-                                                            <span className="slider round"></span>
-                                                        </label>
-                                                        Energy & Electricity
-                                                    </div>
-                                                    <div className="row">
-                                                        <label className="switch child-switch">
-                                                            <Input type="checkbox"/>
-                                                            <span className="slider round"></span>
-                                                        </label>Environment & Waste
-                                                    </div>
-                                                    <div className="row">
-                                                        <label className="switch child-switch">
-                                                            <Input type="checkbox"/>
-                                                            <span className="slider round"></span>
-                                                        </label>Fire & Emergency
-                                                    </div>
-                                                    <div className="row">
-                                                        <label className="switch child-switch">
-                                                            <Input type="checkbox"/>
-                                                            <span className="slider round"></span>
-                                                        </label>Governance
-                                                    </div>
-                                                    <div className="row">
-                                                        <label className="switch child-switch">
-                                                            <Input type="checkbox"/>
-                                                            <span className="slider round"></span>
-                                                        </label>Housing & Community
-                                                    </div>
-                                                    <div className="row">
-                                                        <label className="switch child-switch">
-                                                            <Input type="checkbox"/>
-                                                            <span className="slider round"></span>
-                                                        </label>Transport & Roads
-                                                    </div>
-                                                    <div className="row">
-                                                        <label className="switch child-switch">
-                                                            <Input type="checkbox"/>
-                                                            <span className="slider round"></span>
-                                                        </label>Water & Sanitation
-                                                    </div>
+                                                    { this.renderC88() }
                                                 </FormGroup>
                                             </div>
                                         </div>
@@ -179,57 +288,7 @@ export default class CodebookFilterModal extends Component {
                                             <div>
                                                 <div style={toggleSubItem}>
                                                     <FormGroup>
-                                                        <div className="row" style={{
-                                                            color: '#EAB04B',
-                                                            fontFamily: 'Montserrat',
-                                                            fontSize: '14px',
-                                                            fontWeight: 'bold',
-                                                            letterSpacing: '0',
-                                                            lineHeight: '20px',
-                                                            alignItems: 'flex-end'
-                                                        }}>
-                                                            <label className="switch">
-                                                                <Input type="checkbox"/>
-                                                                <span className="slider round"></span>
-                                                            </label>
-                                                            SOCR Themes:
-                                                        </div>
-                                                        <div className="row">
-                                                            <label className="switch child-switch">
-                                                                <Input type="checkbox"/>
-                                                                <span className="slider round"></span>
-                                                            </label>Demography
-                                                        </div>
-                                                        <div className="row">
-                                                            <label className="switch child-switch">
-                                                                <Input type="checkbox"/>
-                                                                <span className="slider round"></span>
-                                                            </label>Inclusive Cities
-                                                        </div>
-                                                        <div className="row">
-                                                            <label className="switch child-switch">
-                                                                <Input type="checkbox"/>
-                                                                <span className="slider round"></span>
-                                                            </label>Poverty and Inequality
-                                                        </div>
-                                                        <div className="row">
-                                                            <label className="switch child-switch">
-                                                                <Input type="checkbox"/>
-                                                                <span className="slider round"></span>
-                                                            </label>Productive Cities
-                                                        </div>
-                                                        <div className="row">
-                                                            <label className="switch child-switch">
-                                                                <Input type="checkbox"/>
-                                                                <span className="slider round"></span>
-                                                            </label>Sustainable Cities
-                                                        </div>
-                                                        <div className="row">
-                                                            <label className="switch child-switch">
-                                                                <Input type="checkbox"/>
-                                                                <span className="slider round"></span>
-                                                            </label>Well Governed Cities
-                                                        </div>
+                                                        { this.renderSOCR() }
                                                     </FormGroup>
                                                 </div>
                                             </div>
@@ -240,57 +299,7 @@ export default class CodebookFilterModal extends Component {
                                             <div>
                                                 <div style={toggleSubItem}>
                                                     <FormGroup>
-                                                        <div className="row" style={{
-                                                            color: '#4F9DA6',
-                                                            fontFamily: 'Montserrat',
-                                                            fontSize: '14px',
-                                                            fontWeight: 'bold',
-                                                            letterSpacing: '0',
-                                                            lineHeight: '20px',
-                                                            alignItems: 'flex-end'
-                                                        }}>
-                                                            <label className="switch">
-                                                                <Input type="checkbox"/>
-                                                                <span className="slider round"></span>
-                                                            </label>
-                                                            SDG Themes:
-                                                        </div>
-                                                        <div className="row">
-                                                            <label className="switch child-switch">
-                                                                <Input type="checkbox"/>
-                                                                <span className="slider round"></span>
-                                                            </label>Goal 1.
-                                                        </div>
-                                                        <div className="row">
-                                                            <label className="switch child-switch">
-                                                                <Input type="checkbox"/>
-                                                                <span className="slider round"></span>
-                                                            </label>Goal 2.
-                                                        </div>
-                                                        <div className="row">
-                                                            <label className="switch child-switch">
-                                                                <Input type="checkbox"/>
-                                                                <span className="slider round"></span>
-                                                            </label>Goal 3.
-                                                        </div>
-                                                        <div className="row">
-                                                            <label className="switch child-switch">
-                                                                <Input type="checkbox"/>
-                                                                <span className="slider round"></span>
-                                                            </label>Goal 4.
-                                                        </div>
-                                                        <div className="row">
-                                                            <label className="switch child-switch">
-                                                                <Input type="checkbox"/>
-                                                                <span className="slider round"></span>
-                                                            </label>Goal 5.
-                                                        </div>
-                                                        <div className="row">
-                                                            <label className="switch child-switch">
-                                                                <Input type="checkbox"/>
-                                                                <span className="slider round"></span>
-                                                            </label>Goal 6.
-                                                        </div>
+                                                        { this.renderSDG() }
                                                     </FormGroup>
                                                 </div>
                                             </div>
