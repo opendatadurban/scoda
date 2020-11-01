@@ -16,18 +16,21 @@ export default class CodebookDatatable extends Component {
 
     async componentDidMount() {
         axios.get('/api/codebook/1').then(res => {
-            this.setState({data: res.data});
+            const copyData = res;
+            console.log(copyData);
+
+            // Append open property to each parent item
+            for(let item of copyData.data) {
+                item.open = false;
+            }
+
+            this.setState({data: copyData.data});
         });
 
-        const mockDataClone = mockData.slice();
-
-        // Append open property to each parent item
-        for(let item of mockDataClone) {
-            item.open = false;
-        }
     }
 
     setSelected(childItem) {
+        console.log(childItem);
         this.setState({
             selected: childItem
         });
@@ -38,7 +41,7 @@ export default class CodebookDatatable extends Component {
             return parent.children.map(item => {
                 if (parent.open) {
                     return(
-                        <Fragment>
+                        <Fragment key={item.id}>
                             <tr className="child-item" onClick={() => {this.setSelected(item)}}>
                                 <td></td>
                                 <td><div>{item.varCode}</div></td>
@@ -69,10 +72,16 @@ export default class CodebookDatatable extends Component {
     }
 
     getC88Code(code) {
+        if(!code) {
+            return;
+        }
       return code.split(".")[0]
     }
 
     getSORCCode(code) {
+      if(!code) {
+          return;
+      }
       const strArr = code.split(" ")
 
       let sorc = ""
@@ -118,7 +127,7 @@ export default class CodebookDatatable extends Component {
                         {
                             this.state.data.map((parentItem, index) => {
                                 return (
-                                    <>
+                                    <Fragment key={parentItem.id}>
                                         <tr className="parent-item">
                                             <td></td>
                                             <td>
@@ -155,7 +164,7 @@ export default class CodebookDatatable extends Component {
                                             </td>
                                         </tr>
                                         {this.renderChildren(parentItem)}
-                                    </>
+                                    </Fragment>
                                 );
                             })
                         }
