@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import CodebookDatatable from './Codebook_Datatable';
 import CodebookSidebar from './Codebook_Sidebar';
-import {
-    Button,
-    Container,
-    Row,
-    Col} from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import CodebookFilterModal from './Codebook_Filter_Search';
 
 export default class Codebook extends Component {
