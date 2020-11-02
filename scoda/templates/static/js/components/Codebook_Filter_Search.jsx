@@ -49,7 +49,9 @@ export default class CodebookFilterModal extends Component {
             modalVisible: false,
             c88: filterData[0],
             socr: filterData[1],
-            sdg: filterData[2]
+            sdg: filterData[2],
+            searchFilterValue: "",
+            filterData: {}
         };
     }
 
@@ -93,7 +95,27 @@ export default class CodebookFilterModal extends Component {
     }
 
     reset() {
-        // TODO add logic to clear search and reset filters
+        const copyC88 = this.state.c88;
+        const copySOCR = this.state.socr;
+        const copySDG = this.state.sdg;
+
+        this.deselectToggles(copyC88.c88);
+        this.deselectToggles(copySOCR.socr);
+        this.deselectToggles(copySDG.sdg);
+
+        this.setState({
+            c88: copyC88,
+            socr: copySOCR,
+            sdg: copySDG,
+            searchFilterValue: ""
+        });
+    }
+
+    deselectToggles(parentObj) {
+        parentObj.parentSelected = false;
+        for(let child of parentObj.children) {
+           child.selected = false;
+        }
     }
 
     renderC88() {
@@ -244,6 +266,12 @@ export default class CodebookFilterModal extends Component {
         );
     }
 
+    handleChange(event) {
+        this.setState({
+            searchFilterValue: event.target.value
+        })
+    }
+
     render() {
         return (
             <>
@@ -262,7 +290,13 @@ export default class CodebookFilterModal extends Component {
                                                     Search
                                                 </div>
                                                 <div>
-                                                    <Input type="text" placeholder="Search by name..."/>
+                                                    <Input
+                                                        value={ this.state.searchFilterValue }
+                                                        onChange={(e) => this.handleChange(e)}
+                                                        name="searchFilter"
+                                                        type="text"
+                                                        placeholder="Search by name..."
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
