@@ -1,10 +1,13 @@
+import itertools
+import operator
+
 from scoda.app import app
 from flask import request, url_for, redirect, flash, make_response, session, render_template, jsonify, Response, \
     send_file
 from flask_security import current_user
 from itertools import zip_longest
 from sqlalchemy.sql import select
-from sqlalchemy import func
+from sqlalchemy import func, extract, desc
 from .models import db
 from .models import *
 from .models.user import UserAnalysis
@@ -1181,3 +1184,41 @@ def parse_demo():
     response['wards'] = ward_list
 
     return jsonify(response)
+
+@app.route('/api/codebook', methods=['GET'])
+@app.route('/api/codebook/<int:page>', methods=['GET'])
+def api_codebook(page=1):
+    query = db.session.query(CbIndicator).\
+        join(CbTheme, CbTheme.id == CbIndicator.theme_id). \
+        join(CbSource, CbSource.id == CbIndicator.source_id).\
+        join(CbUnit, CbUnit.id == CbIndicator.unit_id).limit(50).offset((page - 1) * 20).all()
+
+    query.sort(key=lambda x:x.code)
+
+    result_list = []
+    for day, dicts_for_group_code in itertools.groupby(query, key=lambda x:x.group_code):
+        dicts_for_group_code = list(dicts_for_group_code)
+        day_dict = {
+            "id": str(dicts_for_group_code[0].id), "varCode": dicts_for_group_code[0].code,
+            "indicator": dicts_for_group_code[0].name, "c88": dicts_for_group_code[0].c88_theme,
+            "socr": dicts_for_group_code[0].socr_theme, "sdg": dicts_for_group_code[0].theme.id,
+            "definition": dicts_for_group_code[0].definition,
+            "source": dicts_for_group_code[0].source.name,
+            "reportingResponsibility": dicts_for_group_code[0].reporting_responsibility,
+            "notesOnCalculation": dicts_for_group_code[0].notes_on_calculation,
+            "variableType": dicts_for_group_code[0].unit.name,
+             "frequencyOfCollection": dicts_for_group_code[0].frequency_of_collection
+        }
+        children = []
+        dicts_for_group_code.pop(0)
+        for d in dicts_for_group_code:
+            child = {
+                "id": str(d.id),
+                "varCode": d.code,
+                "indicator": d.name
+            }
+            children.append(child)
+        day_dict.update({"children": children})
+        result_list.append(day_dict)
+
+    return jsonify(result_list)
