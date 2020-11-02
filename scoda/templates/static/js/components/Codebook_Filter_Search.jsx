@@ -51,7 +51,7 @@ export default class CodebookFilterModal extends Component {
             socr: filterData[1],
             sdg: filterData[2],
             searchFilterValue: "",
-            filterData: {}
+            filterData: null
         };
     }
 
@@ -272,6 +272,17 @@ export default class CodebookFilterModal extends Component {
         })
     }
 
+    submitForm() {
+        const filterVal = {
+            c88: this.state.c88.c88.children.filter(child => child.selected === true),
+            socr: this.state.socr.socr.children.filter(child => child.selected === true),
+            sdg: this.state.sdg.sdg.children.filter(child => child.selected === true),
+            search: this.state.searchFilterValue
+        }
+
+        console.log(JSON.stringify(filterVal));
+    }
+
     render() {
         return (
             <>
@@ -341,7 +352,10 @@ export default class CodebookFilterModal extends Component {
                                     </div>
                                     <div className="row">
                                         <div className="col">
-                                            <Button outline onClick={() => this.toggleModal()}>Apply Search & Filter</Button>
+                                            <Button outline onClick={() => {
+                                                this.toggleModal()
+                                                this.submitForm()
+                                            }}>Apply Search & Filter</Button>
                                         </div>
 
                                         <div className="col">
