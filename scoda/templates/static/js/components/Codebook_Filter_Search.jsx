@@ -31,7 +31,6 @@ const modalSubtitle = {
     fontSize: '24px',
     fontWeight: 'bold',
     letterSpacing: '0',
-    lineHeight: '30px',
 };
 const toggleSubItem = {
     color: '#FFFFFF',
@@ -307,6 +306,7 @@ export default class CodebookFilterModal extends Component {
                                                         name="searchFilter"
                                                         type="text"
                                                         placeholder="Search by name..."
+                                                        className="modal-search-bar"
                                                     />
                                                 </div>
                                             </div>
@@ -352,14 +352,14 @@ export default class CodebookFilterModal extends Component {
                                     </div>
                                     <div className="row">
                                         <div className="col">
-                                            <Button outline onClick={() => {
+                                            <Button className="modal-button" outline onClick={() => {
                                                 this.toggleModal()
                                                 this.submitForm()
                                             }}>Apply Search & Filter</Button>
                                         </div>
 
                                         <div className="col">
-                                            <Button outline onClick={() => this.reset()}>Clear Search & Reset Filters</Button>
+                                            <Button className="modal-button" outline onClick={() => this.reset()}>Clear Search & Reset Filters</Button>
                                         </div>
 
                                         <div className="col">
