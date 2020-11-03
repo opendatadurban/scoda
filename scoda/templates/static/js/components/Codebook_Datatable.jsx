@@ -10,6 +10,7 @@ export default class CodebookDatatable extends Component {
         this.state ={
             data: [],
             selected: null,
+            currentPage: 1,
         };
 
         this.selectChild = this.selectChild.bind(this);
@@ -33,7 +34,7 @@ export default class CodebookDatatable extends Component {
     selectChild(item) {
         this.props.setSelected(item);
     }
-    
+
     renderChildren(parent) {
         if (parent.children.length > 0) {
             return parent.children.map(item => {
@@ -91,9 +92,35 @@ export default class CodebookDatatable extends Component {
       return sorc
     }
 
+    fetchData() {
+        let nextPage = this.state.currentPage + 1;
+        axios.get(`/api/codebook/${nextPage}`).then(res => {
+            const copyData = res;
+            // Append open property to each parent item
+            for(let item of copyData.data) {
+                item.open = false;
+            }
+
+            const combinedData = [...this.state.data, ...copyData.data];
+
+            this.setState({
+                data: combinedData,
+                currentPage: nextPage
+            });
+        });
+    }
+
+    trackScrolling(event) {
+        const bottom = event.target.scrollHeight - event.target.scrollTop === event.target.clientHeight;
+        if (bottom) {
+            this.fetchData();
+            console.log("bottom!");
+        }
+    }
+
     render() {
         return(
-            <div className="data-table">
+            <div className="data-table" onScroll={(event) => this.trackScrolling(event)}>
                 <Table hover responsive>
                     <thead>
                         <tr>
@@ -122,50 +149,52 @@ export default class CodebookDatatable extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                            this.state.data.map((parentItem, index) => {
-                                return (
-                                    <Fragment key={parentItem.id}>
-                                        <tr className="parent-item">
-                                            <td></td>
-                                            <td>
-                                                <div>{parentItem.varCode}</div>
-                                            </td>
-                                            <td>
-                                                <div style={{ whiteSpace: 'pre-wrap'}}>{parentItem.indicator}</div>
-                                            </td>
-                                            <td>
-                                                <div></div>
-                                            </td>
-                                            <td>
-                                                <div className="circle-c88">
-                                                    <div className="circle-icon-text">{this.getC88Code(parentItem.varCode)}</div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div className="circle-socr">
-                                                    <div className="circle-icon-text">{this.getSORCCode(parentItem.socr)}</div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div className="circle-sdg">
-                                                    <div className="circle-icon-text">{parentItem.sdg}</div>
-                                                </div>
-                                            </td>
-                                            <td className="tooglebtn">
-                                                <div><i
-                                                    className={parentItem.open ? "fa fa-caret-left fa-2x hero-block-arrow-expand" : "fa fa-caret-down fa-2x hero-block-arrow-expand"}
-                                                    style={{color: '#2F3442'}}
-                                                    aria-hidden="true"
-                                                    onClick={() => this.toggleAccordion(index)}>
-                                                </i></div>
-                                            </td>
-                                        </tr>
-                                        {this.renderChildren(parentItem)}
-                                    </Fragment>
-                                );
-                            })
-                        }
+                    {
+                        this.state.data.map((parentItem, index) => {
+                            return (
+                                <Fragment key={parentItem.id}>
+                                    <tr className="parent-item">
+                                        <td></td>
+                                        <td>
+                                            <div>{parentItem.varCode}</div>
+                                        </td>
+                                        <td>
+                                            <div style={{whiteSpace: 'pre-wrap'}}>{parentItem.indicator}</div>
+                                        </td>
+                                        <td>
+                                            <div></div>
+                                        </td>
+                                        <td>
+                                            <div className="circle-c88">
+                                                <div
+                                                    className="circle-icon-text">{this.getC88Code(parentItem.varCode)}</div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="circle-socr">
+                                                <div
+                                                    className="circle-icon-text">{this.getSORCCode(parentItem.socr)}</div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="circle-sdg">
+                                                <div className="circle-icon-text">{parentItem.sdg}</div>
+                                            </div>
+                                        </td>
+                                        <td className="tooglebtn">
+                                            <div><i
+                                                className={parentItem.open ? "fa fa-caret-left fa-2x hero-block-arrow-expand" : "fa fa-caret-down fa-2x hero-block-arrow-expand"}
+                                                style={{color: '#2F3442'}}
+                                                aria-hidden="true"
+                                                onClick={() => this.toggleAccordion(index)}>
+                                            </i></div>
+                                        </td>
+                                    </tr>
+                                    {this.renderChildren(parentItem)}
+                                </Fragment>
+                            );
+                        })
+                    }
                     </tbody>
                 </Table>
             </div>
