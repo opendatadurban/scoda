@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { Modal, ModalBody, ModalHeader, Table } from 'reactstrap';
-import Codebook_Filter_Search from './Codebook_Filter_Search';
 import axios from 'axios';
+import { Table } from 'reactstrap';
 
 export default class CodebookDatatable extends Component {
 
@@ -12,6 +11,8 @@ export default class CodebookDatatable extends Component {
             data: [],
             selected: null,
         };
+
+        this.selectChild = this.selectChild.bind(this);
     }
 
     async componentDidMount() {
@@ -29,20 +30,17 @@ export default class CodebookDatatable extends Component {
 
     }
 
-    setSelected(childItem) {
-        console.log(childItem);
-        this.setState({
-            selected: childItem
-        });
+    selectChild(item) {
+        this.props.setSelected(item);
     }
-
+    
     renderChildren(parent) {
         if (parent.children.length > 0) {
             return parent.children.map(item => {
                 if (parent.open) {
                     return(
                         <Fragment key={item.id}>
-                            <tr className="child-item" onClick={() => {this.setSelected(item)}}>
+                            <tr className="child-item" onClick={() => {this.selectChild(item)}}>
                                 <td></td>
                                 <td><div>{item.varCode}</div></td>
                                 <td><div style={{ whiteSpace: 'pre-wrap'}}>{item.indicator}</div></td>
