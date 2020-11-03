@@ -31,7 +31,6 @@ const modalSubtitle = {
     fontSize: '24px',
     fontWeight: 'bold',
     letterSpacing: '0',
-    lineHeight: '30px',
 };
 const toggleSubItem = {
     color: '#FFFFFF',
@@ -49,7 +48,9 @@ export default class CodebookFilterModal extends Component {
             modalVisible: false,
             c88: filterData[0],
             socr: filterData[1],
-            sdg: filterData[2]
+            sdg: filterData[2],
+            searchFilterValue: "",
+            filterData: null
         };
     }
 
@@ -93,7 +94,27 @@ export default class CodebookFilterModal extends Component {
     }
 
     reset() {
-        // TODO add logic to clear search and reset filters
+        const copyC88 = this.state.c88;
+        const copySOCR = this.state.socr;
+        const copySDG = this.state.sdg;
+
+        this.deselectToggles(copyC88.c88);
+        this.deselectToggles(copySOCR.socr);
+        this.deselectToggles(copySDG.sdg);
+
+        this.setState({
+            c88: copyC88,
+            socr: copySOCR,
+            sdg: copySDG,
+            searchFilterValue: ""
+        });
+    }
+
+    deselectToggles(parentObj) {
+        parentObj.parentSelected = false;
+        for(let child of parentObj.children) {
+           child.selected = false;
+        }
     }
 
     renderC88() {
@@ -244,6 +265,23 @@ export default class CodebookFilterModal extends Component {
         );
     }
 
+    handleChange(event) {
+        this.setState({
+            searchFilterValue: event.target.value
+        })
+    }
+
+    submitForm() {
+        const filterVal = {
+            c88: this.state.c88.c88.children.filter(child => child.selected === true),
+            socr: this.state.socr.socr.children.filter(child => child.selected === true),
+            sdg: this.state.sdg.sdg.children.filter(child => child.selected === true),
+            search: this.state.searchFilterValue
+        }
+
+        console.log(JSON.stringify(filterVal));
+    }
+
     render() {
         return (
             <>
@@ -262,7 +300,14 @@ export default class CodebookFilterModal extends Component {
                                                     Search
                                                 </div>
                                                 <div>
-                                                    <Input type="text" placeholder="Search by name..."/>
+                                                    <Input
+                                                        value={ this.state.searchFilterValue }
+                                                        onChange={(e) => this.handleChange(e)}
+                                                        name="searchFilter"
+                                                        type="text"
+                                                        placeholder="Search by name..."
+                                                        className="modal-search-bar"
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
@@ -307,11 +352,14 @@ export default class CodebookFilterModal extends Component {
                                     </div>
                                     <div className="row">
                                         <div className="col">
-                                            <Button outline onClick={() => this.toggleModal()}>Apply Search & Filter</Button>
+                                            <Button className="modal-button" outline onClick={() => {
+                                                this.toggleModal()
+                                                this.submitForm()
+                                            }}>Apply Search & Filter</Button>
                                         </div>
 
                                         <div className="col">
-                                            <Button outline onClick={() => this.reset()}>Clear Search & Reset Filters</Button>
+                                            <Button className="modal-button" outline onClick={() => this.reset()}>Clear Search & Reset Filters</Button>
                                         </div>
 
                                         <div className="col">

@@ -231,3 +231,11 @@ input:checked + .slider:before {
   transform: translateX(-70px) translateY(5px);
   border-radius: 5px;
 }
+
+.modal-button {
+  margin-top: 0;
+}
+
+.modal-search-bar {
+  border-radius: 25px;
+}
