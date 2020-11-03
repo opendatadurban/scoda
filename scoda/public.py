@@ -1196,6 +1196,8 @@ def api_codebook(page=1):
         join(CbSource, CbSource.id == CbIndicator.source_id). \
         join(CbUnit, CbUnit.id == CbIndicator.unit_id)
 
+    row_count = query.count()
+
     if request.method == 'POST':
         data = request.get_json()
 
@@ -1211,10 +1213,12 @@ def api_codebook(page=1):
         if data['search']:
             query = search(query, data['search'], sort=True)
 
-    query = query.limit(50).offset((page - 1) * 20).all()
+        query = query.all()
+    else:
+        query = query.limit(50).offset((page - 1) * 20).all()
     query.sort(key=lambda x: x.code)
 
-    result_list = []
+    result_list = [row_count]
     for day, dicts_for_group_code in itertools.groupby(query, key=lambda x:x.group_code):
         dicts_for_group_code = list(dicts_for_group_code)
         day_dict = {
