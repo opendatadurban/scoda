@@ -1,6 +1,8 @@
 import itertools
 import operator
 
+from sqlalchemy_searchable import search
+
 from scoda.app import app
 from flask import request, url_for, redirect, flash, make_response, session, render_template, jsonify, Response, \
     send_file
@@ -1185,15 +1187,32 @@ def parse_demo():
 
     return jsonify(response)
 
-@app.route('/api/codebook', methods=['GET'])
-@app.route('/api/codebook/<int:page>', methods=['GET'])
+@app.route('/api/codebook', methods=['GET', 'POST'])
+@app.route('/api/codebook/<int:page>', methods=['GET', 'POST'])
+@csrf.exempt
 def api_codebook(page=1):
-    query = db.session.query(CbIndicator).\
+    query = db.session.query(CbIndicator). \
         join(CbTheme, CbTheme.id == CbIndicator.theme_id). \
-        join(CbSource, CbSource.id == CbIndicator.source_id).\
-        join(CbUnit, CbUnit.id == CbIndicator.unit_id).limit(50).offset((page - 1) * 20).all()
+        join(CbSource, CbSource.id == CbIndicator.source_id). \
+        join(CbUnit, CbUnit.id == CbIndicator.unit_id)
 
-    query.sort(key=lambda x:x.code)
+    if request.method == 'POST':
+        data = request.get_json()
+
+        if data['c88']:
+            query = query.filter(CbIndicator.c88_theme == data['c88'])
+
+        if data['socr']:
+            query = query.filter(CbIndicator.socr_theme == data['socr'])
+
+        if data['sdg']:
+            query = query.filter(CbIndicator.theme_id == int(data['sdg']))
+
+        if data['search']:
+            query = search(query, data['search'], sort=True)
+
+    query = query.limit(50).offset((page - 1) * 20).all()
+    query.sort(key=lambda x: x.code)
 
     result_list = []
     for day, dicts_for_group_code in itertools.groupby(query, key=lambda x:x.group_code):
