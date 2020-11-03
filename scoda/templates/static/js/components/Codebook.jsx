@@ -7,6 +7,18 @@ import CodebookFilterModal from './Codebook_Filter_Search';
 export default class Codebook extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            selected: null
+        };
+
+        this.setSelected = this.setSelected.bind(this);
+    }
+
+    setSelected(childItem) {
+        console.log(childItem);
+        this.setState({
+            selected: childItem
+        });
     }
     
     render() {
@@ -14,12 +26,11 @@ export default class Codebook extends Component {
             <Container fluid={true} className="codebook-components" style={{ leftPadding: '0px' }}>
                 <CodebookFilterModal />
                 <Row>
-
                     <Col xs="auto" sm="auto" md="8" className="no-padding">
-                        <CodebookDatatable />
+                        <CodebookDatatable setSelected={this.setSelected} />
                     </Col>
                     <Col xs="auto" sm="auto" md="4" className="no-padding">
-                        <CodebookSidebar />
+                        <CodebookSidebar data={this.state.selected} />
                     </Col>
                 </Row>
             </Container>
