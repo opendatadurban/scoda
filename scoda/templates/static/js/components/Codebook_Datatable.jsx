@@ -18,15 +18,14 @@ export default class CodebookDatatable extends Component {
 
     async componentDidMount() {
         axios.get('/api/codebook/1').then(res => {
-            const copyData = res;
-            console.log(copyData);
+            const copyData = res.data.slice(1, res.data.length);
 
             // Append open property to each parent item
-            for(let item of copyData.data) {
+            for(let item of copyData) {
                 item.open = false;
             }
 
-            this.setState({data: copyData.data});
+            this.setState({data: copyData});
         });
 
     }
@@ -95,13 +94,13 @@ export default class CodebookDatatable extends Component {
     fetchData() {
         let nextPage = this.state.currentPage + 1;
         axios.get(`/api/codebook/${nextPage}`).then(res => {
-            const copyData = res;
+            const copyData = res.data.slice(1, res.data.length);
             // Append open property to each parent item
-            for(let item of copyData.data) {
+            for(let item of copyData) {
                 item.open = false;
             }
 
-            const combinedData = [...this.state.data, ...copyData.data];
+            const combinedData = [...this.state.data, ...copyData];
 
             this.setState({
                 data: combinedData,
