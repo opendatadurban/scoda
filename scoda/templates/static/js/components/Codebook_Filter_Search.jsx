@@ -147,8 +147,8 @@ export default class CodebookFilterModal extends Component {
                     this.state.c88.c88.children.map((childItem, index) => {
                         return(
                             <Fragment>
-                                <div className="row">
-                                    <label className="switch  child-switch">
+                                <div className="row" key={index}>
+                                    <label className="switch child-switch">
                                         <input
                                             type="checkbox"
                                             value={childItem.selected}
