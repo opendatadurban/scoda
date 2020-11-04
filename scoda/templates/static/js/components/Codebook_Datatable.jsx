@@ -11,6 +11,7 @@ export default class CodebookDatatable extends Component {
             data: [],
             selected: null,
             currentPage: 1,
+            isLoading: false
         };
 
         this.selectChild = this.selectChild.bind(this);
@@ -25,36 +26,13 @@ export default class CodebookDatatable extends Component {
                 item.open = false;
             }
 
-            this.setState({data: copyData});
+            this.setState({ data: copyData });
         });
 
     }
 
     selectChild(item) {
-        this.props.setSelected(item);
-    }
-
-    renderChildren(parent) {
-        if (parent.children.length > 0) {
-            return parent.children.map(item => {
-                if (parent.open) {
-                    return(
-                        <Fragment key={item.id}>
-                            <tr className="child-item" onClick={() => {this.selectChild(item)}}>
-                                <td></td>
-                                <td><div>{item.varCode}</div></td>
-                                <td><div style={{ whiteSpace: 'pre-wrap'}}>{item.indicator}</div></td>
-                                <td><div></div></td>
-                                <td><div></div></td>
-                                <td><div></div></td>
-                                <td><div></div></td>
-                                <td><div></div></td>
-                            </tr>
-                        </Fragment>
-                    );
-                }
-            })
-        }
+        this.props.setSelectedChild(item);
     }
 
     toggleAccordion(index) {
@@ -93,6 +71,7 @@ export default class CodebookDatatable extends Component {
 
     fetchData() {
         let nextPage = this.state.currentPage + 1;
+
         axios.get(`/api/codebook/${nextPage}`).then(res => {
             const copyData = res.data.slice(1, res.data.length);
             // Append open property to each parent item
@@ -104,7 +83,8 @@ export default class CodebookDatatable extends Component {
 
             this.setState({
                 data: combinedData,
-                currentPage: nextPage
+                currentPage: nextPage,
+                isLoading: false,
             });
         });
     }
@@ -113,7 +93,29 @@ export default class CodebookDatatable extends Component {
         const bottom = event.target.scrollHeight - event.target.scrollTop === event.target.clientHeight;
         if (bottom) {
             this.fetchData();
-            console.log("bottom!");
+        }
+    }
+
+    renderChildren(parent) {
+        if (parent.children.length > 0) {
+            return parent.children.map(item => {
+                if (parent.open) {
+                    return(
+                        <Fragment key={item.id}>
+                            <tr className="child-item" onClick={() => {this.selectChild(item)}}>
+                                <td></td>
+                                <td><div>{item.varCode}</div></td>
+                                <td><div style={{ whiteSpace: 'pre-wrap'}}>{item.indicator}</div></td>
+                                <td><div></div></td>
+                                <td><div></div></td>
+                                <td><div></div></td>
+                                <td><div></div></td>
+                                <td><div></div></td>
+                            </tr>
+                        </Fragment>
+                    );
+                }
+            })
         }
     }
 
@@ -151,7 +153,7 @@ export default class CodebookDatatable extends Component {
                     {
                         this.state.data.map((parentItem, index) => {
                             return (
-                                <Fragment key={parentItem.id}>
+                                <Fragment key={index}>
                                     <tr className="parent-item">
                                         <td></td>
                                         <td>

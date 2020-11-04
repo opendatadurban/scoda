@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Modal, ModalBody, Spinner } from 'reactstrap';
 
 const sidebarStyle = {
   backgroundColor: '#1E272E',
@@ -74,7 +75,27 @@ export default class CodebookSidebar extends Component {
     constructor(props) {
         super(props);
 
-        console.log(this.props.data)
+        this.state = {
+            data: null  ,
+            loader: true
+        }
+    }
+
+    componentDidMount() {
+        this.setState({
+            data: this.props.data,
+            loader: false
+        })
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        // Workaround for an issue when selecting a child item, the side-bar component does not update
+        //  This helps us trigger a re-render
+        if (prevProps.data !== this.props.data){
+            this.setState({
+                data: this.props.data
+            })
+        }
     }
 
     renderFirstColumn() {
@@ -84,12 +105,12 @@ export default class CodebookSidebar extends Component {
                     INDICATOR SHORT NAME
                 </div>
                 <div className="row" style={itemDescription}>
-                    Number of households having access to electricity
+                    { this.state.data.indicator }
                 </div>
                 <div className="row" style={padding}>
                     <div className="col">
                         <div className="row sidebar-label">VAR CODE</div>
-                        <div className="row" style={itemCodes}>EE1.1.1</div>
+                        <div className="row" style={itemCodes}>{ this.state.data.varCode }</div>
                     </div>
                     <div className="col">
                         <div className="row sidebar-label">IND. GROUP</div>
@@ -239,6 +260,25 @@ export default class CodebookSidebar extends Component {
     }
 
     render() {
+        if(this.state.loader) {
+            return(
+                <Modal id="loader" isOpen={this.state.loader} className="modal-dialog-centered loader">
+                    <ModalBody>
+                        <div className="row">
+                            <div className="col-2"></div>
+                            <div className="col-0 ml-3 pt-4">
+                                <Spinner type="grow" color="secondary" size="sm"/>
+                                <Spinner type="grow" color="success" size="sm"/>
+                                <Spinner type="grow" color="danger" size="sm"/>
+                                <Spinner type="grow" color="warning" size="sm"/>
+                            </div>
+                            <div className="col-0 pt-4 pl-4 float-left">Loading Content...</div>
+                        </div>
+                        <br/>
+                    </ModalBody>
+                </Modal>
+            )
+        }
         return(
             <div className="table-cell" style={sidebarStyle}>
                 { this.renderFirstColumn() }
