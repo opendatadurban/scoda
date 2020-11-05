@@ -11,8 +11,11 @@ export default class Codebook extends Component {
         this.state = {
             selected: null,
             loader: false,
+            filterData: null
         };
+
         this.setSelected = this.setSelected.bind(this);
+        this.filterData = this.filterData.bind(this);
     }
 
     componentDidMount() {
@@ -36,6 +39,12 @@ export default class Codebook extends Component {
         this.setState({
             loader: false
         });
+    }
+
+    filterData(filters) {
+        this.setState({
+            filterData: filters
+        })
     }
 
     getFirstChildItem() {
@@ -70,10 +79,10 @@ export default class Codebook extends Component {
         }
         return(
             <Container fluid={true} className="codebook-components" style={{ leftPadding: '0px' }}>
-                <CodebookFilterModal />
+                <CodebookFilterModal filter={this.filterData} />
                 <Row>
                     <Col xs="auto" sm="auto" md="8" className="no-padding">
-                        <CodebookDatatable setSelectedChild={ this.setSelected } />
+                        <CodebookDatatable setSelectedChild={ this.setSelected } filteredData={ this.state.filterData } />
                     </Col>
                     <Col xs="auto" sm="auto" md="4" className="no-padding">
                         <CodebookSidebar data={ this.state.selected } />
