@@ -33,6 +33,9 @@ export default class CodebookDatatable extends Component {
 
     selectChild(item) {
         this.props.setSelectedChild(item);
+        this.setState({
+          selected: item
+        })
     }
 
     toggleAccordion(index) {
@@ -100,12 +103,13 @@ export default class CodebookDatatable extends Component {
     }
 
     renderChildren(parent) {
+        const { selected } = this.state
         if (parent.children.length > 0) {
             return parent.children.map(item => {
                 if (parent.open) {
                     return(
                         <Fragment key={item.id}>
-                            <tr className="child-item" onClick={() => {this.selectChild(item)}}>
+                            <tr className={"child-item" + (selected && selected.id === item.id? " selected-child-item" : "")} onClick={() => {this.selectChild(item)}}>
                                 <td></td>
                                 <td><div>{item.varCode}</div></td>
                                 <td><div style={{ whiteSpace: 'pre-wrap'}}>{item.indicator}</div></td>
