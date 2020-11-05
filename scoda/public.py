@@ -1196,26 +1196,26 @@ def api_codebook(page=1):
         join(CbSource, CbSource.id == CbIndicator.source_id). \
         join(CbUnit, CbUnit.id == CbIndicator.unit_id)
 
-    row_count = query.count()
-
     if request.method == 'POST':
         data = request.get_json()
 
         if data['c88']:
-            query = query.filter(CbIndicator.c88_theme == data['c88'])
+            query = query.filter(CbIndicator.c88_theme.in_(data['c88']))
 
         if data['socr']:
-            query = query.filter(CbIndicator.socr_theme == data['socr'])
+            query = query.filter(CbIndicator.socr_theme.in_(data['socr']))
 
         if data['sdg']:
-            query = query.filter(CbIndicator.theme_id == int(data['sdg']))
+            query = query.filter(CbIndicator.sdg_theme.in_(data['sdg']))
 
         if data['search']:
             query = search(query, data['search'], sort=True)
 
-        query = query.all()
     else:
-        query = query.limit(50).offset((page - 1) * 20).all()
+        query = query.limit(50).offset((page - 1) * 20)
+
+    row_count = query.count()
+    query = query.all()
     query.sort(key=lambda x: x.code)
 
     result_list = [row_count]
@@ -1224,7 +1224,7 @@ def api_codebook(page=1):
         day_dict = {
             "id": str(dicts_for_group_code[0].id), "varCode": dicts_for_group_code[0].code,
             "indicator": dicts_for_group_code[0].name, "c88": dicts_for_group_code[0].c88_theme,
-            "socr": dicts_for_group_code[0].socr_theme, "sdg": dicts_for_group_code[0].theme.id,
+            "socr": dicts_for_group_code[0].socr_theme, "sdg": dicts_for_group_code[0].sdg_theme,
             "definition": dicts_for_group_code[0].definition,
             "source": dicts_for_group_code[0].source.name,
             "reportingResponsibility": dicts_for_group_code[0].reporting_responsibility,
@@ -1238,7 +1238,16 @@ def api_codebook(page=1):
             child = {
                 "id": str(d.id),
                 "varCode": d.code,
-                "indicator": d.name
+                "indicator": d.name,
+                "c88":d.c88_theme,
+                "socr": d.socr_theme,
+                "sdg": d.sdg_theme,
+                "definition": d.definition,
+                "source": d.source.name,
+                "reportingResponsibility": d.reporting_responsibility,
+                "notesOnCalculation": d.notes_on_calculation,
+                "variableType": d.unit.name,
+                "frequencyOfCollection": d.frequency_of_collection
             }
             children.append(child)
         day_dict.update({"children": children})
