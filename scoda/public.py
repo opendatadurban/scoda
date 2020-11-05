@@ -1238,7 +1238,16 @@ def api_codebook(page=1):
             child = {
                 "id": str(d.id),
                 "varCode": d.code,
-                "indicator": d.name
+                "indicator": d.name,
+                "c88":d.c88_theme,
+                "socr": d.socr_theme,
+                "sdg": d.theme.id,
+                "definition": d.definition,
+                "source": d.source.name,
+                "reportingResponsibility": d.reporting_responsibility,
+                "notesOnCalculation": d.notes_on_calculation,
+                "variableType": d.unit.name,
+                "frequencyOfCollection": d.frequency_of_collection
             }
             children.append(child)
         day_dict.update({"children": children})
