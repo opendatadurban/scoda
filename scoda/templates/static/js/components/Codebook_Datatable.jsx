@@ -9,6 +9,7 @@ export default class CodebookDatatable extends Component {
 
         this.state ={
             data: [],
+            filters: this.props.filteredData,
             selected: null,
             currentPage: 1,
             isLoading: false
@@ -17,7 +18,7 @@ export default class CodebookDatatable extends Component {
         this.selectChild = this.selectChild.bind(this);
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         axios.get('/api/codebook/1').then(res => {
             const copyData = res.data.slice(1, res.data.length);
 
@@ -29,6 +30,21 @@ export default class CodebookDatatable extends Component {
             this.setState({ data: copyData });
         });
 
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.filteredData !== this.props.filteredData) {
+            axios.post('/api/codebook/1', this.props.filteredData).then(data => {
+                const copyData = data.data.slice(1, data.data.length);
+
+                // Append open property to each parent item
+                for(let item of copyData) {
+                    item.open = false;
+                }
+
+                this.setState({ data: copyData });
+            });
+        }
     }
 
     selectChild(item) {
