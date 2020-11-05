@@ -21,7 +21,6 @@ export default class Codebook extends Component {
     }
 
     setSelected(childItem) {
-      console.log(childItem)
         this.setState({
             selected: childItem,
         });
