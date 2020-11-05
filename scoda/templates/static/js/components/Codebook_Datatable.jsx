@@ -21,10 +21,6 @@ export default class CodebookDatatable extends Component {
     componentDidMount() {
         axios.get('/api/codebook/1').then(res => {
             const copyData = res.data.slice(1, res.data.length);
-            const firstItem = res.data.slice(1, 2);
-            this.setState({
-                selected: firstItem[0].children[0]
-            });
             // Append open property to each parent item
             for(let item of copyData) {
                 item.open = false;
