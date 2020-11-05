@@ -16,3 +16,7 @@ psql -U postgres -d scoda -c "CREATE EXTENSION postgis_topology;"
 3. From the app side download the additional data from the google drive and copy it to the data folder in the scoda project
 
 4. After installing requirements and activating your local environment run "python rebuild_db.py"
+
+Additional step to restore db if required:
+
+5. psql --dbname= --username= --host=--port=5432 -f C:\Users\Admin\Downloads\dump_scoda_new.sql
