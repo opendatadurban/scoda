@@ -47,7 +47,7 @@ export default class Codebook extends Component {
             this.hideLoader();
         });
     }
-    
+
     render() {
         if(this.state.loader) {
             return(
@@ -73,7 +73,7 @@ export default class Codebook extends Component {
                 <CodebookFilterModal />
                 <Row>
                     <Col xs="auto" sm="auto" md="8" className="no-padding">
-                        <CodebookDatatable setSelectedChild={ this.setSelected } />
+                        <CodebookDatatable setSelectedChild={ this.setSelected }/>
                     </Col>
                     <Col xs="auto" sm="auto" md="4" className="no-padding">
                         <CodebookSidebar data={ this.state.selected } />
@@ -82,4 +82,4 @@ export default class Codebook extends Component {
             </Container>
         );
     }
-} 
+}
