@@ -120,6 +120,14 @@ export default class CodebookSidebar extends Component {
         return sorc
     }
 
+    getSDG(code) {
+        if(!code) {
+            return;
+        }
+
+        return code.match(/(?:)([0-9]+)/)[0];
+    }
+
     renderFirstColumn() {
         return (
             <div>
@@ -175,7 +183,7 @@ export default class CodebookSidebar extends Component {
                                 backgroundColor: '#4F9DA6',
                                 borderRadius: '50%'
                             }}>
-                                <div style={circleIconText}>{this.state.data.sdg}</div>
+                                <div style={circleIconText}>{this.getSDG(this.state.data.sdg)}</div>
                             </div>
                         </div>
                     </div>
