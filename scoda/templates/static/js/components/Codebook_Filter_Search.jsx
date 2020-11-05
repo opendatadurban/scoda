@@ -16,7 +16,7 @@ const modalStyle = {
     boxShadow: '0 2px 4px 0 rgba(0,0,0,0.3)',
 };
 const modalContainer = {
-    height: '720px',
+    minHeight: '720px',
     width: '100%',
     opacity: '0.95',
     borderRadius: '0 3px 0 0',
@@ -149,7 +149,7 @@ export default class CodebookFilterModal extends Component {
                     this.state.c88.c88.children.map((childItem, index) => {
                         return(
                             <Fragment>
-                                <div className="row" key={index}>
+                                <div className="row toggle-switch-row" key={index}>
                                     <label className="switch child-switch">
                                         <input
                                             type="checkbox"
@@ -160,7 +160,7 @@ export default class CodebookFilterModal extends Component {
                                         />
                                         <span className="slider round"></span>
                                     </label>
-                                    { childItem.label }
+                                    <p className="filter-label-text">{ childItem.label }</p>
                                 </div>
                             </Fragment>
                         )
@@ -198,8 +198,8 @@ export default class CodebookFilterModal extends Component {
                 {
                     this.state.socr.socr.children.map((childItem, index) => {
                         return(
-                            <Fragment>
-                                <div className="row">
+                            <Fragment key={index}>
+                                <div className="row toggle-switch-row">
                                     <label className="switch child-switch">
                                         <input
                                             type="checkbox"
@@ -209,7 +209,7 @@ export default class CodebookFilterModal extends Component {
                                         />
                                         <span className="slider round"></span>
                                     </label>
-                                    { childItem.label }
+                                    <p className="filter-label-text">{ childItem.label }</p>
                                 </div>
                             </Fragment>
                         );
@@ -246,8 +246,8 @@ export default class CodebookFilterModal extends Component {
                 {
                     this.state.sdg.sdg.children.map((childItem, index) => {
                         return(
-                            <Fragment>
-                                <div className="row">
+                            <Fragment key={index}>
+                                <div className="row toggle-switch-row">
                                     <label className="switch child-switch">
                                         <input
                                             type="checkbox"
@@ -257,7 +257,7 @@ export default class CodebookFilterModal extends Component {
                                         />
                                         <span className="slider round"></span>
                                     </label>
-                                    { childItem.label }
+                                    <p className="filter-label-text">{ childItem.label }</p>
                                 </div>
                             </Fragment>
                         );
@@ -318,6 +318,9 @@ export default class CodebookFilterModal extends Component {
                                                     />
                                                 </div>
                                             </div>
+                                            <div className="pull-right">
+
+                                            </div>
                                         </div>
                                     </div>
                                 </FormGroup>
@@ -326,8 +329,8 @@ export default class CodebookFilterModal extends Component {
                                     <div className="row">
                                         <div style={modalSubtitle}>Filter</div>
                                     </div>
-                                    <div className="row">
-                                        <div className="col" style={{ paddingLeft: '70px' }}>
+                                    <div className="row filter-container-row">
+                                        <div className="col">
                                             <div className="themes-c88-border"></div>
                                             <div style={toggleSubItem}>
                                                 <FormGroup>
@@ -358,20 +361,16 @@ export default class CodebookFilterModal extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="row">
-                                        <div className="col">
-                                            <Button className="modal-button" outline onClick={() => {
+                                    <div className="row mt-2 pb-3">
+                                        <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <Button className="modal-button filter" outline onClick={() => {
                                                 this.toggleModal()
                                                 this.submitForm()
                                             }}>Apply Search & Filter</Button>
                                         </div>
 
-                                        <div className="col">
-                                            <Button className="modal-button" outline onClick={() => this.reset()}>Clear Search & Reset Filters</Button>
-                                        </div>
-
-                                        <div className="col">
-
+                                        <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <Button className="modal-button cancel" outline onClick={() => this.reset()}>Clear Search & Reset Filters</Button>
                                         </div>
                                     </div>
                                 </div>
