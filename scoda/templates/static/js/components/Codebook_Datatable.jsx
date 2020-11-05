@@ -92,6 +92,9 @@ export default class CodebookDatatable extends Component {
     trackScrolling(event) {
         const bottom = event.target.scrollHeight - event.target.scrollTop === event.target.clientHeight;
         if (bottom) {
+            this.setState({
+                isLoading: true
+            });
             this.fetchData();
         }
     }
@@ -116,6 +119,24 @@ export default class CodebookDatatable extends Component {
                     );
                 }
             })
+        }
+    }
+
+    renderLoading() {
+        if(this.state.isLoading) {
+            return(
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th>
+                            <div></div>
+                        </th>
+                        <th colSpan="6">
+                            <div>Loading data...</div>
+                        </th>
+                    </tr>
+                </tfoot>
+            )
         }
     }
 
@@ -197,6 +218,9 @@ export default class CodebookDatatable extends Component {
                         })
                     }
                     </tbody>
+                    {
+                        this.renderLoading()
+                    }
                 </Table>
             </div>
         );
