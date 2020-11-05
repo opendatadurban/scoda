@@ -31,14 +31,37 @@
 }
 
 .selected-child-item {
-  color: #FFFFFF;
-  background-color: #000000;
-  font-family: Montserrat;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 24px;
-  white-space: nowrap;
+
+  & td {
+    color: #FFFFFF;
+    background-color: #1E272E;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 24px;
+    white-space: nowrap;
+
+    &:first-child {
+      background-color: #fff;
+    }
+
+    &:nth-child(2) {
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+
+    &:last-child {
+      &:after {
+        content: "";
+        position: absolute;
+        height: 100%;
+        left: 0;
+        right: 0;
+        background-color: #1E272E;
+      }
+    }
+  }
 }
 
 .data-table {
