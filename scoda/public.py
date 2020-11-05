@@ -1241,7 +1241,7 @@ def api_codebook(page=1):
                 "indicator": d.name,
                 "c88":d.c88_theme,
                 "socr": d.socr_theme,
-                "sdg": d.theme.id,
+                "sdg": d.sdg_theme,
                 "definition": d.definition,
                 "source": d.source.name,
                 "reportingResponsibility": d.reporting_responsibility,
