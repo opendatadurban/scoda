@@ -72,6 +72,14 @@ export default class CodebookDatatable extends Component {
       return sorc
     }
 
+    getSDG(code) {
+        if(!code) {
+            return;
+        }
+
+        return code.match(/(?:)([0-9]+)/)[0];
+    }
+
     fetchData() {
         let nextPage = this.state.currentPage + 1;
 
@@ -204,7 +212,7 @@ export default class CodebookDatatable extends Component {
                                         </td>
                                         <td>
                                             <div className="circle-sdg">
-                                                <div className="circle-icon-text">{parentItem.sdg}</div>
+                                                <div className="circle-icon-text">{this.getSDG(parentItem.sdg)}</div>
                                             </div>
                                         </td>
                                         <td className="tooglebtn">
