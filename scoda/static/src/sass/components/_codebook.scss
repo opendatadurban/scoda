@@ -90,6 +90,16 @@
       vertical-align: middle;
     }
   }
+
+  tfoot {
+    tr {
+      color: #4A4A4A;
+      white-space: nowrap;
+      font-size: 10px;
+      letter-spacing: 0;
+      line-height: 13px;
+    }
+  }
 }
 
 .parent-item {
