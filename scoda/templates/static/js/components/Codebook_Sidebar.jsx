@@ -98,6 +98,28 @@ export default class CodebookSidebar extends Component {
         }
     }
 
+    getC88Code(code) {
+        if(!code) {
+            return;
+        }
+        return code.split(".")[0]
+    }
+
+    getSOCRCode(code) {
+        if(!code) {
+            return;
+        }
+        const strArr = code.split(" ")
+
+        let sorc = ""
+
+        strArr.map((str) => {
+            sorc += str.charAt(0)
+        })
+
+        return sorc
+    }
+
     renderFirstColumn() {
         return (
             <div>
@@ -127,7 +149,7 @@ export default class CodebookSidebar extends Component {
                                 width: '20px',
                                 backgroundColor: '#F73E55',
                                 borderRadius: '50%' }}>
-                                <div style={circleIconText}>EE</div>
+                                <div style={circleIconText}>{this.getC88Code(this.state.data.varCode)}</div>
                             </div>
                         </div>
                     </div>
@@ -140,7 +162,7 @@ export default class CodebookSidebar extends Component {
                                 backgroundColor: '#EAB04B',
                                 borderRadius: '50%'
                             }}>
-                                <div style={circleIconText}>WG</div>
+                                <div style={circleIconText}>{this.getSOCRCode(this.state.data.socr)}</div>
                             </div>
                         </div>
                     </div>
@@ -153,7 +175,7 @@ export default class CodebookSidebar extends Component {
                                 backgroundColor: '#4F9DA6',
                                 borderRadius: '50%'
                             }}>
-                                <div style={circleIconText}>7</div>
+                                <div style={circleIconText}>{this.state.data.sdg}</div>
                             </div>
                         </div>
                     </div>
@@ -167,14 +189,12 @@ export default class CodebookSidebar extends Component {
             <div>
                 <div style={padding}>
                     <div className="row sidebar-label">DEFINITION</div>
-                    <div className="row" style={itemInfo}>This is the total number of households that have access to
-                        electricity
-                    </div>
+                    <div className="row" style={itemInfo}>{this.state.data.definition}</div>
                 </div>
                 <div className="row" style={padding}>
                     <div className="col">
                         <div className="row sidebar-label" >REPORTING RESPONSIBILITY</div>
-                        <div className="row" style={itemInfo}>National</div>
+                        <div className="row" style={itemInfo}>{this.state.data.reportingResponsibility}</div>
                     </div>
                     <div className="col">
                         <div className="row sidebar-label">GATHERING METHOD</div>
@@ -201,11 +221,11 @@ export default class CodebookSidebar extends Component {
                     </div>
                     <div style={padding}>
                         <div className="row sidebar-label">NOTES ON CALCULATION</div>
-                        <div className="row" style={itemInfo}>NA</div>
+                        <div className="row" style={itemInfo}>{this.state.data.notesOnCalculation}</div>
                     </div>
                     <div style={padding}>
                         <div className="row sidebar-label">FREQUENCY OF COLLECTION</div>
-                        <div className="row" style={itemInfo}>Annual Midyear following year</div>
+                        <div className="row" style={itemInfo}>{this.state.data.frequencyOfCollection}</div>
                     </div>
                     <div style={padding}>
                         <div className="row sidebar-label">PERIOD</div>
@@ -225,7 +245,7 @@ export default class CodebookSidebar extends Component {
                             <div className="sidebar-label">VARIABLE TYPE</div>
                         </div>
                         <div className="row">
-                            <div style={itemInfo}>Float</div>
+                            <div style={itemInfo}>{this.state.data.variableType}</div>
                         </div>
                     </div>
                     <div className="col" style={padding}>
