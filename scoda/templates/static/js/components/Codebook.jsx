@@ -72,10 +72,10 @@ export default class Codebook extends Component {
             <Container fluid={true} className="codebook-components" style={{ leftPadding: '0px' }}>
                 <CodebookFilterModal />
                 <Row>
-                    <Col xs="auto" sm="auto" md="8" className="no-padding">
+                    <Col xs="auto" sm="auto" md="12" lg="8" className="no-padding">
                         <CodebookDatatable setSelectedChild={ this.setSelected }/>
                     </Col>
-                    <Col xs="auto" sm="auto" md="4" className="no-padding">
+                    <Col xs="auto" sm="auto" md="12" lg="4" className="no-padding">
                         <CodebookSidebar data={ this.state.selected } />
                     </Col>
                 </Row>
