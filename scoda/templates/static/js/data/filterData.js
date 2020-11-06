@@ -7,22 +7,22 @@ const filterData = [
       "children": [
         {
           "label": "City Transformation",
-          "value": "City Transformation",
+          "value": "City transformation",
           "selected": true
         },
         {
           "label": "Energy & Electricity",
-          "value": "Energy & Electricity",
+          "value": "Energy and electricity",
           "selected": true
         },
         {
           "label": "Environment & Waste",
-          "value": "Environment & Waste",
+          "value": "Environment and waste",
           "selected": true
         },
         {
           "label": "Fire & Emergency",
-          "value": "Fire & Emergency",
+          "value": "Fire and emergency",
           "selected": true
         },
         {
@@ -32,22 +32,22 @@ const filterData = [
         },
         {
           "label": "Housing & Community",
-          "value": "Housing & Community",
+          "value": "Housing and community",
           "selected": true
         },{
           "label": "Transport & Roads",
-          "value": "Transport & Roads",
+          "value": "Transport and roads",
           "selected": true
         },{
           "label": "Water & Sanitation",
-          "value": "Water & Sanitation",
+          "value": "Water and sanitation",
           "selected": true
         }
       ]
     }
   },
   {
-    "socr": {
+    "socr":   {
       "label": "SOCR Themes",
       "parentSelected": true,
       "value": "All",
