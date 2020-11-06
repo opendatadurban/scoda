@@ -20,10 +20,11 @@ body {
   letter-spacing: 0;
   line-height: 20px;
   padding-bottom: 50px;
+  margin-top:36px;
 }
 
 .hero-block-background {
-    height: 525px;
+    
     width: 90%;
     transform: scaleX(-1);
   }
@@ -40,6 +41,7 @@ body {
     float:right;
     position: absolute;
     transform: scaleX(-1);
+    top: 90px;
   }
 
   .hero-block-info-display-text {

@@ -25,46 +25,48 @@ export default class CTA_block extends Component {
             </div>
           </div>
         </div>
+        
         <div className="ml-auto cta-container ">
-          <div className="row container ">
-            <div className="">
+          <div className="container ">
+        
               <div className="row cta-info">
-                <ul className="cta-field-description-list">
-                  <li>
-                    <div className="container">
-                      <div className="cta-image cta-image-analysis-dashboard"></div>
-                    </div>
-                  </li>
-                  
-                  <li>
-                  <div class="cta-field-description-list-detailed">
-                    <h5>City Dashboards</h5>
-                    <p>
-                      The city dashboards provide a visual snapshot of key
-                      information surrounding cities in South Africa.
+
+
+                <div className="col-md-6">
+                  <div className="cta-image cta-image-analysis-dashboard"></div>
+                </div>
+                <div class="col-md-6 jumbotron cta-field-description-list-detailed">
+                  <h5>City Dashboards</h5>
+                  <p>
+                   {" The city dashboards provide a visual\n snapshot of key information surrounding\n cities in South Africa."}
                     </p>
-                    </div>
-                  </li>
+
+                  <a href="/scoda/#/dashbo">
+                    <button className="btn cta-field-description-list-detailed-btn">See Our Dashboards</button>
+
+                  </a>
+                </div>
+
                 
-                </ul>
+              
 
                 <div className="cta-field-description"></div>
               </div>
-            </div>
+          
           </div>
         </div>
         <div className="ml-auto cta-container ">
-          <div className="row container  ">
-            <div className="">
+          <div className="container">
+           
               <div className="row cta-info">
-                <ul className="cta-field-description-list">
-                  <li>
-                    <div className="container">
+               
+                 
+                    <div className="col-md-6">
                       <div className="cta-image cta-image-analysis-data-explore "></div>
                     </div>
-                  </li>
-                  <li>
-                  <div class="cta-field-description-list-detailed">
+                 
+                 
+                  <div class="col-md-6 jumbotron cta-field-description-list-detailed">
                       <h5>Data Explorer</h5>
 
                       <p>
@@ -78,69 +80,60 @@ export default class CTA_block extends Component {
                       
                       </a>
                     </div>
-                  </li>
-                </ul>
+                  
+              
               </div>
-            </div>
+            
           </div>
         </div>
         <div className="ml-auto cta-container">
-          <div className="row container ">
-            <div className="">
+          <div className="container ">
               <div className="row cta-info">
-                <ul className="cta-field-description-list">
-                  <li>
-                    <div className="container">
+                    <div className="col-md-6">
                       <div className="cta-image cta-image-analysis-constructor"></div>
                     </div>
-                  </li>
-                  <li>
-                  <div class="cta-field-description-list-detailed">
+               
+                 
+                  <div class="col-md-6 jumbotron  cta-field-description-list-detailed">
                       <h5>Analysis Constructor</h5>
 
                       <p>
-                        The analysis constructor allows for individual
-                        indicators to be combined with one another in a
-                        structure-preserving manner. It also allows for the
-                        separation of indicators into their various time-series.
+                       {" The analysis constructor allows for\n individual indicators to be combined\n with one another in a structure-\npreserving manner. It also allows for the\n separation of indicators into their various\n time-series."}
                       </p>
+                      <a  href="/scoda/#/explorer">
+                        <button className="btn cta-field-description-list-detailed-btn">See Our Analysis Constructor</button>
+                      
+                      </a>
                     </div>
-                  </li>
-                </ul>
+                  
+                
               </div>
-            </div>
+       
           </div>
         </div>
         <div className="ml-auto cta-container ">
-          <div className="row container  ">
-            <div className=" ">
+          <div className="container">
+   
               <div className="row cta-info">
-                <ul className="cta-field-description-list">
-                  <li>
-                    <div className="container">
+             
+             
+                    <div className="col-md-6">
                       <div className="cta-image cta-image-analysis-demo"></div>
                     </div>
-                  </li>
-                  <li>
-                  <div class="cta-field-description-list-detailed">
+                  
+                 
+                  <div class="col-md-6 jumbotron cta-field-description-list-detailed">
                       <h5>Demographics Modeller</h5>
 
                       <p>
-                        With the demographic projection tool we provide both a
-                        powerful predictor of internal migration within South
-                        African metros, as well as a framework for the
-                        development of open, collaborative model building that
-                        is based on diverse and novel data sources.
+                      {"With the demographic projection tool\n we provide both a powerful predictor of\n internal migration within South African\n metros, as well as a framework for the\n development of open, collaborative\n model building that is based on diverse\n and novel data sources."}
                       </p>
                       <a href="/scoda/#/demographic-modeller">
                         <button className="btn cta-field-description-list-detailed-btn"> See Our Demographics Modeller</button>
                        
                       </a>
                     </div>
-                  </li>
-                </ul>
               </div>
-            </div>
           </div>
         </div>
       </div>
