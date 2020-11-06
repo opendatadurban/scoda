@@ -134,9 +134,8 @@ export default class CodebookDatatable extends Component {
                         <Fragment key={item.id}>
                             <tr className={"child-item" + (selected && selected.id === item.id? " selected-child-item" : "")} onClick={() => {this.selectChild(item)}}>
                                 <td></td>
-                                <td><div>{item.varCode}</div></td>
-                                <td style={{ whiteSpace: "pre-wrap" }}><div>{item.indicator}</div></td>
-                                <td></td>
+                                <td><div className="pl-1">{item.varCode}</div></td>
+                                <td colSpan="2"><div>{item.indicator}</div></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -177,7 +176,7 @@ export default class CodebookDatatable extends Component {
                             <th width="13%">
                                 <div>VAR CODE</div>
                             </th>
-                            <th width="50%">
+                            <th width="100%">
                                 <div>INDICATOR SHORT NAME</div>
                             </th>
                             <th width="10%">
@@ -207,11 +206,14 @@ export default class CodebookDatatable extends Component {
                                         <td width="13%">
                                             <div>{parentItem.varCode}</div>
                                         </td>
-                                        <td width="50%">
-                                            <div style={{whiteSpace: 'pre-wrap'}}>{parentItem.indicator}</div>
-                                        </td>
-                                        <td width="10%">
-                                            <div></div>
+                                        <td width="60%" colSpan="2">
+                                            <div>{parentItem.indicator}</div>
+                                              <div className="mobile-only"><i
+                                                  className={parentItem.open ? "fa fa-caret-left fa-2x hero-block-arrow-expand" : "fa fa-caret-down fa-2x hero-block-arrow-expand"}
+                                                  style={{color: '#2F3442'}}
+                                                  aria-hidden="true"
+                                                  onClick={() => this.toggleAccordion(index)}>
+                                              </i></div>
                                         </td>
                                         <td width="5%">
                                             <div className="circle-c88">
