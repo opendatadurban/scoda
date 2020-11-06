@@ -19,15 +19,15 @@ export default class Hero extends Component {
             this.setState({hero_state: 'collapse'});
             this.setState({hero_caret: 'fa fa-caret-down fa-2x hero-block-arrow-expand'});
 
-            document.getElementById('contentContainer').style.display = 'none';
-            document.getElementById('contentContainer').style.height = '0px';
-            document.getElementById('buttonContainer').style.display = 'none';
-            document.getElementById('infoBlockContainer').style.visibility = 'hidden';
-            document.getElementById('infoBlock').style.height = '50px';
-            document.getElementById('hero-content-column').style.height = '50px';
-            document.getElementById('hero-content-column').style.paddingBottom = '0px';
-            document.getElementById('hero-title').style.paddingTop = '15px';
-            document.getElementById('hero-title').style.paddingBottom = '0px';
+            // document.getElementById('contentContainer').style.display = 'none';
+            // document.getElementById('contentContainer').style.height = '0px';
+            // document.getElementById('buttonContainer').style.display = 'none';
+            // document.getElementById('infoBlockContainer').style.visibility = 'hidden';
+            // document.getElementById('infoBlock').style.height = '50px';
+            // document.getElementById('hero-content-column').style.height = '50px';
+            // document.getElementById('hero-content-column').style.paddingBottom = '0px';
+            // document.getElementById('hero-title').style.paddingTop = '15px';
+            // document.getElementById('hero-title').style.paddingBottom = '0px';
         }
         else {
             this.setState({hero_state: 'expand'});
@@ -99,7 +99,6 @@ export default class Hero extends Component {
                         </div>
                         {/*Info bar and background*/}
                         <div id="infoBlock" className="col-md-7 hero-block-background p-0 mr-0" style={infoBlockBackground}>
-                            <div className="hero-block-spacer"></div>
                             <div id="infoBlockContainer" className="row ml-0 p-0 hero-block-info-display">
                                 <div className="col-0 hero-block-info-hspacer"></div>
                                 <div className="col-0 hero-block-info-logo hero-block-info-logo-title" style={infoBlock}>{infoTitleCaps}</div>
