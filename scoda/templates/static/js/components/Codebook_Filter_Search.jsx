@@ -67,8 +67,10 @@ export default class CodebookFilterModal extends Component {
         copyObj[filterName].parentSelected = !isSelected;
         copyObj[filterName].children.forEach(child => child.selected = !isSelected);
 
+        // set an empty array when all items selected
         this.setState({
-            [this.state[filterName]]: copyObj
+            // [this.state[filterName]]: copyObj
+            [this.state[filterName]]: []
         });
     }
 
@@ -271,15 +273,21 @@ export default class CodebookFilterModal extends Component {
         })
     }
 
+    transformFilterFields(children) {
+        // used to return an array of strings for the filter query
+        const selectedChildren = children.filter(child => child.selected === true);
+        return selectedChildren.map(child => child.value);
+    }
+
     submitForm() {
         const filterVal = {
-            c88: this.state.c88.c88.children.filter(child => child.selected === true),
-            socr: this.state.socr.socr.children.filter(child => child.selected === true),
-            sdg: this.state.sdg.sdg.children.filter(child => child.selected === true),
+            c88: this.transformFilterFields(this.state.c88.c88.children),
+            socr: this.transformFilterFields(this.state.socr.socr.children),
+            sdg: this.transformFilterFields(this.state.sdg.sdg.children),
             search: this.state.searchFilterValue
         }
 
-        console.log(JSON.stringify(filterVal));
+        this.props.filter(filterVal);
     }
 
     render() {
