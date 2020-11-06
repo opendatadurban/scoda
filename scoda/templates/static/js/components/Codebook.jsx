@@ -56,7 +56,7 @@ export default class Codebook extends Component {
             this.hideLoader();
         });
     }
-    
+
     render() {
         if(this.state.loader) {
             return(
@@ -81,14 +81,14 @@ export default class Codebook extends Component {
             <Container fluid={true} className="codebook-components" style={{ leftPadding: '0px' }}>
                 <CodebookFilterModal filter={this.filterData} />
                 <Row>
-                    <Col xs="auto" sm="auto" md="8" className="no-padding">
+                    <Col xs="auto" sm="auto" md="12" lg="8" className="no-padding">
                         <CodebookDatatable setSelectedChild={ this.setSelected } filteredData={ this.state.filterData } />
                     </Col>
-                    <Col xs="auto" sm="auto" md="4" className="no-padding">
+                    <Col xs="auto" sm="auto" md="12" lg="4" className="no-padding">
                         <CodebookSidebar data={ this.state.selected } />
                     </Col>
                 </Row>
             </Container>
         );
     }
-} 
+}

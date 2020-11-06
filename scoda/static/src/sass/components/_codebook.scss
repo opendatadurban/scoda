@@ -2,6 +2,10 @@
   margin-top: -60px;
 }
 
+.mobile-only {
+  display: none!important;
+}
+
 .circle-icon-text {
   color: #FFFFFF;
   font-size: 10px;
@@ -130,6 +134,24 @@
   font-size: 16px;
   font-weight: 600;
   white-space: nowrap;
+
+  td {
+
+    border-bottom: 1px solid #B2BEC3;
+
+    &:first-child {
+      border-bottom: none;
+    }
+
+    &:nth-child(3) {
+      div {
+        overflow-x:hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+        max-width: 675px;
+      }
+    }
+  }
 }
 
 .child-item {
@@ -138,13 +160,18 @@
   font-size: 14px;
   letter-spacing: 0;
   line-height: 24px;
+  white-space: nowrap;
 
-  div {
-    overflow-x:hidden;
-    text-overflow: ellipsis;
-    display: inline-block;
-    max-width: 100%;
-    width:100%;
+  td {
+    padding: 3px 0px;
+    border: none;
+
+    div {
+      overflow-x:hidden;
+      text-overflow: ellipsis;
+      display: inline-block;
+      max-width: 675px;
+    }
   }
 }
 
@@ -325,6 +352,200 @@ input:checked + .slider:before {
 
 // Responsive Styling
 
+@media only screen and (max-width: 1610px) {
+  .parent-item {
+    td {
+      &:nth-child(3) {
+        max-width: 575px;
+        div {
+          max-width: 575px;
+        }
+      }
+    }
+  }
+
+  .child-item {
+    td {
+      &:nth-child(3) {
+        max-width: 575px;
+        div {
+          max-width: 575px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1460px) {
+  .parent-item {
+    td {
+      &:nth-child(3) {
+        max-width: 425px;
+        div {
+          max-width: 425px;
+        }
+      }
+    }
+  }
+
+  .child-item {
+    td {
+      &:nth-child(3) {
+        max-width: 425px;
+        div {
+          max-width: 425px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1250px) {
+  .parent-item {
+    td {
+      &:nth-child(3) {
+        max-width: 300px;
+        div {
+          max-width: 300px;
+        }
+      }
+    }
+  }
+
+  .child-item {
+    td {
+      &:nth-child(3) {
+        max-width: 300px;
+        div {
+          max-width: 300px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1060px) {
+  .parent-item {
+    td {
+      &:nth-child(3) {
+        max-width: 200px;
+        div {
+          max-width: 200px;
+        }
+      }
+    }
+  }
+
+  .child-item {
+    td {
+      &:nth-child(3) {
+        max-width: 200px;
+        div {
+          max-width: 200px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .parent-item {
+    td {
+      &:nth-child(3) {
+        max-width: 500px;
+        div {
+          max-width: 500px;
+        }
+      }
+    }
+  }
+
+  .child-item {
+    td {
+      &:nth-child(3) {
+        max-width: 500px;
+        div {
+          max-width: 500px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 890px) {
+  .parent-item {
+    td {
+      &:nth-child(3) {
+        max-width: 350px;
+        div {
+          max-width: 350px;
+        }
+      }
+    }
+  }
+
+  .child-item {
+    td {
+      &:nth-child(3) {
+        max-width: 350px;
+        div {
+          max-width: 350px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .mobile-only {
+    display: inline-block!important;
+  }
+  .hero-block {
+    border-bottom: 0px;
+  }
+
+  .data-table {
+    th {
+      display: none;
+      &:nth-child(3) {
+        display: table-cell;
+        width: 80%;
+        max-width: 80%;
+      }
+    }
+  }
+
+  .parent-item {
+    td {
+      display: none;
+      &:nth-child(3) {
+        display: table-cell;
+        width: 80%;
+        max-width: 80%;
+        div {
+          width: 80%;
+          max-width: 80%;
+        }
+      }
+    }
+  }
+
+  .child-item {
+    td {
+      display: none;
+      &:nth-child(3) {
+        display: table-cell;
+        width: 80%;
+        max-width: 80%;
+        div {
+          width: 80%;
+          max-width: 80%;
+        }
+      }
+    }
+  }
+}
+
 @media only screen and (max-width: 849px) {
   .themes-c88-border {
     height: 90%;
@@ -338,12 +559,6 @@ input:checked + .slider:before {
     .col:last-child {
       padding-left:70px;
     }
-  }
-}
-
-@media only screen and (max-width: 767px) {
-  .hero-block {
-    border-bottom: 0px;
   }
 }
 
