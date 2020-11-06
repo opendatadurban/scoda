@@ -160,7 +160,7 @@ export default class IndicatorExplorerDataBox extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="col pt-3">
+                    <div className="col ie-table">
                         <div className="mt-2 ml-3 mb-4">
                             {this.renderDataSet(this.props.resultType,this.props.filter)}
                         </div>

@@ -37,7 +37,7 @@ export default class Hero extends Component {
             //document.getElementById('contentContainer').style.height = '560px';
             document.getElementById('buttonContainer').style.display = 'block';
             document.getElementById('infoBlockContainer').style.visibility = 'visible';
-            document.getElementById('infoBlock').style.height = '393px';
+            document.getElementById('infoBlock').style.height = '525px';
             document.getElementById('hero-content-column').style.height = '393px';
            // document.getElementById('hero-content-column').style.transition = 'all 1.2s ease-in-out';
             document.getElementById('hero-content-column').style.paddingBottom = '90px';
@@ -81,10 +81,12 @@ export default class Hero extends Component {
                 <div className="container-fluid mt-0 p-0 hero-tab-header">
                     <div className="row ml-0 mr-0 p-0">
                         <div className="col-md-5 hero-content-column" id="hero-content-column">
-                            <div className="row hero-title" id="hero-title">
+                            <a >
+                            <div className="row hero-title" id="hero-title" onClick={this.toggleHero}>
                                 <div className="col-0 hero-block-title" style={primaryColor}>{this.props.title}</div>
-                                <div className="col-1 tooglebtn"><i className={this.state.hero_caret} style={primaryColor} aria-hidden="true" onClick={this.toggleHero}></i></div>
+                                <div  className="col-1 tooglebtn"><i className={this.state.hero_caret} style={primaryColor} aria-hidden="true" onClick={this.toggleHero}></i></div>
                             </div>
+                            </a>
                             <div id="contentContainer" className="row">
                                 <div className="col hero-block-text" dangerouslySetInnerHTML={{__html:this.props.content}}>
                                 </div>
