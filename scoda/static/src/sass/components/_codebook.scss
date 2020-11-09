@@ -161,6 +161,7 @@
   letter-spacing: 0;
   line-height: 24px;
   white-space: nowrap;
+  cursor: pointer;
 
   td {
     padding: 3px 0px;
@@ -349,6 +350,13 @@ input:checked + .slider:before {
   }
 }
 
+.codebook-loader-text {
+  color: #4A4A4A;
+  font-size: 13px;
+  font-family: Montserrat;
+  font-weight: 500;
+}
+
 
 // Responsive Styling
 
@@ -505,6 +513,7 @@ input:checked + .slider:before {
   }
 
   .data-table {
+    margin-right: 0px;
     th {
       display: none;
       &:nth-child(3) {
@@ -525,6 +534,14 @@ input:checked + .slider:before {
         div {
           width: 80%;
           max-width: 80%;
+
+          &.mobile-meta {
+            width: auto!important;
+            max-width: 100%!important;
+            margin: auto;
+            div {
+            }
+          }
         }
       }
     }
