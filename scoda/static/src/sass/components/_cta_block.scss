@@ -266,7 +266,7 @@
          &-half_shadow {
             box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
             position: relative;
-            width: 84%;
+            width: 84.4%;
             bottom: 476px;
             left:18px;
             height: 75.5%;
@@ -391,3 +391,24 @@ p {
     padding: 2rem 1rem !important;
 
 }
+
+
+@media (max-width: 1376px) {
+    .cta {
+        &-search {
+            &-half_shadow {
+                width: 98.4% !important;
+            }
+        }
+    }
+}
+@media (max-width: 1321px) {
+    .cta {
+        &-search {
+            &-half_shadow {
+                width: 100% !important;
+            }
+        }
+    }
+}
+

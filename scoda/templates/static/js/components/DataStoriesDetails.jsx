@@ -36,7 +36,7 @@ export default class DataStoriesDetails extends Component {
             <div className="container data-story-landig-page">
                 <nav>
                     <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                        <span className="nav-stretch"></span>
+                      
                         <a className="nav-item nav-link active" id="nav-sacn-tab" data-toggle="tab" href="#nav-sacn-content" role="tab" aria-controls="nav-sacn-content" aria-selected="true">SACN</a>
                         <a className="nav-item nav-link" id="nav-eThekwini-tab" data-toggle="tab" href="#nav-eThekwini-content" role="tab" aria-controls="nav-eThekwini-content" aria-selected="false">eThekwini</a>
                     </div>
@@ -88,6 +88,7 @@ export default class DataStoriesDetails extends Component {
                                             />
                                             <DataStoriesInfoBanner
                                                 title="South African Cities Network"
+                                                showTitle="South African Cities Network"
                                                 subtitle="July 2018"
                                                 minutes="8"
                                                 filter_type="data-story-card-inclusives"
@@ -108,6 +109,7 @@ export default class DataStoriesDetails extends Component {
                                             />
                                             <DataStoriesInfoBanner
                                                 title="South African Cities Network"
+                                                showTitle="South African Cities Network"
                                                 subtitle="July 2018"
                                                 minutes="5"
                                                 filter_type="data-story-card-inclusives"
@@ -129,6 +131,7 @@ export default class DataStoriesDetails extends Component {
                                             />
                                             <DataStoriesInfoBanner
                                                 title="South African Cities Network"
+                                                showTitle="South African Cities Network"
                                                 subtitle="July 2018"
                                                 minutes="6"
                                                 filter_type="data-story-card-well"
@@ -188,6 +191,7 @@ export default class DataStoriesDetails extends Component {
                                         {/**here */}
                                         <div className="">
                                             <DataStoriesInfoBanner
+                                                showTitle="The Durban EDGE"
                                                 title="The Durban EDGE"
                                                 subtitle="2 August 2019"
                                                 minutes="5"
@@ -210,6 +214,7 @@ export default class DataStoriesDetails extends Component {
                                         />
                                         <div className="">
                                             <DataStoriesInfoBanner
+                                                showTitle="The Durban EDGE"
                                                 title="The Durban EDGE"
                                                 subtitle="14 October 2019"
                                                 minutes="4"
@@ -232,6 +237,7 @@ export default class DataStoriesDetails extends Component {
                                         />
                                         <div className="">
                                             <DataStoriesInfoBanner
+                                                 showTitle="The Durban EDGE"
                                                 title="The Durban EDGE"
                                                 subtitle="June 2019"
                                                 minutes="6"
