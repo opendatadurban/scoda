@@ -210,7 +210,7 @@ export default class CodebookDatatable extends Component {
 
     renderDesktopTable() {
       return (
-        <Table hover responsive>
+        <Table hover>
             <thead width="100%">
                 <tr width="100%">
                     <th width="7%"></th>
