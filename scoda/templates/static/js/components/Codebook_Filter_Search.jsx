@@ -8,38 +8,6 @@ import {
     FormGroup } from 'reactstrap';
 import filterData from '../data/filterData.js';
 
-const modalStyle = {
-    width: '1366px',
-    opacity: '0.95',
-    bordeRadius: '0 3px 0 0',
-    backgroundColor: '#1E272E',
-    boxShadow: '0 2px 4px 0 rgba(0,0,0,0.3)',
-};
-const modalContainer = {
-    minHeight: '720px',
-    width: '100%',
-    opacity: '0.95',
-    borderRadius: '0 3px 0 0',
-    backgroundColor: '#1E272E',
-    boxShadow: '0 2px 4px 0 rgba(0,0,0,0.3)',
-    // zIndex: '1',
-    // position: 'absolute',
-};
-const modalSubtitle = {
-    color: '#FFFFFF',
-    fontFamily: 'Montserrat',
-    fontSize: '24px',
-    fontWeight: 'bold',
-    letterSpacing: '0',
-};
-const toggleSubItem = {
-    color: '#FFFFFF',
-    fontFamily: 'Montserrat',
-    fontSize: '14px',
-    letterSpacing: '0',
-    lineHeight: '30px',
-};
-
 export default class CodebookFilterModal extends Component {
     constructor(props) {
         super(props);
@@ -299,12 +267,12 @@ export default class CodebookFilterModal extends Component {
                 <Modal className="codebook-modal" isOpen={this.state.modalVisible} size="lg" backdrop={true} toggle={() => this.toggleModal()}>
                     <ModalBody style={{ padding: '0px' }}>
                         <Form>
-                            <div style={modalContainer}>
+                            <div className="modal-container">
                                 <FormGroup>
                                     <div style={{padding: '0 5%'}}>
                                         <div className="row">
                                             <div>
-                                                <div style={modalSubtitle}>
+                                                <div className="modal-subtitle">
                                                     Search
                                                 </div>
                                                 <div>
@@ -327,12 +295,12 @@ export default class CodebookFilterModal extends Component {
                                 <hr />
                                 <div style={{padding: '0 5%'}}>
                                     <div className="row">
-                                        <div style={modalSubtitle}>Filter</div>
+                                        <div className="modal-subtitle">Filter</div>
                                     </div>
                                     <div className="row filter-container-row">
                                         <div className="col">
                                             <div className="themes-c88-border"></div>
-                                            <div style={toggleSubItem}>
+                                            <div className="toggle-subitem">
                                                 <FormGroup>
                                                     { this.renderC88() }
                                                 </FormGroup>
@@ -342,7 +310,7 @@ export default class CodebookFilterModal extends Component {
                                         <div className="col">
                                             <div className="themes-socr-border"></div>
                                             <div>
-                                                <div style={toggleSubItem}>
+                                                <div className="toggle-subitem">
                                                     <FormGroup>
                                                         { this.renderSOCR() }
                                                     </FormGroup>
@@ -353,7 +321,7 @@ export default class CodebookFilterModal extends Component {
                                         <div className="col">
                                             <div className="themes-sdg-border"></div>
                                             <div>
-                                                <div style={toggleSubItem}>
+                                                <div className="toggle-subitem">
                                                     <FormGroup>
                                                         { this.renderSDG() }
                                                     </FormGroup>
