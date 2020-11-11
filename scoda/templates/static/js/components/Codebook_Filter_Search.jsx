@@ -319,7 +319,7 @@ export default class CodebookFilterModal extends Component {
                                                 </div>
                                             </div>
                                             <div className="pull-right">
-
+                                                <div className="close" onClick={() => this.toggleModal()}> </div>
                                             </div>
                                         </div>
                                     </div>
@@ -377,6 +377,7 @@ export default class CodebookFilterModal extends Component {
 
                             </div>
                         </Form>
+
                     </ModalBody>
                 </Modal>
             </>
