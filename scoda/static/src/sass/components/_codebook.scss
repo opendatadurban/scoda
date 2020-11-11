@@ -632,3 +632,28 @@ input:checked + .slider:before {
 .close:after {
   transform: rotate(-45deg);
 }
+
+.modal-container {
+  min-height: 720px;
+  width: 100%;
+  opacity: 0.95;
+  border-radius: 0 3px 0 0;
+  background-color: #1E272E;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.3);
+}
+
+.modal-subtitle {
+  color: #FFFFFF;
+  font-family: Montserrat;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 0;
+}
+
+.toggle-subitem {
+  color: #FFFFFF;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 30px;
+}
