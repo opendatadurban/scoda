@@ -679,6 +679,44 @@ input:checked + .slider:before {
 }
 
 @media only screen and (max-width: 485px) {
+    .filter-toggle {
+      left: -13px;
+    }
+
+    .table th, .table td {
+      padding: 0;
+    }
+
+    .data-table {
+      height: 448px;
+      margin-right: 0;
+      margin-left: 30px;
+    }
+
+    .parent-item {
+    td {
+      &:nth-child(3) {
+        max-width: 50px;
+        padding: 0;
+
+        div {
+          max-width: 40px;
+        }
+      }
+    }
+  }
+
+  .child-item {
+    td {
+      &:nth-child(3) {
+        max-width: 280px;
+      }
+
+      div {
+        max-width: 280px;
+      }
+    }
+  }
 
   .themes-c88-border {
     height: 90%;
@@ -695,7 +733,7 @@ input:checked + .slider:before {
   }
 
   .modal-button {
-    width: 100%;
+    width: 90%;
   }
 }
 
