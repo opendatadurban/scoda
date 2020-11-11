@@ -1,74 +1,8 @@
 import React, { Component } from 'react';
 import { Modal, ModalBody, Spinner } from 'reactstrap';
 
-const sidebarStyle = {
-  backgroundColor: '#1E272E',
-  padding:' 40px',
-};
-const circleIconText = {
-    color: '#FFFFFF',
-    fontFamily: 'Montserrat',
-    fontSize: '10px',
-    letterSpacing: '0',
-    lineHeight: '13px',
-    textAlign: 'center',
-    paddingTop: '15%',
-};
-
-const itemDescription = {
-    color: '#FFFFFF',
-    fontFamily: 'Montserrat',
-    fontSize: '20px',
-    fontWeight: '600',
-    letterSpacing: '0',
-    lineHeight: '24px',
-    paddingBottom: '20px',
-};
-const itemCodes = {
-    height: '20px',
-    width: '43px',
-    color: '#FFFFFF',
-    fontFamily: 'Montserrat',
-    fontSize: '14px',
-    fontWeight: 'bold',
-    letterSpacing: '0',
-    lineHeight: '20px',
-};
-const itemInfo = {
-    color: '#FFFFFF',
-    fontFamily: 'Montserrat',
-    fontSize: '14px',
-    letterSpacing: '0',
-    lineHeight: '20px',
-};
-const link = {
-    color: '#FFFFFF',
-    fontFamily: 'Montserrat',
-    fontSize: '14px',
-    fontStyle: 'italic',
-    letterSpacing: '0',
-    lineHeight: '20px',
-};
 const padding = {
     paddingBottom: '15px',
-};
-const actionButton = {
-    height: '24px',
-    width: '252px',
-    border: '1px solid #FFAD5A',
-    borderRadius: '11px',
-    backgroundColor: '#FFAD5A',
-};
-const actionButtonText = {
-    height: '14px',
-    width: '250px',
-    color: '#FFFFFF',
-    fontFamily: 'Montserrat',
-    fontSize: '14px',
-    fontWeight: '500',
-    letterSpacing: '0',
-    lineHeight: '14px',
-    textAlign: 'center',
 };
 
 export default class CodebookSidebar extends Component {
@@ -134,17 +68,17 @@ export default class CodebookSidebar extends Component {
                 <div className="row sidebar-label">
                     INDICATOR SHORT NAME
                 </div>
-                <div className="row" style={itemDescription}>
+                <div className="row item-description">
                     { this.state.data.indicator }
                 </div>
                 <div className="row" style={padding}>
                     <div className="col">
                         <div className="row sidebar-label">VAR CODE</div>
-                        <div className="row" style={itemCodes}>{ this.state.data.varCode }</div>
+                        <div className="row item-codes">{ this.state.data.varCode }</div>
                     </div>
                     <div className="col">
                         <div className="row sidebar-label">IND. GROUP</div>
-                        <div className="row" style={itemCodes}>EE1.1.1</div>
+                        <div className="row item-codes">EE1.1.1</div>
                     </div>
                     <div className="col">
                         <div className="row sidebar-label">THEMES:</div>
@@ -157,7 +91,7 @@ export default class CodebookSidebar extends Component {
                                 width: '20px',
                                 backgroundColor: '#F73E55',
                                 borderRadius: '50%' }}>
-                                <div style={circleIconText}>{this.getC88Code(this.state.data.varCode)}</div>
+                                <div className="circle-icon-text">{this.getC88Code(this.state.data.varCode)}</div>
                             </div>
                         </div>
                     </div>
@@ -170,7 +104,7 @@ export default class CodebookSidebar extends Component {
                                 backgroundColor: '#EAB04B',
                                 borderRadius: '50%'
                             }}>
-                                <div style={circleIconText}>{this.getSOCRCode(this.state.data.socr)}</div>
+                                <div className="circle-icon-text">{this.getSOCRCode(this.state.data.socr)}</div>
                             </div>
                         </div>
                     </div>
@@ -183,7 +117,7 @@ export default class CodebookSidebar extends Component {
                                 backgroundColor: '#4F9DA6',
                                 borderRadius: '50%'
                             }}>
-                                <div style={circleIconText}>{this.getSDG(this.state.data.sdg)}</div>
+                                <div className="circle-icon-text">{this.getSDG(this.state.data.sdg)}</div>
                             </div>
                         </div>
                     </div>
@@ -197,22 +131,22 @@ export default class CodebookSidebar extends Component {
             <div>
                 <div style={padding}>
                     <div className="row sidebar-label">DEFINITION</div>
-                    <div className="row" style={itemInfo}>{this.state.data.definition}</div>
+                    <div className="row item-info">{this.state.data.definition}</div>
                 </div>
                 <div className="row" style={padding}>
                     <div className="col">
                         <div className="row sidebar-label" >REPORTING RESPONSIBILITY</div>
-                        <div className="row" style={itemInfo}>{this.state.data.reportingResponsibility}</div>
+                        <div className="row item-info">{this.state.data.reportingResponsibility}</div>
                     </div>
                     <div className="col">
                         <div className="row sidebar-label">GATHERING METHOD</div>
-                        <div className="row" style={itemInfo}>Webscrape</div>
+                        <div className="row item-info">Webscrape</div>
                     </div>
                 </div>
                 <div className="row" style={padding}>
                     <div className="col">
                         <div className="row sidebar-label">SOURCE</div>
-                        <div className="row" style={link}>Stats SA Superweb General Household Survey</div>
+                        <div className="row item-link">Stats SA Superweb General Household Survey</div>
                     </div>
                 </div>
             </div>
@@ -225,19 +159,19 @@ export default class CodebookSidebar extends Component {
                 <div className="col">
                     <div style={padding}>
                         <div className="row sidebar-label">UNIT OF MEASUREMENT</div>
-                        <div className="row" style={itemInfo}>Number of households</div>
+                        <div className="row item-info">Number of households</div>
                     </div>
                     <div style={padding}>
                         <div className="row sidebar-label">NOTES ON CALCULATION</div>
-                        <div className="row" style={itemInfo}>{this.state.data.notesOnCalculation}</div>
+                        <div className="row item-info">{this.state.data.notesOnCalculation}</div>
                     </div>
                     <div style={padding}>
                         <div className="row sidebar-label">FREQUENCY OF COLLECTION</div>
-                        <div className="row" style={itemInfo}>{this.state.data.frequencyOfCollection}</div>
+                        <div className="row item-info">{this.state.data.frequencyOfCollection}</div>
                     </div>
                     <div style={padding}>
                         <div className="row sidebar-label">PERIOD</div>
-                        <div className="row" style={itemInfo}>January December</div>
+                        <div className="row item-info">January December</div>
                     </div>
                 </div>
             </div>
@@ -253,7 +187,7 @@ export default class CodebookSidebar extends Component {
                             <div className="sidebar-label">VARIABLE TYPE</div>
                         </div>
                         <div className="row">
-                            <div style={itemInfo}>{this.state.data.variableType}</div>
+                            <div className="item-info">{this.state.data.variableType}</div>
                         </div>
                     </div>
                     <div className="col" style={padding}>
@@ -261,7 +195,7 @@ export default class CodebookSidebar extends Component {
                             <div className="sidebar-label">AUTOMATABILITY</div>
                         </div>
                         <div className="row">
-                            <div style={itemInfo}>Yes</div>
+                            <div className="item-info">Yes</div>
                         </div>
                     </div>
                 </div>
@@ -271,7 +205,7 @@ export default class CodebookSidebar extends Component {
                             <div className="sidebar-label">GRANULARITY</div>
                         </div>
                         <div className="row">
-                            <div style={itemInfo}>No</div>
+                            <div className="item-info">No</div>
                         </div>
                     </div>
                     <div className="col" style={padding}>
@@ -279,7 +213,7 @@ export default class CodebookSidebar extends Component {
                             <div className="sidebar-label">EXPANDABILITY</div>
                         </div>
                         <div className="row">
-                            <div style={itemInfo}>No</div>
+                            <div className="item-info">No</div>
                         </div>
                     </div>
                 </div>
@@ -308,7 +242,7 @@ export default class CodebookSidebar extends Component {
             )
         }
         return(
-            <div className="table-cell" style={sidebarStyle}>
+            <div className="table-cell sidebar">
                 { this.renderFirstColumn() }
                 <hr style={padding} />
                 { this.renderSecondColumn() }
@@ -317,8 +251,8 @@ export default class CodebookSidebar extends Component {
                 <hr style={padding} />
                 { this.renderFourthColumn() }
                 <div className="row" style={{ justifyContent: 'space-around' }}>
-                    <button style={actionButton}>
-                        <div style={actionButtonText}>View in Data Explorer</div>
+                    <button className="action-button">
+                        <div className="action-button-text">View in Data Explorer</div>
                     </button>
                 </div>
             </div>
