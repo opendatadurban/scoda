@@ -1,0 +1,20 @@
+// All buttons
+.card-drawer {
+
+  // General styling
+  width: 100%;
+  background-color: $brand-dark;
+  padding: $s-m 0;
+  &--button {
+       margin: auto;
+    display: block;
+    margin-top: $s-m;
+    width: 200px;
+  }
+
+  // Desktop specific styling
+  @media (min-width: $tablet) {}
+
+  // Mobile specific styling
+  @media (max-width: $tablet) {}
+}

@@ -1,0 +1,1092 @@
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.nav {
+    &-stretch {
+        width: 31%;
+        outline: none;
+    }
+
+    &-tabs {
+        color: $scoda-inactive-tab;
+        font-family: $scoda-font;
+        font-size: 16px;
+        letter-spacing: 0;
+        line-height: 32px;
+        text-align: center;
+        border-bottom: 1px solid #131421;
+        margin-left: 360px;
+
+    }
+}
+
+.nav-tabs .nav-link:hover {
+    border: 1px solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    outline: none;
+    text-align: center;
+    color: $scoda-inactive-tab;
+}
+
+.nav-tabs .nav-link {
+    padding-top: 14.5px;
+}
+
+.nav-link {
+    color: $scoda-inactive-tab;
+    font-family: $scoda-font;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 32px;
+    text-align: center;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+    margin-top: 12px;
+    padding-top: 5px;
+    height: 37px;
+    background-color: $scoda-white;
+    border-color: $scoda-black $scoda-black $scoda-white;
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 31px;
+    text-align: center;
+
+}
+
+.ds {
+    &-content {
+        color:#9B9B9B ;
+        font-family: $scoda-font;
+        font-size: 16px;
+        letter-spacing: 0;
+        line-height: 25px;
+        width: 100% !important;
+        margin-left: 14px;
+        margin: 0;
+
+
+        &-cont {
+            margin: auto;
+        }
+        &-diplay-text {
+             position: relative;
+             left: calc(100% - 2148px/2);
+        }
+
+        &-image {
+            height: 30%;
+
+            &-big {
+       
+            }
+        }
+
+        &-hspacer {
+            height: 25px;
+        }
+
+        &-vspacer {
+            width: 5%;
+        }
+
+        &-title {
+            color: $scoda-grey-dark;
+            font-family: $scoda-font;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0;
+            line-height: 28px;
+            width: 100%;
+
+        }
+
+        &-subtitle {
+            color: $scoda-grey-dark;
+            font-family: $scoda-font;
+            font-size: 18px;
+            letter-spacing: 0;
+            line-height: 28px;
+            //height: 50px;
+
+        }
+        &-title {
+            //height: 100px;
+            }
+
+        &-banner {
+            &-logo {
+                height: 85px;
+                width: 85px;
+                margin-left: 14px;
+                box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+
+                @media (max-width: $tablet) {
+                    margin-left: 15px;
+                }
+            }
+
+            &-title {
+                color: $scoda-grey-dark;
+                font-family: $scoda-font;
+                font-size: 25px;
+                font-weight: bold;
+                letter-spacing: 0;
+                line-height: 32px;
+            }
+
+            &-content {
+                &-hspacer {
+
+                    height: 25px;
+
+                }
+            }
+        }
+    }
+
+    &-banner {
+        &-view {
+            &-button {
+                height: 21px;
+                width: 230px;
+                color: $scoda-grey-dark;
+                font-family: $scoda-font;
+                font-size: 11px;
+                font-weight: bold;
+                letter-spacing: 0;
+                line-height: 24px;
+                text-align: center;
+                box-sizing: border-box;
+                height: 28px;
+                width: 235px;
+                border: 1px solid $scoda-grey-dark;
+                border-radius: 25px;
+                cursor: pointer;
+                padding-top: 1px;
+                position: relative;
+                left: calc(100% - 235px/3);
+        
+            }
+        }
+
+        &-hr {
+            box-sizing: border-box;
+            height: 1px;
+            border: 1px solid $scoda-hr;
+            width: 96% !important;
+            margin-left: 28px;
+            margin-right: 28px;
+
+        }
+
+        &-title {
+            color: $scoda-grey-dark;
+            font-family: $scoda-font;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0;
+            line-height: 28px;
+            width: 90%;
+
+        }
+
+        &-content {
+            height: 50px;
+            color: #4A4A4A;
+            font-family: Montserrat;
+            font-size: 18px;
+            letter-spacing: 0;
+            line-height: 25px;
+            margin-top: 5px;
+            margin-bottom: 25px;
+
+            &-hspacer {
+                height: 25px;
+            }
+        }
+
+        &-logo {
+            width: 85px;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+
+        }
+    }
+
+    &-filter {
+
+        &-title {
+            color: $scoda-grey-dark;
+            font-family: $scoda-font;
+            font-size: 12px;
+            letter-spacing: 0;
+            line-height: 25px;
+            margin-top: 33px;
+            margin-left: 10px;
+        }
+    }
+
+}
+
+.ds-right-content {
+    width: 35%;
+}
+
+.ds-top-content {
+    width: 95%;
+    color: $scoda-content;
+    font-family: $scoda-font;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 24px;
+    text-align: justify;
+
+}
+
+.ds-top-header-contents {
+    list-style: none;
+    display: flex;
+}
+
+
+.ds-right-content-vspacer {
+    width: 10px;
+}
+
+.ds-right-content-hspacer {
+    height: 3%;
+}
+
+.ds-right-content-width {
+    padding: 0;
+    position: relative;
+
+}
+
+.ds-info-banner-title {
+    color: $scoda-info;
+    font-family: $scoda-font;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 24px;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+
+    &-num {
+        margin-left: 24px;
+
+    }
+
+    &-mins {
+        margin-left: 10px;
+        font-size: 14px;
+    }
+}
+
+.ds-ecomomy-image {
+    padding : 1px;
+}
+
+.ds-info-banner-subtitle {
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 20px;
+}
+.ds-content-image-big {
+    width:98%;
+}
+.ds-info-banner-image {
+    height: 40px;
+    width: 40px;
+    background-color: $scoda-white;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    margin-left: 17px;
+}
+
+.ds-info-banner-width {
+    // width:360px;
+}
+
+.ds-info-banner-vspacer {
+    width: 10%;
+}
+
+.ds-info-banner-vspacer-edge {
+    width: 125px;
+}
+
+.ds-info-banner-indicator {
+    text-align: center;
+}
+
+.ds-right {
+    float: right;
+}
+
+.ds-content-top-image {
+    width: 93%;
+    height: 85%;
+    margin-left: 15px;
+}
+
+.ds-main-navigation-button-back {
+    box-sizing: border-box;
+    height: 30px;
+    width: 200px;
+    border: 1px solid $scoda-grey-dark;
+    border-radius: 5px;
+    background-color: $scoda-white;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.3);
+    margin-top: 115px !important;
+    margin-left: 57px !important;
+    padding-top: 1px;
+    cursor: pointer;
+}
+
+.ds-main-navigation-button-back-text {
+    height: 19px;
+    width: 116px;
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 26px;
+    text-align: center;
+}
+
+.ds-main-navigation-button-back-icon {
+    line-height: 26px;
+    margin-left: 4px;
+}
+
+.ds-main-navigation-button-explorer {
+    box-sizing: border-box;
+    height: 30px;
+    width: 265px;
+    margin-top: 115px !important;
+    margin-right: 57px !important;
+    padding-top: 2px;
+    border: 1px solid $scoda-grey-dark;
+    border-radius: 14px;
+    background-color: $scoda-white;
+    color: $scoda-black-light;
+    font-family: $scoda-font;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 25px;
+    text-align: center;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.ds-w {
+    width: 50%;
+}
+
+.ds-s {
+    width: 60%;
+}
+
+.ds-content-card {
+    box-sizing: border-box;
+    border: 1px solid $scoda-content;
+    border-radius: 10px 10px 0 0;
+    background-color: $scoda-white;
+}
+
+
+.ds-content-card-header {
+    border-radius: 10px 10px 0 0;
+    background-color: $scoda-black-light;
+    box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2);
+    height: auto;
+}
+
+.ds-content-story-title {
+    color: $scoda-white;
+    font-family: $scoda-font;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 32px;
+}
+
+.ds-content-story-subtitle {
+    height: auto;
+    color: $scoda-white;
+    font-family: $scoda-font;
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 50px;
+}
+
+.ds-content-card-header-hr {
+    padding: 1em;
+    background-image:
+        radial-gradient(circle at 2.5px, #fff 1.25px, rgba(255, 255, 255, 0) 2.5px),
+        radial-gradient(circle, #fff 1.25px, rgba(255, 255, 255, 0) 2.5px),
+        radial-gradient(circle at 2.5px, #fff 1.25px, rgba(255, 255, 255, 0) 2.5px),
+        radial-gradient(circle, #fff 1.25px, rgba(255, 255, 255, 0) 2.5px);
+    background-size: 23px 30px, 0px 0px;
+    background-repeat: repeat-x, repeat-y;
+}
+
+.ds-content-card-header-sub {
+    color: $scoda-white;
+    font-family: $scoda-font;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 12px;
+}
+
+.ds-content-card-header-main {
+    color: $scoda-white;
+    font-family: $scoda-font;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 24px;
+    margin-right: 17px;
+}
+
+.ds-content-card-highlight-block {
+    height: auto;
+    width: 80%;
+    border-radius: 10px;
+    background-color: $scoda-orange;
+    color: $scoda-white;
+    font-family: $scoda-font;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 35px;
+    text-align: center;
+}
+
+.ds-content-card-highlight-block-text {
+    font-family: $scoda-font;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 24px;
+    text-align: center;
+    width: 90%;
+}
+
+.ds-content-card-content-block {
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 24px;
+}
+
+.ds-content-card-content-block-heading {
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 30px;
+}
+
+.ds-content-card-data-description {
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 20px;
+    font-style: italic;
+    letter-spacing: 0;
+    line-height: 30px;
+}
+
+.ds-content-card-data-description-title {
+    font-weight: 600;
+}
+
+.ds-vertical-tabs-active {
+    color: $scoda-black;
+    font-family: $scoda-font;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 22px;
+    width: 181px;
+    height: 60px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.ds-vertical-tabs-none {
+    color: $scoda-black;
+    font-family: $scoda-font;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 22px;
+    height: 60px;
+    width: 181px;
+    background-color: #FFFFFF;
+    text-align: left;
+    margin-bottom: 2px;
+}
+
+.ds-vertical-tabs-box {
+    width: 181px;
+    background-color: $scoda-white;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.ds-tabs-filter-header {
+    height: 49px;
+    width: 101.1%;
+    border-radius: 5px;
+    background-color: $scoda-white;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+    color: #000000;
+    font-family: $scoda-font;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 45px;
+}
+
+.ds-tabs-filter-card {
+    height: auto;
+    width: 100%;
+    border-radius: 5px;
+    background-color: $scoda-white;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.ds-tabs-filter-card-chart {
+    height: 423px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: $scoda-white;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.ds-tabs-filter-card-bottom {
+    height: 132px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: $scoda-white;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.ds-tabs-filter-subheading {
+    height: 25px;
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 25px;
+}
+
+.ds-filter-tabs-context-border {
+    height: 35px;
+    border-radius: 5px 5px 0 0;
+    background-color: $scoda-white;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.ds-filter-tabs-context-header {
+    height: 29px;
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: 24px;
+}
+
+.ds-filter-tabs-context-content {
+    color: $scoda-grey-dark;
+    font-family: $scoda-font;
+    font-size: 14px;
+    font-style: italic;
+    letter-spacing: 0;
+    line-height: 21px;
+}
+
+.ds-filter-tabs-chart-button {
+    height: 27px;
+    width: 223px;
+    color: $scoda-white;
+    font-family: $scoda-font;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 25px;
+    text-align: center;
+    box-sizing: border-box;
+    height: 28px;
+    width: 235px;
+    border: 1px solid $scoda-black;
+    border-radius: 25px;
+    background-color: $scoda-black;
+    cursor: pointer;
+}
+
+.ds-filter-tabs-textreport-header {
+    height: 50px;
+    width: 142px;
+    color: #45B7D9;
+    font-family: $scoda-font;
+    font-size: 50px;
+    font-weight: 800;
+    letter-spacing: 0;
+    line-height: 50px;
+    text-align: center;
+}
+
+.ds-filter-tabs-textreport-footer {
+    height: 25px;
+    width: 142px;
+    color: #45B7D9;
+    font-family: Montserrat;
+    font-size: 21px;
+    letter-spacing: 0;
+    line-height: 25px;
+    text-align: center;
+}
+
+.ds-download-button {
+    height: 22px;
+    width: 160px;
+    border-radius: 11px;
+    background-color: $scoda-grey-dark;
+    color: $scoda-white;
+    font-family: $scoda-font;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 22px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.ds-urban-header {
+    height: 31px;
+    width: auto;
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 31px;
+    text-align: center;
+
+    @media (max-width: $tablet) {
+        margin-bottom: 60px;
+
+
+    }
+}
+
+.ds-urban-addressing-block {
+    height: auto;
+    width: 45%;
+    border-radius: 10px;
+    background-color: #FFE9C5;
+}
+
+.ds-urban-addressing-heading {
+    height: 60px;
+    width: 328px;
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 30px;
+    text-align: center;
+}
+
+.ds-urban-addressng-text {
+    height: 480px;
+    width: 328px;
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 24px;
+}
+
+
+/*.data-stories {
+    padding: 40px 0; }
+    .data-stories .data-stories--map {
+      display: none; }
+    .data-stories [class*="span"] {
+      margin: 0 5px;
+      width: calc(100% - 10px); }
+    .data-stories .data-stories--story {
+      pointer-events: none; } 
+.data-stories .red {
+  background-color: #E0635D; }
+.data-stories .light-green {
+  background-color: #91CF60; }
+.data-stories .lime {
+  background-color: #D9EF8B; }
+.data-stories .green {
+  background-color: #1A9850; }
+.data-stories .yellow {
+  background-color: #FEE08B; }
+.data-stories .orange {
+  background-color: #FC8D59; }
+.data-stories .white {
+  background-color: #ffffff; }
+  .data-stories li.dash {
+    list-style-type: none; }
+*/
+
+o {
+    color: $scoda-orange;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+a {
+    color: $scoda-orange;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.nav-pills .nav-link-2.active,
+.nav-pills .show>.nav-link-2 {
+    height: 22px;
+    width: 68px;
+    border-radius: 11px;
+    background-color: #485460;
+    color: #FFFFFF;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 20px;
+    text-align: center;
+    outline: none;
+    text-decoration: none;
+}
+
+.nav-link-2 {
+    height: 22px;
+    width: 68px;
+    border-radius: 11px;
+    border: 1px solid #525F6B;
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 20px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.nav-pills .nav-link-2 {
+    border-radius: 11px;
+    text-decoration: none;
+}
+
+.tabs_vertical--tooltips--tooltip {
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 16px;
+    letter-spacing: 0;
+
+    display: block;
+    margin: -14px 0 27px 0;
+    padding: 0 0 0 100px;
+    transition: .2s all ease-in-out;
+    position: relative;
+}
+
+.tabs_vertical--pills--pill.active+span {
+    font-weight: 500;
+}
+
+.ds-light-highlight {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #FFE9C5;
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 24px;
+}
+
+.ds-subheader {
+    color: #4A4A4A;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 31px;
+    text-align: center;
+}
+
+.data-story-card {
+
+    // Mobile specific styling
+    @media (max-width: $tablet) {
+        width: 100%;
+
+        .ds-right-content-width {
+            padding-left: unset;
+        }
+
+        .ds-banner-content {
+            margin-bottom: 70px;
+        }
+
+
+    }
+}
+
+.ds-banner-view-button {
+    @media (max-width: $tablet) {
+        width: unset;
+        margin-left: 0;
+    }
+}
+
+.data-story-trigger.selected {
+    opacity: .5;
+}
+
+.data-story-trigger {
+    padding: 5px 10px;
+}
+
+.data-story-card {
+    position: relative;
+    //ds margin-left: -15px !important;
+}
+
+.data-story-card .card-trigger {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+#filter_ {
+    a {
+        cursor: unset;
+        margin-right: 17px;
+    }
+}
+
+.tabs_vertical--pills--pill {
+    z-index: 3;
+}
+
+.modal-body-2 .visual-point table {
+    width: 100%;
+}
+
+.data-story-page {
+    @media (max-width: $tablet) {
+        #filter_ {
+            position: absolute;
+            right: 33px;
+            top: 25px;
+        }
+
+        .ds-content-card-header-main {
+            line-height: 16px;
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+        .ds-content-story-subtitle {
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 21px;
+        }
+
+        .ds-main-navigation-button-explorer {
+            display: block;
+            margin: auto !important;
+            margin-top: 15px !important;
+            margin-right: 57px !important;
+        }
+
+        .ds-content-story-title {
+            margin-top: 90px !important;
+            line-height: 21px;
+        }
+
+        #tabs_vertical {
+            .tabs_vertical--content {
+                order: 2;
+            }
+
+            .tabs_vertical--pill {
+                order: 1;
+            }
+        }
+
+        .chart-heights-mobile {
+            position: relative;
+            min-height: 250px;
+            padding-left: 0;
+            left: -13px;
+
+            canvas {
+                height: 250px !important;
+            }
+        }
+
+        .ds-content-card-highlight-block {
+            .row {
+                .col-10 {
+                    margin: 15px !important;
+                }
+            }
+        }
+
+        .visual-point {
+            display: none;
+        }
+
+        .ds-urban-addressing-block {
+            width: 100%;
+
+            .ds-urban-addressing-heading {
+                height: unset;
+                width: unset;
+            }
+        }
+
+    }
+}
+
+.card-trigger {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.data-story-landig-page {
+    top: -109px;
+    position: relative;
+    z-index: 2;
+
+    @media (min-width: $tablet) {
+
+        .nav-tabs {
+            border-bottom: none;
+        }
+
+    }
+}
+
+.data-story-card-productive-filter:hover {
+    color: black !important;
+    background: white !important;
+}
+
+.data-story-card-inclusives-filter:hover {
+    color: black !important;
+    background: white !important;
+}
+
+.data-story-card-well-filter:hover {
+    color: black !important;
+    background: white !important;
+}
+
+.data-story-card-sustainable-filter:hover {
+    color: black !important;
+    background: white !important;
+}
+
+.data-story-card-built-filter:hover {
+    color: black !important;
+    background: white !important;
+}
+
+.data-story-card-city-filter:hover {
+    color: black !important;
+    background: white !important;
+}
+
+
+// Mobile specific styling
+@media (max-width: $tablet) {
+    .nav-tabs {
+        margin-left: 0;
+    }
+
+    .ds-banner-content {
+        margin-bottom: 205px;
+    }
+
+    .nav-tabs .nav-link {
+        padding-top: 74px !important;
+        padding-bottom: 0px;
+    }
+
+    .ds-right-content-width {
+        position: relative;
+        left: 0 !important;
+    }
+
+    .nav-tabs .nav-link.active,
+    .nav-tabs .nav-item.show .nav-link {
+        margin-top: 71.5px;
+        padding-top: 5px !important;
+
+    }
+
+    .ds-banner-view-button {
+        margin-left: -20px;
+        width: 223px;
+        left: -67px;
+    }
+    .ds-content-diplay-text {
+        position: relative !important;
+        left: 0 !important;
+        flex: 49% ;
+        max-width: 49%;
+    }
+
+}
+@media (max-width: 540px) {
+    .ds-banner-view-button {
+      
+     
+        left: 0;
+    }
+    .ds-content-diplay-text {
+        position: relative !important;
+        left: 0 !important;
+        flex: 1%;
+        max-width:100%;
+    }
+}

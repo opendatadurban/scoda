@@ -55,6 +55,8 @@
 
         var data = new google.visualization.DataTable({{ table|safe }});
 
+        console.log(data);
+
         var categoryPicker1 = new google.visualization.ControlWrapper({
             'controlType': 'CategoryFilter',
             'containerId': 'categorySelector1',
@@ -266,7 +268,7 @@
 
     $(document).ready(function (e) {
 
-        google.setOnLoadCallback(drawBar1);
+        google.charts.setOnLoadCallback(drawBar1);
 
         });
 

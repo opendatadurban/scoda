@@ -1,0 +1,41 @@
+.card-chest {
+
+  // General Styles
+  background: $brand-dark;
+  border-radius: 28px;
+  display: block;
+  .card {
+    border-radius: 0 0 28px 28px;
+    &::before {
+      content: '';
+      height: $s-m;
+      width: 100%;
+      border-radius: 20px 20px 0 0;
+      position: absolute;
+      display: block;
+      background-color: transparent;
+      transition: .2s all ease-in-out;
+      top: -40px;
+      z-index: 1;
+    }
+    &:hover::before {
+      background-color: white;
+    }
+  }
+
+  // Styling for all desktops only
+  @media (min-width: $tablet) {
+
+  }
+  // Styling for mobile only
+  @media (max-width: $tablet) {
+    .card-wrapper:first-of-type {
+      margin-top: $s-m;
+    }
+  }
+
+  // Styling for anything bigger than tablet but smaller than desktop (13inch)
+  @media (min-width: $desktop) and (max-width:$large) {
+  }
+
+}

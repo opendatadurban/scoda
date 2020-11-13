@@ -2,7 +2,7 @@ from ..app import db
 from ..forms import Form
 from wtforms import FileField, validators, SelectField, IntegerField, StringField
 from wtforms.widgets import HiddenInput, TextArea
-from user import UserSet
+from .user import UserSet
 from flask_security import current_user
 
 from sqlalchemy import (

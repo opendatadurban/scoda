@@ -1,0 +1,125 @@
+.navigation-scoda {
+    position: fixed;
+    width: 100%;
+    z-index: 1000000000;
+    background-color: white;
+
+
+    &.fill {
+        box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2);
+
+    }
+
+    .top-header {
+        background-color: #131421;
+        padding: 10px 0px;
+
+        a {
+            color: #FFFFFF;
+            font-family: Montserrat;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0;
+            line-height: 13px;
+
+            &.register {
+                border: 1px solid #FFFFFF;
+                border-radius: 10px;
+                padding: 3px 7px;
+                margin-left: 30px;
+            }
+        }
+    }
+
+    nav {
+        &.box-shadow {
+            //box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        background: white !important;
+        padding: 15px;
+
+        z-index: 1;
+
+        #navbarSupportedContent {
+            .navbar-nav {
+                .dropdown-menu {
+                    .dropdown-item {
+                        color: #F9874A;
+                        font-family: Montserrat;
+                        font-size: 18px;
+                        letter-spacing: 0;
+                        line-height: 13px;
+                    }
+                }
+
+                .nav-item {
+                    &.active {
+                        .nav-link {
+                            font-weight: 700;
+                        }
+                    }
+
+                    .nav-link {
+                        color: #F9874A;
+                        font-family: Montserrat;
+                        font-size: 18px;
+                        letter-spacing: 0;
+                        line-height: 13px;
+                    }
+                }
+            }
+        }
+    }
+
+    .home_ {
+        margin-right: 35px;
+    }
+
+    .tookit_ {
+        margin-right: 35px;
+    }
+
+    // Desktop specific styling
+    @media (min-width: $tablet) {
+        nav {
+            justify-content: flex-end;
+
+            #navbarSupportedContent {
+                justify-content: center;
+
+                .navbar-nav {
+                    justify-content: center;
+
+                    .nav-item {}
+                }
+            }
+        }
+    }
+
+    @media (max-width: $tablet) {
+        nav {
+            justify-content: flex-end;
+        }
+
+        .home_ {
+            margin-right: 35px;
+        }
+
+        .tookit_ {
+            margin-right: 35px;
+        }
+    }
+}
+
+@media (max-width: 991px) {
+
+    .home_ {
+        margin-right: 0 !important;
+    }
+
+    .tookit_ {
+        margin-right: 0 !important;
+
+    }
+}

@@ -1,0 +1,29 @@
+.listing_basic {
+
+  // General styling
+  h2 {
+    font-size: 18px;
+    line-height: 27px;
+  }
+  p{
+    font-size: 14px;
+    font-style: oblique;
+    font-weight: 500;
+    line-height: 22px;
+    margin-top: $s-s - 10px !important;
+    color: #E17055
+  }
+
+  .btn {
+    text-transform: capitalize;
+    font-weight: 300;
+    font-size: 14px;
+    margin-top: $s-s - 10px !important;
+  }
+
+  // Desktop specific styling
+  @media (min-width: $tablet) {}
+
+  // Mobile specific styling
+  @media (max-width: $tablet) {}
+}

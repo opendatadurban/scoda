@@ -1,0 +1,176 @@
+.about-us {
+    h3 {
+        color: #131421;
+        font-family: Montserrat;
+        font-size: 24px;
+        font-weight: bold;
+        letter-spacing: 0;
+        line-height: 32px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        color: #131421;
+        font-family: Montserrat;
+        font-size: 18px;
+        letter-spacing: 0;
+        line-height: 28px;
+        font-weight: 400;
+    }
+
+    .heading {
+        h2 {
+            color: #131421;
+            font-family: Montserrat;
+            font-size: 30px;
+            font-weight: bold;
+            letter-spacing: 0;
+            line-height: 32px;
+        }
+    }
+
+    .what-is-scoda {
+        p {
+            i {
+                font-weight: 500;
+                color: #fc8749;
+            }
+        }
+    }
+
+    .what-do-we-do {
+        img {
+            margin-top: 60px;
+            margin-bottom: 60px;
+        }
+    }
+
+    .how-was-scoda-developed {
+        img {
+            margin: auto;
+            display: block;
+            margin-top: 60px;
+            margin-bottom: 60px;
+            width: 85%;
+        }
+    }
+
+    .box {
+        border: 1px solid #f9874a;
+        border-radius: 3px;
+        background-color: #ffffff;
+        padding: 20px 30px;
+        margin-top: 80px;
+        margin-bottom: 80px;
+        margin: auto;
+
+        p {
+            font-style: italic;
+            text-align: center;
+            color: #f9874a;
+
+            a {
+                color: #f9874a;
+            }
+        }
+    }
+
+    .important-links {
+        .item {
+            margin-top: 60px;
+            margin-right: -90px;
+            position: relative;
+
+            img {
+                width: 43%;
+            }
+        }
+
+        &-logos {
+            &-container {
+                margin: auto;
+            }
+
+            &-list {
+                list-style: none;
+                display: flex;
+            }
+        }
+
+        .line {
+            hr {
+                border-top: 1px solid;
+                opacity: 1;
+                margin: 0;
+                margin-top: 120px;
+            }
+        }
+    }
+
+    // Mobile specific styling
+    @media (max-width: $tablet) {
+        .about-us {
+            img {
+                width: 100%;
+            }
+        }
+
+        .important-links {
+            .item {
+                margin-top: 60px;
+                margin: auto;
+                left: 10px;
+
+                img {
+                    width: 43%;
+                }
+            }
+
+            .line {
+                hr {
+                    margin-top: 47px;
+                }
+            }
+
+            &-logos {
+                &-list {
+                    margin-top: 30px;
+                }
+
+                &-container {
+                    margin: auto;
+                }
+            }
+        }
+
+        h3 {
+            font-size: 18px;
+            line-height: 25px;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        .heading {
+            h2 {
+                font-size: 25px;
+                line-height: 32px;
+            }
+        }
+
+        .what-do-we-do {
+            img {
+                content: url("/static/dist/img/SCODA Assets V3_1 Mobile/3 About Us_Mobile/image_about_what-do-we-do.svg");
+            }
+        }
+
+        .how-was-scoda-developed {
+            img {
+                content: url("/static/dist/img/SCODA Assets V3_1 Mobile/3 About Us_Mobile/image_about_how-was-scoda-developed_mobile.svg");
+                width: 100%;
+            }
+        }
+    }
+}

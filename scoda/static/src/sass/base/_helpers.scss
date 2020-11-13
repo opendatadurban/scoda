@@ -1,0 +1,140 @@
+.background-filler {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: .8;
+}
+.flex-direction-column{
+    flex-direction: column;
+}
+
+hr.dotted {
+    border-top: none;
+    height: 4px;
+    overflow: hidden;
+    position: relative;
+
+    &:after {
+        color: black;
+        content: ".......................................";
+        letter-spacing: 20px;
+        font-size: 32px;
+        display: block;
+        line-height: 0px;
+        position: relative;
+        top: -7px;
+    }
+}
+
+.no-pointer-events {
+    pointer-events: none;
+}
+
+.m-b {
+    margin-bottom: $s-l;
+}
+
+.block {
+    display: block;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.inline {
+    display: inline;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.click-layer {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+    position: absolute !important;
+    z-index: 3 !important;
+}
+
+.circle {
+    @include border(2px, white, 50%);
+}
+
+.pill {
+    @include border(2px, $brand-primary, 15px);
+    background: $brand-primary;
+    line-height: 25px;
+    height: 25px;
+}
+
+.bg {
+    &_transparent {
+      background: transparent;
+    }
+    &_brand_primary {
+      background: $brand_primary;
+    }
+    &_brand_secondary {
+      background: $brand_secondary;
+    }
+    &_brand_tertiary {
+      background: $brand_tertiary;
+    }
+    &_brand_grey {
+      background: $brand_grey;
+    }
+    &_brand_dark {
+      background: $brand_dark;
+    }
+  }
+
+  .border-colour {
+      &_brand_primary {
+          border-color: $brand_primary !important;
+      }
+  }
+  .font {
+    &-colour {
+        &_primary {
+            color: $brand_primary;
+        }
+        &_general {
+            color: $font_general;
+        }
+    }
+  }
+
+// Fonts
+.thin-weight {
+    font-weight: 200 !important;
+}
+.container-fluid-max-width{
+    max-width: 99vw;
+}
+
+
+// Desktop specific styling
+@media (min-width: $tablet) {
+    .mobile {
+        display: none;
+    }
+}
+
+// Mobile specific styling
+@media (max-width: $tablet) {
+    .desktop {
+        display: none;
+    }
+}
+.leaflet-container{
+    height: 663px;
+    width: 100%;
+}

@@ -1,0 +1,170 @@
+// -----------------------------------------------------------------------------
+// This file contains all vendor-overrides
+// -----------------------------------------------------------------------------
+// .dropdown-item {
+//     &:hover {
+//         background: unset;
+//         background: transparent;
+//     }
+// }
+
+// .bootstrap-filestyle {
+// &.input-group {
+//     position: absolute;
+//     top: 0;
+//     height: 85px;
+//     left: 0;
+// }
+//  input {
+//     display: flex;
+//     width: 100% !important;
+//     background-color: transparent !important;
+//     border: 0 !important;
+//     order: 2;
+//     padding-left: 0;
+//     padding-right: 0;
+//     margin-top: 0 !important;
+//     font-size: 10px !important;
+//     text-align: center;
+//  }
+//  > span {
+//      display:flex;
+//      order: 1;
+//      border: 0;
+//      background-color: transparent;
+//      border-radius: 4px;
+//      margin: auto;
+//      height: 100%;
+//      width: 80px;
+//      label {
+//          border: 0;
+//          color: $font-general;
+//          padding-top: 0;
+//          padding-bottom: 0;
+//          min-width: unset;
+//          line-height: unset;
+//          font-size: unset;
+//          margin: 0;
+//          width: 100%;
+//          border-radius: 42.5px;
+//          top: 0;
+//          margin-left: -1px;
+//          position: absolute;
+//          width: 85px;
+//          height: 85px;
+//          background: transparent;
+//          &:hover {
+//              background-color: rgba(0, 0, 0, 0.50) !important;
+//          }
+//          &:active {
+//             border-radius: 42.5px;
+//          }
+//          span {
+//             font-weight: 500 !important;
+//             font-size: 10px;
+//          }
+//         &:hover {
+//         background-color: transparent;
+//         color: $font-general;
+//         }
+//         .buttonText {
+//             display: none;
+//         }
+//         &::after {
+//             content: "\f030";
+//             font-family: 'Font Awesome 5 Free';
+//             font-weight: 900;
+//             font-size: 30px;
+//             color: white;
+//             opacity: .7;
+//             filter: drop-shadow(1px 1px 5px rgba($color: #000000, $alpha: 1.0))
+//         }
+//      }
+//  }
+// }
+
+// .sharethis-inline-share-buttons {
+//     display: none !important;
+//     @media (max-width: $tablet) {
+//         display: block !important;
+//         max-width: 340px;
+//         margin: 40px auto auto;
+//         .st-btn {
+//             background: transparent !important;
+//             > img {
+//                 //
+//             }
+//             > span {
+//                 vertical-align: middle !important;
+//                 display: inline !important;
+//             }
+//         }
+//     }
+// }
+
+// Userback widget
+// .userback-button {
+//     z-index: 3 !important;
+//     margin-left: calc(100vw - 65px) !important;
+//     position: relative !important;
+//     background-color: $brand-primary !important;
+//     bottom: 75px !important;
+//     &-container {
+//         position: sticky;
+//         bottom: 50px;
+//         display: none; // JS to reveal after reposition on userbackOrder() line 207 on scripts.js
+//         z-index: 5;
+//         height: 0 !important;
+//         &.below {
+//             z-index: 3;
+//         }
+//     }
+// }
+// .userback-controls {
+//     &-options {
+//         span {
+//             font: unset;
+//             text-transform: capitalize;
+//         }
+//     }
+//     &-send {
+//         background-color: $brand-primary !important;
+//     }
+//       // Text field styling
+//   input[type="text"],input[type="number"], 
+//   input[type="date"], input[type="time"],
+//   input[type="password"], input[type="email"],
+//   input[type="tel"]{
+//         border-left: 1px solid #ccd3d9 !important;
+//         border-right: 1px solid #ccd3d9 !important;
+//         border-top: 1px solid #ccd3d9 !important;
+//         border-bottom: 1px solid #ccd3d9 !important;
+//         border-radius: 4px !important;
+//         padding-left: unset;
+//         margin-top: unset;
+//         &::placeholder {
+//           text-transform: unset;
+//         }
+//     }
+//     textarea{
+//         padding-left: 10px !important;
+//         background: transparent !important;
+//         &::placeholder {
+//             font-size: unset !important;
+//             color: rgb(117, 117, 117);
+//             font-weight: unset;
+//             text-transform: unset;
+//         }
+//     }
+// }
+
+// Desktop specific styling
+@media (min-width: $tablet) {
+    // .userback-button {
+    //     margin-left: auto !important;
+    // }
+}
+
+  // Mobile specific styling
+  @media (max-width: $tablet) {
+}

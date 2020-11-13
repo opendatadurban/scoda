@@ -1,0 +1,129 @@
+.hero {
+  padding: 0;
+  position: relative;
+  text-align: center;
+  z-index: 0;
+  &_fluid {
+    height: 100vh;
+    min-height: 400px;
+    z-index: 1;
+    width: 100%;
+  }
+  &--image {
+    background-repeat: no-repeat;
+    height: 100%;
+    background-size: 110%;
+    background-position-y: 90%;
+    background-position-x: center;
+  }
+  &--content {
+//
+  }
+  &--cta {
+    margin-top: $s-m;
+    text-transform: uppercase;
+    font-weight: 300;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+  &--title {
+    font-family: Megrim;
+    font-size: 80px;
+    letter-spacing: 3px;
+    display: inline-block;
+    margin: auto;
+  }
+  &--subtitle {
+    font-size: 18px;
+    margin: auto;
+    line-height: 1.5;
+    padding: 30px 0;
+    text-align: center;
+    font: Bold 25px/45px $font;
+    letter-spacing: 3.75px;
+    a{
+      font-family: Roboto !important;
+      background-color: #70c4a3;
+      color: #fff !important;
+      font-weight: 400;
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
+  &--body-text {
+    line-height: 1.5;
+  }
+  span {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: white;
+    font-size: 12px;
+    padding: 15px 5px;
+    z-index: 1;
+    i {
+      margin-right: 10px;
+    }
+    a {
+      color: white;
+      font-size: 12px;
+      font-weight: 400;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+.fa-play{
+  color: #fff !important;
+  display: flex;
+}
+
+  // Styling for all desktops only
+  @media (min-width: $tablet) {
+    &--cta {
+      .fas {
+        margin-left: 10px;
+      }
+    }
+
+  }
+  // Styling for mobile only
+  @media (max-width: $tablet) {
+    &--title {
+      font-size: 35px;
+      line-height: 1;
+    }
+    &--subtitle {
+      font-size: 14px;
+      line-height: 1;
+      padding: $s-t 0 $s-s;
+    }
+    &--body-text {
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 2;
+    }
+    &--image {
+      background-image: url('/static/dist/img/blackbox/hero-image_mobile.png') !important;
+      background-size: 250% auto;
+    }
+  }
+
+  // Styling for anything bigger than tablet but smaller than desktop (13inch)
+  @media (min-width: $desktop) and (max-width:$large) {
+    .hero{
+      &--title {
+        font-size: 60px;
+        line-height: 1;
+      }
+      &--image {
+        background-position-y: 100%;
+      }
+      &--cta {
+        margin-top: 40px;
+      }
+    }
+  }
+
+}

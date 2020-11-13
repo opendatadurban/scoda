@@ -1,0 +1,66 @@
+.card {
+  // General styling
+  background: transparent;
+  text-align: center;
+  border: none;
+  transition: .2s all ease-in-out;
+  border-radius: 28px;
+  &-header {}
+
+  &-title {
+    color: white;
+    font-size: 23px;
+    font-weight: 500;
+  }
+
+  &-subtitle {}
+
+  &-body {
+    padding: 75px 60px;
+    padding-top: 0 !important;
+    margin-top:50px !important;
+    .btn {
+      transition: none;
+      &::after, &::before {
+        transition: none;
+      }
+    }
+  }
+
+  &-text {
+    color: $yellow;
+    font-size: 13px;
+    line-height: 24px;
+    letter-spacing: 1px;
+  }
+  
+  &-details {}
+  
+  &-footer {}
+  
+  &:hover {
+    background-color: white;
+    box-shadow: $box-shadow;
+    .card {
+      &-text {
+        transition: .2s color ease-in;
+        color: $font-general;
+      }
+      &-title {
+        color: $font-general;
+      }
+    }
+    .btn_secondary {
+      @extend .btn_highlight; // pull styles from elements/button 
+    }
+  }
+  // Desktop specific styling
+  @media (min-width: $tablet) {}
+
+  // Mobile specific styling
+  @media (max-width: $tablet) {
+    &-body {
+       padding: 40px 30px;
+    }
+  }
+}
