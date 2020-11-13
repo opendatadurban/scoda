@@ -100,7 +100,7 @@ def seed_codebook_data(db):
         print(e)
 
 def seed_indicator_data(db):
-    df = pd.read_excel('%s/data/%s' % (app.root_path, "codebook-data/Full_codebook_circular_88_SOCR.xlsx")). \
+    df = pd.read_excel('%s/data/%s' % (app.root_path, "codebook-data/Full_codebook_circular_88_SOCR_new.xlsx")). \
         fillna(value='')
     for index, row in df.iterrows():
         indicator_code = str(row["Variable_Code"]).strip()
@@ -153,36 +153,3 @@ def create_themes(db):
     indicator.sdg_theme_id = sdg_theme_id
     c_theme_id = db.session.query(CbCircularTheme.id).filter(CbCircularTheme.name == str(row["C88_theme"]).strip())
     indicator.circular_theme_id = c_theme_id
-
-def seed_indicator_json(db):
-    with open('%s/data/%s' % (app.root_path, "codebook-data/codebook.json"), encoding="utf8") as f:
-        data = json.load(f)
-
-    # indicators = data["codeBook_contents"]["dataDscr"]
-    for key, row in data["codeBook_contents"]["dataDscr"].items():
-        indicator_code = str(key).strip()
-        indicator = db.session.query(CbIndicator).filter(CbIndicator.code == indicator_code).first()
-        row = row["Metadata"]
-        if not indicator:
-            indicator = CbIndicator()
-            indicator.code = str(row["Variable_Code"]).strip()
-            indicator.name = str(row["Indicator_short_name"]).strip()
-            db.session.add(indicator)
-            db.session.flush()
-            message = F"Indicator  {indicator.name} created"
-        else:
-            message = F"Indicator  {indicator.name} Updated"
-        indicator.group_code = str(row["Indicator_Group"][0]).strip()
-        indicator.sub_number = str(row["Sub_Number"][0]).strip()
-        indicator.c88_theme = str(row["C88_theme"][0]).strip()
-        indicator.socr_theme = str(row["SOCR_theme"][0]).strip()
-        indicator.sdg_theme = str(row["SDG_theme"][0]).strip()
-        indicator.indicator_formula = str(row["Indicator_formula"][0]).strip()
-        indicator.notes_on_calculation = str(row["Notes_on_calculation"][0]).strip()
-        indicator.frequency_of_collection = str(row["Frequency_of_collection"][0]).strip()
-        indicator.readiness = str(row["Readiness"][0]).strip()
-        indicator.reporting_responsibility = str(row["Reporting_responsibility"][0]).strip()
-        indicator.reporting_requirement = str(row["Reporting_requirement"][0]).strip()
-        indicator.definition = str(row["Definition"][0]).strip()
-        print(message)
-    db.session.commit()
