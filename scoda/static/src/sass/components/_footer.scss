@@ -5,6 +5,10 @@
     text-align: center;
     min-height: unset;
     padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 100000;
     span{
         font-size: 10px;
     }
@@ -106,7 +110,7 @@
       @media (max-width: $tablet) {
         width: 100%;
         padding: 20px;
-        height: 100%;
+        position: relative;
         min-height: 120px;
         .row {
           padding-top: 0;
