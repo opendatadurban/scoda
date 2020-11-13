@@ -27,35 +27,26 @@ export default class CTA_block extends Component {
           </div>
         </div>
         <div className="ml-auto cta-container">
-          <div className="row container ">
+          <div className="container ">
             <div className="">
               <div className="row cta-info">
-                <ul className="cta-field-description-list">
-                  <li>
-                    <div className="container">
+                
+                
+                    <div className="col-md-6">
                       <div className="cta-image cta-image-computer"></div>
                       <a  href="https://scoda.co.za/dataset">
                        <button className="btn cta-field-description-list-detailed-btn">Data Management System</button>
                       </a>
                     </div>
-                  </li>
-                  <li>
-                  <div class="cta-field-description-list-detailed">
+
+                  <div class=" col-md-6 jumbotron cta-field-description-list-detailed">
                       <h5>Data Management System</h5>
                       <p>
-                        Central to activities on this platform is the Data
-                        Management System, where our evidence base is securely
-                        housed. We use the CKAN data portal framework, the same
-                        system used by various governments around the world, to
-                        store, manage, and share data across the SCODA
-                        ecosystem. From this dynamic, version-controlled and
-                        API-responsive data-store, we can efficiently gather and
-                        process the myriad sources required for insight
-                        generation.
+                        {" Central to activities on this platform is the\n Data Management System, where our\n evidence base is securely housed. We use\n the CKAN data portal framework, the same\n system used by various governments\n around the world, to store, manage, and \nshare data across the SCODA ecosystem.\n From this dynamic, version-controlled and\n API-responsive data-store, we can\n efficiently gather and process the myriad\n sources required for insight  generation."}
                       </p>
                     </div>
-                  </li>
-                </ul>
+                
+             
               </div>
             </div>
           </div>

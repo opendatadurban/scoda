@@ -180,7 +180,7 @@ export default class IndicatorExplorerDataCard extends Component {
                                   </div>
                               </div>
                             </div>
-                            <div id="explorer-details" className="col-md-12 col-lg-12 col-xl-12 mt-3">
+                            <div id="explorer-details" style={{marginTop:"30px"}} className="col-md-12 col-lg-12 col-xl-12">
                                 <div className="row">
                                 <div className="col-md-12 col-lg-12 col-xl-12">
                                 <IndicatorExplorerDataBox 
@@ -191,7 +191,7 @@ export default class IndicatorExplorerDataCard extends Component {
                                     />
                                     </div>
                                 </div>
-                                <div className="row mt-4">
+                                <div className="row">
                                     <div className="col-md-12 col-lg-3 col-xl-3">
                                        <IndicatorExplorerDataBoxChartFilter 
                                          results={this.state.dataset}
@@ -208,7 +208,7 @@ export default class IndicatorExplorerDataCard extends Component {
                                     />
                                     </div>
                                 </div>   
-                                <div className="row mt-4">
+                                <div className="row">
                                     <div className="col-md-12 col-lg-3 col-xl-3">
                                       <IndicatorExplorerDataBoxMapFilter 
                                       results={this.state.dataset}
