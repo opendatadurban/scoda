@@ -21,7 +21,7 @@ export default class DataStoriesInfoBanner extends Component {
                        <div className="row">
                            <div className="col-10 ds-info-banner-detail-width">
                                <div className="row">
-                                    <div className="col ds-info-banner-title">{this.props.title}</div>
+                                    <div title={this.props.showTitle} className="col ds-info-banner-title">{this.props.title}</div>
                                 </div>
                                 <div className="row">
                                     <div className="col ds-info-banner-subtitle">{this.props.subtitle}</div>

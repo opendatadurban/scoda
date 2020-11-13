@@ -19,15 +19,15 @@ export default class Hero extends Component {
             this.setState({hero_state: 'collapse'});
             this.setState({hero_caret: 'fa fa-caret-down fa-2x hero-block-arrow-expand'});
 
-            // document.getElementById('contentContainer').style.display = 'none';
-            // document.getElementById('contentContainer').style.height = '0px';
-            // document.getElementById('buttonContainer').style.display = 'none';
-            // document.getElementById('infoBlockContainer').style.visibility = 'hidden';
-            // document.getElementById('infoBlock').style.height = '50px';
-            // document.getElementById('hero-content-column').style.height = '50px';
-            // document.getElementById('hero-content-column').style.paddingBottom = '0px';
-            // document.getElementById('hero-title').style.paddingTop = '15px';
-            // document.getElementById('hero-title').style.paddingBottom = '0px';
+            document.getElementById('contentContainer').style.display = 'none';
+            document.getElementById('contentContainer').style.height = '0px';
+            document.getElementById('buttonContainer').style.display = 'none';
+            document.getElementById('infoBlockContainer').style.visibility = 'hidden';
+            document.getElementById('infoBlock').style.height = '50px';
+            document.getElementById('hero-content-column').style.height = '50px';
+            document.getElementById('hero-content-column').style.paddingBottom = '0px';
+            document.getElementById('hero-title').style.paddingTop = '15px';
+            document.getElementById('hero-title').style.paddingBottom = '0px';
         }
         else {
             this.setState({hero_state: 'expand'});
@@ -82,9 +82,9 @@ export default class Hero extends Component {
                     <div className="row ml-0 mr-0 p-0">
                         <div className="col-md-5 hero-content-column" id="hero-content-column">
                             <a >
-                            <div className="row hero-title" id="hero-title" onClick={this.toggleHero}>
-                                <div className="col-0 hero-block-title" style={primaryColor}>{this.props.title}</div>
-                                <div  className="col-1 tooglebtn"><i className={this.state.hero_caret} style={primaryColor} aria-hidden="true" onClick={this.toggleHero}></i></div>
+                            <div className="row hero-title" id="hero-title" >
+                                <div className="col-0 hero-block-title" onClick={this.toggleHero} style={primaryColor}>{this.props.title}</div>
+                                <div  className="col-1 tooglebtn" ><i className={this.state.hero_caret} style={primaryColor} aria-hidden="true" onClick={this.toggleHero}></i></div>
                             </div>
                             </a>
                             <div id="contentContainer" className="row">
@@ -101,7 +101,7 @@ export default class Hero extends Component {
                         <div id="infoBlock" className="col-md-7 hero-block-background p-0 mr-0" style={infoBlockBackground}>
                             <div id="infoBlockContainer" className="row ml-0 p-0 hero-block-info-display">
                                 <div className="col-0 hero-block-info-hspacer"></div>
-                                <div className="col-0 hero-block-info-logo hero-block-info-logo-title" style={infoBlock}>{infoTitleCaps}</div>
+                               <div className="col-0 hero-block-info-logo hero-block-info-logo-title" style={infoBlock}>{infoTitleCaps}</div>
                                 <div className="col-0 hero-block-info-hspacer"></div>
                                 <div className="col-0 hero-block-info-display-text" style={secondaryColor}>{this.props.infoTitle}</div>
                             </div>
