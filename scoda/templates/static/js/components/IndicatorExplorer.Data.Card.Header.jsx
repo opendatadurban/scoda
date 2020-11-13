@@ -57,7 +57,7 @@ export default class IndicatorExplorerDataCardHeader extends Component {
                         </div>
                         <div className="row mt-1">
                             <div className="col">
-                                <div id="button-search" className="ie-button-search ie-button-inactive" onClick={this.filterData}>Search</div>
+                                <div id="button-search" className="ie-button-search ie-button-search-explorer ie-button-inactive" onClick={this.filterData}>Search</div>
                             </div>
                             <div className="col ">
                                  <div className="ie-button-reset float-right" onClick={this.resetForm}>Reset Form</div>
