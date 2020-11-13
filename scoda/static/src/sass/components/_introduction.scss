@@ -1,0 +1,38 @@
+.introduction {
+
+    // General styling
+    margin: 20px;
+    text-align: center;
+    
+    
+    &--title {
+      color: #4A4A4A;
+      font-family: Montserrat;
+      font-size: 24px;
+      font-weight: bold;
+      line-height: 32px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    &--text {
+      color: #4A4A4A;
+      font-family: Montserrat;
+      font-size: 14px;
+      line-height: 21px;
+      text-align: center;
+      span{
+        font-weight: 500;
+      }
+    }
+    &--bodytext {
+      font-size: 20px;
+      line-height: 30px;
+    }
+    // Desktop specific styling
+    @media (min-width: $tablet) {
+    }
+    
+      // Mobile specific styling
+      @media (max-width: $tablet) {
+      }
+    }

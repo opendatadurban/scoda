@@ -36,12 +36,14 @@ themes = {'Demographics': 1,
           'Productive': 2,
           'Sustainable': 3,
           'Inclusive': 4,
-          'Well-governed': 5
+          'Well-governed': 5,
+          'Safety': 6,
+          'Finance': 7
           }
 
-dfi = pd.read_csv('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/Indicators.csv')
-df = pd.read_csv('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/Manicured_final.csv')
-dfm = pd.read_csv('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/Indicators_Metadata.csv').\
+dfi = pd.read_excel('%s/data/%s' % (app.root_path, "2020-data/Indicators_WithNew_Aug2020.xlsx"))
+df = pd.read_csv('%s/data/%s' % (app.root_path, "2020-data/Manicured_Final_WithNew_Aug2020.csv"))
+dfm = pd.read_excel('%s/data/%s' % (app.root_path, "2020-data/Indicators_Metadata_WithNew_Aug2020_JW.xlsx")).\
     fillna(value='Unspecified')
 
 def seed_db(db):
@@ -49,13 +51,17 @@ def seed_db(db):
     with app.app_context():
         for x in User.create_defaults():
             db.session.add(x)
-        print 'Created user table...'
+        print ('Created user table...')
         for x in Role.create_defaults():
             db.session.add(x)
-        print 'Created role table...'
-        for x in DataSet.create_defaults():
-            db.session.add(x)
-        print 'Created dataset table...'
+        print ('Created role table...')
+        # for x in DataSet.create_defaults():
+        #     db.session.add(x)
+        for x in dfi["Dataset"].values.tolist():
+            dataset = DataSet()
+            dataset.ds_name = str(x)
+            db.session.add(dataset)
+        print ('Created dataset table...')
         # for x in Indicator.create_defaults():
         #     db.session.add(x)
         for x in dfm.values.tolist():
@@ -68,23 +74,26 @@ def seed_db(db):
             ind.source = x[5]
             ind.frequency = x[6]
             db.session.add(ind)
-        print 'Created indicator table...'
+        print ('Created indicator table...')
         for x in Region.create_defaults():
             db.session.add(x)
-        print 'Created region table...'
+        print ('Created region table...')
         for x in WaziRegion.create_defaults():
             db.session.add(x)
-        print 'Created Wazi-region table...'
+        print ('Created Wazi-region table...')
         for x in Type.create_defaults():
             db.session.add(x)
-        print 'Created type table...'
-        for x in Theme.create_defaults():
-            db.session.add(x)
-
-        print 'Created theme table...'
+        print ('Created type table...')
+        # for x in Theme.create_defaults():
+        #     db.session.add(x)
+        for x in dfm["Theme"].unique():
+            theme = Theme()
+            theme.th_name = str(x)
+            db.session.add(theme)
+        print ('Created theme table...')
         db.session.flush()
         db.session.commit()
-        print 'Populating datapoints...'
+        print ('Populating datapoints...')
 
         mapping = {}
         mapping_theme = {}
@@ -96,33 +105,52 @@ def seed_db(db):
             mapping_theme[index] = theme
 
         for i in range(0, len(df)):
-            dataset_id = df.iloc[i][0]
-            indicator_id = mapping[df.iloc[i][0]]
-            region_id = regions[df.iloc[i][1]]
-            type_id = types[df.iloc[i][2]]
-            theme_id = mapping_theme[df.iloc[i][0]]
-            for y, c in zip(range(1996, 2018), range(3, 25)):
-                if isnan(df.iloc[i][c]):
-                    pass
+            if not df.iloc[i][1] == "Metro average":
+                dataset_id = df.iloc[i][0]
+                indicator_id = mapping[df.iloc[i][0]]
+                if df.iloc[i][1] == "Buffalo City":
+                    region_id = regions["Buffalo City Municipality"]
                 else:
-                    point = DataPoint()
-                    value = df.iloc[i][c]
-                    year = y
-                    point.dataset_id = int(dataset_id)
-                    point.indicator_id = int(indicator_id)
-                    point.region_id = int(region_id)
-                    point.type_id = int(type_id)
-                    point.theme_id = int(theme_id)
-                    point.value = float(value)
-                    point.year = int(year)
-                    db.session.add(point)
+                    if df.iloc[i][1] == "Ekurhuleni":
+                        region_id = regions["Ekurhuleni Municipality"]
+                    else:
+                        if df.iloc[i][1] == "eThekwini":
+                            region_id = regions["EThekwini Municipality"]
+                        else:
+                            if df.iloc[i][1] == "Mangaung":
+                                region_id = regions["Mangaung Municipality"]
+                            else:
+                                if df.iloc[i][1] == "Nelson Mandela Bay":
+                                    region_id = regions["Nelson Mandela Bay Municipality"]
+                                else:
+                                    if df.iloc[i][1] == "The Msunduzi":
+                                        region_id = regions["Msunduzi Municipality"]
+                                    else:
+                                        region_id = regions[df.iloc[i][1]]
+                type_id = types[df.iloc[i][2]]
+                theme_id = mapping_theme[df.iloc[i][0]]
+                for y, c in zip(range(1996, 2018), range(3, 25)):
+                    if isnan(df.iloc[i][c]):
+                        pass
+                    else:
+                        point = DataPoint()
+                        value = df.iloc[i][c]
+                        year = y
+                        point.dataset_id = int(dataset_id)
+                        point.indicator_id = int(indicator_id)
+                        point.region_id = int(region_id)
+                        point.type_id = int(type_id)
+                        point.theme_id = int(theme_id)
+                        point.value = float(value)
+                        point.year = int(year)
+                        db.session.add(point)
 
         db.session.flush()
         db.session.commit()
 
-        data = geojson.load(open('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/metro_salc_geo.json'))
+        data = geojson.load(open('%s/data/%s' % (app.root_path, "metro_salc_geo.json")))
 
-        data2 = genfromtxt('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/jhbpopests_clean.csv', delimiter=',')
+        data2 = genfromtxt('%s/data/%s' % (app.root_path, "jhbpopests_clean.csv"), delimiter=',')
 
         parser = {}
         for i, I in enumerate(sort(list(set(data2[:, 2])))):
@@ -138,7 +166,7 @@ def seed_db(db):
         for i in data2:
             parser2[int(i[1])] = list(i[21:])
 
-        print 'Populating city enumerator GIS data...'
+        print ('Populating city enumerator GIS data...')
         for poly in data['features']:
             if poly['properties']['dc_mdb_c'] == 'JHB':
                 area = Area()
@@ -160,8 +188,8 @@ def seed_db(db):
         del data
         del data2
 
-        print 'Populating city ward GIS data...'
-        data3 = geojson.load(open('C:/Users/mrade_000/Documents/GitHub/scoda/scoda/data/MunicipalWards2016.json', 'r'))
+        print ('Populating city ward GIS data...')
+        data3 = geojson.load(open('%s/data/%s' % (app.root_path, "MunicipalWards2016.json"), 'r'))
 
         for i in data3['features']:
             if 'Johannesburg' in i['properties']['MunicName']:

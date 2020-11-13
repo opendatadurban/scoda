@@ -19,7 +19,6 @@
     }
 
     function drawBar1() {
-
         var data = google.visualization.arrayToDataTable({{ table|safe }});
 
         var categoryPicker1 = new google.visualization.ControlWrapper({
@@ -193,6 +192,6 @@
        }
 
     }
-    google.setOnLoadCallback(drawBar1);
+    google.charts.setOnLoadCallback(drawBar1);
 
 </script>

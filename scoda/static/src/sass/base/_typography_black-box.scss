@@ -1,0 +1,78 @@
+/**
+ * Basic typography style for copy text
+ */
+
+body {
+  color: $font-general;
+  font: normal 16px / 1.5 $font-family-primary;
+  font-family: $font-family-primary;
+  font-weight: 400;
+}
+.fa, .fas, .far, .fab  {
+  font-family: "Font Awesome 5 Free", "FontAwesome";
+  margin-left: 5px;
+}
+
+h1 {
+  font: $h1;
+}
+h2 {
+  font: $h2;
+  text-transform: uppercase;
+}
+h3 {
+  font: $h3;
+}
+h4 {
+  font: $h4;
+  text-transform: uppercase;
+}
+h5 {
+  font: $h5;
+  text-transform: uppercase;
+}
+p {
+  font: $p;
+  letter-spacing: 0.97px;
+  a {
+    font-weight: 600;
+    color: $brand-primary;
+  }
+  &.cite {
+    margin-top: 20px;
+    display: block;
+    font-size: 12px;
+    font-weight: 200;
+    font-style: oblique;
+    color: $brand-primary;
+    a {
+      color: $brand-primary;
+      font-size: 12px;
+      font-weight: 200;
+      // text-decoration: underline;
+    }
+  }
+}
+span {
+  font: $span;
+}
+
+a {
+  color: $font-general;
+}
+label, .label {
+  font-size: 12px;
+  opacity: 0.8;
+  letter-spacing: -0.24px;
+  text-transform: uppercase;
+  color: #2D3036;
+}
+
+.fas, .fa {
+  font-style: normal;
+}
+@media all and (display-mode: standalone) {
+  body {
+    background-color: yellow;
+  }
+}

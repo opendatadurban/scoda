@@ -1,0 +1,79 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+// Colour branding
+$brand-primary:        		    #F3ED62;
+$brand-secondary:   		    #FCC389;
+$brand-tertiary:	   		    #2d3036;
+$brand-dark:                #2F2D41;
+$brand-primary_darker:     #f3e51d;
+$background-colour:		        #FFFFFF;
+$font-general:          		#4A4A4A;
+$font-icons:               		#4A4A4A;
+$button_primary:    			$brand-primary;
+$button_secondary: 		        $brand-secondary;
+$success:                       #B9E08F;
+$failure:                       #FF8795;
+$blue:                          #0984E3;
+$yellow:                          #F7EE6D;
+
+$background-colour-component: #F2F2F2;
+
+// Typography
+$font: 	                'Montserrat';
+$h1: 				            normal 600 20px/1.5 $font;
+$h2: 				            normal 500 28px/1.5 $font;
+$h3: 				            normal 600 16px/1.5 $font;
+$h4: 				            normal 500 16px/1.5 $font;
+$h5: 				            normal 400 10px/1.5 $font;
+$quote1:			            italic 500 20px/1.5 $font;
+$quote-p:			            italic 500 20px/1.5 $font;
+$p: 				            normal 200 13px/28px $font;
+$p-bold:                        normal 700 16px/1.5 $font;
+$span: 			                normal 400 16px/1.5 $font;
+$detail1:			            normal 400 14px/1.5 $font;
+$detail2:			            normal 400 14px/1.5 $font;
+$button-select:		            normal 400 16px/1.5 $font;
+
+// Buttons
+$btn-h: 40px;
+$btn-h_l: 50px;
+$btn-h_g: 80px;
+$btn-lh: 18px;
+$btn-font-size:12px;
+$btn-text-transform: Capitalise;
+
+// Device sizes
+$mobile: 360px;
+$tablet: 768px;
+$desktop: 1200px;
+$large: 1366px;
+
+// Grid Sizes
+$content-grid: 640px;
+
+// Navigation Sizes
+$navigation-height-desktop: 	70px;
+$navigation-height-mobile: 	$navigation-height-desktop;
+$footer-height: 60px;
+$footer-cta-height: 50px;
+$brand-width: 150px;
+$brand-width-expanded: 206px;
+$navbar-brand-content: '//';
+
+// Global Elements
+$box-shadow: 	0px 3px 6px #0000000D;
+$box-shadow-hover:0 5px 5px -3px rgba(0,0,0,0.2), 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12);
+$box-shadow-reverse: 	0 -2px 4px 0 rgba(0,0,0,0.2);
+$text-shadow: 	0px 2px 4px rgba(0,0,0, 0.3);
+$border-radius:  5px;
+
+
+// Spacing
+$s-t:5px;
+$s-s:20px;
+$s-m:$s-s * 2;
+$s-l:$s-m * 2;
+
+$border: 1px solid $font-general;

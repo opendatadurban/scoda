@@ -1,0 +1,68 @@
+// NOTICE
+// A reminder to switch on or off various project specific styles found in
+
+@charset 'UTF-8';
+
+// 1. Configuration and helpers
+@import 
+// "abstracts/variables", 
+// "abstracts/variables_black-box", 
+"abstracts/variables_covid",
+"abstracts/variables_scoda", 
+"abstracts/pace", 
+"abstracts/functions",
+"abstracts/mixins", 
+"abstracts/vendor-overrides";
+
+// 2. Base styles
+@import // "base/base",
+    "base/base_covid",
+  // "base/base_black-box",
+    "base/fonts",
+  "base/typography",
+  // "base/typography_black-box",
+    "base/helpers";
+
+// 3. Elements
+@import "elements/button", "elements/title-block", "elements/image";
+
+// 4. Components
+@import 
+// "components/variables",
+// "components/alerts", 
+// "components/button",
+// "components/card",
+// "components/daterangepicker", 
+// "components/wizard__add-article",
+// "components/source__ingestor",
+"components/hero_mini",
+"components/breadcrumbs",
+// "components/navigation",
+"components/navigation_covid",
+"components/listing_basic",
+"components/home-logos",
+"components/card-chest",
+"components/card-drawer",
+"components/card",
+"components/footer",
+"components/footer_mobile_light",
+"components/home-logos",
+"components/cta_block",
+"components/preview_block",
+"components/content-block",
+"components/data-stories",
+"components/introduction",
+"components/hero_fluid",
+"components/hero_collapsible",
+"components/hero-collapsible",
+"components/datastories",
+"components/indicatorexplorer",
+"components/navigation-scoda",
+"components/about-us",
+"components/tabs",
+"components/codebook",
+"components/demographicmodeller";
+
+
+
+

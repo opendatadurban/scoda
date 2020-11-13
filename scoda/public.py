@@ -1,12 +1,15 @@
-# -*- coding: utf-8 -*-
+import itertools
+import operator
+
+from sqlalchemy_searchable import search
 
 from scoda.app import app
 from flask import request, url_for, redirect, flash, make_response, session, render_template, jsonify, Response, \
     send_file
 from flask_security import current_user
-from itertools import izip_longest
+from itertools import zip_longest
 from sqlalchemy.sql import select
-from sqlalchemy import func
+from sqlalchemy import func, extract, desc
 from .models import db
 from .models import *
 from .models.user import UserAnalysis
@@ -16,18 +19,126 @@ from pandas import read_sql_query
 import gviz_api
 import geojson, json
 import pandas as pd
-
+from .app import csrf
+from werkzeug.datastructures import MultiDict
+from urllib.parse import urlencode, urlparse, parse_qsl, urlsplit, parse_qs
 
 def grouper(iterable, n, fillvalue=None):
     "Collect data into fixed-length chunks or blocks"
     # grouper('ABCDEFG', 3, 'x') --> ABC DEF Gxx"
     args = [iter(iterable)] * n
-    return izip_longest(*args, fillvalue=fillvalue)
+    return zip_longest(*args, fillvalue=fillvalue)
 
 @app.route('/help')
 def help():
     return render_template('help/help.html')
 
+@app.route('/api/indicators-list', methods=['GET', 'POST'])
+def api_indicators_list():
+    remove_list = ['Poverty rate', 'Gini Coefficient', 'Gross Value Add', 'Exports', 'Multiple deprivation index',
+                   'Human Development Index']
+    indicators_list = [[str(c.id), c.in_name] for c in Indicator.all() if c.in_name not in remove_list]
+    # payload = {"indicators_list": indicators_list}
+    return jsonify(indicators_list)
+
+@app.route('/api/explore', methods=['GET', 'POST'])
+def api_explore():
+    form = ExploreForm()
+    status = 200
+    plot = 0
+    tour = 1
+    #ind = 76
+    #Note: Riaan Snyders: 10 June 2020 - Removed for now. Only functions on GET at the moment.
+    #if request.method == 'POST':
+        #if form.validate():
+            #data_json = request.get_json()
+            #ind = data_json["indicator_id"]
+    if request.args.get('indicator_id'):
+        ind = request.args.get('indicator_id')
+    else:
+        ind = 76
+    plot = 1
+    tour = 2
+    query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value). \
+        filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
+        filter(DataPoint.region_id == Region.id)
+    print(query.all())
+    indicator = Indicator.query.get(ind)
+
+    df = read_sql_query(query.statement, query.session.bind)
+    # df.to_csv('%s/data/%s' % (app.root_path, "data_test.csv"), index=False)
+    table = []
+    table_plot = []
+    years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
+    cities = [c for c in cities]
+
+    options_list = [{'optid': i, 'optname': d} for i, d in enumerate(datasets, start=1)]
+    years_list = [{'optid': i, 'optname': 'Year: %s' % d} for i, d in enumerate(sorted(years), start=1)]
+
+    plot_type = 1
+    print(len(years))
+    if (len(datasets) > 1) or (len(years) == 1):
+        plot_type = 2
+
+    colours = ['#f44336', '#03a9f4', '#4caf50', '#ffc107', '#03a9f4', '#ff5722', '#9c27b0', '#8bc34a',
+               '#ffeb3b', '#9e9e9e', '#3f51b5', '#e91e63']
+    series = {i: {'color': colours[i]} for i in range(len(datasets))}
+    view = list(range(2, len(datasets) + 2))
+    view.insert(0, 0)
+
+    minVal = min(map(float, list(df.value.unique())))
+    maxVal = max(map(float, list(df.value.unique()))) * 1.1
+
+    head = ['City', 'Year']
+    for i in datasets:
+        head.append(str(i))
+    table.append(head)
+    table_plot.append(head);
+
+    print(df)
+    # df.re_name = df.re_name.str.encode('utf-8')
+    if plot_type == 1:
+        df_i = df.iloc[:, [0, 1, 3]]
+
+        schema = [('City', 'string'), ('Year', 'string'), ('%s' % datasets[0], 'number')]
+
+        data_table = gviz_api.DataTable(schema)
+        data_table.LoadData(df_i.values)
+        table_plot = data_table.ToJSon(columns_order=('City', '%s' % datasets[0], 'Year'))
+
+        for c in cities:
+            for y in years:
+                row = [str(c), str(y)]
+                for d in datasets:
+                    datapoint = df.loc[(df["re_name"] == c) & (df["year"] == y) & (df["ds_name"] == d), "value"]
+                    if len(datapoint) == 0:
+                        row.append(None)
+                    else:
+                        row.append(
+                            float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
+                            df["ds_name"] == d), "value"]))
+                table.append(row)
+    else:
+        for c in cities:
+            for y in years:
+                row = [str(c), str(y)]
+                for d in datasets:
+                    datapoint = df.loc[(df["re_name"] == c) & (df["year"] == y) & (df["ds_name"] == d), "value"]
+                    if len(datapoint) == 0:
+                        row.append(None)
+                    else:
+                        row.append(
+                            float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
+                            df["ds_name"] == d), "value"]))
+                table.append(row)
+    yrs = ['Year'] + [str(y) for y in years[::-1]]
+    payload = {"plot":plot, "table":table, "table_plot":table_plot,"colours":colours,"year":str(max(years)), "series":series,
+             "view":view, "plot_type":plot_type,"min":minVal,"max":maxVal, "cities":cities, "options_list":options_list,
+             "years_list":years_list,"tour":tour, "years":yrs}
+    return jsonify(payload)
+        # else:
+        #     form_errors = form.errors
+        #     return {"form_errors":form_errors}
 
 @app.route('/explore', methods=['GET', 'POST'])
 def explore():
@@ -57,14 +168,14 @@ def explore():
             query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value). \
                 filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
                 filter(DataPoint.region_id == Region.id)
-
+            print(query.all())
             indicator = Indicator.query.get(ind)
 
             df = read_sql_query(query.statement, query.session.bind)
+            # df.to_csv('%s/data/%s' % (app.root_path, "data_test.csv"), index=False)
             table = []
             years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
-
-            cities = [c.encode('utf-8') for c in cities]
+            cities = [c for c in cities]
 
             options_list = [{'optid': i, 'optname': d} for i, d in enumerate(datasets, start=1)]
             years_list = [{'optid': i, 'optname': 'Year: %s' % d} for i, d in enumerate(sorted(years), start=1)]
@@ -76,7 +187,7 @@ def explore():
             colours = ['#f44336', '#03a9f4', '#4caf50', '#ffc107', '#03a9f4', '#ff5722', '#9c27b0', '#8bc34a',
                        '#ffeb3b', '#9e9e9e', '#3f51b5', '#e91e63']
             series = {i: {'color': colours[i]} for i in range(len(datasets))}
-            view = range(2, len(datasets) + 2)
+            view = list(range(2, len(datasets) + 2))
             view.insert(0, 0)
 
             minVal = min(map(float, list(df.value.unique())))
@@ -86,9 +197,10 @@ def explore():
             for i in datasets:
                 head.append(str(i))
             table.append(head)
-
+            print(df)
+            # df.re_name = df.re_name.str.encode('utf-8')
             if plot_type == 1:
-                df = df.iloc[:, (0, 1, 3)]
+                df = df.iloc[:, [0, 1, 3]]
 
                 schema = [('City', 'string'), ('Year', 'string'), ('%s' % datasets[0], 'number')]
 
@@ -110,7 +222,6 @@ def explore():
                                     df["ds_name"] == d), "value"]))
                         table.append(row)
             yrs = ['Year'] + [str(y) for y in years[::-1]]
-
             return render_template('explore/explore.html', form=form, plot=plot, table=table, colours=colours,
                                    year=str(max(years)), series=series, view=view, plot_type=plot_type, min=minVal,
                                    max=maxVal, cities=cities, options_list=options_list, years_list=years_list,
@@ -182,7 +293,7 @@ def demographics():
         session['maps'] = {0: {}, 1: {}}
 
     form1 = MapForm(prefix='form1', region_id='1', year=1)
-
+    print(form1.city_ward_code.choices)
     status = 200
     tour = 1
     geometries1 = {}
@@ -426,6 +537,182 @@ def demographics():
             # ensure the browser refreshes the page when Back is pressed
             {'Cache-Control': 'no-cache, no-store, must-revalidate'})
 
+@app.route('/api/demographics', methods=['GET', 'POST'])
+@csrf.exempt
+def api_demographics():
+    analyses = []
+
+    session['demo'] = []
+
+    if 'maps' not in session.keys():
+        session['maps'] = {0: {}, 1: {}}
+
+    form1 = MapForm(prefix='form1', region_id='1', year=1)
+    geometries1 = {}
+
+    if request.method == 'POST':
+        data = request.get_json()
+        print(data)
+        #data = request.data.decode('utf-8')
+        #object = parse_qs(urlsplit('?' + data).query)
+        #object = {key: str(value[0]) for key, value in object.items()}
+        
+        #if 'csrf_token' in object: del object['csrf_token']
+        #form1 = MapForm(MultiDict(object))
+        form1 = data
+
+        print(form1['year'])
+
+        #if form1.validate():
+        if form1:
+            tour = 0
+            # query = db.session.query(Area.geom.ST_AsGeoJSON(), Area.data)
+            #year1 = int(form1.year)
+            year1 = int(form1['year'])
+            year_ind1 = range(1996, 2031)
+
+            #if form1.city_ward_code.data == '':
+            if form1['city_ward_code'] == '':
+                query = db.session.query(Ward.geom.ST_AsGeoJSON(), Ward.data, Ward.city_ward_code). \
+                    filter(Ward.region_id == form1['region_id'])
+
+                geometries1 = {"type": "FeatureCollection",
+                               "features": []}
+                for g in query:
+                    d = json.loads(g[0])
+
+                    if year1 == 0:
+                        flow = 0
+                    else:
+                        flow = round(g[1][year1] - g[1][year1 - 1])
+
+                    geometries1['features'].append({"type": "Feature", "properties": {"density": round(g[1][year1]),
+                                                                                      "flow": flow,
+                                                                                      "name": 'Ward %s' % g[2],
+                                                                                      "year": year_ind1[year1]},
+                                                    "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
+
+                query = db.session.query(Ward.data).filter(Ward.region_id == form1['region_id']).all()
+                region = db.session.query(Region.re_name).filter(Region.id == form1['region_id']).first()
+
+                results = []
+
+                for r in query:
+                    row = [val for val in list(r)[0]]
+                    results.append(row)
+
+                df = pd.DataFrame(results).fillna(value=0)
+
+                table1 = [['Year', '%s' % str(region[0])]]
+
+                for y, val in zip(range(1996, 2031), df.sum(axis=0).tolist()):
+                    table1.append([str(y), val])
+
+                m1 = 1.05 * max(df.sum(axis=0).tolist())
+
+            else:
+                query = db.session.query(Area.geom.ST_AsGeoJSON(), Area.data, Area.city_ward_code) \
+                    .filter(Area.city_ward_code == int(form1['city_ward_code'])) \
+                    .filter(Area.region_id == int(form1['region_id']))
+
+                geometries1 = {"type": "FeatureCollection",
+                               "features": []}
+
+                for g in query:
+                    d = json.loads(g[0])
+
+                    if year1 == 0:
+                        flow = 0
+                    else:
+                        flow = round(g[1][year1] - g[1][year1 - 1])
+
+                    geometries1['features'].append(
+                        {"type": "Feature", "properties": {"density": round(g[1][year1]),
+                                                           "flow": flow,
+                                                           "name": 'Area %s' % g[2],
+                                                           "year": year_ind1[year1]},
+                         "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
+
+                query = db.session.query(Ward.data).filter(Ward.city_ward_code == int(form1['city_ward_code'])). \
+                    filter(Ward.region_id == int(form1['region_id'])).first()
+
+                region = db.session.query(Region.re_name).filter(Region.id == int(form1['region_id'])).first()
+                region2 = db.session.query(Ward.city_ward_code).filter(Ward.city_ward_code == int(form1['city_ward_code'])) \
+                    .first()
+
+                results = []
+
+                for r in query:
+                    row = [val for val in list(r)]
+                    results.append(row)
+
+                df = pd.DataFrame(results).fillna(value=0)
+
+                table1 = [['Year', '%s - Ward %s' % (str(region[0]), str(region2[0]))]]
+
+                for y, val in zip(range(1996, 2031), df.sum(axis=0).tolist()):
+                    table1.append([str(y), val])
+
+                m1 = 1.05 * max(df.sum(axis=0).tolist())
+
+            query = db.session.query(Ward.city_ward_code).filter(Ward.region_id == int(form1['region_id'])).order_by(
+                Ward.city_ward_code).distinct()
+
+            #form1.city_ward_code.choices = [[str(i), 'Ward %s' % row.city_ward_code] for i, row in enumerate(query.all()
+                                                                                                             #, start=1)]
+            #form1.city_ward_code.choices.insert(0, ('', 'View All'))
+
+
+            resp = jsonify({'success': True, 'geometries1': geometries1,'table1':table1,
+                            'tour':tour, 'max1':m1, 'region1':form1['region_id'],'ward1':form1['city_ward_code']})
+            resp.status_code = 200
+            return resp
+        else:
+            message = 'Please correct the problems below and try again.'
+            resp = jsonify(message=message)
+            resp.status_code = 500
+            return resp
+
+    else:
+        session['maps'][0] = {'city_ward_code': '', 'region_id': 1, 'year': 1}
+        session['maps'][1] = {'city_ward_code': '', 'region_id': 4, 'year': 1}
+
+        query = db.session.query(Ward.geom.ST_AsGeoJSON(), Ward.data, Ward.city_ward_code). \
+            filter(Ward.region_id == 1)
+
+        geometries1 = {"type": "FeatureCollection",
+                       "features": []}
+
+        for g in query:
+            d = json.loads(g[0])
+            geometries1['features'].append({"type": "Feature", "properties": {"density": round(g[1][1]),
+                                                                              "flow": round(g[1][1] - g[1][0]),
+                                                                              "name": 'Ward %s' % g[2],
+                                                                              "year": 1997},
+                                            "geometry": {"type": "Polygon", "coordinates": d['coordinates']}})
+
+        query = db.session.query(Ward.data).filter(Ward.region_id == 1).all()
+
+        results = []
+
+        for r in query:
+            row = [val for val in list(r)[0]]
+            results.append(row)
+
+        df = pd.DataFrame(results).fillna(value=0)
+
+        table1 = [['Year', 'Johannesburg']]
+
+        for y, val in zip(range(1996, 2031), df.sum(axis=0).tolist()):
+            table1.append([str(y), val])
+
+        m = 1.05 * max(df.sum(axis=0).tolist())
+
+        resp = jsonify({'success': True, 'table1': table1,
+                         'max1': m, 'region1': 1, 'ward1': None,'ward2':None, 'geometries1': geometries1,
+                        'form_year':form1.year.choices,'form_ward':form1.city_ward_code.choices,'form_city':form1.region_id.choices})
+        resp.status_code = 200
+        return resp
 
 @app.route('/nightlights_jhb', methods=['GET', 'POST'])
 def demographics_night_jhb():
@@ -899,3 +1186,71 @@ def parse_demo():
     response['wards'] = ward_list
 
     return jsonify(response)
+
+@app.route('/api/codebook', methods=['GET', 'POST'])
+@app.route('/api/codebook/<int:page>', methods=['GET', 'POST'])
+@csrf.exempt
+def api_codebook(page=1):
+    query = db.session.query(CbIndicator). \
+        join(CbTheme, CbTheme.id == CbIndicator.theme_id). \
+        join(CbSource, CbSource.id == CbIndicator.source_id). \
+        join(CbUnit, CbUnit.id == CbIndicator.unit_id)
+
+    if request.method == 'POST':
+        data = request.get_json()
+
+        if data['c88']:
+            query = query.filter(CbIndicator.c88_theme.in_(data['c88']))
+
+        if data['socr']:
+            query = query.filter(CbIndicator.socr_theme.in_(data['socr']))
+
+        if data['sdg']:
+            query = query.filter(CbIndicator.sdg_theme.in_(data['sdg']))
+
+        if data['search']:
+            query = search(query, data['search'], sort=True)
+
+    else:
+        query = query.limit(50).offset((page - 1) * 20)
+
+    row_count = query.count()
+    query = query.all()
+    query.sort(key=lambda x: x.code)
+
+    result_list = [row_count]
+    for day, dicts_for_group_code in itertools.groupby(query, key=lambda x:x.group_code):
+        dicts_for_group_code = list(dicts_for_group_code)
+        day_dict = {
+            "id": str(dicts_for_group_code[0].id), "varCode": dicts_for_group_code[0].code,
+            "indicator": dicts_for_group_code[0].name, "c88": dicts_for_group_code[0].c88_theme,
+            "socr": dicts_for_group_code[0].socr_theme, "sdg": dicts_for_group_code[0].sdg_theme,
+            "definition": dicts_for_group_code[0].definition,
+            "source": dicts_for_group_code[0].source.name,
+            "reportingResponsibility": dicts_for_group_code[0].reporting_responsibility,
+            "notesOnCalculation": dicts_for_group_code[0].notes_on_calculation,
+            "variableType": dicts_for_group_code[0].unit.name,
+             "frequencyOfCollection": dicts_for_group_code[0].frequency_of_collection
+        }
+        children = []
+        dicts_for_group_code.pop(0)
+        for d in dicts_for_group_code:
+            child = {
+                "id": str(d.id),
+                "varCode": d.code,
+                "indicator": d.name,
+                "c88":d.c88_theme,
+                "socr": d.socr_theme,
+                "sdg": d.sdg_theme,
+                "definition": d.definition,
+                "source": d.source.name,
+                "reportingResponsibility": d.reporting_responsibility,
+                "notesOnCalculation": d.notes_on_calculation,
+                "variableType": d.unit.name,
+                "frequencyOfCollection": d.frequency_of_collection
+            }
+            children.append(child)
+        day_dict.update({"children": children})
+        result_list.append(day_dict)
+
+    return jsonify(result_list)

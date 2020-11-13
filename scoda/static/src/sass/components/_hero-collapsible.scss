@@ -1,0 +1,72 @@
+.hero-collapsible{
+    h5{
+        color: #4F9DA6;
+        font-family: Montserrat;
+        font-size: 24px;
+        font-weight: bold;
+        line-height: 32px;
+        margin: 15px 0px;
+        .fas{
+            margin-left: 30px;
+            font-size: 34px;
+            cursor: pointer;
+        }
+    }
+    p{
+        color: #4A4A4A;
+        font-family: Montserrat;
+        font-size: 18px;
+        line-height: 28px;
+        margin: 15px 0px;
+    }
+    .btn{
+        border: 2px solid #4F9DA6;
+        border-radius: 25px;
+        background-color: #FFFFFF;
+        box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
+        color: #4F9DA6;
+        font-family: Montserrat;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 24px;
+        padding: 5px 20px;
+        margin: 15px 0px;
+        margin-bottom: 60px;
+      
+    }
+    .info-block{
+        padding: 25px;
+        border-radius: 10px 0 0 10px;
+        background-color: #121425;
+        box-shadow: 0 0 6px 2px rgba(0,0,0,0.2);
+        margin-top: 60px;
+        margin-bottom: 60px;
+        position: absolute;
+        right: 0;
+        width: 100%;
+        &-col{
+            position: absolute;
+            right: 19px; 
+        }
+        p{
+            color: #FFFFFF;
+            font-size: 18px;
+            line-height: 28px;
+        }
+        h2{
+            color: #F64343;
+            font-family: 'Montserrat';
+            font-size: 37px;
+            font-weight: 600;
+            line-height: 24px;
+        }
+        .icon{
+            background-image: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_3 Evidence Tools/icon_products_evidence-small.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 69px;
+            max-width: 71px;
+        }
+    }
+}

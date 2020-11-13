@@ -1,0 +1,17 @@
+.title-block {
+
+  padding: $s-m $s-s;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: capitalize;
+  span {
+    text-transform: lowercase;
+  }
+  // General styling
+
+  // Desktop specific styling
+  @media (min-width: $tablet) {}
+
+  // Mobile specific styling
+  @media (max-width: $tablet) {}
+}

@@ -1,0 +1,43 @@
+.home-logos {
+    padding: 90px 0;
+    h3{
+        color: #131421;
+        font-family: 'Montserrat';
+        font-size: 24px;
+        font-style: italic;
+        line-height: 32px;
+        margin-bottom: 15px;
+        text-align: center;
+        font-weight: 400;
+        margin-bottom: 40px;
+    }
+    .inner-wrapper {
+      height: 90px;
+      display: block;
+      width: 100%;
+      text-align: center;
+      img {
+        height: 100%;
+        padding: 0 10px;
+        width: unset;
+        margin-right: 80px;
+      }
+    }
+  
+    // Desktop specific styling
+  @media (min-width: $tablet) {
+  
+  }
+  
+    // Mobile specific styling
+    @media (max-width: $tablet) {
+        .inner-wrapper {
+      img {
+        width: 43%;
+        height: auto;
+        position: relative;
+      }
+    }
+    }
+  
+  }

@@ -1,0 +1,96 @@
+#collapsable-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 93%;
+  list-style: none;
+  min-height: 300px;
+  padding: 0;
+  position: absolute;
+  margin-left: 30px;
+
+  top: 210px;
+  li {
+    margin: 5px 16px;
+  }
+}
+
+#collapsable-card-table {
+  margin: 0 auto;
+  width: 350px;
+  font-family: Montserrat;
+  border-radius: 0 0 7px 7px;
+  .status-arrow {
+    display: inline-block;
+    background: url("../../../../static/img/collapse-icon.png") no-repeat center center;
+    background-size: cover;
+    transition: all 0.08s ease-in;
+    position: absolute;
+    font-size: 30px;
+    top: -2px;
+    right: 4px;
+    width: 20px;
+    height: 100%;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+  
+  }
+
+  .title {
+    margin-right: 50px;
+    line-height: 17px;
+  }
+  .show-list {
+    background: url(../../../../static/img/download-btn.png) no-repeat center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    border: none;
+    width: auto;
+    height: 29px;
+    position: absolute;
+    right: 60px;
+    top: 0;
+    padding: 10px;
+
+  }
+
+  border-radius: 7px;
+  .data-card-header {
+    height: 30px;
+    background: #3c978f;
+    color: #fff;
+    border-radius: 7px 7px 0 0;
+    padding: 7px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    position: relative;
+    display: flex;
+    overflow: hidden;
+  }
+  .card-list {
+    background: #fff;
+    border-radius: 0 0 5px 5px;
+    overflow: hidden;
+    li {
+      border-bottom: 1px solid #e2e1e1;
+      &:last-child {
+        border-bottom: none !important;
+      }
+    }
+    padding: 15px;
+    font-size: 14px;
+    line-height: 29px;
+    list-style: none;
+    .number {
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 29px;
+      float: right;
+      float: right;
+    }
+  }
+}
