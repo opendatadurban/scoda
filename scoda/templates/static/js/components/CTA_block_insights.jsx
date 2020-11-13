@@ -27,17 +27,14 @@ export default class CTA_block extends Component {
           </div>
         </div>
         <div className="ml-auto cta-container">
-          <div className=" container  ">
-            <div className="">
+          <div className=" container ">
               <div className="row cta-info">
-                <ul className="cta-field-description-list">
-                  <li>
-                    <div className="container">
+                    <div className="col-md-6">
                       <div className="cta-image cta-search"></div>
+                        <div className="cta-search-half_shadow"></div>
                     </div>
-                  </li>
-                  <li>
-                  <div class="cta-field-description-list-detailed">
+  
+                  <div class="col-md-6 jumbotron cta-field-description-list-detailed">
                       <h5>Data Stories</h5>
                       <p>
                         Data stories are a way to understand complex information
@@ -50,10 +47,9 @@ export default class CTA_block extends Component {
                        
                       </a>
                     </div>
-                  </li>
-                </ul>
+                
+               
               </div>
-            </div>
           </div>
         </div>
       </div>

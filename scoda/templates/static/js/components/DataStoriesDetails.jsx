@@ -5,6 +5,8 @@ import FilterBar from './DataStories.Filterbar';
 import ContentSectionRight from './DataStories.ContentSection.Right';
 import ContentSectionTop from './DataStories.ContentSection.Top';
 import DataStoriesInfoBanner from './DataStories.InfoBanner';
+import ContentSectionRightEdge from './DataStories.ContentSection.Right.Edge';
+
 
 export default class DataStoriesDetails extends Component {
     constructor(props) {
@@ -13,6 +15,8 @@ export default class DataStoriesDetails extends Component {
 
     render() {
 
+        let bannerImage = `/static/dist/img/scoda/datastories/edge.png`;
+        let bannerImageSACN = `/static/dist/img/scoda/datastories/sacn.png`;
         let sacnContent = "The South African Cities Network data stories provide succinct visual insight into the key narratives from the South African Cities Network research outputs.";
 
         let edgeContent = "The eThekwini data stories provide succinct visual insight into the key narratives surrounding economic development and employment in the City.";
@@ -63,7 +67,7 @@ export default class DataStoriesDetails extends Component {
                                         filter="Productive Cities"
                                         imageTag="P"
                                         filter_type="data-story-card-productive"
-                                        infoBannerTitle="The Durban EDGE"
+                                        infoBannerTitle="South African Cities Network"
                                         infoBannerDate="August 2018"
                                         infoBannerMins="9"
                                         filter_type="data-story-card-productive"
@@ -87,6 +91,7 @@ export default class DataStoriesDetails extends Component {
                                                 subtitle="July 2018"
                                                 minutes="8"
                                                 filter_type="data-story-card-inclusives"
+                                                imgSrc={bannerImageSACN}
                                             />
                                         </div>
                                         <div className="col-md-4">
@@ -106,6 +111,7 @@ export default class DataStoriesDetails extends Component {
                                                 subtitle="July 2018"
                                                 minutes="5"
                                                 filter_type="data-story-card-inclusives"
+                                                imgSrc={bannerImageSACN}
                                             />
                                         </div>
                                         <div className="col-md-4">
@@ -126,6 +132,7 @@ export default class DataStoriesDetails extends Component {
                                                 subtitle="July 2018"
                                                 minutes="6"
                                                 filter_type="data-story-card-well"
+                                                imgSrc={bannerImageSACN}
                                             />
                                         </div>
                                     </div>
@@ -138,7 +145,7 @@ export default class DataStoriesDetails extends Component {
                                         filter="Well Governed Cities"
                                         imageTag="W"
                                         filter_type="data-story-card-well"
-                                        infoBannerTitle="The Durban EDGE"
+                                        infoBannerTitle="South African Cities Network"
                                         infoBannerDate="August 2018"
                                         infoBannerMins="7"
                                         filter_type="data-story-card-well"
@@ -170,7 +177,7 @@ export default class DataStoriesDetails extends Component {
                                             img="unemployed.png"
                                             title="Unemployment in SA’s Major Cities"
                                             subtitle=""
-                                            content="Three line opening sentence which can be custom written or taken from the first part of the introduction until elipses are needed…"
+                                            content="StatsSA has recently released 2019 Q2 unemployment figures, which show alarming rates of unemployment last seen…"
                                             filterColor="#F05252"
                                             filter="Employment"
                                             imageTag="E"
@@ -185,6 +192,7 @@ export default class DataStoriesDetails extends Component {
                                                 subtitle="2 August 2019"
                                                 minutes="5"
                                                 filter_type="data-story-card-employment"
+                                                imgSrc = {bannerImage}
                                             />
                                         </div>
                                     </div>
@@ -193,7 +201,7 @@ export default class DataStoriesDetails extends Component {
                                             img="durban.png"
                                             title="Durban's Economy Recovers in the Second Quarter"
                                             subtitle=""
-                                            content="Three line opening sentence which can be custom written or taken from the first part of the introduction until elipses are needed…"
+                                            content="GDP data on Durban's performance has recently been released. As expected, Durban's economy has recovered from the…"
                                             filterColor="#196CDB"
                                             filter="Economy"
                                             imageTag="Ec"
@@ -206,6 +214,7 @@ export default class DataStoriesDetails extends Component {
                                                 subtitle="14 October 2019"
                                                 minutes="4"
                                                 filter_type="data-story-card-economy"
+                                                imgSrc = {bannerImage}
                                             />
                                         </div>
                                     </div>
@@ -214,7 +223,7 @@ export default class DataStoriesDetails extends Component {
                                             img="electricity.png"
                                             title="Electricity Usage"
                                             subtitle=""
-                                            content="Three line opening sentence which can be custom written or taken from the first part of the introduction until elipses are needed…"
+                                            content="The cost of getting electricity in South Africa is 13 US cents per kilo watt hour on average, while the cost of getting electricity in Durb…"
                                             filterColor="#FFC057"
                                             filter="Service"
                                             imageTag="S"
@@ -227,6 +236,7 @@ export default class DataStoriesDetails extends Component {
                                                 subtitle="June 2019"
                                                 minutes="6"
                                                 filter_type="data-story-card-service"
+                                                imgSrc = {bannerImage}
                                             />
                                         </div>
 
@@ -237,11 +247,11 @@ export default class DataStoriesDetails extends Component {
                                 </div>
 
                                 <div className="ds-ecomomy-image">
-                                <ContentSectionRight
+                                <ContentSectionRightEdge
                                     img="economy.png"
                                     title="Economic Overview: State of the Durban Economy"
                                     subtitle=""
-                                    content="Three line opening sentence which can be custom written or taken from the first part of the introduction until elipses are needed…"
+                                    content="The total gross value added (GVA) of Durban grew by R278 billion in 2018. This is a 0.5% increase from the 2017. In 2018, Durban exp…"
                                     filterColor="#F05252"
                                     filter="Economy"
                                     imageTag="Ec"
