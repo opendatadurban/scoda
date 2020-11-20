@@ -262,10 +262,21 @@
   text-align: center;
 }
 
-
 .codebook-modal {
   max-width: none;
-  opacity: 0.95
+  opacity: 0.95;
+}
+
+.modal-open {
+  .navigation-scoda {
+    z-index: 1;
+  }
+  .hero-block-title {
+    z-index: 1;
+  }
+  .tooglebtn {
+    z-index: 1;
+  }
 }
 
 .filter-container-row {
