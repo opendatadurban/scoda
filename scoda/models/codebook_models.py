@@ -75,6 +75,16 @@ class CbIndicator(db.Model):
     readiness  = Column(String, nullable=True)
     reporting_requirement  = Column(String, nullable=True)
 
+    data_prep  = Column(String, nullable=True)
+    period  = Column(String, nullable=True)
+    url_link  = Column(String, nullable=True)
+    source_gather  = Column(String, nullable=True)
+    validation_comments  = Column(String, nullable=True)
+    automatable  = Column(String, nullable=True)
+    expandable  = Column(String, nullable=True)
+    granularity  = Column(String, nullable=True)
+    gathering_method  = Column(String, nullable=True)
+
     search_vector = Column(TSVectorType('name'))
 
     unit_id = Column(Integer, ForeignKey('cb_unit.id'), index=True)
@@ -82,12 +92,14 @@ class CbIndicator(db.Model):
     theme_id = Column(Integer, ForeignKey('cb_theme.id'), index=True)
     sdg_theme_id = Column(Integer, ForeignKey('cb_sdg_theme.id'), index=True)
     circular_theme_id = Column(Integer, ForeignKey('cb_circular_theme.id'), index=True)
+    value_type_id = Column(Integer, ForeignKey('cb_value_type.id'), index=True)
 
     unit = relationship("CbUnit")
     source = relationship("CbSource")
     theme = relationship("CbTheme")
     sdg_theme_rel = relationship("CbSDGTheme")
     circular_theme = relationship("CbCircularTheme")
+    value_type = relationship("CbValueType")
 
     def __repr__(self):
         return "<CbIndicator='%s'>" % (self.name)
@@ -149,7 +161,7 @@ class CbUnit(db.Model):
     __tablename__ = "cb_unit"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(150), index=True, nullable=False, unique=True)
+    name = Column(String, index=True, nullable=False, unique=True)
 
     def __repr__(self):
         return "<CbIndicatorUnit='%s'>" % (self.name)
