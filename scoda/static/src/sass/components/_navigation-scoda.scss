@@ -80,6 +80,10 @@
         margin-right: 35px;
     }
 
+    .navigation-logo {
+        display: block !important;
+    }
+
     // Desktop specific styling
     @media (min-width: $tablet) {
         nav {
