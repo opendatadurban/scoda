@@ -146,7 +146,7 @@ export default class CodebookSidebar extends Component {
                 <div className="row" style={padding}>
                     <div className="col">
                         <div className="row sidebar-label">SOURCE</div>
-                        <div className="row item-link">Stats SA Superweb General Household Survey</div>
+                        <div className="row"><a className="item-link">Stats SA Superweb General Household Survey</a></div>
                     </div>
                 </div>
             </div>

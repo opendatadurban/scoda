@@ -234,12 +234,13 @@
 }
 
 .item-link {
-  color: #FFFFFF;
-  fon-family: Montserrat;
-  font-size: 14px;
-  font-style: italic;
-  letter-spacing: 0;
-  line-height: 20px;
+  color: #FFFFFF !important;
+  font-family: Montserrat !important;
+  font-size: 14px !important;
+  font-style: italic !important;
+  letter-spacing: 0 !important;
+  line-height: 20px !important;
+  font-weight: 400 !important;
 }
 
 .action-button {
