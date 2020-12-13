@@ -83,40 +83,26 @@ export default class CodebookSidebar extends Component {
                     <div className="col">
                         <div className="row sidebar-label">THEMES:</div>
                     </div>
-                    <div className="col">
+                    <div className="col-1">
                         <div className="row sidebar-label">C88</div>
                         <div className="row">
-                            <div style={{
-                                height: '20px',
-                                width: '20px',
-                                backgroundColor: '#F73E55',
-                                borderRadius: '50%' }}>
+                            <div className="circle-c88">
                                 <div className="circle-icon-text">{this.getC88Code(this.state.data.varCode)}</div>
                             </div>
                         </div>
                     </div>
-                    <div className="col">
+                    <div className="col-1">
                         <div className="row sidebar-label">SOCR</div>
                         <div className="row">
-                            <div style={{
-                                height: '20px',
-                                width: '20px',
-                                backgroundColor: '#EAB04B',
-                                borderRadius: '50%'
-                            }}>
+                            <div className="circle-socr">
                                 <div className="circle-icon-text">{this.getSOCRCode(this.state.data.socr)}</div>
                             </div>
                         </div>
                     </div>
-                    <div className="col">
+                    <div className="col-1">
                         <div className="row sidebar-label">SDG</div>
                         <div className="row">
-                            <div style={{
-                                height: '20px',
-                                width: '20px',
-                                backgroundColor: '#4F9DA6',
-                                borderRadius: '50%'
-                            }}>
+                            <div className="circle-sdg">
                                 <div className="circle-icon-text">{this.getSDG(this.state.data.sdg)}</div>
                             </div>
                         </div>
@@ -139,8 +125,12 @@ export default class CodebookSidebar extends Component {
                         <div className="row item-info">{this.state.data.reportingResponsibility}</div>
                     </div>
                     <div className="col">
-                        <div className="row sidebar-label">GATHERING METHOD</div>
-                        <div className="row item-info">Webscrape</div>
+                        <div className="row">
+                            <div className="sidebar-label text-right" style={{ 'width': '100%' }}>GATHERING METHOD</div>
+                        </div>
+                        <div className="row">
+                            <div className="item-info text-right" style={{ 'width': '100%' }}>Webscrape</div>
+                        </div>
                     </div>
                 </div>
                 <div className="row" style={padding}>
@@ -192,10 +182,10 @@ export default class CodebookSidebar extends Component {
                     </div>
                     <div className="col" style={padding}>
                         <div className="row">
-                            <div className="sidebar-label">AUTOMATABILITY</div>
+                            <div className="sidebar-label text-right" style={{ 'width': '100%' }}>AUTOMATABILITY</div>
                         </div>
                         <div className="row">
-                            <div className="item-info">Yes</div>
+                            <div className="item-info text-right" style={{ 'width': '100%' }}>Yes</div>
                         </div>
                     </div>
                 </div>
@@ -210,10 +200,10 @@ export default class CodebookSidebar extends Component {
                     </div>
                     <div className="col" style={padding}>
                         <div className="row">
-                            <div className="sidebar-label">EXPANDABILITY</div>
+                            <div className="sidebar-label text-right" style={{ 'width': '100%' }}>EXPANDABILITY</div>
                         </div>
                         <div className="row">
-                            <div className="item-info">No</div>
+                            <div className="item-info text-right" style={{ 'width': '100%' }}>No</div>
                         </div>
                     </div>
                 </div>
@@ -244,11 +234,17 @@ export default class CodebookSidebar extends Component {
         return(
             <div className="table-cell sidebar">
                 { this.renderFirstColumn() }
-                <hr style={padding} />
+                <div className="row">
+                    <hr style={padding}/>
+                </div>
                 { this.renderSecondColumn() }
-                <hr style={padding} />
+                <div className="row">
+                    <hr style={padding}/>
+                </div>
                 { this.renderThirdColumn() }
-                <hr style={padding} />
+                <div className="row">
+                    <hr style={padding}/>
+                </div>
                 { this.renderFourthColumn() }
                 <div className="row" style={{ justifyContent: 'space-around' }}>
                     <button className="action-button">
