@@ -65,16 +65,25 @@ export default class CodebookSidebar extends Component {
     renderFirstColumn() {
         return (
             <div>
-                <div className="row sidebar-label">
-                    INDICATOR SHORT NAME
-                </div>
-                <div className="row item-description">
-                    { this.state.data.indicator }
-                </div>
+                { this.state.data.indicator ?
+                    <>
+                        <div className="row sidebar-label">
+                            INDICATOR SHORT NAME
+                        </div>
+                        <div className="row item-description">
+                            { this.state.data.indicator }
+                        </div>
+                    </> : ""
+                }
+
                 <div className="row" style={padding}>
                     <div className="col">
-                        <div className="row sidebar-label">VAR CODE</div>
-                        <div className="row item-codes">{ this.state.data.varCode }</div>
+                        { this.state.data.varCode ?
+                            <>
+                                <div className="row sidebar-label">VAR CODE</div>
+                                <div className="row item-codes">{ this.state.data.varCode }</div>
+                            </> : ""
+                        }
                     </div>
                     <div className="col">
                         <div className="row sidebar-label">IND. GROUP</div>
@@ -116,28 +125,44 @@ export default class CodebookSidebar extends Component {
         return(
             <div>
                 <div style={padding}>
-                    <div className="row sidebar-label">DEFINITION</div>
-                    <div className="row item-info">{this.state.data.definition}</div>
+                    { this.state.data.definition ?
+                        <>
+                            <div className="row sidebar-label">DEFINITION</div>
+                            <div className="row item-info">{this.state.data.definition}</div>
+                        </> : ""
+                    }
                 </div>
                 <div className="row" style={padding}>
                     <div className="col">
-                        <div className="row sidebar-label" >REPORTING RESPONSIBILITY</div>
-                        <div className="row item-info">{this.state.data.reportingResponsibility}</div>
+                        {  this.state.data.reportingResponsibility ?
+                            <>
+                                <div className="row sidebar-label" >REPORTING RESPONSIBILITY</div>
+                                <div className="row item-info">{this.state.data.reportingResponsibility}</div>
+                            </> : ""
+                        }
                     </div>
                     <div className="col">
-                        <div className="row">
-                            <div className="sidebar-label text-right" style={{ 'width': '100%' }}>GATHERING METHOD</div>
-                        </div>
-                        <div className="row">
-                            <div className="item-info text-right" style={{ 'width': '100%' }}>{this.state.data.gathering_method}</div>
-                        </div>
+                        { this.state.data.gathering_method ?
+                            <>
+                                <div className="row">
+                                    <div className="sidebar-label text-right" style={{ 'width': '100%' }}>GATHERING METHOD</div>
+                                </div>
+                                <div className="row">
+                                    <div className="item-info text-right" style={{ 'width': '100%' }}>{this.state.data.gathering_method}</div>
+                                </div>
+                            </> : ""
+                        }
                     </div>
                 </div>
                 <div className="row" style={padding}>
-                    <div className="col">
-                        <div className="row sidebar-label">SOURCE</div>
-                        <div className="row"><a className="item-link" href={this.state.data.source_link}>{this.state.data.source}</a></div>
-                    </div>
+                    { this.state.data.source_link ?
+                        <>
+                            <div className="col">
+                                <div className="row sidebar-label">SOURCE</div>
+                                <div className="row"><a className="item-link" href={this.state.data.source_link}>{this.state.data.source}</a></div>
+                            </div>
+                        </> : ""
+                    }
                 </div>
             </div>
         );
@@ -148,20 +173,36 @@ export default class CodebookSidebar extends Component {
             <div className="row">
                 <div className="col">
                     <div style={padding}>
-                        <div className="row sidebar-label">UNIT OF MEASUREMENT</div>
-                        <div className="row item-info">{this.state.data.unit_of_measurement}</div>
+                        { this.state.data.unit_of_measurement ?
+                            <>
+                                <div className="row sidebar-label">UNIT OF MEASUREMENT</div>
+                                <div className="row item-info">{this.state.data.unit_of_measurement}</div>
+                            </> : ""
+                        }
                     </div>
                     <div style={padding}>
-                        <div className="row sidebar-label">NOTES ON CALCULATION</div>
-                        <div className="row item-info">{this.state.data.notesOnCalculation}</div>
+                        { this.state.data.notesOnCalculation ?
+                            <>
+                                <div className="row sidebar-label">NOTES ON CALCULATION</div>
+                                <div className="row item-info">{this.state.data.notesOnCalculation}</div>
+                            </> : ""
+                        }
                     </div>
                     <div style={padding}>
-                        <div className="row sidebar-label">FREQUENCY OF COLLECTION</div>
-                        <div className="row item-info">{this.state.data.frequencyOfCollection}</div>
+                        { this.state.data.frequencyOfCollection ?
+                           <>
+                               <div className="row sidebar-label">FREQUENCY OF COLLECTION</div>
+                               <div className="row item-info">{this.state.data.frequencyOfCollection}</div>
+                           </> : ""
+                        }
                     </div>
                     <div style={padding}>
-                        <div className="row sidebar-label">PERIOD</div>
-                        <div className="row item-info">{this.state.data.period}</div>
+                        { this.state.data.period ?
+                           <>
+                               <div className="row sidebar-label">PERIOD</div>
+                               <div className="row item-info">{this.state.data.period}</div>
+                           </> : ""
+                        }
                     </div>
                 </div>
             </div>
@@ -173,38 +214,54 @@ export default class CodebookSidebar extends Component {
             <div>
                 <div className="row">
                     <div className="col" style={padding}>
-                        <div className="row">
-                            <div className="sidebar-label">VARIABLE TYPE</div>
-                        </div>
-                        <div className="row">
-                            <div className="item-info">{this.state.data.variableType}</div>
-                        </div>
+                        { this.state.data.variableType ?
+                          <>
+                              <div className="row">
+                                  <div className="sidebar-label">VARIABLE TYPE</div>
+                              </div>
+                              <div className="row">
+                                  <div className="item-info">{this.state.data.variableType}</div>
+                              </div>
+                          </> : ""
+                        }
                     </div>
                     <div className="col" style={padding}>
-                        <div className="row">
-                            <div className="sidebar-label text-right" style={{ 'width': '100%' }}>AUTOMATABILITY</div>
-                        </div>
-                        <div className="row">
-                            <div className="item-info text-right" style={{ 'width': '100%' }}>{this.state.data.automatibility}</div>
-                        </div>
+                        { this.state.data.automatibility ?
+                           <>
+                               <div className="row">
+                                   <div className="sidebar-label text-right" style={{ 'width': '100%' }}>AUTOMATABILITY</div>
+                               </div>
+                               <div className="row">
+                                   <div className="item-info text-right" style={{ 'width': '100%' }}>{this.state.data.automatibility}</div>
+                               </div>
+                           </> : ""
+                        }
                     </div>
                 </div>
                 <div className="row">
                     <div className="col" style={padding}>
-                        <div className="row">
-                            <div className="sidebar-label">GRANULARITY</div>
-                        </div>
-                        <div className="row">
-                            <div className="item-info">{this.state.data.granulity}</div>
-                        </div>
+                        { this.state.data.granulity ?
+                           <>
+                               <div className="row">
+                                   <div className="sidebar-label">GRANULARITY</div>
+                               </div>
+                               <div className="row">
+                                   <div className="item-info">{this.state.data.granulity}</div>
+                               </div>
+                           </> : ""
+                        }
                     </div>
                     <div className="col" style={padding}>
-                        <div className="row">
-                            <div className="sidebar-label text-right" style={{ 'width': '100%' }}>EXPANDABILITY</div>
-                        </div>
-                        <div className="row">
-                            <div className="item-info text-right" style={{ 'width': '100%' }}>{this.state.data.expandability}</div>
-                        </div>
+                        { this.state.data.expandability ?
+                           <>
+                               <div className="row">
+                                   <div className="sidebar-label text-right" style={{ 'width': '100%' }}>EXPANDABILITY</div>
+                               </div>
+                               <div className="row">
+                                   <div className="item-info text-right" style={{ 'width': '100%' }}>{this.state.data.expandability}</div>
+                               </div>
+                           </> : ""
+                        }
                     </div>
                 </div>
             </div>
