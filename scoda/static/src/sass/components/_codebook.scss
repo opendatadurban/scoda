@@ -47,6 +47,7 @@
     letter-spacing: 0;
     line-height: 24px;
     white-space: nowrap;
+    text-align: end;
 
     &:first-child {
       background-color: #fff;
@@ -193,6 +194,7 @@
 .sidebar {
   background-color: #1E272E;
   padding: 40px;
+  height: 100%;
 }
 
 .sidebar-label {
