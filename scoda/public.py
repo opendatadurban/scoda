@@ -1222,15 +1222,25 @@ def api_codebook(page=1):
     for day, dicts_for_group_code in itertools.groupby(query, key=lambda x:x.group_code):
         dicts_for_group_code = list(dicts_for_group_code)
         day_dict = {
-            "id": str(dicts_for_group_code[0].id), "varCode": dicts_for_group_code[0].code,
-            "indicator": dicts_for_group_code[0].name, "c88": dicts_for_group_code[0].c88_theme,
-            "socr": dicts_for_group_code[0].socr_theme, "sdg": dicts_for_group_code[0].sdg_theme,
+            "id": str(dicts_for_group_code[0].id),
+            "varCode": dicts_for_group_code[0].code,
+            "indicator": dicts_for_group_code[0].name,
+            "c88": dicts_for_group_code[0].c88_theme,
+            "socr": dicts_for_group_code[0].socr_theme,
+            "sdg": dicts_for_group_code[0].sdg_theme,
             "definition": dicts_for_group_code[0].definition,
             "source": dicts_for_group_code[0].source.name,
             "reportingResponsibility": dicts_for_group_code[0].reporting_responsibility,
             "notesOnCalculation": dicts_for_group_code[0].notes_on_calculation,
             "variableType": dicts_for_group_code[0].unit.name,
-             "frequencyOfCollection": dicts_for_group_code[0].frequency_of_collection
+            "frequencyOfCollection": dicts_for_group_code[0].frequency_of_collection,
+            "automatibility": dicts_for_group_code[0].automatable,
+            "granulity": dicts_for_group_code[0].granularity,
+            "gathering_method": dicts_for_group_code[0].gathering_method,
+            "expandability": dicts_for_group_code[0].expandable,
+            "period": dicts_for_group_code[0].period,
+            "unit_of_measurement": dicts_for_group_code[0].unit.name,
+            "source_link": dicts_for_group_code[0].url_link
         }
         children = []
         dicts_for_group_code.pop(0)
@@ -1239,7 +1249,7 @@ def api_codebook(page=1):
                 "id": str(d.id),
                 "varCode": d.code,
                 "indicator": d.name,
-                "c88":d.c88_theme,
+                "c88": d.c88_theme,
                 "socr": d.socr_theme,
                 "sdg": d.sdg_theme,
                 "definition": d.definition,
@@ -1247,7 +1257,14 @@ def api_codebook(page=1):
                 "reportingResponsibility": d.reporting_responsibility,
                 "notesOnCalculation": d.notes_on_calculation,
                 "variableType": d.unit.name,
-                "frequencyOfCollection": d.frequency_of_collection
+                "frequencyOfCollection": d.frequency_of_collection,
+                "automatibility": d.automatable,
+                "granulity": d.granularity,
+                "gathering_method": d.gathering_method,
+                "expandability": d.expandable,
+                "period": d.period,
+                "unit_of_measurement": d.unit.name,
+                "source_link": d.url_link
             }
             children.append(child)
         day_dict.update({"children": children})
