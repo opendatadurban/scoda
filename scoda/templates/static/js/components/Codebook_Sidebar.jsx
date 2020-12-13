@@ -129,14 +129,14 @@ export default class CodebookSidebar extends Component {
                             <div className="sidebar-label text-right" style={{ 'width': '100%' }}>GATHERING METHOD</div>
                         </div>
                         <div className="row">
-                            <div className="item-info text-right" style={{ 'width': '100%' }}>Webscrape</div>
+                            <div className="item-info text-right" style={{ 'width': '100%' }}>{this.state.data.gathering_method}</div>
                         </div>
                     </div>
                 </div>
                 <div className="row" style={padding}>
                     <div className="col">
                         <div className="row sidebar-label">SOURCE</div>
-                        <div className="row"><a className="item-link">Stats SA Superweb General Household Survey</a></div>
+                        <div className="row"><a className="item-link" href={this.state.data.source_link}>{this.state.data.source}</a></div>
                     </div>
                 </div>
             </div>
@@ -149,7 +149,7 @@ export default class CodebookSidebar extends Component {
                 <div className="col">
                     <div style={padding}>
                         <div className="row sidebar-label">UNIT OF MEASUREMENT</div>
-                        <div className="row item-info">Number of households</div>
+                        <div className="row item-info">{this.state.data.unit_of_measurement}</div>
                     </div>
                     <div style={padding}>
                         <div className="row sidebar-label">NOTES ON CALCULATION</div>
@@ -161,7 +161,7 @@ export default class CodebookSidebar extends Component {
                     </div>
                     <div style={padding}>
                         <div className="row sidebar-label">PERIOD</div>
-                        <div className="row item-info">January December</div>
+                        <div className="row item-info">{this.state.data.period}</div>
                     </div>
                 </div>
             </div>
@@ -185,7 +185,7 @@ export default class CodebookSidebar extends Component {
                             <div className="sidebar-label text-right" style={{ 'width': '100%' }}>AUTOMATABILITY</div>
                         </div>
                         <div className="row">
-                            <div className="item-info text-right" style={{ 'width': '100%' }}>Yes</div>
+                            <div className="item-info text-right" style={{ 'width': '100%' }}>{this.state.data.automatibility}</div>
                         </div>
                     </div>
                 </div>
@@ -195,7 +195,7 @@ export default class CodebookSidebar extends Component {
                             <div className="sidebar-label">GRANULARITY</div>
                         </div>
                         <div className="row">
-                            <div className="item-info">No</div>
+                            <div className="item-info">{this.state.data.granulity}</div>
                         </div>
                     </div>
                     <div className="col" style={padding}>
@@ -203,7 +203,7 @@ export default class CodebookSidebar extends Component {
                             <div className="sidebar-label text-right" style={{ 'width': '100%' }}>EXPANDABILITY</div>
                         </div>
                         <div className="row">
-                            <div className="item-info text-right" style={{ 'width': '100%' }}>No</div>
+                            <div className="item-info text-right" style={{ 'width': '100%' }}>{this.state.data.expandability}</div>
                         </div>
                     </div>
                 </div>

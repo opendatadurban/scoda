@@ -242,7 +242,7 @@ export default class CodebookDatatable extends Component {
                 this.state.data.map((parentItem, index) => {
                     return (
                         <Fragment key={index}>
-                            <tr className="parent-item" width="100%">
+                            <tr className="parent-item" width="100%" onClick={() => this.selectChild(parentItem)}>
                                 <td width="7%"></td>
                                 <td width="13%">
                                     <div>{parentItem.varCode}</div>
