@@ -3,7 +3,7 @@
     width: 100%;
     z-index: 1000000000;
     background-color: white;
-
+    box-shadow: 1px 1px 4px 0 rgba(0,0,0,0.2);
 
     &.fill {
         box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2);
@@ -78,6 +78,10 @@
 
     .tookit_ {
         margin-right: 35px;
+    }
+
+    .navigation-logo {
+        display: block !important;
     }
 
     // Desktop specific styling

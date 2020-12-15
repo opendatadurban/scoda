@@ -12,26 +12,26 @@
   letter-spacing: 0;
   line-height: 13px;
   text-align: center;
-  padding-top: 15%;
+  padding-top: 23%;
 }
 
 .circle-c88 {
-  height: 20px;
-  width: 20px;
+  height: 25px;
+  width: 25px;
   background-color: #F73E55;
   border-radius: 50%;
 }
 
 .circle-socr {
-  height: 20px;
-  width: 20px;
+  height: 25px;
+  width: 25px;
   background-color: #EAB04B;
   border-radius: 50%;
 }
 
 .circle-sdg {
-  height: 20px;
-  width: 20px;
+  height: 25px;
+  width: 25px;
   background-color: #4F9DA6;
   border-radius: 50%;
 }
@@ -47,6 +47,7 @@
     letter-spacing: 0;
     line-height: 24px;
     white-space: nowrap;
+    text-align: end;
 
     &:first-child {
       background-color: #fff;
@@ -193,6 +194,7 @@
 .sidebar {
   background-color: #1E272E;
   padding: 40px;
+  height: 100%;
 }
 
 .sidebar-label {
@@ -234,12 +236,13 @@
 }
 
 .item-link {
-  color: #FFFFFF;
-  fon-family: Montserrat;
-  font-size: 14px;
-  font-style: italic;
-  letter-spacing: 0;
-  line-height: 20px;
+  color: #FFFFFF !important;
+  font-family: Montserrat !important;
+  font-size: 14px !important;
+  font-style: italic !important;
+  letter-spacing: 0 !important;
+  line-height: 20px !important;
+  font-weight: 400 !important;
 }
 
 .action-button {
@@ -752,4 +755,8 @@ input:checked + .slider:before {
   .filter-label-text {
     max-width: 200px;
   }
+}
+
+.font-weight-400 {
+  font-weight: 400;
 }
