@@ -43,7 +43,7 @@ export default class Navigation_scoda extends Component {
                     <nav className={style_}>
 
                         <a style={{position:"absolute",left:"0"}}   className="navbar-brand d-flex align-items-center">
-                            <Image  style={{width:"105px",display:`${this.state.logo_hide}`}} imgSrc="/static/img/scoda_logo.png" />
+                            <Image className="navigation-logo"  style={{width:"105px",display:`${this.state.logo_hide}`}} imgSrc="/static/img/scoda_logo.png" />
                         </a>
 
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,9 +61,9 @@ export default class Navigation_scoda extends Component {
                                         Toolkits
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a className="dropdown-item" href="/scoda/#/data-stories-details">Data stories</a>
-                                        <a className="dropdown-item" href="/scoda/#/explorer">Indicator explore</a>
-                                        <a className="dropdown-item" href="/scoda/#/demographic-modeller">Demographic modeller</a>
+                                        <a className="dropdown-item" href="/scoda/#/data-stories-details">Data Stories</a>
+                                        <a className="dropdown-item" href="/scoda/#/explorer">Indicator Explore</a>
+                                        <a className="dropdown-item" href="/scoda/#/demographic-modeller">Demographic Modeller</a>
                                         <a className="dropdown-item" href="/scoda/#/codebook">Codebook</a>
                                     </div>
                                 </li>

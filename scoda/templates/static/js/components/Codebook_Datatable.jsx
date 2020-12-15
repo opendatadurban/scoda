@@ -215,22 +215,22 @@ export default class CodebookDatatable extends Component {
                 <tr width="100%">
                     <th width="7%"></th>
                     <th width="13%">
-                        <div>VAR CODE</div>
+                        <div className="font-weight-400">VAR CODE</div>
                     </th>
                     <th width="100%">
-                        <div>INDICATOR SHORT NAME</div>
+                        <div className="font-weight-400">INDICATOR SHORT NAME</div>
                     </th>
                     <th width="10%">
-                        <div>THEMES:</div>
+                        <div className="font-weight-400">THEMES:</div>
                     </th>
                     <th width="5%">
-                        <div>C88</div>
+                        <div className="font-weight-400">C88</div>
                     </th>
                     <th width="5%">
-                        <div>SOCR</div>
+                        <div className="font-weight-400">SOCR</div>
                     </th>
                     <th width="5%">
-                        <div>SDG</div>
+                        <div className="font-weight-400">SDG</div>
                     </th>
                     <th width="5%">
                         <div></div>
@@ -242,7 +242,7 @@ export default class CodebookDatatable extends Component {
                 this.state.data.map((parentItem, index) => {
                     return (
                         <Fragment key={index}>
-                            <tr className="parent-item" width="100%">
+                            <tr className="parent-item" width="100%" onClick={() => this.selectChild(parentItem)}>
                                 <td width="7%"></td>
                                 <td width="13%">
                                     <div>{parentItem.varCode}</div>
