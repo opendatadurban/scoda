@@ -87,7 +87,7 @@ export default class CodebookSidebar extends Component {
                     </div>
                     <div className="col">
                         <div className="row sidebar-label">IND. GROUP</div>
-                        <div className="row item-codes">EE1.1.1</div>
+                        <div className="row item-codes">{ this.state.data.groupCode }</div>
                     </div>
                     <div className="col">
                         <div className="row sidebar-label">THEMES:</div>
