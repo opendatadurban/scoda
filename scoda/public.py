@@ -1221,11 +1221,10 @@ def api_codebook(page=1):
     result_list = [row_count]
     for day, dicts_for_group_code in itertools.groupby(query, key=lambda x:x.group_code):
         dicts_for_group_code = list(dicts_for_group_code)
-        print(dicts_for_group_code)
-        # input('...')
         day_dict = {
             "id": str(dicts_for_group_code[0].id),
             "varCode": dicts_for_group_code[0].code,
+            "groupCode": dicts_for_group_code[0].group_code,
             "indicator": dicts_for_group_code[0].name,
             "c88": dicts_for_group_code[0].c88_theme,
             "socr": dicts_for_group_code[0].socr_theme,
@@ -1250,6 +1249,7 @@ def api_codebook(page=1):
             child = {
                 "id": str(d.id),
                 "varCode": d.code,
+                "groupCode": d.group_code,
                 "indicator": d.name,
                 "c88": d.c88_theme,
                 "socr": d.socr_theme,
