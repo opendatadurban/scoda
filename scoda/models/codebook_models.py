@@ -102,7 +102,7 @@ class CbIndicator(db.Model):
     value_type = relationship("CbValueType")
 
     def __repr__(self):
-        return "<CbIndicator='%s'>" % (self.name)
+        return "<CbIndicator Code='%s'>" % (self.code)
 
     @classmethod
     def all(cls):
