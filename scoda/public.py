@@ -1192,9 +1192,9 @@ def parse_demo():
 @csrf.exempt
 def api_codebook(page=1):
     query = db.session.query(CbIndicator). \
-        join(CbTheme, CbTheme.id == CbIndicator.theme_id). \
-        join(CbSource, CbSource.id == CbIndicator.source_id). \
-        join(CbUnit, CbUnit.id == CbIndicator.unit_id)
+        outerjoin(CbTheme, CbTheme.id == CbIndicator.theme_id). \
+        outerjoin(CbSource, CbSource.id == CbIndicator.source_id). \
+        outerjoin(CbUnit, CbUnit.id == CbIndicator.unit_id)
 
     if request.method == 'POST':
         data = request.get_json()
@@ -1216,11 +1216,13 @@ def api_codebook(page=1):
 
     row_count = query.count()
     query = query.all()
-    query.sort(key=lambda x: x.code)
+    # query.sort(key=lambda x: x.code)
 
     result_list = [row_count]
     for day, dicts_for_group_code in itertools.groupby(query, key=lambda x:x.group_code):
         dicts_for_group_code = list(dicts_for_group_code)
+        print(dicts_for_group_code)
+        # input('...')
         day_dict = {
             "id": str(dicts_for_group_code[0].id),
             "varCode": dicts_for_group_code[0].code,
@@ -1229,7 +1231,7 @@ def api_codebook(page=1):
             "socr": dicts_for_group_code[0].socr_theme,
             "sdg": dicts_for_group_code[0].sdg_theme,
             "definition": dicts_for_group_code[0].definition,
-            "source": dicts_for_group_code[0].source.name,
+            "source": dicts_for_group_code[0].source.name if dicts_for_group_code[0].source else None,
             "reportingResponsibility": dicts_for_group_code[0].reporting_responsibility,
             "notesOnCalculation": dicts_for_group_code[0].notes_on_calculation,
             "variableType": dicts_for_group_code[0].unit.name,
