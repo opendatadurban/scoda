@@ -91,42 +91,52 @@ export default class CTA_block extends Component {
               <ul className="important-links-logos-list container">
                 <li>
                   <div className="item">
+                    <a href="https://www.sacities.net/">
                     <img
                       src="/static/dist/img/SCODA Assets V3_1/3 About Us/Important Links/logo_important-links_sacn.png"
                       alt=""
                     />
+                    </a>
                   </div>
                 </li>
                 <li>
                   <div className="item">
+                    <a href="http://www.socr.co.za/">
                     <img
                       src="/static/dist/img/SCODA Assets V3_1/3 About Us/Important Links/logo_important-links_2016-state-of-cities-report.png"
                       alt=""
                     />
+                    </a>
                   </div>
                 </li>
                 <li>
                   <div className="item">
+                    <a href="http://stepsa.org/about.html">
                     <img
                       src="/static/dist/img/SCODA Assets V3_1/3 About Us/Important Links/logo_important-links_stepsa.png"
                       alt=""
                     />
+                    </a>
                   </div>
                 </li>
                 <li>
                   <div className="item">
+                    <a href="https://salga-unrest.herokuapp.com/salga/municipality">
                     <img
                       src="/static/dist/img/SCODA Assets V3_1/3 About Us/Important Links/logo_important-links_salga.png"
                       alt=""
                     />
+                    </a>
                   </div>
                 </li>
                 <li>
                   <div className="item">
+                    <a href="http://www.statssa.gov.za/">
                     <img
                       src="/static/dist/img/SCODA Assets V3_1/3 About Us/Important Links/logo_important-links_statssa.png"
                       alt=""
                     />
+                    </a>
                   </div>
                 </li>
               </ul>

@@ -11,6 +11,8 @@ export default class ContentSectionRight extends Component {
 
     render() {
 
+         let bannerImage = `/static/dist/img/scoda/datastories/edge.png`;
+         let bannerImageSACN = `/static/dist/img/scoda/datastories/sacn.png`;
         let sectionImage = `/static/dist/img/scoda/datastories/${this.props.img}`;
         let main_class = `justify-content-center ml-0 mt-3 p-0 data-story-card ${this.props.filter_type}`
         let filterTag = {
@@ -29,8 +31,8 @@ export default class ContentSectionRight extends Component {
             position:'relative',
             top:'42px',
             left:'8px',
-            paddingTop:'0.2px',
-            paddingRight:'1.3px'
+            paddingTop:'1.2px',
+            paddingLeft:'2px'
         };
 
         return (
@@ -60,6 +62,7 @@ export default class ContentSectionRight extends Component {
                                   title={this.props.infoBannerTitle}
                                   subtitle={this.props.infoBannerDate}
                                   minutes={this.props.infoBannerMins}
+                                  imgSrc = {bannerImageSACN}
                                 />
                             </div>
                        </div>
