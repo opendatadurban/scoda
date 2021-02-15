@@ -20,10 +20,11 @@ body {
   letter-spacing: 0;
   line-height: 20px;
   padding-bottom: 50px;
+  margin-top:36px;
 }
 
 .hero-block-background {
-    height: 525px;
+    
     width: 90%;
     transform: scaleX(-1);
   }
@@ -93,11 +94,12 @@ body {
     font-weight: bold;
     letter-spacing: 0;
     line-height: 32px;
+    z-index: 100000;
 
   }
 
   .tooglebtn {
-    z-index: 1;
+    z-index: 100000;
   }
   .hero-block-vspacer {
     height:5%;
@@ -145,8 +147,7 @@ body {
     // Mobile specific styling
 
         @media (max-width: $tablet) {
-          margin-bottom: 0px;
-          padding-bottom: 130px;
+
           #contentContainer{
             padding-bottom: 60px;
           }
@@ -162,6 +163,7 @@ body {
 
     .hero-content-column{
       padding-bottom: 90px;
+      
     }
 
     .content-collapsible {

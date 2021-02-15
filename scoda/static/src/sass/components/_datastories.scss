@@ -18,6 +18,7 @@ body {
         line-height: 32px;
         text-align: center;
         border-bottom: 1px solid #131421;
+        margin-left: 360px;
 
     }
 }
@@ -277,6 +278,9 @@ body {
     font-weight: 500;
     letter-spacing: 0;
     line-height: 24px;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
 
     &-num {
         margin-left: 24px;
@@ -285,6 +289,7 @@ body {
 
     &-mins {
         margin-left: 10px;
+        font-size: 14px;
     }
 }
 
@@ -373,7 +378,7 @@ body {
     width: 265px;
     margin-top: 115px !important;
     margin-right: 57px !important;
-    padding-top: 1px;
+    padding-top: 2px;
     border: 1px solid $scoda-grey-dark;
     border-radius: 14px;
     background-color: $scoda-white;
@@ -1034,6 +1039,9 @@ a {
 
 // Mobile specific styling
 @media (max-width: $tablet) {
+    .nav-tabs {
+        margin-left: 0;
+    }
 
     .ds-banner-content {
         margin-bottom: 205px;
