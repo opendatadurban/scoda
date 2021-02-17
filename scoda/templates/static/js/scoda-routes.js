@@ -43,9 +43,8 @@ const _heroPrimaryColor_insight = '#4F9DA6';
 const _heroSecondaryColor_insight = '#4F9DA6';
 
 const _heroTitle_explore = 'Data Explorer';
-const _heroContent_explore = `<b>Our 102 Indicators:</b> More detailed writeup about SOCR indicators and how the how the user can flip through them Our 152 Indicators: More detailed writeup about SOCR indicators and how the how the user can flip through them Our 152 Indicators: More detailed writeup about SOCR indicators and how the how the user can flip through them Our 152 Indicators: More detailed writeup about SOCR indicators and how the how the user can flip through them.
-<br/><br/>
-<b>Our Codebook Indicators:</b>explain in basic terms what the codebook is and how it can be browsed Our Codebook Indicators: explain in basic terms what the codebook is and how it can be browsed Our Codebook Indicators: explain in basic terms what the codebook is and how it can be browsed Our Codebook Indicators: explain in basic terms what the codebook is and how it can be browsed.`;
+const _heroContent_explore = `Our Indicators: We use a diverse range of carefully selected and tested indicators to compile our State of Cities Report.  
+You can browse, analyse and download these individual indicators using our Data Explorer tool.`;
 const _heroInfoTitle_explore = 'ANALYSIS TOOLS';
 const _heroPrimaryColor_explore = '#FFAD5A';
 const _heroSecondaryColor_explore = '#FFAD5A';
