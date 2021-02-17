@@ -25,36 +25,6 @@ export default class CTA_block extends Component {
             </div>
           </div>
         </div>
-        
-        <div className="ml-auto cta-container ">
-          <div className="container ">
-        
-              <div className="row cta-info">
-
-
-                <div className="col-md-6">
-                  <div className="cta-image cta-image-analysis-dashboard"></div>
-                </div>
-                <div class="col-md-6 jumbotron cta-field-description-list-detailed">
-                  <h5>City Dashboards</h5>
-                  <p>
-                   {" The city dashboards provide a visual\n snapshot of key information surrounding\n cities in South Africa."}
-                    </p>
-
-                  <a href="/scoda/#/dashbo">
-                    <button className="btn cta-field-description-list-detailed-btn">See Our Dashboards</button>
-
-                  </a>
-                </div>
-
-                
-              
-
-                <div className="cta-field-description"></div>
-              </div>
-          
-          </div>
-        </div>
         <div className="ml-auto cta-container ">
           <div className="container">
            
@@ -70,8 +40,8 @@ export default class CTA_block extends Component {
                       <h5>Data Explorer</h5>
 
                       <p>
-                        The data explorer provides access to the 102 indicators
-                        used by the South African Cities Network in the State of
+                        The data explorer provides access to the<br/> 102 indicators
+                        used by the South African Cities<br/> Network in the State of
                         Cities Report.
                       </p>
 
@@ -90,18 +60,18 @@ export default class CTA_block extends Component {
           <div className="container ">
               <div className="row cta-info">
                     <div className="col-md-6">
-                      <div className="cta-image cta-image-analysis-constructor"></div>
+                      <div className="cta-image cta-image-codebook"></div>
                     </div>
                
                  
                   <div class="col-md-6 jumbotron  cta-field-description-list-detailed">
-                      <h5>Analysis Constructor</h5>
+                      <h5>Codebook</h5>
 
                       <p>
-                       {" The analysis constructor allows for\n individual indicators to be combined\n with one another in a structure-\npreserving manner. It also allows for the\n separation of indicators into their various\n time-series."}
+                       {"The codebook is a live list of common city\n indicators providing definitions,\n methodologies for collection, and data\n availability of comparable city data."}
                       </p>
-                      <a  href="/scoda/#/explorer">
-                        <button className="btn cta-field-description-list-detailed-btn">See Our Analysis Constructor</button>
+                      <a  href="/scoda/#/codebook">
+                        <button className="btn cta-field-description-list-detailed-btn cta-field-description-list-detailed-btn-codebook">See Our Data Explorer</button>
                       
                       </a>
                     </div>

@@ -144,7 +144,7 @@ export default class CodebookDatatable extends Component {
                               onClick={() => {this.selectChild(item)}}
                               >
                                 <td></td>
-                                <td><div className="pl-1" >{item.varCode}</div></td>
+                                <td><div className="pl-3" >{item.varCode}</div></td>
                                 <td colSpan={2}>
                                   <div>
                                     {item.indicator}
