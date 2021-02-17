@@ -93,9 +93,9 @@
               
             }
 
-            .cta-image-analysis-constructor {
-                background-image: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_4 Analysis Tools/image_analysis-tools_-constructor.png');
-                height: 345px;
+            .cta-image-codebook {
+                background-image: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_4 Analysis Tools/image_analysis_codebook.png');
+                height: 369px;
                 width: 459px;
                 margin-top: 30px;
                 
@@ -249,9 +249,15 @@
                 margin-right: 20px;
                 width: 87%;
                 margin: 0 auto;
+                &-data_stories_text {
+                    margin-top: 216px;
+                }
 
                 &-btn {
                     margin-top: 30px !important;
+                    &-codebook {
+                        margin-top: 99px !important;
+                    }
                 }
             }
         }
