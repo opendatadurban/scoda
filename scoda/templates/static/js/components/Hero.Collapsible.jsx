@@ -26,7 +26,7 @@ export default class Hero extends Component {
             document.getElementById('infoBlock').style.height = '50px';
             document.getElementById('hero-content-column').style.height = '50px';
             document.getElementById('hero-content-column').style.paddingBottom = '0px';
-            document.getElementById('hero-title').style.paddingTop = '15px';
+            // document.getElementById('hero-title').style.paddingTop = '15px';
             document.getElementById('hero-title').style.paddingBottom = '0px';
         }
         else {
