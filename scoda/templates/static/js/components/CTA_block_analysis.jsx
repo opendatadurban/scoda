@@ -41,7 +41,7 @@ export default class CTA_block extends Component {
 
                       <p>
                         The data explorer provides access to the<br/>
-                         102 indicators used by the South African Cities<br/>
+                         indicators used by the South African Cities<br/>
                           Network in the State of Cities Report.
                       </p>
 
