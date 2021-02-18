@@ -32,6 +32,13 @@
                 height: 455px;
                 width: 455px;
                 box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
+                @media(max-width:1495px){
+                    width: 411px;
+                }
+                @media(max-width:1191px){
+                    width: 409px;
+                }
+                
 
             }
 
@@ -73,6 +80,15 @@
                 width: 455px;
                 box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
                 margin-top: 25px;
+
+                @media(max-width:1495px){
+                    height: 255px;
+                    width: 425px;
+                }
+                @media(max-width:1191px){
+                    height: 225px;
+                    width: 405px;
+                }
             }
 
             .cta-image-analysis-data-explore {
@@ -81,6 +97,15 @@
                 width: 455px;
                 box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
                 border-radius: 5.69px;
+
+                @media(max-width:1495px){
+                    height: 120px;
+                    width: 411px;
+                }
+                @media(max-width:1191px){
+                    height: 100px;
+                    width: 405px;
+                }
                
             }
 
@@ -90,6 +115,14 @@
                 width: 455px;
                 box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
                 margin-top:18px;
+                @media(max-width:1495px){
+                    height: 396px;
+                    width: 425px;
+                }
+                @media(max-width:1191px){
+                    height: 376px;
+                    width: 405px;
+                }
               
             }
 
@@ -97,7 +130,18 @@
                 background-image: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_4 Analysis Tools/image_analysis_codebook.png');
                 height: 369px;
                 width: 459px;
-                margin-top: 30px;
+                margin-top: 20px;
+                box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
+                border-radius: 6px;
+                
+                @media(max-width:1495px){
+                    height: 339px;
+                    width: 411px;
+                }
+                @media(max-width:1191px){
+                    height: 329px;
+                    width: 409px;
+                }
                 
             }
 
@@ -154,7 +198,7 @@
             text-align: center;
             width: 74% !important;
             margin: auto;
-            margin-bottom: 49px;
+            margin-bottom: 0;
         }
 
         p {
@@ -182,8 +226,8 @@
             height: 258px;
             width: 300px;
             display: block;
-            margin: auto;
-            margin-top: 60px;
+            margin-left: 5px;
+            margin-top: 70px;
             margin-bottom: 20px;
         }
     }
@@ -276,18 +320,23 @@
             bottom: 476px;
             left:18px;
             height: 75.5%;
+                            
+            @media(max-width:1495px){
+
+                width: 411px;
+            }
+            @media(max-width:1191px){
+
+                width: 409px;
+            }
+            
+            
 
          }
+                        
 
     }
 
-    @media (max-width:1550px) {
-        .cta-info {
-            .btn {
-                width: 100% !important;
-            }
-        }
-    }
 
     @media (max-width: 1376px) {
         .cta-container {
@@ -362,7 +411,7 @@
                 margin: auto;
                 &-computer{
                     width: 62% !important;
-                    margin-top: 18px;
+                    margin-top: 20px;
                 }
             }
 
@@ -394,11 +443,9 @@ p {
 }
 .jumbotron {
     background-color: transparent !important;
-    padding: 2rem 1rem !important;
+    padding: 50px 1rem !important;
 
 }
-
-
 @media (max-width: 1376px) {
     .cta {
         &-search {
