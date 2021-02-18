@@ -32,10 +32,6 @@
                 height: 455px;
                 width: 455px;
                 box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
-
-                @media(max-width:1191px){
-                    width: 409px;
-                }
                 
 
             }
@@ -68,8 +64,6 @@
             @media (max-width: 1300px) {
                     background: linear-gradient(97deg, #FBB65B calc((100vw / 2 - 461px + 368px )), white 0px);
             }
-
-
         .cta-info {
 
             .cta-image-analysis-dashboard {
@@ -78,10 +72,6 @@
                 width: 455px;
                 box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
                 margin-top: 25px;
-
-                @media(max-width:1191px){
-                    width: 405px;
-                }
             }
 
             .cta-image-analysis-data-explore {
@@ -89,12 +79,7 @@
                 height: 140px;
                 width: 455px;
                 box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
-                border-radius: 5.69px;
-
-                @media(max-width:1191px){
-                    width: 405px;
-                }
-               
+                border-radius: 5.69px;  
             }
 
             .cta-image-analysis-demo {
@@ -103,10 +88,6 @@
                 width: 455px;
                 box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
                 margin-top:18px;
-
-                @media(max-width:1191px){
-                    width: 405px;
-                }
               
             }
 
@@ -117,10 +98,6 @@
                 margin-top: 20px;
                 box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
                 border-radius: 6px;
-                
-                @media(max-width:1191px){
-                    width: 409px;
-                }
                 
             }
 
@@ -153,14 +130,7 @@
         box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
         margin-bottom: 50px;
         width: 60%;
-
         margin-right: 23.3%;
-        @media (max-width:1497px) {
-            width: 73%;
-
-            margin-right: 10.3%;
-            
-        }
 
     }
 
@@ -306,18 +276,7 @@
             bottom: 476px;
             left:18px;
             height: 75.5%;
-                            
-            @media(max-width:1495px){
-
-                width: 411px;
-            }
-            @media(max-width:1191px){
-
-                width: 409px;
-            }
-            
-            
-
+                
          }
                         
 
@@ -426,6 +385,15 @@ p {
     padding: 50px 1rem !important;
 
 }
+@media (max-width:1497px) {
+    .cta_block {
+        .cta-container {
+            width: 73%;
+            margin-right: 10.3%;
+
+        }
+    }
+}
 @media (max-width: 1376px) {
     .cta {
         &-search {
@@ -444,4 +412,19 @@ p {
         }
     }
 }
+@media(max-width:1191px){
+    .cta_block {
+        &.cta_block_analysis {
+            .cta-info {
 
+                .cta-image-analysis-dashboard,
+                .cta-image-analysis-data-explore,
+                .cta-image-analysis-demo,.cta-image-codebook {
+                    width: 409px;
+                }
+            }
+
+        }
+    }
+    
+}
