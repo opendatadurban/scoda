@@ -32,9 +32,7 @@
                 height: 455px;
                 width: 455px;
                 box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
-                @media(max-width:1495px){
-                    width: 411px;
-                }
+
                 @media(max-width:1191px){
                     width: 409px;
                 }
@@ -81,12 +79,7 @@
                 box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
                 margin-top: 25px;
 
-                @media(max-width:1495px){
-                    height: 255px;
-                    width: 425px;
-                }
                 @media(max-width:1191px){
-                    height: 225px;
                     width: 405px;
                 }
             }
@@ -98,12 +91,7 @@
                 box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
                 border-radius: 5.69px;
 
-                @media(max-width:1495px){
-                    height: 120px;
-                    width: 411px;
-                }
                 @media(max-width:1191px){
-                    height: 100px;
                     width: 405px;
                 }
                
@@ -115,12 +103,8 @@
                 width: 455px;
                 box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
                 margin-top:18px;
-                @media(max-width:1495px){
-                    height: 396px;
-                    width: 425px;
-                }
+
                 @media(max-width:1191px){
-                    height: 376px;
                     width: 405px;
                 }
               
@@ -134,12 +118,7 @@
                 box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
                 border-radius: 6px;
                 
-                @media(max-width:1495px){
-                    height: 339px;
-                    width: 411px;
-                }
                 @media(max-width:1191px){
-                    height: 329px;
                     width: 409px;
                 }
                 
@@ -176,6 +155,13 @@
         width: 60%;
 
         margin-right: 23.3%;
+        @media (max-width:1497px) {
+            width: 73%;
+
+            margin-right: 10.3%;
+            
+        }
+
     }
 
     .cta-info {
@@ -339,12 +325,6 @@
 
 
     @media (max-width: 1376px) {
-        .cta-container {
-
-            width: 73%;
-            margin-right: 10.3%;
-        }
-
         .cta-info {
             .btn {
                 width: 367px !important;
