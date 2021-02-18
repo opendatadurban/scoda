@@ -40,9 +40,9 @@ export default class CTA_block extends Component {
                       <h5>Data Explorer</h5>
 
                       <p>
-                        The data explorer provides access to the 102 indicators
-                        used by the South African Cities Network in the State of
-                        Cities Report.
+                        The data explorer provides access to the<br/>
+                         102 indicators used by the South African Cities<br/>
+                          Network in the State of Cities Report.
                       </p>
 
                       <a  href="/scoda/#/explorer">
@@ -68,7 +68,7 @@ export default class CTA_block extends Component {
                       <h5>Codebook</h5>
 
                       <p>
-                       {"The codebook is a live list of common city\n indicators providing definitions,\n methodologies for collection, and data\n availability of comparable city data."}
+                       {"The codebook is a live list of common\n city indicators providing definitions,\n methodologies for collection, and data\n availability of comparable city data."}
                       </p>
                       <a  href="/scoda/#/codebook">
                         <button className="btn cta-field-description-list-detailed-btn cta-field-description-list-detailed-btn-codebook">See Our Codebook</button>
