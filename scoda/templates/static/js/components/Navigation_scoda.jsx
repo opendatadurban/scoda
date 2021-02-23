@@ -4,19 +4,19 @@ export default class Navigation_scoda extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            logo_hide:"block"
+            logo_hide:"none"
         }
     }
 
 
     // //HIDE SCODA LOGO ON SCROLL
-    // componentDidMount() {
-    //     document.addEventListener("scroll", () => {
-    //       const logo = window.scrollY < 50 ? "block" : "none";
+    componentDidMount() {
+        document.addEventListener("scroll", () => {
+          const logo = window.scrollY < 50 ? "none" : "block";
     
-    //       this.setState({ logo_hide: logo });
-    //     });
-    //   }
+          this.setState({ logo_hide: logo });
+        });
+      }
     render() {
         
         
