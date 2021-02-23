@@ -9,14 +9,14 @@ export default class Navigation_scoda extends Component {
     }
 
 
-    //HIDE LOGO ON SCROLL
-    componentDidMount() {
-        document.addEventListener("scroll", () => {
-          const logo = window.scrollY < 50 ? "block" : "none";
+    // //HIDE LOGO ON SCROLL
+    // componentDidMount() {
+    //     document.addEventListener("scroll", () => {
+    //       const logo = window.scrollY < 50 ? "block" : "none";
     
-          this.setState({ logo_hide: logo });
-        });
-      }
+    //       this.setState({ logo_hide: logo });
+    //     });
+    //   }
     render() {
         
         
