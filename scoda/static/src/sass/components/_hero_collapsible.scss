@@ -175,6 +175,8 @@ body {
         transition: .2s all ease-in-out;    
         margin-top: 60px;
         padding-top: 0;
+        cursor: pointer;
+        position: relative;
       }
       &.collapse {
         display: flex !important;
