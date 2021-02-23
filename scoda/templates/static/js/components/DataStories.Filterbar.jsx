@@ -19,7 +19,7 @@ export default class FilterBar extends Component {
         ));
 
         return (
-            <div className="container-fluid ml-0 mt-0 p-0 d-none">
+            <div className="container-fluid ml-0 mt-0 p-0">
                <div className="row">
                    <div className="col-0 ds-filter-title">
                        FILTERS:
