@@ -49,7 +49,8 @@ export default class IndicatorExplorerDataCardHeader extends Component {
                         </div>
                         <div className="row">
                             <div className="col-12 mt-1 ml-2 mr-2">
-                              <select id="selector" className="pl-3 mt-2 mr-2 ie-dropdown" onChange={this.enableFilter}>
+                            <div className="ie-dropdown-icon" ></div>
+                              <select id="selector" className="pl-3 mt-2 mr-2 ie-dropdown" onChange={this.enableFilter}>                     
                                   <option value="0">Empty</option>
                                   {selectorOptions}
                               </select>
