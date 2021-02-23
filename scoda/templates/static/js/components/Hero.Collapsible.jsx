@@ -79,14 +79,13 @@ export default class Hero extends Component {
         return (
             <div id="hero" className="hero-block">
                 <div className="container-fluid mt-0 p-0 hero-tab-header">
-                    <div className="row ml-0 mr-0 p-0">
-                        <div className="col-md-5 hero-content-column" id="hero-content-column">
-                            <a >
-                            <div className="row hero-title" id="hero-title" >
-                                <div className="col-0 hero-block-title" onClick={this.toggleHero} style={primaryColor}>{this.props.title}</div>
-                                <div  className="col-1 tooglebtn" ><i className={this.state.hero_caret} style={primaryColor} aria-hidden="true" onClick={this.toggleHero}></i></div>
+                    <div className={[this.state.hero_state + " row ml-0 mr-0 p-0 content-collapsible"]}>
+                        <div className=" col-md-5 hero-content-column" id="hero-content-column">
+                            <div className="row hero-title" id="hero-title">
+                                <a className="click-layer" onClick={this.toggleHero}></a>
+                                <div className="col-0 hero-block-title" style={primaryColor}>{this.props.title}</div>
+                                <div className="col-1 tooglebtn"><i className={this.state.hero_caret} style={primaryColor} aria-hidden="true"></i></div>
                             </div>
-                            </a>
                             <div id="contentContainer" className="row">
                                 <div className="col hero-block-text" dangerouslySetInnerHTML={{__html:this.props.content}}>
                                 </div>
