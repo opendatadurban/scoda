@@ -133,11 +133,14 @@
     //Set the background color to a BadAss Green color 
     &-icon{
         &::after {
-            content: url('/static/dist/img/scoda/dropdown_caret.png');
+            font-family: FontAwesome !important;
+            content: '\f078' !important;
             position: absolute;
-            top: 19px;
-            right: 29px;
+            top: 9px;
+            right: 35px;
             z-index: 1000;
+            font-size: 27px;
+            
             
             }
         }

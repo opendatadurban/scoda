@@ -14,7 +14,7 @@ export default class DataStoriesDetails extends Component {
     }
 
     render() {
-
+        let main_class = `container-fluid ml-0 mt-3 p-0 data-story-card`
         let bannerImage = `/static/dist/img/scoda/datastories/edge.png`;
         let bannerImageSACN = `/static/dist/img/scoda/datastories/sacn.png`;
         let sacnContent = "The South African Cities Network data stories provide succinct visual insight into the key narratives from the South African Cities Network research outputs.";
@@ -74,7 +74,7 @@ export default class DataStoriesDetails extends Component {
                                         href_='/scoda/#/ds-spatial-transformation-2018'
                                     />
                                     <div className="row">
-                                        <div className="col-md-4">
+                                        <div className={"col-md-4 "+main_class+" data-story-card-inclusives"}>
                                             <ContentSectionTop
                                                 img="stateof.png"
                                                 title="State of the EPWP"
@@ -95,7 +95,7 @@ export default class DataStoriesDetails extends Component {
                                                 imgSrc={bannerImageSACN}
                                             />
                                         </div>
-                                        <div className="col-md-4">
+                                        <div className={"col-md-4 "+main_class+" data-story-card-inclusives"}>
                                             <ContentSectionTop
                                                 img="affordability.png"
                                                 title="State of the City Finances 2018"
@@ -116,7 +116,7 @@ export default class DataStoriesDetails extends Component {
                                                 imgSrc={bannerImageSACN}
                                             />
                                         </div>
-                                        <div className="col-md-4">
+                                        <div className={"col-md-4 "+main_class+" data-story-card-well"}>
                                             <ContentSectionTop
                                                 img="urban-safety.png"
                                                 title="Urban Safety"
@@ -175,7 +175,7 @@ export default class DataStoriesDetails extends Component {
                                 />
                                 <FilterBar filters={edgeFilters} colors={edgeColors} />
                                 <div className="row">
-                                    <div className="col-md-4">
+                                <div className={"col-md-4 "+main_class+" data-story-card-employment"}>
                                         <ContentSectionTop
                                             img="unemployed.png"
                                             title="Unemployment in SA’s Major Cities"
@@ -200,7 +200,7 @@ export default class DataStoriesDetails extends Component {
                                             />
                                         </div>
                                     </div>
-                                    <div className="col-md-4">
+                                    <div className={"col-md-4 "+main_class+" data-story-card-economy"}>
                                         <ContentSectionTop
                                             img="durban.png"
                                             title="Durban's Economy Recovers in the Second Quarter"
@@ -223,7 +223,7 @@ export default class DataStoriesDetails extends Component {
                                             />
                                         </div>
                                     </div>
-                                    <div className="col-md-4">
+                                    <div className={"col-md-4 "+main_class+" data-story-card-service"}>
                                         <ContentSectionTop
                                             img="electricity.png"
                                             title="Electricity Usage"
