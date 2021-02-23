@@ -25,7 +25,7 @@ export default class FilterBar extends Component {
                        FILTERS:
                    </div>
                </div>
-               <div className="row">
+               <div className="row ml-2">
                   {pill}
                </div>
             </div>
