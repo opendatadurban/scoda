@@ -131,7 +131,17 @@
     -webkit-appearance: none;
     //Use png at assets/selectArrow.png for the arrow on the right
     //Set the background color to a BadAss Green color 
-    background: url('/static/dist/img/scoda/dropdown_caret.png') no-repeat 98% 80% #FFFFFF;
+    &-icon{
+        &::after {
+            content: url('/static/dist/img/scoda/dropdown_caret.png');
+            position: absolute;
+            top: 19px;
+            right: 29px;
+            z-index: 1000;
+            
+            }
+        }
+
 }
 
 .ie-dropdown-small {
@@ -287,7 +297,7 @@
 }
 
 .google-visualization-table-table {
-    font-family: $scoda-font;
+    font-family: "Montserrat" !important;
     cursor: default;
     margin: 0;
     background: white;

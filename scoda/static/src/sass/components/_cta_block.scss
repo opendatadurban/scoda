@@ -4,12 +4,12 @@
     font-family: 'Montserrat';
     background: linear-gradient(
         71deg, 
-        red calc((100vw / 2 - 570px + 360px )), 
+        #F05252 calc((100vw / 2 - 570px + 360px )), 
         white 0px);
 
         // 13inch laptop
         @media (max-width: 1300px) {
-            background: linear-gradient(78deg, red calc((100vw / 2 - 461px + 360px )), white 0px);
+            background: linear-gradient(78deg, #F05252 calc((100vw / 2 - 461px + 360px )), white 0px);
         }
          
     padding-bottom: 100px;
@@ -25,15 +25,26 @@
 
         .cta-info {
             margin-bottom: -26px;
-            overflow: hidden;
+            overflow:visible;
 
             .cta-image {
-                background-image: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_5 Insight Tools/image_evidence_data-stories.png');
-                height: 455px;
+                background-image: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_5 Insight Tools/image_evidence_data-stories_report.png');
+                height: 400px;
                 width: 455px;
                 box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-left: 5px !important;
                 
+                &-magnified-glass {
+                    content: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_5 Insight Tools/image_evidence_data-stories_magnifying-glass.png');
+                    height: 270px;
+                    position: absolute;
+                    top: 46%;
+                    left: 28px;
 
+
+                }
             }
 
             .btn {
@@ -88,6 +99,7 @@
                 width: 455px;
                 box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
                 margin-top:18px;
+                margin-bottom: 20px;
               
             }
 
@@ -182,9 +194,7 @@
             height: 258px;
             width: 300px;
             display: block;
-            margin-left: 5px;
             margin-top: 70px;
-            margin-bottom: 20px;
         }
     }
 
@@ -250,7 +260,7 @@
                 width: 87%;
                 margin: 0 auto;
                 &-data_stories_text {
-                    margin-top: 216px;
+                    margin-top: 167px;
                 }
 
                 &-btn {
@@ -267,7 +277,6 @@
     .cta-search {
         
         margin-left: 18px !important;
-         box-shadow: none !important;
          margin-top: 18px;
          &-half_shadow {
             box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
