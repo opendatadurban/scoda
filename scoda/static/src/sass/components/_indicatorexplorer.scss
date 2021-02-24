@@ -136,10 +136,10 @@
             font-family: FontAwesome !important;
             content: '\f078' !important;
             position: absolute;
-            top: 9px;
+            top: 14px;
             right: 35px;
-            z-index: 1000;
-            font-size: 27px;
+            pointer-events: none;
+            font-size: 20px;
             
             
             }
