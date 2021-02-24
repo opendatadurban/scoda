@@ -14,7 +14,7 @@ export default class DataStoriesDetails extends Component {
     }
 
     render() {
-        let main_class = `container-fluid ml-0 mt-3 p-0 data-story-card`
+        let main_class = `ml-0 mt-3 p-0 data-story-card`
         let bannerImage = `/static/dist/img/scoda/datastories/edge.png`;
         let bannerImageSACN = `/static/dist/img/scoda/datastories/sacn.png`;
         let sacnContent = "The South African Cities Network data stories provide succinct visual insight into the key narratives from the South African Cities Network research outputs.";
@@ -73,7 +73,7 @@ export default class DataStoriesDetails extends Component {
                                         filter_type="data-story-card-productive"
                                         href_='/scoda/#/ds-spatial-transformation-2018'
                                     />
-                                    <div className="row">
+                                    <div className="row ml-1">
                                         <div className={"col-md-4 "+main_class+" data-story-card-inclusives"}>
                                             <ContentSectionTop
                                                 img="stateof.png"
@@ -174,7 +174,7 @@ export default class DataStoriesDetails extends Component {
                                     viewType="Portal"
                                 />
                                 <FilterBar filters={edgeFilters} colors={edgeColors} />
-                                <div className="row">
+                                <div className="row ml-1">
                                 <div className={"col-md-4 "+main_class+" data-story-card-employment"}>
                                         <ContentSectionTop
                                             img="unemployed.png"
