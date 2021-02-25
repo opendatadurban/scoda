@@ -36,7 +36,7 @@ export default class ContentSectionRight extends Component {
         };
 
         return (
-            <div className={main_class}>
+            <div id={this.props.filter_id} className={main_class}>
                 <a href={this.props.href_} className="card-trigger"></a>
                <div className="container row m-0">
                    <div className="col-md-6 col-lg-8 col-xl-8 p-0 ds-content-image">
