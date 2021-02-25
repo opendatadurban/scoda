@@ -75,57 +75,7 @@ gtag('config', 'UA-127209646-5');
 
 
     <script src="/static/dist/js/scripts.min.js" type="text/javascript"></script>
-    <script>
-        //filter
-$("#filter_ .data-story-trigger").each(function() {
-  $(this).on("click", function(){
-    var filtertag = 'data-story-card';
-    if($(this).hasClass("data-story-card-productive")){
-      filtertag = 'data-story-card-productive';
-    }
-    else if($(this).hasClass("data-story-card-inclusives")){
-      filtertag = 'data-story-card-inclusives';
-    }
-    else if($(this).hasClass("data-story-card-well")){
-      filtertag = 'data-story-card-well';
-    }
-    else if($(this).hasClass("data-story-card-sustainable")){
-      filtertag = 'data-story-card-sustainable';
-    }
-    else if($(this).hasClass("data-story-card-built")){
-      filtertag = 'data-story-card-built';
-    }
-    else if($(this).hasClass("data-story-card-city")){
-      filtertag = 'data-story-card-city';
-    }
-    else if($(this).hasClass("data-story-card-economy")){
-      filtertag = 'data-story-card-economy';
-    }
-    else if($(this).hasClass("data-story-card-employment")){
-      filtertag = 'data-story-card-employment';
-    }
-    else if($(this).hasClass("data-story-card-service")){
-      filtertag = 'data-story-card-service';
-    }
 
-    if($('.data-story-card.' + filtertag).is(":visible") ){
-      $('.data-story-card.' + filtertag).hide();
-    }
-    else{
-      $('.data-story-card.' + filtertag).show();
-    }
-
-    if($(this).hasClass('selected')){
-      $(this).removeClass('selected');
-    }
-    else{
-      $(this).addClass('selected');
-    }
-
-    
-  });
-});
-    </script>
 
     <script>
           if(document.location.href == window.location.origin + '/scoda/#/home' ){

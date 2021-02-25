@@ -67,7 +67,7 @@ export default class IndicatorExplorerDataCardHeader extends Component {
                     </div>
                     <div className="col-0 ml-3 ie-content-card-header-vl"></div>
                     <div className="col-0 pl-5 pt-4 pr-5 ie-content-card-header-info">
-                        The data explorer provides access to the 102 different indicators used by the South African Cities Network in the State of Cities Report.
+                        The data explorer provides access to the different indicators used by the South African Cities Network in the State of Cities Report.
                     </div>
            </div> 
         )
