@@ -37,7 +37,8 @@ def help():
 def api_indicators_list():
     remove_list = ['Poverty rate', 'Gini Coefficient', 'Gross Value Add', 'Exports', 'Multiple deprivation index',
                    'Human Development Index']
-    indicators_list = [[str(c.id), c.in_name] for c in Indicator.all() if c.in_name not in remove_list]
+    # indicators_list = [[str(c.id), c.in_name] for c in Indicator.all() if c.in_name not in remove_list]
+    indicators_list = [[str(c.id), c.name] for c in CbIndicator.all() if c.name not in remove_list]
     # payload = {"indicators_list": indicators_list}
     return jsonify(indicators_list)
 
@@ -57,15 +58,22 @@ def api_explore():
         ind = request.args.get('indicator_id')
     else:
         ind = 76
+    print(ind)
     plot = 1
     tour = 2
-    query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value). \
-        filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
-        filter(DataPoint.region_id == Region.id)
+    # query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value). \
+    #     filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
+    #     filter(DataPoint.region_id == Region.id)
+    # indicator = Indicator.query.get(ind)
+    # codebook query
+    query = db.session.query(CbRegion.name.label('re_name'), CbDataPoint.start_dt, CbIndicator.name.label('ds_name'), CbDataPoint.value). \
+        filter(CbDataPoint.indicator_id == ind).filter(CbDataPoint.indicator_id == CbIndicator.id). \
+        filter(CbDataPoint.region_id == CbRegion.id)
     print(query.all())
-    indicator = Indicator.query.get(ind)
-
     df = read_sql_query(query.statement, query.session.bind)
+    df = df.rename(columns={'name': 're_name', 'name.1': 'ds_name'})
+    print(df.columns)
+    df["year"] = df["start_dt"].apply(lambda x: int(x.strftime('%Y')))
     # df.to_csv('%s/data/%s' % (app.root_path, "data_test.csv"), index=False)
     table = []
     table_plot = []
@@ -93,7 +101,7 @@ def api_explore():
     for i in datasets:
         head.append(str(i))
     table.append(head)
-    table_plot.append(head);
+    table_plot.append(head)
 
     print(df)
     # df.re_name = df.re_name.str.encode('utf-8')
