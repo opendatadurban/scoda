@@ -65,14 +65,13 @@ def api_explore():
     #     filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
     #     filter(DataPoint.region_id == Region.id)
     # indicator = Indicator.query.get(ind)
+
     # codebook query
     query = db.session.query(CbRegion.name.label('re_name'), CbDataPoint.start_dt, CbIndicator.name.label('ds_name'), CbDataPoint.value). \
         filter(CbDataPoint.indicator_id == ind).filter(CbDataPoint.indicator_id == CbIndicator.id). \
         filter(CbDataPoint.region_id == CbRegion.id)
-    print(query.all())
     df = read_sql_query(query.statement, query.session.bind)
     df = df.rename(columns={'name': 're_name', 'name.1': 'ds_name'})
-    print(df.columns)
     df["year"] = df["start_dt"].apply(lambda x: int(x.strftime('%Y')))
     # df.to_csv('%s/data/%s' % (app.root_path, "data_test.csv"), index=False)
     table = []
