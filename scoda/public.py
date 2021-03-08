@@ -33,17 +33,21 @@ def grouper(iterable, n, fillvalue=None):
 def help():
     return render_template('help/help.html')
 
-@app.route('/api/indicators-list', methods=['GET', 'POST'])
-def api_indicators_list():
+@app.route('/api/indicators-list/', defaults={'check': ''})
+@app.route('/api/indicators-list/<check>', methods=['GET', 'POST'])
+def api_indicators_list(check):
     remove_list = ['Poverty rate', 'Gini Coefficient', 'Gross Value Add', 'Exports', 'Multiple deprivation index',
                    'Human Development Index']
-    # indicators_list = [[str(c.id), c.in_name] for c in Indicator.all() if c.in_name not in remove_list]
-    indicators_list = [[str(c.id), c.name] for c in CbIndicator.all() if c.name not in remove_list]
+    if check == "codebook":
+        indicators_list = [[str(c.id), c.name] for c in CbIndicator.query.join(CbDataPoint,CbDataPoint.indicator_id == CbIndicator.id).all() if c.name not in remove_list]
+    else:
+        indicators_list = [[str(c.id), c.in_name] for c in Indicator.all() if c.in_name not in remove_list]
     # payload = {"indicators_list": indicators_list}
     return jsonify(indicators_list)
 
-@app.route('/api/explore', methods=['GET', 'POST'])
-def api_explore():
+@app.route('/api/explore/', defaults={'check': ''})
+@app.route('/api/explore/<check>', methods=['GET', 'POST'])
+def api_explore(check):
     form = ExploreForm()
     status = 200
     plot = 0
@@ -61,19 +65,22 @@ def api_explore():
     print(ind)
     plot = 1
     tour = 2
-    # query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value). \
-    #     filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
-    #     filter(DataPoint.region_id == Region.id)
-    # indicator = Indicator.query.get(ind)
 
     # codebook query
-    query = db.session.query(CbRegion.name.label('re_name'), CbDataPoint.start_dt, CbIndicator.name.label('ds_name'), CbDataPoint.value). \
-        filter(CbDataPoint.indicator_id == ind).filter(CbDataPoint.indicator_id == CbIndicator.id). \
-        filter(CbDataPoint.region_id == CbRegion.id)
-    df = read_sql_query(query.statement, query.session.bind)
-    df = df.rename(columns={'name': 're_name', 'name.1': 'ds_name'})
-    df["year"] = df["start_dt"].apply(lambda x: int(x.strftime('%Y')))
-    # df.to_csv('%s/data/%s' % (app.root_path, "data_test.csv"), index=False)
+    if check == "codebook":
+        query = db.session.query(CbRegion.name.label('re_name'), CbDataPoint.start_dt, CbIndicator.name.label('ds_name'), CbDataPoint.value). \
+            filter(CbDataPoint.indicator_id == ind).filter(CbDataPoint.indicator_id == CbIndicator.id). \
+            filter(CbDataPoint.region_id == CbRegion.id)
+        df = read_sql_query(query.statement, query.session.bind)
+        df = df.rename(columns={'name': 're_name', 'name.1': 'ds_name'})
+        df["year"] = df["start_dt"].apply(lambda x: int(x.strftime('%Y')))
+        df["start_dt"] = df["year"]
+    else:
+        query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value). \
+            filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
+            filter(DataPoint.region_id == Region.id)
+        df = read_sql_query(query.statement, query.session.bind)
+    df.to_csv('%s/data/%s' % (app.root_path, "data_test.csv"), index=False)
     table = []
     table_plot = []
     years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
@@ -102,7 +109,6 @@ def api_explore():
     table.append(head)
     table_plot.append(head)
 
-    print(df)
     # df.re_name = df.re_name.str.encode('utf-8')
     if plot_type == 1:
         df_i = df.iloc[:, [0, 1, 3]]
