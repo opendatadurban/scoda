@@ -76,25 +76,6 @@ const _tabs = [
 export default (
     <HashRouter history={hashHistory}>
 
-      {/* <Route exact path="/demographic-modeller" component={()=> <Navigation_scoda box_shadow={true} />} />
-      <Route exact path="/demographic-modeller" component={()=> <Hero_Collapsable title={_heroTitle_demographics} 
-            content={_heroContent_demographics} 
-            infoTitle={_heroInfoTitle_demographics}
-            primaryColor={_heroPrimaryColor_demographics} 
-            secondaryColor={_heroSecondaryColor_demographics}/>}/>
-            <Route exact path="/demographic-modeller" component={()=><DemographicModeller />} /> */}
-      
-
-       {/*<Route exact path="/hero_collapsible" component={()=> <Hero_Collapsable title={_heroTitle} 
-            content={_heroContent} 
-            infoTitle={_heroInfoTitle}
-            primaryColor={_heroPrimaryColor} 
-            secondaryColor={_heroSecondaryColor}/>}/>
-      <Route exact path="/hero" component={()=> <Hero title={_heroTitle} 
-            content={_heroContent} 
-            infoTitle={_heroInfoTitle}
-            primaryColor={_heroPrimaryColor} 
-secondaryColor={_heroSecondaryColor}/>}/>*/}
 
     <Route path='/data-stories-details'  component={()=> <Navigation_scoda box_shadow={true} />}/>
     <Route exact path="/data-stories-details" component={()=> <Hero_Collapsable title={_heroTitle_insight} 
@@ -146,7 +127,7 @@ secondaryColor={_heroSecondaryColor}/>}/>*/}
       
       <Route path='/datastory' component={DataStories} />
 
-      <Route path='/home' component={()=> <Navigation_scoda box_shadow={false} />} />
+      <Route path='/home' component={()=> <Navigation_scoda logoHide={true} box_shadow={false} />} />
       <Route path='/home' component={Hero} />
       <Route path='/home' component={Preview_block} />
       <Route path='/home' component={CTA_block} />
@@ -155,7 +136,7 @@ secondaryColor={_heroSecondaryColor}/>}/>*/}
       <Route path='/home' component={Sub_Footer} />
       <Route path='/home' component={Footer} />
 
-      <Route path='/about-us' component={()=> <Navigation_scoda box_shadow={false} />} />
+      <Route path='/about-us' component={()=> <Navigation_scoda logoHide={true} box_shadow={false} />} />
       <Route path='/about-us' component={About} />
       <Route path='/about-us' component={Sub_Footer} />
       <Route path='/about-us' component={Footer} />
