@@ -156,6 +156,7 @@ body {
 
     #infoBlock{
       height: unset;
+      transition: .2s height ease-in-out;
     }
 
     .hero-content-column{
@@ -170,16 +171,24 @@ body {
       overflow: hidden;
       .hero-title {
         transition: .2s all ease-in-out;    
-        margin-top: 60px;
         padding-top: 0;
         cursor: pointer;
         position: relative;
+        margin-top: 15px;
+        right: 30px;
+        position: absolute;
+        z-index: 99999999999;
+        top: 94px;
+        .hero-block-title {
+          color: white;
+        }
+        i {
+          color: white;
+        }
       }
       &.collapse {
         display: flex !important;
         max-height: 60px;
-        .hero-title {
-          margin-top: 15px;
-        }
+      
       }
     }
