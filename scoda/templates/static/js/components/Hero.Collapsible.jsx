@@ -70,7 +70,7 @@ export default class Hero extends Component {
         };
 
         var infoBlockBackground = {
-            background: `linear-gradient(75deg, ${this.props.primaryColor} calc(38% - 1px), ${this.props.primaryColor}, #fff calc(38% + 1px))`
+            background: `linear-gradient(112deg, ${this.props.primaryColor} calc(54% - 1px), ${this.props.primaryColor}, #fff calc(38% + 1px))`
         }
 
         var infoTitleCaps = this.props.infoTitle.substring(0,1);
@@ -79,7 +79,7 @@ export default class Hero extends Component {
             <div id="hero" className="hero-block">
                 <div className="container-fluid mt-0 p-0 hero-tab-header">
                     <div className={[this.state.hero_state + " row ml-0 mr-0 p-0 content-collapsible"]}>
-                        <div className="row hero-title" id="hero-title">
+                        <div className="row hero-title p-0" id="hero-title">
                             <a className="click-layer" onClick={this.toggleHero}></a>
                             <div className="col-0 hero-block-title"  onClick={this.toggleHero}>{this.props.title}</div>
                             <div className="col-1 tooglebtn"><i className={this.state.hero_caret} aria-hidden="true"></i></div>
