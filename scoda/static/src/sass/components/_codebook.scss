@@ -72,12 +72,15 @@
 
 .data-table {
   font-family: Montserrat;
-  margin-right: 20px;
+  // margin-right: 20px;
 
   table {
     width: 100%;
-    overflow: hidden;
-    overflow-y: scroll;
+    max-height: calc(100vh - 205px); // subtracting nav, collapsed hero, thead and footer from total window height to get remaining window for table to fit snugly in with scroll. 
+    overflow: auto;
+    display: block;
+    // tbody {
+    // }
   }
 
   table::-webkit-scrollbar {
@@ -100,9 +103,6 @@
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
   }
 
-  table {
-    height: 832px;
-  }
 
   thead {
     tr {
@@ -194,7 +194,29 @@
 .sidebar {
   background-color: #1E272E;
   padding: 40px;
+  max-height: calc(100vh - 200px); // subtracting nav, collapsed hero and footer from total window height to get remaining window for sidebar to fit snugly in with scroll. 
   height: 100%;
+  overflow: auto;
+  
+  &::-webkit-scrollbar {
+    width: 10px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  &::-webkit-scrollbar-track {
+    width: 4px;
+    opacity: 0.4;
+    border-radius: 5px;
+    background-color: #C5C5C5;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 40px;
+    width: 10px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+  }
 }
 
 .sidebar-label {
@@ -268,6 +290,10 @@
 .codebook-modal {
   max-width: none;
   opacity: 0.95;
+  margin: 0;
+  .modal-content{
+    border: 0;
+  }
 }
 
 .modal-open {
@@ -279,6 +305,11 @@
   }
   .tooglebtn {
     z-index: 1;
+  }
+  .modal {
+    // overflow-y: hidden;
+    @include custom-scrollbar(white);
+    overflow-y: auto;
   }
 }
 
@@ -422,7 +453,7 @@ input:checked + .slider:before {
   opacity: 0.3;
   line-height: 14px;
   font-weight: 300;
-  tex-align: center;
+  text-align: center;
 
   &.filter {
     border: 1px solid #fff;
@@ -468,7 +499,7 @@ input:checked + .slider:before {
 }
 
 .modal-container {
-  min-height: 720px;
+  min-height: 100vh;
   width: 100%;
   opacity: 0.95;
   border-radius: 0 3px 0 0;
@@ -490,6 +521,13 @@ input:checked + .slider:before {
   font-size: 14px;
   letter-spacing: 0;
   line-height: 30px;
+}
+
+.filter-content-wrapper {
+  padding: 0px 5%;
+  max-height: calc(100vh - 120px);
+  @include custom-scrollbar (white);
+  overflow-y: auto;
 }
 
 // Responsive Styling

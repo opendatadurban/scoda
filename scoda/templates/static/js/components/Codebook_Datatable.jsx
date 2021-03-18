@@ -217,10 +217,10 @@ export default class CodebookDatatable extends Component {
                     <th width="13%">
                         <div className="font-weight-400">VAR CODE</div>
                     </th>
-                    <th width="100%">
+                    <th width="55%">
                         <div className="font-weight-400">INDICATOR SHORT NAME</div>
                     </th>
-                    <th width="10%">
+                    <th width="5%">
                         <div className="font-weight-400">THEMES:</div>
                     </th>
                     <th width="5%">
