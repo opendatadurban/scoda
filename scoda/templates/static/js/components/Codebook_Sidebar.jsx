@@ -96,7 +96,7 @@ export default class CodebookSidebar extends Component {
                         <div className="row sidebar-label">C88</div>
                         <div className="row">
                             <div className="circle-c88">
-                                <div className="circle-icon-text">{this.getC88Code(this.state.data.varCode)}</div>
+                                <div title={this.getC88Code(this.state.data.varCode)} className="circle-icon-text">{this.getC88Code(this.state.data.varCode)}</div>
                             </div>
                         </div>
                     </div>

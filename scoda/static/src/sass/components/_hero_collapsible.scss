@@ -178,7 +178,7 @@ body {
         right: 30px;
         position: absolute;
         z-index: 2;
-        top: 94px;
+        top: 108px;
         .hero-block-title {
           color: white;
         }
@@ -189,6 +189,9 @@ body {
       &.collapse {
         display: flex !important;
         max-height: 60px;
+        .hero-title {
+          top: 94px;
+        }
       
       }
     }
