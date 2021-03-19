@@ -293,7 +293,7 @@ export default class CodebookFilterModal extends Component {
                                     </div>
                                 </FormGroup>
                                 <hr />
-                                <div style={{padding: '0 5%'}}>
+                                <div className="filter-content-wrapper" style={{padding: '0 5%'}}>
                                     <div className="row">
                                         <div className="modal-subtitle">Filter</div>
                                     </div>
