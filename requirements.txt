@@ -26,7 +26,7 @@ html5lib==1.0.1
 infinity==1.4
 intervals==0.8.0
 itsdangerous==0.24
-Jinja2==2.9.6
+Jinja2==2.11.3
 Mako==1.0.6
 numpy==1.18.4
 olefile==0.44
