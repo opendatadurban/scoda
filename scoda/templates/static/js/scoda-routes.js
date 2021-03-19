@@ -61,6 +61,11 @@ const _heroInfoTitle_codebook = 'ANALYSIS TOOLS';
 const _heroPrimaryColor_codebook = '#FFAD5A';
 const _heroSecondaryColor_codebook = '#FFAD5A';
 
+// Linear gradients
+const _heroLinearGradient_demo = `linear-gradient(112deg, rgb(255, 173, 90) calc(57% - 1px), rgb(255, 173, 90), #fff calc(38% + 1px))`
+const _heroLinearGradient_codebook = `linear-gradient(112deg, rgb(255, 173, 90) calc(40% - 1px), rgb(255, 173, 90), #fff calc(38% + 1px))`
+const _heroLinearGradient_datastories = `linear-gradient(112deg, rgba(79,157,166,1) calc(54% - 1px), rgba(79,157,166,1), #fff calc(38% + 1px))`
+
 
 
 const _tabs = [
@@ -77,23 +82,27 @@ export default (
     <HashRouter history={hashHistory}>
 
 
+      {/* DATA STORY DETAILS */}
     <Route path='/data-stories-details'  component={()=> <Navigation_scoda box_shadow={true} />}/>
     <Route exact path="/data-stories-details" component={()=> <Hero_Collapsable title={_heroTitle_insight} 
             content={_heroContent_insight} 
             infoTitle={_heroInfoTitle_insight}
             primaryColor={_heroPrimaryColor_insight} 
-            secondaryColor={_heroSecondaryColor_insight}/>}/>
+            secondaryColor={_heroSecondaryColor_insight}
+            linearGradient={_heroLinearGradient_datastories}/> } />
 
       <Route exact path="/data-stories-details" component={()=>
             <DataStoriesDetails />} />
       <Route path='/data-stories-details' component={Footer} />
 
+      {/* CODE BOOK */}
       <Route path="/codebook" component={() => <Navigation_scoda box_shadow={true} />} />
       <Route exact path="/codebook" component={() => <Hero_Collapsable title={_heroTitle_codebook}
             content={_heroContent_codebook}
             infoTitle={_heroInfoTitle_codebook}
             primaryColor={_heroPrimaryColor_codebook}
-            secondaryColor={_heroSecondaryColor_codebook} /> } />
+            secondaryColor={_heroSecondaryColor_codebook} 
+            linearGradient={_heroLinearGradient_codebook}/> } />
       <Route exact path="/codebook" component={() => <Codebook />} />      
       <Route path="/codebook" component={Footer} />
       
@@ -146,7 +155,8 @@ export default (
             content={_heroContent_demo} 
             infoTitle={_heroInfoTitle_demo}
             primaryColor={_heroPrimaryColor_demo} 
-            secondaryColor={_heroSecondaryColor_demo}/>}/>
+            secondaryColor={_heroSecondaryColor_demo}
+            linearGradient={_heroLinearGradient_demo}/>}/>
       <Route exact path="/demographic-modeller" component={()=><DemographicModeller />} />
       <Route path="/demographic-modeller" component={Footer} />
 
@@ -155,7 +165,8 @@ export default (
             content={_heroContent_explore} 
             infoTitle={_heroInfoTitle_explore}
             primaryColor={_heroPrimaryColor_explore} 
-            secondaryColor={_heroSecondaryColor_explore}/>}/>
+            secondaryColor={_heroSecondaryColor_explore}
+            linearGradient={_heroLinearGradient_codebook}/>}/>
       <Route exact path="/explorer" component={()=> <IndicatorExplorer />}/>
       <Route path="/explorer" component={Footer} />
     </HashRouter>
