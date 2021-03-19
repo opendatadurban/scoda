@@ -116,7 +116,7 @@ export default class CodebookFilterModal extends Component {
                 {
                     this.state.c88.c88.children.map((childItem, index) => {
                         return(
-                            <Fragment>
+                            <Fragment key={index}>
                                 <div className="row toggle-switch-row" key={index}>
                                     <label className="switch child-switch">
                                         <input
