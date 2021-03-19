@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import $ from 'jquery'
 
+var height;
 
 export default class Hero extends Component {
     constructor(props) {
@@ -10,6 +12,11 @@ export default class Hero extends Component {
         }
 
         this.toggleHero = this.toggleHero.bind(this);
+    }
+    componentDidMount(){
+        height = $('.hero-tab-header').height() + 60;
+        $('#infoBlock').height(height);
+       
     }
 
     toggleHero() {
@@ -36,8 +43,8 @@ export default class Hero extends Component {
             //document.getElementById('contentContainer').style.height = '560px';
             document.getElementById('buttonContainer').style.display = 'block';
             document.getElementById('infoBlockContainer').style.visibility = 'visible';
-            document.getElementById('infoBlock').style.height = '450px';
-            document.getElementById('hero-content-column').style.height = '393px';
+            $('#infoBlock').height(height);
+            document.getElementById('hero-content-column').style.height = height;
            // document.getElementById('hero-content-column').style.transition = 'all 1.2s ease-in-out';
             document.getElementById('hero-content-column').style.paddingBottom = '90px';
       
@@ -70,7 +77,7 @@ export default class Hero extends Component {
         };
 
         var infoBlockBackground = {
-            background: `linear-gradient(112deg, ${this.props.primaryColor} calc(54% - 1px), ${this.props.primaryColor}, #fff calc(38% + 1px))`
+            background: this.props.linearGradient
         }
 
         var infoTitleCaps = this.props.infoTitle.substring(0,1);
