@@ -145,7 +145,7 @@ export default class CodebookDatatable extends Component {
                               >
                                 <td></td>
                                 <td><div className="pl-3" >{item.varCode}</div></td>
-                                <td colSpan={2}>
+                                <td title={item.indicator} colSpan={2}>
                                   <div>
                                     {item.indicator}
                                   </div>
@@ -247,7 +247,7 @@ export default class CodebookDatatable extends Component {
                                 <td width="13%">
                                     <div>{parentItem.varCode}</div>
                                 </td>
-                                <td width="60%" colSpan={2}>
+                                <td width="60%" colSpan={2} title={parentItem.indicator}>
                                     <div>{parentItem.indicator}</div>
                                 </td>
                                 <td width="5%">
