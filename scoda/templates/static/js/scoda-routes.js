@@ -23,7 +23,7 @@ import DataStoriesSpacial from './components/DataStories.Spacial';
 import DataStoriesUrbanSafety from './components/DataStories.UrbanSafety';
 import DataStoriesEPW from './components/DataStories.EPW';
 import IndicatorExplorer from './components/IndicatorExplorer';
-
+import CBIndicatorExplorer from './components/codebook-explorer/CBIndicatorExplorer'
 import TabsAndFilters from './components/TabsAndFilters'
 import DemographicModeller from './components/DemographicModeller';
 import DataStoriesAffordability from './components/DataStories.Affordability';
@@ -169,5 +169,14 @@ export default (
             linearGradient={_heroLinearGradient_codebook}/>}/>
       <Route exact path="/explorer" component={()=> <IndicatorExplorer />}/>
       <Route path="/explorer" component={Footer} />
+
+            <Route path="/codebook-explorer" component={()=> <Navigation_scoda box_shadow={true} />} />
+      <Route exact path="/codebook-explorer" component={()=> <Hero_Collapsable title={_heroTitle_explore}
+            content={_heroContent_explore}
+            infoTitle={_heroInfoTitle_explore}
+            primaryColor={_heroPrimaryColor_explore}
+            secondaryColor={_heroSecondaryColor_explore}/>}/>
+      <Route exact path="/codebook-explorer" component={()=> <CBIndicatorExplorer />}/>
+      <Route path="/codebook-explorer" component={Footer} />
     </HashRouter>
 );
