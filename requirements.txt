@@ -60,3 +60,4 @@ WTForms==2.1
 WTForms-Components==0.10.2
 xhtml2pdf==0.2.4
 xlrd==1.1.1
+whitenoise==5.2.0
