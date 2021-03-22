@@ -106,7 +106,7 @@ class CbIndicator(db.Model):
 
     @classmethod
     def all(cls):
-        return cls.query.order_by(CbIndicator.in_name).all()
+        return cls.query.order_by(CbIndicator.name).all()
 
 
 class CbRegion(db.Model):
