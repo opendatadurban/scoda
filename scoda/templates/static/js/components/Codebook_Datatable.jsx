@@ -258,18 +258,18 @@ export default class CodebookDatatable extends Component {
                                 <td width="5%">
                                     <div className="circle-c88">
                                         <div
-                                            className="circle-icon-text">{this.getC88Code(parentItem.varCode)}</div>
+                                            className="circle-icon-text" title={parentItem.varCode}>{this.getC88Code(parentItem.varCode)}</div>
                                     </div>
                                 </td>
                                 <td width="5%">
                                     <div className="circle-socr">
                                         <div
-                                            className="circle-icon-text">{this.getSORCCode(parentItem.socr)}</div>
+                                            className="circle-icon-text" title={parentItem.socr}>{this.getSORCCode(parentItem.socr)}</div>
                                     </div>
                                 </td>
                                 <td width="5%">
                                     <div className="circle-sdg">
-                                        <div className="circle-icon-text">{this.getSDG(parentItem.sdg)}</div>
+                                        <div className="circle-icon-text" title={parentItem.sdg}>{this.getSDG(parentItem.sdg)}</div>
                                     </div>
                                 </td>
                                 <td className="tooglebtn" width="5%">

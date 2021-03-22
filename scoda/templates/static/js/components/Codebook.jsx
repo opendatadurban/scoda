@@ -97,10 +97,10 @@ export default class Codebook extends Component {
                 <CodebookFilterModal filter={this.filterData} />
                 <Row>
                     <Col xs="12" sm="12" md="12" lg="8" className="no-padding">
-                        <CodebookDatatable setSelectedChild={ this.setSelected } filteredData={ this.state.filterData } />
+                        <CodebookDatatable codes={this.state.codes} setSelectedChild={ this.setSelected } filteredData={ this.state.filterData } />
                     </Col>
                     <Col xs="12" sm="12" md="12" lg="4" className="no-padding">
-                        <CodebookSidebar data={ this.state.selected } />
+                        <CodebookSidebar codes={this.state.codes} data={ this.state.selected } />
                     </Col>
                 </Row>
             </Container>
