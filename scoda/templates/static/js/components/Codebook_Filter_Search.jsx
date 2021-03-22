@@ -7,6 +7,7 @@ import {
     Input,
     FormGroup } from 'reactstrap';
 import filterData from '../data/filterData.js';
+import Toggle from './Toggle';
 
 export default class CodebookFilterModal extends Component {
     constructor(props) {
@@ -98,18 +99,19 @@ export default class CodebookFilterModal extends Component {
                     letterSpacing: '0',
                     lineHeight: '20px',
                     alignItems: 'flex-end'
-                }}>
-                    <label className="switch">
-                        <input
-                            type="checkbox"
-                            name="c88"
-                            onChange={(event) => this.toggleParent(event, this.state.c88.c88.parentSelected)}
-                            value={ this.state.c88.c88.parentSelected }
-                            checked={ this.state.c88.c88.parentSelected }
-                        />
-                        <span className="slider round"></span>
-                    </label>
-                    { this.state.c88.c88.label }:
+                }}>     
+                        
+                    <Toggle 
+                        type="checkbox"
+                        labelClass="primary-label"
+                        className="primary-toggle"
+                        name="c88"
+                        onChange={(event) => this.toggleParent(event, this.state.c88.c88.parentSelected)}
+                        value={ this.state.c88.c88.parentSelected }
+                        checked={ this.state.c88.c88.parentSelected }
+                        labelOff={this.state.c88.c88.label}
+                        labelOn={this.state.c88.c88.label}
+                    />
 
                 </div>
 
@@ -118,17 +120,19 @@ export default class CodebookFilterModal extends Component {
                         return(
                             <Fragment key={index}>
                                 <div className="row toggle-switch-row" key={index}>
-                                    <label className="switch child-switch">
-                                        <input
+                               
+                                        <Toggle
                                             type="checkbox"
+                                            id={index}
                                             value={childItem.selected}
                                             name="c88"
                                             checked={this.state.c88.c88.parentSelected || childItem.selected}
                                             onChange={(event) => {this.toggleChild(event, index)}}
+                                            labelOff={childItem.label}
+                                            labelOn={childItem.label}
+                                            className="secondary-toggle"
                                         />
-                                        <span className="slider round"></span>
-                                    </label>
-                                    <p className="filter-label-text">{ childItem.label }</p>
+
                                 </div>
                             </Fragment>
                         )
@@ -150,17 +154,17 @@ export default class CodebookFilterModal extends Component {
                     lineHeight: '20px',
                     alignItems: 'flex-end'
                 }}>
-                    <label className="switch">
-                        <input
+                        <Toggle
                             type="checkbox"
                             name="socr"
+                            className="primary-toggle"
+                            labelClass="primary-label"
                             onChange={(event) => this.toggleParent(event, this.state.socr.socr.parentSelected)}
                             value={ this.state.socr.socr.parentSelected }
                             checked={ this.state.socr.socr.parentSelected }
+                            labelOn={this.state.socr.socr.label}
+                            labelOff={this.state.socr.socr.label}
                         />
-                        <span className="slider round"></span>
-                    </label>
-                    { this.state.socr.socr.label }:
                 </div>
 
                 {
@@ -168,16 +172,16 @@ export default class CodebookFilterModal extends Component {
                         return(
                             <Fragment key={index}>
                                 <div className="row toggle-switch-row">
-                                    <label className="switch child-switch">
-                                        <input
+                                        <Toggle
                                             type="checkbox"
                                             name="socr"
+                                            id={"socr_" + index}
                                             checked={this.state.socr.socr.parentSelected || childItem.selected}
                                             onChange={(event) => {this.toggleChild(event, index)}}
+                                            labelOn={childItem.label}
+                                            labelOff={childItem.label}
+                                            className="secondary-toggle"
                                         />
-                                        <span className="slider round"></span>
-                                    </label>
-                                    <p className="filter-label-text">{ childItem.label }</p>
                                 </div>
                             </Fragment>
                         );
@@ -199,33 +203,34 @@ export default class CodebookFilterModal extends Component {
                     lineHeight: '20px',
                     alignItems: 'flex-end'
                 }}>
-                    <label className="switch">
-                        <input
+                        <Toggle
                             type="checkbox"
                             name="sdg"
+                            className="primary-toggle"
+                            labelClass="primary-label"
                             onChange={(event) => this.toggleParent(event, this.state.sdg.sdg.parentSelected)}
                             value={ this.state.sdg.sdg.parentSelected }
                             checked={ this.state.sdg.sdg.parentSelected }
+                            labelOn={this.state.sdg.sdg.label}
+                            labelOff={this.state.sdg.sdg.label}
                         />
-                        <span className="slider round"></span>
-                    </label>
-                    { this.state.sdg.sdg.label }:
                 </div>
                 {
                     this.state.sdg.sdg.children.map((childItem, index) => {
                         return(
                             <Fragment key={index}>
                                 <div className="row toggle-switch-row">
-                                    <label className="switch child-switch">
-                                        <input
+                                        <Toggle
                                             type="checkbox"
+                                            className="secondary-toggle"
                                             name="sdg"
+                                            id={"sdg_" + index}
                                             checked={this.state.sdg.sdg.parentSelected || childItem.selected}
                                             onChange={(event) => {this.toggleChild(event, index)}}
+                                            labelOn={childItem.label}
+                                            labelOff={childItem.label}
+                                            title={childItem.label}
                                         />
-                                        <span className="slider round"></span>
-                                    </label>
-                                    <p className="filter-label-text">{ childItem.label }</p>
                                 </div>
                             </Fragment>
                         );

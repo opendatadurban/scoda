@@ -527,6 +527,30 @@ input:checked + .slider:before {
   line-height: 30px;
 }
 
+.toggle label {
+  margin-top: 0;
+  &.primary-label {
+    color: inherit !important;
+    font-weight: bold !important;
+  }
+}
+
+.toggle {
+  &.secondary-toggle {
+    margin-left: 1rem;
+    label {
+      &::before {
+        height: 11px !important;
+        width: 27px !important;
+      }
+      &::after {
+        height: 16px !important;
+        width: 16px !important;
+      }
+    }
+  }
+}
+
 .filter-content-wrapper {
   padding: 0px 5%;
   max-height: calc(100vh - 120px);
