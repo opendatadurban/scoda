@@ -421,10 +421,6 @@ input:checked + .slider:before {
   border-radius: 5px;
 }
 
-.modal-button {
-  margin-top: 0;
-}
-
 .modal-search-bar {
   border-radius: 25px;
   height: 25px;
@@ -457,14 +453,27 @@ input:checked + .slider:before {
   font-weight: 300;
   text-align: center;
   height: 40px;
-
+  margin-top: 0;
+  background-color: transparent !important;
+  
+  &.active {
+    opacity: 1;
+  }
   &.filter {
-    border: 1px solid #fff;
+    border: 1px solid;
+    border-color: white !important;
     border-radius: 30px;
   }
 
   &.cancel {
     text-decoration: underline;
+    border: none !important;
+    box-shadow: none;
+    &:hover, &:focus {
+      box-shadow: none;
+      outline: none;
+
+    }
   }
 }
 
