@@ -72,6 +72,11 @@ export default class CodebookDatatable extends Component {
         });
     }
 
+    selectChildAndToggleAccordion(item,index){
+        this.selectChild(item);
+        this.toggleAccordion(index);
+    }
+
     getC88Code(code) {
         if(!code) {
             return;
@@ -242,7 +247,7 @@ export default class CodebookDatatable extends Component {
                 this.state.data.map((parentItem, index) => {
                     return (
                         <Fragment key={index}>
-                            <tr className="parent-item" width="100%" onClick={() => this.selectChild(parentItem)}>
+                            <tr className="parent-item" width="100%" onClick={() => this.selectChildAndToggleAccordion(parentItem,index)}>
                                 <td width="7%"></td>
                                 <td width="13%">
                                     <div>{parentItem.varCode}</div>
@@ -272,7 +277,7 @@ export default class CodebookDatatable extends Component {
                                         className={parentItem.open ? "fa fa-caret-left fa-2x hero-block-arrow-expand" : "fa fa-caret-down fa-2x hero-block-arrow-expand"}
                                         style={{color: '#2F3442'}}
                                         aria-hidden="true"
-                                        onClick={() => this.toggleAccordion(index)}>
+                                        >
                                     </i></div>
                                 </td>
                             </tr>
