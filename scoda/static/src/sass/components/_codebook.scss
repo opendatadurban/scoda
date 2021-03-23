@@ -72,17 +72,19 @@
 
 .data-table {
   font-family: Montserrat;
-  margin-right: 20px;
+  // margin-right: 20px;
 
   table {
     width: 100%;
-    overflow: hidden;
-    overflow-y: scroll;
+    max-height: calc(100vh - 205px); // subtracting nav, collapsed hero, thead and footer from total window height to get remaining window for table to fit snugly in with scroll. 
+    overflow: auto;
+    display: block;
+    padding-right: 5px;
   }
 
   table::-webkit-scrollbar {
     width: 10px;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
   }
 
   table::-webkit-scrollbar-track {
@@ -97,12 +99,9 @@
     width: 10px;
     border-radius: 5px;
     background-color: #FFFFFF;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 4px 0 rgba(114, 84, 84, 0.3);
   }
 
-  table {
-    height: 832px;
-  }
 
   thead {
     tr {
@@ -136,10 +135,11 @@
   font-size: 16px;
   font-weight: 600;
   white-space: nowrap;
+  cursor: pointer;
 
   td {
 
-    border-bottom: 1px solid #B2BEC3;
+    // border-bottom: 1px solid #B2BEC3;
 
     &:first-child {
       border-bottom: none;
@@ -151,6 +151,7 @@
         text-overflow: ellipsis;
         display: inline-block;
         max-width: 675px;
+        margin-top: 5px;
       }
     }
   }
@@ -175,6 +176,7 @@
       display: inline-block;
       max-width: 675px;
       padding-left: 11px;
+      margin-top: 5px;
     }
   }
 }
@@ -194,7 +196,29 @@
 .sidebar {
   background-color: #1E272E;
   padding: 40px;
+  max-height: calc(100vh - 200px); // subtracting nav, collapsed hero and footer from total window height to get remaining window for sidebar to fit snugly in with scroll. 
   height: 100%;
+  overflow: auto;
+  
+  &::-webkit-scrollbar {
+    width: 10px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  &::-webkit-scrollbar-track {
+    width: 4px;
+    opacity: 0.4;
+    border-radius: 5px;
+    background-color: #C5C5C5;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 40px;
+    width: 10px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+  }
 }
 
 .sidebar-label {
@@ -268,6 +292,10 @@
 .codebook-modal {
   max-width: none;
   opacity: 0.95;
+  margin: 0;
+  .modal-content{
+    border: 0;
+  }
 }
 
 .modal-open {
@@ -279,6 +307,11 @@
   }
   .tooglebtn {
     z-index: 1;
+  }
+  .modal {
+    // overflow-y: hidden;
+    @include custom-scrollbar(white);
+    overflow-y: auto;
   }
 }
 
@@ -297,7 +330,7 @@
 }
 
 .child-switch {
-  transform: scale(0.90) translateY(-8px);
+  transform: scale(0.90) translateY(-1px);
 }
 
 /* Hide default HTML checkbox */
@@ -390,12 +423,10 @@ input:checked + .slider:before {
   border-radius: 5px;
 }
 
-.modal-button {
-  margin-top: 0;
-}
-
 .modal-search-bar {
   border-radius: 25px;
+  height: 25px;
+  margin-bottom: 30px;
 }
 
 .filter-label-text {
@@ -422,15 +453,29 @@ input:checked + .slider:before {
   opacity: 0.3;
   line-height: 14px;
   font-weight: 300;
-  tex-align: center;
-
+  text-align: center;
+  height: 40px;
+  margin-top: 0;
+  background-color: transparent !important;
+  
+  &.active {
+    opacity: 1;
+  }
   &.filter {
-    border: 1px solid #fff;
-    border-radius: 50px;
+    border: 1px solid;
+    border-color: white !important;
+    border-radius: 30px;
   }
 
   &.cancel {
     text-decoration: underline;
+    border: none !important;
+    box-shadow: none;
+    &:hover, &:focus {
+      box-shadow: none;
+      outline: none;
+
+    }
   }
 }
 
@@ -468,7 +513,7 @@ input:checked + .slider:before {
 }
 
 .modal-container {
-  min-height: 720px;
+  min-height: 100vh;
   width: 100%;
   opacity: 0.95;
   border-radius: 0 3px 0 0;
@@ -482,6 +527,7 @@ input:checked + .slider:before {
   font-size: 24px;
   font-weight: bold;
   letter-spacing: 0;
+  margin: 10px 0;
 }
 
 .toggle-subitem {
@@ -490,6 +536,37 @@ input:checked + .slider:before {
   font-size: 14px;
   letter-spacing: 0;
   line-height: 30px;
+}
+
+.toggle label {
+  margin-top: 0;
+  &.primary-label {
+    color: inherit !important;
+    font-weight: bold !important;
+  }
+}
+
+.toggle {
+  &.secondary-toggle {
+    margin-left: 1rem;
+    label {
+      &::before {
+        height: 11px !important;
+        width: 27px !important;
+      }
+      &::after {
+        height: 16px !important;
+        width: 16px !important;
+      }
+    }
+  }
+}
+
+.filter-content-wrapper {
+  padding: 0px 5%;
+  max-height: calc(100vh - 120px);
+  @include custom-scrollbar (white);
+  overflow-y: auto;
 }
 
 // Responsive Styling
@@ -554,6 +631,7 @@ input:checked + .slider:before {
 
         div {
           max-width: 300px;
+          display: block;
         }
       }
     }

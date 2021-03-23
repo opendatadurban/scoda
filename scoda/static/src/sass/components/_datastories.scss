@@ -1090,3 +1090,19 @@ a {
         max-width:100%;
     }
 }
+
+// Desktop specific
+@media (min-width: $tablet) {
+    .nav-tabs {
+        width: 200px;
+        margin-top: -36px;
+        position: absolute;
+    }
+    .data-story-landig-page {
+        top: -73px;
+    }
+
+    .ds-top-header-contents {
+        padding-top: 30px;
+    }
+}
