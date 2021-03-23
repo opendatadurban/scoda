@@ -7,6 +7,7 @@ import {
     Input,
     FormGroup } from 'reactstrap';
 import filterData from '../data/filterData.js';
+import Toggle from './Toggle';
 
 export default class CodebookFilterModal extends Component {
     constructor(props) {
@@ -18,7 +19,8 @@ export default class CodebookFilterModal extends Component {
             socr: filterData[1],
             sdg: filterData[2],
             searchFilterValue: "",
-            filterData: null
+            filterData: null,
+            criteriaChanged: false
         };
     }
 
@@ -38,7 +40,8 @@ export default class CodebookFilterModal extends Component {
         // set an empty array when all items selected
         this.setState({
             // [this.state[filterName]]: copyObj
-            [this.state[filterName]]: []
+            [this.state[filterName]]: [],
+            criteriaChanged: true
         });
     }
 
@@ -59,7 +62,8 @@ export default class CodebookFilterModal extends Component {
             copyObj[filterName].parentSelected = true;
         }
         this.setState({
-            [this.state[filterName]]: copyObj
+            [this.state[filterName]]: copyObj,
+            criteriaChanged: true
         });
     }
 
@@ -76,7 +80,8 @@ export default class CodebookFilterModal extends Component {
             c88: copyC88,
             socr: copySOCR,
             sdg: copySDG,
-            searchFilterValue: ""
+            searchFilterValue: "",
+            criteriaChanged: false
         });
     }
 
@@ -98,37 +103,40 @@ export default class CodebookFilterModal extends Component {
                     letterSpacing: '0',
                     lineHeight: '20px',
                     alignItems: 'flex-end'
-                }}>
-                    <label className="switch">
-                        <input
-                            type="checkbox"
-                            name="c88"
-                            onChange={(event) => this.toggleParent(event, this.state.c88.c88.parentSelected)}
-                            value={ this.state.c88.c88.parentSelected }
-                            checked={ this.state.c88.c88.parentSelected }
-                        />
-                        <span className="slider round"></span>
-                    </label>
-                    { this.state.c88.c88.label }:
+                }}>     
+                        
+                    <Toggle 
+                        type="checkbox"
+                        labelClass="primary-label"
+                        className="primary-toggle"
+                        name="c88"
+                        onChange={(event) => this.toggleParent(event, this.state.c88.c88.parentSelected)}
+                        value={ this.state.c88.c88.parentSelected }
+                        checked={ this.state.c88.c88.parentSelected }
+                        labelOff={this.state.c88.c88.label}
+                        labelOn={this.state.c88.c88.label}
+                    />
 
                 </div>
 
                 {
                     this.state.c88.c88.children.map((childItem, index) => {
                         return(
-                            <Fragment>
+                            <Fragment key={index}>
                                 <div className="row toggle-switch-row" key={index}>
-                                    <label className="switch child-switch">
-                                        <input
+                               
+                                        <Toggle
                                             type="checkbox"
+                                            id={index}
                                             value={childItem.selected}
                                             name="c88"
                                             checked={this.state.c88.c88.parentSelected || childItem.selected}
                                             onChange={(event) => {this.toggleChild(event, index)}}
+                                            labelOff={childItem.label}
+                                            labelOn={childItem.label}
+                                            className="secondary-toggle"
                                         />
-                                        <span className="slider round"></span>
-                                    </label>
-                                    <p className="filter-label-text">{ childItem.label }</p>
+
                                 </div>
                             </Fragment>
                         )
@@ -150,17 +158,17 @@ export default class CodebookFilterModal extends Component {
                     lineHeight: '20px',
                     alignItems: 'flex-end'
                 }}>
-                    <label className="switch">
-                        <input
+                        <Toggle
                             type="checkbox"
                             name="socr"
+                            className="primary-toggle"
+                            labelClass="primary-label"
                             onChange={(event) => this.toggleParent(event, this.state.socr.socr.parentSelected)}
                             value={ this.state.socr.socr.parentSelected }
                             checked={ this.state.socr.socr.parentSelected }
+                            labelOn={this.state.socr.socr.label}
+                            labelOff={this.state.socr.socr.label}
                         />
-                        <span className="slider round"></span>
-                    </label>
-                    { this.state.socr.socr.label }:
                 </div>
 
                 {
@@ -168,16 +176,16 @@ export default class CodebookFilterModal extends Component {
                         return(
                             <Fragment key={index}>
                                 <div className="row toggle-switch-row">
-                                    <label className="switch child-switch">
-                                        <input
+                                        <Toggle
                                             type="checkbox"
                                             name="socr"
+                                            id={"socr_" + index}
                                             checked={this.state.socr.socr.parentSelected || childItem.selected}
                                             onChange={(event) => {this.toggleChild(event, index)}}
+                                            labelOn={childItem.label}
+                                            labelOff={childItem.label}
+                                            className="secondary-toggle"
                                         />
-                                        <span className="slider round"></span>
-                                    </label>
-                                    <p className="filter-label-text">{ childItem.label }</p>
                                 </div>
                             </Fragment>
                         );
@@ -199,33 +207,34 @@ export default class CodebookFilterModal extends Component {
                     lineHeight: '20px',
                     alignItems: 'flex-end'
                 }}>
-                    <label className="switch">
-                        <input
+                        <Toggle
                             type="checkbox"
                             name="sdg"
+                            className="primary-toggle"
+                            labelClass="primary-label"
                             onChange={(event) => this.toggleParent(event, this.state.sdg.sdg.parentSelected)}
                             value={ this.state.sdg.sdg.parentSelected }
                             checked={ this.state.sdg.sdg.parentSelected }
+                            labelOn={this.state.sdg.sdg.label}
+                            labelOff={this.state.sdg.sdg.label}
                         />
-                        <span className="slider round"></span>
-                    </label>
-                    { this.state.sdg.sdg.label }:
                 </div>
                 {
                     this.state.sdg.sdg.children.map((childItem, index) => {
                         return(
                             <Fragment key={index}>
                                 <div className="row toggle-switch-row">
-                                    <label className="switch child-switch">
-                                        <input
+                                        <Toggle
                                             type="checkbox"
+                                            className="secondary-toggle"
                                             name="sdg"
+                                            id={"sdg_" + index}
                                             checked={this.state.sdg.sdg.parentSelected || childItem.selected}
                                             onChange={(event) => {this.toggleChild(event, index)}}
+                                            labelOn={childItem.label}
+                                            labelOff={childItem.label}
+                                            title={childItem.label}
                                         />
-                                        <span className="slider round"></span>
-                                    </label>
-                                    <p className="filter-label-text">{ childItem.label }</p>
                                 </div>
                             </Fragment>
                         );
@@ -293,7 +302,7 @@ export default class CodebookFilterModal extends Component {
                                     </div>
                                 </FormGroup>
                                 <hr />
-                                <div style={{padding: '0 5%'}}>
+                                <div className="filter-content-wrapper" style={{padding: '0 5%'}}>
                                     <div className="row">
                                         <div className="modal-subtitle">Filter</div>
                                     </div>
@@ -331,14 +340,14 @@ export default class CodebookFilterModal extends Component {
                                     </div>
                                     <div className="row mt-2 pb-3">
                                         <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                                            <Button className="modal-button filter" outline onClick={() => {
+                                            <Button className={"modal-button filter " + [this.state.criteriaChanged && " active"]} outline onClick={() => {
                                                 this.toggleModal()
                                                 this.submitForm()
                                             }}>Apply Search & Filter</Button>
                                         </div>
 
                                         <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                                            <Button className="modal-button cancel" outline onClick={() => this.reset()}>Clear Search & Reset Filters</Button>
+                                            <Button className={"modal-button cancel " + [this.state.criteriaChanged && " active"]} outline onClick={() => this.reset()}>Clear Search & Reset Filters</Button>
                                         </div>
                                     </div>
                                 </div>

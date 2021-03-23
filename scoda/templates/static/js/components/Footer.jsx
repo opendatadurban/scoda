@@ -20,19 +20,19 @@ export default class Footer extends Component {
                                 <img src="../../../../static/dist/img/cloud.png" alt="cloud logo" />
                             </a>
                             <a href="https://www.facebook.com/SACitiesNetwork" target="blank__">
-                                <img class="icon" src="../../../../static/dist/img/facebook.png" alt="facebook logo" />
+                                <img className="icon" src="../../../../static/dist/img/facebook.png" alt="facebook logo" />
                             </a>
                             <a href="https://twitter.com/SACitiesNetwork" target="blank__">
                                 <img src="../../../../static/dist/img/twitter.png" alt="twitter logo" />
                             </a>
                             <a href="https://www.linkedin.com/company/3168975/admin/" target="blank__">
-                                <img class="icon" src="../../../../static/dist/img/linkedin.png" alt="linkedin logo" />
+                                <img className="icon" src="../../../../static/dist/img/linkedin.png" alt="linkedin logo" />
                             </a>
                             <a href="https://www.instagram.com/sacitiesnetwork/" target="blank__">
                                 <img src="../../../../static/dist/img/instagram.png" alt="instagram logo" />
                             </a>
                             <a href="https://www.youtube.com/channel/UC1Ro42Ivb9f0La57fuhjJFA/videos?view_as=subscriber" target="blank__">
-                                <img class="icon" src="../../../../static/dist/img/youtube.png" alt="youtube logo" />
+                                <img className="icon" src="../../../../static/dist/img/youtube.png" alt="youtube logo" />
                             </a>
                         </div>
                     </div>
