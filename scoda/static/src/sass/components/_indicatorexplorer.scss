@@ -10,6 +10,23 @@
     height: 100%;
     border-radius: 5px 5px 0 0;
     background-color: $scoda-ie-header;
+    padding: $s-s;
+    .select2 {
+        margin-bottom: $s-s;
+        &-selection--single {
+            border-radius: 30px !important;
+        }
+    }
+    .explainer-text {
+        display: flex;
+        align-items: center;
+        color: rgba(202,202,202,1);
+        border-left: 2px solid white;
+        margin-left: $s-s;
+        padding-left: $s-s;
+        line-height: 24px;
+        font-weight: bold;
+    }
 }
 
 .ie-content-card-header-vl {
@@ -82,11 +99,6 @@
     line-height: 30px;
     text-align: center;
     cursor: pointer;
-    margin: 0 11px;
-    &-explorer {
-        position: absolute;
-        top: 18px;
-    }
 
 }
 
@@ -111,9 +123,7 @@
     line-height: 28px;
     text-align: center;
     cursor: pointer;
-    position: absolute;
-    top: 18px;
-    right: 7px;
+    float: right;
 }
 
 .ie-dropdown {
