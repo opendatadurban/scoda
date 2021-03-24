@@ -184,7 +184,7 @@ secondaryColor={_heroSecondaryColor}/>}/>*/}
             infoTitle={_heroInfoTitle_explore}
             primaryColor={_heroPrimaryColor_explore}
             secondaryColor={_heroSecondaryColor_explore}/>}/>
-      <Route exact path="/codebook-explorer" component={()=> <CBIndicatorExplorer />}/>
+      <Route exact path="/codebook-explorer/:codebook_explorer?" component={()=> <CBIndicatorExplorer />}/>
       <Route path="/codebook-explorer" component={Footer} />
     </HashRouter>
 );
