@@ -110,6 +110,7 @@ export default class CodebookFilterModal extends Component {
                         labelClass="primary-label"
                         className="primary-toggle"
                         name="c88"
+                        id="C88Primary"
                         onChange={(event) => this.toggleParent(event, this.state.c88.c88.parentSelected)}
                         value={ this.state.c88.c88.parentSelected }
                         checked={ this.state.c88.c88.parentSelected }
@@ -161,6 +162,7 @@ export default class CodebookFilterModal extends Component {
                         <Toggle
                             type="checkbox"
                             name="socr"
+                            id="SOCRPrimary"
                             className="primary-toggle"
                             labelClass="primary-label"
                             onChange={(event) => this.toggleParent(event, this.state.socr.socr.parentSelected)}
@@ -210,6 +212,7 @@ export default class CodebookFilterModal extends Component {
                         <Toggle
                             type="checkbox"
                             name="sdg"
+                            id="SDGPrimary"
                             className="primary-toggle"
                             labelClass="primary-label"
                             onChange={(event) => this.toggleParent(event, this.state.sdg.sdg.parentSelected)}

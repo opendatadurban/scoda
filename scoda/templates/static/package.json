@@ -42,6 +42,7 @@
     "react-leaflet": "^2.7.0",
     "react-leaflet-choropleth": "^2.0.1",
     "react-router-dom": "^5.1.2",
+    "react-select2-wrapper": "^1.0.4-beta6",
     "react-simple-maps": "^2.0.0",
     "reactstrap": "^8.4.1",
     "recharts": "^1.8.5",
