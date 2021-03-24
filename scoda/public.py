@@ -42,7 +42,7 @@ def api_indicators_list(check):
         indicators_list = [[str(c.id), c.name] for c in CbIndicator.query.join(CbDataPoint,CbDataPoint.indicator_id == CbIndicator.id).all() if c.name not in remove_list]
     else:
         indicators_list = [[str(c.id), c.in_name] for c in Indicator.all() if c.in_name not in remove_list]
-    print(indicators_list)
+    # print(indicators_list)
     # payload = {"indicators_list": indicators_list}
     return jsonify(indicators_list)
 
