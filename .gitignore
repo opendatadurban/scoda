@@ -58,7 +58,6 @@ instance/
 
 # Scrapy stuff:
 .scrapy
-requirements.txt
 
 # Sphinx documentation
 docs/_build/
