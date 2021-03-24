@@ -5,7 +5,7 @@
 /**
  * Set up a decent box model on the root element
  */
-html {
+ html {
   box-sizing: border-box;
   scroll-behavior: smooth;
   font-family: $font;
@@ -14,19 +14,22 @@ html {
 h1,h2,h3,h4,h5,h6, p, span, label, input, ul {
   @include no-margin-padding;
 }
-// Force the mobile max-width
-.container {
-  //max-width: $content-grid;
-}
 
 body {
-  padding-bottom: 0 !important; // Overrides sharethis inline styles
   background-repeat: repeat;
-  > .content {
-    padding-top: calc(#{$navigation-height-desktop} - 2px);
-    background: white;
+  padding-top: $navigation-height-desktop;
+  background: white;
+  position: relative;
+  // @include custom-scrollbar(white);
+  // overflow-y: auto;
+  
+  // Content wrapper for react
+  #content-scoda{
+    min-height: 100vh;
+    padding-bottom: 32px;
   }
 }
+
 
 /**
 * Make all elements from the DOM inherit from the parent box-sizing
@@ -114,12 +117,7 @@ a {
 }
 
 label {
-//   font-size: 11px;
-//    text-transform: uppercase;
-//   font-weight: 300;
-//   margin-bottom: 0;
-//   margin-right: 5px;
-//   color: #636E72;
+  margin-top: $s-s - 5px;
 }
 
 .show {

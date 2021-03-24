@@ -11,24 +11,23 @@ export default class Navigation_scoda extends Component {
 
     // //HIDE SCODA LOGO ON SCROLL
     componentDidMount() {
-        document.addEventListener("scroll", () => {
-          const logo = window.scrollY < 50 ? "none" : "block";
-    
-          this.setState({ logo_hide: logo });
-        });
+        this.props.logoHide ? (
+            document.addEventListener("scroll", () => {
+                const logo = window.scrollY < 50 ? "none" : "block";
+                
+                this.setState({ logo_hide: logo });
+            })
+        ) : this.setState({ logo_hide: "block" });
       }
     render() {
         
         
-        let style_ = ""
-        if (this.props.box_shadow == true) {
-            style_ = "navbar navbar-expand-lg navbar-light bg-light box-shadow"
-        }
-        else {
-            style_ = "navbar navbar-expand-lg navbar-light bg-light "
-        }
+        let dropShadow = ""
+        this.props.box_shadow && (dropShadow = "box-shadow")
+        this.state.logo_hide == "block" ? dropShadow = "box-shadow" : '';
+       
         return (
-            <div className="navigation-scoda">
+            <div className={"navigation-scoda " + dropShadow}>
                 <div className="top-header d-flex align-items-center justify-content-end">
                     <div className="container">
                         <div className="row">
@@ -40,7 +39,7 @@ export default class Navigation_scoda extends Component {
                     </div>
                 </div>
                 <div className="container">
-                    <nav className={style_}>
+                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
 
                         <a style={{position:"absolute",left:"0"}}   className="navbar-brand d-flex align-items-center">
                             <Image className="navigation-logo"  style={{width:"105px",display:`${this.state.logo_hide}`}} imgSrc="/static/img/scoda_logo.png" />
@@ -71,9 +70,7 @@ export default class Navigation_scoda extends Component {
                                 <li className="nav-item about_">
                                     <a className="nav-link " href="/scoda/#/about-us">About Us </a>
                                 </li>
-                                {/* <li className="nav-item help_">
-           <a className="nav-link " href="#">Help</a>
-       </li> */}
+
                             </ul>
                         </div>
                     </nav>
