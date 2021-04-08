@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import $ from 'jquery'
 
+var height;
 
 export default class Hero extends Component {
     constructor(props) {
@@ -10,6 +12,11 @@ export default class Hero extends Component {
         }
 
         this.toggleHero = this.toggleHero.bind(this);
+    }
+    componentDidMount(){
+        height = $('.hero-tab-header').height() + 60;
+        $('#infoBlock').height(height);
+       
     }
 
     toggleHero() {
@@ -26,7 +33,6 @@ export default class Hero extends Component {
             document.getElementById('infoBlock').style.height = '50px';
             document.getElementById('hero-content-column').style.height = '50px';
             document.getElementById('hero-content-column').style.paddingBottom = '0px';
-            document.getElementById('hero-title').style.paddingTop = '15px';
             document.getElementById('hero-title').style.paddingBottom = '0px';
         }
         else {
@@ -37,8 +43,8 @@ export default class Hero extends Component {
             //document.getElementById('contentContainer').style.height = '560px';
             document.getElementById('buttonContainer').style.display = 'block';
             document.getElementById('infoBlockContainer').style.visibility = 'visible';
-            document.getElementById('infoBlock').style.height = '525px';
-            document.getElementById('hero-content-column').style.height = '393px';
+            $('#infoBlock').height(height);
+            document.getElementById('hero-content-column').style.height = height;
            // document.getElementById('hero-content-column').style.transition = 'all 1.2s ease-in-out';
             document.getElementById('hero-content-column').style.paddingBottom = '90px';
       
@@ -71,7 +77,7 @@ export default class Hero extends Component {
         };
 
         var infoBlockBackground = {
-            background: `linear-gradient(75deg, ${this.props.primaryColor} calc(38% - 1px), ${this.props.primaryColor}, #fff calc(38% + 1px))`
+            background: this.props.linearGradient
         }
 
         var infoTitleCaps = this.props.infoTitle.substring(0,1);
@@ -79,14 +85,13 @@ export default class Hero extends Component {
         return (
             <div id="hero" className="hero-block">
                 <div className="container-fluid mt-0 p-0 hero-tab-header">
-                    <div className="row ml-0 mr-0 p-0">
-                        <div className="col-md-5 hero-content-column" id="hero-content-column">
-                            <a >
-                            <div className="row hero-title" id="hero-title" >
-                                <div className="col-0 hero-block-title" onClick={this.toggleHero} style={primaryColor}>{this.props.title}</div>
-                                <div  className="col-1 tooglebtn" ><i className={this.state.hero_caret} style={primaryColor} aria-hidden="true" onClick={this.toggleHero}></i></div>
-                            </div>
-                            </a>
+                    <div className={[this.state.hero_state + " row ml-0 mr-0 p-0 content-collapsible"]}>
+                        <div className="row hero-title p-0" id="hero-title">
+                            <a className="click-layer" onClick={this.toggleHero}></a>
+                            <div className="col-0 hero-block-title"  onClick={this.toggleHero}>{this.props.title}</div>
+                            <div className="col-1 tooglebtn"><i className={this.state.hero_caret} aria-hidden="true"></i></div>
+                        </div>
+                        <div className=" col-md-5 hero-content-column" id="hero-content-column">
                             <div id="contentContainer" className="row">
                                 <div className="col hero-block-text" dangerouslySetInnerHTML={{__html:this.props.content}}>
                                 </div>

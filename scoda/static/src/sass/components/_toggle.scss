@@ -1,0 +1,97 @@
+.toggle {
+  * :hover {
+    cursor: pointer;
+  }
+
+  margin: 10px 0 0 5px;
+
+  .custom-switch {
+    padding-left: 25px;
+  }
+
+  label {
+    margin-left: 10px;
+    display: block;
+    text-transform: Capitalize;
+    line-height: 25px;
+    font-size: 14px;
+    color: white;
+  }
+
+
+  // Default state overides of bootstraps switch
+  .custom-switch .custom-control-label {
+    color: rgba(255,255,255,0.5);
+    &::before {
+      left: -40px;
+      width: 34px;
+      height: 14px;
+      background-color: rgba(81,79,79,1);
+      box-shadow: none;
+      border: none;
+      top: 6px;
+    }
+
+    &::after {
+      top: 3px;
+      left: -40px;
+      width: 20px;
+      height: 20px;
+      border-radius: 10px;
+      background-color: #F1F1F1;
+      box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.24);
+    }
+  }
+
+  // Checked overrides of bootstraps switch
+  .custom-control-input:checked~.custom-control-label {
+    font-weight: 500;
+    color: white;
+    &::before {
+      border-color: transparent;
+      background-color: rgba(0, 150, 135, 0.5);
+    }
+
+    &::after {
+      background-color: rgba(0, 150, 135, 1);
+      left: -37px;
+
+    }
+  }
+
+
+  &--indicator {
+    &.clinics-bg.true{
+      background-image: url('/static/dist/img/marker_clinic_blue_white-outline.png');
+      background-size: cover;
+    }
+    $diameter: 15px;
+
+    position: absolute;
+    right: 0;
+    top: 4px;
+
+    height: $diameter;
+    width: $diameter;
+    border-radius: $diameter/2;
+
+    background-color: #F1F1F1;
+
+    transition: .2s background-color ease-in-out;
+
+    // Default fallback
+    &.true {
+      background-color: darkgray;
+    }
+
+
+  }
+
+  // General styling
+
+  // Desktop specific styling
+  @media (min-width: $tablet) {}
+
+  // Mobile specific styling
+  @media (max-width: $tablet) {}
+}

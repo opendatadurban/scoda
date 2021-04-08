@@ -21,12 +21,8 @@ export default class CodebookDatatable extends Component {
     componentDidMount() {
         axios.get('/api/codebook/1').then(res => {
             const copyData = res.data.slice(1, res.data.length);
-            // Append open property to each parent item
-            for(let item of copyData) {
-                item.open = false;
-            }
 
-            this.setState({ data: copyData });
+            this.setOpen(copyData);
         });
 
     }
@@ -36,14 +32,25 @@ export default class CodebookDatatable extends Component {
             axios.post('/api/codebook/1', this.props.filteredData).then(data => {
                 const copyData = data.data.slice(1, data.data.length);
 
-                // Append open property to each parent item
-                for(let item of copyData) {
-                    item.open = false;
-                }
-
-                this.setState({ data: copyData });
+               this.setOpen(copyData);
             });
         }
+    }
+
+    setOpen(data) {
+        // Append open property to each parent item
+        let selected = null
+        for(let [index, item] of data.entries()) {
+            if(!selected) {
+                item.open = item.children.length > 0;
+                selected = item.children[0]
+            }
+        }
+
+        this.setState({
+            data: data,
+            selected
+        });
     }
 
     selectChild(item) {
@@ -63,6 +70,11 @@ export default class CodebookDatatable extends Component {
         this.setState({
             data: copyData
         });
+    }
+
+    selectChildAndToggleAccordion(item,index){
+        this.selectChild(item);
+        this.toggleAccordion(index);
     }
 
     getC88Code(code) {
@@ -125,21 +137,53 @@ export default class CodebookDatatable extends Component {
         }
     }
 
-    renderChildren(parent) {
+    renderDesktopChildren(parent) {
         const { selected } = this.state
         if (parent.children.length > 0) {
             return parent.children.map(item => {
                 if (parent.open) {
                     return(
                         <Fragment key={item.id}>
-                            <tr className={"child-item" + (selected && selected.id === item.id? " selected-child-item" : "")} onClick={() => {this.selectChild(item)}}>
+                            <tr
+                              className={"child-item" + (selected && selected.id === item.id? " selected-child-item" : "")}
+                              onClick={() => {this.selectChild(item)}}
+                              >
                                 <td></td>
-                                <td><div className="pl-1">{item.varCode}</div></td>
-                                <td colSpan="2"><div>{item.indicator}</div></td>
+                                <td><div className="pl-3" >{item.varCode}</div></td>
+                                <td title={item.indicator} colSpan={2}>
+                                  <div>
+                                    {item.indicator}
+                                  </div>
+                                </td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                            </tr>
+                        </Fragment>
+                    );
+                }
+            })
+        }
+    }
+
+    renderMobileChildren(parent) {
+        const { selected } = this.state
+        if (parent.children.length > 0) {
+            return parent.children.map(item => {
+                if (parent.open) {
+                    return(
+                        <Fragment key={item.id}>
+                            <tr
+                              className={"child-item" + (selected && selected.id === item.id? " selected-child-item" : "")}
+                              onClick={() => {this.selectChild(item)}}
+                              >
+                                <td width={(window.innerWidth / 100 * 10) + "%"}></td>
+                                <td width={(window.innerWidth / 100 * 90) + "%"} colSpan={2}>
+                                  <div>
+                                    {item.indicator}
+                                  </div>
+                                </td>
                             </tr>
                         </Fragment>
                     );
@@ -154,103 +198,170 @@ export default class CodebookDatatable extends Component {
                 <tfoot>
                     <tr>
                         <th></th>
-                        <th>
-                            <div></div>
+                        <th></th>
+                        <th className="text-center">
+                            <p className="codebook-loader-text">Loading more on scroll...</p>
                         </th>
-                        <th colSpan="6">
-                            <div>Loading data...</div>
-                        </th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </tfoot>
             )
         }
     }
 
+    renderDesktopTable() {
+      return (
+        <Table hover>
+            <thead width="100%">
+                <tr width="100%">
+                    <th width="7%"></th>
+                    <th width="13%">
+                        <div className="font-weight-400">VAR CODE</div>
+                    </th>
+                    <th width="55%">
+                        <div className="font-weight-400">INDICATOR SHORT NAME</div>
+                    </th>
+                    <th width="5%">
+                        <div className="font-weight-400">THEMES:</div>
+                    </th>
+                    <th width="5%">
+                        <div className="font-weight-400">C88</div>
+                    </th>
+                    <th width="5%">
+                        <div className="font-weight-400">SOCR</div>
+                    </th>
+                    <th width="5%">
+                        <div className="font-weight-400">SDG</div>
+                    </th>
+                    <th width="5%">
+                        <div></div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody width="100%">
+            {
+                this.state.data.map((parentItem, index) => {
+                    return (
+                        <Fragment key={index}>
+                            <tr className="parent-item" width="100%" onClick={() => this.selectChildAndToggleAccordion(parentItem,index)}>
+                                <td width="7%"></td>
+                                <td width="13%">
+                                    <div>{parentItem.varCode}</div>
+                                </td>
+                                <td width="60%" colSpan={2} title={parentItem.indicator}>
+                                    <div>{parentItem.indicator}</div>
+                                </td>
+                                <td width="5%">
+                                    <div className="circle-c88">
+                                        <div
+                                            className="circle-icon-text" title={parentItem.varCode}>{this.getC88Code(parentItem.varCode)}</div>
+                                    </div>
+                                </td>
+                                <td width="5%">
+                                    <div className="circle-socr">
+                                        <div
+                                            className="circle-icon-text" title={parentItem.socr}>{this.getSORCCode(parentItem.socr)}</div>
+                                    </div>
+                                </td>
+                                <td width="5%">
+                                    <div className="circle-sdg">
+                                        <div className="circle-icon-text" title={parentItem.sdg}>{this.getSDG(parentItem.sdg)}</div>
+                                    </div>
+                                </td>
+                                <td className="tooglebtn" width="5%">
+                                    <div><i
+                                        className={parentItem.open ? "fa fa-caret-left fa-2x hero-block-arrow-expand" : "fa fa-caret-down fa-2x hero-block-arrow-expand"}
+                                        style={{color: '#2F3442'}}
+                                        aria-hidden="true"
+                                        >
+                                    </i></div>
+                                </td>
+                            </tr>
+                            {this.renderDesktopChildren(parentItem)}
+                        </Fragment>
+                    );
+                })
+            }
+            </tbody>
+            {
+                this.renderLoading()
+            }
+        </Table>
+      )
+    }
+
+    renderMobileTable() {
+      return (
+        <Table hover responsive>
+            <thead width="100%">
+                <tr width="100%">
+                    <th width={(window.innerWidth / 100 * 10) + "%"}></th>
+                    <th width={(window.innerWidth / 100 * 70) + "%"}>
+                        <div>INDICATOR SHORT NAME</div>
+                    </th>
+                    <th width={(window.innerWidth / 100 * 20) + "%"}>
+                        <div></div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody width="100%">
+            {
+                this.state.data.map((parentItem, index) => {
+                    return (
+                        <Fragment key={index}>
+                            <tr className="parent-item" width="100%">
+                                <td width={(window.innerWidth / 100 * 10) + "%"}></td>
+                                <td width={(window.innerWidth / 100 * 70) + "%"}>
+                                    <div width={(window.innerWidth / 100 * 70) + "%"}>{parentItem.indicator}</div>
+                                    <div className="mobile-meta">
+                                        <div className="mobile-text">
+                                          <small><strong>{parentItem.varCode}</strong></small>
+                                        </div>
+                                        <div className="mobile-icons">
+                                          <div className="circle-c88">
+                                              <div className="circle-icon-text">{this.getC88Code(parentItem.varCode)}</div>
+                                          </div>
+                                          <div className="circle-socr">
+                                              <div className="circle-icon-text">{this.getSORCCode(parentItem.socr)}</div>
+                                          </div>
+                                          <div className="circle-sdg">
+                                            <div className="circle-icon-text">{this.getSDG(parentItem.sdg)}</div>
+                                          </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td className="tooglebtn" width={(window.innerWidth / 100 * 20) + "%"}>
+                                    <div><i
+                                        className={parentItem.open ? "fa fa-caret-left fa-2x hero-block-arrow-expand" : "fa fa-caret-down fa-2x hero-block-arrow-expand"}
+                                        style={{color: '#2F3442'}}
+                                        aria-hidden="true"
+                                        onClick={() => this.toggleAccordion(index)}>
+                                    </i></div>
+                                </td>
+                            </tr>
+                            {this.renderMobileChildren(parentItem)}
+                        </Fragment>
+                    );
+                })
+            }
+            </tbody>
+            {
+                this.renderLoading()
+            }
+        </Table>
+      )
+    }
+
     render() {
         return(
             <div className="data-table" onScroll={(event) => this.trackScrolling(event)}>
-                <Table hover responsive>
-                    <thead width="100%">
-                        <tr width="100%">
-                            <th width="7%"></th>
-                            <th width="13%">
-                                <div>VAR CODE</div>
-                            </th>
-                            <th width="100%">
-                                <div>INDICATOR SHORT NAME</div>
-                            </th>
-                            <th width="10%">
-                                <div>THEMES:</div>
-                            </th>
-                            <th width="5%">
-                                <div>C88</div>
-                            </th>
-                            <th width="5%">
-                                <div>SOCR</div>
-                            </th>
-                            <th width="5%">
-                                <div>SDG</div>
-                            </th>
-                            <th width="5%">
-                                <div></div>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody width="100%">
-                    {
-                        this.state.data.map((parentItem, index) => {
-                            return (
-                                <Fragment key={index}>
-                                    <tr className="parent-item" width="100%">
-                                        <td width="7%"></td>
-                                        <td width="13%">
-                                            <div>{parentItem.varCode}</div>
-                                        </td>
-                                        <td width="60%" colSpan="2">
-                                            <div>{parentItem.indicator}</div>
-                                              <div className="mobile-only"><i
-                                                  className={parentItem.open ? "fa fa-caret-left fa-2x hero-block-arrow-expand" : "fa fa-caret-down fa-2x hero-block-arrow-expand"}
-                                                  style={{color: '#2F3442'}}
-                                                  aria-hidden="true"
-                                                  onClick={() => this.toggleAccordion(index)}>
-                                              </i></div>
-                                        </td>
-                                        <td width="5%">
-                                            <div className="circle-c88">
-                                                <div
-                                                    className="circle-icon-text">{this.getC88Code(parentItem.varCode)}</div>
-                                            </div>
-                                        </td>
-                                        <td width="5%">
-                                            <div className="circle-socr">
-                                                <div
-                                                    className="circle-icon-text">{this.getSORCCode(parentItem.socr)}</div>
-                                            </div>
-                                        </td>
-                                        <td width="5%">
-                                            <div className="circle-sdg">
-                                                <div className="circle-icon-text">{this.getSDG(parentItem.sdg)}</div>
-                                            </div>
-                                        </td>
-                                        <td className="tooglebtn" width="5%">
-                                            <div><i
-                                                className={parentItem.open ? "fa fa-caret-left fa-2x hero-block-arrow-expand" : "fa fa-caret-down fa-2x hero-block-arrow-expand"}
-                                                style={{color: '#2F3442'}}
-                                                aria-hidden="true"
-                                                onClick={() => this.toggleAccordion(index)}>
-                                            </i></div>
-                                        </td>
-                                    </tr>
-                                    {this.renderChildren(parentItem)}
-                                </Fragment>
-                            );
-                        })
-                    }
-                    </tbody>
-                    {
-                        this.renderLoading()
-                    }
-                </Table>
+              {!window.innerWidth <= 768
+                ? this.renderDesktopTable() : this.renderMobileTable()
+              }
             </div>
         );
     }

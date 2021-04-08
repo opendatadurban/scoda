@@ -23,7 +23,7 @@ import DataStoriesSpacial from './components/DataStories.Spacial';
 import DataStoriesUrbanSafety from './components/DataStories.UrbanSafety';
 import DataStoriesEPW from './components/DataStories.EPW';
 import IndicatorExplorer from './components/IndicatorExplorer';
-
+import CBIndicatorExplorer from './components/codebook-explorer/CBIndicatorExplorer'
 import TabsAndFilters from './components/TabsAndFilters'
 import DemographicModeller from './components/DemographicModeller';
 import DataStoriesAffordability from './components/DataStories.Affordability';
@@ -43,9 +43,8 @@ const _heroPrimaryColor_insight = '#4F9DA6';
 const _heroSecondaryColor_insight = '#4F9DA6';
 
 const _heroTitle_explore = 'Data Explorer';
-const _heroContent_explore = `<b>Our 102 Indicators:</b> More detailed writeup about SOCR indicators and how the how the user can flip through them Our 152 Indicators: More detailed writeup about SOCR indicators and how the how the user can flip through them Our 152 Indicators: More detailed writeup about SOCR indicators and how the how the user can flip through them Our 152 Indicators: More detailed writeup about SOCR indicators and how the how the user can flip through them.
-<br/><br/>
-<b>Our Codebook Indicators:</b>explain in basic terms what the codebook is and how it can be browsed Our Codebook Indicators: explain in basic terms what the codebook is and how it can be browsed Our Codebook Indicators: explain in basic terms what the codebook is and how it can be browsed Our Codebook Indicators: explain in basic terms what the codebook is and how it can be browsed.`;
+const _heroContent_explore = `Our Indicators: We use a diverse range of carefully selected and tested indicators to compile our State of Cities Report.  
+You can browse, analyse and download these individual indicators using our Data Explorer tool.`;
 const _heroInfoTitle_explore = 'ANALYSIS TOOLS';
 const _heroPrimaryColor_explore = '#FFAD5A';
 const _heroSecondaryColor_explore = '#FFAD5A';
@@ -62,6 +61,11 @@ const _heroInfoTitle_codebook = 'ANALYSIS TOOLS';
 const _heroPrimaryColor_codebook = '#FFAD5A';
 const _heroSecondaryColor_codebook = '#FFAD5A';
 
+// Linear gradients
+const _heroLinearGradient_demo = `linear-gradient(112deg, rgb(255, 173, 90) calc(57% - 1px), rgb(255, 173, 90), #fff calc(38% + 1px))`
+const _heroLinearGradient_codebook = `linear-gradient(112deg, rgb(255, 173, 90) calc(40% - 1px), rgb(255, 173, 90), #fff calc(38% + 1px))`
+const _heroLinearGradient_datastories = `linear-gradient(112deg, rgba(79,157,166,1) calc(54% - 1px), rgba(79,157,166,1), #fff calc(38% + 1px))`
+
 
 
 const _tabs = [
@@ -77,43 +81,28 @@ const _tabs = [
 export default (
     <HashRouter history={hashHistory}>
 
-      {/* <Route exact path="/demographic-modeller" component={()=> <Navigation_scoda box_shadow={true} />} />
-      <Route exact path="/demographic-modeller" component={()=> <Hero_Collapsable title={_heroTitle_demographics} 
-            content={_heroContent_demographics} 
-            infoTitle={_heroInfoTitle_demographics}
-            primaryColor={_heroPrimaryColor_demographics} 
-            secondaryColor={_heroSecondaryColor_demographics}/>}/>
-            <Route exact path="/demographic-modeller" component={()=><DemographicModeller />} /> */}
-      
 
-       {/*<Route exact path="/hero_collapsible" component={()=> <Hero_Collapsable title={_heroTitle} 
-            content={_heroContent} 
-            infoTitle={_heroInfoTitle}
-            primaryColor={_heroPrimaryColor} 
-            secondaryColor={_heroSecondaryColor}/>}/>
-      <Route exact path="/hero" component={()=> <Hero title={_heroTitle} 
-            content={_heroContent} 
-            infoTitle={_heroInfoTitle}
-            primaryColor={_heroPrimaryColor} 
-secondaryColor={_heroSecondaryColor}/>}/>*/}
-
+      {/* DATA STORY DETAILS */}
     <Route path='/data-stories-details'  component={()=> <Navigation_scoda box_shadow={true} />}/>
     <Route exact path="/data-stories-details" component={()=> <Hero_Collapsable title={_heroTitle_insight} 
             content={_heroContent_insight} 
             infoTitle={_heroInfoTitle_insight}
             primaryColor={_heroPrimaryColor_insight} 
-            secondaryColor={_heroSecondaryColor_insight}/>}/>
+            secondaryColor={_heroSecondaryColor_insight}
+            linearGradient={_heroLinearGradient_datastories}/> } />
 
       <Route exact path="/data-stories-details" component={()=>
             <DataStoriesDetails />} />
       <Route path='/data-stories-details' component={Footer} />
 
+      {/* CODE BOOK */}
       <Route path="/codebook" component={() => <Navigation_scoda box_shadow={true} />} />
       <Route exact path="/codebook" component={() => <Hero_Collapsable title={_heroTitle_codebook}
             content={_heroContent_codebook}
             infoTitle={_heroInfoTitle_codebook}
             primaryColor={_heroPrimaryColor_codebook}
-            secondaryColor={_heroSecondaryColor_codebook} /> } />
+            secondaryColor={_heroSecondaryColor_codebook} 
+            linearGradient={_heroLinearGradient_codebook}/> } />
       <Route exact path="/codebook" component={() => <Codebook />} />      
       <Route path="/codebook" component={Footer} />
       
@@ -147,7 +136,7 @@ secondaryColor={_heroSecondaryColor}/>}/>*/}
       
       <Route path='/datastory' component={DataStories} />
 
-      <Route path='/home' component={()=> <Navigation_scoda box_shadow={false} />} />
+      <Route path='/home' component={()=> <Navigation_scoda logoHide={true} box_shadow={false} />} />
       <Route path='/home' component={Hero} />
       <Route path='/home' component={Preview_block} />
       <Route path='/home' component={CTA_block} />
@@ -156,7 +145,7 @@ secondaryColor={_heroSecondaryColor}/>}/>*/}
       <Route path='/home' component={Sub_Footer} />
       <Route path='/home' component={Footer} />
 
-      <Route path='/about-us' component={()=> <Navigation_scoda box_shadow={false} />} />
+      <Route path='/about-us' component={()=> <Navigation_scoda logoHide={true} box_shadow={false} />} />
       <Route path='/about-us' component={About} />
       <Route path='/about-us' component={Sub_Footer} />
       <Route path='/about-us' component={Footer} />
@@ -166,7 +155,8 @@ secondaryColor={_heroSecondaryColor}/>}/>*/}
             content={_heroContent_demo} 
             infoTitle={_heroInfoTitle_demo}
             primaryColor={_heroPrimaryColor_demo} 
-            secondaryColor={_heroSecondaryColor_demo}/>}/>
+            secondaryColor={_heroSecondaryColor_demo}
+            linearGradient={_heroLinearGradient_demo}/>}/>
       <Route exact path="/demographic-modeller" component={()=><DemographicModeller />} />
       <Route path="/demographic-modeller" component={Footer} />
 
@@ -175,8 +165,18 @@ secondaryColor={_heroSecondaryColor}/>}/>*/}
             content={_heroContent_explore} 
             infoTitle={_heroInfoTitle_explore}
             primaryColor={_heroPrimaryColor_explore} 
-            secondaryColor={_heroSecondaryColor_explore}/>}/>
+            secondaryColor={_heroSecondaryColor_explore}
+            linearGradient={_heroLinearGradient_codebook}/>}/>
       <Route exact path="/explorer" component={()=> <IndicatorExplorer />}/>
       <Route path="/explorer" component={Footer} />
+
+            <Route path="/codebook-explorer" component={()=> <Navigation_scoda box_shadow={true} />} />
+      <Route exact path="/codebook-explorer" component={()=> <Hero_Collapsable title={_heroTitle_explore}
+            content={_heroContent_explore}
+            infoTitle={_heroInfoTitle_explore}
+            primaryColor={_heroPrimaryColor_explore}
+            secondaryColor={_heroSecondaryColor_explore}/>}/>
+      <Route exact path="/codebook-explorer/:codebook_explorer_id?" component={()=> <CBIndicatorExplorer />}/>
+      <Route path="/codebook-explorer" component={Footer} />
     </HashRouter>
 );

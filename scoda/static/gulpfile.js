@@ -55,6 +55,15 @@ gulp.task('sass', function() {
   .pipe(gulp.dest(basePaths.dist + 'css'))
 });
 
+// SASS
+gulp.task('sass-build', function() {
+  gulp.src(sassSources)
+  .pipe(sass({outputStyle: 'compressed'}))
+    .on('error', gutil.log)
+  .pipe(concat('main.min.css'))
+  .pipe(gulp.dest(basePaths.dist + 'css'))
+});
+
 // JS
 gulp.task('js', function() {
   gulp.src(jsSources)
@@ -62,6 +71,14 @@ gulp.task('js', function() {
   .pipe(butternut())
   .pipe(concat('scripts.min.js'))
   .pipe(sourcemaps.write())
+  .pipe(gulp.dest(basePaths.dist + 'js'))
+});
+
+// JS
+gulp.task('js-build', function() {
+  gulp.src(jsSources)
+  .pipe(butternut())
+  .pipe(concat('scripts.min.js'))
   .pipe(gulp.dest(basePaths.dist + 'js'))
 });
 
@@ -171,3 +188,4 @@ gulp.task('copy-assets', function() {
 
 
 gulp.task('default', ['js', 'sass', 'watch']);
+gulp.task('build', ['js-build', 'sass-build']);

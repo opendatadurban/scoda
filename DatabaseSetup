@@ -20,6 +20,7 @@ psql -U postgres -d scoda -c "CREATE EXTENSION postgis_topology;"
 5. After installing requirements and activating your local environment run "python rebuild_db.py"
 
 Additional step to restore db if required:
-1. Completed step 1 & 2 above. Steps 3,4,5 not required for this setup.
-2. Open windows CMD and CD into your local postgres bin dir (e.g. C:\Program Files\PostgreSQL\9.6\bin)
-5. psql --dbname=scoda --username=posgres --host=localhost --port=5432 -f C:\Users\Admin\Downloads\dump_scoda_new.sql
+1. Completed step 1,2 & 3 above. Steps 4,5 not required for this setup.
+2. Download the dump_scoda_new.sql from the following folder: https://drive.google.com/drive/folders/1tnI_EveGeeJg8-WnP5Js2doMDsQGT2Vh
+3. Open windows CMD and CD into your local postgres bin dir (e.g. C:\Program Files\PostgreSQL\9.6\bin)
+4. psql --dbname=scoda --username=postgres --host=localhost --port=5432 -f C:\Users\Admin\Downloads\Work\scoda\dump_scoda_new.sql

@@ -33,16 +33,22 @@ def grouper(iterable, n, fillvalue=None):
 def help():
     return render_template('help/help.html')
 
-@app.route('/api/indicators-list', methods=['GET', 'POST'])
-def api_indicators_list():
+@app.route('/api/indicators-list/', defaults={'check': ''})
+@app.route('/api/indicators-list/<check>', methods=['GET', 'POST'])
+def api_indicators_list(check):
     remove_list = ['Poverty rate', 'Gini Coefficient', 'Gross Value Add', 'Exports', 'Multiple deprivation index',
                    'Human Development Index']
-    indicators_list = [[str(c.id), c.in_name] for c in Indicator.all() if c.in_name not in remove_list]
+    if check == "codebook":
+        indicators_list = [[str(c.id), c.name] for c in CbIndicator.query.join(CbDataPoint,CbDataPoint.indicator_id == CbIndicator.id).all() if c.name not in remove_list]
+    else:
+        indicators_list = [[str(c.id), c.in_name] for c in Indicator.all() if c.in_name not in remove_list]
+    # print(indicators_list)
     # payload = {"indicators_list": indicators_list}
     return jsonify(indicators_list)
 
-@app.route('/api/explore', methods=['GET', 'POST'])
-def api_explore():
+@app.route('/api/explore/', defaults={'check': ''})
+@app.route('/api/explore/<check>', methods=['GET', 'POST'])
+def api_explore(check):
     form = ExploreForm()
     status = 200
     plot = 0
@@ -57,16 +63,25 @@ def api_explore():
         ind = request.args.get('indicator_id')
     else:
         ind = 76
+    print(ind)
     plot = 1
     tour = 2
-    query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value). \
-        filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
-        filter(DataPoint.region_id == Region.id)
-    print(query.all())
-    indicator = Indicator.query.get(ind)
 
-    df = read_sql_query(query.statement, query.session.bind)
-    # df.to_csv('%s/data/%s' % (app.root_path, "data_test.csv"), index=False)
+    # codebook query
+    if check == "codebook":
+        query = db.session.query(CbRegion.name.label('re_name'), CbDataPoint.start_dt, CbIndicator.name.label('ds_name'), CbDataPoint.value). \
+            filter(CbDataPoint.indicator_id == ind).filter(CbDataPoint.indicator_id == CbIndicator.id). \
+            filter(CbDataPoint.region_id == CbRegion.id)
+        df = read_sql_query(query.statement, query.session.bind)
+        df = df.rename(columns={'name': 're_name', 'name.1': 'ds_name'})
+        df["year"] = df["start_dt"].apply(lambda x: int(x.strftime('%Y')))
+        df["start_dt"] = df["year"]
+    else:
+        query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value). \
+            filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
+            filter(DataPoint.region_id == Region.id)
+        df = read_sql_query(query.statement, query.session.bind)
+    df.to_csv('%s/data/%s' % (app.root_path, "data_test.csv"), index=False)
     table = []
     table_plot = []
     years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
@@ -93,9 +108,8 @@ def api_explore():
     for i in datasets:
         head.append(str(i))
     table.append(head)
-    table_plot.append(head);
+    table_plot.append(head)
 
-    print(df)
     # df.re_name = df.re_name.str.encode('utf-8')
     if plot_type == 1:
         df_i = df.iloc[:, [0, 1, 3]]
@@ -1192,9 +1206,9 @@ def parse_demo():
 @csrf.exempt
 def api_codebook(page=1):
     query = db.session.query(CbIndicator). \
-        join(CbTheme, CbTheme.id == CbIndicator.theme_id). \
-        join(CbSource, CbSource.id == CbIndicator.source_id). \
-        join(CbUnit, CbUnit.id == CbIndicator.unit_id)
+        outerjoin(CbTheme, CbTheme.id == CbIndicator.theme_id). \
+        outerjoin(CbSource, CbSource.id == CbIndicator.source_id). \
+        outerjoin(CbUnit, CbUnit.id == CbIndicator.unit_id)
 
     if request.method == 'POST':
         data = request.get_json()
@@ -1216,21 +1230,32 @@ def api_codebook(page=1):
 
     row_count = query.count()
     query = query.all()
-    query.sort(key=lambda x: x.code)
+    # query.sort(key=lambda x: x.code)
 
     result_list = [row_count]
     for day, dicts_for_group_code in itertools.groupby(query, key=lambda x:x.group_code):
         dicts_for_group_code = list(dicts_for_group_code)
         day_dict = {
-            "id": str(dicts_for_group_code[0].id), "varCode": dicts_for_group_code[0].code,
-            "indicator": dicts_for_group_code[0].name, "c88": dicts_for_group_code[0].c88_theme,
-            "socr": dicts_for_group_code[0].socr_theme, "sdg": dicts_for_group_code[0].sdg_theme,
+            "id": str(dicts_for_group_code[0].id),
+            "varCode": dicts_for_group_code[0].code,
+            "groupCode": dicts_for_group_code[0].group_code,
+            "indicator": dicts_for_group_code[0].name,
+            "c88": dicts_for_group_code[0].c88_theme,
+            "socr": dicts_for_group_code[0].socr_theme,
+            "sdg": dicts_for_group_code[0].sdg_theme,
             "definition": dicts_for_group_code[0].definition,
-            "source": dicts_for_group_code[0].source.name,
+            "source": dicts_for_group_code[0].source.name if dicts_for_group_code[0].source else None,
             "reportingResponsibility": dicts_for_group_code[0].reporting_responsibility,
             "notesOnCalculation": dicts_for_group_code[0].notes_on_calculation,
             "variableType": dicts_for_group_code[0].unit.name,
-             "frequencyOfCollection": dicts_for_group_code[0].frequency_of_collection
+            "frequencyOfCollection": dicts_for_group_code[0].frequency_of_collection,
+            "automatibility": dicts_for_group_code[0].automatable,
+            "granulity": dicts_for_group_code[0].granularity,
+            "gathering_method": dicts_for_group_code[0].gathering_method,
+            "expandability": dicts_for_group_code[0].expandable,
+            "period": dicts_for_group_code[0].period,
+            "unit_of_measurement": dicts_for_group_code[0].unit.name,
+            "source_link": dicts_for_group_code[0].url_link
         }
         children = []
         dicts_for_group_code.pop(0)
@@ -1238,8 +1263,9 @@ def api_codebook(page=1):
             child = {
                 "id": str(d.id),
                 "varCode": d.code,
+                "groupCode": d.group_code,
                 "indicator": d.name,
-                "c88":d.c88_theme,
+                "c88": d.c88_theme,
                 "socr": d.socr_theme,
                 "sdg": d.sdg_theme,
                 "definition": d.definition,
@@ -1247,7 +1273,14 @@ def api_codebook(page=1):
                 "reportingResponsibility": d.reporting_responsibility,
                 "notesOnCalculation": d.notes_on_calculation,
                 "variableType": d.unit.name,
-                "frequencyOfCollection": d.frequency_of_collection
+                "frequencyOfCollection": d.frequency_of_collection,
+                "automatibility": d.automatable,
+                "granulity": d.granularity,
+                "gathering_method": d.gathering_method,
+                "expandability": d.expandable,
+                "period": d.period,
+                "unit_of_measurement": d.unit.name,
+                "source_link": d.url_link
             }
             children.append(child)
         day_dict.update({"children": children})

@@ -12,7 +12,6 @@ export default class ContentSectionTop extends Component {
     render() {
 
         let sectionImage = `/static/dist/img/scoda/datastories/${this.props.img}`;
-        let main_class = `container-fluid ml-0 mt-3 p-0 data-story-card ${this.props.filter_type}`
         let filterTag = {
             boxSizing: 'border-box',
             height: '34px',
@@ -34,7 +33,7 @@ export default class ContentSectionTop extends Component {
         };
 
         return (
-            <div className={main_class}>
+            <div>
                 <a href={this.props.href_} className="card-trigger"></a>
                <div className="row m-0">
                    <div className="col-0 ds-content-top-image">
