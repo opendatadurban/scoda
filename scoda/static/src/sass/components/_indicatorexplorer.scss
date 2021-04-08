@@ -10,6 +10,23 @@
     height: 100%;
     border-radius: 5px 5px 0 0;
     background-color: $scoda-ie-header;
+    padding: $s-s;
+    .select2 {
+        margin-bottom: $s-s;
+        &-selection--single {
+            border-radius: 30px !important;
+        }
+    }
+    .explainer-text {
+        display: flex;
+        align-items: center;
+        color: rgba(202,202,202,1);
+        border-left: 2px solid white;
+        margin-left: $s-s;
+        padding-left: $s-s;
+        line-height: 24px;
+        font-weight: bold;
+    }
 }
 
 .ie-content-card-header-vl {
@@ -82,11 +99,6 @@
     line-height: 30px;
     text-align: center;
     cursor: pointer;
-    margin: 0 11px;
-    &-explorer {
-        position: absolute;
-        top: 18px;
-    }
 
 }
 
@@ -111,9 +123,7 @@
     line-height: 28px;
     text-align: center;
     cursor: pointer;
-    position: absolute;
-    top: 18px;
-    right: 7px;
+    float: right;
 }
 
 .ie-dropdown {
@@ -131,7 +141,20 @@
     -webkit-appearance: none;
     //Use png at assets/selectArrow.png for the arrow on the right
     //Set the background color to a BadAss Green color 
-    background: url('/static/dist/img/scoda/dropdown_caret.png') no-repeat 98% 80% #FFFFFF;
+    &-icon{
+        &::after {
+            font-family: FontAwesome !important;
+            content: '\f078' !important;
+            position: absolute;
+            top: 14px;
+            right: 35px;
+            pointer-events: none;
+            font-size: 20px;
+            
+            
+            }
+        }
+
 }
 
 .ie-dropdown-small {
@@ -287,7 +310,7 @@
 }
 
 .google-visualization-table-table {
-    font-family: $scoda-font;
+    font-family: "Montserrat" !important;
     cursor: default;
     margin: 0;
     background: white;

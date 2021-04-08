@@ -31,14 +31,14 @@ export default class CTA_block extends Component {
               <div className="row cta-info">
                     <div className="col-md-6">
                       <div className="cta-image cta-search"></div>
-                        <div className="cta-search-half_shadow"></div>
+                        <div className="cta-image-magnified-glass"></div>
                     </div>
   
-                  <div class="col-md-6 jumbotron cta-field-description-list-detailed">
-                      <h5>Data Stories</h5>
+                  <div class="col-md-6 cta-field-description-list-detailed">
+                      <h5 className="cta-field-description-list-detailed-data_stories_text">Data Stories</h5>
                       <p>
-                        Data stories are a way to understand complex information
-                        and data using a narrative that appeals to interested
+                        Data stories are a way to understand<br/> complex information
+                        and data using a<br/> narrative that appeals to interested
                         readers.
                       </p>
 

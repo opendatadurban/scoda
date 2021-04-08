@@ -14,7 +14,7 @@ export default class DataStoriesDetails extends Component {
     }
 
     render() {
-
+        let main_class = `ml-0 mt-3 p-0 data-story-card`
         let bannerImage = `/static/dist/img/scoda/datastories/edge.png`;
         let bannerImageSACN = `/static/dist/img/scoda/datastories/sacn.png`;
         let sacnContent = "The South African Cities Network data stories provide succinct visual insight into the key narratives from the South African Cities Network research outputs.";
@@ -67,14 +67,14 @@ export default class DataStoriesDetails extends Component {
                                         filter="Productive Cities"
                                         imageTag="P"
                                         filter_type="data-story-card-productive"
+                                        filter_id="data-story-card-productive"
                                         infoBannerTitle="South African Cities Network"
                                         infoBannerDate="August 2018"
                                         infoBannerMins="9"
-                                        filter_type="data-story-card-productive"
                                         href_='/scoda/#/ds-spatial-transformation-2018'
                                     />
-                                    <div className="row">
-                                        <div className="col-md-4">
+                                    <div className="row ml-1 mr-1">
+                                        <div id="data-story-card-inclusive" className={"col-md-4 "+main_class+" data-story-card-inclusives data-story-card-inclusive"}>
                                             <ContentSectionTop
                                                 img="stateof.png"
                                                 title="State of the EPWP"
@@ -95,7 +95,7 @@ export default class DataStoriesDetails extends Component {
                                                 imgSrc={bannerImageSACN}
                                             />
                                         </div>
-                                        <div className="col-md-4">
+                                        <div id="data-story-card-inclusive1" className={"col-md-4 "+main_class+" data-story-card-inclusives data-story-card-inclusive"}>
                                             <ContentSectionTop
                                                 img="affordability.png"
                                                 title="State of the City Finances 2018"
@@ -116,7 +116,7 @@ export default class DataStoriesDetails extends Component {
                                                 imgSrc={bannerImageSACN}
                                             />
                                         </div>
-                                        <div className="col-md-4">
+                                        <div id="data-story-card-well-governed" className={"col-md-4 "+main_class+" data-story-card-well"}>
                                             <ContentSectionTop
                                                 img="urban-safety.png"
                                                 title="Urban Safety"
@@ -151,7 +151,7 @@ export default class DataStoriesDetails extends Component {
                                         infoBannerTitle="South African Cities Network"
                                         infoBannerDate="August 2018"
                                         infoBannerMins="7"
-                                        filter_type="data-story-card-well"
+                                        filter_id="data-story-card-well-governed1"
                                         href_='/scoda/#/ds-state-of-finance-2018'
                                     />
                                 </div>
@@ -174,8 +174,8 @@ export default class DataStoriesDetails extends Component {
                                     viewType="Portal"
                                 />
                                 <FilterBar filters={edgeFilters} colors={edgeColors} />
-                                <div className="row">
-                                    <div className="col-md-4">
+                                <div className="row ml-1 mr-1">
+                                <div id="data-story-card-employment" className={"col-md-4 "+main_class+" data-story-card-employment"}>
                                         <ContentSectionTop
                                             img="unemployed.png"
                                             title="Unemployment in SA’s Major Cities"
@@ -200,7 +200,7 @@ export default class DataStoriesDetails extends Component {
                                             />
                                         </div>
                                     </div>
-                                    <div className="col-md-4">
+                                    <div id="data-story-card-economy" className={"col-md-4 "+main_class+" data-story-card-economy"}>
                                         <ContentSectionTop
                                             img="durban.png"
                                             title="Durban's Economy Recovers in the Second Quarter"
@@ -223,7 +223,7 @@ export default class DataStoriesDetails extends Component {
                                             />
                                         </div>
                                     </div>
-                                    <div className="col-md-4">
+                                    <div id="data-story-card-service" className={"col-md-4 "+main_class+" data-story-card-service"}>
                                         <ContentSectionTop
                                             img="electricity.png"
                                             title="Electricity Usage"
@@ -252,13 +252,13 @@ export default class DataStoriesDetails extends Component {
 
                                 </div>
 
-                                <div className="ds-ecomomy-image">
+                                <div id="data-story-card-economy1" className="ds-ecomomy-image">
                                 <ContentSectionRightEdge
                                     img="economy.png"
                                     title="Economic Overview: State of the Durban Economy"
                                     subtitle=""
                                     content="The total gross value added (GVA) of Durban grew by R278 billion in 2018. This is a 0.5% increase from the 2017. In 2018, Durban exp…"
-                                    filterColor="#F05252"
+                                    filterColor="rgb(25, 108, 219)"
                                     filter="Economy"
                                     imageTag="Ec"
                                     infoBannerTitle="The Durban EDGE"

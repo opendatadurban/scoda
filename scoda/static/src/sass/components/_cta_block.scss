@@ -4,12 +4,12 @@
     font-family: 'Montserrat';
     background: linear-gradient(
         71deg, 
-        red calc((100vw / 2 - 570px + 360px )), 
+        #F05252 calc((100vw / 2 - 570px + 360px )), 
         white 0px);
 
         // 13inch laptop
         @media (max-width: 1300px) {
-            background: linear-gradient(78deg, red calc((100vw / 2 - 461px + 360px )), white 0px);
+            background: linear-gradient(78deg, #F05252 calc((100vw / 2 - 461px + 360px )), white 0px);
         }
          
     padding-bottom: 100px;
@@ -25,14 +25,26 @@
 
         .cta-info {
             margin-bottom: -26px;
-            overflow: hidden;
+            overflow:visible;
 
             .cta-image {
-                background-image: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_5 Insight Tools/image_evidence_data-stories.png');
-                height: 455px;
+                background-image: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_5 Insight Tools/image_evidence_data-stories_report.png');
+                height: 400px;
                 width: 455px;
                 box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-left: 5px !important;
+                
+                &-magnified-glass {
+                    content: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_5 Insight Tools/image_evidence_data-stories_magnifying-glass.png');
+                    height: 270px;
+                    position: absolute;
+                    top: 46%;
+                    left: 28px;
 
+
+                }
             }
 
             .btn {
@@ -63,8 +75,6 @@
             @media (max-width: 1300px) {
                     background: linear-gradient(97deg, #FBB65B calc((100vw / 2 - 461px + 368px )), white 0px);
             }
-
-
         .cta-info {
 
             .cta-image-analysis-dashboard {
@@ -80,8 +90,7 @@
                 height: 140px;
                 width: 455px;
                 box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
-                border-radius: 5.69px;
-               
+                border-radius: 5.69px;  
             }
 
             .cta-image-analysis-demo {
@@ -90,14 +99,17 @@
                 width: 455px;
                 box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
                 margin-top:18px;
+                margin-bottom: 20px;
               
             }
 
-            .cta-image-analysis-constructor {
-                background-image: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_4 Analysis Tools/image_analysis-tools_-constructor.png');
-                height: 345px;
+            .cta-image-codebook {
+                background-image: url('/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_4 Analysis Tools/image_analysis_codebook.png');
+                height: 369px;
                 width: 459px;
-                margin-top: 30px;
+                margin-top: 20px;
+                box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
+                border-radius: 6px;
                 
             }
 
@@ -130,8 +142,8 @@
         box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
         margin-bottom: 50px;
         width: 60%;
-
         margin-right: 23.3%;
+
     }
 
     .cta-info {
@@ -154,7 +166,7 @@
             text-align: center;
             width: 74% !important;
             margin: auto;
-            margin-bottom: 49px;
+            margin-bottom: 0;
         }
 
         p {
@@ -182,9 +194,7 @@
             height: 258px;
             width: 300px;
             display: block;
-            margin: auto;
-            margin-top: 60px;
-            margin-bottom: 20px;
+            margin-top: 70px;
         }
     }
 
@@ -249,9 +259,15 @@
                 margin-right: 20px;
                 width: 87%;
                 margin: 0 auto;
+                &-data_stories_text {
+                    margin-top: 167px;
+                }
 
                 &-btn {
                     margin-top: 30px !important;
+                    &-codebook {
+                        margin-top: 99px !important;
+                    }
                 }
             }
         }
@@ -261,7 +277,6 @@
     .cta-search {
         
         margin-left: 18px !important;
-         box-shadow: none !important;
          margin-top: 18px;
          &-half_shadow {
             box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
@@ -270,26 +285,14 @@
             bottom: 476px;
             left:18px;
             height: 75.5%;
-
+                
          }
+                        
 
     }
 
-    @media (max-width:1550px) {
-        .cta-info {
-            .btn {
-                width: 100% !important;
-            }
-        }
-    }
 
     @media (max-width: 1376px) {
-        .cta-container {
-
-            width: 73%;
-            margin-right: 10.3%;
-        }
-
         .cta-info {
             .btn {
                 width: 367px !important;
@@ -356,7 +359,7 @@
                 margin: auto;
                 &-computer{
                     width: 62% !important;
-                    margin-top: 18px;
+                    margin-top: 20px;
                 }
             }
 
@@ -388,11 +391,18 @@ p {
 }
 .jumbotron {
     background-color: transparent !important;
-    padding: 2rem 1rem !important;
+    padding: 50px 1rem !important;
 
 }
+@media (max-width:1497px) {
+    .cta_block {
+        .cta-container {
+            width: 73%;
+            margin-right: 10.3%;
 
-
+        }
+    }
+}
 @media (max-width: 1376px) {
     .cta {
         &-search {
@@ -411,4 +421,19 @@ p {
         }
     }
 }
+@media(max-width:1191px){
+    .cta_block {
+        &.cta_block_analysis {
+            .cta-info {
 
+                .cta-image-analysis-dashboard,
+                .cta-image-analysis-data-explore,
+                .cta-image-analysis-demo,.cta-image-codebook {
+                    width: 409px;
+                }
+            }
+
+        }
+    }
+    
+}

@@ -16,9 +16,9 @@ body {
   width: 652px;
   color: $scoda-grey-dark;
   font-family: $scoda-font;
-  font-size: 14px;
+  font-size: 18px;
   letter-spacing: 0;
-  line-height: 20px;
+  //line-height: 20px;
   padding-bottom: 50px;
   margin-top:36px;
 }
@@ -98,9 +98,6 @@ body {
 
   }
 
-  .tooglebtn {
-    z-index: 100000;
-  }
   .hero-block-vspacer {
     height:5%;
   }
@@ -147,8 +144,7 @@ body {
     // Mobile specific styling
 
         @media (max-width: $tablet) {
-          margin-bottom: 0px;
-          padding-bottom: 130px;
+
           #contentContainer{
             padding-bottom: 60px;
           }
@@ -160,10 +156,12 @@ body {
 
     #infoBlock{
       height: unset;
+      transition: .2s height ease-in-out;
     }
 
     .hero-content-column{
       padding-bottom: 90px;
+      padding-left: 101px;
       
     }
 
@@ -173,14 +171,27 @@ body {
       overflow: hidden;
       .hero-title {
         transition: .2s all ease-in-out;    
-        margin-top: 60px;
         padding-top: 0;
+        cursor: pointer;
+        position: relative;
+        margin-top: 15px;
+        right: 30px;
+        position: absolute;
+        z-index: 2;
+        top: 108px;
+        .hero-block-title {
+          color: white;
+        }
+        i {
+          color: white;
+        }
       }
       &.collapse {
         display: flex !important;
         max-height: 60px;
         .hero-title {
-          margin-top: 15px;
+          top: 94px;
         }
+      
       }
     }
