@@ -119,3 +119,4 @@ scoda/Scripts/
 scoda/pyvenv.cfg
 scoda/pip-selfcheck.json
 /requirements_mac.txt
+node_modules/
