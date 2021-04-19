@@ -37,7 +37,7 @@ export default class IndicatorExplorerDataCard extends Component {
 
     componentDidMount() {
        this.init();
-       this.filterIndicatorData()
+       this.filterIndicatorData(this.state.id);
        if(this.state && this.loadIndicators()){
            this.loadIndicators();
        }
@@ -82,7 +82,7 @@ export default class IndicatorExplorerDataCard extends Component {
         this.setState({loader:false});
     }
 
-    async filterIndicatorData() {
+    async filterIndicatorData(indicatorId) {
         this.showLoader();
 
         this.setState({mapFilter: 'NA'});
@@ -92,7 +92,7 @@ export default class IndicatorExplorerDataCard extends Component {
 
         this.toggleComponentDisplay(false);
 
-        let resultSet = await axios.get(`/api/explore/codebook?indicator_id=${this.state.id}`).catch(error => {
+        let resultSet = await axios.get(`/api/explore/codebook?indicator_id=${indicatorId}`).catch(error => {
             this.hideLoader();
             this.setState({modal:true, toggle:true});
         });
