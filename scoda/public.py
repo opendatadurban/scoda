@@ -1225,7 +1225,7 @@ def api_codebook(page=1):
             query = search(query, data['search'], sort=True)
 
     else:
-        query = query.limit(50).offset((page - 1) * 20)
+        query = query.limit(150).offset((page - 1) * 20)
 
     row_count = query.count()
     query = query.all()
