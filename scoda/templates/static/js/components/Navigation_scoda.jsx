@@ -61,7 +61,7 @@ export default class Navigation_scoda extends Component {
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a className="dropdown-item" target="_blank"  href="https://scoda.co.za/dataset">Data Management System</a>
-                                        <a className="dropdown-item" href="/scoda/#/explorer">Data Explorer</a>
+                                        {/* <a className="dropdown-item" href="/scoda/#/explorer">Data Explorer</a> */}
                                         <a className="dropdown-item" href="/scoda/#/codebook">Codebook</a>
                                         <a className="dropdown-item" href="/scoda/#/demographic-modeller">Demographic Modeller</a>
                                         <a className="dropdown-item" href="/scoda/#/data-stories-details">Data Stories</a>
