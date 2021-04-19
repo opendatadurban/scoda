@@ -101,6 +101,8 @@ class CbIndicator(db.Model):
     circular_theme = relationship("CbCircularTheme")
     value_type = relationship("CbValueType")
 
+    indicator_data = relationship("CbDataPoint", backref="cb_datapoints", cascade='all, delete-orphan')
+
     def __repr__(self):
         return "<CbIndicator Code='%s'>" % (self.code)
 

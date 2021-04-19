@@ -66,7 +66,6 @@ def api_explore(check):
     print(ind)
     plot = 1
     tour = 2
-
     # codebook query
     if check == "codebook":
         query = db.session.query(CbRegion.name.label('re_name'), CbDataPoint.start_dt, CbIndicator.name.label('ds_name'), CbDataPoint.value). \
@@ -1255,7 +1254,8 @@ def api_codebook(page=1):
             "expandability": dicts_for_group_code[0].expandable,
             "period": dicts_for_group_code[0].period,
             "unit_of_measurement": dicts_for_group_code[0].unit.name,
-            "source_link": dicts_for_group_code[0].url_link
+            "source_link": dicts_for_group_code[0].url_link,
+            "data_check":True if dicts_for_group_code[0].indicator_data else False
         }
         children = []
         dicts_for_group_code.pop(0)
@@ -1269,7 +1269,7 @@ def api_codebook(page=1):
                 "socr": d.socr_theme,
                 "sdg": d.sdg_theme,
                 "definition": d.definition,
-                "source": d.source.name,
+                "source": d.source.name if d.source else None,
                 "reportingResponsibility": d.reporting_responsibility,
                 "notesOnCalculation": d.notes_on_calculation,
                 "variableType": d.unit.name,
@@ -1280,8 +1280,10 @@ def api_codebook(page=1):
                 "expandability": d.expandable,
                 "period": d.period,
                 "unit_of_measurement": d.unit.name,
-                "source_link": d.url_link
+                "source_link": d.url_link,
+                "data_check": bool(d.indicator_data),
             }
+
             children.append(child)
         day_dict.update({"children": children})
         result_list.append(day_dict)
