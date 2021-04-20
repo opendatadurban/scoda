@@ -63,7 +63,7 @@ export default class IndicatorExplorerDataCard extends Component {
     }
 
     loadIndicators() {
-        axios.get('/api/indicators-list').then(res => {
+        axios.get('/api/indicators-list/codebook').then(res => {
             this.setState({ indicators:res.data });
         });
     }
@@ -86,7 +86,7 @@ export default class IndicatorExplorerDataCard extends Component {
 
         this.toggleComponentDisplay(false);
 
-        let resultSet = await axios.get(`/api/explore?indicator_id=${indicatorId}`).catch(error => {
+        let resultSet = await axios.get(`/api/explore/codebook?indicator_id=${indicatorId}`).catch(error => {
             this.hideLoader();
             this.setState({modal:true, toggle:true});
         });

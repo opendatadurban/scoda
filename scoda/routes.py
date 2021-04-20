@@ -366,7 +366,7 @@ def sanitation():
 
 @app.route('/')
 def home_public():
-    return redirect(url_for('scoda.index'))
+    return redirect(url_for('SCODA.index'))
 
 
 @app.route('/registered')
