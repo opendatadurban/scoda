@@ -170,13 +170,13 @@ export default (
       <Route exact path="/explorer" component={()=> <IndicatorExplorer />}/>
       <Route path="/explorer" component={Footer} />
 
-            <Route path="/codebook-explorer" component={()=> <Navigation_scoda box_shadow={true} />} />
-      <Route exact path="/codebook-explorer" component={()=> <Hero_Collapsable title={_heroTitle_explore}
+      <Route exact path='/codebook-explorer/:id' render={(props)=> <Navigation_scoda box_shadow={true} {...props}/>} />
+      <Route exact path='/codebook-explorer/:id' render={(props)=> <Hero_Collapsable {...props} title={_heroTitle_explore}
             content={_heroContent_explore}
             infoTitle={_heroInfoTitle_explore}
             primaryColor={_heroPrimaryColor_explore}
             secondaryColor={_heroSecondaryColor_explore}/>}/>
-      <Route exact path="/codebook-explorer/:codebook_explorer_id?" component={()=> <CBIndicatorExplorer />}/>
-      <Route path="/codebook-explorer" component={Footer} />
+        <Route exact path='/codebook-explorer/:id' render={(props)=> <CBIndicatorExplorer className=""  {...props}/>} />
+      <Route path="/codebook-explorer/:id" component={Footer} />
     </HashRouter>
 );

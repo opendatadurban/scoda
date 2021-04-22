@@ -3,7 +3,6 @@ import json
 SCODA = Blueprint('SCODA',__name__)
 
 @SCODA.route('/')
-@SCODA.route('/scoda')
 def index():
 	return render_template("scoda.html")
 
