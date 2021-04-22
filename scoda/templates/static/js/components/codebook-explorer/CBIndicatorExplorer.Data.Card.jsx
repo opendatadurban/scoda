@@ -23,7 +23,8 @@ export default class IndicatorExplorerDataCard extends Component {
             mapFilter:'NA',
             display:false,
             modal: false,
-            loader:false
+            loader:false,
+            id: this.props.indicator_id
         }
 
         this.filterIndicatorData = this.filterIndicatorData.bind(this);
@@ -36,6 +37,7 @@ export default class IndicatorExplorerDataCard extends Component {
 
     componentDidMount() {
        this.init();
+       this.filterIndicatorData(this.state.id);
        if(this.state && this.loadIndicators()){
            this.loadIndicators();
        }
@@ -46,11 +48,14 @@ export default class IndicatorExplorerDataCard extends Component {
     }
 
     toggleComponentDisplay(show) {
+        let explorer_details  = document.getElementById('explorer-details');
         if(show) {
-            document.getElementById('explorer-details').style.display='block';
+            explorer_details.style.display='block';
         }
         else {
-            document.getElementById('explorer-details').style.display='none'; 
+            if(explorer_details){
+                explorer_details.style.display='none'; 
+            }
         }
     }
 
@@ -165,7 +170,6 @@ export default class IndicatorExplorerDataCard extends Component {
         let modalCloseIcon = <i className="modal-close fa fa-times" aria-hidden="true" onClick={this.toggleModal}></i>;
 
         return(
-           this.state.modalCloseIcon ?
                 <div className="mt-4 ">
                     <div className="row">
                         <div className="col-sm-12">
@@ -261,7 +265,6 @@ export default class IndicatorExplorerDataCard extends Component {
                     </Modal>
 
                 </div>
-            : null
         )
     }
 }
