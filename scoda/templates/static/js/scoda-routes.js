@@ -24,6 +24,8 @@ import DataStoriesUrbanSafety from './components/DataStories.UrbanSafety';
 import DataStoriesEPW from './components/DataStories.EPW';
 import IndicatorExplorer from './components/IndicatorExplorer';
 
+import Context from './components/DataStories.Context'
+
 import TabsAndFilters from './components/TabsAndFilters'
 import DemographicModeller from './components/DemographicModeller';
 import DataStoriesAffordability from './components/DataStories.Affordability';
@@ -131,6 +133,11 @@ secondaryColor={_heroSecondaryColor}/>}/>*/}
       <Route path="/ds-epw-metro-2018" component={()=> <Navigation_scoda box_shadow={true} />} />
       <Route path="/ds-epw-metro-2018" component={()=> <DataStoriesEPW />} />
       <Route path="/ds-epw-metro-2018" component={Footer} />
+
+
+      <Route path="/ds-context" component={()=> <Navigation_scoda box_shadow={true} />} />
+      <Route path="/ds-context" component={()=> <Context />} />
+      <Route path="/ds-context" component={Footer} />
 
       <Route path="/ds-affordability-2018" component={()=> <Navigation_scoda box_shadow={true} />} />
       <Route path="/ds-affordability-2018" component={()=> <DataStoriesAffordability />} />
