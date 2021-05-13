@@ -162,3 +162,8 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+@mixin indicator-circle-number {
+  position: relative;
+  top: 1px;
+  color: white;
+}

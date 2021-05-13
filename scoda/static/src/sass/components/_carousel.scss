@@ -1,0 +1,153 @@
+.carousel {
+    height: 649px;
+    position: relative;
+    top: 60px;
+
+    &-container {
+        position: relative;
+        top: 45px;
+    }
+
+    &-indicators {
+        bottom: -124px !important;
+
+        li {
+            width: 24px !important;
+            height: 24px !important;
+            border-radius: 50% !important;
+            background-color: #38B99F !important;
+
+            &:nth-child(1) {
+                &::before {
+                    content: "1";
+                    left: 1007.5px;
+                    @include indicator-circle-number;
+                }
+            }
+
+            &:nth-child(2) {
+                &::before {
+                    content: "2";
+                    left: 1006.5px;
+                    @include indicator-circle-number;
+                }
+            }
+
+            &:nth-child(3) {
+                &::before {
+                    content: "3";
+                    left: 1006.5px;
+                    @include indicator-circle-number;
+                }
+            }
+
+            &:nth-child(4) {
+                &::before {
+                    content: "4";
+                    left: 1005px;
+                    @include indicator-circle-number;
+                }
+            }
+
+            &:nth-child(5) {
+                &::before {
+                    content: "5";
+                    left: 1005px;
+                    @include indicator-circle-number;
+                }
+            }
+
+            &:nth-child(6) {
+                &::before {
+                    content: "6";
+                    left: 1005.5px;
+                    @include indicator-circle-number;
+                }
+            }
+
+            &:nth-child(7) {
+                &::before {
+                    content: "7";
+                    left: 1005.5px;
+                    @include indicator-circle-number;
+                }
+            }
+
+        }
+    }
+
+    &-control {
+        &-prev {
+            top: unset !important;
+            left: 40px;
+            bottom: -94px !important;
+            opacity: 1 !important;
+
+            &-icon {
+                background-image: none !important;
+
+                &::before {
+                    content: 'Back';
+                    color: #38B99F;
+                    font-family: Montserrat;
+                    font-size: 24px;
+                    letter-spacing: 0;
+                    line-height: 24px;
+                    text-align: center;
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        &-next {
+            top: unset !important;
+            right: 40px;
+            bottom: -94px !important;
+            opacity: 1 !important;
+
+            &-icon {
+                background-image: none !important;
+
+                &::before {
+                    content: 'Next';
+                    color: #38B99F;
+                    font-family: Montserrat;
+                    font-size: 24px;
+                    font-weight: 600;
+                    letter-spacing: 0;
+                    line-height: 24px;
+                    text-align: center;
+                    border: 2px solid #38B99F;
+                    border-radius: 25px;
+                    background-color: #FFFFFF;
+                    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+                    padding: 5px 34px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1366px) {
+    .carousel {
+        margin-bottom: 306px;
+    }
+}
+@media (max-width: 404px) {
+    .carousel {
+        height: 100%;
+        overflow-y: scroll;
+       &-indicators {
+           display: none;
+       }
+       &-control {
+           &-prev {
+            display: none;
+           }
+           &-next {
+            display: none;
+           }
+       }
+    }
+    
+}
