@@ -75,6 +75,10 @@ hr.dotted {
     height: 25px;
 }
 
+.ellipses {
+   @include ellipsis;
+}
+
 .bg {
     &_transparent {
       background: transparent;

@@ -54,7 +54,7 @@ Then do the following:
 
 ### Setting up the Database with PostgreSQL
 Setup the PostgreSQL database (version 9.6.*)
-Download and install postgis locally http://download.osgeo.org/postgis/windows/pg96/
+Download and install postgis (version 3.1.1) locally from http://download.osgeo.org/postgis/windows/pg96/
 ```
 psql -U postgres
 =# CREATE USER scoda WITH PASSWORD 'scoda';
@@ -66,7 +66,7 @@ psql -U postgres
 =# \q
 ```
 Construct your db app-side:
-1. copy and unzip this [data](https://drive.google.com/drive/folders/1tnI_EveGeeJg8-WnP5Js2doMDsQGT2Vh) into the /scoda/data directory
+1. Download this [data folder](https://drive.google.com/drive/folders/1tnI_EveGeeJg8-WnP5Js2doMDsQGT2Vh) and empty it's contents into the /scoda/data directory, extrating the contents out of the zipped files. No zipped files or empty folders should be in the scoda/data folder.
 2. Request access to the drive data folder if unable to download data.
 3. Activate your local environment
 ```

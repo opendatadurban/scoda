@@ -72,6 +72,11 @@ export default class CodebookDatatable extends Component {
         });
     }
 
+    selectChildAndToggleAccordion(item,index){
+        this.selectChild(item);
+        this.toggleAccordion(index);
+    }
+
     getC88Code(code) {
         if(!code) {
             return;
@@ -145,7 +150,7 @@ export default class CodebookDatatable extends Component {
                               >
                                 <td></td>
                                 <td><div className="pl-3" >{item.varCode}</div></td>
-                                <td colSpan={2}>
+                                <td title={item.indicator} colSpan={2}>
                                   <div>
                                     {item.indicator}
                                   </div>
@@ -217,10 +222,10 @@ export default class CodebookDatatable extends Component {
                     <th width="13%">
                         <div className="font-weight-400">VAR CODE</div>
                     </th>
-                    <th width="100%">
+                    <th width="55%">
                         <div className="font-weight-400">INDICATOR SHORT NAME</div>
                     </th>
-                    <th width="10%">
+                    <th width="5%">
                         <div className="font-weight-400">THEMES:</div>
                     </th>
                     <th width="5%">
@@ -242,29 +247,29 @@ export default class CodebookDatatable extends Component {
                 this.state.data.map((parentItem, index) => {
                     return (
                         <Fragment key={index}>
-                            <tr className="parent-item" width="100%" onClick={() => this.selectChild(parentItem)}>
+                            <tr className="parent-item" width="100%" onClick={() => this.selectChildAndToggleAccordion(parentItem,index)}>
                                 <td width="7%"></td>
                                 <td width="13%">
                                     <div>{parentItem.varCode}</div>
                                 </td>
-                                <td width="60%" colSpan={2}>
+                                <td width="60%" colSpan={2} title={parentItem.indicator}>
                                     <div>{parentItem.indicator}</div>
                                 </td>
                                 <td width="5%">
                                     <div className="circle-c88">
                                         <div
-                                            className="circle-icon-text">{this.getC88Code(parentItem.varCode)}</div>
+                                            className="circle-icon-text" title={parentItem.varCode}>{this.getC88Code(parentItem.varCode)}</div>
                                     </div>
                                 </td>
                                 <td width="5%">
                                     <div className="circle-socr">
                                         <div
-                                            className="circle-icon-text">{this.getSORCCode(parentItem.socr)}</div>
+                                            className="circle-icon-text" title={parentItem.socr}>{this.getSORCCode(parentItem.socr)}</div>
                                     </div>
                                 </td>
                                 <td width="5%">
                                     <div className="circle-sdg">
-                                        <div className="circle-icon-text">{this.getSDG(parentItem.sdg)}</div>
+                                        <div className="circle-icon-text" title={parentItem.sdg}>{this.getSDG(parentItem.sdg)}</div>
                                     </div>
                                 </td>
                                 <td className="tooglebtn" width="5%">
@@ -272,7 +277,7 @@ export default class CodebookDatatable extends Component {
                                         className={parentItem.open ? "fa fa-caret-left fa-2x hero-block-arrow-expand" : "fa fa-caret-down fa-2x hero-block-arrow-expand"}
                                         style={{color: '#2F3442'}}
                                         aria-hidden="true"
-                                        onClick={() => this.toggleAccordion(index)}>
+                                        >
                                     </i></div>
                                 </td>
                             </tr>

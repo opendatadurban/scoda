@@ -96,7 +96,7 @@ export default class CodebookSidebar extends Component {
                         <div className="row sidebar-label">C88</div>
                         <div className="row">
                             <div className="circle-c88">
-                                <div className="circle-icon-text">{this.getC88Code(this.state.data.varCode)}</div>
+                                <div title={this.state.data.varCode} className="circle-icon-text">{this.getC88Code(this.state.data.varCode)}</div>
                             </div>
                         </div>
                     </div>
@@ -104,7 +104,7 @@ export default class CodebookSidebar extends Component {
                         <div className="row sidebar-label">SOCR</div>
                         <div className="row">
                             <div className="circle-socr">
-                                <div className="circle-icon-text">{this.getSOCRCode(this.state.data.socr)}</div>
+                                <div title={this.state.data.socr} className="circle-icon-text">{this.getSOCRCode(this.state.data.socr)}</div>
                             </div>
                         </div>
                     </div>
@@ -112,7 +112,7 @@ export default class CodebookSidebar extends Component {
                         <div className="row sidebar-label">SDG</div>
                         <div className="row">
                             <div className="circle-sdg">
-                                <div className="circle-icon-text">{this.getSDG(this.state.data.sdg)}</div>
+                                <div title={this.state.data.sdg} className="circle-icon-text">{this.getSDG(this.state.data.sdg)}</div>
                             </div>
                         </div>
                     </div>
@@ -304,9 +304,12 @@ export default class CodebookSidebar extends Component {
                 </div>
                 { this.renderFourthColumn() }
                 <div className="row" style={{ justifyContent: 'space-around' }}>
-                    <button className="action-button">
-                        <div className="action-button-text">View in Data Explorer</div>
-                    </button>
+                    {
+                        this.state.data.data_check ?
+                        <button className="action-button"><a href={ "/scoda/#/codebook-explorer/" + this.state.data.id } target="_blank">
+                            <div className="action-button-text">View in Data Explorer</div></a>
+                        </button>:""
+                    }
                 </div>
             </div>
         );

@@ -26,7 +26,7 @@ def seed_codebook_data(db):
     try:
         for index, row in df.iterrows():
             indicator_name = str(row["Indicator_name"]).strip()
-            indicator = db.session.query(CbIndicator).filter(CbIndicator.name == indicator_name).first()
+            indicator = db.session.query(CbIndicator).filter(CbIndicator.code == str(row["Indicator_code"]).strip()).first()
             if not indicator:
                 print(F"No indicator:{indicator_name}")
                 indicator = CbIndicator()

@@ -411,7 +411,6 @@ body {
     background-color: $scoda-white;
     &-color {
         color: #2F3442 !important;
-        ;
     }
     &-carousel {
         border: none !important;
@@ -621,7 +620,7 @@ body {
             &-carousel {
                 margin-bottom: 10px;
             }
-        }
+        }err
         &-paragraph {
             color: #FFFFFF;
             font-family: Montserrat;
@@ -1270,5 +1269,21 @@ a {
         left: 0 !important;
         flex: 1%;
         max-width:100%;
+    }
+}
+
+// Desktop specific
+@media (min-width: $tablet) {
+    .nav-tabs {
+        width: 200px;
+        margin-top: -36px;
+        position: absolute;
+    }
+    .data-story-landig-page {
+        top: -73px;
+    }
+
+    .ds-top-header-contents {
+        padding-top: 30px;
     }
 }

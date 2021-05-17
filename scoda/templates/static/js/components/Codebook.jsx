@@ -4,6 +4,7 @@ import CodebookSidebar from './Codebook_Sidebar';
 import { Container, Row, Col, Modal, ModalBody, Spinner } from 'reactstrap';
 import CodebookFilterModal from './Codebook_Filter_Search';
 import axios from 'axios';
+import $ from 'jquery';
 
 export default class Codebook extends Component {
     constructor(props) {
@@ -16,12 +17,26 @@ export default class Codebook extends Component {
 
         this.setSelected = this.setSelected.bind(this);
         this.filterData = this.filterData.bind(this);
+        this.scrollToAnchor = this.scrollToAnchor.bind(this);
     }
 
     componentDidMount() {
         this.showLoader();
         this.getFirstChildItem();
+        this.scrollToAnchor('content-scoda', 'html,body', true);
     }
+
+    scrollToAnchor(id, scrollElement, animate){
+        // Set the anchor
+        var to = $('#' + id);
+        // Animate or jump scrollElement to anchor point
+        if (animate) {
+          $(scrollElement).animate({scrollTop: to.offset().top},'fast');
+        } else {
+          $(scrollElement).scrollTop(to.offset().top);
+        }
+        console.log('scroll function run')
+      }
 
     setSelected(childItem) {
         this.setState({
@@ -82,10 +97,10 @@ export default class Codebook extends Component {
                 <CodebookFilterModal filter={this.filterData} />
                 <Row>
                     <Col xs="12" sm="12" md="12" lg="8" className="no-padding">
-                        <CodebookDatatable setSelectedChild={ this.setSelected } filteredData={ this.state.filterData } />
+                        <CodebookDatatable codes={this.state.codes} setSelectedChild={ this.setSelected } filteredData={ this.state.filterData } />
                     </Col>
                     <Col xs="12" sm="12" md="12" lg="4" className="no-padding">
-                        <CodebookSidebar data={ this.state.selected } />
+                        <CodebookSidebar codes={this.state.codes} data={ this.state.selected } />
                     </Col>
                 </Row>
             </Container>

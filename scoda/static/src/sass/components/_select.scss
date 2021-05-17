@@ -1,0 +1,133 @@
+.select2 {
+
+  
+  // NOTICE
+  // This component uses the select2 plugin, to which most of these styles are attached to.
+  
+  margin: 7px 0;
+  &-container {
+    display: block;
+    &--open {
+      .select2-selection__arrow::before {
+        transform: rotate(180deg);
+      }
+    }
+  }
+  &-selection {
+    border: 1px solid #E0E1E2;
+    color: $font-general;
+    min-height: 40px !important;
+    padding-left: $s-s + 2px;
+    border-radius: 3px;
+    border-color: #E0E1E2;
+    transition: .2s all ease-in-out;
+    display: flex !important;
+    justify-content: center;
+    flex-flow: column;
+    &__rendered, &__placeholder {
+      font: 500 14px/18px $font;
+      padding-left: 0 !important;
+      color: $font-general !important;
+    }
+    &__choice {
+      margin-top: 0 !important;
+      height: 30px;
+      font: 500 10px/13px $font !important;
+      border-radius: 15px !important;
+      display: flex !important;
+      align-items: center;
+      flex-flow: row;  
+      padding: 0 10px !important;
+      span {
+        order: 1;
+        margin: 2px 0 0 2px;
+      }
+    }
+    &--single {
+      .select2-selection__clear{
+        display: none;
+      }
+    }
+    &--multiple {
+      padding: 5px;
+      padding-left: 22px;
+    }
+    &__arrow {
+      position: relative;
+      b {
+        display: none;
+      }
+      &::before {
+        transition: .2s all ease-in-out;
+        content: '\f078';
+        display: block;
+        position: absolute;
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        top: 5px;
+        right: 19px;
+        font-size: 22px;
+      }
+    }
+    &__clear {
+      font-size: 30px;
+      position: absolute !important;
+      right: 10px;
+      top: -11px;
+    }
+  }
+  &-results {
+    &__options {
+      @include custom-scrollbar ($scoda-black-light);
+      font: normal 14px/18px $font;
+      color: $font-general;
+    }
+
+    &__option {
+      height: 37px;
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      padding-left: 22px !important;
+      &--highlighted {
+        // font-weight: 600 !important;
+        color: $font-general !important;
+        background-color: #F8F8F8 !important;
+      }
+      &[aria-selected=true]{
+        background-color: #F8F8F8 !important;
+      }
+      &[aria-disabled=true]{
+        display: none;
+      }
+    }
+  }
+  &-search {
+    &--inline {
+    display: block;
+    width: 100% !important;
+    margin-bottom: 0;
+  }
+    &__field {
+      margin-top: 0 !important;
+      // padding-top: 5px !important;
+      width: 100% !important;
+      font-weight: 500;
+    }
+  }
+
+
+  // General styling
+
+  // Desktop specific styling
+  @media (min-width: $tablet) {}
+
+  // Mobile specific styling
+  @media (max-width: $tablet) {}
+}
+
+.error+.select2 {
+  .select2-selection {
+    border-color: red;
+  }
+}

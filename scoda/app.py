@@ -2,8 +2,21 @@
 from flask import Flask
 import jinja2
 import os
+from whitenoise import WhiteNoise
 
-app = Flask(__name__, static_folder='static')
+app = Flask(__name__)
+app.wsgi_app = WhiteNoise(app.wsgi_app)
+my_static_folders = (
+    'scoda/static/public/',
+    'scoda/static/dist/css/',
+    'scoda/static/dist/img/',
+    'scoda/static/dist/js/',
+)
+for static in my_static_folders:
+    app.wsgi_app.add_files(static)
+
+# disable on production when using white noise
+# app = Flask( __name__, static_folder='static')
 
 # setup configs
 env = os.environ.get('FLASK_ENV', 'development')

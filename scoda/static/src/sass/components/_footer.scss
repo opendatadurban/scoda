@@ -5,10 +5,10 @@
     text-align: center;
     min-height: unset;
     padding: 10px 0;
-    position: fixed;
+    position: absolute;
     width: 100%;
     bottom: 0;
-    z-index: 100000;
+    z-index: 1000;
     span{
         font-size: 10px;
     }
