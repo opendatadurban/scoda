@@ -416,7 +416,14 @@ body {
         border: none !important;
         border-bottom: 1px solid $scoda-content !important;
     }
-    
+    &-highlight-block-header-paragraph {
+        color: #FFFFFF;
+        font-family: Montserrat;
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: 0;
+        line-height: 30px;
+    }
 }
 
 
