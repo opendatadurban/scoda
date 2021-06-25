@@ -22,7 +22,13 @@ body {
 
     }
 }
-
+.chart-mainchart3--desktop {
+display: block !important;
+}
+.chart-mainchart3--mobile {
+    
+    display: none !important;
+}
 .nav-tabs .nav-link:hover {
     border: 1px solid transparent;
     border-top-left-radius: .25rem;
@@ -1039,6 +1045,12 @@ a {
 
 // Mobile specific styling
 @media (max-width: $tablet) {
+    .chart-mainchart3--desktop {
+        display: none !important;
+        }
+    .chart-mainchart3--mobile {
+            display: block !important;
+        }
     .nav-tabs {
         margin-left: 0;
     }

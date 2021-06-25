@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Pie} from 'react-chartjs-2';
 import Chart from 'chart.js';
+import Select from './Select';
 
 import Image from '../components/Image';
 
@@ -8,6 +9,24 @@ import DataStoriesContentCardHeader from '../components/DataStories.Content.Card
 import DataStoriesContentCardHighlightBlock from '../components/DataStories.Content.Card.HighlightBlock';
 import DataStoriesContentCardContentBlock from '../components/DataStories.Content.Card.ContentBlock';
 import DataStoriesContentCardDataInformation from '../components/DataStories.Content.Card.Data.Information';
+
+const mydata = {
+  pl : {
+     id: "my-select",
+     multiple: false,
+     data : ['Buffalo City','Cape Town','JHB','Tswane','Ekurhuleni','eThekwini','Mangaung','Msunduzi','NMB']
+  }
+}
+let buffalo = [566,645,1266,1857,2307]
+let cpt = [27876,38574,9510,21317,25389]
+let jhb = [23603,26932,5734,14599,12468]
+let tswane = [17790,34639,5204,9096,9820]
+let ethekwini = [29838,28962,13016,14948,20508]
+let ekh = [6005,8434,7420,8412,5081]
+let mangaung = [1687,3031,2958,1208,627]
+let msunduzi = [1451,1595,1393,779,1813]
+let nhb = [5068,6390,1229,2431,4899]
+
 
 export default class DataStoriesContentCardEPW extends Component {
     constructor(props) {
@@ -40,18 +59,67 @@ export default class DataStoriesContentCardEPW extends Component {
           ]
           }]
         }
+        this.state = {
+          place:"", 
+          data:[]
+        }
+        this.place = this.place.bind(this)
     }
+    place(e){
+      this.setState({place:e.target.value}); 
 
+      if(e.target.value ==='Buffalo City') {
+        this.setState({data:buffalo})
+        }
+      if(e.target.value ==='Cape Town') {
+
+          this.setState({data:cpt})
+        }
+      if(e.target.value ==='JHB') {
+          this.setState({data:jhb})
+        }
+      if(e.target.value ==='Tswane') {
+        this.setState({data:tswane})
+        }
+      if(e.target.value ==='Ekurhuleni') {
+        this.setState({data:ekh})
+        }
+      if(e.target.value ==='eThekwini') {
+        this.setState({data:ethekwini})
+        }
+      if(e.target.value ==='Mangaung') {
+        this.setState({data:mangaung})
+        }
+      if(e.target.value ==='Msunduzi') {
+        this.setState({data:msunduzi})
+        }
+      if(e.target.value ==='NMB') {
+        this.setState({data:nhb})
+        }
+        
+
+
+      
+
+  } 
     componentDidMount() {
+        this.setState({data:buffalo})
         Chart.platform.disableCSSInjection = true;
         
         this.renderChart();
         this.renderChart2();
         this.renderChart3();
+        this.renderChart3_mobile();
+  
 
 
         
     }
+    componentDidUpdate(){
+
+      this.renderChart3_mobile();
+ }
+
 
     renderChart() {
 
@@ -420,6 +488,217 @@ export default class DataStoriesContentCardEPW extends Component {
            }
           });
     }
+    renderChart3_mobile(){
+      const chartRef = document.getElementById('mainChart3_mobile').getContext('2d');
+
+      new Chart(chartRef, {
+          type: 'bar',
+          data: {
+            labels: [this.state.place,"Average"],
+            datasets: [{
+              label: '2013/14',
+              stack: 'Stack 1',
+              data: [this.state.data[0], 12654],
+              backgroundColor: [
+                  'rgba(68, 114, 196, 1)',
+                  'rgba(68, 114, 196, 1)',
+                  'rgba(68, 114, 196, 1)',
+                  'rgba(68, 114, 196, 1)',
+                  'rgba(68, 114, 196, 1)',
+                  'rgba(68, 114, 196, 1)',
+                  'rgba(68, 114, 196, 1)',
+                  'rgba(68, 114, 196, 1)',
+                  'rgba(68, 114, 196, 1)',
+                  'rgba(68, 114, 196, 1)'
+              ],
+              borderColor: [
+                  'rgba(68, 114, 196, 1)',
+                  'rgba(68, 114, 196, 1)',
+                  'rgba(68, 114, 196, 1)',
+                  'rgba(68, 114, 196, 1)',
+                  'rgba(68, 114, 196, 1)',
+                  'rgba(68, 114, 196, 1)',
+                  'rgba(68, 114, 196, 1)',
+                  'rgba(68, 114, 196, 1)',
+                  'rgba(68, 114, 196, 1)',
+                  'rgba(68, 114, 196, 1)'
+              ]
+            },
+                {
+                label: '2014/15',
+                stack: 'Stack 2',
+                data: [this.state.data[1],16578],
+                backgroundColor: [
+                  'rgb(203, 147, 109, 1)',
+                  'rgb(203, 147, 109, 1)',
+                  'rgb(203, 147, 109, 1)',
+                  'rgb(203, 147, 109, 1)',
+                  'rgb(203, 147, 109, 1)',
+                  'rgb(203, 147, 109, 1)',
+                  'rgb(203, 147, 109, 1)',
+                  'rgb(203, 147, 109, 1)',
+                  'rgb(203, 147, 109, 1)',
+                  'rgb(203, 147, 109, 1)'
+                ],
+                borderColor: [
+                  'rgb(203, 147, 109, 1)',
+                  'rgb(203, 147, 109, 1)',
+                  'rgb(203, 147, 109, 1)',
+                  'rgb(203, 147, 109, 1)',
+                  'rgb(203, 147, 109, 1)',
+                  'rgb(203, 147, 109, 1)',
+                  'rgb(203, 147, 109, 1)',
+                  'rgb(203, 147, 109, 1)',
+                  'rgb(203, 147, 109, 1)',
+                  'rgb(203, 147, 109, 1)'
+                ]
+              },
+              {
+                label: '2015/16',
+                stack: 'Stack 3',
+                data: [this.state.data[2], 5303],
+                backgroundColor: [
+                  'rgba(167, 167, 167, 1)',
+                  'rgba(167, 167, 167, 1)',
+                  'rgba(167, 167, 167, 1)',
+                  'rgba(167, 167, 167, 1)',
+                  'rgba(167, 167, 167, 1)',
+                  'rgba(167, 167, 167, 1)',
+                  'rgba(167, 167, 167, 1)',
+                  'rgba(167, 167, 167, 1)',
+                  'rgba(167, 167, 167, 1)',
+                  'rgba(167, 167, 167, 1)'
+                ],
+                borderColor: [
+                  'rgba(167, 167, 167, 1)',
+                  'rgba(167, 167, 167, 1)',
+                  'rgba(167, 167, 167, 1)',
+                  'rgba(167, 167, 167, 1)',
+                  'rgba(167, 167, 167, 1)',
+                  'rgba(167, 167, 167, 1)',
+                  'rgba(167, 167, 167, 1)',
+                  'rgba(167, 167, 167, 1)',
+                  'rgba(167, 167, 167, 1)',
+                  'rgba(167, 167, 167, 1)'
+                ]
+              },
+              {
+                label: '2016/17',
+                stack: 'Stack 4',
+                data: [this.state.data[3], 8290],
+                backgroundColor: [
+                  'rgba(212, 181, 85, 1)',
+                  'rgba(212, 181, 85, 1)',
+                  'rgba(212, 181, 85, 1)',
+                  'rgba(212, 181, 85, 1)',
+                  'rgba(212, 181, 85, 1)',
+                  'rgba(212, 181, 85, 1)',
+                  'rgba(212, 181, 85, 1)',
+                  'rgba(212, 181, 85, 1)',
+                  'rgba(212, 181, 85, 1)',
+                  'rgba(212, 181, 85, 1)'
+                ],
+                borderColor: [
+                  'rgba(212, 181, 85, 1)',
+                  'rgba(212, 181, 85, 1)',
+                  'rgba(212, 181, 85, 1)',
+                  'rgba(212, 181, 85, 1)',
+                  'rgba(212, 181, 85, 1)',
+                  'rgba(212, 181, 85, 1)',
+                  'rgba(212, 181, 85, 1)',
+                  'rgba(212, 181, 85, 1)',
+                  'rgba(212, 181, 85, 1)',
+                  'rgba(212, 181, 85, 1)'
+                ]
+              },
+              {
+                label: '2017/18',
+                stack: 'Stack 5',
+                data: [this.state.data[4], 9212],
+                backgroundColor: [
+                  'rgba(91, 155, 213, 1)',
+                  'rgba(91, 155, 213, 1)',
+                  'rgba(91, 155, 213, 1)',
+                  'rgba(91, 155, 213, 1)',
+                  'rgba(91, 155, 213, 1)',
+                  'rgba(91, 155, 213, 1)',
+                  'rgba(91, 155, 213, 1)',
+                  'rgba(91, 155, 213, 1)',
+                  'rgba(91, 155, 213, 1)',
+                  'rgba(91, 155, 213, 1)'
+                ],
+                borderColor: [
+                  'rgba(91, 155, 213, 1)',
+                  'rgba(91, 155, 213, 1)',
+                  'rgba(91, 155, 213, 1)',
+                  'rgba(91, 155, 213, 1)',
+                  'rgba(91, 155, 213, 1)',
+                  'rgba(91, 155, 213, 1)',
+                  'rgba(91, 155, 213, 1)',
+                  'rgba(91, 155, 213, 1)',
+                    'rgba(91, 155, 213, 1)',
+                  'rgba(91, 155, 213, 1)'
+                ]
+              }
+        ]
+          },
+          options: {
+            title: {
+                display: false,
+                text: 'Title'
+            },
+            tooltips: {
+                mode: 'index',
+                intercept: false,
+                callbacks: {
+                    label: function (tooltipItem, data) {
+                        var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                        if (label) {
+                            label += ': ';
+                        }
+                        label += Math.round(tooltipItem.yLabel * 100) / 100;
+                        return label;
+                    }
+                }
+            },
+            responsive: true,
+            scales: {
+                xAxes: [{
+                    stacked: true,
+                    ticks: {fontStyle: 'bold'},
+                    gridLines: {
+                        borderDash: [2],
+                        zeroLineBorderDash: [],
+                        zeroLineWidth: 2,
+                        lineWidth: 2,
+                        color: [0, 0, 0],
+                        drawTicks: true,
+                    }
+                }],
+                yAxes: [{
+                    stacked: true,
+                    ticks: {
+                        callback: function (value, index, values) {
+                            return Math.round(value / 1000)+ 'K  ';
+                        }
+                    },
+                    gridLines: {
+                        drawTicks: false,
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: "Number of WO's",
+                        fontStyle: 'bold',
+                        fontFamily: "Montserrat",
+                        fontSize: 15
+                    }
+                }],
+
+            }
+         }
+        });
+  }
 
     downloadChart() {
         var url_base64jp = document.getElementById("mainChart").toDataURL("image/png");
@@ -688,12 +967,35 @@ export default class DataStoriesContentCardEPW extends Component {
                                </div>
                                <div className="container-fluid mt-2 justify-content-center">
                                  <div className="ds-subheader">Number of work opportunities created by the EPWP in South African cities</div>
+                                 <div className='chart-mainchart3--mobile'>
+                                 <p className='select2--label'>Cities :</p>
+                                 <Select 
+                                    value={this.state.place}
+                                    placeholder='Select'
+                                    id={mydata.pl.id}
+                                    multiple={mydata.pl.multiple}
+                                    data={mydata.pl.data}
+                                    name = 'gender'
+                                    onChange={this.place}
+        
+                                  />
+                                 </div>
                                </div>
                                <br/><br/>
-                                <canvas
+                               
+                               <canvas
                                      id="mainChart3"
-                                    className="w-100 h-100"
+                                    className="w-100 h-100 chart-mainchart3--desktop"
                                 />
+                            
+                           
+                                <canvas
+                                     id="mainChart3_mobile"
+                                    className="w-100 chart-mainchart3--mobile"
+                                    style={{height:450}}
+                                   
+                                />
+                               
                            </div>
                            <div className="row mt-3">
                                <DataStoriesContentCardDataInformation
