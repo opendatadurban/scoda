@@ -3,8 +3,17 @@
   
   // NOTICE
   // This component uses the select2 plugin, to which most of these styles are attached to.
-  
+  &--label {
+    font-size: 10px;
+    color: $font-general;
+    font-family: $font ;
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 13px;
+    letter-spacing: 0;
+  }
   margin: 7px 0;
+  width: 177px !important;
   &-container {
     display: block;
     &--open {
@@ -16,7 +25,7 @@
   &-selection {
     border: 1px solid #E0E1E2;
     color: $font-general;
-    min-height: 40px !important;
+    min-height: 20px !important;
     padding-left: $s-s + 2px;
     border-radius: 3px;
     border-color: #E0E1E2;
@@ -25,7 +34,7 @@
     justify-content: center;
     flex-flow: column;
     &__rendered, &__placeholder {
-      font: 500 14px/18px $font;
+      font: 500 12px/18px $font;
       padding-left: 0 !important;
       color: $font-general !important;
     }
@@ -54,6 +63,7 @@
     }
     &__arrow {
       position: relative;
+      right: -8px !important;
       b {
         display: none;
       }
@@ -65,8 +75,8 @@
         font-family: 'Font Awesome 5 Free';
         font-weight: 900;
         top: 5px;
-        right: 19px;
-        font-size: 22px;
+        right: 20px;
+        font-size: 14px;
       }
     }
     &__clear {
@@ -89,13 +99,15 @@
       flex-flow: row;
       align-items: center;
       padding-left: 22px !important;
+      font-size: 12px;
       &--highlighted {
         // font-weight: 600 !important;
         color: $font-general !important;
-        background-color: #F8F8F8 !important;
+        background-color: #fff !important;
+        font-weight: 800;
       }
       &[aria-selected=true]{
-        background-color: #F8F8F8 !important;
+        background-color: #fff !important;
       }
       &[aria-disabled=true]{
         display: none;
@@ -130,4 +142,11 @@
   .select2-selection {
     border-color: red;
   }
+}
+
+span.select2-selection.select2-selection--single,span.select2-selection.select2-selection--multiple {
+  border-radius: 18px;
+}
+input.select2-search__field {
+  display: none;
 }
