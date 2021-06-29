@@ -21,20 +21,26 @@ export default class Select extends Component {
 
       <Select2
         multiple={this.props.multiple} 
-        data={this.props.data} 
+        data={this.props.data} // For true data
+        // data={data} // For dummy data
         name={this.props.name} 
         id={this.props.id} 
-        className={["select "] + this.props.className + [this.props.error === true ? ' error' : '']}
+        className={["select "] + this.props.className}
         disabled={this.props.disabled}
-        required={this.props.required}
-        error = {this.props.error}
+        onChange={this.props.onChange}
+        name={this.props.name} 
+        value={this.props.value}
+        required
+        // required={required}
         options={
           {  
             placeholder:this.props.placeholder,
             width: width + '%',         
           }
         }
+          
         />
+      
         {/* <HelperText className={this.props.className + [this.props.error === true ? ' error' : '']} helperText={this.props.helperText}></HelperText> */}
         </div>
     );
