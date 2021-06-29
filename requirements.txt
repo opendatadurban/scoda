@@ -33,7 +33,7 @@ olefile==0.44
 pandas==1.0.3
 passlib==1.7.0
 pathlib==1.0.1
-Pillow==7.1.2
+Pillow==8.2.0
 plotly==1.12.12
 psycopg2-binary
 PyHAML==1.1.0
