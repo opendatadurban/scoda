@@ -36,7 +36,7 @@ export default class CTA_block extends Component {
                 whether or not they are adequately achieving their objectives.{" "}
               </p>
               <img
-                src="/static/dist/img/SCODA Assets V3_2 Desktop/3 About Us/What We Do/image_about_what-do-we-do.svg"
+                src="/static/dist/img/SCODA Assets V3_2 Desktop/3 About Us/What We Do/image_about_what-do-we-do.png"
                 alt=""
               />
             </div>
@@ -45,7 +45,7 @@ export default class CTA_block extends Component {
             <div className="col-12">
               <h3>How Was SCODA Developed? </h3>
               <img
-                src="/static/dist/img/SCODA Assets V3_1/3 About Us/How Was SCODA Developed/image_about_how-was-scoda-developed.svg"
+                src="/static/dist/img/SCODA Assets V3_1/3 About Us/How Was SCODA Developed/image_about_how-was-scoda-developed.png"
                 alt=""
               />
             </div>
