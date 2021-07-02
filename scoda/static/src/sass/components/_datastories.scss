@@ -322,6 +322,10 @@ display: block !important;
 }
 
 .ds-info-banner-width {
+    &-flex {
+        flex: 0 0 83% !important;
+        max-width: 100% !important;
+    }
     // width:360px;
 }
 
@@ -1107,7 +1111,7 @@ a {
 @media (min-width: $tablet) {
     .nav-tabs {
         width: 200px;
-        margin-top: -36px;
+        margin-top: -5px;
         position: absolute;
     }
     .data-story-landig-page {
@@ -1115,6 +1119,6 @@ a {
     }
 
     .ds-top-header-contents {
-        padding-top: 30px;
+        padding-top: 50px;
     }
 }
