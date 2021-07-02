@@ -16,77 +16,33 @@ export default class FilterPill extends Component {
     }
 
     filter(e) {
-
         if (e.target.classList.contains(productive)) {
-            console.log('clicked')
-            if (document.getElementById(productive).style.display === "block") {
-                document.getElementById(productive).style.display = "none"
-                e.target.classList.add('selected');
-
-                console.log('clicked')
-            }
-            else {
-                document.getElementById(productive).style.display = "block"
-                e.target.classList.remove('selected');
-            }
+            $('#' + productive).toggle();
+            $(e.target).toggleClass('selected')
         }
-        else if (e.target.classList.contains(inclusive)) {
-            if (document.getElementById(inclusive).style.display === "block") {
-                document.getElementById(inclusive).style.display = "none"
-                document.getElementById(inclusive + "1").style.display = "none"
-                e.target.classList.add('selected');
-            }
-            else {
-                document.getElementById(inclusive).style.display = "block"
-                document.getElementById(inclusive + "1").style.display = "block"
-                e.target.classList.remove('selected');
-            }
+        if (e.target.classList.contains(inclusive)) {
+            $('#' + inclusive).toggle()
+            $('#' + inclusive + "1").toggle()
+            $(e.target).toggleClass('selected')
         }
 
-        else if (e.target.classList.contains(well)) {
-            if (document.getElementById(well).style.display === "block") {
-                document.getElementById(well).style.display = "none"
-                document.getElementById(well + "1").style.display = "none"
-                e.target.classList.add('selected');
-            }
-            else {
-                document.getElementById(well).style.display = "block"
-                document.getElementById(well + "1").style.display = "block"
-                e.target.classList.remove('selected');
-            }
+        if (e.target.classList.contains(well)) {
+            $('#' + well).toggle()
+            $('#' + well + "1").toggle()
+            $(e.target).toggleClass('selected')
         }
-        else if (e.target.classList.contains(employnent)) {
-            if (document.getElementById(employnent).style.display === "block") {
-                document.getElementById(employnent).style.display = "none"
-                e.target.classList.add('selected');
-            }
-            else {
-                document.getElementById(employnent).style.display = "block"
-                e.target.classList.remove('selected');
-            }
+        if (e.target.classList.contains(employnent)) {
+            $('#' + employnent).toggle()
+            $(e.target).toggleClass('selected')
         }
-        else if (e.target.classList.contains(economy)) {
-            if (document.getElementById(economy).style.display === "block") {
-                document.getElementById(economy).style.display = "none"
-                document.getElementById(economy+"1").style.display = "none"
-                e.target.classList.add('selected');
-            }
-            else {
-                document.getElementById(economy).style.display = "block"
-                document.getElementById(economy+"1").style.display = "block"
-                e.target.classList.remove('selected');
-            }
+        if (e.target.classList.contains(economy)) {
+            $('#' + economy).toggle()
+            $('#' + economy + "1").toggle()
+            $(e.target).toggleClass('selected')
         }
-        else if (e.target.classList.contains(service)) {
-            if (document.getElementById(service).style.display === "block") {
-                document.getElementById(service).style.display = "none"
-                e.target.classList.add('selected');
-            }
-            else {
-                document.getElementById(service).style.display = "block"
-                e.target.classList.remove('selected');
-            }
-
+        if (e.target.classList.contains(service)) {
+            $('#' + service).toggle()
+            $(e.target).toggleClass('selected')
         }
 
     }
