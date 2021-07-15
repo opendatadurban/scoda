@@ -17,7 +17,7 @@ export default class DemographicModellerFooterCard extends Component {
             <div className="mt-1 ">
                 <div className="row">
                     <div className="col-sm-12">
-                        <div className="ie-content-card">
+                        <div className="ie-content-card ie-content-card-footer">
                             <div className="col">
                                 <div className="row">
                                     <div className="col-md-6">
