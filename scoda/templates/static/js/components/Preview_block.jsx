@@ -7,7 +7,7 @@ export default class Preview_block extends Component {
                     <div className="row">
                         <div className="col-12">
                             <h2>What Products Do We Offer?</h2>
-                            <p>South African Cities Network (SACN) are continually developing our range of tools to help cities employees perform their functions more effecively and efficiently.  These tools are built around our core research concepts:</p>
+                            <p>South African Cities Network (SACN) are continually developing our range of tools to help cities employees perform their functions more effectively and efficiently.  These tools are built around our core research concepts:</p>
                         </div>
                         <div className="col-md-10 offset-md-2 preview-elements">
                             <div className="row product-evidence mt-5 mb-5 d-flex align-items-center">

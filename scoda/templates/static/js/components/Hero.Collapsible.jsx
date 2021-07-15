@@ -91,19 +91,21 @@ export default class Hero extends Component {
                             <div className="col-0 hero-block-title"  onClick={this.toggleHero}>{this.props.title}</div>
                             <div className="col-1 tooglebtn"><i className={this.state.hero_caret} aria-hidden="true"></i></div>
                         </div>
-                        <div className=" col-md-5 hero-content-column" id="hero-content-column">
+                        <div className=" col-md-6 hero-content-column" id="hero-content-column">
                             <div id="contentContainer" className="row">
                                 <div className="col hero-block-text" dangerouslySetInnerHTML={{__html:this.props.content}}>
                                 </div>
                                 <div className="col-12">
                                     <button className="hero-block-button" style={buttonPrimaryColor} onClick={this.toggleHero}>Got It!</button>
+
                                 </div>
+                                   <div className='spacer'></div>
                             </div>
                             <div id="buttonContainer" className="row">
                             </div>
                         </div>
                         {/*Info bar and background*/}
-                        <div id="infoBlock" className="col-md-7 hero-block-background p-0 mr-0" style={infoBlockBackground}>
+                        <div id="infoBlock" className="col-md-6 hero-block-background p-0 mr-0" style={infoBlockBackground}>
                             <div id="infoBlockContainer" className="row ml-0 p-0 hero-block-info-display">
                                 <div className="col-0 hero-block-info-hspacer"></div>
                                <div className="col-0 hero-block-info-logo hero-block-info-logo-title" style={infoBlock}>{infoTitleCaps}</div>
