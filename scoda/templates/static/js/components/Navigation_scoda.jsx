@@ -41,7 +41,7 @@ export default class Navigation_scoda extends Component {
                 <div className="container">
                     <nav className="navbar navbar-expand-lg navbar-light bg-light">
 
-                        <a style={{position:"absolute",left:"0"}}   className="navbar-brand d-flex align-items-center">
+                        <a style={{position:"absolute",left:"0"}}   className="navbar-brand d-flex align-items-center" href='/#/home'>
                             <Image className="navigation-logo"  style={{width:"105px",display:`${this.state.logo_hide}`}} imgSrc="/static/img/scoda_logo.png" />
                         </a>
 

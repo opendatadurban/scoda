@@ -9,7 +9,7 @@ body {
  .hero-block {
   box-sizing: border-box;
     border-bottom: 1.4px solid $scoda-black;
-    margin-bottom: 60px;
+    margin-bottom: 29px;
   }
 
 .hero-block-text {
@@ -155,7 +155,7 @@ body {
     }
 
     #infoBlock{
-      height: unset;
+      height: 446px !important;
       transition: .2s height ease-in-out;
     }
 
@@ -167,7 +167,7 @@ body {
 
     .content-collapsible {
       transition: .2s all ease-in-out;    
-      max-height: 500px;
+      max-height: 460px;
       overflow: hidden;
       .hero-title {
         transition: .2s all ease-in-out;    
@@ -178,7 +178,7 @@ body {
         right: 30px;
         position: absolute;
         z-index: 2;
-        top: 108px;
+        top: 99px !important;
         .hero-block-title {
           color: white;
         }

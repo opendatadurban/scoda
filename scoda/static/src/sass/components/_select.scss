@@ -91,6 +91,7 @@
       @include custom-scrollbar ($scoda-black-light);
       font: normal 14px/18px $font;
       color: $font-general;
+
     }
 
     &__option {
@@ -100,6 +101,10 @@
       align-items: center;
       padding-left: 22px !important;
       font-size: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;  
+      overflow: hidden;
       &--highlighted {
         // font-weight: 600 !important;
         color: $font-general !important;
