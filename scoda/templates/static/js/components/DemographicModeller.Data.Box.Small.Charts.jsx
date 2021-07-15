@@ -93,7 +93,7 @@ export default class DemographicModellerDataBoxSmallChart extends Component {
     render() {
 
         return (
-                        <div className="ie-box-card mt-4">
+                        <div className="ie-box-card mt-4 mb-0">
                             <div className="dm-box-card-header">
                               <div className="row">
                                   <div className="col ml-3">

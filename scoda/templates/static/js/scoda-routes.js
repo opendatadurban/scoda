@@ -37,7 +37,7 @@ const _heroSecondaryColor = '#F64343';
 
 
 const _heroTitle_insight = 'Data Stories';
-const _heroContent_insight = 'More detailed writeup about data stories.';
+const _heroContent_insight = 'Data stories are a way to understand complex information and data using a narrative that appeals to interested readers.<br/><br/>They can be thought of as a series of dashboards connected with explainer text.  The topic is clearly defined and explored using information broken into understandable chunks which result in a finding or conclusion with calls to action to encourage the reader to learn and explore more.';
 const _heroInfoTitle_insight = 'INSIGHT TOOLS';
 const _heroPrimaryColor_insight = '#4F9DA6';
 const _heroSecondaryColor_insight = '#4F9DA6';
