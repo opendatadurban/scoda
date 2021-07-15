@@ -10,7 +10,7 @@ Prism.languages.roboconf = {
 	},
 	'property': /[\w.-]+(?=[ \t]*:)/,
 	'value': {
-		pattern: /(=[ \t]*(?![ \t]))[^,;]+/,
+		pattern: /(=[ \t]*)[^,;]+/,
 		lookbehind: true,
 		alias: 'attr-value'
 	},
