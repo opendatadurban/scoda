@@ -140,6 +140,7 @@
     letter-spacing: 0;
     line-height: 32px;
     -webkit-appearance: none;
+    padding-left: 18px;
     //Use png at assets/selectArrow.png for the arrow on the right
     //Set the background color to a BadAss Green color 
     &-icon{
@@ -172,7 +173,11 @@
     //-webkit-appearance: none; 
     //background: url('/static/dist/img/scoda/dropdown_caret_small.png') no-repeat 96% 80% #FFFFFF;
 }
-
+.ie-spacer {
+    display: block;
+    width: 100%;
+    height: 20px;
+}
 .goog-menu-button {
     border-style: none;
     border: 0px;
