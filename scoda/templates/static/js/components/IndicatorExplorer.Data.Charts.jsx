@@ -140,8 +140,8 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                           y: {
                               all: {
                                   range: {
-                                     //max: resultSet.max,
-                                      min: 0
+                                      max: resultSet.max,
+                                      min: resultSet.min > 0 ? 0 : resultSet.min-1
                                   }
                               }
                           }
