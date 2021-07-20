@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 // import Select from './Select';
 import $ from 'jquery'
 import select2 from 'select2';
-
+import { Container, Row, Col, Modal, ModalBody, Spinner } from 'reactstrap';
 
 
 export default class IndicatorExplorerDataCardHeader extends Component {
     constructor(props) {
         super(props);
-        
+        this.state = {
+            loader:true,
+        }
         this.resetForm = this.resetForm.bind(this);
         this.filterData = this.filterData.bind(this);
         // this.enableFilter = this.enableFilter.bind(this);
@@ -16,6 +18,9 @@ export default class IndicatorExplorerDataCardHeader extends Component {
     }
 
     componentDidMount(){
+        setTimeout(function(){
+            this.setState({loader:false});
+       }.bind(this),5000);  // wait 5 seconds, then reset to false
         $('#selector').select2({
             placeholder:"Empty"
             }
@@ -50,11 +55,30 @@ export default class IndicatorExplorerDataCardHeader extends Component {
     
     render() {
         const selectorOptions = this.props.datasetOptions.map((dataset,index) =>(
-            <option key={index} value={dataset[0]}>{dataset[1]}</option>
+            <option key={index} value={dataset[0]}>{dataset[1].match(/.{1,10}(\s|$)/g)}</option>
         ));
 
+
+            
+        
         return (
+            
             <div className="row">
+                {this.state.loader ?                 <Modal id="loader" isOpen={this.state.loader} className="modal-dialog-centered loader">
+                    <ModalBody>
+                        <div className="row">
+                            <div className="col-2"></div>
+                            <div className="col-0 ml-3 pt-4">
+                                <Spinner type="grow" color="secondary" size="sm"/>
+                                <Spinner type="grow" color="success" size="sm"/>
+                                <Spinner type="grow" color="danger" size="sm"/>
+                                <Spinner type="grow" color="warning" size="sm"/>
+                            </div>
+                            <div className="col-0 pt-4 pl-4 float-left">Loading Content...</div>
+                        </div>
+                        <br/>
+                    </ModalBody>
+                </Modal> :''}
                     <div className="col-6">
 
                         <div className="row">
@@ -65,14 +89,14 @@ export default class IndicatorExplorerDataCardHeader extends Component {
 
                         <div className="row">
                             <div className="col">
-                              <select id="selector" className="ie-dropdown" onChange={this.enableFilter}>                     
+                              <select id="selector" className="ie-dropdown mb-2" onChange={this.enableFilter}>                     
                                   <option value="0">Empty</option>
                                   {selectorOptions}
 
                               </select>
                             </div>
                         </div>
-
+                            <div className='ie-spacer'></div>
                         <div className="row">
                             <div className="col-6">
                                 <div id="button-search" className="ie-button-search ie-button-search-explorer ie-button-inactive" onClick={this.filterData}>Search</div>
