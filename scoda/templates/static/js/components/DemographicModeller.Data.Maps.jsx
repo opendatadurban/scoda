@@ -233,7 +233,7 @@ export default class DemographicModellerDataMap extends Component {
   onEachFeature(feature, layer) {
     layer.on({
       mouseover: this.highlightFeature,
-      mouseout: this.resetHighlight,
+      mouseout: this.resetHighlight, 
       click: this.zoomToFeature
     });
   }
