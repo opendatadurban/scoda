@@ -117,4 +117,4 @@ data/
 scoda/pyvenv.cfg
 scoda/Scripts/
 scoda/pip-selfcheck.json
-.scoda/
+.storybook/
