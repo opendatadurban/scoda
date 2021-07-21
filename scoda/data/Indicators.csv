@@ -1,0 +1,186 @@
+Index,Dataset,Indicator,Theme
+1,Population size,1,1
+2,Population density (persons per square km),2,1
+3,Households,3,1
+4,Population growth rate (1996 - 2001 and 2001 -2011),4,1
+5,Female population,5,1
+6,Male population,6,1
+7,Sex ratio,7,1
+8,Dependency ratio (age & economic),8,1
+9,Child population,9,1
+10,Youth population,10,1
+11,Adult population,11,1
+12,Elderly population,12,1
+13,Net migration rate,13,1
+14,International immigrants rate,14,1
+15,Indigent,15,1
+16,Poverty rate,16,1
+17,Gini Coefficient ,17,1
+18,Life expectancy - Male,18,1
+19,Life expectancy - Female,18,1
+20,Gross Value Add (GVA),19,2
+21,Exports,20,2
+22,Imports,21,2
+23,Household income,22,2
+24,Cost of living,23,2
+25,Economically active population,24,2
+26,Employment Absorption Rate (EAR),25,2
+27,Employment,26,2
+28,Unemployment Rate,27,2
+29,Vulnerable population unemployment,28,2
+30,Human Development Index (HDI),29,2
+31,"Fixed-landline connections per 100,000",30,2
+32,"Mobile connections per 100,000",31,2
+33,"Internet connections per 100,000",32,2
+34,Water availability ,33,3
+35,Water consumption ,34,3
+36,Non-revenue water,35,3
+37,Water losses,36,3
+38,Risk Score - blue drop,37,3
+39,Risk score - green drop,38,3
+40,Energy supply - Petrol,39,3
+41,Energy supply - Diesel,39,3
+42,Energy supply - Coal,39,3
+43,Energy supply - Paraffin,39,3
+44,Energy supply - LPG,39,3
+45,Energy supply - HFO,39,3
+46,Energy supply - JetFuel + AvGas,39,3
+47,Energy consumption (GJ),40,3
+48,Energy intensity - Residential,41,3
+49,Energy intensity - Commercial,41,3
+50,Energy intensity - Industrial,41,3
+51,Energy intensity - Transport,41,3
+52,Energy intensity - Government,41,3
+53,Energy intensity - Agriculture,41,3
+54,Renewable energy,42,3
+55,Energy losses,43,3
+56,Green house gas (GHG) emissions,44,3
+57,Waste recycling (tonnes),45,3
+58,Residential fuel combustion - heating - coal,46,3
+59,Residential fuel combustion - heating - wood,46,3
+60,Residential fuel combustion - cooking - coal,46,3
+61,Residential fuel combustion - cooking - wood,46,3
+62,Open Space,47,3
+63,Energy use - Residential,48,3
+64,Energy use - Commercial,48,3
+65,Energy use - Industrial,48,3
+66,Energy use - Transport,48,3
+67,Energy use - Government,48,3
+68,Energy use - Agriculture,48,3
+69,Energy use - Losses,48,3
+70,Emission - Residential,49,3
+71,Emission - Commercial,49,3
+72,Emission - Industrial,49,3
+73,Emission - Transport,49,3
+74,Emission - Government,49,3
+75,Emission - Agriculture,49,3
+76,Emission - Losses,49,3
+77,"Emissions (all fuels excl. aviation, marine) ",49,3
+78,Male learner enrolment- primary,50,4
+79,Female learner enrolment- primary,50,4
+80,Male learner enrolment- secondary,51,4
+81,Female learner enrolment- secondary,51,4
+82,Learner-educator ratio,52,4
+83,Completion rate - primary school 2011,53,4
+84,Completion rate - secondary school 2011,54,4
+85,Literacy rates,55,4
+86,Matric pass rate,56,4
+87,Hospital beds - provincial (public sector),57,4
+88,Mortality - under 5 years per 1 000 births,58,4
+89,Multiple deprivation index,59,4
+90,Dwelling type - formal,60,4
+91,Dwelling type - informal,60,4
+92,Dwelling type - traditional,60,4
+93,Dwelling tenure - owned + paid,61,4
+94,Dwelling tenure - owned + not paid,61,4
+95,Dwelling tenure - rented,61,4
+96,Dwelling tenure - occupied + no rent,61,4
+97,Informal shelter growth,62,4
+98,Housing Affordability Ratio,63,4
+99,Housing Affordability Index,64,4
+100,Transport passengers - Train,65,4
+101,Transport passengers - Bus,65,4
+102,Transport passengers - Taxi,65,4
+103,Transport passengers - Car / Truck driver,65,4
+104,Transport passengers - Car / Truck passenger,65,4
+105,Transport passengers - Walk only,65,4
+106,Transport passengers - Other,65,4
+107,Motor vehicle ownership,66,4
+108,Inpatient bed utilisation rate,67,4
+109,Educational level - no schooling,68,4
+110,Educational level - some primary,68,4
+111,Educational level - completed primary,68,4
+112,Educational level - some secondary,68,4
+113,Educational level - grade 12 / std 9,68,4
+114,Educational level - higher education,68,4
+115,Educational level - other,68,4
+116,Educational level - total,68,4
+117,Municipal management vacancies,69,5
+118,Municipal posts - Community and Social Services,70,5
+119,Municipal posts - Finance and Administration,70,5
+120,Municipal posts - Electricity,70,5
+121,Municipal posts - Environmental Protection,70,5
+122,Municipal posts - Health,70,5
+123,Municipal posts - Public Safety,70,5
+124,Municipal posts - Road Transport,70,5
+125,Municipal posts - Sport and Recreation,70,5
+126,Municipal posts - Waste Management,70,5
+127,Municipal posts - Waste Water Management,70,5
+128,Municipal posts - Water,70,5
+129,Municipal posts - Other,70,5
+130,Municipal staff vacancies,71,5
+131,Voter turnout - Local (2011),72,5
+132,Voter Turnout - National (2014),73,5
+133,Access to water - Piped in dwelling,74,5
+134,Access to water - Piped in yard,74,5
+135,Access to water - Communal within 200m,74,5
+136,Access to water - Communal more than 200m,74,5
+137,Access to water - No piped,74,5
+138,Access to sanitation - Flush toilet,75,5
+139,Access to sanitation - VIPs,75,5
+140,Access to sanitation - Pit toilet,75,5
+141,Access to sanitation - Bucket System,75,5
+142,Access to sanitation - No toilet,75,5
+143,Access to electricity - Lighting only,76,5
+144,Access to electricity - Lighting and other,76,5
+145,Access to electricity - Not using,76,5
+146,Access to refuse removal - Weekly by authority,77,5
+147,Access to refuse removal - Less than weekly by authority,77,5
+148,Access to refuse removal - Community removal,77,5
+149,Access to refuse removal - Personally removed,77,5
+150,Access to refuse removal - No removal,77,5
+151,Clinics - provincial,78,5
+152,External audit,79,5
+153,Informal settlements,80,5
+154,Residential rates,81,5
+155,Business rates,82,5
+156,Services levy,83,5
+157,Grants,84,5
+158,Capital grants & transfers,85,5
+159,Operating surplus,86,5
+160,Debtors,87,5
+161,Bad Debt,88,5
+162,Remuneration costs,89,5
+163,Liabilities,90,5
+164,Cash position,91,5
+165,Acid test ratio,92,5
+166,Debt to income ratio,93,5
+167,Current ratio,94,5
+168,Debt ratio,95,5
+169,Budget funding,96,5
+170,Wasteful expenditure,97,5
+171,Operating expenditure - Employee related,98,5
+172,Operating expenditure - Remuneration of councillors,98,5
+173,Operating expenditure - Bad debt,98,5
+174,Operating expenditure - Repairs and maintenance,98,5
+175,Operating expenditure - Bulk purchase,98,5
+176,Operating expenditure - Other operating,98,5
+177,Operating expenditure - Total,98,5
+178,Operating expenditure - Ave annual growth,98,5
+179,Operating expenditure - Repairs and maintenance growth,98,5
+180,Affordability of municipal bills - Municipal Bill,99,5
+181,Affordability of municipal bills - Benchmark income,99,5
+182,Affordability of municipal bills - Municipal bill as percent of income,99,5
+183,Affordability of municipal bills - change since 2010,99,5
+184,Voter turnout- local,100,5
+185,Voter registration - local,101,5

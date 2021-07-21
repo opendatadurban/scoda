@@ -8,9 +8,9 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-env/
 build/
 develop-eggs/
+# dist/
 downloads/
 eggs/
 .eggs/
@@ -19,9 +19,11 @@ lib64/
 parts/
 sdist/
 var/
+wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -41,16 +43,18 @@ htmlcov/
 .cache
 nosetests.xml
 coverage.xml
-*,cover
+*.cover
 .hypothesis/
+.pytest_cache/
 
 # Translations
 *.mo
 *.pot
-.vscode
+
 # Django stuff:
 *.log
 local_settings.py
+db.sqlite3
 
 # Flask stuff:
 instance/
@@ -65,7 +69,7 @@ docs/_build/
 # PyBuilder
 target/
 
-# IPython Notebook
+# Jupyter Notebook
 .ipynb_checkpoints
 
 # pyenv
@@ -74,49 +78,43 @@ target/
 # celery beat schedule file
 celerybeat-schedule
 
-# dotenv
-.env
+# SageMath parsed files
+*.sage.py
 
-# virtualenv
+# Environments
+.env
+.venv
+env/
 venv/
 ENV/
+env.bak/
+venv.bak/
 
 # Spyder project settings
 .spyderproject
+.spyproject
 
 # Rope project settings
 .ropeproject
-*.xml
-/scoda/data/process_test.py
-/scoda/data/Indicators.csv
-/scoda/data/UniqueIndicators.csv
-/scoda/data/jhbpopests_clean.csv
-/scoda/data/metro_salc_geo.json
-/scoda/data/pandasTest.py
-.idea/
-out.csv
-scoda/data/pandasTest.py
-scoda/static/vendor/blockUI/
-scoda/static/vendor/grChartImg/
-/scoda/templates/demographics/testMap.html
-/scoda/data/MunicipalWards2016.json
-/scoda/static/css/style.css.old
-/scoda/data/JHB_Grid.json
-/scoda/data/jhbgridmodel.csv
-scoda-env1/
-scoda/data/Indicators.xlsx
-scoda/data/archive/
-scoda/data/metadata/GCRO_QoL.zip
-scoda/data/new_data/
 
-#node-modules
-scoda/static/node_modules
-scoda/templates/static/node_modules
-scoda/data/data_test.csv
-/scoda/config/development.cfg
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.idea
+
+#npm
+.idea/dataSources.xml
+
+development.cfg
+#mapping/static/data
+# node modules
+
 node_modules/
-scoda/Scripts/
+data/
+.vscode/
 scoda/pyvenv.cfg
+scoda/Scripts/
 scoda/pip-selfcheck.json
-/requirements_mac.txt
-node_modules/
+.scoda/
