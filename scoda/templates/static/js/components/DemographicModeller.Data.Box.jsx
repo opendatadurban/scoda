@@ -7,7 +7,7 @@ export default class DemographicModellerDataBox extends Component {
         super(props);
     }
 
-    renderDataSet(dataSetType){
+    renderDataSet(dataSetType) {
 
         switch(dataSetType) {
             case "map":
