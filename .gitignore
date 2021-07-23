@@ -88,10 +88,10 @@ ENV/
 .ropeproject
 *.xml
 /scoda/data/process_test.py
-/scoda/data/Indicators.csv
-/scoda/data/UniqueIndicators.csv
-/scoda/data/jhbpopests_clean.csv
-/scoda/data/metro_salc_geo.json
+Indicators.csv
+UniqueIndicators.csv
+jhbpopests_clean.csv
+metro_salc_geo.json
 /scoda/data/pandasTest.py
 .idea/
 out.csv
@@ -99,10 +99,10 @@ scoda/data/pandasTest.py
 scoda/static/vendor/blockUI/
 scoda/static/vendor/grChartImg/
 /scoda/templates/demographics/testMap.html
-/scoda/data/MunicipalWards2016.json
+MunicipalWards2016.json
 /scoda/static/css/style.css.old
-/scoda/data/JHB_Grid.json
-/scoda/data/jhbgridmodel.csv
+JHB_Grid.json
+jhbgridmodel.csv
 scoda-env1/
 scoda/data/Indicators.xlsx
 scoda/data/archive/
@@ -110,11 +110,11 @@ scoda/data/metadata/GCRO_QoL.zip
 scoda/data/new_data/
 
 #node-modules
-scoda/data/data_test.csv
+data_test.csv
 /scoda/config/development.cfg
 scoda/Scripts/
 scoda/pyvenv.cfg
-scoda/pip-selfcheck.json
+pip-selfcheck.json
 /requirements_mac.txt
 node_modules/
 node_modules/
