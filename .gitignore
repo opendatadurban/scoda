@@ -119,5 +119,4 @@ pip-selfcheck.json
 node_modules/
 node_modules/
 .storybook/
-scoda/data/MunicipalWards2016.json
-scoda/data/metro_salc_geo.json
+/scoda/data/
