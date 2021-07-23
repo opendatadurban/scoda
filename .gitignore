@@ -111,7 +111,7 @@ development.cfg
 #mapping/static/data
 # node modules
 
-node_modules/
+
 data/
 .vscode/
 scoda/pyvenv.cfg
