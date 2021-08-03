@@ -1,0 +1,146 @@
+.subnav {
+
+    box-shadow: $box-shadow;
+    z-index: 401; // 1 higher than leaflet's map
+    padding-left: 70px; // enough space for the sidebar trigger to sit in
+  
+    &--wrapper {
+      background-color: white;
+      display: block;
+      position: relative;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      height: 50px;
+    }
+  
+    &--content {
+      &--title {
+        font-size: 22px;
+      }
+  
+      &--menu {
+        &--item {
+          font-size: 22px;
+        }
+      }
+    }
+  
+    &--breadcrumbs {
+      font-size: 22px;
+      strong {
+        color: black;
+      }
+  
+      .dropdown {
+        .btn,
+        h6 {
+          font-size: 22px;
+          padding-left: 0;
+        }
+        &-header {
+          font-weight: bold;
+          color: $font-general;
+        }
+  
+        &-menu {
+         width: 400px;
+         padding: $s-t $s-s $s-s;
+         left: - $s-s !important;
+        }
+  
+        &-divider {
+          width: calc(100% + #{$s-m});
+          left: - $s-s;
+          position: relative;
+          border-top: 1px solid #B2BEC3;
+          opacity: 1;
+        }
+  
+        &-toggle {
+  
+          // Used when font awesome is installed through gulp and not react component
+          &::after {
+            content: '\f078';
+            border: 0;
+            font-family: 'FontAwesome';
+            font-weight: 900;
+            font-size: 16px;
+            top: 4px;
+            right: -30px;
+            position: absolute;
+          }
+        }
+        
+        .icon {
+          border: 0;
+          font-family: 'FontAwesome';
+          font-weight: 900;
+          font-size: 16px;
+          top: 10px;
+          right: -30px;
+          position: absolute;
+        }
+        
+        &-item {
+          padding: 0;
+          font-size: 20px;
+          line-height: 50px;
+          border-bottom: 4px solid transparent;
+          display: block;
+          width: fit-content;
+          margin-left: 0;
+  
+          &:hover {
+            border-bottom: 4px solid $font-general;
+            background-color: white;
+          }
+  
+          &.active {
+            font-weight: 600;
+            background-color: white;
+            color: $font-general;
+            border-bottom: 4px solid $font-general;
+          }
+          &:focus, &:active {
+            outline: none;
+            background: white;
+            color: $font-general;
+          }
+        }
+      }
+    }
+  
+    &--cta {
+      position: absolute;
+      right: 60px;
+      &---download_icon {
+        width: 18px;
+        position: absolute;
+        right: -24px;
+        top: 17px;
+      }
+      .btn {
+        height: 30px;
+        width: unset;
+      }
+  
+    }
+  
+    // General styling
+  
+    // Desktop specific styling
+    @media (min-width: $tablet) {}
+  
+    // Mobile specific styling
+    @media (max-width: $tablet) {}
+  }
+  #download {
+    &:hover {
+      box-shadow: none !important;
+    }
+    &:active,&:focus {
+      background-color: white !important;
+    }
+  }

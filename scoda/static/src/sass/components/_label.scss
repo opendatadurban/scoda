@@ -1,0 +1,27 @@
+label, .label {
+    // General styling
+  
+    text-align: left;
+    font: 400 12px/20px $font;
+    color: #8694A2;
+    margin: $s-s/2 0 0;
+    display: block;
+    text-transform: uppercase;
+  
+    // Error state
+    &.error {
+      border-color: $failure;
+      color: $failure;
+    }
+  
+    &.disabled {
+      border-color: $disabled;
+      color: $disabled;
+    }
+  
+    // Desktop specific styling
+    @media (min-width: $tablet) {}
+  
+    // Mobile specific styling
+    @media (max-width: $tablet) {}
+  }

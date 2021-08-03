@@ -1,0 +1,129 @@
+.sidebar_left {
+
+    // Local Variables
+    $totalWidth: 461px;
+    $panelWidth: 411px;
+    $tabHeight: 50px; 
+    $vertical: 100px; // Vertical position of sidebar from the top
+    
+    // General styling
+    display: inline-block;
+    position: fixed;
+    top: $vertical;
+    height: calc(100vh - #{$vertical}); // minus top height
+    overflow: hidden;
+    left: -$panelWidth;
+    width: $totalWidth;
+    transition: .2s all ease-in-out;
+    z-index: 1001; // 1 higher than leaflet's map's zoom component
+    &--tab {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+      background: #2F3442;
+      border-radius: 0 5px 5px 0;
+      height: $tabHeight;
+      &--trigger {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 100%; 
+        cursor: pointer;
+      }
+      span {
+        z-index: 1;
+        position: absolute;
+        font-size: 14px;
+        font-weight: bold;
+        display: inline-block;
+        line-height: 24px;
+        font-size: 24px;
+        color: #B2BEC3;
+        font-weight: 600;
+        top: 15px;
+        left: 50px;
+      }
+      i {
+        z-index: 1;
+      }
+  
+      .icon {
+        &-left, &-right {
+          height: 100%;
+          width: 24px;
+          position: relative;
+        }
+        &-left {
+          left: 10px;
+        }
+        &-right {
+          right: 14px;
+        }
+      }
+  
+      .circle {
+        position: relative;
+        right: 10px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        width: 32px;
+        height: 32px;
+        border-color: #B2BEC3;
+        .fas, svg {
+          color: #B2BEC3;
+        }
+      }
+    }
+    &--panel {
+      margin: 0;
+      width: $panelWidth;
+      position: relative;
+      left: 0;
+      background-color: white;
+      padding: $s-s;
+      box-shadow: $box-shadow;
+      border-radius: 0  0 $border-radius 0;
+      height: 100%;
+  
+      // Custom Sidebar Content
+      a {
+        font-size: 22px;
+        line-height: 40px;
+        border-bottom: 4px solid transparent;
+        display: inline-block;
+        &:hover {
+          border-bottom: 4px solid $font-general;
+        }
+        &.active {
+          font-weight: 600;
+          border-bottom: 4px solid $font-general;
+        }
+        &:not(:first-of-type) {
+          margin-top: 10px;
+        }
+      }
+    }
+    &.open {
+      left: 0;
+      z-index: 1003;
+      i.circle {
+        transform: rotate(180deg);
+      }
+    }
+    // Desktop specific styling
+    @media (min-width: $tablet) {
+    }
+    
+      // Mobile specific styling
+      @media (max-width: $tablet) {
+        display: none;
+      }
+    }
+    
+  
