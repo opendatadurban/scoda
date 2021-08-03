@@ -1,0 +1,30 @@
+.dropdown {
+    // General styling
+    vertical-align: unset;
+    &.show {
+      display: inline-flex !important; // written for reactstrap bootstrap to keep inline nature, overiding base templates display block
+    }
+  
+    .btn {
+      height: unset;
+      padding: 0;
+      margin: 0;
+      display: inline-block;
+      color: $font-general;
+      background-color: unset;
+      border: 0;
+      box-shadow: none;
+      &[aria-expanded="true"], &:focus, &:active {
+        border: 0;
+        color: $font-general !important;
+        background-color: unset !important;
+        box-shadow: none !important;
+      }
+    }
+  
+    // Desktop specific styling
+    @media (min-width: $tablet) {}
+  
+    // Mobile specific styling
+    @media (max-width: $tablet) {}
+  }
