@@ -57,7 +57,24 @@
 @mixin padding-bottom {
   padding-bottom: $s-m;
 }
-
+@mixin active ($color, $background){
+  border: 1px solid $background;
+  background: $background;
+  color: $color;
+  font-weight: 600 !important;
+  opacity: 1;
+  &::after {
+    color: $font;
+  }
+}
+@mixin dissapear {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
 @mixin circle-frame($diameter, $border-thickness, $border-colour) {
   height: $diameter;
   width: $diameter;
