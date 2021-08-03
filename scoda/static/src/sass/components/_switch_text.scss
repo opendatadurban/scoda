@@ -1,0 +1,68 @@
+.switch_text {
+
+    // Local variables
+  
+    
+    // General styling
+    .btn {
+      top: 3px;
+      text-transform: capitalize;
+      margin-right: 0;
+      display: inline-flex;
+      height: 22px;
+      padding: 0 10px;
+      border: 1px solid #B0B4B9;
+      font: 400 12px/18px 'Montserrat' !important;
+      &:hover {
+        color: white;
+        background-color: rgba(45, 179, 172, 1);
+        box-shadow: none;
+        opacity: 0.5;
+      }
+  
+      &.option-one {
+        color: #979797;
+        background-color: white;
+        border-radius: 12px 0 0 12px;
+        opacity: 0.5;
+      }
+      &.option-two {
+        color: #979797;
+        background-color: white;
+        border-radius: 0 12px 12px 0;
+        left: -1px;
+        opacity: 0.5;
+      }
+    }
+  
+    input {
+      visibility: hidden;
+      &[type="radio"] {
+        @include dissapear();
+      }
+    }
+  
+    #optionTwo:checked ~ label.option-two  {
+      @include active (white,#646B75);
+    }
+  
+    #optionOne:checked ~ label.option-one  {
+      @include active (white,#646B75);
+    }
+  
+    // Desktop specific styling
+    @media (min-width: $tablet) {
+    }
+  
+    // Mobile specific styling
+    @media (max-width: $tablet) {
+    }
+  
+  
+  
+    // Desktop specific styling
+    @media (min-width: $tablet) {}
+  
+    // Mobile specific styling
+    @media (max-width: $tablet) {}
+  }
