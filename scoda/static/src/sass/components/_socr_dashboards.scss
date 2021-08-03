@@ -1,0 +1,83 @@
+.charts {
+    padding: 15px;
+}
+.sorc_dashboards {
+    background-color: #F1F1F1;
+
+    .stat_display_panel {
+        background-color: white;
+        margin-bottom: 15px;
+        padding: 15px 0;
+
+        .first_panel {
+            border-right: 1px solid #B2BEC3;
+        }
+        .catagory-name {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 15px;
+            padding: 15px;
+            text-align: left;
+
+            span {
+                font-weight: 400;
+                font-size:13px;
+            }
+        }
+        &--numbers {
+          h1,p {
+              text-align: center;
+              line-height: 20px;
+          }
+        }      
+    }
+    .charts_dashboards {
+        background-color: white;
+        width:98%;
+        margin: auto;
+        margin-bottom: 30px;
+        border-radius: 5px;
+
+        &--left_container {
+            border-right: 2px solid #F1F1F1;
+        }
+        &--select {
+            border-bottom: 2px solid #F1F1F1;
+        }
+        &--button {
+            background: #FFFFFF;
+            border: 1px solid #4A4A4A;
+            border-radius: 11px;
+            box-shadow: none;
+            height: 25px;
+            font-family: Montserrat;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 10px;
+            line-height: 14px;
+            margin-top: 10px;
+            padding: 1px 5px;
+            height: 17px;
+            width: 63px;
+        }
+        &--households {
+            font-family: Montserrat;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 15px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    }
+    .spacer {
+        width: 100%;
+        height: 5px;
+        &--top {
+            height: 100px;
+            width: 100%;
+            display: block;
+        }
+    }
+}
