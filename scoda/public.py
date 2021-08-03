@@ -80,7 +80,7 @@ def api_explore(check):
             filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
             filter(DataPoint.region_id == Region.id)
         df = read_sql_query(query.statement, query.session.bind)
-    df.to_csv('%s/data/%s' % (app.root_path, "data_test.csv"), index=False)
+    # df.to_csv('%s/data/%s' % (app.root_path, "data_test.csv"), index=False)
     table = []
     table_plot = []
     years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
