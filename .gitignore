@@ -110,8 +110,6 @@ scoda/data/metadata/GCRO_QoL.zip
 scoda/data/new_data/
 
 #node-modules
-scoda/static/node_modules
-scoda/templates/static/node_modules
 scoda/data/data_test.csv
 /scoda/config/development.cfg
 scoda/Scripts/
@@ -119,4 +117,4 @@ scoda/pyvenv.cfg
 scoda/pip-selfcheck.json
 /requirements_mac.txt
 node_modules/
-scoda/data/
+scoda/data
