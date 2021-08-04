@@ -1567,7 +1567,7 @@ export default class Charts_dashboards extends Component {
 
                 <div className='charts_dashboards--barcharts'>
                   <div className='row'>
-                    <div className='col'>
+                    <div className='col-md-6'>
                       <div className='charts'>
                         <div className='row'>
                           <div className='col-md-9'><h1 className='charts_dashboards--households'>Households: Access to Basic Water Supply</h1></div>
@@ -1576,7 +1576,7 @@ export default class Charts_dashboards extends Component {
                         <canvas id='mc'></canvas>
                       </div>
                     </div>
-                    <div className='col'>
+                    <div className='col-md-6'>
                       <div className='charts'>
                         <div className='row'>
                           <div className='col-md-9'><h1 className='charts_dashboards--households'>Households: Access to Basic Sanitation</h1></div>
@@ -1587,7 +1587,7 @@ export default class Charts_dashboards extends Component {
                     </div>
                   </div>
                   <div className='row'>
-                    <div className='col'>
+                    <div className='col-md-6'>
                       <div className='charts'>
                         <div className='row'>
                           <div className='col-md-9'><h1 className='charts_dashboards--households'>Households: Access to Electricity</h1></div>
@@ -1596,7 +1596,7 @@ export default class Charts_dashboards extends Component {
                         <canvas id='mc2'></canvas>
                       </div>
                     </div>
-                    <div className='col'>
+                    <div className='col-md-6'>
                       <div className='charts'>
                         <div className='row'>
                           <div className='col-md-9'><h1 className='charts_dashboards--households'>Households: Access to Refuse Removal</h1></div>
