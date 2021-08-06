@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Image from './Image';
+import $ from 'jquery'
 export default class Navigation_scoda extends Component {
     constructor(props) {
         super(props);
@@ -18,6 +19,26 @@ export default class Navigation_scoda extends Component {
                 this.setState({ logo_hide: logo });
             })
         ) : this.setState({ logo_hide: "block" });
+
+
+        $(document).ready(function () {
+
+            $(".navbar-nav li a").click(function () {
+                var id = $(this);
+
+                $(".active").removeClass("active");
+                $(id).addClass("active");
+                localStorage.setItem("selectedolditem", $(id).text());
+
+            });
+
+            var selectedolditem = localStorage.getItem('selectedolditem');
+
+            if (selectedolditem !== null) {
+
+                $("a:contains('" + selectedolditem + "')").addClass("active");
+            }
+        });
       }
     render() {
         
