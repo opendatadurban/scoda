@@ -145,13 +145,34 @@ let free_basic_services_sortedNumber1= []
 let free_basic_services_sortedNumber2= []
 let free_basic_services_sortedNumber3= []  
 
+const style = {
+  control: (base, state) => ({
+    ...base,
+    border: '1px solid #4A4A4A',
+    borderRadius:'12.5px',
+    boxShadow: 'none',
+    '&:hover': {
+        border: '1px solid #4A4A4A',
+        borderRadius:'12.5px',
+    }
+})
+};
 export default class Charts_dashboards extends Component {
     constructor() {
         super();
         this.state = {
             isMulti:true,
             toggle: true,
-          multiValue: [],
+          multiValue: [
+            { value: "BUF", label: "BUF" },
+            { value: "CCT", label: "CCT" },
+            { value: "JHB", label: "JHB" },
+            { value: "EKH", label: "EKH" },
+            { value: "ETK", label: "ETK" },
+            { value: "MAN", label: "MAN" },
+            { value: "NMB", label: "NMB" },
+            { value: "TSH", label: "TSH" }
+          ],
           filterOptions: [
             { value: "BUF", label: "BUF" },
             { value: "CCT", label: "CCT" },
@@ -181,6 +202,9 @@ export default class Charts_dashboards extends Component {
     }
       handleMultiChange(option) {
         this.setState({multiValue: option}); 
+        console.log(this.state.multiValue)
+        console.log('------BREAK------')
+        console.log(this.state.filterOptions)
         sortedData =[]
 
         myData =[]
@@ -518,9 +542,8 @@ export default class Charts_dashboards extends Component {
         free_basic_services_clean_2016 = free_basic_services_sortedNumber1.filter(Boolean);
         free_basic_services_clean_2017 = free_basic_services_sortedNumber2.filter(Boolean);
         free_basic_services_clean_2018 = free_basic_services_sortedNumber3.filter(Boolean);
-        // console.log(sortedData)
-        // console.log('------BREAK------')
-        // console.log(water_supply_clean_2015)
+
+ 
 
         }) 
       }
@@ -639,9 +662,17 @@ export default class Charts_dashboards extends Component {
           ]
             },
             options: {
+              legend: {
+                labels: {
+                    fontColor: "#4A4A4A",
+                    fontSize: 8,
+                    fontFamily: "Montserrat",
+                }
+              },
               title: {
                   display: false,
-                  text: 'Title'
+                  text: 'Title',
+                  fontFamily: "Montserrat",
               },
               tooltips: {
                   mode: 'index',
@@ -662,7 +693,7 @@ export default class Charts_dashboards extends Component {
               scales: {
                   xAxes: [{
                       stacked: true,
-                      ticks: {fontStyle: 'bold',steps:4},
+                      ticks: {fontStyle: 'bold',steps:4,fontFamily: "Montserrat",},
                       gridLines: {
                         display:false,
                       }
@@ -807,9 +838,17 @@ export default class Charts_dashboards extends Component {
           ]
             },
             options: {
+              legend: {
+                labels: {
+                    fontColor: "#4A4A4A",
+                    fontSize: 8,
+                    fontFamily: "Montserrat",
+                }
+              },
               title: {
                   display: false,
-                  text: 'Title'
+                  text: 'Title',
+                  fontFamily: "Montserrat",
               },
               tooltips: {
                   mode: 'index',
@@ -830,7 +869,7 @@ export default class Charts_dashboards extends Component {
               scales: {
                   xAxes: [{
                       stacked: true,
-                      ticks: {fontStyle: 'bold'},
+                      ticks: {fontStyle: 'bold',fontFamily: "Montserrat",},
                       gridLines: {
                         display:false,
                       }
@@ -973,9 +1012,17 @@ export default class Charts_dashboards extends Component {
           ]
             },
             options: {
+              legend: {
+                labels: {
+                    fontColor: "#4A4A4A",
+                    fontSize: 8,
+                    fontFamily: "Montserrat",
+                }
+              },
               title: {
                   display: false,
-                  text: 'Title'
+                  text: 'Title',
+                  fontFamily: "Montserrat",
               },
               tooltips: {
                   mode: 'index',
@@ -996,7 +1043,7 @@ export default class Charts_dashboards extends Component {
               scales: {
                   xAxes: [{
                       stacked: true,
-                      ticks: {fontStyle: 'bold'},
+                      ticks: {fontStyle: 'bold',fontFamily: "Montserrat",},
                       gridLines: {
                         display:false,
                       }
@@ -1139,9 +1186,17 @@ export default class Charts_dashboards extends Component {
           ]
             },
             options: {
+              legend: {
+                labels: {
+                    fontColor: "#4A4A4A",
+                    fontSize: 8,
+                    fontFamily: "Montserrat",
+                }
+              },
               title: {
                   display: false,
-                  text: 'Title'
+                  text: 'Title',
+                  fontFamily: "Montserrat",
               },
               tooltips: {
                   mode: 'index',
@@ -1162,7 +1217,7 @@ export default class Charts_dashboards extends Component {
               scales: {
                   xAxes: [{
                       stacked: true,
-                      ticks: {fontStyle: 'bold'},
+                      ticks: {fontStyle: 'bold',fontFamily: "Montserrat",},
                       gridLines: {
                         display:false,
                       }
@@ -1305,9 +1360,17 @@ export default class Charts_dashboards extends Component {
           ]
             },
             options: {
+              legend: {
+                labels: {
+                    fontColor: "#4A4A4A",
+                    fontSize: 8,
+                    fontFamily: "Montserrat",
+                }
+              },
               title: {
                   display: false,
-                  text: 'Title'
+                  text: 'Title',
+                  fontFamily: "Montserrat",
               },
               tooltips: {
                   mode: 'index',
@@ -1328,7 +1391,7 @@ export default class Charts_dashboards extends Component {
               scales: {
                   xAxes: [{
                       stacked: true,
-                      ticks: {fontStyle: 'bold'},
+                      ticks: {fontStyle: 'bold',fontFamily: "Montserrat",},
                       gridLines: {
                         display:false,
                       }
@@ -1471,9 +1534,17 @@ export default class Charts_dashboards extends Component {
           ]
             },
             options: {
+              legend: {
+                labels: {
+                    fontColor: "#4A4A4A",
+                    fontSize: 8,
+                    fontFamily: "Montserrat",
+                }
+              },
               title: {
                   display: false,
-                  text: 'Title'
+                  text: 'Title',
+                  fontFamily: "Montserrat",
               },
               tooltips: {
                   mode: 'index',
@@ -1494,7 +1565,7 @@ export default class Charts_dashboards extends Component {
               scales: {
                   xAxes: [{
                       stacked: true,
-                      ticks: {fontStyle: 'bold'},
+                      ticks: {fontStyle: 'bold',fontFamily: "Montserrat",},
                       gridLines: {
                         display:false,
                       }
@@ -1505,7 +1576,7 @@ export default class Charts_dashboards extends Component {
                       ticks: {
                         stepSize:200000,
                           callback: function (value, index, values) {
-                             {a? values = Math.round(value / 400000) * 100 + ' %' : values = Math.round(value * 100) / 100 + ''; }
+                             {a? values = Math.round(value / 400000) * 100 + ' %' : values = Math.round(value * 100) / 100000 + 'k'; }
                               return values
                           },
                          
@@ -1562,6 +1633,7 @@ export default class Charts_dashboards extends Component {
                     options={this.state.filterOptions}
                     onChange={this.handleMultiChange}
                     isMulti={this.state.isMulti}
+                    styles={style}
                   />
                 </div>
 
@@ -1616,7 +1688,7 @@ export default class Charts_dashboards extends Component {
                   </div>
                   <canvas id='mc4'></canvas>
                 </div>
-                <div className='charts p-0'>
+                <div className='charts p-0 mt-4'>
                   <div className='row'>
                     <div className='col-md-9'><h1 className='charts_dashboards--households'>Units Receiving Free Basic Services</h1></div>
                     <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook' target='_blank'/></div>

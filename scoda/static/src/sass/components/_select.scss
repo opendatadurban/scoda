@@ -105,6 +105,7 @@
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;  
       overflow: hidden;
+      height: 25px;
       &--highlighted {
         // font-weight: 600 !important;
         color: $font-general !important;
@@ -130,6 +131,12 @@
       // padding-top: 5px !important;
       width: 100% !important;
       font-weight: 500;
+    }
+  }
+  &-dropdown {
+    &--below {
+      border-bottom-left-radius: 18px;
+      border-bottom-right-radius: 18px;
     }
   }
 
