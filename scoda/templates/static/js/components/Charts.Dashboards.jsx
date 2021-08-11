@@ -163,25 +163,25 @@ export default class Charts_dashboards extends Component {
         this.state = {
             isMulti:true,
             toggle: true,
-          multiValue: [
-            { value: "BUF", label: "BUF" },
-            { value: "CCT", label: "CCT" },
-            { value: "JHB", label: "JHB" },
-            { value: "EKH", label: "EKH" },
-            { value: "ETK", label: "ETK" },
-            { value: "MAN", label: "MAN" },
-            { value: "NMB", label: "NMB" },
-            { value: "TSH", label: "TSH" }
+            multiValue: [
+            { value: "BUF", label: "Buffalo City" },
+            { value: "CCT", label: "City of Cape Town" },
+            { value: "JHB", label: "City of Joburg" },
+            { value: "EKH", label: "Ekurhuleni" },
+            { value: "ETK", label: "Ethekwini" },
+            { value: "MAN", label: "Mangaung" },
+            { value: "NMB", label: "Nelson Mandela Bay" },
+            { value: "TSH", label: "Tshwane" }
           ],
           filterOptions: [
-            { value: "BUF", label: "BUF" },
-            { value: "CCT", label: "CCT" },
-            { value: "JHB", label: "JHB" },
-            { value: "EKH", label: "EKH" },
-            { value: "ETK", label: "ETK" },
-            { value: "MAN", label: "MAN" },
-            { value: "NMB", label: "NMB" },
-            { value: "TSH", label: "TSH" }
+            { value: "BUF", label: "Buffalo City" },
+            { value: "CCT", label: "City of Cape Town" },
+            { value: "JHB", label: "City of Joburg" },
+            { value: "EKH", label: "Ekurhuleni" },
+            { value: "ETK", label: "Ethekwini" },
+            { value: "MAN", label: "Mangaung" },
+            { value: "NMB", label: "Nelson Mandela Bay" },
+            { value: "TSH", label: "Tshwane" }
           ]
         };
     
@@ -1576,7 +1576,7 @@ export default class Charts_dashboards extends Component {
                       ticks: {
                         stepSize:200000,
                           callback: function (value, index, values) {
-                             {a? values = Math.round(value / 400000) * 100 + ' %' : values = Math.round(value * 100) / 100000 + 'k'; }
+                             {a? values = Math.round(value / 400000) * 100 + '%  ' : values = Math.round(value * 100) / 100000 + 'k'; }
                               return values
                           },
                          
