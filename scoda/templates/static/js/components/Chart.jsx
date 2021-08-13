@@ -10,7 +10,7 @@ export default class Chart extends Component {
         }
     }
     componentDidMount() {
-        fetch('http://localhost:5000/react/test_data')
+        fetch('https://localhost:5000/react/test_data')
         .then(res => res.json())
         .then((data) => {
             console.log(data);

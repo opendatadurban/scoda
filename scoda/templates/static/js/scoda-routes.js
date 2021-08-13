@@ -71,10 +71,10 @@ const _heroLinearGradient_datastories = `linear-gradient(112deg, rgba(79,157,166
 
 const _tabs = [
   {
-      name: 'SACN', mode:'active',url: 'http://www.sacn.co.za'
+      name: 'SACN', mode:'active',url: 'https://www.sacn.co.za'
   },
   {
-      name: 'eThekwini', mode: 'none', url: 'http://www.google.com'
+      name: 'eThekwini', mode: 'none', url: 'https://www.google.com'
   }
 ];
 

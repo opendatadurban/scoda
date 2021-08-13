@@ -16,7 +16,7 @@ export default class Footer extends Component {
                             </span>
                         </div>
                         <div className="span4 footer--col_three">
-                            <a href="http://www.sacncloud.net/index.php/login" target="blank__">
+                            <a href="https://www.sacncloud.net/index.php/login" target="blank__">
                                 <img src="../../../../static/dist/img/cloud.png" alt="cloud logo" />
                             </a>
                             <a href="https://www.facebook.com/SACitiesNetwork" target="blank__">

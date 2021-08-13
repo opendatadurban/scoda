@@ -140,11 +140,11 @@ export default class TabAndFilters extends Component {
                         year: '2011',
                         subchart: [
                             {
-                                url:'http://stepsa.org',
+                                url:'https://stepsa.org',
                                 link: 'See More at: StepSA.org'
                             },
                             {
-                                url:'http://www.jhbsocr.org.za',
+                                url:'https://www.jhbsocr.org.za',
                                 link: 'View JHB SoCR'
                             },
                         ]
@@ -160,7 +160,7 @@ export default class TabAndFilters extends Component {
                                 link: 'See More at: StepSA.org'
                             },
                             {
-                                url:'http://www.jhbsocr.org.za',
+                                url:'https://www.jhbsocr.org.za',
                                 link: 'View JHB SoCR'
                             },
                         ]
@@ -172,11 +172,11 @@ export default class TabAndFilters extends Component {
                         display:'none',
                         subchart: [
                             {
-                                url:'http://stepsa.org',
+                                url:'https://stepsa.org',
                                 link: 'See More at: StepSA.org'
                             },
                             {
-                                url:'http://www.jhbsocr.org.za',
+                                url:'https://www.jhbsocr.org.za',
                                 link: 'View JHB SoCR'
                             },
                         ]

@@ -17,7 +17,7 @@ const Content_block = (props) => {
           <Image className="" imgSrc={props.imgSrc}/>
           </Col>
         </Row>
-          <Button id="#ukzn-site" href="http://irmaps.ukzn.ac.za" target="blank" text="Visit The Site" className="btn btn_highlight light content-block--button" icon={[<i key className="fas fa-arrow-right"></i>]} />
+          <Button id="#ukzn-site" href="https://irmaps.ukzn.ac.za" target="blank" text="Visit The Site" className="btn btn_highlight light content-block--button" icon={[<i key className="fas fa-arrow-right"></i>]} />
       </Container>
   );
 };

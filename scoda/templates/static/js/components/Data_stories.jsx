@@ -16,7 +16,7 @@ export default class Data_stories extends Component {
                         <div className="col-md-8">
                             <div className="row">
                                 <div className="col-6">
-                                    <a href="http://scoda.opendata.durban/group/epwp" className="data-stories--story epwp-data-group trigger">
+                                    <a href="https://scoda.opendata.durban/group/epwp" className="data-stories--story epwp-data-group trigger">
                                         <span class="data-stories--label">
                                             <strong>EPWP Data Group</strong>
                                             <p>View Our Collection of Datasets</p>
