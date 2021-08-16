@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import CookiePolicy from './CookiePolicy'
 export default class Footer extends Component {
     render() {
         return (
+            <div>          
+           
             <footer className="site-footer footer">
                 <div className="container">
                     <div className="row">
@@ -14,6 +17,9 @@ export default class Footer extends Component {
                                 <p>email us:</p>
                                     <a href="mailto:scoda@sacities.net">scoda@sacities.net</a>
                             </span>
+                        </div>
+                        <div className="span4 footer--col_three">
+                        <CookiePolicy/>   
                         </div>
                         <div className="span4 footer--col_three">
                             <a href="https://www.sacncloud.net/index.php/login" target="blank__">
@@ -38,6 +44,7 @@ export default class Footer extends Component {
                     </div>
                 </div>
             </footer>
+            </div>
             )
         }
     }
