@@ -9,6 +9,40 @@
     width: 100%;
     bottom: 0;
     z-index: 1000;
+    &--cookies {
+      button {
+        text-decoration: underline;
+        color: white;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 17px;
+        background: none;
+        border: none;
+        &:hover, &:focus, &:active {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px !important;
+          line-height: 17px;
+          font-weight: 500 !important;
+          background: none !important;
+          border: none;
+          outline: none;
+          box-shadow: none !important;
+        }
+      }
+    }
+    &--cookie_link {
+      position: relative;
+      color: #FFFFFF !important;
+      top: 4px;
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 17px;
+      text-decoration: underline !important;
+    }
     span{
         font-size: 10px;
     }
@@ -83,15 +117,15 @@
           margin-right: 8px;
         }
         a {
-          font-size: 16px;
+          font-size: 14px;
           font-weight: 700;
           color: white !important;
         }
       }
       &_three {
         img {
-          height: 32px;
-          width: 32px;
+          height: 25px;
+          width: 25px;
           &.ckan {
             width: 66px;
             height: auto;;
@@ -104,6 +138,12 @@
     }
     // Desktop specific styling
     @media (min-width: $tablet) {
+      &--cookies {
+        button {
+          margin-bottom: -10px;
+          font-size: 12px;
+        }
+      }
     }
     
       // Mobile specific styling

@@ -88,7 +88,7 @@ const SideBarArticleMetadata = () => {
                           Weblink to Original Article
                         </div>
                         <div className="content-val" >
-                          <a className="article-link">http://citizen.co.za/news/south-africa/rama…
+                          <a className="article-link">https://citizen.co.za/news/south-africa/rama…
 
 </a>
                         </div>

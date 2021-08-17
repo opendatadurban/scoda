@@ -1,0 +1,39 @@
+.popover {
+    max-width: 720px !important;
+    &-header {
+        background-color: white !important;
+        border: 0 !important;
+        padding: 20px 20px 10px 20px !important;
+    }
+    &-body {
+        padding: 10px 20px 20px 20px !important;
+        p {
+            font-family: Montserrat;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 20px;
+        }
+        a {
+            color: #F5A623;
+        }
+    }
+  }
+#Popover1 {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+    text-decoration: underline;
+    color: #FFFFFF;
+    background-color: transparent;
+    height: 29px;
+    margin-top: 0px;
+
+    &:hover,&:active,&:focus {
+        border: none !important;
+        box-shadow: none !important;
+    }
+}

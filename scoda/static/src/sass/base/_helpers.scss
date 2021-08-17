@@ -9,7 +9,14 @@
 .flex-direction-column{
     flex-direction: column;
 }
-
+.popover-header{
+    padding-left: 21px;
+    padding-top: 21px;
+}
+.popover-body{
+        font: normal 400 16px/1.5 "Montserrat";
+        padding: 21px;
+    }
 hr.dotted {
     border-top: none;
     height: 4px;
