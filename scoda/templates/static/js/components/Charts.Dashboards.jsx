@@ -2,42 +2,44 @@ import React,{ Component } from 'react'
 import Select from "react-select";
 import Button from './Button';
 import Switch_text from './Switch_text'
+import axios from 'axios';
+import { Container, Row, Col, Modal, ModalBody, Spinner } from 'reactstrap';
 
 let a = true;
 let test_2015 = [500000, 270876, 423603, 217790, 360005, 329838, 501687, 421451]
 let test_2016 = [453145, 266876, 125603, 128790, 316005, 319838, 162387, 231151]
-let test_2017 = [311445, 126876, 255603, 238790, 126005, 212738, 219687, 211151]
-let test_2018 = [351445, 414176, 334103, 191690, 531715, 344738, 434112, 423112]
+let test_2017 = [76201, 320406, 15848, 237330, 174687, 29658, 73593, 57250]
+let test_2018 = [80831, 315246, 11520, 226118, 191033, 32105, 63706, 52926]
 
-let water_supply2015 = [87.8,96.0,97.2,95.1,86.4,97.1,98.1,92.2]
-let water_supply2016 = [87.6,95.1,97.5,96.6,89.4,95.4,96.2,92.0]
-let water_supply2017 = [88.3,95.1,96.9,96.6,91.1,92.8,97.5,91.3]
-let water_supply2018 = [84.5,95.9,97.1,96.4,91.8,86.4,97.7,91.3]
+let water_supply2015 = []
+let water_supply2016 = []
+let water_supply2017 = []
+let water_supply2018 = []
 
-let basic_sani2015 =   [88.9,91.8,96.3,88.2,83.7,91.0,94.6,81.9]
-let basic_sani2016 =   [90.4,92.0,94.8,89.2,83.3,87.8,92.9,82.5]
-let basic_sani2017 =   [93.9,92.0,95.2,89.9,83.4,90.9,93.3,82.2]
-let basic_sani2018 =   [93.1,92.4,96.0,90.6,83.6,89.3,97.1,83.7]
+let basic_sani2015 =   []
+let basic_sani2016 =   []
+let basic_sani2017 =   []
+let basic_sani2018 =   []
 
-let access_to_elec2015 =[91.9,98.7,94.4,86.7,97.3,97.7,98.3,91.2]
-let access_to_elec2016 =[90.6,98.4,94.1,90.0,97.4,97.7,97.6,92.2]
-let access_to_elec2017 =[93.3,98.6,95.2,90.4,98.2,97.7,98.1,92.2]
-let access_to_elec2018 =[91.6,98.6,96.1,92.2,98.2,98.0,98.6,93.3]
+let access_to_elec2015 =[]
+let access_to_elec2016 =[]
+let access_to_elec2017 =[]
+let access_to_elec2018 =[]
 
-let refuse_removal2015 =[72.1,89.2,93.9,89.3,81.7,90.3,57.9,81.5]
-let refuse_removal2016 =[67.2,89.6,94.3,88.7,82.3,88.6,84.3,81.3]
-let refuse_removal2017 =[71.1,89.2,93.8,90.3,81.6,94.4,85.8,82.4]
-let refuse_removal2018 =[69.1,89.7,91.9,89.9,81.4,77.3,88.3,82.0]
+let refuse_removal2015 =[]
+let refuse_removal2016 =[]
+let refuse_removal2017 =[]
+let refuse_removal2018 =[]
 
 let free_basics2015 =[,,,,,,,]
 let free_basics2016 =[,,,,,,,]
 let free_basics2017 =[,,,,,,,]
 let free_basics2018 =[,,,,,,,]
 
-let numOfHousehold2015 =[229366,1133121,1646703,1124504,1071626,246861.2,329334.4,1009391]
-let numOfHousehold2016 =[232814.5,1166911,1715315,1162696,1097550,251997.9,335398.9,1053314]
-let numOfHousehold2017 =[236977.7,1200396,1780132,1199962,1128122,257466,342388.5,1094797]
-let numOfHousehold2018 =[240877.5,1234317,1850035,1240058,1159272,262897.2,349257.2,1139488]
+let numOfHousehold2015 =[]
+let numOfHousehold2016 =[]
+let numOfHousehold2017 =[]
+let numOfHousehold2018 =[]
 
 
 //chart declarations
@@ -46,31 +48,31 @@ var chartRef1,chartRef2,chartRef3,chartRef4,chartRef5,chartRef6
 //City and year data
 let sortedData = ["BUF", "CCT", "EKH", "ETK","JHB", "MAN", "NMB", "TSH"]
 
-let water_supply_2015 = water_supply2015
-let water_supply_2016 = water_supply2016
-let water_supply_2017 = water_supply2017
-let water_supply_2018 = water_supply2018
+let water_supply_2015 = []
+let water_supply_2016 = []
+let water_supply_2017 = []
+let water_supply_2018 = []
 
-let basic_sanitation_2015 = basic_sani2015
-let basic_sanitation_2016 = basic_sani2016
-let basic_sanitation_2017= basic_sani2017
-let basic_sanitation_2018 = basic_sani2018
+let basic_sanitation_2015 = []
+let basic_sanitation_2016 = []
+let basic_sanitation_2017= []
+let basic_sanitation_2018 = []
 
-let access_to_elec_2015 = access_to_elec2015
-let access_to_elec_2016 = access_to_elec2016
-let access_to_elec_2017= access_to_elec2017
-let access_to_elec_2018 = access_to_elec2018
+let access_to_elec_2015 = []
+let access_to_elec_2016 = []
+let access_to_elec_2017= []
+let access_to_elec_2018 = []
 
-let access_to_refuse_2015 = refuse_removal2015
-let access_to_refuse_2016 = refuse_removal2016
-let access_to_refuse_2017= refuse_removal2017
-let access_to_refuse_2018 = refuse_removal2018
+let access_to_refuse_2015 = []
+let access_to_refuse_2016 = []
+let access_to_refuse_2017= []
+let access_to_refuse_2018 = []
 
 //----
-let  number_of_households_2015 = numOfHousehold2015
-let  number_of_households_2016 = numOfHousehold2016
-let  number_of_households_2017= numOfHousehold2017
-let  number_of_households_2018 = numOfHousehold2018
+let  number_of_households_2015 = []
+let  number_of_households_2016 = []
+let  number_of_households_2017= []
+let  number_of_households_2018 = []
 
 let free_basic_services_2015 = test_2015
 let free_basic_services_2016 = test_2016
@@ -79,31 +81,31 @@ let free_basic_services_2018 = test_2018
 
 
 //cleaned data
-let water_supply_clean_2015 = water_supply2015
-let water_supply_clean_2016 = water_supply2016
-let water_supply_clean_2017 = water_supply2017
-let water_supply_clean_2018 = water_supply2018
+let water_supply_clean_2015 = []
+let water_supply_clean_2016 = []
+let water_supply_clean_2017 = []
+let water_supply_clean_2018 = []
 
-let basic_sanitation_clean_2015 = basic_sani2015
-let basic_sanitation_clean_2016 = basic_sani2016
-let basic_sanitation_clean_2017 = basic_sani2017
-let basic_sanitation_clean_2018 = basic_sani2018
+let basic_sanitation_clean_2015 = []
+let basic_sanitation_clean_2016 = []
+let basic_sanitation_clean_2017 = []
+let basic_sanitation_clean_2018 = []
 
-let access_to_elec_clean_2015 = access_to_elec2015
-let access_to_elec_clean_2016 = access_to_elec2016
-let access_to_elec_clean_2017= access_to_elec2017
-let access_to_elec_clean_2018 = access_to_elec2018
+let access_to_elec_clean_2015 = []
+let access_to_elec_clean_2016 = []
+let access_to_elec_clean_2017= []
+let access_to_elec_clean_2018 = []
 
-let access_to_refuse_clean_2015 = refuse_removal2015
-let access_to_refuse_clean_2016 = refuse_removal2016
-let access_to_refuse_clean_2017= refuse_removal2017
-let access_to_refuse_clean_2018 = refuse_removal2018
+let access_to_refuse_clean_2015 = []
+let access_to_refuse_clean_2016 = []
+let access_to_refuse_clean_2017= []
+let access_to_refuse_clean_2018 = []
 
 //----
-let  number_of_households_clean_2015 = numOfHousehold2015
-let  number_of_households_clean_2016 = numOfHousehold2016
-let  number_of_households_clean_2017= numOfHousehold2017
-let  number_of_households_clean_2018 = numOfHousehold2018
+let  number_of_households_clean_2015 = []
+let  number_of_households_clean_2016 = []
+let  number_of_households_clean_2017= []
+let  number_of_households_clean_2018 = []
 
 let free_basic_services_clean_2015 = test_2015
 let free_basic_services_clean_2016 = test_2016
@@ -163,6 +165,7 @@ export default class Charts_dashboards extends Component {
         this.state = {
             isMulti:true,
             toggle: true,
+            loader: false,
             multiValue: [
             { value: "BUF", label: "Buffalo City" },
             { value: "CCT", label: "City of Cape Town" },
@@ -188,6 +191,379 @@ export default class Charts_dashboards extends Component {
         this.handleMultiChange = this.handleMultiChange.bind(this);
         this.switchTrigger = this.switchTrigger.bind(this);
       }
+      componentDidMount(){
+        this.showLoader()
+        this.renderChart();
+        this.renderChart1();
+        this.renderChart2();
+        this.renderChart3();
+        this.renderChart4();
+        this.renderChart5();
+
+        this.percentage_of_household_with_basic_water_supply();
+        this.percentage_of_households_with_access_to_basic_sanitation();
+        this.percentage_of_households_with_access_to_electricity();
+        this.percentage_households_with_weekly_municipal_refuse_removal();
+        this.total_number_of_households_in_the_municipality();
+
+      }
+      componentDidUpdate(){
+        this.renderChart();
+        this.renderChart1();
+        this.renderChart2();
+        this.renderChart3();
+        this.renderChart4();
+        this.renderChart5();
+      }
+      showLoader() {
+        this.setState({
+            loader: true
+        });
+      }
+
+      hideLoader() {
+        this.setState({
+            loader: false
+        });
+      }
+      //API
+      percentage_of_household_with_basic_water_supply() {
+        axios.get(`/api/explore/codebook?indicator_id=392`).then(res => {
+      
+         
+            let water_supply1 = []
+            let water_supply2 = []
+            let water_supply3 = []
+            let water_supply4 = []
+          
+
+            //2015
+            water_supply1[0] = res.data.table[32].slice(2,3)[0]
+            water_supply1[1] = res.data.table[28].slice(2,3)[0]
+            water_supply1[2] = res.data.table[24].slice(2,3)[0]
+            water_supply1[3] = res.data.table[20].slice(2,3)[0]
+            water_supply1[4] = res.data.table[4].slice(2,3)[0]
+            water_supply1[5] = res.data.table[16].slice(2,3)[0]
+            water_supply1[6] = res.data.table[12].slice(2,3)[0]
+            water_supply1[7] = res.data.table[8].slice(2,3)[0]
+            //2016
+            water_supply2[0] = res.data.table[31].slice(2,3)[0]
+            water_supply2[1] = res.data.table[27].slice(2,3)[0]
+            water_supply2[2] = res.data.table[23].slice(2,3)[0]
+            water_supply2[3] = res.data.table[19].slice(2,3)[0]
+            water_supply2[4] = res.data.table[3].slice(2,3)[0]
+            water_supply2[5] = res.data.table[15].slice(2,3)[0]
+            water_supply2[6] = res.data.table[11].slice(2,3)[0]
+            water_supply2[7] = res.data.table[7].slice(2,3)[0]
+            //2017
+            water_supply3[0] = res.data.table[30].slice(2,3)[0]
+            water_supply3[1] = res.data.table[26].slice(2,3)[0]
+            water_supply3[2] = res.data.table[22].slice(2,3)[0]
+            water_supply3[3] = res.data.table[18].slice(2,3)[0]
+            water_supply3[4] = res.data.table[2].slice(2,3)[0]
+            water_supply3[5] = res.data.table[14].slice(2,3)[0]
+            water_supply3[6] = res.data.table[10].slice(2,3)[0]
+            water_supply3[7] = res.data.table[6].slice(2,3)[0]
+            //2017
+            water_supply4[0] = res.data.table[29].slice(2,3)[0]
+            water_supply4[1] = res.data.table[25].slice(2,3)[0]
+            water_supply4[2] = res.data.table[21].slice(2,3)[0]
+            water_supply4[3] = res.data.table[17].slice(2,3)[0]
+            water_supply4[4] = res.data.table[1].slice(2,3)[0]
+            water_supply4[5] = res.data.table[13].slice(2,3)[0]
+            water_supply4[6] = res.data.table[9].slice(2,3)[0]
+            water_supply4[7] = res.data.table[5].slice(2,3)[0]
+
+            console.log('',water_supply1)
+            //2015
+            water_supply2015 = water_supply1
+            water_supply_2015 = water_supply2015
+            water_supply_clean_2015 = water_supply2015
+            //2016
+            water_supply2016 = water_supply2
+            water_supply_2016 = water_supply2016
+            water_supply_clean_2016 = water_supply2016
+            //2017
+            water_supply2017 = water_supply3
+            water_supply_2017 = water_supply2017
+            water_supply_clean_2017 = water_supply2017
+            //2018
+            water_supply2018 = water_supply4
+            water_supply_2018 = water_supply2018
+            water_supply_clean_2018 = water_supply2018
+            
+
+        });
+        
+      }
+      percentage_of_households_with_access_to_basic_sanitation() {
+        axios.get(`/api/explore/codebook?indicator_id=384`).then(res => {
+            let array1 = []
+            let arrayy1 = []
+            let array2 = []
+            let array3 = []
+            let array4 = []
+            
+            //2015
+            array1[0] = res.data.table[32].slice(2,3)[0]
+            array1[1] = res.data.table[28].slice(2,3)[0]
+            array1[2] = res.data.table[24].slice(2,3)[0]
+            array1[3] = res.data.table[20].slice(2,3)[0]
+            array1[4] = res.data.table[4].slice(2,3)[0]
+            array1[5] = res.data.table[16].slice(2,3)[0]
+            array1[6] = res.data.table[12].slice(2,3)[0]
+            array1[7] = res.data.table[8].slice(2,3)[0]
+            //2016
+            array2[0] = res.data.table[31].slice(2,3)[0]
+            array2[1] = res.data.table[27].slice(2,3)[0]
+            array2[2] = res.data.table[23].slice(2,3)[0]
+            array2[3] = res.data.table[19].slice(2,3)[0]
+            array2[4] = res.data.table[3].slice(2,3)[0]
+            array2[5] = res.data.table[15].slice(2,3)[0]
+            array2[6] = res.data.table[11].slice(2,3)[0]
+            array2[7] = res.data.table[7].slice(2,3)[0]
+            //2017
+            array3[0] = res.data.table[30].slice(2,3)[0]
+            array3[1] = res.data.table[26].slice(2,3)[0]
+            array3[2] = res.data.table[22].slice(2,3)[0]
+            array3[3] = res.data.table[18].slice(2,3)[0]
+            array3[4] = res.data.table[2].slice(2,3)[0]
+            array3[5] = res.data.table[14].slice(2,3)[0]
+            array3[6] = res.data.table[10].slice(2,3)[0]
+            array3[7] = res.data.table[6].slice(2,3)[0]
+            //2017
+            array4[0] = res.data.table[29].slice(2,3)[0]
+            array4[1] = res.data.table[25].slice(2,3)[0]
+            array4[2] = res.data.table[21].slice(2,3)[0]
+            array4[3] = res.data.table[17].slice(2,3)[0]
+            array4[4] = res.data.table[1].slice(2,3)[0]
+            array4[5] = res.data.table[13].slice(2,3)[0]
+            array4[6] = res.data.table[9].slice(2,3)[0]
+            array4[7] = res.data.table[5].slice(2,3)[0]
+
+            console.log('aaddwff',array1)
+            // for (let i = 0; i < 1; i++) {
+            //   arrayy1[i] = array1
+            // }
+            console.log('aaaaa',array1)
+            //2015
+            basic_sani2015 = array1
+            basic_sanitation_2015 = basic_sani2015
+            basic_sanitation_clean_2015 = basic_sani2015
+            //2016
+            basic_sani2016 = array2
+            basic_sanitation_2016 = basic_sani2016
+            basic_sanitation_clean_2016 = basic_sani2016
+            //2017
+            basic_sani2017 = array3
+            basic_sanitation_2017 = basic_sani2017
+            basic_sanitation_clean_2017 = basic_sani2017
+            //2018
+            basic_sani2018 = array4
+            basic_sanitation_2018 = basic_sani2018
+            basic_sanitation_clean_2018 = basic_sani2018
+           
+
+        });
+      }
+
+      percentage_of_households_with_access_to_electricity() {
+        axios.get(`/api/explore/codebook?indicator_id=10`).then(res => {
+            let array1 = []
+            let array2 = []
+            let array3 = []
+            let array4 = []
+            
+            //2015
+            array1[0] = res.data.table[32].slice(2,3)[0]
+            array1[1] = res.data.table[28].slice(2,3)[0]
+            array1[2] = res.data.table[24].slice(2,3)[0]
+            array1[3] = res.data.table[20].slice(2,3)[0]
+            array1[4] = res.data.table[4].slice(2,3)[0]
+            array1[5] = res.data.table[16].slice(2,3)[0]
+            array1[6] = res.data.table[12].slice(2,3)[0]
+            array1[7] = res.data.table[8].slice(2,3)[0]
+            //2016
+            array2[0] = res.data.table[31].slice(2,3)[0]
+            array2[1] = res.data.table[27].slice(2,3)[0]
+            array2[2] = res.data.table[23].slice(2,3)[0]
+            array2[3] = res.data.table[19].slice(2,3)[0]
+            array2[4] = res.data.table[3].slice(2,3)[0]
+            array2[5] = res.data.table[15].slice(2,3)[0]
+            array2[6] = res.data.table[11].slice(2,3)[0]
+            array2[7] = res.data.table[7].slice(2,3)[0]
+            //2017
+            array3[0] = res.data.table[30].slice(2,3)[0]
+            array3[1] = res.data.table[26].slice(2,3)[0]
+            array3[2] = res.data.table[22].slice(2,3)[0]
+            array3[3] = res.data.table[18].slice(2,3)[0]
+            array3[4] = res.data.table[2].slice(2,3)[0]
+            array3[5] = res.data.table[14].slice(2,3)[0]
+            array3[6] = res.data.table[10].slice(2,3)[0]
+            array3[7] = res.data.table[6].slice(2,3)[0]
+            //2017
+            array4[0] = res.data.table[29].slice(2,3)[0]
+            array4[1] = res.data.table[25].slice(2,3)[0]
+            array4[2] = res.data.table[21].slice(2,3)[0]
+            array4[3] = res.data.table[17].slice(2,3)[0]
+            array4[4] = res.data.table[1].slice(2,3)[0]
+            array4[5] = res.data.table[13].slice(2,3)[0]
+            array4[6] = res.data.table[9].slice(2,3)[0]
+            array4[7] = res.data.table[5].slice(2,3)[0]
+            console.log('',array1)
+            //2015
+            access_to_elec2015 = array1
+            access_to_elec_2015 = access_to_elec2015
+            access_to_elec_clean_2015 = access_to_elec2015
+            //2016
+            access_to_elec2016 = array2
+            access_to_elec_2016 = access_to_elec2016
+            access_to_elec_clean_2016 = access_to_elec2016
+            //2017
+            access_to_elec2017 = array3
+            access_to_elec_2017 = access_to_elec2017
+            access_to_elec_clean_2017 = access_to_elec2017
+            //2018
+            access_to_elec2018 = array4
+            access_to_elec_2018 = access_to_elec2018
+            access_to_elec_clean_2018 = access_to_elec2018
+
+        });
+      }
+      percentage_households_with_weekly_municipal_refuse_removal() {
+        axios.get(`/api/explore/codebook?indicator_id=1114`).then(res => {
+            let array1 = []
+            let array2 = []
+            let array3 = []
+            let array4 = []
+
+            //2015
+            array1[0] = res.data.table[32].slice(2,3)[0]
+            array1[1] = res.data.table[28].slice(2,3)[0]
+            array1[2] = res.data.table[24].slice(2,3)[0]
+            array1[3] = res.data.table[20].slice(2,3)[0]
+            array1[4] = res.data.table[4].slice(2,3)[0]
+            array1[5] = res.data.table[16].slice(2,3)[0]
+            array1[6] = res.data.table[12].slice(2,3)[0]
+            array1[7] = res.data.table[8].slice(2,3)[0]
+            //2016
+            array2[0] = res.data.table[31].slice(2,3)[0]
+            array2[1] = res.data.table[27].slice(2,3)[0]
+            array2[2] = res.data.table[23].slice(2,3)[0]
+            array2[3] = res.data.table[19].slice(2,3)[0]
+            array2[4] = res.data.table[3].slice(2,3)[0]
+            array2[5] = res.data.table[15].slice(2,3)[0]
+            array2[6] = res.data.table[11].slice(2,3)[0]
+            array2[7] = res.data.table[7].slice(2,3)[0]
+            //2017
+            array3[0] = res.data.table[30].slice(2,3)[0]
+            array3[1] = res.data.table[26].slice(2,3)[0]
+            array3[2] = res.data.table[22].slice(2,3)[0]
+            array3[3] = res.data.table[18].slice(2,3)[0]
+            array3[4] = res.data.table[2].slice(2,3)[0]
+            array3[5] = res.data.table[14].slice(2,3)[0]
+            array3[6] = res.data.table[10].slice(2,3)[0]
+            array3[7] = res.data.table[6].slice(2,3)[0]
+            //2017
+            array4[0] = res.data.table[29].slice(2,3)[0]
+            array4[1] = res.data.table[25].slice(2,3)[0]
+            array4[2] = res.data.table[21].slice(2,3)[0]
+            array4[3] = res.data.table[17].slice(2,3)[0]
+            array4[4] = res.data.table[1].slice(2,3)[0]
+            array4[5] = res.data.table[13].slice(2,3)[0]
+            array4[6] = res.data.table[9].slice(2,3)[0]
+            array4[7] = res.data.table[5].slice(2,3)[0]
+            console.log('',array1)
+            //2015
+            refuse_removal2015 = array1
+            access_to_refuse_2015 = refuse_removal2015
+            access_to_refuse_clean_2015 = refuse_removal2015
+            //2016
+            refuse_removal2016 = array2
+            access_to_refuse_2016 = refuse_removal2016
+            access_to_refuse_clean_2016 = refuse_removal2016
+            //2017
+            refuse_removal2017 = array3
+            access_to_refuse_2017 = refuse_removal2017
+            access_to_refuse_clean_2017 = refuse_removal2017
+            //2018
+            refuse_removal2018 = array4
+            access_to_refuse_2018 = refuse_removal2018
+            access_to_refuse_clean_2018 = refuse_removal2018
+
+        });
+      }
+
+      total_number_of_households_in_the_municipality() {
+        axios.get(`/api/explore/codebook?indicator_id=12`).then(res => {
+            let array1 = []
+            let array2 = []
+            let array3 = []
+            let array4 = []
+            
+
+            //2015
+            array1[0] = res.data.table[32].slice(2,3)[0]
+            array1[1] = res.data.table[28].slice(2,3)[0]
+            array1[2] = res.data.table[24].slice(2,3)[0]
+            array1[3] = res.data.table[20].slice(2,3)[0]
+            array1[4] = res.data.table[4].slice(2,3)[0]
+            array1[5] = res.data.table[16].slice(2,3)[0]
+            array1[6] = res.data.table[12].slice(2,3)[0]
+            array1[7] = res.data.table[8].slice(2,3)[0]
+            //2016
+            array2[0] = res.data.table[31].slice(2,3)[0]
+            array2[1] = res.data.table[27].slice(2,3)[0]
+            array2[2] = res.data.table[23].slice(2,3)[0]
+            array2[3] = res.data.table[19].slice(2,3)[0]
+            array2[4] = res.data.table[3].slice(2,3)[0]
+            array2[5] = res.data.table[15].slice(2,3)[0]
+            array2[6] = res.data.table[11].slice(2,3)[0]
+            array2[7] = res.data.table[7].slice(2,3)[0]
+            //2017
+            array3[0] = res.data.table[30].slice(2,3)[0]
+            array3[1] = res.data.table[26].slice(2,3)[0]
+            array3[2] = res.data.table[22].slice(2,3)[0]
+            array3[3] = res.data.table[18].slice(2,3)[0]
+            array3[4] = res.data.table[2].slice(2,3)[0]
+            array3[5] = res.data.table[14].slice(2,3)[0]
+            array3[6] = res.data.table[10].slice(2,3)[0]
+            array3[7] = res.data.table[6].slice(2,3)[0]
+            //2017
+            array4[0] = res.data.table[29].slice(2,3)[0]
+            array4[1] = res.data.table[25].slice(2,3)[0]
+            array4[2] = res.data.table[21].slice(2,3)[0]
+            array4[3] = res.data.table[17].slice(2,3)[0]
+            array4[4] = res.data.table[1].slice(2,3)[0]
+            array4[5] = res.data.table[13].slice(2,3)[0]
+            array4[6] = res.data.table[9].slice(2,3)[0]
+            array4[7] = res.data.table[5].slice(2,3)[0]
+            console.log('',array1)
+            //2015
+            numOfHousehold2015 = array1
+            number_of_households_2015 = numOfHousehold2015
+            number_of_households_clean_2015 = numOfHousehold2015
+            //2016
+            numOfHousehold2016 = array2
+            number_of_households_2016 = numOfHousehold2016
+            number_of_households_clean_2016 = numOfHousehold2016
+            //2017
+            numOfHousehold2017 = array3
+            number_of_households_2017 = numOfHousehold2017
+            number_of_households_clean_2017 = numOfHousehold2017
+            //2018
+            numOfHousehold2018 = array4
+            number_of_households_2018 = numOfHousehold2018
+            number_of_households_clean_2018 = numOfHousehold2018
+            document.getElementById('optionTwo').click();
+            document.getElementById('optionOne').click();
+            this.hideLoader();
+
+        });
+      }
+
+ 
+    
      switchTrigger(){
        this.setState({
          toggle: !this.state.toggle
@@ -547,6 +923,7 @@ export default class Charts_dashboards extends Component {
 
         }) 
       }
+
       renderChart(){
         if(chartRef1){chartRef1.destroy();}
         var ctx = document.getElementById('mc').getContext('2d');
@@ -1428,59 +1805,9 @@ export default class Charts_dashboards extends Component {
             type: 'bar',
             data: {
               labels: sortedData,
-              datasets: [{
-                label: 'Free basic electricity',
-                stack: 'Stack 1',
-                data: free_basic_services_clean_2015,
-                backgroundColor: [
-                    '#FFCA81',
-                    '#FFCA81',
-                    '#FFCA81',
-                    '#FFCA81',
-                    '#FFCA81',
-                    '#FFCA81',
-                    '#FFCA81',
-                    '#FFCA81',
-                ],
-                borderColor: [
-                    '#FFCA81',
-                    '#FFCA81',
-                    '#FFCA81',
-                    '#FFCA81',
-                    '#FFCA81',
-                    '#FFCA81',
-                    '#FFCA81',
-                    '#FFCA81',
-                ]
-              },
-                  {
-                  label: 'Free basic sewerage & sanitation',
-                  stack: 'Stack 2',
-                  data: free_basic_services_clean_2016,
-                  backgroundColor: [
-                    '#C4500C',
-                    '#C4500C',
-                    '#C4500C',
-                    '#C4500C',
-                    '#C4500C',
-                    '#C4500C',
-                    '#C4500C',
-                    '#C4500C',
-
-                  ],
-                  borderColor: [
-                    '#C4500C',
-                    '#C4500C',
-                    '#C4500C',
-                    '#C4500C',
-                    '#C4500C',
-                    '#C4500C',
-                    '#C4500C',
-                    '#C4500C',
-                  ]
-                },
+              datasets: [
                 {
-                  label: 'Free basic solid waste management',
+                  label: '2018',
                   stack: 'Stack 3',
                   data: free_basic_services_clean_2017,
                   backgroundColor: [
@@ -1505,7 +1832,7 @@ export default class Charts_dashboards extends Component {
                   ]
                 },
                 {
-                  label: 'Free basic water',
+                  label: '2019',
                   stack: 'Stack 4',
                   data: free_basic_services_clean_2018,
                   backgroundColor: [
@@ -1597,30 +1924,32 @@ export default class Charts_dashboards extends Component {
           }
           });
       }
-      componentDidMount(){
-        window.onload = function(){
-          document.getElementById('optionTwo').click();
-        }
-        this.renderChart();
-        this.renderChart1();
-        this.renderChart2();
-        this.renderChart3();
-        this.renderChart4();
-        this.renderChart5();
-      }
-      componentDidUpdate(){
-        this.renderChart();
-        this.renderChart1();
-        this.renderChart2();
-        this.renderChart3();
-        this.renderChart4();
-        this.renderChart5();
-      }
+
 
     
     render(){
+
         return(
           <div >
+      {this.state.loader ?
+   
+   <Modal id="loader" isOpen={this.state.loader} className="modal-dialog-centered loader">
+       <ModalBody>
+           <div className="row">
+               <div className="col-2"></div>
+               <div className="col-0 ml-3 pt-4">
+                   <Spinner type="grow" color="secondary" size="sm"/>
+                   <Spinner type="grow" color="success" size="sm"/>
+                   <Spinner type="grow" color="danger" size="sm"/>
+                   <Spinner type="grow" color="warning" size="sm"/>
+               </div>
+               <div className="col-0 pt-4 pl-4 float-left">Loading Content...</div>
+           </div>
+           <br/>
+       </ModalBody>
+   </Modal>
+   :''
+}
           <div  className='container-fluid charts_dashboards'>
             <div className='row'>
               <div className='charts_dashboards--left_container col-md-8 p-0'>
