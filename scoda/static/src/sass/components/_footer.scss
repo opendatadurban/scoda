@@ -52,14 +52,14 @@
       }
     }
     .container {
-      max-width: 940px;
+      max-width: 1094px;
       width: unset !important;
       .row {
         display: flex;
         flex-flow: row nowrap;
         justify-content: space-between;
         > * {
-          width: 33%;
+          width: 26%;
         }
       }
     }
@@ -131,7 +131,7 @@
             height: auto;;
           }
           &.icon {
-            margin: 0 15px;
+            margin: 0 10px;
           }
         }
       }
