@@ -5,23 +5,28 @@ export default class Footer extends Component {
         return (
             <div>          
            
-            <footer className="site-footer footer">
+            <footer className=" footer">
                 <div className="container">
                     <div className="row">
-                        <div className="span4 footer--col_one">
+                        <div className="span4 footer--col_one col-md-3">
                             <a href="https://ckan.org/" target="blank__"><img className="ckan" src="../../../../static/dist/img/ckan-logo.png" alt="ckan logo" /></a>
                             <span><span className="sacn"><a href="https://www.sacities.net/" target="blank__">SACN</a></span> in partnership with <span className="sacn"><a target="blank__" href="https://opencitieslab.org/odd/home">OCL</a></span> <br/> <span className="ccl"> Creative Commons License</span></span>
                         </div>
-                        <div className="span4 footer--col_two">
-                            <span>
-                                <p>email us:</p>
-                                    <a href="mailto:scoda@sacities.net">scoda@sacities.net</a>
+                        <div className="span4 footer--col_two col-md-6">
+                            <div className='row'>
+                                <div className='col-md-9'>
+                                <span>
+                                <p>email us:   <a href="mailto:scoda@sacities.net">scoda@sacities.net</a></p>
+                    
                             </span>
+                                </div>
+                                <div className='col-md-3'>
+                                <CookiePolicy/> 
+                                </div>
+                            </div>
+                            
                         </div>
-                        <div className="span4 footer--col_three">
-                        <CookiePolicy/>   
-                        </div>
-                        <div className="span4 footer--col_three">
+                        <div className="span4 footer--col_three col-md-3">
                             <a href="https://www.sacncloud.net/index.php/login" target="blank__">
                                 <img src="../../../../static/dist/img/cloud.png" alt="cloud logo" />
                             </a>
