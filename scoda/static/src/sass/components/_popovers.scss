@@ -36,6 +36,8 @@
     border: none !important;
     box-shadow: none !important;
     min-width: 134px;
+    position: relative;
+    bottom: 2px;
 
     &:hover,&:active,&:focus {
         border: none !important;
