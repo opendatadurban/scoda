@@ -14,7 +14,7 @@ export default class Hero extends Component {
         this.toggleHero = this.toggleHero.bind(this);
     }
     componentDidMount(){
-        height = $('.hero-tab-header').height() + 60;
+        height = $('.hero-tab-header').height() + 30;
         $('#infoBlock').height(height);
        
     }
@@ -30,7 +30,7 @@ export default class Hero extends Component {
             document.getElementById('contentContainer').style.height = '0px';
             document.getElementById('buttonContainer').style.display = 'none';
             document.getElementById('infoBlockContainer').style.visibility = 'hidden';
-            document.getElementById('infoBlock').style.height = '50px';
+            document.getElementById('infoBlock').style.height = '300px';
             document.getElementById('hero-content-column').style.height = '50px';
             document.getElementById('hero-content-column').style.paddingBottom = '0px';
             document.getElementById('hero-title').style.paddingBottom = '0px';
@@ -40,12 +40,10 @@ export default class Hero extends Component {
             this.setState({hero_caret: 'fa fa-caret-up fa-2x hero-block-arrow-expand'});
 
             document.getElementById('contentContainer').style.display = 'block';
-            //document.getElementById('contentContainer').style.height = '560px';
             document.getElementById('buttonContainer').style.display = 'block';
             document.getElementById('infoBlockContainer').style.visibility = 'visible';
             $('#infoBlock').height(height);
             document.getElementById('hero-content-column').style.height = height;
-           // document.getElementById('hero-content-column').style.transition = 'all 1.2s ease-in-out';
             document.getElementById('hero-content-column').style.paddingBottom = '90px';
       
             
