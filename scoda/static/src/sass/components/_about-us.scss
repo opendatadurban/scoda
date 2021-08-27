@@ -107,6 +107,12 @@
         }
     }
 
+    ~ .home-logos {
+        h3 {
+            margin-top: 80px;
+        }
+    }
+
     // Mobile specific styling
     @media (max-width: $tablet) {
         .about-us {
