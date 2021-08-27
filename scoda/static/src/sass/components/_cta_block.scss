@@ -302,6 +302,16 @@
 
     @media (max-width: 1260px) {}
 
+    @media (max-width:1497px) {
+       
+            .cta-container {
+                width: 73%;
+                margin-right: 10.3%;
+    
+            }
+        
+    }
+    
     // Mobile specific stylings
     @media (max-width: 768px) {
 
@@ -394,15 +404,7 @@ p {
     padding: 50px 1rem !important;
 
 }
-@media (max-width:1497px) {
-    .cta_block {
-        .cta-container {
-            width: 73%;
-            margin-right: 10.3%;
 
-        }
-    }
-}
 @media (max-width: 1376px) {
     .cta {
         &-search {
