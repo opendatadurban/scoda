@@ -160,6 +160,35 @@ def seed_indicator_data(db):
             print(message)
     db.session.commit()
 
+def seed_total_households_municipality(db):
+    indicators = db.session.query(CbIndicator).filter(CbIndicator.name == "Total number of households in the municipality").all()
+    df = pd.read_excel('%s/data/%s' % (app.root_path, "codebook-data/municipality_households.xlsx")). \
+        fillna(value='')
+    for indicator in indicators:
+        if not indicator.indicator_data:
+            for index, row in df.iterrows():
+                if row["value"] and not isinstance(row["value"], str):
+                    data_point = CbDataPoint()
+                    data_point.value = row["value"]
+                    # Setup date start & end
+                    try:
+                        date_start = datetime.date(int(row["year_start"]), int(row["month_start"]), int(row["day_start"]))
+                        data_point.start_dt = date_start
+                        date_end = datetime.date(int(row["year_end"]), int(row["month_end"]), int(row["day_end"]))
+                        data_point.end_dt = date_end
+                    except Exception as e:
+                        print(e)
+                    data_point.indicator_id = indicator.id
+                    region_id = db.session.query(CbRegion.id).filter(CbRegion.name == str(row["region_name"]).strip())
+                    data_point.region_id = region_id
+                    region_type_id = db.session.query(CbRegionType.id).filter(CbRegionType.name == str(row["region_type"]).strip())
+                    data_point.region_type_id = region_type_id
+                    db.session.add(data_point)
+            print(F" {indicator.name} - {indicator.id} updated")
+    try:
+        db.session.commit()
+    except Exception as e:
+        print(e)
 # Next up
 def create_themes(db):
     """"Use this to create additional theme tables"""

@@ -12,8 +12,8 @@ seed_dbn(db)
 seed_jhb_grid(db)
 seed_eth_grid(db)
 
-from scoda.models.seed_codebook import seed_codebook_data,seed_indicator_data
+from scoda.models.seed_codebook import seed_codebook_data,seed_indicator_data,seed_total_households_municipality
 
 seed_indicator_data(db)
 seed_codebook_data(db)
-
+seed_total_households_municipality(db)

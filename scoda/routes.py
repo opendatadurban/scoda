@@ -12,6 +12,7 @@ import gviz_api
 import urllib
 from urllib.request import urlopen,Request
 
+from .models import *
 from .blueprints import *
 
 app.register_blueprint(REACT, url_prefix='/react')
@@ -367,7 +368,6 @@ def sanitation():
 @app.route('/')
 def home_public():
     return redirect(url_for('SCODA.index'))
-
 
 @app.route('/registered')
 def home_user():
