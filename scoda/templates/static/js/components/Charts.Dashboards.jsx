@@ -274,7 +274,6 @@ export default class Charts_dashboards extends Component {
             water_supply4[6] = res.data.table[9].slice(2,3)[0]
             water_supply4[7] = res.data.table[5].slice(2,3)[0]
 
-            console.log('',water_supply1)
             //2015
             water_supply2015 = water_supply1
             water_supply_2015 = water_supply2015
@@ -341,11 +340,10 @@ export default class Charts_dashboards extends Component {
             array4[6] = res.data.table[9].slice(2,3)[0]
             array4[7] = res.data.table[5].slice(2,3)[0]
 
-            console.log('aaddwff',array1)
             // for (let i = 0; i < 1; i++) {
             //   arrayy1[i] = array1
             // }
-            console.log('aaaaa',array1)
+
             //2015
             basic_sani2015 = array1
             basic_sanitation_2015 = basic_sani2015
@@ -410,7 +408,6 @@ export default class Charts_dashboards extends Component {
             array4[5] = res.data.table[13].slice(2,3)[0]
             array4[6] = res.data.table[9].slice(2,3)[0]
             array4[7] = res.data.table[5].slice(2,3)[0]
-            console.log('',array1)
             //2015
             access_to_elec2015 = array1
             access_to_elec_2015 = access_to_elec2015
@@ -473,7 +470,6 @@ export default class Charts_dashboards extends Component {
             array4[5] = res.data.table[13].slice(2,3)[0]
             array4[6] = res.data.table[9].slice(2,3)[0]
             array4[7] = res.data.table[5].slice(2,3)[0]
-            console.log('',array1)
             //2015
             refuse_removal2015 = array1
             access_to_refuse_2015 = refuse_removal2015
@@ -538,7 +534,7 @@ export default class Charts_dashboards extends Component {
             array4[5] = res.data.table[13].slice(2,3)[0]
             array4[6] = res.data.table[9].slice(2,3)[0]
             array4[7] = res.data.table[5].slice(2,3)[0]
-            console.log('',array1)
+
             //2015
             numOfHousehold2015 = array1
             number_of_households_2015 = numOfHousehold2015
@@ -578,9 +574,6 @@ export default class Charts_dashboards extends Component {
     }
       handleMultiChange(option) {
         this.setState({multiValue: option}); 
-        console.log(this.state.multiValue)
-        console.log('------BREAK------')
-        console.log(this.state.filterOptions)
         sortedData =[]
 
         myData =[]
@@ -1972,7 +1965,7 @@ export default class Charts_dashboards extends Component {
                       <div className='charts'>
                         <div className='row'>
                           <div className='col-md-9'><h1 className='charts_dashboards--households'>Households: Access to Basic Water Supply</h1></div>
-                          <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook' target='_blank'/></div>
+                          <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/392' target='_blank'/></div>
                         </div>
                         <canvas id='mc'></canvas>
                       </div>
@@ -1981,7 +1974,7 @@ export default class Charts_dashboards extends Component {
                       <div className='charts'>
                         <div className='row'>
                           <div className='col-md-9'><h1 className='charts_dashboards--households'>Households: Access to Basic Sanitation</h1></div>
-                          <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook' target='_blank'/></div>
+                          <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/384' target='_blank'/></div>
                         </div>
                         <canvas id='mc1'></canvas>
                       </div>
@@ -1992,7 +1985,7 @@ export default class Charts_dashboards extends Component {
                       <div className='charts'>
                         <div className='row'>
                           <div className='col-md-9'><h1 className='charts_dashboards--households'>Households: Access to Electricity</h1></div>
-                          <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook' target='_blank'/></div>
+                          <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/10' target='_blank'/></div>
                         </div>
                         <canvas id='mc2'></canvas>
                       </div>
@@ -2001,7 +1994,7 @@ export default class Charts_dashboards extends Component {
                       <div className='charts'>
                         <div className='row'>
                           <div className='col-md-9'><h1 className='charts_dashboards--households'>Households: Access to Refuse Removal</h1></div>
-                          <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook' target='_blank' /></div>
+                          <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/1114' target='_blank' /></div>
                         </div>
                         <canvas id='mc3'></canvas>
                       </div>
@@ -2013,14 +2006,14 @@ export default class Charts_dashboards extends Component {
                 <div className='charts p-0'>
                   <div className='row'>
                     <div className='col-md-9'><h1 className='charts_dashboards--households'>Total Number of Households/Municipality</h1></div>
-                    <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook' target='_blank'/></div>
+                    <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/12' target='_blank'/></div>
                   </div>
                   <canvas id='mc4'></canvas>
                 </div>
                 <div className='charts p-0 mt-4'>
                   <div className='row'>
                     <div className='col-md-9'><h1 className='charts_dashboards--households'>Units Receiving Free Basic Services</h1></div>
-                    <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook' target='_blank'/></div>
+                    <div className='col-md-3 d-none'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/384' target='_blank'/></div>
                   </div>
                   <Switch_text toggle={this.state.toggle} action={this.switchTrigger} />
                   <canvas id='mc5'></canvas>
