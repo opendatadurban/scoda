@@ -13,7 +13,7 @@
     letter-spacing: 0;
   }
   margin: 7px 0;
-  width: 177px !important;
+  width: 100% !important;
   &-container {
     display: block;
     &--open {
@@ -23,7 +23,7 @@
     }
   }
   &-selection {
-    border: 1px solid #E0E1E2;
+    border: none;
     color: $font-general;
     min-height: 20px !important;
     padding-left: $s-s + 2px;
@@ -37,6 +37,12 @@
       font: 500 12px/18px $font;
       padding-left: 0 !important;
       color: $font-general !important;
+      color: #4A4A4A !important;
+      font-size: 20px;
+      font-weight: bold;
+      letter-spacing: 0;
+      line-height: 32px;
+      width: 94% !important;
     }
     &__choice {
       margin-top: 0 !important;
@@ -52,7 +58,8 @@
         margin: 2px 0 0 2px;
       }
     }
-    &--single {
+    &--single { 
+      height: 40px !important;
       .select2-selection__clear{
         display: none;
       }
@@ -74,9 +81,9 @@
         position: absolute;
         font-family: 'Font Awesome 5 Free';
         font-weight: 900;
-        top: 5px;
-        right: 20px;
-        font-size: 14px;
+        top: 0px;
+        right: 22px;
+        font-size: 28px;
       }
     }
     &__clear {
