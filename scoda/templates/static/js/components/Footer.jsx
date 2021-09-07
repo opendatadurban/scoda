@@ -1,22 +1,33 @@
 import React, { Component } from 'react';
+import CookiePolicy from './CookiePolicy'
 export default class Footer extends Component {
     render() {
         return (
-            <footer className="site-footer footer">
+            <div>          
+           
+            <footer className=" footer">
                 <div className="container">
                     <div className="row">
-                        <div className="span4 footer--col_one">
+                        <div className="span4 footer--col_one col-md-3">
                             <a href="https://ckan.org/" target="blank__"><img className="ckan" src="../../../../static/dist/img/ckan-logo.png" alt="ckan logo" /></a>
-                            <span><span className="sacn"><a href="https://www.sacities.net/" target="blank__">SACN</a></span> in partnership with <span className="sacn"><a target="blank__" href="https://opendata.durban/odd/home">OCL</a></span> <br/> <span className="ccl"> Creative Commons License</span></span>
+                            <span><span className="sacn"><a href="https://www.sacities.net/" target="blank__">SACN</a></span> in partnership with <span className="sacn"><a target="blank__" href="https://opencitieslab.org/odd/home">OCL</a></span> <br/> <span className="ccl"> Creative Commons License</span></span>
                         </div>
-                        <div className="span4 footer--col_two">
-                            <span>
-                                <p>email us:</p>
-                                    <a href="mailto:scoda@sacities.net">scoda@sacities.net</a>
+                        <div className="span4 footer--col_two col-md-6">
+                            <div className='row'>
+                                <div className='col-md-9'>
+                                <span>
+                                <p>email us:   <a href="mailto:scoda@sacities.net">scoda@sacities.net</a></p>
+                    
                             </span>
+                                </div>
+                                <div className='col-md-3'>
+                                <CookiePolicy/> 
+                                </div>
+                            </div>
+                            
                         </div>
-                        <div className="span4 footer--col_three">
-                            <a href="http://www.sacncloud.net/index.php/login" target="blank__">
+                        <div className="span4 footer--col_three col-md-3">
+                            <a href="https://www.sacncloud.net/index.php/login" target="blank__">
                                 <img src="../../../../static/dist/img/cloud.png" alt="cloud logo" />
                             </a>
                             <a href="https://www.facebook.com/SACitiesNetwork" target="blank__">
@@ -38,6 +49,7 @@ export default class Footer extends Component {
                     </div>
                 </div>
             </footer>
+            </div>
             )
         }
     }

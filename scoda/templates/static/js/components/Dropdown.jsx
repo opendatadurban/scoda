@@ -7,16 +7,12 @@ const Example = (props) => {
   const toggle = () => setOpen(!dropdownOpen);
 
   return (
-    <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
+    <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}  className="dropdown">
       <DropdownToggle caret>
         {props.name}
       </DropdownToggle>
       <DropdownMenu>
-        <DropdownItem header>Header</DropdownItem>
-        <DropdownItem disabled>Action</DropdownItem>
-        <DropdownItem>Another Action</DropdownItem>
-        <DropdownItem divider />
-        <DropdownItem>Another Action</DropdownItem>
+        <DropdownItem header>Service Delivery</DropdownItem>
       </DropdownMenu>
     </ButtonDropdown>
   );

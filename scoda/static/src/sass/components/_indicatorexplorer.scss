@@ -1,5 +1,6 @@
 .ie-content-card {
     width: 100%;
+    padding: 20px 5px;
     border-radius: 5px;
     background-color: $scoda-data-grey;
     box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2);
@@ -139,6 +140,7 @@
     letter-spacing: 0;
     line-height: 32px;
     -webkit-appearance: none;
+    padding-left: 18px;
     //Use png at assets/selectArrow.png for the arrow on the right
     //Set the background color to a BadAss Green color 
     &-icon{
@@ -171,7 +173,11 @@
     //-webkit-appearance: none; 
     //background: url('/static/dist/img/scoda/dropdown_caret_small.png') no-repeat 96% 80% #FFFFFF;
 }
-
+.ie-spacer {
+    display: block;
+    width: 100%;
+    height: 20px;
+}
 .goog-menu-button {
     border-style: none;
     border: 0px;

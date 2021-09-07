@@ -91,6 +91,7 @@
       @include custom-scrollbar ($scoda-black-light);
       font: normal 14px/18px $font;
       color: $font-general;
+
     }
 
     &__option {
@@ -100,10 +101,15 @@
       align-items: center;
       padding-left: 22px !important;
       font-size: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;  
+      overflow: hidden;
+      height: 25px;
       &--highlighted {
         // font-weight: 600 !important;
         color: $font-general !important;
-        background-color: #fff !important;
+        background-color: transparent !important;
         font-weight: 800;
       }
       &[aria-selected=true]{
@@ -125,6 +131,12 @@
       // padding-top: 5px !important;
       width: 100% !important;
       font-weight: 500;
+    }
+  }
+  &-dropdown {
+    &--below {
+      border-bottom-left-radius: 18px;
+      border-bottom-right-radius: 18px;
     }
   }
 

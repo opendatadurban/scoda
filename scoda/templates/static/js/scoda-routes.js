@@ -28,6 +28,7 @@ import TabsAndFilters from './components/TabsAndFilters'
 import DemographicModeller from './components/DemographicModeller';
 import DataStoriesAffordability from './components/DataStories.Affordability';
 import Codebook from './components/Codebook';
+import Socr_Dashboards from './components/Socr.Dashboards'
 
 const _heroTitle = 'Data Management System';
 const _heroContent = ' Central to activities on this platform is the Data Management System, where our evidence base is securely housed. We use the CKAN data portal framework, the same system used by various governments around the world, to store, manage, and share data across the SCODA ecosystem. From this dynamic, version-controlled and API-responsive data-store, we can efficiently gather and process the myriad sources required for insight generation.Central to activities on this platform is the Data Management System, where our evidence base is securely housed. We use the CKAN data portal framework, the same system used by various governments around the world, to store, manage, and share data across the SCODA ecosystem. From this dynamic, version-controlled and API-responsive data-store, we can efficiently gather and process the myriad sources required for insight generation.';
@@ -37,7 +38,7 @@ const _heroSecondaryColor = '#F64343';
 
 
 const _heroTitle_insight = 'Data Stories';
-const _heroContent_insight = 'More detailed writeup about data stories.';
+const _heroContent_insight = 'Data stories are a way to understand complex information and data using a narrative that appeals to interested readers.<br/><br/>They can be thought of as a series of dashboards connected with explainer text.  The topic is clearly defined and explored using information broken into understandable chunks which result in a finding or conclusion with calls to action to encourage the reader to learn and explore more.';
 const _heroInfoTitle_insight = 'INSIGHT TOOLS';
 const _heroPrimaryColor_insight = '#4F9DA6';
 const _heroSecondaryColor_insight = '#4F9DA6';
@@ -70,10 +71,10 @@ const _heroLinearGradient_datastories = `linear-gradient(112deg, rgba(79,157,166
 
 const _tabs = [
   {
-      name: 'SACN', mode:'active',url: 'http://www.sacn.co.za'
+      name: 'SACN', mode:'active',url: 'https://www.sacn.co.za'
   },
   {
-      name: 'eThekwini', mode: 'none', url: 'http://www.google.com'
+      name: 'eThekwini', mode: 'none', url: 'https://www.google.com'
   }
 ];
 
@@ -178,5 +179,9 @@ export default (
             secondaryColor={_heroSecondaryColor_explore}/>}/>
         <Route exact path='/codebook-explorer/:id' render={(props)=> <CBIndicatorExplorer className=""  {...props}/>} />
       <Route path="/codebook-explorer/:id" component={Footer} />
+
+      <Route path='/socr-dashboards' component={()=> <Navigation_scoda logoHide={false} box_shadow={true} />} />
+      <Route path='/socr-dashboards' component={Socr_Dashboards} />
+      <Route path='/socr-dashboards' component={Footer} />
     </HashRouter>
 );

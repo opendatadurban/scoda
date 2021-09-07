@@ -9,7 +9,7 @@ export default class DataStoriesSVGIcon extends Component {
 
         return (
             <div>
-                <svg width="26px" height="24px" viewBox="0 0 26 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <svg width="26px" height="24px" viewBox="0 0 26 24" version="1.1" xmlns="https://www.w3.org/2000/svg">
                     <defs>
                         <filter x="-6.0%" y="-40.0%" width="112.0%" height="180.0%" filterUnits="objectBoundingBox" id="filter-1">
                             <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>

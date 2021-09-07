@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="23px" height="35px" viewBox="0 0 23 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>icon_departments</title>
+    <desc>Created with Sketch.</desc>
+    <g id="HSU-Mapping" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-19.000000, -64.000000)" stroke="#B2BEC3" stroke-width="2">
+            <g id="icon_departments" transform="translate(20.000000, 65.000000)">
+                <path d="M1,0 L20,0 C20.5522847,-1.01453063e-16 21,0.44771525 21,1 L21,12 C21,12.5522847 20.5522847,13 20,13 L0,13 L0,13 L0,1 C-6.76353751e-17,0.44771525 0.44771525,1.01453063e-16 1,0 Z" id="Rectangle"></path>
+                <path d="M0,13 L16,13 C16.5522847,13 17,13.4477153 17,14 L17,22 C17,22.5522847 16.5522847,23 16,23 L0,23 L0,23 L0,13 Z" id="Rectangle-Copy-2"></path>
+                <path d="M0,23 L16,23 C16.5522847,23 17,23.4477153 17,24 L17,32 C17,32.5522847 16.5522847,33 16,33 L1,33 C0.44771525,33 6.76353751e-17,32.5522847 0,32 L0,23 L0,23 Z" id="Rectangle-Copy-4"></path>
+            </g>
+        </g>
+    </g>
+</svg>

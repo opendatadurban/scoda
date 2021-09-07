@@ -5,9 +5,10 @@ import {
     ModalBody,
     Form,
     Input,
-    FormGroup } from 'reactstrap';
+    FormGroup,Spinner } from 'reactstrap';
 import filterData from '../data/filterData.js';
 import Toggle from './Toggle';
+
 
 export default class CodebookFilterModal extends Component {
     constructor(props) {
@@ -20,9 +21,11 @@ export default class CodebookFilterModal extends Component {
             sdg: filterData[2],
             searchFilterValue: "",
             filterData: null,
-            criteriaChanged: false
+            criteriaChanged: false,
+            loader: false,
         };
     }
+
 
     toggleModal() {
         this.setState({
@@ -268,10 +271,38 @@ export default class CodebookFilterModal extends Component {
         }
 
         this.props.filter(filterVal);
+
+        this.setState({
+            loader: true
+        });
+
+        setTimeout(function(){
+             this.setState({loader:false});
+        }.bind(this),1500); 
     }
 
     render() {
+        if(this.state.loader) {
+            return(
+                <Modal id="loader" isOpen={this.state.loader} className="modal-dialog-centered loader">
+                    <ModalBody>
+                        <div className="row">
+                            <div className="col-2"></div>
+                            <div className="col-0 ml-3 pt-4">
+                                <Spinner type="grow" color="secondary" size="sm"/>
+                                <Spinner type="grow" color="success" size="sm"/>
+                                <Spinner type="grow" color="danger" size="sm"/>
+                                <Spinner type="grow" color="warning" size="sm"/>
+                            </div>
+                            <div className="col-0 pt-4 pl-4 float-left">Loading Content...</div>
+                        </div>
+                        <br/>
+                    </ModalBody>
+                </Modal>
+            )
+        }
         return (
+            
             <>
                 <Button className="filter-toggle" color="danger" onClick={() =>this.toggleModal()}>
                     <i className="fas fa-filter"></i>
@@ -298,6 +329,19 @@ export default class CodebookFilterModal extends Component {
                                                     />
                                                 </div>
                                             </div>
+                                            <div className="row codebook-components-pull-right">
+
+                                        <div className="">
+                                            <Button className={"modal-button cancel " + [this.state.criteriaChanged && " active"]} outline onClick={() => this.reset()}>Clear Search & Reset Filters</Button>
+                                        </div>
+                                        <div className="">
+                                            <Button className={"modal-button filter " + [this.state.criteriaChanged && " active"]} outline onClick={() => {
+                                                this.toggleModal()
+                                                this.submitForm()
+                                            }}>Apply Search & Filter</Button>
+                                        </div>
+
+                                    </div>
                                             <div className="pull-right">
                                                 <div className="close" onClick={() => this.toggleModal()}> </div>
                                             </div>
@@ -339,18 +383,6 @@ export default class CodebookFilterModal extends Component {
                                                     </FormGroup>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div className="row mt-2 pb-3">
-                                        <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                                            <Button className={"modal-button filter " + [this.state.criteriaChanged && " active"]} outline onClick={() => {
-                                                this.toggleModal()
-                                                this.submitForm()
-                                            }}>Apply Search & Filter</Button>
-                                        </div>
-
-                                        <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                                            <Button className={"modal-button cancel " + [this.state.criteriaChanged && " active"]} outline onClick={() => this.reset()}>Clear Search & Reset Filters</Button>
                                         </div>
                                     </div>
                                 </div>

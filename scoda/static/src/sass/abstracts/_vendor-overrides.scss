@@ -157,7 +157,27 @@
 //         }
 //     }
 // }
-
+.popover {
+    max-width: 720px !important;
+    &-header {
+        background-color: white !important;
+        border: 0 !important;
+        padding: 20px 20px 10px 20px !important;
+    }
+    &-body {
+        padding: 20px !important;
+        p {
+            font-family: Montserrat;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 20px;
+        }
+        a {
+            color: #F5A623;
+        }
+    }
+  }
 // Desktop specific styling
 @media (min-width: $tablet) {
     // .userback-button {

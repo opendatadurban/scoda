@@ -17,6 +17,7 @@
   margin-top: $s-s;
   text-transform: $btn-text-transform;
 
+
   &:disabled {
     cursor: not-allowed;
     opacity: .5;
@@ -245,4 +246,9 @@
       padding: 0 18px;
     }
   }
+}
+.download-screen-capture {
+  color: #4A4A4A !important;
+  box-shadow: none;
+  margin-top: 6px;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Image from './Image';
+import $ from 'jquery'
 export default class Navigation_scoda extends Component {
     constructor(props) {
         super(props);
@@ -18,6 +19,26 @@ export default class Navigation_scoda extends Component {
                 this.setState({ logo_hide: logo });
             })
         ) : this.setState({ logo_hide: "block" });
+
+
+        $(document).ready(function () {
+
+            $(".navbar-nav li a").click(function () {
+                var id = $(this);
+
+                $(".active").removeClass("active");
+                $(id).addClass("active");
+                localStorage.setItem("selectedolditem", $(id).text());
+
+            });
+
+            var selectedolditem = localStorage.getItem('selectedolditem');
+
+            if (selectedolditem !== null) {
+
+                $("a:contains('" + selectedolditem + "')").addClass("active");
+            }
+        });
       }
     render() {
         
@@ -41,7 +62,7 @@ export default class Navigation_scoda extends Component {
                 <div className="container">
                     <nav className="navbar navbar-expand-lg navbar-light bg-light">
 
-                        <a style={{position:"absolute",left:"0"}}   className="navbar-brand d-flex align-items-center">
+                        <a style={{position:"absolute",left:"0"}}   className="navbar-brand d-flex align-items-center" href='/#/home'>
                             <Image className="navigation-logo"  style={{width:"105px",display:`${this.state.logo_hide}`}} imgSrc="/static/img/scoda_logo.png" />
                         </a>
 
@@ -65,6 +86,7 @@ export default class Navigation_scoda extends Component {
                                         <a className="dropdown-item" href="/scoda/#/codebook">Codebook</a>
                                         <a className="dropdown-item" href="/scoda/#/demographic-modeller">Demographic Modeller</a>
                                         <a className="dropdown-item" href="/scoda/#/data-stories-details">Data Stories</a>
+                                        {/* <a className="dropdown-item" href="/scoda/#/socr-dashboards">SOCR</a> */}
                                     </div>
                                 </li>
                                 <li className="nav-item about_">

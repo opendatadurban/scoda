@@ -57,7 +57,23 @@
 @mixin padding-bottom {
   padding-bottom: $s-m;
 }
-
+@mixin active ($color, $background){
+  border: 1px solid $background;
+  background: $background;
+  color: $color;
+  opacity: 1;
+  &::after {
+    color: $font;
+  }
+}
+@mixin dissapear {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
 @mixin circle-frame($diameter, $border-thickness, $border-colour) {
   height: $diameter;
   width: $diameter;
@@ -90,7 +106,6 @@
   }
   &::-webkit-scrollbar-track {
     padding-right: 5px;
-    box-shadow: inset 0 0 5px grey;
     border-radius: 10px;
   }
   &::-webkit-scrollbar-thumb {

@@ -101,7 +101,7 @@ export default class CTA_block extends Component {
                 </li>
                 <li>
                   <div className="item">
-                    <a href="http://www.socr.co.za/">
+                    <a href="https://www.socr.co.za/">
                     <img
                       src="/static/dist/img/SCODA Assets V3_1/3 About Us/Important Links/logo_important-links_2016-state-of-cities-report.png"
                       alt=""
@@ -111,7 +111,7 @@ export default class CTA_block extends Component {
                 </li>
                 <li>
                   <div className="item">
-                    <a href="http://stepsa.org/about.html">
+                    <a href="https://stepsa.org/about.html">
                     <img
                       src="/static/dist/img/SCODA Assets V3_1/3 About Us/Important Links/logo_important-links_stepsa.png"
                       alt=""
@@ -131,7 +131,7 @@ export default class CTA_block extends Component {
                 </li>
                 <li>
                   <div className="item">
-                    <a href="http://www.statssa.gov.za/">
+                    <a href="https://www.statssa.gov.za/">
                     <img
                       src="/static/dist/img/SCODA Assets V3_1/3 About Us/Important Links/logo_important-links_statssa.png"
                       alt=""
