@@ -66,6 +66,7 @@ def api_explore(check):
     print(ind)
     plot = 1
     tour = 2
+    print(check)
     # codebook query
     if check == "codebook":
         query = db.session.query(CbRegion.name.label('re_name'), CbDataPoint.start_dt, CbIndicator.name.label('ds_name'), CbDataPoint.value). \
@@ -80,12 +81,14 @@ def api_explore(check):
             filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
             filter(DataPoint.region_id == Region.id)
         df = read_sql_query(query.statement, query.session.bind)
+    # df = df.drop_duplicates()
+    # print(app.root_path)
     # df.to_csv('%s/data/%s' % (app.root_path, "data_test.csv"), index=False)
     table = []
     table_plot = []
     years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
     cities = [c for c in cities]
-
+    print(df)
     options_list = [{'optid': i, 'optname': d} for i, d in enumerate(datasets, start=1)]
     years_list = [{'optid': i, 'optname': 'Year: %s' % d} for i, d in enumerate(sorted(years), start=1)]
 
