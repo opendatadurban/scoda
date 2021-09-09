@@ -559,6 +559,7 @@ export default class Charts_dashboards extends Component {
             numOfHousehold2018 = array4
             number_of_households_2018 = numOfHousehold2018
             number_of_households_clean_2018 = numOfHousehold2018
+            this.activate()
             this.hideLoader();
 
         });
