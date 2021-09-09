@@ -226,6 +226,10 @@ export default class Charts_dashboards extends Component {
             loader: false
         });
       }
+      activate(){
+        document.getElementById('optionTwo').click();
+        document.getElementById('optionOne').click();
+      }
       //API
       percentage_of_household_with_basic_water_supply() {
         axios.get(`/api/explore/codebook?indicator_id=392`).then(res => {
@@ -290,6 +294,7 @@ export default class Charts_dashboards extends Component {
             water_supply2018 = water_supply4
             water_supply_2018 = water_supply2018
             water_supply_clean_2018 = water_supply2018
+            this.activate()
             
 
         });
@@ -360,6 +365,7 @@ export default class Charts_dashboards extends Component {
             basic_sani2018 = array4
             basic_sanitation_2018 = basic_sani2018
             basic_sanitation_clean_2018 = basic_sani2018
+            this.activate()
            
 
         });
@@ -424,6 +430,7 @@ export default class Charts_dashboards extends Component {
             access_to_elec2018 = array4
             access_to_elec_2018 = access_to_elec2018
             access_to_elec_clean_2018 = access_to_elec2018
+            this.activate()
 
         });
       }
@@ -486,6 +493,7 @@ export default class Charts_dashboards extends Component {
             refuse_removal2018 = array4
             access_to_refuse_2018 = refuse_removal2018
             access_to_refuse_clean_2018 = refuse_removal2018
+            this.activate()
 
         });
       }
@@ -551,8 +559,6 @@ export default class Charts_dashboards extends Component {
             numOfHousehold2018 = array4
             number_of_households_2018 = numOfHousehold2018
             number_of_households_clean_2018 = numOfHousehold2018
-            document.getElementById('optionTwo').click();
-            document.getElementById('optionOne').click();
             this.hideLoader();
 
         });
