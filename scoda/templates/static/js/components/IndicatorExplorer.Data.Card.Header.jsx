@@ -55,7 +55,8 @@ export default class IndicatorExplorerDataCardHeader extends Component {
     
     render() {
         const selectorOptions = this.props.datasetOptions.map((dataset,index) =>(
-            <option key={index} value={dataset[0]}>{dataset[1].match(/.{1,10}(\s|$)/g)}</option>
+            // <option key={index} value={dataset[0]}>{dataset[1].match(/.{1,10}(\s|$)/g)}</option>
+            <option key={index} value={dataset[0]}>{dataset[1]}</option>
         ));
 
 
