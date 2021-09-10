@@ -581,14 +581,41 @@ export default class Charts_dashboards extends Component {
     }
       handleMultiChange(option) {
         this.setState({multiValue: option}); 
+
+        //Empty array so new data can be assigned
         sortedData =[]
 
-        myData =[]
+        sortedNumber = []
+        sortedNumber1 = []
+        sortedNumber2 = []
+        sortedNumber3 = []
 
-        sortedNumber  ,basic_sanitation_sortedNumber,  access_to_elec_sortedNumber,  access_to_refuse_sortedNumber, number_of_households_sortedNumber, free_basic_services_sortedNumber= []
-        sortedNumber1 ,basic_sanitation_sortedNumber1, access_to_elec_sortedNumber1, access_to_refuse_sortedNumber1, number_of_households_sortedNumber1, free_basic_services_sortedNumber1 = [] 
-        sortedNumber2 ,basic_sanitation_sortedNumber2, access_to_elec_sortedNumber2, access_to_refuse_sortedNumber2, number_of_households_sortedNumber2, free_basic_services_sortedNumber2 = [] ,
-        sortedNumber3 ,basic_sanitation_sortedNumber3, access_to_elec_sortedNumber3, access_to_refuse_sortedNumber3, number_of_households_sortedNumber3, free_basic_services_sortedNumber3 = []  
+        basic_sanitation_sortedNumber = []
+        basic_sanitation_sortedNumber1 = []
+        basic_sanitation_sortedNumber2 = []
+        basic_sanitation_sortedNumber3 = []
+
+        access_to_elec_sortedNumber = []
+        access_to_elec_sortedNumber1 = []
+        access_to_elec_sortedNumber2 = []
+        access_to_elec_sortedNumber3= [] 
+
+        access_to_refuse_sortedNumber= []
+        access_to_refuse_sortedNumber1 = []
+        access_to_refuse_sortedNumber2 = []
+        access_to_refuse_sortedNumber3 = []
+
+        number_of_households_sortedNumber = []
+        number_of_households_sortedNumber1 = []
+        number_of_households_sortedNumber2 = []
+        number_of_households_sortedNumber3 = []
+
+        free_basic_services_sortedNumber = []
+        free_basic_services_sortedNumber1 = [] 
+        free_basic_services_sortedNumber2 = [] 
+        free_basic_services_sortedNumber3 = []  
+        
+        myData =[]
 
         water_supply_clean_2015 =[]
         water_supply_clean_2016 =[]
@@ -627,6 +654,7 @@ export default class Charts_dashboards extends Component {
 
         if(sortedData.includes('BUF'))
           {
+            console.log('true BUF')
           sortedNumber[0] = water_supply_2015[0]
           sortedNumber1[0] = water_supply_2016[0]
           sortedNumber2[0] = water_supply_2017[0]
@@ -665,6 +693,7 @@ export default class Charts_dashboards extends Component {
           }
         if(sortedData.includes('CCT'))
           {
+            console.log('true CCT')
             sortedNumber[1] = water_supply_2015[1]
             sortedNumber1[1] = water_supply_2016[1]
             sortedNumber2[1] = water_supply_2017[1]
@@ -697,6 +726,7 @@ export default class Charts_dashboards extends Component {
           }
         if(sortedData.includes('EKH'))
           {
+            console.log('true EKH')
             sortedNumber[2] = water_supply_2015[2]
             sortedNumber1[2] = water_supply_2016[2]
             sortedNumber2[2] = water_supply_2017[2]
@@ -729,6 +759,7 @@ export default class Charts_dashboards extends Component {
           }
         if(sortedData.includes('ETK'))
           {
+            console.log('true ETK')
             sortedNumber[3] = water_supply_2015[3]
             sortedNumber1[3] = water_supply_2016[3]
             sortedNumber2[3] = water_supply_2017[3]
@@ -761,6 +792,7 @@ export default class Charts_dashboards extends Component {
           }
         if(sortedData.includes('JHB'))
           {
+            console.log('true JHB')
             sortedNumber[4] = water_supply_2015[4]
             sortedNumber1[4] = water_supply_2016[4]
             sortedNumber2[4] = water_supply_2017[4]
@@ -793,6 +825,7 @@ export default class Charts_dashboards extends Component {
           }
         if(sortedData.includes('MAN'))
           {
+            console.log('true MAN')
             sortedNumber[5] = water_supply_2015[5]
             sortedNumber1[5] = water_supply_2016[5]
             sortedNumber2[5] = water_supply_2017[5]
@@ -825,6 +858,7 @@ export default class Charts_dashboards extends Component {
           }
         if(sortedData.includes('NMB'))
           {
+            console.log('true NMB')
           sortedNumber[6] = water_supply_2015[6]
           sortedNumber1[6] = water_supply_2016[6]
           sortedNumber2[6] = water_supply_2017[6]
@@ -858,6 +892,7 @@ export default class Charts_dashboards extends Component {
           }
         if(sortedData.includes('TSH'))
           {
+            console.log('true TSH')
             sortedNumber[7] = water_supply_2015[7]
             sortedNumber1[7] = water_supply_2016[7]
             sortedNumber2[7] = water_supply_2017[7]
@@ -888,7 +923,8 @@ export default class Charts_dashboards extends Component {
             free_basic_services_sortedNumber2[7] = free_basic_services_2017[7]
             free_basic_services_sortedNumber3[7] = free_basic_services_2018[7]
           }
-        
+          console.log('checking final sorted number',sortedNumber)
+          console.log('data filtered',sortedData)
         water_supply_clean_2015 = sortedNumber.filter(Boolean);
         water_supply_clean_2016 = sortedNumber1.filter(Boolean);
         water_supply_clean_2017 = sortedNumber2.filter(Boolean);
@@ -920,7 +956,7 @@ export default class Charts_dashboards extends Component {
         free_basic_services_clean_2018 = free_basic_services_sortedNumber3.filter(Boolean);
 
  
-
+         
         }) 
       }
 
@@ -1951,6 +1987,7 @@ export default class Charts_dashboards extends Component {
    :''
 }
           <div  className='container-fluid charts_dashboards'>
+            <p>{water_supply_clean_2015}</p>
             <div className='row'>
               <div className='charts_dashboards--left_container col-md-8 p-0'>
                 <div className='charts_dashboards--select'>
