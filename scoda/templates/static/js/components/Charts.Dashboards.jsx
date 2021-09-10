@@ -1987,7 +1987,6 @@ export default class Charts_dashboards extends Component {
    :''
 }
           <div  className='container-fluid charts_dashboards'>
-            <p>{water_supply_clean_2015}</p>
             <div className='row'>
               <div className='charts_dashboards--left_container col-md-8 p-0'>
                 <div className='charts_dashboards--select'>
