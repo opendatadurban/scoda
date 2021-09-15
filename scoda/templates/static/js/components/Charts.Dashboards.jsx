@@ -234,12 +234,27 @@ export default class Charts_dashboards extends Component {
       percentage_of_household_with_basic_water_supply() {
         axios.get(`/api/explore/codebook?indicator_id=392`).then(res => {
       
-         
+            console.log(res.data.table)
             let water_supply1 = []
             let water_supply2 = []
             let water_supply3 = []
             let water_supply4 = []
-          
+
+            let ekh2015 
+            let jhb2015
+            let etk2015
+
+            let ekh2016
+            let jhb2016
+            let etk2016
+
+            let ekh2017 
+            let jhb2017
+            let etk2017
+
+            let ekh2018 
+            let jhb2018
+            let etk2018
 
             //2015
             water_supply1[0] = res.data.table[32].slice(2,3)[0]
@@ -281,18 +296,58 @@ export default class Charts_dashboards extends Component {
             //2015
             water_supply2015 = water_supply1
             water_supply_2015 = water_supply2015
+
+            //Sorted
+            ekh2015 = water_supply_2015[2]
+            jhb2015 = water_supply_2015[4]
+            etk2015 = water_supply_2015[3]
+
+            water_supply_2015[4] = ekh2015
+            water_supply_2015[3] = jhb2015
+            water_supply_2015[2] = etk2015
+            
             water_supply_clean_2015 = water_supply2015
             //2016
             water_supply2016 = water_supply2
             water_supply_2016 = water_supply2016
+
+            //Sorted
+            ekh2016 = water_supply_2016[2]
+            jhb2016 = water_supply_2016[4]
+            etk2016 = water_supply_2016[3]
+
+            water_supply_2016[4] = ekh2016
+            water_supply_2016[3] = jhb2016
+            water_supply_2016[2] = etk2016
+            
             water_supply_clean_2016 = water_supply2016
             //2017
             water_supply2017 = water_supply3
             water_supply_2017 = water_supply2017
+
+            //Sorted
+            ekh2017 = water_supply_2017[2]
+            jhb2017 = water_supply_2017[4]
+            etk2017 = water_supply_2017[3]
+
+            water_supply_2017[4] = ekh2017
+            water_supply_2017[3] = jhb2017
+            water_supply_2017[2] = etk2017
+
             water_supply_clean_2017 = water_supply2017
             //2018
             water_supply2018 = water_supply4
             water_supply_2018 = water_supply2018
+
+            //Sorted
+            ekh2018 = water_supply_2018[2]
+            jhb2018 = water_supply_2018[4]
+            etk2018 = water_supply_2018[3]
+
+            water_supply_2018[4] = ekh2018
+            water_supply_2018[3] = jhb2018
+            water_supply_2018[2] = etk2018
+
             water_supply_clean_2018 = water_supply2018
             this.activate()
             
@@ -303,10 +358,27 @@ export default class Charts_dashboards extends Component {
       percentage_of_households_with_access_to_basic_sanitation() {
         axios.get(`/api/explore/codebook?indicator_id=384`).then(res => {
             let array1 = []
-            let arrayy1 = []
             let array2 = []
             let array3 = []
             let array4 = []
+
+            let ekh2015 
+            let jhb2015
+            let etk2015
+
+            let ekh2016
+            let jhb2016
+            let etk2016
+
+            let ekh2017 
+            let jhb2017
+            let etk2017
+
+            let ekh2018 
+            let jhb2018
+            let etk2018
+
+
             
             //2015
             array1[0] = res.data.table[32].slice(2,3)[0]
@@ -345,25 +417,61 @@ export default class Charts_dashboards extends Component {
             array4[6] = res.data.table[9].slice(2,3)[0]
             array4[7] = res.data.table[5].slice(2,3)[0]
 
-            // for (let i = 0; i < 1; i++) {
-            //   arrayy1[i] = array1
-            // }
-
             //2015
             basic_sani2015 = array1
             basic_sanitation_2015 = basic_sani2015
+
+            //Sorted
+            ekh2015 = basic_sanitation_2015[2]
+            jhb2015 = basic_sanitation_2015[4]
+            etk2015 = basic_sanitation_2015[3]
+
+            basic_sanitation_2015[4] = ekh2015
+            basic_sanitation_2015[3] = jhb2015
+            basic_sanitation_2015[2] = etk2015
+
             basic_sanitation_clean_2015 = basic_sani2015
             //2016
             basic_sani2016 = array2
             basic_sanitation_2016 = basic_sani2016
+
+            //Sorted
+            ekh2016 = basic_sanitation_2016[2]
+            jhb2016 = basic_sanitation_2016[4]
+            etk2016 = basic_sanitation_2016[3]
+
+            basic_sanitation_2016[4] = ekh2016
+            basic_sanitation_2016[3] = jhb2016
+            basic_sanitation_2016[2] = etk2016
+
             basic_sanitation_clean_2016 = basic_sani2016
             //2017
             basic_sani2017 = array3
             basic_sanitation_2017 = basic_sani2017
+
+            //Sorted
+            ekh2017 = basic_sanitation_2017[2]
+            jhb2017 = basic_sanitation_2017[4]
+            etk2017 = basic_sanitation_2017[3]
+
+            basic_sanitation_2017[4] = ekh2017
+            basic_sanitation_2017[3] = jhb2017
+            basic_sanitation_2017[2] = etk2017
+
             basic_sanitation_clean_2017 = basic_sani2017
             //2018
             basic_sani2018 = array4
             basic_sanitation_2018 = basic_sani2018
+
+            //Sorted
+            ekh2018 = basic_sanitation_2018[2]
+            jhb2018 = basic_sanitation_2018[4]
+            etk2018 = basic_sanitation_2018[3]
+
+            basic_sanitation_2018[4] = ekh2018
+            basic_sanitation_2018[3] = jhb2018
+            basic_sanitation_2018[2] = etk2018
+
             basic_sanitation_clean_2018 = basic_sani2018
             this.activate()
            
@@ -377,6 +485,22 @@ export default class Charts_dashboards extends Component {
             let array2 = []
             let array3 = []
             let array4 = []
+
+            let ekh2015 
+            let jhb2015
+            let etk2015
+
+            let ekh2016
+            let jhb2016
+            let etk2016
+
+            let ekh2017 
+            let jhb2017
+            let etk2017
+
+            let ekh2018 
+            let jhb2018
+            let etk2018
             
             //2015
             array1[0] = res.data.table[32].slice(2,3)[0]
@@ -417,18 +541,56 @@ export default class Charts_dashboards extends Component {
             //2015
             access_to_elec2015 = array1
             access_to_elec_2015 = access_to_elec2015
+
+            //Sorted
+            ekh2015 = access_to_elec_2015[2]
+            jhb2015 = access_to_elec_2015[4]
+            etk2015 = access_to_elec_2015[3]
+
+            access_to_elec_2015[4] = ekh2015
+            access_to_elec_2015[3] = jhb2015
+            access_to_elec_2015[2] = etk2015
+
             access_to_elec_clean_2015 = access_to_elec2015
             //2016
             access_to_elec2016 = array2
             access_to_elec_2016 = access_to_elec2016
+
+            //Sorted
+            ekh2016 = access_to_elec_2016[2]
+            jhb2016 = access_to_elec_2016[4]
+            etk2016 = access_to_elec_2016[3]
+
+            access_to_elec_2016[4] = ekh2016
+            access_to_elec_2016[3] = jhb2016
+            access_to_elec_2016[2] = etk2016
+
             access_to_elec_clean_2016 = access_to_elec2016
             //2017
             access_to_elec2017 = array3
             access_to_elec_2017 = access_to_elec2017
+
+            ekh2017 = access_to_elec_2017[2]
+            jhb2017 = access_to_elec_2017[4]
+            etk2017 = access_to_elec_2017[3]
+
+            access_to_elec_2017[4] = ekh2017
+            access_to_elec_2017[3] = jhb2017
+            access_to_elec_2017[2] = etk2017
+
             access_to_elec_clean_2017 = access_to_elec2017
             //2018
             access_to_elec2018 = array4
             access_to_elec_2018 = access_to_elec2018
+
+            ekh2018 = access_to_elec_2018[2]
+            jhb2018 = access_to_elec_2018[4]
+            etk2018 = access_to_elec_2018[3]
+
+            access_to_elec_2018[4] = ekh2018
+            access_to_elec_2018[3] = jhb2018
+            access_to_elec_2018[2] = etk2018
+
             access_to_elec_clean_2018 = access_to_elec2018
             this.activate()
 
@@ -440,6 +602,22 @@ export default class Charts_dashboards extends Component {
             let array2 = []
             let array3 = []
             let array4 = []
+
+            let ekh2015 
+            let jhb2015
+            let etk2015
+
+            let ekh2016
+            let jhb2016
+            let etk2016
+
+            let ekh2017 
+            let jhb2017
+            let etk2017
+
+            let ekh2018 
+            let jhb2018
+            let etk2018
 
             //2015
             array1[0] = res.data.table[32].slice(2,3)[0]
@@ -480,20 +658,57 @@ export default class Charts_dashboards extends Component {
             //2015
             refuse_removal2015 = array1
             access_to_refuse_2015 = refuse_removal2015
+
+            ekh2015 = access_to_refuse_2015[2]
+            jhb2015 = access_to_refuse_2015[4]
+            etk2015 = access_to_refuse_2015[3]
+
+            access_to_refuse_2015[4] = ekh2015
+            access_to_refuse_2015[3] = jhb2015
+            access_to_refuse_2015[2] = etk2015
+
             access_to_refuse_clean_2015 = refuse_removal2015
             //2016
             refuse_removal2016 = array2
             access_to_refuse_2016 = refuse_removal2016
+
+            ekh2016 = refuse_removal2016[2]
+            jhb2016 = refuse_removal2016[4]
+            etk2016 = refuse_removal2016[3]
+
+            refuse_removal2016[4] = ekh2016
+            refuse_removal2016[3] = jhb2016
+            refuse_removal2016[2] = etk2016
+
             access_to_refuse_clean_2016 = refuse_removal2016
             //2017
             refuse_removal2017 = array3
             access_to_refuse_2017 = refuse_removal2017
+
+            ekh2017 = refuse_removal2017[2]
+            jhb2017 = refuse_removal2017[4]
+            etk2017 = refuse_removal2017[3]
+
+            refuse_removal2017[4] = ekh2017
+            refuse_removal2017[3] = jhb2017
+            refuse_removal2017[2] = etk2017
+
             access_to_refuse_clean_2017 = refuse_removal2017
             //2018
             refuse_removal2018 = array4
             access_to_refuse_2018 = refuse_removal2018
+
+            ekh2018 = refuse_removal2018[2]
+            jhb2018 = refuse_removal2018[4]
+            etk2018 = refuse_removal2018[3]
+
+            refuse_removal2018[4] = ekh2018
+            refuse_removal2018[3] = jhb2018
+            refuse_removal2018[2] = etk2018
+
             access_to_refuse_clean_2018 = refuse_removal2018
             this.activate()
+
 
         });
       }
@@ -504,6 +719,22 @@ export default class Charts_dashboards extends Component {
             let array2 = []
             let array3 = []
             let array4 = []
+
+            let ekh2015 
+            let jhb2015
+            let etk2015
+
+            let ekh2016
+            let jhb2016
+            let etk2016
+
+            let ekh2017 
+            let jhb2017
+            let etk2017
+
+            let ekh2018 
+            let jhb2018
+            let etk2018
             
 
             //2015
@@ -546,18 +777,54 @@ export default class Charts_dashboards extends Component {
             //2015
             numOfHousehold2015 = array1
             number_of_households_2015 = numOfHousehold2015
+
+            ekh2015 = number_of_households_2015[2]
+            jhb2015 = number_of_households_2015[4]
+            etk2015 = number_of_households_2015[3]
+
+            number_of_households_2015[4] = ekh2015
+            number_of_households_2015[3] = jhb2015
+            number_of_households_2015[2] = etk2015
+
             number_of_households_clean_2015 = numOfHousehold2015
             //2016
             numOfHousehold2016 = array2
             number_of_households_2016 = numOfHousehold2016
+
+            ekh2016 = number_of_households_2016[2]
+            jhb2016 = number_of_households_2016[4]
+            etk2016 = number_of_households_2016[3]
+
+            number_of_households_2016[4] = ekh2016
+            number_of_households_2016[3] = jhb2016
+            number_of_households_2016[2] = etk2016
+
             number_of_households_clean_2016 = numOfHousehold2016
             //2017
             numOfHousehold2017 = array3
             number_of_households_2017 = numOfHousehold2017
+
+            ekh2017 = number_of_households_2017[2]
+            jhb2017 = number_of_households_2017[4]
+            etk2017 = number_of_households_2017[3]
+
+            number_of_households_2017[4] = ekh2017
+            number_of_households_2017[3] = jhb2017
+            number_of_households_2017[2] = etk2017
+
             number_of_households_clean_2017 = numOfHousehold2017
             //2018
             numOfHousehold2018 = array4
             number_of_households_2018 = numOfHousehold2018
+
+            ekh2018 = number_of_households_2018[2]
+            jhb2018 = number_of_households_2018[4]
+            etk2018 = number_of_households_2018[3]
+
+            number_of_households_2018[4] = ekh2018
+            number_of_households_2018[3] = jhb2018
+            number_of_households_2018[2] = etk2018
+            
             number_of_households_clean_2018 = numOfHousehold2018
             this.activate()
             this.hideLoader();
@@ -654,7 +921,7 @@ export default class Charts_dashboards extends Component {
 
         if(sortedData.includes('BUF'))
           {
-            console.log('true BUF')
+
           sortedNumber[0] = water_supply_2015[0]
           sortedNumber1[0] = water_supply_2016[0]
           sortedNumber2[0] = water_supply_2017[0]
@@ -693,7 +960,7 @@ export default class Charts_dashboards extends Component {
           }
         if(sortedData.includes('CCT'))
           {
-            console.log('true CCT')
+
             sortedNumber[1] = water_supply_2015[1]
             sortedNumber1[1] = water_supply_2016[1]
             sortedNumber2[1] = water_supply_2017[1]
@@ -726,7 +993,7 @@ export default class Charts_dashboards extends Component {
           }
         if(sortedData.includes('EKH'))
           {
-            console.log('true EKH')
+
             sortedNumber[2] = water_supply_2015[2]
             sortedNumber1[2] = water_supply_2016[2]
             sortedNumber2[2] = water_supply_2017[2]
@@ -759,7 +1026,7 @@ export default class Charts_dashboards extends Component {
           }
         if(sortedData.includes('ETK'))
           {
-            console.log('true ETK')
+
             sortedNumber[3] = water_supply_2015[3]
             sortedNumber1[3] = water_supply_2016[3]
             sortedNumber2[3] = water_supply_2017[3]
@@ -792,7 +1059,7 @@ export default class Charts_dashboards extends Component {
           }
         if(sortedData.includes('JHB'))
           {
-            console.log('true JHB')
+
             sortedNumber[4] = water_supply_2015[4]
             sortedNumber1[4] = water_supply_2016[4]
             sortedNumber2[4] = water_supply_2017[4]
@@ -825,7 +1092,7 @@ export default class Charts_dashboards extends Component {
           }
         if(sortedData.includes('MAN'))
           {
-            console.log('true MAN')
+ 
             sortedNumber[5] = water_supply_2015[5]
             sortedNumber1[5] = water_supply_2016[5]
             sortedNumber2[5] = water_supply_2017[5]
@@ -858,7 +1125,7 @@ export default class Charts_dashboards extends Component {
           }
         if(sortedData.includes('NMB'))
           {
-            console.log('true NMB')
+
           sortedNumber[6] = water_supply_2015[6]
           sortedNumber1[6] = water_supply_2016[6]
           sortedNumber2[6] = water_supply_2017[6]
@@ -892,7 +1159,7 @@ export default class Charts_dashboards extends Component {
           }
         if(sortedData.includes('TSH'))
           {
-            console.log('true TSH')
+
             sortedNumber[7] = water_supply_2015[7]
             sortedNumber1[7] = water_supply_2016[7]
             sortedNumber2[7] = water_supply_2017[7]
@@ -923,8 +1190,7 @@ export default class Charts_dashboards extends Component {
             free_basic_services_sortedNumber2[7] = free_basic_services_2017[7]
             free_basic_services_sortedNumber3[7] = free_basic_services_2018[7]
           }
-          console.log('checking final sorted number',sortedNumber)
-          console.log('data filtered',sortedData)
+
         water_supply_clean_2015 = sortedNumber.filter(Boolean);
         water_supply_clean_2016 = sortedNumber1.filter(Boolean);
         water_supply_clean_2017 = sortedNumber2.filter(Boolean);
