@@ -78,9 +78,17 @@ const _tabs = [
   }
 ];
 
+import createHistory from "history/createBrowserHistory"
+
+export const history = createHistory()
+
+history.listen((location, action) => {
+    window.scrollTo(0, 0)
+})
+
 // import more components
 export default (
-    <HashRouter history={hashHistory}>
+    <HashRouter history={history}>
 
 
       {/* DATA STORY DETAILS */}
