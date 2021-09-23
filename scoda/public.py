@@ -81,7 +81,7 @@ def api_explore(check):
             filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
             filter(DataPoint.region_id == Region.id)
         df = read_sql_query(query.statement, query.session.bind)
-    # df = df.drop_duplicates()
+    df = df.drop_duplicates()
     # print(app.root_path)
     # df.to_csv('%s/data/%s' % (app.root_path, "data_test.csv"), index=False)
     table = []
