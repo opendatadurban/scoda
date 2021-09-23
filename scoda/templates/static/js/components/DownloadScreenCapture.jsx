@@ -12,7 +12,7 @@ export default class DownloadScreenCapture extends Component {
   download(e){
     var htmlToImage = require('html-to-image');
     e.preventDefault()
-    htmlToImage.toJpeg(document.getElementById('content'), { quality: 0.95 })
+    htmlToImage.toJpeg(document.getElementById('content-scoda'), { quality: 0.95 })
   .then(function (dataUrl) {
     var link = document.createElement('a');
     link.download = 'data-snapshot.jpeg';
