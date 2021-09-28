@@ -11,6 +11,11 @@ let test_2016 = [453145, 266876, 125603, 128790, 316005, 319838, 162387, 231151]
 let test_2017 = [76201, 320406, 15848, 237330, 174687, 29658, 73593, 57250]
 let test_2018 = [80831, 315246, 11520, 226118, 191033, 32105, 63706, 52926]
 
+let fbs_2018_perc = []
+let fbs_2019_perc = []
+let fbs_2018_data = []
+let fbs_2019_data = []
+
 let water_supply2015 = []
 let water_supply2016 = []
 let water_supply2017 = []
@@ -163,6 +168,7 @@ export default class Charts_dashboards extends Component {
     constructor() {
         super();
         this.state = {
+            stepSize:200000,
             isMulti:true,
             toggle: true,
             loader: false,
@@ -1082,15 +1088,32 @@ export default class Charts_dashboards extends Component {
  
     
      switchTrigger(){
+       
+
+
        this.setState({
          toggle: !this.state.toggle
 
        });
        if (!this.state.toggle) {
          a = false
+         console.log('num')
+         fbs_2018_data = free_basic_services_clean_2017
+         fbs_2019_data = free_basic_services_clean_2018
+         this.setState({stepSize:200000})
        }
        else {
          a = true
+         console.log('percentage')
+         for(let i=0;i<free_basic_services_clean_2018.length;i++){
+           fbs_2018_perc[i] = free_basic_services_clean_2017[i] / 400000*100
+           fbs_2019_perc[i] = free_basic_services_clean_2018[i] / 400000*100
+         fbs_2018_data = fbs_2018_perc
+         fbs_2019_data = fbs_2019_perc
+         this.setState({stepSize:50})
+         }
+
+         
        }
     }
       handleMultiChange(option) {
@@ -1467,6 +1490,8 @@ export default class Charts_dashboards extends Component {
         free_basic_services_clean_2016 = free_basic_services_sortedNumber1.filter(Boolean);
         free_basic_services_clean_2017 = free_basic_services_sortedNumber2.filter(Boolean);
         free_basic_services_clean_2018 = free_basic_services_sortedNumber3.filter(Boolean);
+
+        console.log('cleaned',free_basic_services_clean_2017)
 
  
          
@@ -2358,7 +2383,7 @@ export default class Charts_dashboards extends Component {
                 {
                   label: '2018',
                   stack: 'Stack 3',
-                  data: free_basic_services_clean_2017,
+                  data:fbs_2018_data,
                   backgroundColor: [
                     '#C8EBBA',
                     '#C8EBBA',
@@ -2383,7 +2408,7 @@ export default class Charts_dashboards extends Component {
                 {
                   label: '2019',
                   stack: 'Stack 4',
-                  data: free_basic_services_clean_2018,
+                  data: fbs_2019_data,
                   backgroundColor: [
                     '#5A8699',
                     '#5A8699',
@@ -2433,6 +2458,7 @@ export default class Charts_dashboards extends Component {
                               label += ': ';
                           }
                           label += Math.round(tooltipItem.yLabel * 100) / 100;
+                          {a ?  label = label+'%' : label}
                           return label;
                       }
                   }
@@ -2446,13 +2472,15 @@ export default class Charts_dashboards extends Component {
                         display:false,
                       }
                   }],
+                  
                   yAxes: [{
                       stacked: true,
-                     
                       ticks: {
-                        stepSize:200000,
+                        stepSize:this.state.stepSize,
+        
+                         
                           callback: function (value, index, values) {
-                             {a? values = Math.round(value / 400000) * 100 + '%  ' : values = Math.round(value * 100) / 100000 + 'k'; }
+                             {a? values = value + '%  ' : values = Math.round(value * 100) / 100000 + 'k'; }
                               return values
                           },
                          
