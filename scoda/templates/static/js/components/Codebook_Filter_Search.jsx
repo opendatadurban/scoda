@@ -31,7 +31,6 @@ export default class CodebookFilterModal extends Component {
         this.setState({
             modalVisible: !this.state.modalVisible,
         });
-
     }
 
     toggleParent(event, isSelected) {
@@ -264,7 +263,6 @@ export default class CodebookFilterModal extends Component {
     }
 
     submitForm() {
-
         const filterVal = {
             c88: this.transformFilterFields(this.state.c88.c88.children),
             socr: this.transformFilterFields(this.state.socr.socr.children),

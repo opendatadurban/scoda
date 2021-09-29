@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 export default class Preview_block extends Component {
+
     render() {
         return (
             <div className="preview_block module-wrapper">

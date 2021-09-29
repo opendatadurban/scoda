@@ -12,6 +12,9 @@ export default class Navigation_scoda extends Component {
 
     // //HIDE SCODA LOGO ON SCROLL
     componentDidMount() {
+
+          //window.scrollTo(0,0);
+
         this.props.logoHide ? (
             document.addEventListener("scroll", () => {
                 const logo = window.scrollY < 50 ? "none" : "block";

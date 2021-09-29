@@ -8,6 +8,7 @@ export default class DataStoriesAffordability extends Component {
         super(props);
     }
 
+
     render() {
 
         return (

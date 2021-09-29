@@ -75,14 +75,14 @@ export default class Statistics_display extends Component {
             axios.get(`/api/explore/codebook?indicator_id=392`).then(res => {    
                 let ethekwini,tshwane,nmb,mangaung,ekurhuleni,joburg,capetown,buffalo,subtotal,total=0 
                 //2018 data
-                ethekwini = res.data.table[1].slice(2,3)[0]
-                tshwane = res.data.table[5].slice(2,3)[0]
-                nmb = res.data.table[9].slice(2,3)[0]
-                mangaung = res.data.table[13].slice(2,3)[0]
-                ekurhuleni = res.data.table[17].slice(2,3)[0]
-                joburg = res.data.table[21].slice(2,3)[0]
-                capetown = res.data.table[25].slice(2,3)[0]
-                buffalo = res.data.table[29].slice(2,3)[0]
+                ethekwini = res.data.table[32].slice(2,3)[0]
+                tshwane = res.data.table[28].slice(2,3)[0]
+                nmb = res.data.table[24].slice(2,3)[0]
+                mangaung = res.data.table[20].slice(2,3)[0]
+                ekurhuleni = res.data.table[16].slice(2,3)[0]
+                joburg = res.data.table[12].slice(2,3)[0]
+                capetown = res.data.table[8].slice(2,3)[0]
+                buffalo = res.data.table[4].slice(2,3)[0]
 
                 this.setState({ws_buffalo : Math.round(buffalo)})
                 this.setState({ws_capetown: Math.round(capetown)})
@@ -102,16 +102,16 @@ export default class Statistics_display extends Component {
         percentage_of_households_with_access_to_basic_sanitation() {
             axios.get(`/api/explore/codebook?indicator_id=384`).then(res => {  
                 let ethekwini,tshwane,nmb,mangaung,ekurhuleni,joburg,capetown,buffalo,subtotal,total=0 
-                console.log(res.data)
+
                 //2018 data
-                ethekwini = res.data.table[1].slice(2,3)[0]
-                tshwane = res.data.table[5].slice(2,3)[0]
-                nmb = res.data.table[9].slice(2,3)[0]
-                mangaung = res.data.table[13].slice(2,3)[0]
-                ekurhuleni = res.data.table[17].slice(2,3)[0]
-                joburg = res.data.table[21].slice(2,3)[0]
-                capetown = res.data.table[25].slice(2,3)[0]
-                buffalo = res.data.table[29].slice(2,3)[0]
+                ethekwini = res.data.table[32].slice(2,3)[0]
+                tshwane = res.data.table[28].slice(2,3)[0]
+                nmb = res.data.table[24].slice(2,3)[0]
+                mangaung = res.data.table[20].slice(2,3)[0]
+                ekurhuleni = res.data.table[16].slice(2,3)[0]
+                joburg = res.data.table[12].slice(2,3)[0]
+                capetown = res.data.table[8].slice(2,3)[0]
+                buffalo = res.data.table[4].slice(2,3)[0]
 
                 this.setState({bs_buffalo : Math.round(buffalo)})
                 this.setState({bs_capetown: Math.round(capetown)})
@@ -133,16 +133,16 @@ export default class Statistics_display extends Component {
         percentage_of_households_with_access_to_electricity() {
             axios.get(`/api/explore/codebook?indicator_id=10`).then(res => {
             let ethekwini,tshwane,nmb,mangaung,ekurhuleni,joburg,capetown,buffalo,subtotal,total=0 
-            console.log(res.data)
+
             //2018 data
-            ethekwini = res.data.table[1].slice(2,3)[0]
-            tshwane = res.data.table[5].slice(2,3)[0]
-            nmb = res.data.table[9].slice(2,3)[0]
-            mangaung = res.data.table[13].slice(2,3)[0]
-            ekurhuleni = res.data.table[17].slice(2,3)[0]
-            joburg = res.data.table[21].slice(2,3)[0]
-            capetown = res.data.table[25].slice(2,3)[0]
-            buffalo = res.data.table[29].slice(2,3)[0]
+            ethekwini = res.data.table[32].slice(2,3)[0]
+            tshwane = res.data.table[28].slice(2,3)[0]
+            nmb = res.data.table[24].slice(2,3)[0]
+            mangaung = res.data.table[20].slice(2,3)[0]
+            ekurhuleni = res.data.table[16].slice(2,3)[0]
+            joburg = res.data.table[12].slice(2,3)[0]
+            capetown = res.data.table[8].slice(2,3)[0]
+            buffalo = res.data.table[4].slice(2,3)[0]
 
             this.setState({elec_buffalo : Math.round(buffalo)})
             this.setState({elec_capetown: Math.round(capetown)})
@@ -163,16 +163,16 @@ export default class Statistics_display extends Component {
         percentage_households_with_weekly_municipal_refuse_removal() {
             axios.get(`/api/explore/codebook?indicator_id=1114`).then(res => {
             let ethekwini,tshwane,nmb,mangaung,ekurhuleni,joburg,capetown,buffalo,subtotal,total=0 
-            console.log(res.data)
+
             //2018 data
-            ethekwini = res.data.table[1].slice(2,3)[0]
-            tshwane = res.data.table[5].slice(2,3)[0]
-            nmb = res.data.table[9].slice(2,3)[0]
-            mangaung = res.data.table[13].slice(2,3)[0]
-            ekurhuleni = res.data.table[17].slice(2,3)[0]
-            joburg = res.data.table[21].slice(2,3)[0]
-            capetown = res.data.table[25].slice(2,3)[0]
-            buffalo = res.data.table[29].slice(2,3)[0]
+            ethekwini = res.data.table[32].slice(2,3)[0]
+            tshwane = res.data.table[28].slice(2,3)[0]
+            nmb = res.data.table[24].slice(2,3)[0]
+            mangaung = res.data.table[20].slice(2,3)[0]
+            ekurhuleni = res.data.table[16].slice(2,3)[0]
+            joburg = res.data.table[12].slice(2,3)[0]
+            capetown = res.data.table[8].slice(2,3)[0]
+            buffalo = res.data.table[4].slice(2,3)[0]
 
             this.setState({rr_buffalo : Math.round(buffalo)})
             this.setState({rr_capetown: Math.round(capetown)})

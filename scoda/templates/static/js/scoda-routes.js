@@ -28,7 +28,7 @@ import TabsAndFilters from './components/TabsAndFilters'
 import DemographicModeller from './components/DemographicModeller';
 import DataStoriesAffordability from './components/DataStories.Affordability';
 import Codebook from './components/Codebook';
-// import Socr_Dashboards from './components/Socr.Dashboards'
+import Socr_Dashboards from './components/Socr.Dashboards'
 
 const _heroTitle = 'Data Management System';
 const _heroContent = ' Central to activities on this platform is the Data Management System, where our evidence base is securely housed. We use the CKAN data portal framework, the same system used by various governments around the world, to store, manage, and share data across the SCODA ecosystem. From this dynamic, version-controlled and API-responsive data-store, we can efficiently gather and process the myriad sources required for insight generation.Central to activities on this platform is the Data Management System, where our evidence base is securely housed. We use the CKAN data portal framework, the same system used by various governments around the world, to store, manage, and share data across the SCODA ecosystem. From this dynamic, version-controlled and API-responsive data-store, we can efficiently gather and process the myriad sources required for insight generation.';
@@ -78,9 +78,17 @@ const _tabs = [
   }
 ];
 
+import createHistory from "history/createBrowserHistory"
+
+export const history = createHistory()
+
+history.listen((location, action) => {
+    window.scrollTo(0, 0)
+})
+
 // import more components
 export default (
-    <HashRouter history={hashHistory}>
+    <HashRouter history={history}>
 
 
       {/* DATA STORY DETAILS */}
@@ -180,8 +188,8 @@ export default (
         <Route exact path='/codebook-explorer/:id' render={(props)=> <CBIndicatorExplorer className=""  {...props}/>} />
       <Route path="/codebook-explorer/:id" component={Footer} />
 
-      {/* <Route path='/socr-dashboards' component={()=> <Navigation_scoda logoHide={false} box_shadow={true} />} />
+      <Route path='/socr-dashboards' component={()=> <Navigation_scoda logoHide={false} box_shadow={true} />} />
       <Route path='/socr-dashboards' component={Socr_Dashboards} />
-      <Route path='/socr-dashboards' component={Footer} /> */}
+      <Route path='/socr-dashboards' component={Footer} />
     </HashRouter>
 );

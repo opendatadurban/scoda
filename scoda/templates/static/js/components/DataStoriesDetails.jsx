@@ -13,6 +13,7 @@ export default class DataStoriesDetails extends Component {
         super(props);
     }
 
+
     render() {
         let main_class = `ml-0 mt-3 p-0 data-story-card`
         let bannerImage = `/static/dist/img/scoda/datastories/edge.png`;
@@ -53,6 +54,7 @@ export default class DataStoriesDetails extends Component {
                                         title="SACN Data Stories"
                                         content={sacnContent}
                                         viewType="Webpage"
+                                        siteLink='https://www.sacities.net'
                                     />
                                     <FilterBar
                                         filters={sacnFilters}
@@ -172,6 +174,7 @@ export default class DataStoriesDetails extends Component {
                                     title="eThekwini Data Stories (via the Durban EDGE)"
                                     content={edgeContent}
                                     viewType="Portal"
+                                    siteLink='https://edge.durban/'
                                 />
                                 <FilterBar filters={edgeFilters} colors={edgeColors} />
                                 <div className="row ml-1 mr-1">
