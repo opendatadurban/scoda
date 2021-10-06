@@ -449,6 +449,9 @@ export default class Charts_dashboards extends Component {
       }
 
      switchTrigger(){
+       
+
+
        this.setState({
          toggle: !this.state.toggle
 
@@ -1585,6 +1588,7 @@ export default class Charts_dashboards extends Component {
                               label += ': ';
                           }
                           label += Math.round(tooltipItem.yLabel * 100) / 100;
+                          {a ?  label = label+'%' : label}
                           return label;
                       }
                   }
@@ -1598,6 +1602,7 @@ export default class Charts_dashboards extends Component {
                         display:false,
                       }
                   }],
+                  
                   yAxes: [{
                       stacked: true,
                       ticks: {
