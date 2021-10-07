@@ -122,12 +122,12 @@ export default class Charts_dashboards extends Component {
       componentDidMount(){
         this.getYears()
         this.showLoader()
-        this.renderChart();
-        this.renderChart1();
-        this.renderChart2();
-        this.renderChart3();
-        this.renderChart4();
-        this.renderChart5();
+        this.renderChart_percentage_of_household_with_basic_water_supply();
+        this.renderChart_percentage_of_households_with_access_to_basic_sanitation();
+        this.renderChart_percentage_of_households_with_access_to_electricity();
+        this.renderChart_percentage_households_with_weekly_municipal_refuse_removal();
+        this.renderChart_total_number_of_households_in_the_municipality();
+        this.renderChart_free_basic_services();
 
         this.percentage_of_household_with_basic_water_supply();
         this.percentage_of_households_with_access_to_basic_sanitation();
@@ -137,12 +137,12 @@ export default class Charts_dashboards extends Component {
 
       }
       componentDidUpdate(){
-        this.renderChart();
-        this.renderChart1();
-        this.renderChart2();
-        this.renderChart3();
-        this.renderChart4();
-        this.renderChart5();
+        this.renderChart_percentage_of_household_with_basic_water_supply();
+        this.renderChart_percentage_of_households_with_access_to_basic_sanitation();
+        this.renderChart_percentage_of_households_with_access_to_electricity();
+        this.renderChart_percentage_households_with_weekly_municipal_refuse_removal();
+        this.renderChart_total_number_of_households_in_the_municipality();
+        this.renderChart_free_basic_services();
       }
 
       showLoader() {
@@ -651,26 +651,30 @@ export default class Charts_dashboards extends Component {
         }) 
       }
 
-      renderChart(){
-        let color = 'grey'
+      renderChart_percentage_of_household_with_basic_water_supply(){
+        let color = '#d6d6d6'
         let data = {
           labels:sortedData,
           datasets:[]
           }
 
           years.forEach(function(a,i) {
-                if(i == 0){
-                  color='#D0D1E6'
-                }
-                if(i == 1){
-                  color='#74A9CF'
-                }
-                if(i == 2){
-                  color='#0570B0'
-                }
-                if(i == 3){
-                  color='#023858'
-                }
+            switch(i) {
+              case 0:
+                color='#D0D1E6'
+                break;
+              case 1:
+                color='#74A9CF'
+                break;
+              case 2:
+                color='#0570B0'
+                break;
+              case 3:
+                color='#023858'
+                break;
+              default:
+                color='#d6d6d6'
+            }
                 data.datasets.push({
                 label: a,
                 stack: 'Stack '+i,
@@ -681,9 +685,6 @@ export default class Charts_dashboards extends Component {
             })
           
         if(chartRef1){chartRef1.destroy();}
-
-
-      
         var ctx = document.getElementById('mc').getContext('2d');
         chartRef1 = new Chart(ctx, {
             type: 'bar',
@@ -750,26 +751,29 @@ export default class Charts_dashboards extends Component {
            }
           });
       }
-      renderChart1(){
-        let color = 'grey'
+      renderChart_percentage_of_households_with_access_to_basic_sanitation(){
+        let color = '#d6d6d6'
         let data = {
           labels:sortedData,
           datasets:[]
           }
-
             years.forEach(function(a,i) {
-                if(i == 0){
+              switch(i) {
+                case 0:
                   color='#D0D1E6'
-                }
-                if(i == 1){
+                  break;
+                case 1:
                   color='#74A9CF'
-                }
-                if(i == 2){
+                  break;
+                case 2:
                   color='#0570B0'
-                }
-                if(i == 3){
+                  break;
+                case 3:
                   color='#023858'
-                }
+                  break;
+                default:
+                  color='#d6d6d6'
+              }
                 data.datasets.push({
                 label: a,
                 stack: 'Stack '+i,
@@ -780,9 +784,7 @@ export default class Charts_dashboards extends Component {
             })
           
         if(chartRef2){chartRef2.destroy();}
-
         var ctx = document.getElementById('mc1').getContext('2d');
-
         chartRef2 = new Chart(ctx, {
             type: 'bar',
             data,
@@ -846,26 +848,29 @@ export default class Charts_dashboards extends Component {
           }
           });
       }
-      renderChart2(){
-        let color = 'grey'
+      renderChart_percentage_of_households_with_access_to_electricity(){
+        let color = '#d6d6d6'
         let data = {
           labels:sortedData,
           datasets:[]
           }
-
             years.forEach(function(a,i) {
-                if(i == 0){
+              switch(i) {
+                case 0:
                   color='#D0D1E6'
-                }
-                if(i == 1){
+                  break;
+                case 1:
                   color='#74A9CF'
-                }
-                if(i == 2){
+                  break;
+                case 2:
                   color='#0570B0'
-                }
-                if(i == 3){
+                  break;
+                case 3:
                   color='#023858'
-                }
+                  break;
+                default:
+                  color='#d6d6d6'
+              }
                 data.datasets.push({
                 label: a,
                 stack: 'Stack '+i,
@@ -876,7 +881,6 @@ export default class Charts_dashboards extends Component {
             })
         if(chartRef3){chartRef3.destroy();}
         var ctx = document.getElementById('mc2').getContext('2d');
-
         chartRef3 = new Chart(ctx, {
             type: 'bar',
             data,
@@ -940,26 +944,29 @@ export default class Charts_dashboards extends Component {
           }
           });
       }
-      renderChart3(){
-        let color = 'grey'
+      renderChart_total_number_of_households_in_the_municipality(){
+        let color = '#d6d6d6'
         let data = {
           labels:sortedData,
           datasets:[]
           }
-
             years.forEach(function(a,i) {
-                if(i == 0){
+              switch(i) {
+                case 0:
                   color='#D0D1E6'
-                }
-                if(i == 1){
+                  break;
+                case 1:
                   color='#74A9CF'
-                }
-                if(i == 2){
+                  break;
+                case 2:
                   color='#0570B0'
-                }
-                if(i == 3){
+                  break;
+                case 3:
                   color='#023858'
-                }
+                  break;
+                default:
+                  color='#d6d6d6'
+              }
                 data.datasets.push({
                 label: a,
                 stack: 'Stack '+i,
@@ -970,7 +977,6 @@ export default class Charts_dashboards extends Component {
             })
         if(chartRef4){chartRef4.destroy();}
         var ctx = document.getElementById('mc3').getContext('2d');
-
         chartRef4 = new Chart(ctx, {
             type: 'bar',
             data,
@@ -1035,26 +1041,29 @@ export default class Charts_dashboards extends Component {
           }
           });
       }
-      renderChart4(){
-        let color = 'grey'
+      renderChart_percentage_households_with_weekly_municipal_refuse_removal(){
+        let color = '#d6d6d6'
         let data = {
           labels:sortedData,
           datasets:[]
           }
-
             years.forEach(function(a,i) {
-                if(i == 0){
+              switch(i) {
+                case 0:
                   color='#D0D1E6'
-                }
-                if(i == 1){
+                  break;
+                case 1:
                   color='#74A9CF'
-                }
-                if(i == 2){
+                  break;
+                case 2:
                   color='#0570B0'
-                }
-                if(i == 3){
+                  break;
+                case 3:
                   color='#023858'
-                }
+                  break;
+                default:
+                  color='#d6d6d6'
+              }
                 data.datasets.push({
                 label: a,
                 stack: 'Stack '+i,
@@ -1065,7 +1074,6 @@ export default class Charts_dashboards extends Component {
             })
         if(chartRef5){chartRef5.destroy();}
         var ctx = document.getElementById('mc4').getContext('2d');
-
         chartRef5 = new Chart(ctx, {
             type: 'bar',
             data,
@@ -1128,7 +1136,7 @@ export default class Charts_dashboards extends Component {
           }
           });
       }
-      renderChart5(){
+      renderChart_free_basic_services(){
         if(chartRef6){chartRef6.destroy();}
         var ctx = document.getElementById('mc5').getContext('2d');
 
