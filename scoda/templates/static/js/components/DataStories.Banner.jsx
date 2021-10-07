@@ -28,7 +28,7 @@ export default class Banner extends Component {
                        <div className="row">
                            <div className="col-md-8 ds-banner-title">{this.props.title}</div>
                            <div className="col-md-2">
-                                <div className="ds-banner-view-button"> <a href="https://www.sacities.net" target="blank__" className="card-trigger"></a> View the {viewButtonTitle}</div>
+                                <div className="ds-banner-view-button"> <a href={this.props.siteLink} target="blank__" className="card-trigger"></a> View the {viewButtonTitle}</div>
                            </div>
                        </div>
 

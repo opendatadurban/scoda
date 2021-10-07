@@ -7,6 +7,8 @@ export default class IndicatorExplorer extends Component {
         super(props);
     }
 
+
+
     render() {
 
         return (

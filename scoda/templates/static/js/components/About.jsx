@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 export default class CTA_block extends Component {
+
   render() {
     return (
       <div className="about-us module-wrapper justify-content-center justify-items-center">
