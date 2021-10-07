@@ -6,6 +6,9 @@ import axios from 'axios';
 import { Container, Row, Col, Modal, ModalBody, Spinner } from 'reactstrap';
 
 let a = true;
+let years = []
+let lineChartData = { 'datasets':[]}
+
 
 //Units Receiving Free Basic Services data , static for now since it's still not part of codebook.
 let fbs_data_2018 = [76201, 320406, 15848, 237330, 174687, 29658, 73593, 57250]
@@ -90,6 +93,7 @@ export default class Charts_dashboards extends Component {
             toggle: true,
             loader: false,
             chartYears: 0,
+            noYears:[],
             multiValue: [
             { value: "BUF", label: "Buffalo City" },
             { value: "CCT", label: "City of Cape Town" },
@@ -116,6 +120,7 @@ export default class Charts_dashboards extends Component {
         this.switchTrigger = this.switchTrigger.bind(this);
       }
       componentDidMount(){
+        this.getYears()
         this.showLoader()
         this.renderChart();
         this.renderChart1();
@@ -139,6 +144,7 @@ export default class Charts_dashboards extends Component {
         this.renderChart4();
         this.renderChart5();
       }
+
       showLoader() {
         this.setState({
             loader: true
@@ -155,9 +161,18 @@ export default class Charts_dashboards extends Component {
         document.getElementById('optionOne').click();
       }
       //API
+      getYears(){
+          axios.get(`/api/explore/codebook?indicator_id=392`).then(res => {
+          this.setState({noYears: res.data.years})
+          this.state.noYears.shift();
+          this.state.noYears.sort();
+          years = this.state.noYears
+        })
+
+      }
       percentage_of_household_with_basic_water_supply() {
         axios.get(`/api/explore/codebook?indicator_id=392`).then(res => {
-          
+          this.getYears()
            let toNum = new Object()
            let years = parseInt(res.data.years[1])
            let startingYear = parseInt(res.data.years.slice(-1)[0])
@@ -171,6 +186,7 @@ export default class Charts_dashboards extends Component {
            let tsh
            let etk
           this.setState({chartYears: res.data.years})
+
            for(let i=0;i<res.data.years.length;i++){
               for(let k=0;k<1;k++){
                 if(i === 0){}
@@ -631,123 +647,47 @@ export default class Charts_dashboards extends Component {
         
         free_basic_services_clean_2017 = free_basic_services_sortedNumber2.filter(Boolean);
         free_basic_services_clean_2018 = free_basic_services_sortedNumber3.filter(Boolean);
+
         }) 
       }
 
       renderChart(){
-        if(chartRef1){chartRef1.destroy();}
-        var ctx = document.getElementById('mc').getContext('2d');
+        let color = 'grey'
+        let data = {
+          labels:sortedData,
+          datasets:[]
+          }
 
+          years.forEach(function(a,i) {
+                if(i == 0){
+                  color='#D0D1E6'
+                }
+                if(i == 1){
+                  color='#74A9CF'
+                }
+                if(i == 2){
+                  color='#0570B0'
+                }
+                if(i == 3){
+                  color='#023858'
+                }
+                data.datasets.push({
+                label: a,
+                stack: 'Stack '+i,
+                data: final_water_supply[i],
+                backgroundColor: color,
+                borderColor: color,
+              })
+            })
+          
+        if(chartRef1){chartRef1.destroy();}
+
+
+      
+        var ctx = document.getElementById('mc').getContext('2d');
         chartRef1 = new Chart(ctx, {
             type: 'bar',
-            data: {
-              labels: sortedData,
-              datasets: [
-                {
-                label: '2015',
-                stack: 'Stack 1',
-                data: final_water_supply[0],
-                backgroundColor: [
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                ],
-                borderColor: [
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                ]
-                },
-                  {
-                  label: '2016',
-                  stack: 'Stack 2',
-                  data: final_water_supply[1],
-                  backgroundColor: [
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-
-                  ],
-                  borderColor: [
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                  ]
-                },
-                {
-                  label: '2017',
-                  stack: 'Stack 3',
-                  data: final_water_supply[2],
-                  backgroundColor: [
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                  ],
-                  borderColor: [
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                  ]
-                },
-                {
-                  label: '2018',
-                  stack: 'Stack 4',
-                  data: final_water_supply[3],
-                  backgroundColor: [
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-
-                  ],
-                  borderColor: [
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-
-                  ]
-                }
-          ]
-            },
+            data,
             options: {
               legend: {
                 labels: {
@@ -811,119 +751,41 @@ export default class Charts_dashboards extends Component {
           });
       }
       renderChart1(){
+        let color = 'grey'
+        let data = {
+          labels:sortedData,
+          datasets:[]
+          }
+
+            years.forEach(function(a,i) {
+                if(i == 0){
+                  color='#D0D1E6'
+                }
+                if(i == 1){
+                  color='#74A9CF'
+                }
+                if(i == 2){
+                  color='#0570B0'
+                }
+                if(i == 3){
+                  color='#023858'
+                }
+                data.datasets.push({
+                label: a,
+                stack: 'Stack '+i,
+                data: final_basic_sanitation[i],
+                backgroundColor: color,
+                borderColor: color,
+              })
+            })
+          
         if(chartRef2){chartRef2.destroy();}
 
         var ctx = document.getElementById('mc1').getContext('2d');
 
         chartRef2 = new Chart(ctx, {
             type: 'bar',
-            data: {
-              labels: sortedData,
-              datasets: [{
-                label: '2015',
-                stack: 'Stack 1',
-                data: final_basic_sanitation[0],
-                backgroundColor: [
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                ],
-                borderColor: [
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                ]
-              },
-                  {
-                  label: '2016',
-                  stack: 'Stack 2',
-                  data: final_basic_sanitation[1],
-                  backgroundColor: [
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-
-                  ],
-                  borderColor: [
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                  ]
-                },
-                {
-                  label: '2017',
-                  stack: 'Stack 3',
-                  data: final_basic_sanitation[2],
-                  backgroundColor: [
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                  ],
-                  borderColor: [
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                  ]
-                },
-                {
-                  label: '2018',
-                  stack: 'Stack 4',
-                  data: final_basic_sanitation[3],
-                  backgroundColor: [
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-
-                  ],
-                  borderColor: [
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-
-                  ]
-                }
-          ]
-            },
+            data,
             options: {
               legend: {
                 labels: {
@@ -985,118 +847,39 @@ export default class Charts_dashboards extends Component {
           });
       }
       renderChart2(){
+        let color = 'grey'
+        let data = {
+          labels:sortedData,
+          datasets:[]
+          }
+
+            years.forEach(function(a,i) {
+                if(i == 0){
+                  color='#D0D1E6'
+                }
+                if(i == 1){
+                  color='#74A9CF'
+                }
+                if(i == 2){
+                  color='#0570B0'
+                }
+                if(i == 3){
+                  color='#023858'
+                }
+                data.datasets.push({
+                label: a,
+                stack: 'Stack '+i,
+                data: final_access_elec[i],
+                backgroundColor: color,
+                borderColor: color,
+              })
+            })
         if(chartRef3){chartRef3.destroy();}
         var ctx = document.getElementById('mc2').getContext('2d');
 
         chartRef3 = new Chart(ctx, {
             type: 'bar',
-            data: {
-              labels: sortedData,
-              datasets: [{
-                label: '2015',
-                stack: 'Stack 1',
-                data: final_access_elec[0],
-                backgroundColor: [
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                ],
-                borderColor: [
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                ]
-              },
-                  {
-                  label: '2016',
-                  stack: 'Stack 2',
-                  data: final_access_elec[1],
-                  backgroundColor: [
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-
-                  ],
-                  borderColor: [
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                  ]
-                },
-                {
-                  label: '2017',
-                  stack: 'Stack 3',
-                  data: final_access_elec[2],
-                  backgroundColor: [
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                  ],
-                  borderColor: [
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                  ]
-                },
-                {
-                  label: '2018',
-                  stack: 'Stack 4',
-                  data: final_access_elec[3],
-                  backgroundColor: [
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-
-                  ],
-                  borderColor: [
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-
-                  ]
-                }
-          ]
-            },
+            data,
             options: {
               legend: {
                 labels: {
@@ -1158,118 +941,39 @@ export default class Charts_dashboards extends Component {
           });
       }
       renderChart3(){
+        let color = 'grey'
+        let data = {
+          labels:sortedData,
+          datasets:[]
+          }
+
+            years.forEach(function(a,i) {
+                if(i == 0){
+                  color='#D0D1E6'
+                }
+                if(i == 1){
+                  color='#74A9CF'
+                }
+                if(i == 2){
+                  color='#0570B0'
+                }
+                if(i == 3){
+                  color='#023858'
+                }
+                data.datasets.push({
+                label: a,
+                stack: 'Stack '+i,
+                data: final_refuse_removal[i],
+                backgroundColor: color,
+                borderColor: color,
+              })
+            })
         if(chartRef4){chartRef4.destroy();}
         var ctx = document.getElementById('mc3').getContext('2d');
 
         chartRef4 = new Chart(ctx, {
             type: 'bar',
-            data: {
-              labels: sortedData,
-              datasets: [{
-                label: '2015',
-                stack: 'Stack 1',
-                data: final_refuse_removal[0],
-                backgroundColor: [
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                ],
-                borderColor: [
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                ]
-              },
-                  {
-                  label: '2016',
-                  stack: 'Stack 2',
-                  data: final_refuse_removal[1],
-                  backgroundColor: [
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-
-                  ],
-                  borderColor: [
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                  ]
-                },
-                {
-                  label: '2017',
-                  stack: 'Stack 3',
-                  data: final_refuse_removal[2],
-                  backgroundColor: [
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                  ],
-                  borderColor: [
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                  ]
-                },
-                {
-                  label: '2018',
-                  stack: 'Stack 4',
-                  data: final_refuse_removal[3],
-                  backgroundColor: [
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-
-                  ],
-                  borderColor: [
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-
-                  ]
-                }
-          ]
-            },
+            data,
             options: {
               legend: {
                 labels: {
@@ -1332,117 +1036,39 @@ export default class Charts_dashboards extends Component {
           });
       }
       renderChart4(){
+        let color = 'grey'
+        let data = {
+          labels:sortedData,
+          datasets:[]
+          }
+
+            years.forEach(function(a,i) {
+                if(i == 0){
+                  color='#D0D1E6'
+                }
+                if(i == 1){
+                  color='#74A9CF'
+                }
+                if(i == 2){
+                  color='#0570B0'
+                }
+                if(i == 3){
+                  color='#023858'
+                }
+                data.datasets.push({
+                label: a,
+                stack: 'Stack '+i,
+                data: final_num_of_household[i],
+                backgroundColor: color,
+                borderColor: color,
+              })
+            })
         if(chartRef5){chartRef5.destroy();}
         var ctx = document.getElementById('mc4').getContext('2d');
 
         chartRef5 = new Chart(ctx, {
             type: 'bar',
-            data: {
-              labels: sortedData,
-              datasets: [{
-                label: '2015',
-                stack: 'Stack 1',
-                data: final_num_of_household[0],
-                backgroundColor: [
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                ],
-                borderColor: [
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                    '#D0D1E6',
-                ]
-              },
-                  {
-                  label: '2016',
-                  stack: 'Stack 2',
-                  data: final_num_of_household[1],
-                  backgroundColor: [
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-
-                  ],
-                  borderColor: [
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                    '#74A9CF',
-                  ]
-                },
-                {
-                  label: '2017',
-                  stack: 'Stack 3',
-                  data: final_num_of_household[2],
-                  backgroundColor: [
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                  ],
-                  borderColor: [
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                    '#0570B0',
-                  ]
-                },
-                {
-                  label: '2018',
-                  stack: 'Stack 4',
-                  data: final_num_of_household[3],
-                  backgroundColor: [
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-
-                  ],
-                  borderColor: [
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                  ]
-                }
-          ]
-            },
+            data,
             options: {
               legend: {
                 labels: {
@@ -1515,52 +1141,15 @@ export default class Charts_dashboards extends Component {
                   label: '2018',
                   stack: 'Stack 3',
                   data:fbs_2018_data,
-                  backgroundColor: [
-                    '#C8EBBA',
-                    '#C8EBBA',
-                    '#C8EBBA',
-                    '#C8EBBA',
-                    '#C8EBBA',
-                    '#C8EBBA',
-                    '#C8EBBA',
-                    '#C8EBBA',
-                  ],
-                  borderColor: [
-                    '#C8EBBA',
-                    '#C8EBBA',
-                    '#C8EBBA',
-                    '#C8EBBA',
-                    '#C8EBBA',
-                    '#C8EBBA',
-                    '#C8EBBA',
-                    '#C8EBBA',
-                  ]
+                  backgroundColor: '#C8EBBA',
+                  borderColor: '#C8EBBA',
                 },
                 {
                   label: '2019',
                   stack: 'Stack 4',
                   data: fbs_2019_data,
-                  backgroundColor: [
-                    '#5A8699',
-                    '#5A8699',
-                    '#5A8699',
-                    '#5A8699',
-                    '#5A8699',
-                    '#5A8699',
-                    '#5A8699',
-                    '#5A8699',
-
-                  ],
-                  borderColor: [
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                    '#023858',
-                  ]
+                  backgroundColor: '#5A8699',
+                  borderColor: '#023858',
                 }
           ]
             },
