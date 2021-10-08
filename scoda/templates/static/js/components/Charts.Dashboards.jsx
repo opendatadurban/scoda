@@ -466,8 +466,6 @@ export default class Charts_dashboards extends Component {
 
      switchTrigger(){
        
-
-
        this.setState({
          toggle: !this.state.toggle
 
@@ -497,6 +495,11 @@ export default class Charts_dashboards extends Component {
         access_to_elec_data = []
         refuse_removal_data = []
         number_of_households_data = []
+        fbs_2018_perc = []
+        fbs_2019_perc = []
+        fbs_2018_data = []
+        fbs_2019_data = []
+
         let cYears = this.state.chartYears
       for(let item=0;item<cYears.length - 1;item++){
         water_supply_data.push([])
@@ -645,8 +648,12 @@ export default class Charts_dashboards extends Component {
             final_num_of_household[index]= number_of_households_data[index].filter(Boolean)
           }
         
-        free_basic_services_clean_2017 = free_basic_services_sortedNumber2.filter(Boolean);
-        free_basic_services_clean_2018 = free_basic_services_sortedNumber3.filter(Boolean);
+          free_basic_services_clean_2017 = free_basic_services_sortedNumber2.filter(Boolean);
+          free_basic_services_clean_2018 = free_basic_services_sortedNumber3.filter(Boolean);
+
+          fbs_2018_data = free_basic_services_clean_2017
+          fbs_2019_data = free_basic_services_clean_2018
+          document.getElementById('optionOne').click();
 
         }) 
       }
@@ -1137,6 +1144,7 @@ export default class Charts_dashboards extends Component {
           });
       }
       renderChart_free_basic_services(){
+        console.log('data',fbs_2018_data)
         if(chartRef6){chartRef6.destroy();}
         var ctx = document.getElementById('mc5').getContext('2d');
 
