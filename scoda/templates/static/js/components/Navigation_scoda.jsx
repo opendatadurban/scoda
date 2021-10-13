@@ -56,8 +56,8 @@ export default class Navigation_scoda extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col d-flex align-items-center justify-content-end">
-                                <a href="https://scoda.co.za/user/login">Log In</a>
-                                <a href="https://scoda.co.za/user/register" className="register">Register</a>
+                                <a href="https://ckan.scoda.co.za/user/login">Log In</a>
+                                <a href="https://ckan.scoda.co.za/user/register" className="register">Register</a>
                             </div>
                         </div>
                     </div>
@@ -84,7 +84,7 @@ export default class Navigation_scoda extends Component {
                                         Toolkits
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a className="dropdown-item" target="_blank"  href="https://scoda.co.za/dataset">Data Management System</a>
+                                        <a className="dropdown-item" target="_blank"  href="https://ckan.scoda.co.za/dataset">Data Management System</a>
                                         <a className="dropdown-item" href="/scoda/#/explorer">Data Explorer</a>
                                         <a className="dropdown-item" href="/scoda/#/codebook">Codebook</a>
                                         <a className="dropdown-item" href="/scoda/#/demographic-modeller">Demographic Modeller</a>
