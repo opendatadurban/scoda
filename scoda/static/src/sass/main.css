@@ -2120,8 +2120,8 @@ img {
 }
 
 .cta_block.cta_block_analysis .cta-info .cta-image-codebook {
-  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_4 Analysis Tools/image_analysis_codebook.png");
-  height: 369px;
+  background-image: url("/static/dist/img/SCODA Assets V3_2 Desktop/1 Landing Page/1_4 Analysis Tools/image_analysis-tools_codebook.png");
+  height: 285px;
   width: 459px;
   margin-top: 20px;
   -webkit-box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
@@ -2287,7 +2287,7 @@ img {
 }
 
 .cta_block .cta-field-description-list-detailed-btn-codebook {
-  margin-top: 99px !important;
+  margin-top: 18px !important;
 }
 
 .cta_block .cta-search {
@@ -6838,6 +6838,10 @@ label.disabled, .label.disabled {
   background-color: #fff;
   cursor: pointer;
   float: right;
+}
+
+.dm-footer-button-white:hover, .dm-footer-button-white:active, .dm-footer-button-white:focus {
+  text-decoration: none !important;
 }
 
 .demographic-card .leaflet-control.info {
