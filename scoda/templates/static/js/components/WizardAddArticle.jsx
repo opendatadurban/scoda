@@ -41,7 +41,7 @@ const WizardAddArticle = () => {
                   <div className="step-image">
                     <img
                       src="../../../../static/img/article-add_1.png"
-                      alt=""
+                      alt="step"
                     />
                   </div>
                   <div>
@@ -90,7 +90,7 @@ const WizardAddArticle = () => {
                   <div className="step-image">
                     <img
                       src="../../../../static/img/article-add_2.png"
-                      alt=""
+                      alt="step"
                     />
                   </div>
                   <div>
@@ -125,7 +125,7 @@ const WizardAddArticle = () => {
                   <div className="step-image">
                     <img
                       src="../../../../static/img/article-add_3.png"
-                      alt=""
+                      alt="step"
                     />
                   </div>
                   <div>
@@ -159,7 +159,7 @@ const WizardAddArticle = () => {
               </div>
 
               <div className="step-image">
-                <img src="../../../../static/img/article-add_4.png" alt="" />
+                <img src="../../../../static/img/article-add_4.png" alt="step" />
               </div>
               <div>
                 <p className="step-instruction">Leave notes for the Monitor</p>

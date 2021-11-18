@@ -73,7 +73,7 @@ const SideBarArticleMetadata = () => {
                           <div className="content-val ">
                             <img id="country"
                                 src="../../../static/img/flag.png"
-                              alt=""
+                              alt="Country"
                               srcset=""
                             />
                           </div>

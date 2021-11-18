@@ -28,7 +28,7 @@ const config = {
         loader: "style-loader!css-loader?modules",
       },
       {
-        test: /\.(jpg|png)$/,
+        test: /\.(jpg|png|svg|gif)$/,
         use: {
           loader: "url-loader",
           options: {

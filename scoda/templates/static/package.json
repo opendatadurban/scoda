@@ -35,6 +35,8 @@
     "canvg": "^3.0.6",
     "chart.js": "^2.9.3",
     "css-loader": "^3.4.2",
+    "datatables.net": "^1.11.3",
+    "datatables.net-dt": "^1.11.3",
     "file-loader": "^6.0.0",
     "form-data": "^3.0.0",
     "google-map-react": "^1.1.7",
