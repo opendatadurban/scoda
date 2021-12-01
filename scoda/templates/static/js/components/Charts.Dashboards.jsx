@@ -4,6 +4,7 @@ import Button from './Button';
 import Switch_text from './Switch_text'
 import axios from 'axios';
 import { Container, Row, Col, Modal, ModalBody, Spinner } from 'reactstrap';
+import { Chart } from 'react-chartjs-2';
 
 let a = true;
 let test_2015 = [500000, 270876, 423603, 217790, 360005, 329838, 501687, 421451]

@@ -17,19 +17,7 @@ export default class DataStoriesContentCardAffordability extends Component {
     componentDidMount() {
         Chart.platform.disableCSSInjection = true;
 
-        $('#example').DataTable({
-          "order": [[1, "asc"], [0, "asc"]],
-          "bPaginate": false,
-          "info": false,
-          dom: 'Bfrtip',
-          buttons: [
-          'copy', 'csv']
-      });
-
-      document.getElementsByTagName("input")[0].placeholder="Search...";
-      document.getElementsByTagName("button")[1].innerText ="Copy this Table";
-      document.getElementsByTagName("button")[2].innerText ="Download as CSV";
-     // $('#example_filter').text('Search...');
+        this.renderDataTable();
         
         this.renderChart();
         this.renderChart2();
@@ -604,6 +592,27 @@ export default class DataStoriesContentCardAffordability extends Component {
         var a =  document.getElementById("download");
 
         a.href = url_base64jp;
+    }
+
+    renderDataTable(){
+        try {
+            $('#example').DataTable({
+                "order": [[1, "asc"], [0, "asc"]],
+                "bPaginate": false,
+                "info": false,
+                dom: 'Bfrtip',
+                buttons: [
+                'copy', 'csv']
+            });
+      
+            document.getElementsByTagName("input")[0].placeholder="Search...";
+            document.getElementsByTagName("button")[1].innerText ="Copy this Table";
+            document.getElementsByTagName("button")[2].innerText ="Download as CSV";
+           $('#example_filter').text('Search...');
+          }
+          catch(err) {
+            location.reload();
+          }
     }
 
 

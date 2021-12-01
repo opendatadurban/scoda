@@ -6,7 +6,7 @@ export default class IndicatorExplorer extends Component {
     constructor(props) {
         super(props);
         this.state={
-            indicator_id : this.props.match.params.id
+            indicator_id : this.props.id
         }
     }
 
