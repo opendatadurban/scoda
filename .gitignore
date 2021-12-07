@@ -86,7 +86,7 @@ ENV/
 
 # Rope project settings
 .ropeproject
-*.xml
+
 /scoda/data/process_test.py
 /scoda/data/Indicators.csv
 /scoda/data/UniqueIndicators.csv
