@@ -12,12 +12,10 @@ let lineChartData = { 'datasets':[]}
 
 //Units Receiving Free Basic Services data , static for now since it's still not part of codebook.
 let fbs_data_2018 = [76201, 320406, 15848, 237330, 174687, 29658, 73593, 57250]
-let fbs_data_2019 = [80831, 315246, 11520, 226118, 191033, 32105, 63706, 52926]
+let tot_household = [240877.5, 1234317, 1850035, 1240058, 1159272, 262897.2, 349257.2, 1139488]
 
 let fbs_2018_perc = []
-let fbs_2019_perc = []
 let fbs_2018_data = []
-let fbs_2019_data = []
 
 let water_supply = []
 let basic_sani =   []
@@ -60,17 +58,15 @@ let sortedData = ["BUF", "CCT", "EKH", "ETK","JHB", "MAN", "NMB", "TSH"]
 //Units Receiving Free Basic Services data , static for now since it's still not part of codebook.
 
 let free_basic_services_2018= fbs_data_2018
-let free_basic_services_2019 = fbs_data_2019
 
 let free_basic_services_clean_2017= fbs_data_2018
-let free_basic_services_clean_2018 = fbs_data_2019
 
 let myData = [] 
 
 //Units Receiving Free Basic Services data , static for now since it's still not part of codebook.
 
 let free_basic_services_sortedNumber2= []
-let free_basic_services_sortedNumber3= []  
+
 
 const style = {
   control: (base, state) => ({
@@ -473,17 +469,18 @@ export default class Charts_dashboards extends Component {
        if (!this.state.toggle) {
          a = false
          fbs_2018_data = free_basic_services_clean_2017
-         fbs_2019_data = free_basic_services_clean_2018
+
          this.setState({stepSize:200000})
        }
        else {
          a = true
-         for(let i=0;i<free_basic_services_clean_2018.length;i++){
-            fbs_2018_perc[i] = free_basic_services_clean_2017[i] / 400000*100
-            fbs_2019_perc[i] = free_basic_services_clean_2018[i] / 400000*100
+         for(let i=0;i<free_basic_services_clean_2017.length;i++){
+            fbs_2018_perc[i] = free_basic_services_clean_2017[i] / tot_household[i] * 100
+
             fbs_2018_data = fbs_2018_perc
-            fbs_2019_data = fbs_2019_perc
-            this.setState({stepSize:50})
+            console.log('tot',tot_household)
+            console.log('data',fbs_2018_data)
+            this.setState({stepSize:25})
        }
       }
     }
@@ -496,9 +493,7 @@ export default class Charts_dashboards extends Component {
         refuse_removal_data = []
         number_of_households_data = []
         fbs_2018_perc = []
-        fbs_2019_perc = []
         fbs_2018_data = []
-        fbs_2019_data = []
 
         let cYears = this.state.chartYears
       for(let item=0;item<cYears.length - 1;item++){
@@ -512,7 +507,6 @@ export default class Charts_dashboards extends Component {
         //Empty array so new data can be assigned
 
         free_basic_services_sortedNumber2 = [] 
-        free_basic_services_sortedNumber3 = []  
         
         myData =[]
 
@@ -524,7 +518,6 @@ export default class Charts_dashboards extends Component {
         final_num_of_household = []
 
         free_basic_services_clean_2017= []
-        free_basic_services_clean_2018 = []
 
         option.map(function(item, i){
         
@@ -543,7 +536,6 @@ export default class Charts_dashboards extends Component {
           }
           
           free_basic_services_sortedNumber2[0] = free_basic_services_2018[0]
-          free_basic_services_sortedNumber3[0] = free_basic_services_2019[0]
           
           }
         if(sortedData.includes('CCT'))
@@ -558,7 +550,6 @@ export default class Charts_dashboards extends Component {
           }
         
             free_basic_services_sortedNumber2[1] = free_basic_services_2018[1]
-            free_basic_services_sortedNumber3[1] = free_basic_services_2019[1]
           }
         if(sortedData.includes('EKH'))
           {
@@ -571,7 +562,7 @@ export default class Charts_dashboards extends Component {
           }
 
             free_basic_services_sortedNumber2[2] = free_basic_services_2018[2]
-            free_basic_services_sortedNumber3[2] = free_basic_services_2019[2]
+
           }
         if(sortedData.includes('ETK'))
           {
@@ -584,7 +575,6 @@ export default class Charts_dashboards extends Component {
           }
 
             free_basic_services_sortedNumber2[3] = free_basic_services_2018[3]
-            free_basic_services_sortedNumber3[3] = free_basic_services_2019[3]
           }
         if(sortedData.includes('JHB'))
           {
@@ -597,7 +587,6 @@ export default class Charts_dashboards extends Component {
           }
 
             free_basic_services_sortedNumber2[4] = free_basic_services_2018[4]
-            free_basic_services_sortedNumber3[4] = free_basic_services_2019[4]
           }
         if(sortedData.includes('MAN'))
           {
@@ -610,7 +599,7 @@ export default class Charts_dashboards extends Component {
           }
 
             free_basic_services_sortedNumber2[5] = free_basic_services_2018[5]
-            free_basic_services_sortedNumber3[5] = free_basic_services_2019[5]
+
           }
         if(sortedData.includes('NMB'))
           {
@@ -623,7 +612,6 @@ export default class Charts_dashboards extends Component {
           }
 
           free_basic_services_sortedNumber2[6] = free_basic_services_2018[6]
-          free_basic_services_sortedNumber3[6] = free_basic_services_2019[6]
           }
         if(sortedData.includes('TSH'))
           {
@@ -636,7 +624,6 @@ export default class Charts_dashboards extends Component {
           }
   
             free_basic_services_sortedNumber2[7] = free_basic_services_2018[7]
-            free_basic_services_sortedNumber3[7] = free_basic_services_2019[7]
           }
  
 
@@ -649,10 +636,8 @@ export default class Charts_dashboards extends Component {
           }
         
           free_basic_services_clean_2017 = free_basic_services_sortedNumber2.filter(Boolean);
-          free_basic_services_clean_2018 = free_basic_services_sortedNumber3.filter(Boolean);
 
           fbs_2018_data = free_basic_services_clean_2017
-          fbs_2019_data = free_basic_services_clean_2018
           document.getElementById('optionOne').click();
 
         }) 
@@ -1159,13 +1144,6 @@ export default class Charts_dashboards extends Component {
                   data:fbs_2018_data,
                   backgroundColor: '#C8EBBA',
                   borderColor: '#C8EBBA',
-                },
-                {
-                  label: '2019',
-                  stack: 'Stack 4',
-                  data: fbs_2019_data,
-                  backgroundColor: '#5A8699',
-                  borderColor: '#023858',
                 }
           ]
             },
