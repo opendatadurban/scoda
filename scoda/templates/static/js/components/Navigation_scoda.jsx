@@ -92,6 +92,17 @@ export default class Navigation_scoda extends Component {
                                         {/* <a className="dropdown-item" href="/scoda/#/socr-dashboards">SOCR</a> */}
                                     </div>
                                 </li>
+                                {/* <li className="nav-item tookit_ dropdown">
+                                    <a className="nav-link dropdown-toggle " href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    SoCR
+                                    </a>
+                                    <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a className="dropdown-item" href="/scoda/#/socr-dashboards">SoCR Dashboards</a>
+                                    </div>
+                                </li> */}
+                                <li className="nav-item about_">
+                                    <a className="nav-link " href="/scoda/#/socr-dashboards">SoCR </a>
+                                </li>
                                 <li className="nav-item about_">
                                     <a className="nav-link " href="/scoda/#/about-us">About Us </a>
                                 </li>
