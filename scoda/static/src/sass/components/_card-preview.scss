@@ -1,0 +1,356 @@
+.card_data-story-preview {
+    //Local variables
+    
+      $box-shadow: 0 2px 4px 0 rgba(0,0,0,0.3);
+      $box-shadow_hover: 0 2px 5px 1px rgba(0,0,0,.3);
+      $border-radius: 7.6px;
+      $s-t:5px;
+      $s-s:20px;
+      $s-m:40px;
+      $s-l:60px;
+    
+      &.support-finder{
+        background-image: url('../../assets/img/card_support-finder_desktop.png');
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100%;
+        border: 1.09px solid #2F3442;
+        border-radius: 8px;
+        background-color: #FFFFFF;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.3);
+      }
+    
+      &.covid_flyer{
+        border-radius: 8px;
+        background-color: #247F2E;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.3);
+        .card-header{
+          width: 89%;
+          height: 55px;
+          background-image: url('../../assets/img/image_covid-card_header.png');
+          background-position: center;
+          background-size: cover;
+          border-bottom: none;
+        }
+        .card-body{
+          padding: 10px;
+          width: 100%;
+          p{
+            color: #F7F7F7;
+            font-family: Montserrat;
+            font-size: 14px;
+            letter-spacing: 0;
+            line-height: 19px;
+            text-align: center;
+          }
+          h5{
+            color: #FFC601;
+            font-family: "Montserrat";
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0;
+            line-height: 21px;
+            text-align: center;
+          }
+          a.btn{
+            border-radius: 12.5px;
+            background-color: #FFC603 !important;
+            box-shadow: 0 0 4px 0 rgba(0,0,0,0.3);
+            padding: 5px 10px;
+            color: #4A4A4A;
+            font-family: "Montserrat";
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0;
+            line-height: 13px;
+            width: 208px;
+            display: block;
+            margin: auto;
+            border: transparent;
+          }
+        }
+      }
+    
+    // Image used for BK and gaussian blur
+    
+    
+      &.read-our-data-stories{
+        $image: '../../assets/img/image_card-citizen_engagement.png ';
+         &.module {
+            background: url($image) top left / cover;
+          }
+      }
+      &_citizen_engagement{
+        $image: '/static/dist/img/image_card-citizen_engagement.png';
+         &.module {
+            background: url($image) top left / cover;
+          }
+        @at-root {
+          .card {
+            &--gaussian-blur_citizen_engagement {
+          @include gaussian-blur($image,2px,#4fa68399);
+            }
+          }
+        }
+      }
+      &_city_finances{
+        $image: '/static/dist/img/image_card-city_finances.png';
+         &.module {
+            background: url($image) top left / cover;
+          }
+        @at-root {
+          .card {
+            &--gaussian-blur_city_finances {
+          @include gaussian-blur($image,2px,#4fa68399);
+            }
+          }
+        }
+      }
+      &_household_bills_affordability{
+        $image: '/static/dist/img/image_card-household_bills_affordability.png';
+         &.module {
+            background: url($image) top left / cover;
+          }
+        @at-root {
+          .card {
+            &--gaussian-blur_household_bills_affordability {
+          @include gaussian-blur($image,2px,#4f9da699);
+            }
+          }
+        }
+      }
+      &_human_resources{
+        $image: '/static/dist/img/image_card-human_resources.png';
+         &.module {
+            background: url($image) top left / cover;
+          }
+        @at-root {
+          .card {
+            &--gaussian-blur_human_resources {
+          @include gaussian-blur($image,2px,#4fa68399);
+            }
+          }
+        }
+      }
+      &_service_delivery{
+        $image: '/static/dist/img/image_card-service_delivery.png';
+         &.module {
+            background: url($image) top left / cover;
+          }
+        @at-root {
+          .card {
+            &--gaussian-blur_service_delivery {
+          @include gaussian-blur($image,2px,#4fa68399);
+            }
+          }
+        }
+      }
+      &_state_of_municipal_finance{
+        $image: '/static/dist/img/image_card-state_of_municipal_finance.png';
+         &.module {
+            background: url($image) top left / cover;
+          }
+        @at-root {
+          .card {
+            &--gaussian-blur_state_of_municipal_finance {
+          @include gaussian-blur($image,2px,#4f9da699);
+            }
+          }
+        }
+      }
+    
+    
+    // General styling
+    
+      .label {
+        text-transform: uppercase;
+        font-weight: 200;
+        font-size: 10px;
+        line-height: 12px;
+        display: block;
+        text-shadow: unset;
+        background: unset;
+        padding-left: 0;
+        color: white;
+      }
+      h3 {
+        font: normal 600 18px/1.3 Montserrat;
+        text-align: left;
+        margin-top: 20px;
+        span.card_data-story-preview--title--meta{
+            font-size: 14px;
+            font-weight: 100;
+            top: -3px;
+            position: relative;
+        }
+    }
+      h4 {
+        font: normal 500 16px/1.5 Montserrat;
+        margin-bottom: 15px;
+    }
+    &.module {
+      padding: 0;
+      margin-bottom: 30px;
+    }
+    border-radius: $border-radius;
+    width: 350px;
+    height: 248px;
+    color: white;
+    border: 0;
+    transition: .2s transform ease-in-out, .2s box-shadow ease-in-out;
+    &:hover {
+      box-shadow: $box-shadow_hover;
+      transform: scale(1.001);
+    }
+    
+    hr {
+      //margin: $s-m + 5px 0 10px 0;
+      border-top: 1.2px solid white;
+      position: absolute;
+      top: 65%;
+      transform: translateY(50%);
+    }
+    &--title {
+      max-width: 180px;
+    }
+    
+    &--metadata {
+      position: absolute;
+      bottom: 0;
+      * {
+        transition: .2s .1s opacity ease-in-out;
+      }
+      &::before {
+        content: "";
+        transition: .1s opacity ease-in-out;
+        opacity: 0;
+        height: 0;
+        display: block;
+        position: relative;
+        top: $s-s - 5px;
+        text-align: center;
+        font-weight: 500;
+        font-size: 16px;
+      }
+    }
+    &--metadata_population_by_race{
+      position: absolute;
+      bottom: 0;
+      * {
+        transition: .2s .1s opacity ease-in-out;
+      }
+      &::before {
+        content: "";
+        transition: .1s opacity ease-in-out;
+        opacity: 0;
+        height: 0;
+        display: block;
+        position: relative;
+        top: $s-s - 5px;
+        text-align: center;
+      }
+    }
+    &--metadata_population_by_age_and_gender{
+      position: absolute;
+      bottom: 0;
+      * {
+        transition: .2s .1s opacity ease-in-out;
+      }
+      &::before {
+        content: "";
+        transition: .1s opacity ease-in-out;
+        opacity: 0;
+        height: 0;
+        display: block;
+        position: relative;
+        top: $s-s - 5px;
+        text-align: center;
+      }
+    }
+    
+    
+    // Card styling broken out from nest
+    @at-root {
+      .card {
+        &.read-our-data-stories {
+          .card-body {
+            width: 100%;
+            padding: 40px;
+            text-align: center;
+            * {
+              color: $font-general;
+            }
+            h3 {
+              max-width: 100%;
+              font-size: 22px;
+              font-weight: 600;
+              line-height: 25px;
+            }
+            p{
+              font-size: 14px;
+              line-height: 21px;
+              margin-top: 20px;
+            }
+            &--content {
+              flex-flow: column;
+            }
+          }
+        }
+        &-body {
+          position: relative;
+          width: 220px;
+          padding: $s-s;
+          overflow: hidden;
+          transition: .2s .1s width ease-in-out;
+          margin-top: 0 !important;
+          &--content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+          }
+        }
+        &--trigger {
+          opacity: 0;
+          height: 100%;
+          width: 100%;
+          position: absolute;
+          display: block;
+          top: 0;
+          left: 0;
+          z-index: 2;
+
+          &:hover {
+            cursor: pointer;
+            + .card-body {
+              width: 100%;
+              transition: .15s width ease-in;
+              [class*="metadata"] {
+                * {
+                  transition: .2s opacity ease-in-out;
+                  opacity: 0;
+                }
+                &::before {
+                  transition: .2s .2s opacity ease-in-out;
+                  opacity: 1;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    // Desktop specific styling
+    @media (min-width: $tablet) {
+    }
+    
+      // Mobile specific styling
+      @media (max-width: $tablet) {
+        width: 100%;
+        &.module{
+            right: -21px;
+        }
+      }
+    }
+    
