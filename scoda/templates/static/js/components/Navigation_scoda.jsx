@@ -100,7 +100,7 @@ export default class Navigation_scoda extends Component {
                                         <a className="dropdown-item" href="/scoda/#/socr-dashboards">SoCR Dashboards</a>
                                     </div>
                                 </li> */}
-                                <li className="nav-item about_">
+                                <li className="nav-item tookit_ ">
                                     <a className="nav-link " href="/scoda/#/socr">SoCR </a>
                                 </li>
                                 <li className="nav-item about_">
