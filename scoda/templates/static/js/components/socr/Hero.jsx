@@ -3,10 +3,12 @@ import React from 'react';
 const Hero = ({ setIsOpen }) => {
     return (
         <div className="socr--hero">
-            <div className="container">
+            <div className="container p-zero">
                 <div className="row">
-                    <div className="col-md-6 hero--image"></div>
-                    <div className="col-md-6 hero--content ">
+                    <div className="col-md-5 hero--image">
+                        <img src="/static/dist/img/image_hero-banner.png" alt="" />
+                    </div>
+                    <div className="col-md-7 hero--content ">
                         <h5 className="hero--title">
                             State of Cities Report
                         </h5>

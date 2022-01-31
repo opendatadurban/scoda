@@ -88,13 +88,13 @@
 .socr--hero{
     position: relative;
     top: 101px;
-    .hero--image{
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-image: url("/static/dist/img/image_hero-banner.png") !important;
-        height: 320px;
-    }
+    // .hero--image{
+    //     background-position: center;
+    //     background-size: cover;
+    //     background-repeat: no-repeat;
+    //     background-image: url("/static/dist/img/image_hero-banner.png") !important;
+    //     height: 320px;
+    // }
     .hero--content{
         padding: 30px 0;
         margin: auto;
@@ -127,9 +127,7 @@
             margin-top: 20px;
             width: fit-content;
             cursor: pointer;
-            &:hover{
-                box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
-            }
+            box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
         }
     }
     @media (max-width: $tablet) {
@@ -142,7 +140,11 @@
     background-color: #F8F8F8;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
     position: relative;
-    top: 145px;
+    top: 102px;
     padding: 50px 0;
-    margin-bottom: 148px;
+    margin-bottom: 100px;
+    min-height: calc(100vh - 100.14px - 294.93px - 51.98px);
+}
+.p-zero{
+    padding: 0;
 }
