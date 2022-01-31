@@ -6,7 +6,7 @@ const SoCR_Modal = ({ isOpen, setIsOpen }) => {
         <Modal isOpen={isOpen} toggle={() => { setIsOpen(!isOpen) }} className="modal-socr ">
             <div className="container">
                 <div className="row modal--header">
-                    <div className="col-8">
+                    <div className="col-8 p-0">
                         <h3 className="modal--heading">State of Cities Reports</h3>
                     </div>
                     <div className="col-4 close" onClick={(e)=>{setIsOpen(false)}}>
@@ -14,7 +14,7 @@ const SoCR_Modal = ({ isOpen, setIsOpen }) => {
                     </div>
                 </div>
                 <div className="row modal--body">
-                    <div className="col-12">
+                    <div className="col-12 pr-0">
                         <div className="row">
                             <div className="col-md-4 report--image" style={{ backgroundImage: "url(/static/dist/img/image_report-2021.png)" }}></div>
                             <div className="col report--content">
