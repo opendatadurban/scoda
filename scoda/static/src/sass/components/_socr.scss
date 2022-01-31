@@ -1,15 +1,23 @@
 .modal-socr{
-    max-width: 1140px;
+    max-width: 987px;
+    .modal-content{
+        border: none;
+    }
     .modal--header{
-        padding: 30px;
+        padding: 30px 50px;
         border-bottom: 1px solid #4A4A4A;
         .close{
             opacity: 1;
             cursor: pointer;
+            top: 35px;
+            right: 44px;
         }
         .close::after,.close::before{
             background-color: #4A4A4A;
+            border-radius: 12px;
             top: -9px;
+            height: 27px;
+            width: 4px;
         }
         .modal--heading{
             font-family: 'Montserrat';
@@ -21,7 +29,7 @@
         }
     }
     .modal--body{
-        padding: 30px;
+        padding: 30px 50px;
         max-height: calc(100vh - (85px + 60px));
         overflow-y: scroll;
         @include custom-scrollbar(#C0C0C0);
