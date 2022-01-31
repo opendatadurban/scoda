@@ -6,7 +6,7 @@ const Card =() => {
     return(
         <div className="container-fluid socr-cards">
         <div className="bootstrap-4">
-          <div className="container">
+          <div className="container p-zero">
             <div className="row">
               {
     
