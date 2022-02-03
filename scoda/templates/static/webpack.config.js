@@ -3,10 +3,16 @@ const resolve = require("path").resolve;
 
 const config = {
   devtool: 'eval-source-map',
-  entry: __dirname + '/js/scoda-index.jsx',
+  //entry: __dirname + '/js/scoda-index.jsx',
+  entry: {
+    toolkit: ['react-app-polyfill/ie9', 'react-app-polyfill/stable', __dirname + '/js/toolkit.jsx'],
+    home:  __dirname + '/js/home.jsx',
+    socr:  __dirname + '/js/socr.jsx',
+    about:  __dirname + '/js/about.jsx'
+  },
   output: {
     path: resolve("../../static/public"),
-    filename: "bundle.js",
+    filename: "[name].js",
     publicPath: resolve("../../static/public"),
   },
   devServer: {

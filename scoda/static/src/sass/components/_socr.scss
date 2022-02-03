@@ -88,15 +88,13 @@
 .socr--hero{
     position: relative;
     top: 101px;
-    // .hero--image{
-    //     background-position: center;
-    //     background-size: cover;
-    //     background-repeat: no-repeat;
-    //     background-image: url("/static/dist/img/image_hero-banner.png") !important;
-    //     height: 320px;
-    // }
+    .hero--image{
+        margin-top: 30px;
+
+    }
     .hero--content{
         padding: 30px 0;
+        padding-left: 30px;
         margin: auto;
         .hero--title{
             font-family: 'Montserrat';

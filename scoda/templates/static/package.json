@@ -45,6 +45,7 @@
     "jquery": "^3.5.1",
     "leaflet": "^1.6.0",
     "querystring": "^0.2.0",
+    "react-app-polyfill": "^3.0.0",
     "react-chartjs-2": "^2.9.0",
     "react-leaflet": "^2.7.0",
     "react-leaflet-choropleth": "^2.0.1",

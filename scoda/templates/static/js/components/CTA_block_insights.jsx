@@ -42,7 +42,7 @@ export default class CTA_block extends Component {
                         readers.
                       </p>
 
-                      <a href="/scoda/#/data-stories-details">
+                      <a href="/scoda/toolkit#/data-stories-details">
                       <button className="btn cta-field-description-list-detailed-btn"> See Our Data Stories</button>
                        
                       </a>

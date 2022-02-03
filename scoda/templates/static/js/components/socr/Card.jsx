@@ -6,7 +6,7 @@ const Card =() => {
     return(
         <div className="container-fluid socr-cards">
         <div className="bootstrap-4">
-          <div className="container p-zero">
+          <div className="container">
             <div className="row">
               {
     
@@ -15,8 +15,8 @@ const Card =() => {
                 <div className={"card card_data-story-preview card_data-story-preview"+[item.class]+" module"}
                   id="card_data-story-preview_durban-economy">
                   <a href={item.href} class="card--trigger">Card click layer</a>
-                  <div className="card-body">
-                    <div className="card-body--content">
+                  <div className="card--body">
+                    <div className="card--body--content">
                       <h3 className="card_data-story-preview--title">{item.header}<br/>
                           <span className="card_data-story-preview--title--meta">{item.subheader}</span>
                       </h3>

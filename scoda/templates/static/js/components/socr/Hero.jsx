@@ -3,7 +3,7 @@ import React from 'react';
 const Hero = ({ setIsOpen }) => {
     return (
         <div className="socr--hero">
-            <div className="container p-zero">
+            <div className="container">
                 <div className="row">
                     <div className="col-md-5 hero--image">
                         <img src="/static/dist/img/image_hero-banner.png" alt="" />
