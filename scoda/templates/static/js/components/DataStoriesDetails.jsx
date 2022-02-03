@@ -73,7 +73,7 @@ export default class DataStoriesDetails extends Component {
                                         infoBannerTitle="South African Cities Network"
                                         infoBannerDate="August 2018"
                                         infoBannerMins="9"
-                                        href_='/scoda/#/ds-spatial-transformation-2018'
+                                        href_='/scoda/toolkit#/ds-spatial-transformation-2018'
                                     />
                                     <div className="row ml-1 mr-1">
                                         <div id="data-story-card-inclusive" className={"col-md-4 "+main_class+" data-story-card-inclusives data-story-card-inclusive"}>
@@ -86,7 +86,7 @@ export default class DataStoriesDetails extends Component {
                                                 filter="Inclusive Cities"
                                                 imageTag="I"
                                                 filter_type="data-story-card-inclusives"
-                                                href_='/scoda/#/ds-epw-metro-2018'
+                                                href_='/scoda/toolkit#/ds-epw-metro-2018'
                                             />
                                             <DataStoriesInfoBanner
                                                 title="South African Cities Network"
@@ -107,7 +107,7 @@ export default class DataStoriesDetails extends Component {
                                                 filter="Inclusive Cities"
                                                 imageTag="I"
                                                 filter_type="data-story-card-inclusives"
-                                                href_='/scoda/#/ds-affordability-2018'
+                                                href_='/scoda/toolkit#/ds-affordability-2018'
                                             />
                                             <DataStoriesInfoBanner
                                                 title="South African Cities Network"
@@ -128,7 +128,7 @@ export default class DataStoriesDetails extends Component {
                                                 filter="Well Governed Cities"
                                                 filter_type="data-story-card-well"
                                                 imageTag="W"
-                                                href_='/scoda/#/ds-urban-safety-2018'
+                                                href_='/scoda/toolkit#/ds-urban-safety-2018'
 
                                             />
                                             <DataStoriesInfoBanner
@@ -154,7 +154,7 @@ export default class DataStoriesDetails extends Component {
                                         infoBannerDate="August 2018"
                                         infoBannerMins="7"
                                         filter_id="data-story-card-well-governed1"
-                                        href_='/scoda/#/ds-state-of-finance-2018'
+                                        href_='/scoda/toolkit#/ds-state-of-finance-2018'
                                     />
                                 </div>
                                 <div className="ds-content-vspacer"></div>

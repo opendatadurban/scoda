@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <url>
+      <loc>https://ckan.scoda.co.za/</loc>
+   </url>
+   <url>
+      <loc>https://ckan.scoda.co.za/dataset</loc>
+   </url>
+   <url>
+      <loc>https://scoda.co.za/scoda/toolkit#/explorer</loc>
+   </url>
+   <url>
+      <loc>https://scoda.co.za/scoda/toolkit#/codebook</loc>
+   </url>
+   <url>
+      <loc>https://scoda.co.za/scoda/toolkit#/demographic-modeller</loc>
+   </url>
+   <url>
+      <loc>https://scoda.co.za/scoda/toolkit#/data-stories-details</loc>
+   </url>
+   <url>
+      <loc>https://scoda.co.za/scoda/#/about-us</loc>
+   </url>
+   <url>
+      <loc>https://scoda.co.za/scoda/#/socr</loc>
+   </url>
+</urlset>

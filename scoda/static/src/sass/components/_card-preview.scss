@@ -276,7 +276,7 @@
     @at-root {
       .card {
         &.read-our-data-stories {
-          .card-body {
+          .card--body {
             width: 100%;
             padding: 40px;
             text-align: center;
@@ -299,13 +299,14 @@
             }
           }
         }
-        &-body {
+        &--body {
           position: relative;
           width: 220px;
           padding: $s-s;
           overflow: hidden;
           transition: .2s .1s width ease-in-out;
           margin-top: 0 !important;
+          height: 100%;
           &--content {
             position: relative;
             z-index: 1;
@@ -324,7 +325,7 @@
 
           &:hover {
             cursor: pointer;
-            + .card-body {
+            + .card--body {
               width: 100%;
               transition: .15s width ease-in;
               [class*="metadata"] {

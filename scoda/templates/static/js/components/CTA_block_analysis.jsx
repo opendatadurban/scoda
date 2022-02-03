@@ -45,7 +45,7 @@ export default class CTA_block extends Component {
                           Network in the State of Cities Report.
                       </p>
 
-                      <a  href="/scoda/#/explorer">
+                      <a  href="/scoda/toolkit#/explorer">
                         <button className="btn cta-field-description-list-detailed-btn">See Our Data Explorer</button>
                       
                       </a>
@@ -70,7 +70,7 @@ export default class CTA_block extends Component {
                       <p>
                        {"The codebook is a live list of common\n city indicators providing definitions,\n methodologies for collection, and data\n availability of comparable city data."}
                       </p>
-                      <a  href="/scoda/#/codebook">
+                      <a  href="/scoda/toolkit#/codebook">
                         <button className="btn cta-field-description-list-detailed-btn cta-field-description-list-detailed-btn-codebook">See Our Codebook</button>
                       
                       </a>
@@ -98,7 +98,7 @@ export default class CTA_block extends Component {
                       <p>
                       {"With the demographic projection tool\n we provide both a powerful predictor of\n internal migration within South African\n metros, as well as a framework for the\n development of open, collaborative\n model building that is based on diverse\n and novel data sources."}
                       </p>
-                      <a href="/scoda/#/demographic-modeller">
+                      <a href="/scoda/toolkit#/demographic-modeller">
                         <button className="btn cta-field-description-list-detailed-btn"> See Our Demographics Modeller</button>
                        
                       </a>

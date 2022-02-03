@@ -9,8 +9,8 @@ export default class DataStoriesNavigation extends Component {
 
     render() {
 
-        let explorerUrl = '/scoda/#/explorer';
-        let homeUrl = '/scoda/#/data-stories-details';
+        let explorerUrl = '/scoda/toolkit#/explorer';
+        let homeUrl = '/scoda/toolkit#/data-stories-details';
 
         return (
             <div className="container-fluid mt-3">
