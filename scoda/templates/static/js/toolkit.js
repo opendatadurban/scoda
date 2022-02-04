@@ -15,6 +15,7 @@ const State_of_finance =  lazy(() => import('./templates/datastories/State_of_fi
 const CBIndicatorExplorer =  lazy(() => import('./templates/codebook/Explore'));
 const Codebook =  lazy(() => import('./templates/codebook/Codebook'));
 const Demographic =  lazy(() => import('./templates/Demographic'));
+const Socr_Dashboards =  lazy(() => import('./templates/SocrDashboard'));
 
 const style = {
       position: 'absolute', left: '50%', top: '50%',
@@ -43,6 +44,7 @@ export default (
       <Route exact path="/explorer" component={()=> <IndicatorExplorer />}/>
       <Route exact path='/codebook-explorer/:id' render={()=> <CBIndicatorExplorer/>} />
       <Route exact path="/demographic-modeller" component={()=><Demographic />} />
+      <Route exact path='/socr-dashboards' component={Socr_Dashboards} />
       </Suspense>
     </HashRouter>
 );
