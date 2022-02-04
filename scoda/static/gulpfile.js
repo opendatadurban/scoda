@@ -2,7 +2,7 @@
 var gulp = require('gulp'),
     gutil = require('gulp-util'),
     sass = require('gulp-sass'),
-    sourcemaps = require('gulp-sourcemaps'),
+    //sourcemaps = require('gulp-sourcemaps'),
     pngquant = require('imagemin-pngquant'),
     mozjpeg = require('imagemin-mozjpeg'),
     butternut = require('gulp-butternut'),
@@ -47,11 +47,11 @@ sassSources = [
 // SASS
 gulp.task('sass', function() {
   gulp.src(sassSources)
-  .pipe(sourcemaps.init({loadMaps: true}))
+  //.pipe(sourcemaps.init({loadMaps: true}))
   .pipe(sass({outputStyle: 'compressed'}))
     .on('error', gutil.log)
   .pipe(concat('main.min.css'))
-  .pipe(sourcemaps.write())
+  //.pipe(sourcemaps.write())
   .pipe(gulp.dest(basePaths.dist + 'css'))
 });
 
@@ -67,10 +67,10 @@ gulp.task('sass-build', function() {
 // JS
 gulp.task('js', function() {
   gulp.src(jsSources)
-  .pipe(sourcemaps.init({loadMaps: true}))
+  //.pipe(sourcemaps.init({loadMaps: true}))
   .pipe(butternut())
   .pipe(concat('scripts.min.js'))
-  .pipe(sourcemaps.write())
+  //.pipe(sourcemaps.write())
   .pipe(gulp.dest(basePaths.dist + 'js'))
 });
 
