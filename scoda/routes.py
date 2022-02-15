@@ -18,6 +18,10 @@ from .blueprints import *
 app.register_blueprint(REACT, url_prefix='/react')
 app.register_blueprint(SCODA, url_prefix='/scoda')
 
+@app.route('/sitemap.xml', methods=['GET'])
+def sitemap():
+    return app.send_static_file('public/sitemap.xml')
+
 @app.route('/bundle.js', methods=['GET'])
 def bundle():
     return app.send_static_file('public/bundle.js')
@@ -367,7 +371,7 @@ def sanitation():
 
 @app.route('/')
 def home_public():
-    return redirect(url_for('SCODA.index'))
+    return redirect(url_for('SCODA.home'))
 
 @app.route('/registered')
 def home_user():

@@ -5,51 +5,60 @@ export default class Navigation_scoda extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            logo_hide:"none"
+            logo_hide: "none"
         }
+        this.checkSoCR = this.checkSoCR.bind(this)
+        this.checkToolkit = this.checkToolkit.bind(this)
+        this.checkHome = this.checkHome.bind(this)
+    }
+
+    checkHome() {
+        if (document.location.href == window.location.origin + '/scoda/home#/' ||
+        document.location.href == window.location.origin + '/scoda/#/') {
+            return true
+        }
+        return false
+    }
+
+    checkSoCR() {
+        if (document.location.href == window.location.origin + '/scoda/socr#/') {
+            return true
+        }
+        return false
+    }
+    checkToolkit() {
+        if ((document.location.href == window.location.origin + '/scoda/toolkit#/explorer') || 
+        (document.location.href == window.location.origin + '/scoda/toolkit#/codebook') || 
+        (document.location.href == window.location.origin + '/scoda/toolkit#/demographic-modeller') || 
+        (document.location.href == window.location.origin + '/scoda/toolkit#/data-stories-details')) {
+            return true;
+        }
+        return false;
     }
 
 
     // //HIDE SCODA LOGO ON SCROLL
     componentDidMount() {
+        //Remove spinner
+        $('.spinner--container').remove();
 
-          //window.scrollTo(0,0);
+        //window.scrollTo(0,0);
 
         this.props.logoHide ? (
             document.addEventListener("scroll", () => {
                 const logo = window.scrollY < 50 ? "none" : "block";
-                
+
                 this.setState({ logo_hide: logo });
             })
         ) : this.setState({ logo_hide: "block" });
-
-
-        $(document).ready(function () {
-
-            $(".navbar-nav li a").click(function () {
-                var id = $(this);
-
-                $(".active").removeClass("active");
-                $(id).addClass("active");
-                localStorage.setItem("selectedolditem", $(id).text());
-
-            });
-
-            var selectedolditem = localStorage.getItem('selectedolditem');
-
-            if (selectedolditem !== null) {
-
-                $("a:contains('" + selectedolditem + "')").addClass("active");
-            }
-        });
-      }
+    }
     render() {
-        
-        
+
+
         let dropShadow = ""
         this.props.box_shadow && (dropShadow = "box-shadow")
         this.state.logo_hide == "block" ? dropShadow = "box-shadow" : '';
-       
+
         return (
             <div className={"navigation-scoda " + dropShadow}>
                 <div className="top-header d-flex align-items-center justify-content-end">
@@ -65,8 +74,8 @@ export default class Navigation_scoda extends Component {
                 <div className="container">
                     <nav className="navbar navbar-expand-lg navbar-light bg-light">
 
-                        <a style={{position:"absolute",left:"0"}}   className="navbar-brand d-flex align-items-center" href='/#/home'>
-                            <Image className="navigation-logo"  style={{width:"105px",display:`${this.state.logo_hide}`}} imgSrc="/static/img/scoda_logo.png" />
+                        <a style={{ position: "absolute", left: "0" }} className="navbar-brand d-flex align-items-center" href='/#/home'>
+                            <Image className="navigation-logo" style={{ width: "105px", display: `${this.state.logo_hide}` }} imgSrc="/static/img/scoda_logo.png" />
                         </a>
 
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,23 +86,38 @@ export default class Navigation_scoda extends Component {
                             <ul className="navbar-nav ">
 
                                 <li className="nav-item home_">
-                                    <a className="nav-link " href="/scoda/#/home">Home</a>
+                                    <a className={this.checkHome() ? "nav-link active" : "nav-link "} href="/scoda/home">Home</a>
                                 </li>
                                 <li className="nav-item tookit_ dropdown">
-                                    <a className="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a className={this.checkToolkit() ? "nav-link dropdown-toggle active" : "nav-link dropdown-toggle"}
+                                        href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Toolkits
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a className="dropdown-item" target="_blank"  href="https://ckan.scoda.co.za/dataset">Data Management System</a>
-                                        <a className="dropdown-item" href="/scoda/#/explorer">Data Explorer</a>
-                                        <a className="dropdown-item" href="/scoda/#/codebook">Codebook</a>
-                                        <a className="dropdown-item" href="/scoda/#/demographic-modeller">Demographic Modeller</a>
-                                        <a className="dropdown-item" href="/scoda/#/data-stories-details">Data Stories</a>
-                                        {/* <a className="dropdown-item" href="/scoda/#/socr-dashboards">SOCR</a> */}
+                                        <a className="dropdown-item" target="_blank" href="https://ckan.scoda.co.za/dataset">Data Management System</a>
+                                        <a className="dropdown-item" href="/scoda/toolkit#/explorer">Data Explorer</a>
+                                        <a className="dropdown-item" href="/scoda/toolkit#/codebook">Codebook</a>
+                                        <a className="dropdown-item" href="/scoda/toolkit#/demographic-modeller">Demographic Modeller</a>
+                                        <a className="dropdown-item" href="/scoda/toolkit#/data-stories-details">Data Stories</a>
+                                    </div>
+                                </li>
+                                <li className="nav-item tookit_ socr_ dropdown">
+                                    <a className={this.checkSoCR() ? "nav-link dropdown-toggle active" : "nav-link dropdown-toggle"}
+                                        href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        SoCR
+                                    </a>
+                                    <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a className="dropdown-item" href="/scoda/socr">Introduction</a>
+                                        <a className="dropdown-item" href="/scoda/socr">Citizen Engagement</a>
+                                        <a className="dropdown-item" href="/scoda/socr">City Finances</a>
+                                        <a className="dropdown-item" href="/scoda/socr">Household Bills & Affordability</a>
+                                        <a className="dropdown-item" href="/scoda/socr">Human Resources</a>
+                                        <a className="dropdown-item" href="/scoda/socr">Service Delivery</a>
+                                        <a className="dropdown-item" href="/scoda/socr">State of Municipal Finance</a>
                                     </div>
                                 </li>
                                 <li className="nav-item about_">
-                                    <a className="nav-link " href="/scoda/#/about-us">About Us </a>
+                                    <a className={document.location.href == window.location.origin + '/scoda/about-us#/' ? "nav-link active" : "nav-link "} href="/scoda/about-us">About Us </a>
                                 </li>
 
                             </ul>
