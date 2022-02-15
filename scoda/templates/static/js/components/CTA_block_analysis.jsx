@@ -13,7 +13,7 @@ export default class CTA_block extends Component {
                 </div>
                 <div className="col-md-9 pl-0 mt-3">
                   <p>
-                    Data requires context to provide meanginful analysis. We
+                    Data requires context to provide meaningful analysis. We
                     offer a range of public and city management friendly data
                     analysis tools which feed directly from a central management
                     system to allow overlays of comparable data to help users
