@@ -18,7 +18,7 @@ const SubNav = (props) => {
   return (
     <div className={["subnav subnav--wrapper container-fluid "] + props.className}>
       <div className="subnav--breadcrumbs">
-      <strong>{props.name}</strong> / <Dropdown name={props.dropdownName} header={props.dropdownHeading} menu={props.dropdownMenu} ></Dropdown>
+      <strong>{props.name}</strong> / <Dropdown name={props.dropdownName} header={props.dropdownHeading} menu={props.dropdownMenu} dropDownItem={props.dropDownItem} ></Dropdown>
       </div>
  
       <div className="subnav--cta">
