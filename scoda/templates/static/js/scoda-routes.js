@@ -28,7 +28,10 @@ import TabsAndFilters from './components/TabsAndFilters'
 import DemographicModeller from './components/DemographicModeller';
 import DataStoriesAffordability from './components/DataStories.Affordability';
 import Codebook from './components/Codebook';
+
+//SOCR Dashboards
 import Socr_Dashboards from './components/Socr.Dashboards'
+import CitizensEngagements from './components/Socr.Citizens.Engagement'
 
 const _heroTitle = 'Data Management System';
 const _heroContent = ' Central to activities on this platform is the Data Management System, where our evidence base is securely housed. We use the CKAN data portal framework, the same system used by various governments around the world, to store, manage, and share data across the SCODA ecosystem. From this dynamic, version-controlled and API-responsive data-store, we can efficiently gather and process the myriad sources required for insight generation.Central to activities on this platform is the Data Management System, where our evidence base is securely housed. We use the CKAN data portal framework, the same system used by various governments around the world, to store, manage, and share data across the SCODA ecosystem. From this dynamic, version-controlled and API-responsive data-store, we can efficiently gather and process the myriad sources required for insight generation.';
@@ -191,5 +194,9 @@ export default (
       <Route path='/socr-dashboards' component={()=> <Navigation_scoda logoHide={false} box_shadow={true} />} />
       <Route path='/socr-dashboards' component={Socr_Dashboards} />
       <Route path='/socr-dashboards' component={Footer} />
+
+      <Route path='/citizen-engagement' component={()=> <Navigation_scoda logoHide={false} box_shadow={true} />} />
+      <Route path='/citizen-engagement' component={CitizensEngagements} />
+      <Route path='/citizen-engagement' component={Footer} />
     </HashRouter>
 );
