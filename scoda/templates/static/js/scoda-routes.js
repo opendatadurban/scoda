@@ -195,8 +195,5 @@ export default (
       <Route path='/socr-dashboards' component={Socr_Dashboards} />
       <Route path='/socr-dashboards' component={Footer} />
 
-      <Route path='/citizen-engagement' component={()=> <Navigation_scoda logoHide={false} box_shadow={true} />} />
-      <Route path='/citizen-engagement' component={CitizensEngagements} />
-      <Route path='/citizen-engagement' component={Footer} />
     </HashRouter>
 );
