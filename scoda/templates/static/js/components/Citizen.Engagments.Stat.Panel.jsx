@@ -2,6 +2,8 @@ import React, { Component,useEffect, useState } from 'react'
 import Select from './Select'
 import axios from 'axios';
 
+import panelData from '../data/panelData.js';
+
 const CitizenEngagmentStatPanel = () => {
 
     const [place,setPlace] = useState('Buffalo City')
@@ -9,33 +11,12 @@ const CitizenEngagmentStatPanel = () => {
     const [registered_national, setRegistered_national] = useState(64)
     const [voter_turnout_local, setVoter_turnout_local] = useState(51)
     const [registered_local, setRegistered_local] = useState(62)
+    //set data
+    const [data,setData] = useState(panelData[0])
+    const [voting_and_reg_2019_averages,setVoting_and_reg_2019_averages] = useState(panelData[1].voting_and_reg_2019_averages)
 
-    const mydata = {
-        pl: {
-            id: "my-select",
-            multiple: false,
-            data: ['Buffalo City', 'City of Cape Town', 'City of Joburg', 'Ekurhuleni', 'eThekwini', 'Mangaung', 'Nelson Mandela Bay', 'Tshwane']
-        }
-    }
-    const average = [
-        {
-            percentage: 42,
-            type: `VOTER TURNOUT<br/>NATIONAL`
-        },
-        {
-            percentage: 62,
-            type: `REGISTERED<br/>NATIONAL`
-        },
-        {
-            percentage: 57,
-            type: `VOTER TURNOUT<br/>LOCAL`
-        },
-        {
-            percentage: 68,
-            type: `REGISTERED<br/>LOCAL`
-        }
-    ]
-    let focus = [
+    
+    let municipality_focus = [
         {
             percentage: voter_turnout_national,
             type: `VOTER TURNOUT<br/>NATIONAL`
@@ -53,10 +34,7 @@ const CitizenEngagmentStatPanel = () => {
             type: `REGISTERED<br/>LOCAL`
         }
     ]
-    useEffect(() => {
-         console.log(average[0].percentage)
-      });
-    
+
     const places = (e) => {
         setPlace(e.target.value);
         console.log('selected city :',e.target.value)
@@ -109,14 +87,13 @@ const CitizenEngagmentStatPanel = () => {
             setRegistered_local(76)
         }
     }
-
     return (
         <div className='stat_display_panel'>
             <div className='row stat_display_panel--numbers w-100'>
                 <div className='col-md-6 first_panel'>
                     <p className='catagory-name '>Averages 2019 <span>(Voting and Registration)</span></p>
                     <div className='row'>
-                        {average.map((item, i) => (
+                        {voting_and_reg_2019_averages.map((item, i) => (
                             <div className='col p-0'>
                                 <h1>{item.percentage}%</h1>
                                 <p dangerouslySetInnerHTML={{__html:item.type}}></p>
@@ -132,17 +109,17 @@ const CitizenEngagmentStatPanel = () => {
                             <Select
                                 value={place}
                                 placeholder='Select a City'
-                                id={mydata.pl.id}
-                                multiple={mydata.pl.multiple}
-                                data={mydata.pl.data}
+                                id={data.places.id}
+                                multiple={data.places.multiple}
+                                data={data.places.data}
                                 name='gender'
                                 onChange={places}
                             /></div>
                     </div>
                     <div className='row'>
-                        {focus.map((item, i) => (
+                        {municipality_focus.map((item, i) => (
                             <div className='col'>
-                                <h1 className={item.percentage > average[i].percentage ? 'green' : item.percentage < average[i].percentage ? 'red' : 'none'}>{item.percentage}%</h1>
+                                <h1 className={item.percentage > voting_and_reg_2019_averages[i].percentage ? 'green' : item.percentage < voting_and_reg_2019_averages[i].percentage ? 'red' : 'none'}>{item.percentage}%</h1>
                                 <p dangerouslySetInnerHTML={{__html:item.type}}></p>
                             </div>
                         )
