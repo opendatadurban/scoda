@@ -6,6 +6,8 @@ import loader from "./gif/Spinner.gif"
 
 const SoCR =  lazy(() => import('./templates/SoCR'));
 const CitizenEngagements =  lazy(() => import('./templates/CitizenEngagements'));
+const Socr_Dashboards =  lazy(() => import('./templates/SocrDashboard'));
+
 const style = {
       position: 'absolute', left: '50%', top: '50%',
       transform: 'translate(-50%, -50%)'
@@ -21,8 +23,11 @@ history.listen(() => {
 export default (
     <HashRouter history={history}>
     <Suspense fallback={<div style={style}><img src={loader} alt='Loader'></img></div>}>
+
       <Route exact path='/' component={SoCR} />
       <Route exact path='/citizen-engagement' component={CitizenEngagements} />
+      <Route exact path='/service-delivery' component={Socr_Dashboards} />
+
       </Suspense>
     </HashRouter>
 );
