@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import DemographicModellerDataCard from '../components/DemographicModeller.Data.Card';
 import DemographicModellerFooterCard from '../components/DemographicModeller.Footer.Card';
 
+const report = '/static/dist/data/report.pdf'
+
 export default class DemographicModeller extends Component {
     constructor(props) {
         super(props);
@@ -56,7 +58,7 @@ export default class DemographicModeller extends Component {
                <div className="row">
                    <div className="col-sm-12">
                        <DemographicModellerFooterCard 
-                       downloadEvent={this.downloadMethodology}/>
+                       report={report}/>
                    </div>
                </div>
             </div>

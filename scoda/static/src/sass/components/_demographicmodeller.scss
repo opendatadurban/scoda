@@ -67,6 +67,10 @@
     background-color: $scoda-white;
     cursor: pointer;
     float: right;
+
+    &:hover,&:active,&:focus {
+        text-decoration:none !important;
+    }
 }
 
 .demographic-card {

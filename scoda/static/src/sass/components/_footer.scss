@@ -152,6 +152,10 @@
         padding: 20px;
         position: relative;
         min-height: 120px;
+        top: 34px;
+        #Popover1{
+          left:0;
+        }
         .row {
           padding-top: 0;
           flex-flow: column nowrap !important;

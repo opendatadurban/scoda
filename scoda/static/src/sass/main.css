@@ -6869,6 +6869,10 @@ label.disabled, .label.disabled {
   float: right;
 }
 
+.dm-footer-button-white:hover, .dm-footer-button-white:active, .dm-footer-button-white:focus {
+  text-decoration: none !important;
+}
+
 .demographic-card .leaflet-control.info {
   margin-right: 0;
   background: white;

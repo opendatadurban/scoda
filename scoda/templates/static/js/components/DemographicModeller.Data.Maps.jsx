@@ -39,7 +39,7 @@ export default class DemographicModellerDataMap extends Component {
     //Note: HACK to prevent 404 tile errors
     //Riaan Snyders - 1 July 2020
     try {
-      L.tileLayer('https://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+      L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: 'Map data &copy; <a href="https://openstreetmap.org">OpenStreetMap</a>'
       }).addTo(map);

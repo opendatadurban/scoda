@@ -4,6 +4,7 @@ import Button from './Button';
 import Switch_text from './Switch_text'
 import axios from 'axios';
 import { Container, Row, Col, Modal, ModalBody, Spinner } from 'reactstrap';
+import { Bar } from 'react-chartjs-2';
 
 let a = true;
 let years = []

@@ -39,7 +39,7 @@ export default class DataStoriesContentCardUrbanSafety extends Component {
 
         let contentBlockThree = `<o onClick="javascript:window.open('https://www.sacities.net/municipal-finance/','_new');">Read</o> more SACN publications and research on municipal finance matters on the SACN website
         <o onClick="javascript:window.open('https://www.sacities.net/state-of-cities-reporting','_new')">Engage</o> with SACN’s State of Cities Reporting for broader cities development context since 2004 Explore municipal finance’s interactively on National Treasury’s <o onClick="javascript:window.open('https://municipalmoney.gov.za/','_new')">Municipal Money</o> Datatool
-        Explore the <o onClick="javascript:window.open('https://scoda.co.za/dataset/city-revenue-performance','_new')">full collection of State of Cities Finances 2018 datasets</o> on SCODA’s data portal
+        Explore the <o onClick="javascript:window.open('https://ckan.scoda.co.za/dataset/city-revenue-performance','_new')">full collection of State of Cities Finances 2018 datasets</o> on SCODA’s data portal
         <br/><br/>
         If you have any queries and further comment on this datastory, please email <o onClick="javascript:window.location='mailto:danga@sacities.net'">Danga Mughogho</o> at SACN.`;
 
@@ -128,7 +128,7 @@ export default class DataStoriesContentCardUrbanSafety extends Component {
                                             <div className="col p-3 ds-urban-addressing-content">
                                             Since at least the 1970s, South Africa’s murder levels have not been below 30 per 100 000, which is considered very high by global standards - only a handful of countries record murder rates at this level.
                                             <br/><br/>
-                                            Comparative internationla research shows that a very strong predictor of a country’s level of crime and violence is its level of inequality.
+                                            Comparative international research shows that a very strong predictor of a country’s level of crime and violence is its level of inequality.
                                             As measured by its Gini coefficient, South Africa is one of the most unequal countries, if not the most unequal country, in the world.
                                             <br/><br/>
                                             Addressing inequality must no longer be considered an abstract and long-term ideal.  It is a matter of life and violent death.
