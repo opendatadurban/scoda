@@ -4,8 +4,7 @@ import Subnav from './Subnav'
 import Stat_Panel from './Citizen.Engagments.Stat.Panel'
 import Charts_dashboards from './Charts.Citizen.Engagements'
 
-export default class Socr_Citizens_Engagement extends Component {
-    render() {
+const Socr_Citizens_Engagement = () => {
         return (
             <div className='sorc_dashboards'>
                 <div className='spacer--top'></div>
@@ -18,4 +17,4 @@ export default class Socr_Citizens_Engagement extends Component {
             </div>
         )
     }
-}
+export default Socr_Citizens_Engagement;
