@@ -15,10 +15,10 @@ let final_total_number_of_municipal_posts = []
 let voterTurnoutCollection = [];
 
 let municipal_management_vacancies = []
-let total_number_of_municipal_posts_data_local = []
-let total_number_of_municipal_posts_clean_local = []
+let municipal_management_vacancies_data = []
+let municipal_management_vacancies_clean = []
 let final_municipal_management_vacancies = []
-let voterTurnoutCollection_local = [];
+let MunicipalVacanciesCollection = [];
 
 let number_of_senior_management_vacancies = []
 let number_of_senior_management_vacancies_data = []
@@ -164,12 +164,12 @@ const CitizenEngagmentes = () => {
       }
     }
     for (let year = startingYear; year < years; year++) {
-      voterTurnoutCollection_local.push(municiapal_mv[toNum[year] - 1]);
-      municipal_management_vacancies.push(voterTurnoutCollection_local[count])
-      total_number_of_municipal_posts_clean_local.push(municipal_management_vacancies)
+      MunicipalVacanciesCollection.push(municiapal_mv[toNum[year] - 1]);
+      municipal_management_vacancies.push(MunicipalVacanciesCollection[count])
+      municipal_management_vacancies_clean.push(municipal_management_vacancies)
       count++
     }
-    final_municipal_management_vacancies = total_number_of_municipal_posts_clean_local[0]
+    final_municipal_management_vacancies = municipal_management_vacancies_clean[0]
   }
   const senior_management_vacancies = () => {
     let toNum = new Object()
@@ -196,13 +196,13 @@ const CitizenEngagmentes = () => {
     setMultiValue(option)
 
     total_number_of_municipal_posts_data = []
-    total_number_of_municipal_posts_data_local = []
+    municipal_management_vacancies_data = []
     number_of_senior_management_vacancies_data = []
 
     let cYears = chartYears
     for (let item = 0; item < cYears.length - 1; item++) {
       total_number_of_municipal_posts_data.push([])
-      total_number_of_municipal_posts_data_local.push([])
+      municipal_management_vacancies_data.push([])
       number_of_senior_management_vacancies_data.push([])
     }
 
@@ -225,7 +225,7 @@ const CitizenEngagmentes = () => {
         for (let index = 0; index < cYears.length - 1; index++) {
 
           total_number_of_municipal_posts_data[index][0] = voterTurnoutCollection[index][0]
-          total_number_of_municipal_posts_data_local[index][0] = voterTurnoutCollection_local[index][0]
+          municipal_management_vacancies_data[index][0] = MunicipalVacanciesCollection[index][0]
           number_of_senior_management_vacancies_data[index][0] = NumberOfSeniorManagementVacanciesCollection[index][0]
         }
 
@@ -234,7 +234,7 @@ const CitizenEngagmentes = () => {
 
         for (let index = 0; index < cYears.length - 1; index++) {
           total_number_of_municipal_posts_data[index][1] = voterTurnoutCollection[index][1]
-          total_number_of_municipal_posts_data_local[index][1] = voterTurnoutCollection_local[index][1]
+          municipal_management_vacancies_data[index][1] = MunicipalVacanciesCollection[index][1]
           number_of_senior_management_vacancies_data[index][1] = NumberOfSeniorManagementVacanciesCollection[index][1]
         }
 
@@ -242,35 +242,35 @@ const CitizenEngagmentes = () => {
       if (sortedData.includes('EKH')) {
         for (let index = 0; index < cYears.length - 1; index++) {
           total_number_of_municipal_posts_data[index][2] = voterTurnoutCollection[index][2]
-          total_number_of_municipal_posts_data_local[index][2] = voterTurnoutCollection_local[index][2]
+          municipal_management_vacancies_data[index][2] = MunicipalVacanciesCollection[index][2]
           number_of_senior_management_vacancies_data[index][2] = NumberOfSeniorManagementVacanciesCollection[index][2]
         }
       }
       if (sortedData.includes('ETK')) {
         for (let index = 0; index < cYears.length - 1; index++) {
           total_number_of_municipal_posts_data[index][3] = voterTurnoutCollection[index][3]
-          total_number_of_municipal_posts_data_local[index][3] = voterTurnoutCollection_local[index][3]
+          municipal_management_vacancies_data[index][3] = MunicipalVacanciesCollection[index][3]
           number_of_senior_management_vacancies_data[index][3] = NumberOfSeniorManagementVacanciesCollection[index][3]
         }
       }
       if (sortedData.includes('JHB')) {
         for (let index = 0; index < cYears.length - 1; index++) {
           total_number_of_municipal_posts_data[index][4] = voterTurnoutCollection[index][4]
-          total_number_of_municipal_posts_data_local[index][4] = voterTurnoutCollection_local[index][4]
+          municipal_management_vacancies_data[index][4] = MunicipalVacanciesCollection[index][4]
           number_of_senior_management_vacancies_data[index][4] = NumberOfSeniorManagementVacanciesCollection[index][4]
         }
       }
       if (sortedData.includes('MAN')) {
         for (let index = 0; index < cYears.length - 1; index++) {
           total_number_of_municipal_posts_data[index][5] = voterTurnoutCollection[index][5]
-          total_number_of_municipal_posts_data_local[index][5] = voterTurnoutCollection_local[index][5]
+          municipal_management_vacancies_data[index][5] = MunicipalVacanciesCollection[index][5]
           number_of_senior_management_vacancies_data[index][5] = NumberOfSeniorManagementVacanciesCollection[index][5]
         }
       }
       if (sortedData.includes('NMB')) {
         for (let index = 0; index < cYears.length - 1; index++) {
           total_number_of_municipal_posts_data[index][6] = voterTurnoutCollection[index][6]
-          total_number_of_municipal_posts_data_local[index][6] = voterTurnoutCollection_local[index][6]
+          municipal_management_vacancies_data[index][6] = MunicipalVacanciesCollection[index][6]
           number_of_senior_management_vacancies_data[index][6] = NumberOfSeniorManagementVacanciesCollection[index][6]
 
         }
@@ -278,14 +278,14 @@ const CitizenEngagmentes = () => {
       if (sortedData.includes('TSH')) {
         for (let index = 0; index < cYears.length - 1; index++) {
           total_number_of_municipal_posts_data[index][7] = voterTurnoutCollection[index][7]
-          total_number_of_municipal_posts_data_local[index][7] = voterTurnoutCollection_local[index][7]
+          municipal_management_vacancies_data[index][7] = MunicipalVacanciesCollection[index][7]
           number_of_senior_management_vacancies_data[index][7] = NumberOfSeniorManagementVacanciesCollection[index][7]
         }
       }
 
       for (let index = 0; index < cYears.length - 1; index++) {
         final_total_number_of_municipal_posts[index] = total_number_of_municipal_posts_data[index].filter(Boolean)
-        final_municipal_management_vacancies[index] = total_number_of_municipal_posts_data_local[index].filter(Boolean)
+        final_municipal_management_vacancies[index] = municipal_management_vacancies_data[index].filter(Boolean)
         final_number_of_senior_management_vacancies[index] = number_of_senior_management_vacancies_data[index].filter(Boolean)
       }
 
