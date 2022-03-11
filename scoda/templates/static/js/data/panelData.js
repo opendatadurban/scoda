@@ -24,6 +24,23 @@ const panelData = [
               "type": `REGISTERED<br/>LOCAL`
           }
     ]
+    },
+    {
+      "municipal_posts_and_vacancies" : [
+          {
+              "percentage": 14856,
+              "type": `Total Municipal<br/>Posts`
+          },
+          {
+              "percentage": 62,
+              "type": `Municipal Management<br/>Vacancies`
+          },
+          {
+              "percentage": 57,
+              "type": `Senior Management<br/>Vacancies`
+          },
+
+    ]
     }
   ];
   
