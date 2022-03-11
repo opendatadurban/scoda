@@ -20,7 +20,7 @@ export default class Footer extends Component {
                     
                             </span>
                                 </div>
-                                <div className='col-md-3'>
+                                <div className='col-md-3 footer-popover'>
                                 <CookiePolicy/> 
                                 </div>
                             </div>

@@ -1,5 +1,5 @@
 import React,{ Component } from 'react'
-import Select from './Select'
+import Select from '../Select'
 import axios from 'axios';
 
 const mydata = {

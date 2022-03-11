@@ -1,7 +1,7 @@
 import React,{useState, lazy} from 'react';
 const Footer =  lazy(() => import('../components/Footer'));
 const Navigation_scoda =  lazy(() => import('../components/Navigation_scoda'));
-const Human_resources =  lazy(() => import('../components/Socr.Human.Resources'));
+const Human_resources =  lazy(() => import('../components/HumanResources/Socr.Human.Resources'));
 
 const HumanResources = () => {
 

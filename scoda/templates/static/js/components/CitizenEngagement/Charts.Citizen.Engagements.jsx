@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
 import Select from "react-select";
-import Button from './Button';
+import Button from '../Button';
 import { Modal, ModalBody, Spinner } from 'reactstrap';
 import { Bar } from 'react-chartjs-2';
 
@@ -11,13 +11,13 @@ let voter_turnout = []
 let voter_turnout_data = []
 let voter_turnout_clean = []
 let final_voter_turnout = []
-let voterTurnoutCollection = [];
+let WastefulExpenditureCollection = [];
 
 let voter_turnout_local = []
 let voter_turnout_data_local = []
 let voter_turnout_clean_local = []
 let final_voter_turnout_local = []
-let voterTurnoutCollection_local = [];
+let IrregularExpenditureCollection = [];
 
 let registered_voters = []
 let registered_voters_data = []
@@ -153,8 +153,8 @@ const CitizenEngagmentes = () => {
       }
     }
     for (let year = startingYear; year < years; year++) {
-      voterTurnoutCollection.push(data_vt[toNum[year] - 1]);
-      voter_turnout.push(voterTurnoutCollection[count])
+      WastefulExpenditureCollection.push(data_vt[toNum[year] - 1]);
+      voter_turnout.push(WastefulExpenditureCollection[count])
       voter_turnout_clean.push(voter_turnout)
       count++
     }
@@ -173,8 +173,8 @@ const CitizenEngagmentes = () => {
       }
     }
     for (let year = startingYear; year < years; year++) {
-      voterTurnoutCollection_local.push(data_vt_local[toNum[year] - 1]);
-      voter_turnout_local.push(voterTurnoutCollection_local[count])
+      IrregularExpenditureCollection.push(data_vt_local[toNum[year] - 1]);
+      voter_turnout_local.push(IrregularExpenditureCollection[count])
       voter_turnout_clean_local.push(voter_turnout_local)
       count++
     }
@@ -255,11 +255,11 @@ const CitizenEngagmentes = () => {
 
       sortedData = myData.sort()
       if (sortedData.includes('BUF')) {
-        //voter_turnout_data[year][index]  voterTurnoutCollection[year][index]
+        //voter_turnout_data[year][index]  WastefulExpenditureCollection[year][index]
         for (let index = 0; index < cYears.length - 1; index++) {
 
-          voter_turnout_data[index][0] = voterTurnoutCollection[index][0]
-          voter_turnout_data_local[index][0] = voterTurnoutCollection_local[index][0]
+          voter_turnout_data[index][0] = WastefulExpenditureCollection[index][0]
+          voter_turnout_data_local[index][0] = IrregularExpenditureCollection[index][0]
           registered_voters_data[index][0] = registeredVotersCollection[index][0]
           registered_voters_data_local[index][0] = registeredVotersCollection_local[index][0]
         }
@@ -268,8 +268,8 @@ const CitizenEngagmentes = () => {
       if (sortedData.includes('CCT')) {
 
         for (let index = 0; index < cYears.length - 1; index++) {
-          voter_turnout_data[index][1] = voterTurnoutCollection[index][1]
-          voter_turnout_data_local[index][1] = voterTurnoutCollection_local[index][1]
+          voter_turnout_data[index][1] = WastefulExpenditureCollection[index][1]
+          voter_turnout_data_local[index][1] = IrregularExpenditureCollection[index][1]
           registered_voters_data[index][1] = registeredVotersCollection[index][1]
           registered_voters_data_local[index][1] = registeredVotersCollection_local[index][1]
         }
@@ -277,48 +277,48 @@ const CitizenEngagmentes = () => {
       }
       if (sortedData.includes('EKH')) {
         for (let index = 0; index < cYears.length - 1; index++) {
-          voter_turnout_data[index][2] = voterTurnoutCollection[index][2]
-          voter_turnout_data_local[index][2] = voterTurnoutCollection_local[index][2]
+          voter_turnout_data[index][2] = WastefulExpenditureCollection[index][2]
+          voter_turnout_data_local[index][2] = IrregularExpenditureCollection[index][2]
           registered_voters_data[index][2] = registeredVotersCollection[index][2]
           registered_voters_data_local[index][2] = registeredVotersCollection_local[index][2]
         }
       }
       if (sortedData.includes('ETK')) {
         for (let index = 0; index < cYears.length - 1; index++) {
-          voter_turnout_data[index][3] = voterTurnoutCollection[index][3]
-          voter_turnout_data_local[index][3] = voterTurnoutCollection_local[index][3]
+          voter_turnout_data[index][3] = WastefulExpenditureCollection[index][3]
+          voter_turnout_data_local[index][3] = IrregularExpenditureCollection[index][3]
           registered_voters_data[index][3] = registeredVotersCollection[index][3]
           registered_voters_data_local[index][3] = registeredVotersCollection_local[index][3]
         }
       }
       if (sortedData.includes('JHB')) {
         for (let index = 0; index < cYears.length - 1; index++) {
-          voter_turnout_data[index][4] = voterTurnoutCollection[index][4]
-          voter_turnout_data_local[index][4] = voterTurnoutCollection_local[index][4]
+          voter_turnout_data[index][4] = WastefulExpenditureCollection[index][4]
+          voter_turnout_data_local[index][4] = IrregularExpenditureCollection[index][4]
           registered_voters_data[index][4] = registeredVotersCollection[index][4]
           registered_voters_data_local[index][4] = registeredVotersCollection_local[index][4]
         }
       }
       if (sortedData.includes('MAN')) {
         for (let index = 0; index < cYears.length - 1; index++) {
-          voter_turnout_data[index][5] = voterTurnoutCollection[index][5]
-          voter_turnout_data_local[index][5] = voterTurnoutCollection_local[index][5]
+          voter_turnout_data[index][5] = WastefulExpenditureCollection[index][5]
+          voter_turnout_data_local[index][5] = IrregularExpenditureCollection[index][5]
           registered_voters_data[index][5] = registeredVotersCollection[index][5]
           registered_voters_data_local[index][5] = registeredVotersCollection_local[index][5]
         }
       }
       if (sortedData.includes('NMB')) {
         for (let index = 0; index < cYears.length - 1; index++) {
-          voter_turnout_data[index][6] = voterTurnoutCollection[index][6]
-          voter_turnout_data_local[index][6] = voterTurnoutCollection_local[index][6]
+          voter_turnout_data[index][6] = WastefulExpenditureCollection[index][6]
+          voter_turnout_data_local[index][6] = IrregularExpenditureCollection[index][6]
           registered_voters_data[index][6] = registeredVotersCollection[index][6]
           registered_voters_data_local[index][6] = registeredVotersCollection_local[index][6]
         }
       }
       if (sortedData.includes('TSH')) {
         for (let index = 0; index < cYears.length - 1; index++) {
-          voter_turnout_data[index][7] = voterTurnoutCollection[index][7]
-          voter_turnout_data_local[index][7] = voterTurnoutCollection_local[index][7]
+          voter_turnout_data[index][7] = WastefulExpenditureCollection[index][7]
+          voter_turnout_data_local[index][7] = IrregularExpenditureCollection[index][7]
           registered_voters_data[index][7] = registeredVotersCollection[index][7]
           registered_voters_data_local[index][7] = registeredVotersCollection_local[index][7]
         }

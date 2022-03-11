@@ -1,15 +1,15 @@
 import React, { Component,useEffect, useState } from 'react'
-import Select from './Select'
+import Select from '../Select'
 import axios from 'axios';
 
-import panelData from '../data/panelData.js';
+import panelData from '../../data/panelData';
 
 const CitizenEngagmentStatPanel = () => {
 
     const [place,setPlace] = useState('Buffalo City')
-    const [total_number_of_municipal_posts_national, settotal_number_of_municipal_posts_national] = useState(40)
+    const [wasteful_expenditure_national, setwasteful_expenditure_national] = useState(40)
     const [registered_national, setRegistered_national] = useState(64)
-    const [municipal_management_vacancies, setmunicipal_management_vacancies] = useState(51)
+    const [irregular_expenditure, setirregular_expenditure] = useState(51)
     const [registered_local, setRegistered_local] = useState(62)
     //set data
     const [data,setData] = useState(panelData[0])
@@ -18,7 +18,7 @@ const CitizenEngagmentStatPanel = () => {
     
     let municipality_focus = [
         {
-            percentage: total_number_of_municipal_posts_national,
+            percentage: wasteful_expenditure_national,
             type: `VOTER TURNOUT<br/>NATIONAL`
         },
         {
@@ -26,7 +26,7 @@ const CitizenEngagmentStatPanel = () => {
             type: `REGISTERED<br/>NATIONAL`
         },
         {
-            percentage: municipal_management_vacancies,
+            percentage: irregular_expenditure,
             type: `VOTER TURNOUT<br/>LOCAL`
         },
         {
@@ -39,51 +39,51 @@ const CitizenEngagmentStatPanel = () => {
         setPlace(e.target.value);
         console.log('selected city :',e.target.value)
         if(e.target.value ==='Buffalo City'){
-            settotal_number_of_municipal_posts_national(40)
+            setwasteful_expenditure_national(40)
             setRegistered_national(64)
-            setmunicipal_management_vacancies(51) 
+            setirregular_expenditure(51) 
             setRegistered_local(62)
         }
         if(e.target.value ==='City of Cape Town'){
-            settotal_number_of_municipal_posts_national(12)
+            setwasteful_expenditure_national(12)
             setRegistered_national(32)
-            setmunicipal_management_vacancies(56) 
+            setirregular_expenditure(56) 
             setRegistered_local(43)
         }
         if(e.target.value ==='City of Joburg'){
-            settotal_number_of_municipal_posts_national(34)
+            setwasteful_expenditure_national(34)
             setRegistered_national(89)
-            setmunicipal_management_vacancies(56) 
+            setirregular_expenditure(56) 
             setRegistered_local(43)
         }
         if(e.target.value ==='Ekurhuleni'){
-            settotal_number_of_municipal_posts_national(45)
+            setwasteful_expenditure_national(45)
             setRegistered_national(34)
-            setmunicipal_management_vacancies(75) 
+            setirregular_expenditure(75) 
             setRegistered_local(56)
         }
         if(e.target.value ==='eThekwini'){
-            settotal_number_of_municipal_posts_national(12)
+            setwasteful_expenditure_national(12)
             setRegistered_national(34)
-            setmunicipal_management_vacancies(34) 
+            setirregular_expenditure(34) 
             setRegistered_local(56)
         }
         if(e.target.value ==='Mangaung'){
-            settotal_number_of_municipal_posts_national(90)
+            setwasteful_expenditure_national(90)
             setRegistered_national(54)
-            setmunicipal_management_vacancies(34) 
+            setirregular_expenditure(34) 
             setRegistered_local(67)
         }
         if(e.target.value ==='Nelson Mandela Bay'){
-            settotal_number_of_municipal_posts_national(34)
+            setwasteful_expenditure_national(34)
             setRegistered_national(45)
-            setmunicipal_management_vacancies(56) 
+            setirregular_expenditure(56) 
             setRegistered_local(64)
         }
         if(e.target.value ==='Tshwane'){
-            settotal_number_of_municipal_posts_national(23)
+            setwasteful_expenditure_national(23)
             setRegistered_national(42)
-            setmunicipal_management_vacancies(12) 
+            setirregular_expenditure(12) 
             setRegistered_local(76)
         }
     }

@@ -1,14 +1,14 @@
 import React, { Component,useEffect, useState } from 'react'
-import Select from './Select'
+import Select from '../Select'
 import axios from 'axios';
 
-import panelData from '../data/panelData.js';
+import panelData from '../../data/panelData.js';
 
 const HumanResourcesStatPanel = () => {
 
     const [place,setPlace] = useState('Buffalo City')
     const [total_municipal_posts, setTotal_municipal_posts] = useState(29465)
-    const [municipal_management_vacancies, setMunicipal_management_vacancies] = useState(64)
+    const [irregular_expenditure, setirregular_expenditure] = useState(64)
     const [senior_management_vacancies, setSenior_management_vacancies] = useState(51)
     //set data
     const [data,setData] = useState(panelData[0])
@@ -21,7 +21,7 @@ const HumanResourcesStatPanel = () => {
             type: `Total Municipal<br/>Posts`
         },
         {
-            percentage: municipal_management_vacancies,
+            percentage: irregular_expenditure,
             type: `Municipal Management<br/>Vacancies`
         },
         {
@@ -36,42 +36,42 @@ const HumanResourcesStatPanel = () => {
         console.log('selected city :',e.target.value)
         if(e.target.value ==='Buffalo City'){
             setTotal_municipal_posts(40)
-            setMunicipal_management_vacancies(64)
+            setirregular_expenditure(64)
             setSenior_management_vacancies(51) 
         }
         if(e.target.value ==='City of Cape Town'){
             setTotal_municipal_posts(12)
-            setMunicipal_management_vacancies(32)
+            setirregular_expenditure(32)
             setSenior_management_vacancies(56) 
         }
         if(e.target.value ==='City of Joburg'){
             setTotal_municipal_posts(34)
-            setMunicipal_management_vacancies(89)
+            setirregular_expenditure(89)
             setSenior_management_vacancies(56) 
         }
         if(e.target.value ==='Ekurhuleni'){
             setTotal_municipal_posts(45)
-            setMunicipal_management_vacancies(34)
+            setirregular_expenditure(34)
             setSenior_management_vacancies(75) 
         }
         if(e.target.value ==='eThekwini'){
             setTotal_municipal_posts(12)
-            setMunicipal_management_vacancies(34)
+            setirregular_expenditure(34)
             setSenior_management_vacancies(34) 
         }
         if(e.target.value ==='Mangaung'){
             setTotal_municipal_posts(90)
-            setMunicipal_management_vacancies(54)
+            setirregular_expenditure(54)
             setSenior_management_vacancies(34) 
         }
         if(e.target.value ==='Nelson Mandela Bay'){
             setTotal_municipal_posts(34)
-            setMunicipal_management_vacancies(45)
+            setirregular_expenditure(45)
             setSenior_management_vacancies(56) 
         }
         if(e.target.value ==='Tshwane'){
             setTotal_municipal_posts(23)
-            setMunicipal_management_vacancies(42)
+            setirregular_expenditure(42)
             setSenior_management_vacancies(12) 
         }
     }

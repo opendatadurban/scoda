@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 const Example = (props) => {
@@ -12,7 +12,9 @@ const Example = (props) => {
         {props.name}
       </DropdownToggle>
       <DropdownMenu>
-        <DropdownItem header>{props.dropDownItem}</DropdownItem>
+        {props.dropDownItem.dropdownMenu.map((item, index) =>
+          <DropdownItem key={index} active={item.active} href={item.href}>{item.name}</DropdownItem>
+        )}
       </DropdownMenu>
     </ButtonDropdown>
   );

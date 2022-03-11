@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react'
 import Select from "react-select";
-import Button from './Button';
+import Button from '../Button';
 import { Modal, ModalBody, Spinner } from 'reactstrap';
 import { Bar } from 'react-chartjs-2';
-import HumanResourcesData from '../data/HumanResourceData'
+import HumanResourcesData from '../../data/HumanResourceData'
 
 //Units Receiving Free Basic Services data , static for now since it's still not part of codebook.
 // let fbs_data_2018 = [76201, 320406, 15848, 237330, 174687, 29658, 73593, 57250]
