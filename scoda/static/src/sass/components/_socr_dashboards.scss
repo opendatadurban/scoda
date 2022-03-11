@@ -102,6 +102,54 @@
                 height: 2px;
                 color:#F1F1F1;
             }
+            .post_breakdown-container{
+                padding: 24px;
+                h1 {
+                    font-family: 'Montserrat';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 12px;
+                    line-height: 15px;
+                    color: #2F3442;
+                    margin-bottom: 4px;
+                }
+            table {
+                tr {
+                    th {
+                        font-family: 'Montserrat';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 12px;
+                        line-height: 12px;
+                        text-transform: uppercase;
+                        color: #979797;
+                        padding-bottom: 4px;
+                    }
+                    td{
+                        width: 100vw;
+                        font-family: 'Montserrat';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 12px;
+                        line-height: 14px;
+                        color: #2F3442;
+                        a {
+                            text-decoration-line: underline;
+                            color: #2F3442;
+                        }
+
+                    }
+                    .right {
+                        text-align: right;
+                        
+
+                    }
+                }
+            }
+          }
+          .left-container {
+            border-right: 2px solid #F1F1F1;
+          }
         }
     }
     .spacer {
