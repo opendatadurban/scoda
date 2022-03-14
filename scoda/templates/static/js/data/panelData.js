@@ -41,7 +41,24 @@ const panelData = [
           },
 
     ]
-    }
+    },
+    {
+        "expenditure" : [
+            {
+                "percentage": 1340000,
+                "type": `Irregular<br/>Expenditure`
+            },
+            {
+                "percentage": 1340000,
+                "type": `Fruitless & Wasteful<br/>Expenditure`
+            },
+            {
+                "percentage": 13450000,
+                "type": `Unauthorised<br/>Expenditure`
+            },
+  
+      ]
+      }
   ];
   
   export default panelData;
