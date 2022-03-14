@@ -19,6 +19,7 @@
             line-height: 15px;
             padding: 15px;
             text-align: left;
+            color: #2F3442;
 
             span {
                 font-weight: 400;
@@ -30,12 +31,20 @@
               text-align: center;
               line-height: 30px;
               font-size: 24px;
+              color: #2F3442;
           }
           p {
             text-align: center;
             font-size: 10px;
             line-height: 12px;
             text-transform: uppercase;
+            color: #979797;
+          }
+          .green {
+            color:#36A39C;
+          }
+          .red {
+            color:#F94144;
           }
         }      
     }
@@ -45,6 +54,13 @@
         margin: auto;
         margin-bottom: 30px;
         border-radius: 5px;
+        padding: 0;
+        .spacer {
+            display: inline-block;
+            background-color: transparent;
+            height: 15px;
+        }
+
 
         &--left_container {
             border-right: 2px solid #F1F1F1;
@@ -52,6 +68,9 @@
         &--select {
             border-bottom: 2px solid #F1F1F1;
             //here
+            &-container {
+                width: 60%;
+            }
         }
         &--button {
             background: #FFFFFF;
@@ -77,6 +96,60 @@
             line-height: 15px;
             margin-top: 10px;
             margin-bottom: 10px;
+        }
+        &--barcharts {
+            hr {
+                height: 2px;
+                color:#F1F1F1;
+            }
+            .post_breakdown-container{
+                padding: 24px;
+                h1 {
+                    font-family: 'Montserrat';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 12px;
+                    line-height: 15px;
+                    color: #2F3442;
+                    margin-bottom: 4px;
+                }
+            table {
+                tr {
+                    th {
+                        font-family: 'Montserrat';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 12px;
+                        line-height: 12px;
+                        text-transform: uppercase;
+                        color: #979797;
+                        padding-bottom: 4px;
+                    }
+                    td{
+                        width: 100vw;
+                        font-family: 'Montserrat';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 12px;
+                        line-height: 14px;
+                        color: #2F3442;
+                        a {
+                            text-decoration-line: underline;
+                            color: #2F3442;
+                        }
+
+                    }
+                    .right {
+                        text-align: right;
+                        
+
+                    }
+                }
+            }
+          }
+          .left-container {
+            border-right: 2px solid #F1F1F1;
+          }
         }
     }
     .spacer {

@@ -3,6 +3,8 @@
         margin: 7px 30px 7px 15px;
         border: none;
         border-radius: 12.5px;
+        display: inline-block;
+        width: 53vw;
 
     }
     &-tlfecz-indicatorContainer {
@@ -15,7 +17,7 @@
 
     }
     &-1rhbuit-multiValue {
-        background: rgba(207, 221, 232, 0.6);
+        background-color: rgba(207, 221, 232, 0.6) !important;
         border-radius: 12.5px !important;
         padding: 0 5px;
     }
