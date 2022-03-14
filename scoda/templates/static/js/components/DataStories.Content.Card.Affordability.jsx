@@ -17,19 +17,7 @@ export default class DataStoriesContentCardAffordability extends Component {
     componentDidMount() {
         Chart.platform.disableCSSInjection = true;
 
-        $('#example').DataTable({
-          "order": [[1, "asc"], [0, "asc"]],
-          "bPaginate": false,
-          "info": false,
-          dom: 'Bfrtip',
-          buttons: [
-          'copy', 'csv']
-      });
-
-      document.getElementsByTagName("input")[0].placeholder="Search...";
-      document.getElementsByTagName("button")[1].innerText ="Copy this Table";
-      document.getElementsByTagName("button")[2].innerText ="Download as CSV";
-     // $('#example_filter').text('Search...');
+        this.renderDataTable();
         
         this.renderChart();
         this.renderChart2();
@@ -606,6 +594,27 @@ export default class DataStoriesContentCardAffordability extends Component {
         a.href = url_base64jp;
     }
 
+    renderDataTable(){
+        try {
+            $('#example').DataTable({
+                "order": [[1, "asc"], [0, "asc"]],
+                "bPaginate": false,
+                "info": false,
+                dom: 'Bfrtip',
+                buttons: [
+                'copy', 'csv']
+            });
+      
+            document.getElementsByTagName("input")[0].placeholder="Search...";
+            document.getElementsByTagName("button")[1].innerText ="Copy this Table";
+            document.getElementsByTagName("button")[2].innerText ="Download as CSV";
+           $('#example_filter').text('Search...');
+          }
+          catch(err) {
+            location.reload();
+          }
+    }
+
 
     render() {
 
@@ -634,7 +643,7 @@ export default class DataStoriesContentCardAffordability extends Component {
 
         let resources = `<o onClick="javascript:window.open('https://www.sacities.net/municipal-finance/','_new');">Read</o> more SACN publications and research on municipal finance matters on the SACN website
         <o onClick="javascript:window.open('https://www.sacities.net/state-of-cities-reporting','_new')">Engage</o> with SACN’s State of Cities Reporting for broader cities development context since 2004 Explore municipal finance’s interactively on National Treasury’s <o onClick="javascript:window.open('https://municipalmoney.gov.za/','_new')">Municipal Money</o> Datatool
-        Explore the <o onClick="javascript:window.open('https://scoda.co.za/dataset/city-revenue-performance','_new')">full collection of State of Cities Finances 2018 datasets</o> on SCODA’s data portal
+        Explore the <o onClick="javascript:window.open('https://ckan.scoda.co.za/dataset/city-revenue-performance','_new')">full collection of State of Cities Finances 2018 datasets</o> on SCODA’s data portal
         <br/><br/>
         If you have any queries and further comment on this datastory, please email <o onClick="javascript:window.location='mailto:danga@sacities.net'">Danga Mughogho</o> at SACN.`;
 
@@ -649,7 +658,7 @@ export default class DataStoriesContentCardAffordability extends Component {
 
         let contentBlockThree = `<o onClick="javascript:window.open('https://www.sacities.net/municipal-finance/','_new');">Read</o> more SACN publications and research on municipal finance matters on the SACN website
         <o onClick="javascript:window.open('https://www.sacities.net/state-of-cities-reporting','_new')">Engage</o> with SACN’s State of Cities Reporting for broader cities development context since 2004 Explore municipal finance’s interactively on National Treasury’s <o onClick="javascript:window.open('https://municipalmoney.gov.za/','_new')">Municipal Money</o> Datatool
-        Explore the <o onClick="javascript:window.open('https://scoda.co.za/dataset/city-revenue-performance','_new')">full collection of State of Cities Finances 2018 datasets</o> on SCODA’s data portal
+        Explore the <o onClick="javascript:window.open('https://ckan.scoda.co.za/dataset/city-revenue-performance','_new')">full collection of State of Cities Finances 2018 datasets</o> on SCODA’s data portal
         <br/><br/>
         If you have any queries and further comment on this datastory, please email <o onClick="javascript:window.location='mailto:danga@sacities.net'">Danga Mughogho</o> at SACN.`;
 

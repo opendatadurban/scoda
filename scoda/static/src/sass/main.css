@@ -2120,8 +2120,8 @@ img {
 }
 
 .cta_block.cta_block_analysis .cta-info .cta-image-codebook {
-  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_4 Analysis Tools/image_analysis_codebook.png");
-  height: 369px;
+  background-image: url("/static/dist/img/SCODA Assets V3_2 Desktop/1 Landing Page/1_4 Analysis Tools/image_analysis-tools_codebook.png");
+  height: 285px;
   width: 459px;
   margin-top: 20px;
   -webkit-box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
@@ -2287,7 +2287,7 @@ img {
 }
 
 .cta_block .cta-field-description-list-detailed-btn-codebook {
-  margin-top: 99px !important;
+  margin-top: 18px !important;
 }
 
 .cta_block .cta-search {
@@ -6353,6 +6353,7 @@ input:checked + .slider:before {
   line-height: 15px;
   padding: 15px;
   text-align: left;
+  color: #2F3442;
 }
 
 .sorc_dashboards .stat_display_panel .catagory-name span {
@@ -6364,6 +6365,7 @@ input:checked + .slider:before {
   text-align: center;
   line-height: 30px;
   font-size: 24px;
+  color: #2F3442;
 }
 
 .sorc_dashboards .stat_display_panel--numbers p {
@@ -6371,6 +6373,15 @@ input:checked + .slider:before {
   font-size: 10px;
   line-height: 12px;
   text-transform: uppercase;
+  color: #979797;
+}
+
+.sorc_dashboards .stat_display_panel--numbers .green {
+  color: #36A39C;
+}
+
+.sorc_dashboards .stat_display_panel--numbers .red {
+  color: #F94144;
 }
 
 .sorc_dashboards .charts_dashboards {
@@ -6379,6 +6390,13 @@ input:checked + .slider:before {
   margin: auto;
   margin-bottom: 30px;
   border-radius: 5px;
+  padding: 0;
+}
+
+.sorc_dashboards .charts_dashboards .spacer {
+  display: inline-block;
+  background-color: transparent;
+  height: 15px;
 }
 
 .sorc_dashboards .charts_dashboards--left_container {
@@ -6387,6 +6405,10 @@ input:checked + .slider:before {
 
 .sorc_dashboards .charts_dashboards--select {
   border-bottom: 2px solid #F1F1F1;
+}
+
+.sorc_dashboards .charts_dashboards--select-container {
+  width: 60%;
 }
 
 .sorc_dashboards .charts_dashboards--button {
@@ -6415,6 +6437,11 @@ input:checked + .slider:before {
   line-height: 15px;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.sorc_dashboards .charts_dashboards--barcharts hr {
+  height: 2px;
+  color: #F1F1F1;
 }
 
 .sorc_dashboards .spacer {
@@ -6635,6 +6662,8 @@ span#select2-my-select-container {
   margin: 7px 30px 7px 15px;
   border: none;
   border-radius: 12.5px;
+  display: inline-block;
+  width: 53vw;
 }
 
 .css-tlfecz-indicatorContainer {
@@ -6648,7 +6677,7 @@ span#select2-my-select-container {
 }
 
 .css-1rhbuit-multiValue {
-  background: rgba(207, 221, 232, 0.6);
+  background-color: rgba(207, 221, 232, 0.6) !important;
   border-radius: 12.5px !important;
   padding: 0 5px;
 }
@@ -6838,6 +6867,10 @@ label.disabled, .label.disabled {
   background-color: #fff;
   cursor: pointer;
   float: right;
+}
+
+.dm-footer-button-white:hover, .dm-footer-button-white:active, .dm-footer-button-white:focus {
+  text-decoration: none !important;
 }
 
 .demographic-card .leaflet-control.info {

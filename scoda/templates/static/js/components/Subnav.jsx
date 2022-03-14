@@ -18,12 +18,12 @@ const SubNav = (props) => {
   return (
     <div className={["subnav subnav--wrapper container-fluid "] + props.className}>
       <div className="subnav--breadcrumbs">
-      <strong>{props.name}</strong> / <Dropdown name={props.dropdownName} header={props.dropdownHeading} menu={props.dropdownMenu} ></Dropdown>
+      <strong>{props.name}</strong> / <Dropdown name={props.dropdownName} header={props.dropdownHeading} menu={props.dropdownMenu} dropDownItem={props.dropDownItem} ></Dropdown>
       </div>
  
       <div className="subnav--cta">
         <div className='row'>
-          <div className=''><DownloadScreenCapture targetID="charts-container" filename="image.jpg" className="round btn_secondary" buttonText={props.buttonText}></DownloadScreenCapture> <img className="subnav--cta---download_icon" src="/static/dist/img/icon_download.png" alt="" /></div>
+          <div className=''><DownloadScreenCapture targetID="charts-container" filename="image.jpg" className="round btn_secondary" buttonText={props.buttonText}></DownloadScreenCapture> <img className="subnav--cta---download_icon" src="/static/dist/img/icon_download.png" alt="download_icon" /></div>
 
           </div>
       </div>

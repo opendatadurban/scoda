@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>SCODA - Open Cities Data Portal</title>
+  <meta name="description" content="SCODA is a city-centric data portal that provides Evidence, Analysis & Insight Of current and comparable information About South African cities To help inform evidence-based decision-making and reporting.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--Google API For Explorer-->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript"
+    src='https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1","packages":["corechart","controls","table"]}]}'></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKWaAxsKHY86tddKvUmdCOg2c7YQjp-3k"
+    type="text/javascript"></script>
+
+  <link rel="stylesheet" href="/main.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700" rel="stylesheet">
+  <link rel="stylesheet" href="/static/dist/fonts/fontawesome-free/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Megrim&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/dist/css/ds-style.css" />
+  <!--Displays fontawsome icons-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+    type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel='icon' type='image/x-icon' href="/static/dist/img/favicon_v6.ico?v=1">
+
+  <style>
+    .data-story-trigger.selected {
+      opacity: .5;
+    }
+
+    .data-story-trigger {
+      padding: 5px 10px;
+    }
+
+    .data-story-card {
+      position: relative;
+    }
+
+    .data-story-card .card-trigger {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      display: block;
+      top: 0;
+      left: 0;
+      z-index: 2;
+    }
+  </style>
+
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-W8CJK7Z');</script>
+  <!-- End Google Tag Manager -->
+
+  <script>
+    window.Userback = window.Userback || {};
+    Userback.access_token = '7688|16723|ha8YH6mRJBS2dBoMh4GPd5I1qncr7GqYxyNMjBOSgrHO5Z1b44';
+    (function (d) {
+      var s = d.createElement('script'); s.async = true;
+      s.src = 'https://static.userback.io/widget/v1.js';
+      (d.head || d.body).appendChild(s);
+    })(document);
+  </script>
+</head>
+
+<body>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8CJK7Z" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <div class="spinner--container">
+    <div class="spinner--inner-container">
+      <img src="/static/dist/img/Spinner.gif" />
+    </div>
+  </div>
+
+
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+  <div id="content-scoda"></div>
+  <div id="content-scoda-one"></div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+
+
+  <script src="/static/public/toolkit.js" type="text/javascript"></script>
+  <!-- <script src="/static/src/js/vendor/bootstrap4/bootstrap.bundle.min.js" type="text/javascript"></script> -->
+
+
+  <script src="/scripts.min.js" type="text/javascript"></script>
+
+
+  <script>
+$('.toolkit_').addClass('active');
+  </script>
+</body>
+
+</html>

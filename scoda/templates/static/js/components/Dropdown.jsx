@@ -12,7 +12,7 @@ const Example = (props) => {
         {props.name}
       </DropdownToggle>
       <DropdownMenu>
-        <DropdownItem header>Service Delivery</DropdownItem>
+        <DropdownItem header>{props.dropDownItem}</DropdownItem>
       </DropdownMenu>
     </ButtonDropdown>
   );

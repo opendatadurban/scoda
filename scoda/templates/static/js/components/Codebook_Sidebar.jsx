@@ -306,7 +306,7 @@ export default class CodebookSidebar extends Component {
                 <div className="row" style={{ justifyContent: 'space-around' }}>
                     {
                         this.state.data.data_check ?
-                        <button className="action-button"><a href={ "/scoda/#/codebook-explorer/" + this.state.data.id } target="_blank">
+                        <button className="action-button"><a href={ "/scoda/toolkit#/codebook-explorer/" + this.state.data.id } target="_blank">
                             <div className="action-button-text">View in Data Explorer</div></a>
                         </button>:""
                     }

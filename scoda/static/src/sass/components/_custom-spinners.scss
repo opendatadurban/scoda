@@ -1,0 +1,41 @@
+.spinner--container {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    background-color: #f1f2f3;
+    //   .beatloader {
+    //     display: inline-block;
+    //     background-color: #1A62C6;
+    //     width: 15px;
+    //     height: 15px;
+    //     margin: 2px;
+    //     border-radius: 100%;
+    //     animation: 0.7s linear 0s infinite normal both running animation;
+    //     &-middle {
+    //       animation: 0.7s linear 0.35s infinite normal both running animation;
+    //     }
+    // }
+    
+    @keyframes animation {
+      50% {
+        transform: scale(0.75);
+        opacity: 0.2;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    
+      // General styling
+    
+      // Desktop specific styling
+      @media (min-width: $tablet) {}
+    
+      // Mobile specific styling
+      @media (max-width: $tablet) {}
+    }

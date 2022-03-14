@@ -102,7 +102,7 @@
 @mixin custom-scrollbar ($colour) {
   overflow-y: scroll;
   &::-webkit-scrollbar {
-    width: 3px;
+    width: 5px;
   }
   &::-webkit-scrollbar-track {
     padding-right: 5px;
@@ -177,3 +177,26 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+@mixin cover($dimension) {
+  height: $dimension;
+  width: $dimension;
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+}
+
+@mixin gaussian-blur($image,$blur,$colour) {
+  @include cover(100%);
+      background-image: url($image);
+      background-repeat: no-repeat;
+      background-size: cover;
+      box-shadow: inset 0 0 0 1000px $colour;
+      filter: blur($blur);
+      -webkit-filter: blur($blur);
+      -moz-filter: blur($blur);
+      -o-filter: blur($blur);
+      -ms-filter: blur($blur);
+      // filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' ><filter id='svgMask'><feGaussianBlur stdDeviation='10' /></filter></svg>#svgMask");
+      transform: scale(1.1);
+    }
