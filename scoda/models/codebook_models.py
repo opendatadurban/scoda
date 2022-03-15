@@ -41,11 +41,15 @@ class CbDataPoint(db.Model):
     indicator_id = Column(Integer, ForeignKey('cb_indicators.id'), index=True)
     region_id = Column(Integer, ForeignKey('cb_regions.id'), index=True)
     region_type_id = Column(Integer, ForeignKey('cb_region_type.id'), index=True)
+    year_start_id = Column(Integer, ForeignKey('cb_year.id'), index=True)
+    year_end_id = Column(Integer, ForeignKey('cb_year.id'), index=True)
 
     # Associations
     indicator = relationship("CbIndicator")
     region = relationship("CbRegion")
     region_type = relationship("CbRegionType")
+    year_start = relationship("CbYear", lazy=False, foreign_keys=[year_start_id])
+    year_end = relationship("CbYear", lazy=False, foreign_keys=[year_end_id])
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
@@ -166,7 +170,19 @@ class CbUnit(db.Model):
     name = Column(String, index=True, nullable=False, unique=True)
 
     def __repr__(self):
-        return "<CbIndicatorUnit='%s'>" % (self.name)
+        return "<CbUnit='%s'>" % (self.name)
+
+class CbYear(db.Model):
+    """
+    The Value Type of the data point
+    """
+    __tablename__ = "cb_year"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(Integer, nullable=False, unique=True)
+
+    def __repr__(self):
+        return "<CbYear='%s'>" % (self.name)
 
 class CbTheme(db.Model):
     """
