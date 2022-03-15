@@ -7,22 +7,24 @@ import Charts_dashboards from './Charts.City.Finances'
 const subNavContent = {
     dropdownMenu: [ 
         {
-        name: "City Finances", 
-        href: "socr#/city-finances", 
-        active: true 
-      }, 
-      { name: "Citizen Engagement", 
-        href: "socr#/citizen-engagement", 
-        active: false 
+          name: "Service Delivery", 
+          href: "socr#/service-delivery", 
+          active: false 
+        },
+        { 
+          name: "Citizen Engagement", 
+          href: "socr#/citizen-engagement", 
+          active: false 
+        }, 
+        {
+          name: "City Finances", 
+          href: "socr#/city-finances", 
+          active: true 
       }, 
       {
-        name: "Service Delivery", 
-        href: "socr#/service-delivery", 
-        active: false 
-      },
-      { name: "Human Resources", 
-        href: "socr#/human-resources", 
-        active: false 
+         name: "Human Resources", 
+         href: "socr#/human-resources", 
+         active: false 
       }
     ]
   }

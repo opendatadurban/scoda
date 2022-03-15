@@ -20,6 +20,7 @@
             padding: 15px;
             text-align: left;
             color: #2F3442;
+            text-transform: capitalize;
 
             span {
                 font-weight: 400;
@@ -27,6 +28,7 @@
             }
         }
         &--numbers {
+
           h1 {
               text-align: center;
               line-height: 30px;
@@ -99,6 +101,7 @@
             padding: 1px 5px;
             height: 17px;
             width: 63px;
+            float: right;
         }
         &--households {
             font-family: Montserrat;
@@ -218,3 +221,18 @@ span#select2-my-select-container {
     }
 }
 
+    // Mobile specific styling
+    @media (max-width: $tablet) {
+        .sorc_dashboards {
+            .stat_display_panel {
+                padding: 15px;
+                .first_panel {
+                    border: 0;
+                }
+                &--numbers {
+                    margin: 0;
+                }
+            }
+        }
+        
+    }

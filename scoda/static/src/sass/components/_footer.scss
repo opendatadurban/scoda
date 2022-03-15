@@ -154,7 +154,21 @@
         min-height: 120px;
         top: 34px;
         #Popover1{
-          left:0;
+          left: 0;
+          right: 0;
+          padding-left: 0;
+          padding-right: 0;
+          margin: 0 auto;
+        }
+        .container {
+          max-width: 1094px;
+          width: unset !important;
+          .row {
+
+            > * {
+              width: 100%;
+            }
+          }
         }
         .row {
           padding-top: 0;
@@ -184,7 +198,7 @@
             width: 100% !important;
             span {
               p {
-                display: none;
+                // display: none;
               }
             }
           }

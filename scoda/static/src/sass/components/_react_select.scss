@@ -31,4 +31,16 @@
     &-xb97g8 {
         color : #4A4A4A, 100%;
     }
+
 }
+
+    // Mobile specific styling
+    @media (max-width: $tablet) {
+        .css{
+            &-2b097c-container {
+                width: 88vw;
+        
+            }
+        }
+        
+    }
