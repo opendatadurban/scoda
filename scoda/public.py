@@ -93,7 +93,7 @@ def api_explore(check):
         df = read_sql_query(query.statement, query.session.bind)
     df = df.drop_duplicates()
     # print(app.root_path)
-    df.to_csv('%s/data/%s' % (app.root_path, "data_test.csv"), index=False)
+    # df.to_csv('%s/data/%s' % (app.root_path, "data_test.csv"), index=False)
     table = []
     table_plot = []
     years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
