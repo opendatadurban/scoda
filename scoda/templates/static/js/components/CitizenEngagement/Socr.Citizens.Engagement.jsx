@@ -5,29 +5,31 @@ import Stat_Panel from './Citizen.Engagments.Stat.Panel'
 import Charts_dashboards from './Charts.Citizen.Engagements'
 
 const Socr_Citizens_Engagement = () => {
-    const subNavContent = {
-        dropdownMenu: [ 
-            { name: "Citizen Engagement", 
-            href: "socr#/citizen-engagement", 
-            active: true 
-          }, 
-          {
-            name: "Service Delivery", 
-            href: "socr#/service-delivery", 
-            active: false 
-          },
-            {
-            name: "City Finances", 
-            href: "socr#/city-finances", 
-            active: false 
-          }, 
-
-          { name: "Human Resources", 
-            href: "socr#/human-resources", 
-            active: false 
-          }
-        ]
+  
+  const subNavContent = {
+    dropdownMenu: [ 
+        {
+          name: "Service Delivery", 
+          href: "socr#/service-delivery", 
+          active: false 
+        },
+        { 
+          name: "Citizen Engagement", 
+          href: "socr#/citizen-engagement", 
+          active: true 
+        }, 
+        {
+          name: "City Finances", 
+          href: "socr#/city-finances", 
+          active: false 
+      }, 
+      {
+         name: "Human Resources", 
+         href: "socr#/human-resources", 
+         active: false 
       }
+    ]
+  }
         return (
             <div className='sorc_dashboards'>
                 <div className='spacer--top'></div>

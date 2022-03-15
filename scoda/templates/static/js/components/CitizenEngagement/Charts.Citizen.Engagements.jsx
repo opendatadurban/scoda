@@ -78,11 +78,11 @@ const style = {
   control: (base, state) => ({
     ...base,
     border: '1px solid #4A4A4A',
-    borderRadius: '12.5px',
+    borderRadius: '28px',
     boxShadow: 'none',
     '&:hover': {
       border: '1px solid #4A4A4A',
-      borderRadius: '12.5px',
+      borderRadius: '28px',
     }
   })
 };
@@ -368,7 +368,7 @@ const CitizenEngagmentes = () => {
     })
 
     if (chartRef1) { chartRef1.destroy(); }
-    var ctx = document.getElementById('mc').getContext('2d');
+    var ctx = document.getElementById('national_election_voter_turnout').getContext('2d');
     chartRef1 = new Chart(ctx, {
       type: 'bar',
       data,
@@ -474,7 +474,7 @@ const CitizenEngagmentes = () => {
     })
 
     if (chartRef3) { chartRef3.destroy(); }
-    var ctx = document.getElementById('mc2').getContext('2d');
+    var ctx = document.getElementById('national_election_voter_turnout_local').getContext('2d');
     chartRef3 = new Chart(ctx, {
       type: 'bar',
       data,
@@ -580,7 +580,7 @@ const CitizenEngagmentes = () => {
     })
 
     if (chartRef2) { chartRef2.destroy(); }
-    var ctx = document.getElementById('mc1').getContext('2d');
+    var ctx = document.getElementById('national_election_registered_voters').getContext('2d');
     chartRef2 = new Chart(ctx, {
       type: 'bar',
       data,
@@ -686,7 +686,7 @@ const CitizenEngagmentes = () => {
     })
 
     if (chartRef4) { chartRef4.destroy(); }
-    var ctx = document.getElementById('mc3').getContext('2d');
+    var ctx = document.getElementById('national_election_registered_voters_local').getContext('2d');
     chartRef4 = new Chart(ctx, {
       type: 'bar',
       data,
@@ -800,18 +800,20 @@ const CitizenEngagmentes = () => {
                   <div className='charts'>
                     <div className='row'>
                       <div className='col-md-9'><h1 className='charts_dashboards--households'>National Election: Voter Turnout</h1></div>
-                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/392' target='_blank' /></div>
+                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='#' target='_blank' /></div>
                     </div>
-                    <canvas id='mc'></canvas>
+                    {/**National election voter turnout chart */}
+                    <canvas id='national_election_voter_turnout'></canvas>
                   </div>
                 </div>
                 <div className='col-md-6'>
                   <div className='charts'>
                     <div className='row'>
                       <div className='col-md-9'><h1 className='charts_dashboards--households'>National Election: Registered Voters</h1></div>
-                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/392' target='_blank' /></div>
+                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='#' target='_blank' /></div>
                     </div>
-                    <canvas id='mc1'></canvas>
+                     {/**National election registered voters chart */}
+                    <canvas id='national_election_registered_voters'></canvas>
                   </div>
                 </div>
               </div>
@@ -821,18 +823,20 @@ const CitizenEngagmentes = () => {
                   <div className='charts'>
                     <div className='row'>
                       <div className='col-md-9'><h1 className='charts_dashboards--households'>Local Election: Voter Turnout</h1></div>
-                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/392' target='_blank' /></div>
+                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='#' target='_blank' /></div>
                     </div>
-                    <canvas id='mc2'></canvas>
+                     {/**Local election voter turnout chart */}
+                    <canvas id='national_election_voter_turnout_local'></canvas>
                   </div>
                 </div>
                 <div className='col-md-6'>
                   <div className='charts'>
                     <div className='row'>
                       <div className='col-md-9'><h1 className='charts_dashboards--households'>Local Election: Rgistered Voters</h1></div>
-                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/392' target='_blank' /></div>
+                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='#' target='_blank' /></div>
                     </div>
-                    <canvas id='mc3'></canvas>
+                    {/**Local election registered voters chart */}
+                    <canvas id='national_election_registered_voters_local'></canvas>
                   </div>
                 </div>
               </div>
