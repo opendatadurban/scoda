@@ -3,6 +3,7 @@ import Select from "react-select";
 import Button from '../Button';
 import { Modal, ModalBody, Spinner } from 'reactstrap';
 import { Bar } from 'react-chartjs-2';
+import BarChart from '../Barchart'
 
 //Units Receiving Free Basic Services data , static for now since it's still not part of codebook.
 // let fbs_data_2018 = [76201, 320406, 15848, 237330, 174687, 29658, 73593, 57250]
@@ -30,7 +31,6 @@ let registered_voters_data_local = []
 let registered_voters_clean_local = []
 let final_registered_voters_local = []
 let registeredVotersCollection_local = [];
-
 
 //Testing data
 
@@ -86,11 +86,29 @@ const style = {
     }
   })
 };
-
+let data_nevt= {
+  labels: sortedData,
+  datasets: []
+}
+let data_nevt_local= {
+  labels: sortedData,
+  datasets: []
+}
+let data_nerv = {
+  labels: sortedData,
+  datasets: []
+}
+let data_nerv_local = {
+  labels: sortedData,
+  datasets: []
+}
 const CitizenEngagmentes = () => {
 
   const mounted = useRef();
-  // let [final_voter_turnout, setFinal_voter_turnout] = useState([])
+  const [nevt, setNevt] = useState()
+  const [nevt_local, setNevt_local] = useState()
+  const [nerv, setNerv] = useState()
+  const [nerv_local, setNerv_local] = useState()
   const [stepSize, setStepSize] = useState(200000);
   const [isMulti, setIsMulti] = useState(true);
   const [loader, setLoader] = useState(false);
@@ -118,7 +136,9 @@ const CitizenEngagmentes = () => {
     { value: "TSH", label: "TSH" }
   ]);
 
+  
   useEffect(() => {
+
     if (!mounted.current) {
       //equivilent to componentdidmount
       national_election_voter_turnout();
@@ -138,8 +158,9 @@ const CitizenEngagmentes = () => {
       renderChart_national_election_voter_turnout_local();
       renderChart_national_election_registered_voters();
       renderChart_national_election_registered_voters_local();
+
     }
-  });
+  },[]);
   const national_election_voter_turnout = () => {
     let toNum = new Object()
     let years = 2020
@@ -220,8 +241,6 @@ const CitizenEngagmentes = () => {
     }
     final_registered_voters_local = registered_voters_clean_local[0]
   }
-
-
   const handleMultiChange = (option) => {
     setMultiValue(option)
 
@@ -330,13 +349,17 @@ const CitizenEngagmentes = () => {
         final_registered_voters[index] = registered_voters_data[index].filter(Boolean)
         final_registered_voters_local[index] = registered_voters_data_local[index].filter(Boolean)
       }
-
+      renderChart_national_election_voter_turnout();
+      renderChart_national_election_voter_turnout_local();
+      renderChart_national_election_registered_voters();
+      renderChart_national_election_registered_voters_local();
     })
   }
 
   const renderChart_national_election_voter_turnout = () => {
+    
     let color = '#d6d6d6'
-    let data = {
+    data_nevt= {
       labels: sortedData,
       datasets: []
     }
@@ -357,8 +380,8 @@ const CitizenEngagmentes = () => {
         default:
           color = '#d6d6d6'
       }
-
-      data.datasets.push({
+      console.log('see see ',data_nevt)
+      data_nevt.datasets.push({
         label: a,
         stack: 'Stack ' + i,
         data: final_voter_turnout[i],
@@ -366,83 +389,11 @@ const CitizenEngagmentes = () => {
         borderColor: color,
       })
     })
-
-    if (chartRef1) { chartRef1.destroy(); }
-    var ctx = document.getElementById('national_election_voter_turnout').getContext('2d');
-    chartRef1 = new Chart(ctx, {
-      type: 'bar',
-      data,
-      options: {
-        legend: {
-          labels: {
-            fontColor: "#4A4A4A",
-            fontSize: 8,
-            fontFamily: "Montserrat",
-          }
-        },
-        title: {
-          display: false,
-          text: 'Title',
-          fontFamily: "Montserrat",
-        },
-        tooltips: {
-          mode: 'index',
-          intercept: false,
-          callbacks: {
-            label: function (tooltipItem, data) {
-              var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-              if (label) {
-                label += ': ';
-              }
-              label += Math.round(tooltipItem.yLabel * 100) / 100;
-              return label;
-            }
-          }
-        },
-        responsive: true,
-        scales: {
-          xAxes: [{
-            stacked: true,
-            ticks: { fontStyle: 'bold', steps: 4, fontFamily: "Montserrat", },
-            gridLines: {
-              display: false,
-            }
-          }],
-          yAxes: [{
-            stacked: true,
-            ticks: {
-              steps:10,
-              stepSize: 200000,
-              callback: function (value, index, values) {
-                if(value < 800001) {
-                  values = Math.round(value * 10) / 10000 + 'K ';
-                  }else {
-                    values = Math.round(value * 10) / 10000000 + 'M ';
-                  }
-                return values
-              },
-
-            },
-            gridLines: {
-              drawTicks: false,
-            },
-            scaleLabel: {
-              display: true,
-              labelString: "Number of People",
-              fontStyle: 'bold',
-              fontFamily: "Montserrat",
-              fontSize: 12
-            }
-          }],
-
-        }
-      }
-    });
+    setNevt(data_nevt)
   }
   const renderChart_national_election_voter_turnout_local = () => {
     let color = '#d6d6d6'
-    let data = {
+    data_nevt_local= {
       labels: sortedData,
       datasets: []
     }
@@ -464,7 +415,7 @@ const CitizenEngagmentes = () => {
           color = '#d6d6d6'
       }
 
-      data.datasets.push({
+      data_nevt_local.datasets.push({
         label: a,
         stack: 'Stack ' + i,
         data: final_voter_turnout_local[i],
@@ -472,83 +423,11 @@ const CitizenEngagmentes = () => {
         borderColor: color,
       })
     })
-
-    if (chartRef3) { chartRef3.destroy(); }
-    var ctx = document.getElementById('national_election_voter_turnout_local').getContext('2d');
-    chartRef3 = new Chart(ctx, {
-      type: 'bar',
-      data,
-      options: {
-        legend: {
-          labels: {
-            fontColor: "#4A4A4A",
-            fontSize: 8,
-            fontFamily: "Montserrat",
-          }
-        },
-        title: {
-          display: false,
-          text: 'Title',
-          fontFamily: "Montserrat",
-        },
-        tooltips: {
-          mode: 'index',
-          intercept: false,
-          callbacks: {
-            label: function (tooltipItem, data) {
-              var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-              if (label) {
-                label += ': ';
-              }
-              label += Math.round(tooltipItem.yLabel * 100) / 100;
-              return label;
-            }
-          }
-        },
-        responsive: true,
-        scales: {
-          xAxes: [{
-            stacked: true,
-            ticks: { fontStyle: 'bold', steps: 4, fontFamily: "Montserrat", },
-            gridLines: {
-              display: false,
-            }
-          }],
-          yAxes: [{
-            stacked: true,
-            ticks: {
-              steps:10,
-              stepSize: 200000,
-              callback: function (value, index, values) {
-                if(value < 800001) {
-                  values = Math.round(value * 10) / 10000 + 'K ';
-                  }else {
-                    values = Math.round(value * 10) / 10000000 + 'M ';
-                  }
-                return values
-              },
-
-            },
-            gridLines: {
-              drawTicks: false,
-            },
-            scaleLabel: {
-              display: true,
-              labelString: "Number of People",
-              fontStyle: 'bold',
-              fontFamily: "Montserrat",
-              fontSize: 12
-            }
-          }],
-
-        }
-      }
-    });
+    setNevt_local(data_nevt_local)
   }
   const renderChart_national_election_registered_voters = () => {
     let color = '#d6d6d6'
-    let data = {
+    data_nerv = {
       labels: sortedData,
       datasets: []
     }
@@ -570,7 +449,7 @@ const CitizenEngagmentes = () => {
           color = '#d6d6d6'
       }
 
-      data.datasets.push({
+      data_nerv.datasets.push({
         label: a,
         stack: 'Stack ' + i,
         data: final_registered_voters[i],
@@ -578,83 +457,11 @@ const CitizenEngagmentes = () => {
         borderColor: color,
       })
     })
-
-    if (chartRef2) { chartRef2.destroy(); }
-    var ctx = document.getElementById('national_election_registered_voters').getContext('2d');
-    chartRef2 = new Chart(ctx, {
-      type: 'bar',
-      data,
-      options: {
-        legend: {
-          labels: {
-            fontColor: "#4A4A4A",
-            fontSize: 8,
-            fontFamily: "Montserrat",
-          }
-        },
-        title: {
-          display: false,
-          text: 'Title',
-          fontFamily: "Montserrat",
-        },
-        tooltips: {
-          mode: 'index',
-          intercept: false,
-          callbacks: {
-            label: function (tooltipItem, data) {
-              var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-              if (label) {
-                label += ': ';
-              }
-              label += Math.round(tooltipItem.yLabel * 100) / 100;
-              return label;
-            }
-          }
-        },
-        responsive: true,
-        scales: {
-          xAxes: [{
-            stacked: true,
-            ticks: { fontStyle: 'bold', steps: 4, fontFamily: "Montserrat", },
-            gridLines: {
-              display: false,
-            }
-          }],
-          yAxes: [{
-            stacked: true,
-            ticks: {
-              steps:10,
-              stepSize: 200000,
-              callback: function (value, index, values) {
-                if(value < 800001) {
-                  values = Math.round(value * 10) / 10000 + 'K ';
-                  }else {
-                    values = Math.round(value * 10) / 10000000 + 'M ';
-                  }
-                return values
-              },
-
-            },
-            gridLines: {
-              drawTicks: false,
-            },
-            scaleLabel: {
-              display: true,
-              labelString: "Number of People",
-              fontStyle: 'bold',
-              fontFamily: "Montserrat",
-              fontSize: 12
-            }
-          }],
-
-        }
-      }
-    });
+    setNerv(data_nerv)
   }
   const renderChart_national_election_registered_voters_local = () => {
     let color = '#d6d6d6'
-    let data = {
+    data_nerv_local = {
       labels: sortedData,
       datasets: []
     }
@@ -676,7 +483,7 @@ const CitizenEngagmentes = () => {
           color = '#d6d6d6'
       }
 
-      data.datasets.push({
+      data_nerv_local.datasets.push({
         label: a,
         stack: 'Stack ' + i,
         data: final_registered_voters_local[i],
@@ -684,79 +491,7 @@ const CitizenEngagmentes = () => {
         borderColor: color,
       })
     })
-
-    if (chartRef4) { chartRef4.destroy(); }
-    var ctx = document.getElementById('national_election_registered_voters_local').getContext('2d');
-    chartRef4 = new Chart(ctx, {
-      type: 'bar',
-      data,
-      options: {
-        legend: {
-          labels: {
-            fontColor: "#4A4A4A",
-            fontSize: 8,
-            fontFamily: "Montserrat",
-          }
-        },
-        title: {
-          display: false,
-          text: 'Title',
-          fontFamily: "Montserrat",
-        },
-        tooltips: {
-          mode: 'index',
-          intercept: false,
-          callbacks: {
-            label: function (tooltipItem, data) {
-              var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-              if (label) {
-                label += ': ';
-              }
-              label += Math.round(tooltipItem.yLabel * 100) / 100;
-              return label;
-            }
-          }
-        },
-        responsive: true,
-        scales: {
-          xAxes: [{
-            stacked: true,
-            ticks: { fontStyle: 'bold', steps: 4, fontFamily: "Montserrat", },
-            gridLines: {
-              display: false,
-            }
-          }],
-          yAxes: [{
-            stacked: true,
-            ticks: {
-              steps:10,
-              stepSize: 200000,
-              callback: function (value, index, values) {
-                if(value < 800001) {
-                  values = Math.round(value * 10) / 10000 + 'K ';
-                  }else {
-                    values = Math.round(value * 10) / 10000000 + 'M ';
-                  }
-                return values
-              },
-
-            },
-            gridLines: {
-              drawTicks: false,
-            },
-            scaleLabel: {
-              display: true,
-              labelString: "Number of People",
-              fontStyle: 'bold',
-              fontFamily: "Montserrat",
-              fontSize: 12
-            }
-          }],
-
-        }
-      }
-    });
+    setNerv_local(data_nerv_local)
   }
   return (
     <div >
@@ -803,7 +538,8 @@ const CitizenEngagmentes = () => {
                       <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='#' target='_blank' /></div>
                     </div>
                     {/**National election voter turnout chart */}
-                    <canvas id='national_election_voter_turnout'></canvas>
+
+                    <BarChart data={nevt} stepSize={200000} hundred={true} divide={1000}/>
                   </div>
                 </div>
                 <div className='col-md-6'>
@@ -813,7 +549,7 @@ const CitizenEngagmentes = () => {
                       <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='#' target='_blank' /></div>
                     </div>
                      {/**National election registered voters chart */}
-                    <canvas id='national_election_registered_voters'></canvas>
+                     <BarChart data={nerv} stepSize={500000} hundred={true} divide={1000}/>
                   </div>
                 </div>
               </div>
@@ -826,7 +562,7 @@ const CitizenEngagmentes = () => {
                       <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='#' target='_blank' /></div>
                     </div>
                      {/**Local election voter turnout chart */}
-                    <canvas id='national_election_voter_turnout_local'></canvas>
+                     <BarChart data={nevt_local} stepSize={200000} hundred={true} divide={1000}/>
                   </div>
                 </div>
                 <div className='col-md-6'>
@@ -836,7 +572,7 @@ const CitizenEngagmentes = () => {
                       <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='#' target='_blank' /></div>
                     </div>
                     {/**Local election registered voters chart */}
-                    <canvas id='national_election_registered_voters_local'></canvas>
+                    <BarChart data={nerv_local} stepSize={500000} hundred={true} divide={1000}/>
                   </div>
                 </div>
               </div>

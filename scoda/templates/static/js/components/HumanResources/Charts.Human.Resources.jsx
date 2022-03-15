@@ -4,6 +4,8 @@ import Button from '../Button';
 import { Modal, ModalBody, Spinner } from 'reactstrap';
 import { Bar } from 'react-chartjs-2';
 import HumanResourcesData from '../../data/HumanResourceData'
+import Barchart from '../Barchart'
+import Piechart from '../PieChart'
 
 //Units Receiving Free Basic Services data , static for now since it's still not part of codebook.
 // let fbs_data_2018 = [76201, 320406, 15848, 237330, 174687, 29658, 73593, 57250]
@@ -48,7 +50,26 @@ let senior_mv = [
   [2, 1, 9, 4, 4, 2, 2, 4],//2011
   [1, 0, 14, 6, 2, 11, 0, 2],//2016
 ]
-
+let data_num_of_mp = {
+  labels: sortedData,
+  datasets: []
+}
+let data_senior_mv = {
+  labels: sortedData,
+  datasets: []
+}
+let data_manage_v = {
+  labels: sortedData,
+  datasets: []
+}
+let data_m_m_posts = {
+  labels:['Total filled Posts','Vacancies'],
+  datasets: []
+}
+let data_s_manage_p = {
+  labels:['Total filled Posts','Vacancies'],
+  datasets: []
+}
 //chart declarations
 var chartRef1,chartRef2,chartRef3,chartRef4,chartRef5
 
@@ -79,6 +100,11 @@ const CitizenEngagmentes = () => {
   const mounted = useRef();
   // let [final_total_number_of_municipal_posts, setFinal_total_number_of_municipal_posts] = useState([])
   const [stepSize, setStepSize] = useState(200000);
+  const [num_mp, setNum_mp] = useState();
+  const [senior_m_vac, setSenior_m_vac] = useState();
+  const [manage_v, setManage_v] = useState();
+  const [muni_m_posts, setMuni_m_posts] = useState();
+  const [senior_m_p, setSenior_m_p] = useState();
   const [isMulti, setIsMulti] = useState(true);
   const [loader, setLoader] = useState(false);
   const [chartYears, setChartYears] = useState(['Year', '2014', '2015', '2016', '2017']);
@@ -130,7 +156,7 @@ const CitizenEngagmentes = () => {
       renderChart_management_vacancies();
       renderChart_senior_management_vacancies();
     }
-  });
+  },[]);
   const number_of_municipal_posts = () => {
     let toNum = new Object()
     let years = 2020
@@ -288,13 +314,15 @@ const CitizenEngagmentes = () => {
         final_municipal_management_vacancies[index] = municipal_management_vacancies_data[index].filter(Boolean)
         final_number_of_senior_management_vacancies[index] = number_of_senior_management_vacancies_data[index].filter(Boolean)
       }
-
+        renderChart_number_of_municipal_posts();
+        renderChart_management_vacancies();
+        renderChart_senior_management_vacancies();
     })
   }
 
   const renderChart_number_of_municipal_posts = () => {
     let color = '#d6d6d6'
-    let data = {
+    data_num_of_mp = {
       labels: sortedData,
       datasets: []
     }
@@ -316,7 +344,7 @@ const CitizenEngagmentes = () => {
           color = '#d6d6d6'
       }
 
-      data.datasets.push({
+      data_num_of_mp.datasets.push({
         label: a,
         stack: 'Stack ' + i,
         data: final_total_number_of_municipal_posts[i],
@@ -324,78 +352,11 @@ const CitizenEngagmentes = () => {
         borderColor: color,
       })
     })
-
-    if (chartRef1) { chartRef1.destroy(); }
-    var ctx = document.getElementById('mc').getContext('2d');
-    chartRef1 = new Chart(ctx, {
-      type: 'bar',
-      data,
-      options: {
-        legend: {
-          labels: {
-            fontColor: "#4A4A4A",
-            fontSize: 8,
-            fontFamily: "Montserrat",
-          }
-        },
-        title: {
-          display: false,
-          text: 'Title',
-          fontFamily: "Montserrat",
-        },
-        tooltips: {
-          mode: 'index',
-          intercept: false,
-          callbacks: {
-            label: function (tooltipItem, data) {
-              var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-              if (label) {
-                label += ': ';
-              }
-              label += Math.round(tooltipItem.yLabel * 100) / 100;
-              return label;
-            }
-          }
-        },
-        responsive: true,
-        scales: {
-          xAxes: [{
-            stacked: true,
-            ticks: { fontStyle: 'bold', steps: 4, fontFamily: "Montserrat", },
-            gridLines: {
-              display: false,
-            }
-          }],
-          yAxes: [{
-            stacked: true,
-            ticks: {
-              stepSize: 5000,
-              callback: function (value, index, values) {
-                  values = Math.round(value) / 100000 + 'K ';
-                return values
-              },
-
-            },
-            gridLines: {
-              drawTicks: false,
-            },
-            scaleLabel: {
-              display: true,
-              labelString: "Number of Posts",
-              fontStyle: 'bold',
-              fontFamily: "Montserrat",
-              fontSize: 12
-            }
-          }],
-
-        }
-      }
-    });
+    setNum_mp(data_num_of_mp)
   }
   const renderChart_management_vacancies = () => {
     let color = '#d6d6d6'
-    let data = {
+    data_manage_v = {
       labels: sortedData,
       datasets: []
     }
@@ -417,7 +378,7 @@ const CitizenEngagmentes = () => {
           color = '#d6d6d6'
       }
 
-      data.datasets.push({
+      data_manage_v.datasets.push({
         label: a,
         stack: 'Stack ' + i,
         data: final_municipal_management_vacancies[i],
@@ -425,77 +386,11 @@ const CitizenEngagmentes = () => {
         borderColor: color,
       })
     })
-
-    if (chartRef3) { chartRef3.destroy(); }
-    var ctx = document.getElementById('mc2').getContext('2d');
-    chartRef3 = new Chart(ctx, {
-      type: 'bar',
-      data,
-      options: {
-        legend: {
-          labels: {
-            fontColor: "#4A4A4A",
-            fontSize: 8,
-            fontFamily: "Montserrat",
-          }
-        },
-        title: {
-          display: false,
-          text: 'Title',
-          fontFamily: "Montserrat",
-        },
-        tooltips: {
-          mode: 'index',
-          intercept: false,
-          callbacks: {
-            label: function (tooltipItem, data) {
-              var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-              if (label) {
-                label += ': ';
-              }
-              label += Math.round(tooltipItem.yLabel * 100) / 100;
-              return label;
-            }
-          }
-        },
-        responsive: true,
-        scales: {
-          xAxes: [{
-            stacked: true,
-            ticks: { fontStyle: 'bold', steps: 4, fontFamily: "Montserrat", },
-            gridLines: {
-              display: false,
-            }
-          }],
-          yAxes: [{
-            stacked: true,
-            ticks: {
-              stepSize: 2,
-              callback: function (value, index, values) {
-                return value+"   "
-              },
-
-            },
-            gridLines: {
-              drawTicks: false,
-            },
-            scaleLabel: {
-              display: true,
-              labelString: "Number of Vacancies",
-              fontStyle: 'bold',
-              fontFamily: "Montserrat",
-              fontSize: 12
-            }
-          }],
-
-        }
-      }
-    });
+    setManage_v(data_manage_v)
   }
   const renderChart_senior_management_vacancies = () => {
     let color = '#d6d6d6'
-    let data = {
+    data_senior_mv = {
       labels: sortedData,
       datasets: []
     }
@@ -517,7 +412,7 @@ const CitizenEngagmentes = () => {
           color = '#d6d6d6'
       }
 
-      data.datasets.push({
+      data_senior_mv.datasets.push({
         label: a,
         stack: 'Stack ' + i,
         data: final_number_of_senior_management_vacancies[i],
@@ -525,79 +420,13 @@ const CitizenEngagmentes = () => {
         borderColor: color,
       })
     })
-
-    if (chartRef2) { chartRef2.destroy(); }
-    var ctx = document.getElementById('mc1').getContext('2d');
-    chartRef2 = new Chart(ctx, {
-      type: 'bar',
-      data,
-      options: {
-        legend: {
-          labels: {
-            fontColor: "#4A4A4A",
-            fontSize: 8,
-            fontFamily: "Montserrat",
-          }
-        },
-        title: {
-          display: false,
-          text: 'Title',
-          fontFamily: "Montserrat",
-        },
-        tooltips: {
-          mode: 'index',
-          intercept: false,
-          callbacks: {
-            label: function (tooltipItem, data) {
-              var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-              if (label) {
-                label += ': ';
-              }
-              label += Math.round(tooltipItem.yLabel * 100) / 100;
-              return label;
-            }
-          }
-        },
-        responsive: true,
-        scales: {
-          xAxes: [{
-            stacked: true,
-            ticks: { fontStyle: 'bold', steps: 4, fontFamily: "Montserrat", },
-            gridLines: {
-              display: false,
-            }
-          }],
-          yAxes: [{
-            stacked: true,
-            ticks: {
-              stepSize: 2,
-              callback: function (value, index, values) {
-                return value+" "
-              },
-
-            },
-            gridLines: {
-              drawTicks: false,
-            },
-            scaleLabel: {
-              display: true,
-              labelString: "Number of Vacancies",
-              fontStyle: 'bold',
-              fontFamily: "Montserrat",
-              fontSize: 12
-            }
-          }],
-
-        }
-      }
-    });
+    setSenior_m_vac(data_senior_mv)
   }
 
   //Pie chart
   const renderChart_municipal_management_posts = () => {
     let color = '#d6d6d6'
-    let data = {
+    data_m_m_posts = {
       labels:['Total filled Posts','Vacancies'],
       datasets: []
     }
@@ -610,40 +439,18 @@ const CitizenEngagmentes = () => {
           color = '#d6d6d6'
       }
 
-      data.datasets.push({
+      data_m_m_posts.datasets.push({
         data:management_posts,
         backgroundColor: color,
         borderColor: color,
       })
     })
+    setMuni_m_posts(data_m_m_posts)
 
-    if (chartRef4) { chartRef4.destroy(); }
-    var ctx = document.getElementById('mc3').getContext('2d');
-    chartRef4 = new Chart(ctx, {
-      type: 'pie',
-      data,
-      options: {
-        legend: {
-          position:'right',
-          labels: {
-            fontColor: "#4A4A4A",
-            fontSize: 10,
-            fontFamily: "Montserrat",
-          }
-        },
-        title: {
-          display: false,
-          text: 'Title',
-          fontFamily: "Montserrat",
-        },
-
-        responsive: true,
-      }
-    });
   }
   const renderChart_senior_management_posts = () => {
     let color = '#d6d6d6'
-    let data = {
+    data_s_manage_p = {
       labels:['Total filled Posts','Vacancies'],
       datasets: []
     }
@@ -656,36 +463,13 @@ const CitizenEngagmentes = () => {
           color = '#d6d6d6'
       }
 
-      data.datasets.push({
+      data_s_manage_p.datasets.push({
         data:senior_management_posts,
         backgroundColor: color,
         borderColor: color,
       })
     })
-
-    if (chartRef5) { chartRef5.destroy(); }
-    var ctx = document.getElementById('mc4').getContext('2d');
-    chartRef5 = new Chart(ctx, {
-      type: 'pie',
-      data,
-      options: {
-        legend: {
-          position:'right',
-          labels: {
-            fontColor: "#4A4A4A",
-            fontSize: 10,
-            fontFamily: "Montserrat",
-          }
-        },
-        title: {
-          display: false,
-          text: 'Title',
-          fontFamily: "Montserrat",
-        },
-
-        responsive: true,
-      }
-    });
+    setSenior_m_p(data_s_manage_p)
   }
 
   return (
@@ -732,7 +516,7 @@ const CitizenEngagmentes = () => {
                       <div className='col-md-9'><h1 className='charts_dashboards--households'>Total number of municipal posts</h1></div>
                       <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/392' target='_blank' /></div>
                     </div>
-                    <canvas id='mc'></canvas>
+                    <Barchart data={num_mp} stepSize={5000} hundred={true} divide={1000}/>
                   </div>
                   <div className='post_breakdown-container'>
                       <h1>Municipal Post Breakdown</h1>
@@ -756,7 +540,7 @@ const CitizenEngagmentes = () => {
                       <div className='col-md-9'><h1 className='charts_dashboards--households'>Municipal Management Vacancies</h1></div>
                       <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='#' target='_blank' /></div>
                     </div>
-                    <canvas id='mc1'></canvas>
+                    <Barchart data={senior_m_vac} stepSize={2} hundred={false} divide={1}/>
                   </div>
                   <div>
                   <div className='charts'>
@@ -764,24 +548,25 @@ const CitizenEngagmentes = () => {
                       <div className='col-md-9'><h1 className='charts_dashboards--households'>Municipal Management Posts</h1></div>
 
                     </div>
-                    <canvas id='mc3'></canvas>
+                    <Piechart data={muni_m_posts} />
                   </div>
                   </div>
                 </div>
                 <div className='col-md-4'>
                   <div className='charts'>
                     <div className='row'>
-                      <div className='col-md-9'><h1 className='charts_dashboards--households'>Municipal Management Posts</h1></div>
+                      <div className='col-md-9'><h1 className='charts_dashboards--households'>Number of Senior Management Vacancies</h1></div>
                       <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data'  href='#' target='_blank' /></div>
                     </div>
-                    <canvas id='mc2'></canvas>
+                    <Barchart data={manage_v} stepSize={2} hundred={false} divide={1}/>
                   </div>
                   <div>
                   <div className='charts'>
                     <div className='row'>
                       <div className='col-md-9'><h1 className='charts_dashboards--households'>Senior Management Posts</h1></div>
                     </div>
-                    <canvas id='mc4'></canvas>
+                    <Piechart data={senior_m_p}/>
+
                   </div>
                   </div>
                 </div>

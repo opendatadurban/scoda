@@ -9,22 +9,22 @@ const Socr_Human_Resources = () => {
         dropdownMenu: [ 
             {
               name: "Service Delivery", 
-              href: "socr#/service-delivery", 
+              href: "socr#/service_delivery", 
               active: false 
             },
             { 
               name: "Citizen Engagement", 
-              href: "socr#/citizen-engagement", 
+              href: "socr#/citizen_engagement", 
               active: false 
             }, 
             {
               name: "City Finances", 
-              href: "socr#/city-finances", 
+              href: "socr#/city_finances", 
               active: false 
           }, 
           {
              name: "Human Resources", 
-             href: "socr#/human-resources", 
+             href: "socr#/human_resources", 
              active: true 
           }
         ]
