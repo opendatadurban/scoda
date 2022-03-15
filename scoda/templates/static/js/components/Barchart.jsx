@@ -1,28 +1,6 @@
 import React, { Component } from 'react';
 import { Bar, Chart } from 'react-chartjs-2';
 const Charts = (props) => {
-    
-     const data = {
-        labels: ["2020/02/17", "", "2020/02/23", "", "2020/02/29", ""],
-        datasets: [
-          {
-            type: "bar",
-            backgroundColor: "rgba(54, 162, 235, 0.2)",
-            borderColor: "rgba(54, 162, 235, 1)",
-            borderWidth: 1,
-            label: "標籤一",
-            data: [60, 49, 72, 90, 100, 60]
-          },
-          {
-            type: "line",
-            label: "標籤二",
-            data: [25, 13, 30, 35, 25, 40],
-            lineTension: 0, // 曲線的彎度，設 0 表示直線
-            fill: true // 是否填滿色彩
-          }
-        ]
-      }
-
       const options= {
         legend: {
           labels: {
@@ -89,7 +67,7 @@ const Charts = (props) => {
                 <div className="row">
                     <div className="col-12">
                         <h3 className={props.class}>{props.title}</h3>
-                        <Bar options={options} data={props.data} />
+                        <Bar data={props.data} redraw={true}/>
                         <p className="source">{props.source}</p>
                     </div>
                 </div>
