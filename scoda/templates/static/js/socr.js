@@ -27,10 +27,10 @@ export default (
     <Suspense fallback={<div style={style}><img src={loader} alt='Loader'></img></div>}>
 
       <Route exact path='/' component={SoCR} />
-      <Route exact path='/citizen-engagement' component={CitizenEngagements} />
-      <Route exact path='/service-delivery' component={ServiceDelivery} />
-      <Route exact path='/human-resources' component={HumanResources} />
-      <Route exact path='/city-finances' component={CityFinances} />
+      <Route exact path='/citizen_engagement' component={CitizenEngagements} />
+      <Route exact path='/service_delivery' component={ServiceDelivery} />
+      <Route exact path='/human_resources' component={HumanResources} />
+      <Route exact path='/city_finances' component={CityFinances} />
 
       </Suspense>
     </HashRouter>
