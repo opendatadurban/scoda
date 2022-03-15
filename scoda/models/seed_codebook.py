@@ -9,6 +9,7 @@ def seed_codebook_data(db):
     df = pd.read_excel('%s/data/%s' % (app.root_path, "codebook-data/sacn_socr_variables_20200817_scoda.xlsx")). \
         fillna(value='')
 
+    print("Processing Metadata")
     for data in df["region_name"].unique():
         if data:
             region = CbRegion()
@@ -20,6 +21,12 @@ def seed_codebook_data(db):
             region_type = CbRegionType()
             region_type.name = data.strip()
             db.session.add(region_type)
+
+    for data in df["year_end"].astype(str).unique():
+        if data:
+            year_end = CbYear()
+            year_end.name = int(data)
+            db.session.add(year_end)
     db.session.commit()
 
     print("Seeding DataPoints & Indicators")
@@ -46,10 +53,17 @@ def seed_codebook_data(db):
                 data_point.value = row["value"]
                 # Setup date start & end
                 try:
-                    date_start = datetime.date(int(row["year_start"]), int(row["month_start"]), int(row["day_start"]))
-                    data_point.start_dt = date_start
-                    date_end = datetime.date(int(row["year_end"]), int(row["month_end"]), int(row["day_end"]))
-                    data_point.end_dt = date_end
+                    if row["year_start"]:
+                        date_start = datetime.date(int(row["year_start"]), int(row["month_start"]) if row["month_start"] else 1,
+                                                   int(row["day_start"]) if row["day_start"] else 1)
+                        data_point.start_dt = date_start
+                        data_point.year_start_id = db.session.query(CbYear.id).filter(
+                            CbYear.name == int(row["year_start"]))
+                    if row["year_end"]:
+                        date_end = datetime.date(int(row["year_end"]), int(row["month_end"]) if row["month_end"] else 1, int(row["day_end"]) if row["day_end"] else 1)
+                        data_point.end_dt = date_end
+                        data_point.year_end_id = db.session.query(CbYear.id).filter(
+                            CbYear.name == int(row["year_end"]))
                 except Exception as e:
                     print(e)
                 data_point.indicator_id = indicator.id
