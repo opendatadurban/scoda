@@ -95,7 +95,7 @@ export default class IndicatorExplorerDataCard extends Component {
         let resultSet = await axios.get(`/api/explore/codebook?indicator_id=${indicatorId}`).catch(error => {
             this.hideLoader();
             this.setState({modal:true, toggle:true});
-        });
+        }); 
 
         try
         {
