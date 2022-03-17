@@ -130,12 +130,45 @@
   
     // General styling
   
-    // Desktop specific styling
-    @media (min-width: $tablet) {}
-  
-    // Mobile specific styling
-    @media (max-width: $tablet) {}
   }
+      // Desktop specific styling
+      @media (min-width: $tablet) {}
+  
+      // Mobile specific styling
+      @media (max-width: $tablet) {
+        .subnav {
+          padding-top: 15px;
+          padding-left: 15px;
+          &--wrapper {
+            height: 97px;
+            display: block;
+          }
+          &--breadcrumbs {
+            font-size: 14px;
+              
+      .dropdown {
+        .btn,
+        h6 {
+          font-size: 14px;
+        }
+        &-menu {
+          width: 69vw;
+          top: 0px;
+          left: 0px;
+          transform: translate3d(-61px, 25px, 0px);
+        }
+        &-toggle {
+          &::after {
+            font-size: 13px;
+            top: -3px;
+            right: -24px;
+          }
+        }
+      }
+          }
+        }
+        
+      }
   #download {
     &:hover {
       box-shadow: none !important;

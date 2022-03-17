@@ -9,7 +9,7 @@ from flask import request, url_for, redirect, flash, make_response, session, ren
 from flask_security import current_user
 from itertools import zip_longest
 from sqlalchemy.sql import select
-from sqlalchemy import func, extract, desc
+from sqlalchemy import func, extract, desc,cast,Date
 from .models import db
 from .models import *
 from .models.user import UserAnalysis
@@ -69,13 +69,23 @@ def api_explore(check):
     print(check)
     # codebook query
     if check == "codebook":
-        query = db.session.query(CbRegion.name.label('re_name'), CbDataPoint.start_dt, CbIndicator.name.label('ds_name'), CbDataPoint.value). \
+        query = db.session.query(CbRegion.name.label('re_name'), CbDataPoint.start_dt,
+                                 CbIndicator.name.label('ds_name'), CbDataPoint.value,
+                                 CbDataPoint.end_dt). \
             filter(CbDataPoint.indicator_id == ind).filter(CbDataPoint.indicator_id == CbIndicator.id). \
             filter(CbDataPoint.region_id == CbRegion.id)
         df = read_sql_query(query.statement, query.session.bind)
+        print(df['start_dt'].iloc[0])
+        print(df['end_dt'].iloc[0])
         df = df.rename(columns={'name': 're_name', 'name.1': 'ds_name'})
-        df["year"] = df["start_dt"].apply(lambda x: int(x.strftime('%Y')))
-        df["start_dt"] = df["year"]
+        if df['start_dt'].iloc[0]:
+            df["year"] = df["start_dt"].apply(lambda x: int(x.strftime('%Y')))
+            df["start_dt"] = df["year"]
+        elif df['end_dt'].iloc[0]:
+            df["year"] = df["end_dt"].apply(lambda x: int(x.strftime('%Y')))
+            df["start_dt"] = df["year"]
+            del df["end_dt"]
+
     else:
         query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value). \
             filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
@@ -156,6 +166,30 @@ def api_explore(check):
         #     form_errors = form.errors
         #     return {"form_errors":form_errors}
 
+
+
+@app.route('/api/indicator/<int:indicator_id>', methods=['GET', 'POST'])
+def api_indicators(indicator_id):
+    if not indicator_id:
+        message = 'No indicator selected'
+        resp = jsonify(response_message=message)
+        resp.status_code = 404
+        return resp
+    # codebook query
+    indicators = db.session.query(CbRegion.name.label('re_name'), CbDataPoint.start_dt.cast(Date),
+                             CbIndicator.name.label('ds_name'), CbDataPoint.value,
+                             CbDataPoint.end_dt.cast(Date)). \
+        filter(CbDataPoint.indicator_id == indicator_id).filter(CbDataPoint.indicator_id == CbIndicator.id). \
+        filter(CbDataPoint.region_id == CbRegion.id).all()
+    if indicators:
+        resp = jsonify(indicators)
+        resp.status_code = 200
+        return resp
+    else:
+        message = 'No indicator selected'
+        resp = jsonify(response_message=message)
+        resp.status_code = 404
+        return resp
 @app.route('/explore', methods=['GET', 'POST'])
 def explore():
     analyses = []

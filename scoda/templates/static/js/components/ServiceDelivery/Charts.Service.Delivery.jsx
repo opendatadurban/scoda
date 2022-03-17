@@ -71,11 +71,11 @@ const style = {
   control: (base, state) => ({
     ...base,
     border: '1px solid #4A4A4A',
-    borderRadius:'12.5px',
+    borderRadius: '28px',
     boxShadow: 'none',
     '&:hover': {
         border: '1px solid #4A4A4A',
-        borderRadius:'12.5px',
+        borderRadius: '28px',
     }
 })
 };
@@ -1254,7 +1254,7 @@ export default class Charts_dashboards extends Component {
                       <div className='charts'>
                         <div className='row'>
                           <div className='col-md-9'><h1 className='charts_dashboards--households'>Households: Access to Basic Water Supply</h1></div>
-                          <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/392' target='_blank'/></div>
+                          <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='toolkit#/codebook-explorer/392' target='_blank'/></div>
                         </div>
                         <canvas id='mc'></canvas>
                       </div>
@@ -1263,7 +1263,7 @@ export default class Charts_dashboards extends Component {
                       <div className='charts'>
                         <div className='row'>
                           <div className='col-md-9'><h1 className='charts_dashboards--households'>Households: Access to Basic Sanitation</h1></div>
-                          <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/384' target='_blank'/></div>
+                          <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='toolkit#/codebook-explorer/384' target='_blank'/></div>
                         </div>
                         <canvas id='mc1'></canvas>
                       </div>
@@ -1274,7 +1274,7 @@ export default class Charts_dashboards extends Component {
                       <div className='charts'>
                         <div className='row'>
                           <div className='col-md-9'><h1 className='charts_dashboards--households'>Households: Access to Electricity</h1></div>
-                          <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/10' target='_blank'/></div>
+                          <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='toolkit#/codebook-explorer/10' target='_blank'/></div>
                         </div>
                         <canvas id='mc2'></canvas>
                       </div>
@@ -1283,7 +1283,7 @@ export default class Charts_dashboards extends Component {
                       <div className='charts'>
                         <div className='row'>
                           <div className='col-md-9'><h1 className='charts_dashboards--households'>Households: Access to Refuse Removal</h1></div>
-                          <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/1114' target='_blank' /></div>
+                          <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='toolkit#/codebook-explorer/1114' target='_blank' /></div>
                         </div>
                         <canvas id='mc3'></canvas>
                       </div>
@@ -1295,14 +1295,14 @@ export default class Charts_dashboards extends Component {
                 <div className='charts p-0'>
                   <div className='row'>
                     <div className='col-md-9'><h1 className='charts_dashboards--households'>Total Number of Households/Municipality</h1></div>
-                    <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/12' target='_blank'/></div>
+                    <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='toolkit#/codebook-explorer/12' target='_blank'/></div>
                   </div>
                   <canvas id='mc4'></canvas>
                 </div>
                 <div className='charts p-0 mt-4'>
                   <div className='row'>
                     <div className='col-md-9'><h1 className='charts_dashboards--households'>Units Receiving Free Basic Services</h1></div>
-                    <div className='col-md-3 d-none'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/384' target='_blank'/></div>
+                    <div className='col-md-3 d-none'><Button className='charts_dashboards--button' text='Raw Data' href='toolkit#/codebook-explorer/384' target='_blank'/></div>
                   </div>
                   <Switch_text toggle={this.state.toggle} action={this.switchTrigger} />
                   <canvas id='mc5'></canvas>

@@ -8,26 +8,26 @@ import Charts_dashboards from './Charts.Human.Resources'
 const Socr_Human_Resources = () => {
     const subNavContent = {
         dropdownMenu: [ 
-            { 
-                name: "Human Resources", 
-                href: "socr#/human-resources", 
-                active: true 
-            },
             {
-                name: "Service Delivery", 
-                href: "socr#/service-delivery", 
-                active: false 
-              },
+              name: "Service Delivery", 
+              href: "socr#/service-delivery", 
+              active: false 
+            },
             { 
-                name: "Citizen Engagement", 
-                href: "socr#/citizen-engagement", 
-                active: false 
+              name: "Citizen Engagement", 
+              href: "socr#/citizen-engagement", 
+              active: false 
             }, 
             {
-                name: "City Finances", 
-                href: "socr#/city-finances", 
-                active: false 
+              name: "City Finances", 
+              href: "socr#/city-finances", 
+              active: false 
           }, 
+          {
+             name: "Human Resources", 
+             href: "socr#/human-resources", 
+             active: true 
+          }
         ]
       }
       const [current_year, setCurrentYear] = useState(2015)

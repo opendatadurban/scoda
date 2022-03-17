@@ -1,7 +1,6 @@
 import React, { Component,useEffect, useState } from 'react'
 import Select from '../Select'
 import axios from 'axios';
-
 import panelData from '../../data/panelData';
 
 const CitizenEngagmentStatPanel = () => {

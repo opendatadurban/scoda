@@ -77,11 +77,11 @@ const style = {
   control: (base, state) => ({
     ...base,
     border: '1px solid #4A4A4A',
-    borderRadius: '12.5px',
+    borderRadius: '28px',
     boxShadow: 'none',
     '&:hover': {
       border: '1px solid #4A4A4A',
-      borderRadius: '12.5px',
+      borderRadius: '28px',
     }
   })
 };
@@ -369,7 +369,7 @@ const CitizenEngagmentes = () => {
     })
 
     if (chartRef1) { chartRef1.destroy(); }
-    var ctx = document.getElementById('mc').getContext('2d');
+    var ctx = document.getElementById('wasteful_expenditure').getContext('2d');
     chartRef1 = new Chart(ctx, {
       type: 'bar',
       data,
@@ -435,7 +435,7 @@ const CitizenEngagmentes = () => {
       }
     });
   }
-  const renderChart_irregular_expenditure= () => {
+  const renderChart_irregular_expenditure = () => {
     let color = '#d6d6d6'
     let data = {
       labels: sortedData,
@@ -469,7 +469,7 @@ const CitizenEngagmentes = () => {
     })
 
     if (chartRef3) { chartRef3.destroy(); }
-    var ctx = document.getElementById('mc2').getContext('2d');
+    var ctx = document.getElementById('irregular_expenditure').getContext('2d');
     chartRef3 = new Chart(ctx, {
       type: 'bar',
       data,
@@ -569,7 +569,7 @@ const CitizenEngagmentes = () => {
     })
 
     if (chartRef2) { chartRef2.destroy(); }
-    var ctx = document.getElementById('mc1').getContext('2d');
+    var ctx = document.getElementById('fruitless_expenditure').getContext('2d');
     chartRef2 = new Chart(ctx, {
       type: 'bar',
       data,
@@ -669,7 +669,7 @@ const CitizenEngagmentes = () => {
     })
 
     if (chartRef4) { chartRef4.destroy(); }
-    var ctx = document.getElementById('mc3').getContext('2d');
+    var ctx = document.getElementById('unauthorised_expenditure').getContext('2d');
     chartRef4 = new Chart(ctx, {
       type: 'bar',
       data,
@@ -781,9 +781,9 @@ const CitizenEngagmentes = () => {
                   <div className='charts'>
                     <div className='row'>
                       <div className='col-md-9'><h1 className='charts_dashboards--households'>Unauthorised, irregular, fruitless & wastful expenditure</h1></div>
-                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/392' target='_blank' /></div>
+                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='#' target='_blank' /></div>
                     </div>
-                    <canvas id='mc'></canvas>
+                    <canvas id='wasteful_expenditure'></canvas>
                   </div>
                   <div className='post_breakdown-container'>
                       <h1>Context Notes</h1>
@@ -803,12 +803,12 @@ const CitizenEngagmentes = () => {
                   <div className='charts'>
                     <div className='row'>
                       <div className='col-md-9'><h1 className='charts_dashboards--households'>Irregular Expenditure</h1></div>
-                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/392' target='_blank' /></div>
+                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='#' target='_blank' /></div>
                     </div>
-                    <canvas id='mc1'></canvas>
+                    <canvas id='fruitless_expenditure'></canvas>
                   </div>
                   <div className='post_breakdown-container'>
-                        <h1>Deifinitions</h1>
+                        <h1>Definitions</h1>
                         <p><b>Irregular Expenditure: </b>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
                         Unde rerum quae iusto, ut asperiores commodi quibusdam deserunt. 
@@ -833,17 +833,17 @@ const CitizenEngagmentes = () => {
                   <div className='charts'>
                     <div className='row'>
                       <div className='col-md-9'><h1 className='charts_dashboards--households'>Fruitless & Wasteful Expenditure</h1></div>
-                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/392' target='_blank' /></div>
+                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data'  href='#' target='_blank' /></div>
                     </div>
-                    <canvas id='mc2'></canvas>
+                    <canvas id='irregular_expenditure'></canvas>
                   </div>
                   <div>
                   <div className='charts'>
                     <div className='row'>
                       <div className='col-md-9'><h1 className='charts_dashboards--households'>Unauthorised Expenditure</h1></div>
-                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/392' target='_blank' /></div>
+                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data'  href='#' target='_blank' /></div>
                     </div>
-                    <canvas id='mc3'></canvas>
+                    <canvas id='unauthorised_expenditure'></canvas>
                   </div>
                   </div>
                 </div>

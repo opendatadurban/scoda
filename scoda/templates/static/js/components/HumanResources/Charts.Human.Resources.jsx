@@ -65,11 +65,11 @@ const style = {
   control: (base, state) => ({
     ...base,
     border: '1px solid #4A4A4A',
-    borderRadius: '12.5px',
+    borderRadius: '28px',
     boxShadow: 'none',
     '&:hover': {
       border: '1px solid #4A4A4A',
-      borderRadius: '12.5px',
+      borderRadius: '28px',
     }
   })
 };
@@ -744,10 +744,9 @@ const CitizenEngagmentes = () => {
                     {data.map((item, i) => (
                       <tr key={i}>
                         <td>{item.department}</td>
-                        <td className='right'><a href={item.link}>{item.codebook_id}</a></td>
+                        <td className='right'><a href={item.link} target='_blank'>{item.codebook_id}</a></td>
                       </tr>
                     ))}
-
                   </table>
                   </div>
                 </div>
@@ -755,7 +754,7 @@ const CitizenEngagmentes = () => {
                   <div className='charts'>
                     <div className='row'>
                       <div className='col-md-9'><h1 className='charts_dashboards--households'>Municipal Management Vacancies</h1></div>
-                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/392' target='_blank' /></div>
+                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='#' target='_blank' /></div>
                     </div>
                     <canvas id='mc1'></canvas>
                   </div>
@@ -773,7 +772,7 @@ const CitizenEngagmentes = () => {
                   <div className='charts'>
                     <div className='row'>
                       <div className='col-md-9'><h1 className='charts_dashboards--households'>Municipal Management Posts</h1></div>
-                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/392' target='_blank' /></div>
+                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data'  href='#' target='_blank' /></div>
                     </div>
                     <canvas id='mc2'></canvas>
                   </div>
