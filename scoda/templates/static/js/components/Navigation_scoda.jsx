@@ -21,7 +21,12 @@ export default class Navigation_scoda extends Component {
     }
 
     checkSoCR() {
-        if (document.location.href == window.location.origin + '/scoda/socr#/') {
+        if (document.location.href == window.location.origin + '/scoda/socr#/' ||
+        document.location.href == window.location.origin + '/scoda/socr#/human_resources' ||
+        document.location.href == window.location.origin + '/scoda/socr#/city_finances' ||
+        document.location.href == window.location.origin + '/scoda/socr#/citizen_engagement' ||
+        document.location.href == window.location.origin + '/scoda/socr#/service_delivery' 
+        ) {
             return true
         }
         return false
@@ -108,11 +113,11 @@ export default class Navigation_scoda extends Component {
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a className="dropdown-item" href="/scoda/socr">Introduction</a>
-                                        <a className="dropdown-item" href="/scoda/socr">Citizen Engagement</a>
-                                        <a className="dropdown-item" href="/scoda/socr">City Finances</a>
+                                        <a className="dropdown-item" href="/scoda/socr#/citizen_engagement">Citizen Engagement</a>
+                                        <a className="dropdown-item" href="/scoda/socr#/city_finances">City Finances</a>
                                         <a className="dropdown-item" href="/scoda/socr">Household Bills & Affordability</a>
-                                        <a className="dropdown-item" href="/scoda/socr">Human Resources</a>
-                                        <a className="dropdown-item" href="/scoda/socr">Service Delivery</a>
+                                        <a className="dropdown-item" href="/scoda/socr#/human_resources">Human Resources</a>
+                                        <a className="dropdown-item" href="/scoda/socr#/service_delivery">Service Delivery</a>
                                         <a className="dropdown-item" href="/scoda/socr">State of Municipal Finance</a>
                                     </div>
                                 </li>

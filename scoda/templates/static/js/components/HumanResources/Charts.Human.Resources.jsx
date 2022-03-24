@@ -6,84 +6,12 @@ import { Bar } from 'react-chartjs-2';
 import HumanResourcesData from '../../data/HumanResourceData'
 import Barchart from '../Barchart'
 import Piechart from '../PieChart'
+import axios from 'axios'
+import _ from 'lodash';
 
-//Units Receiving Free Basic Services data , static for now since it's still not part of codebook.
-// let fbs_data_2018 = [76201, 320406, 15848, 237330, 174687, 29658, 73593, 57250]
-
-let total_number_of_municipal_posts = []
-let total_number_of_municipal_posts_data = []
-let total_number_of_municipal_posts_clean = []
-let final_total_number_of_municipal_posts = []
-let voterTurnoutCollection = [];
-
-let municipal_management_vacancies = []
-let municipal_management_vacancies_data = []
-let municipal_management_vacancies_clean = []
-let final_municipal_management_vacancies = []
-let MunicipalVacanciesCollection = [];
-
-let number_of_senior_management_vacancies = []
-let number_of_senior_management_vacancies_data = []
-let number_of_senior_management_vacancies_clean = []
-let final_number_of_senior_management_vacancies = []
-let NumberOfSeniorManagementVacanciesCollection = [];
-
-
-//Testing data
-
-let tot_num_of_municipal_posts = [
-  [5096, 28403, 27685, 17660, 7549, 8111, 29364, 24268], //2014
-  [5528, 29398, 26731, 17639, 8327, 6665, 29394, 24623],//2015
-  [5646, 29653, 27082, 19640, 7574, 6991, 26449, 27452],//2016
-  [5644, 29909, 26555, 20102, 6773, 6792, 22032, 27296],//2017
-]
-let municiapal_mv = [
-  [2, 0, 0, 8, 2, 1, 1, 0], //2014
-  [2, 2, 3, 3, 4, 2, 2, 0],//2015
-  [2, 1, 9, 4, 4, 2, 2, 4],//2016
-  [1, 0, 14, 6, 2, 11, 0, 2],//2017
-]
-
-let senior_mv = [
-  [2, 0, 0, 8, 2, 1, 1, 0], //2000
-  [2, 2, 3, 3, 4, 2, 2, 0],//2006
-  [2, 1, 9, 4, 4, 2, 2, 4],//2011
-  [1, 0, 14, 6, 2, 11, 0, 2],//2016
-]
-let data_num_of_mp = {
-  labels: sortedData,
-  datasets: []
-}
-let data_senior_mv = {
-  labels: sortedData,
-  datasets: []
-}
-let data_manage_v = {
-  labels: sortedData,
-  datasets: []
-}
-let data_m_m_posts = {
-  labels:['Total filled Posts','Vacancies'],
-  datasets: []
-}
-let data_s_manage_p = {
-  labels:['Total filled Posts','Vacancies'],
-  datasets: []
-}
-//chart declarations
-var chartRef1,chartRef2,chartRef3,chartRef4,chartRef5
-
-//City and year data
-let sortedData = ["BUF", "CCT", "EKH", "ETK", "JHB", "MAN", "NMB", "TSH"]
-
-//Units Receiving Free Basic Services data , static for now since it's still not part of codebook.
-
-let myData = []
-
-//Units Receiving Free Basic Services data , static for now since it's still not part of codebook.
 
 const style = {
-  control: (base, state) => ({
+  control: (base) => ({
     ...base,
     border: '1px solid #4A4A4A',
     borderRadius: '28px',
@@ -95,387 +23,244 @@ const style = {
   })
 };
 
-const CitizenEngagmentes = () => {
+const CitizenEngagmentes = ({ }) => {
+  const [senior_management, setSeniorManagement] = useState([])
+  const [senior_management_sum, setSeniorManagementSum] = useState()
+  const [total_posts, setTotalPosts] = useState([])
+  const [total_posts_sum, setTotalPostsSum] = useState(0)
+  const [municipal_posts, setMunicipalPosts] = useState([])
+  const [municipal_posts_sum, setMunicipalPostsSum] = useState()
+  const [cities, setCities] = useState([])
+  const [select_values, setSelectValues] = useState([])
 
-  const mounted = useRef();
-  // let [final_total_number_of_municipal_posts, setFinal_total_number_of_municipal_posts] = useState([])
-  const [stepSize, setStepSize] = useState(200000);
-  const [num_mp, setNum_mp] = useState();
-  const [senior_m_vac, setSenior_m_vac] = useState();
-  const [manage_v, setManage_v] = useState();
-  const [muni_m_posts, setMuni_m_posts] = useState();
-  const [senior_m_p, setSenior_m_p] = useState();
-  const [isMulti, setIsMulti] = useState(true);
-  const [loader, setLoader] = useState(false);
-  const [chartYears, setChartYears] = useState(['Year', '2014', '2015', '2016', '2017']);
-  const [noYears, setNoYears] = useState(['2014', '2015', '2016', '2017']);
-  const [noYears1, setNoYears1] = useState(['2000', '2006', '2011', '2016']);
-  const [pie, setPie] = useState(['a']);
-  const [management_posts, setManagement_posts] = useState([100,25]);
-  const [senior_management_posts, setSenior_management_posts] = useState([100,5]);
-  const [data,setData] = useState(HumanResourcesData)
-  const [multiValue, setMultiValue] = useState([
-    { value: "BUF", label: "BUF" },
-    { value: "CCT", label: "CCT" },
-    { value: "JHB", label: "JHB" },
-    { value: "EKH", label: "EKH" },
-    { value: "ETK", label: "ETK" },
-    { value: "MAN", label: "MAN" },
-    { value: "NMB", label: "NMB" },
-    { value: "TSH", label: "TSH" }
-  ]);
-  const [filterOptions, setfilterOptions] = useState([
-    { value: "BUF", label: "BUF" },
-    { value: "CCT", label: "CCT" },
-    { value: "JHB", label: "JHB" },
-    { value: "EKH", label: "EKH" },
-    { value: "ETK", label: "ETK" },
-    { value: "MAN", label: "MAN" },
-    { value: "NMB", label: "NMB" },
-    { value: "TSH", label: "TSH" }
-  ]);
+ 
+  const emptyChartsData = ()=>{
+    setTotalPosts([])
+    setMunicipalPosts([])
+    setSeniorManagement([])
+  }
+  const colorsByYear = year => {
+    switch (year) {
+      case 2014:
+        return '#E0E0E0'
+      case 2015:
+        return '#D0D1E6'
+      case 2016:
+        return '#74A9CF'
+      case 2017:
+        return '#0570B0'
+      default:
+        return '#d6d6d6'
+    }
+  }
+  const labels = city => {
+    switch (city) {
+      case 'Buffalo City':
+        return "BUF";
+      case 'City of Cape Town':
+        return "CCT"
+      case 'City of Joburg':
+        return "JHB"
+      case 'Ekurhuleni':
+        return "EKH"
+      case "Mangaung":
+        return "MAN"
+      case "Msunduzi":
+        return "PMB"
+      case "Nelson Mandela Bay":
+        return "NMB"
+      case "Tshwane":
+        return "TSH"
+      case "eThekwini":
+        return "ETK"
+    }
+  }
+
+  //Total posts
+  const total_posts_callback = table => {
+    let data = []
+    let current_year = 2014
+    let sum = 0
+    while (table.filter(value => { return (value[1] === current_year.toString()) }).length > 0) {
+
+      let current_data = table.filter(value => { return (value[1] === current_year.toString()) })
+      let chart_labels = []
+      let values = []
+
+      for (let i = 0; i < current_data.length; i++) {
+        current_data[i][0] = labels(current_data[i][0])
+        chart_labels.push({ label: current_data[i][0], value: current_data[i][0] })
+        values.push(current_data[i][2])
+        sum += current_data[i][2] ? current_data[i][2] : 0
+      }
+      data.push({
+        year: current_year,
+        //data :  current_data,
+        labels: chart_labels,
+        values: values,
+        color: colorsByYear(current_year)
+      })
+      setCities(chart_labels)
+      setSelectValues(chart_labels)
+      current_year = current_year + 1
+    }
+    setTotalPostsSum(sum)
+    setTotalPosts(data)
+  }
+  const codebook_total_posts_api = callback => {
+    axios.get(`/api/explore/codebook?indicator_id=970`)
+      .then(res => {
+        callback(res.data.table)
+      })
+  }
+  useEffect(() => {
+    codebook_total_posts_api(total_posts_callback)
+  }, [])
+  //End Total posts
+
+
+  // Municipal posts/vacancies 
+  const municipal_posts_callback = table => {
+    let data = []
+    let current_year = 2014
+    let sum = 0
+    while (table.filter(value => { return (value[1] === current_year.toString()) }).length > 0) {
+
+      let current_data = table.filter(value => { return (value[1] === current_year.toString()) })
+      let chart_labels = []
+      let values = []
+      for (let i = 0; i < current_data.length; i++) {
+        current_data[i][0] = labels(current_data[i][0])
+        chart_labels.push(current_data[i][0])
+        values.push(current_data[i][2])
+        sum += current_data[i][2] ? current_data[i][2] : 0
+      }
+      data.push({
+        year: current_year,
+        data: current_data,
+        labels: chart_labels,
+        values: values,
+        color: colorsByYear(current_year)
+      })
+      //setCities(chart_labels)
+      current_year = current_year + 1
+    }
+    setMunicipalPosts(data)
+    setMunicipalPostsSum(sum)
+  }
+
+  const codebook_municipal_posts_api = callback => {
+    axios.get(`/api/explore/codebook?indicator_id=968`)
+      .then(res => {
+        console.log('codebook_municipal_posts_api', res)
+        callback(res.data.table)
+      })
+
+  }
+  useEffect(() => {
+    codebook_municipal_posts_api(municipal_posts_callback)
+  }, [])
+  // End Municipal posts/vacancies 
+
+
+  const senior_management_callback = table => {
+    let data = []
+    let current_year = 2014
+    let sum = 0
+    while (table.filter(value => { return (value[1] === current_year.toString()) }).length > 0) {
+
+      let current_data = table.filter(value => { return (value[1] === current_year.toString()) })
+      let chart_labels = []
+      let values = []
+      for (let i = 0; i < current_data.length; i++) {
+        current_data[i][0] = labels(current_data[i][0])
+        chart_labels.push(current_data[i][0])
+        values.push(current_data[i][2])
+        sum += current_data[i][2] ? current_data[i][2] : 0
+      }
+      data.push({
+        year: current_year,
+        data: current_data,
+        labels: chart_labels,
+        values: values,
+        color: colorsByYear(current_year)
+      })
+      //setCities(chart_labels)
+      current_year = current_year + 1
+    }
+    setSeniorManagement(data)
+    setSeniorManagementSum(sum)
+  }
+
+  const codebook_senior_management_api = callback => {
+    axios.get(`/api/explore/codebook?indicator_id=969`)
+      .then(res => {
+        console.log('codebook_senior_management_api', res)
+        callback(res.data.table)
+      })
+
+  }
+
+  const onChange = (e) => {
+    setSelectValues(e)
+    emptyChartsData()
+    axios.get(`/api/explore/codebook?indicator_id=970`)
+      .then(res => {
+        callback_select(res.data.table, setTotalPosts, e, setTotalPostsSum)
+      })
+
+    axios.get(`/api/explore/codebook?indicator_id=968`)
+      .then(res => {
+        callback_select(res.data.table, setMunicipalPosts, e, setMunicipalPostsSum)
+      })
+
+    axios.get(`/api/explore/codebook?indicator_id=969`)
+      .then(res => {
+        callback_select(res.data.table, setSeniorManagement, e, setSeniorManagementSum)
+      })
+
+  }
+
+  const callback_select = (table, callback, select_values, sum_callback) => {
+    var cit = _.map(select_values, 'value')
+    let data = []
+    let current_year = 2014
+    let sum = 0
+    while (table.filter(value => { return (value[1] === current_year.toString()) }).length > 0) {
+      let current_data = table.filter(value => { return (value[1] === current_year.toString()) })
+      let values = []
+      let chart_labels = []
+      for (let i = 0; i < current_data.length; i++) {
+        var label = labels(current_data[i][0])
+        if (cit.includes(label)) {
+          current_data[i][0] = label
+          values.push(current_data[i][2])
+          sum += current_data[i][2] ? current_data[i][2] : 0
+        }
+      }
+      data.push({
+        year: current_year,
+        data: current_data,
+        labels: chart_labels,
+        values: values,
+        color: colorsByYear(current_year)
+      })
+      //setCities(chart_labels)
+      current_year = current_year + 1
+    }
+    callback(data)
+    sum_callback(sum)
+  }
 
   useEffect(() => {
-    console.log(data)
-    if (!mounted.current) {
-      //equivilent to componentdidmount
-      number_of_municipal_posts();
-      management_vacancies();
-      senior_management_vacancies();
+    codebook_senior_management_api(senior_management_callback)
+  }, [])
 
-      renderChart_number_of_municipal_posts();
-      renderChart_management_vacancies();
-      renderChart_senior_management_vacancies();
-      renderChart_municipal_management_posts();
-      renderChart_senior_management_posts();
-      mounted.current = true;
-    }
-    else {
-      //equivilent to componentdidupdate
-      renderChart_number_of_municipal_posts();
-      renderChart_management_vacancies();
-      renderChart_senior_management_vacancies();
-    }
-  },[]);
-  const number_of_municipal_posts = () => {
-    let toNum = new Object()
-    let years = 2020
-    let startingYear = 2015
-
-    let count = 0
-    for (let i = 0; i < 5; i++) {
-      for (let k = 0; k < 1; k++) {
-        if (i === 0) { }
-        else { toNum[2014 + i] = i }
-      }
-    }
-    for (let year = startingYear; year < years; year++) {
-      voterTurnoutCollection.push(tot_num_of_municipal_posts[toNum[year] - 1]);
-      total_number_of_municipal_posts.push(voterTurnoutCollection[count])
-      total_number_of_municipal_posts_clean.push(total_number_of_municipal_posts)
-      count++
-    }
-    final_total_number_of_municipal_posts = total_number_of_municipal_posts_clean[0]
-  }
-  const management_vacancies = () => {
-    let toNum = new Object()
-    let years = 2020
-    let startingYear = 2015
-
-    let count = 0
-    for (let i = 0; i < 5; i++) {
-      for (let k = 0; k < 1; k++) {
-        if (i === 0) { }
-        else { toNum[2014 + i] = i }
-      }
-    }
-    for (let year = startingYear; year < years; year++) {
-      MunicipalVacanciesCollection.push(municiapal_mv[toNum[year] - 1]);
-      municipal_management_vacancies.push(MunicipalVacanciesCollection[count])
-      municipal_management_vacancies_clean.push(municipal_management_vacancies)
-      count++
-    }
-    final_municipal_management_vacancies = municipal_management_vacancies_clean[0]
-  }
-  const senior_management_vacancies = () => {
-    let toNum = new Object()
-    let years = 2020
-    let startingYear = 2015
-
-    let count = 0
-    for (let i = 0; i < 5; i++) {
-      for (let k = 0; k < 1; k++) {
-        if (i === 0) { }
-        else { toNum[2014 + i] = i }
-      }
-    }
-    for (let year = startingYear; year < years; year++) {
-      NumberOfSeniorManagementVacanciesCollection.push(senior_mv[toNum[year] - 1]);
-      number_of_senior_management_vacancies.push(NumberOfSeniorManagementVacanciesCollection[count])
-      number_of_senior_management_vacancies_clean.push(number_of_senior_management_vacancies)
-      count++
-    }
-    final_number_of_senior_management_vacancies = number_of_senior_management_vacancies_clean[0]
-  }
-
-  const handleMultiChange = (option) => {
-    setMultiValue(option)
-
-    total_number_of_municipal_posts_data = []
-    municipal_management_vacancies_data = []
-    number_of_senior_management_vacancies_data = []
-
-    let cYears = chartYears
-    for (let item = 0; item < cYears.length - 1; item++) {
-      total_number_of_municipal_posts_data.push([])
-      municipal_management_vacancies_data.push([])
-      number_of_senior_management_vacancies_data.push([])
-    }
-
-    //Empty array so new data can be assigned
-    myData = []
-
-    //new 
-    final_total_number_of_municipal_posts = []
-    final_municipal_management_vacancies = []
-    final_number_of_senior_management_vacancies = []
-
-
-    option.map(function (item, i) {
-
-      myData.push(item.value);
-
-      sortedData = myData.sort()
-      if (sortedData.includes('BUF')) {
-        //total_number_of_municipal_posts_data[year][index]  voterTurnoutCollection[year][index]
-        for (let index = 0; index < cYears.length - 1; index++) {
-
-          total_number_of_municipal_posts_data[index][0] = voterTurnoutCollection[index][0]
-          municipal_management_vacancies_data[index][0] = MunicipalVacanciesCollection[index][0]
-          number_of_senior_management_vacancies_data[index][0] = NumberOfSeniorManagementVacanciesCollection[index][0]
-        }
-
-      }
-      if (sortedData.includes('CCT')) {
-
-        for (let index = 0; index < cYears.length - 1; index++) {
-          total_number_of_municipal_posts_data[index][1] = voterTurnoutCollection[index][1]
-          municipal_management_vacancies_data[index][1] = MunicipalVacanciesCollection[index][1]
-          number_of_senior_management_vacancies_data[index][1] = NumberOfSeniorManagementVacanciesCollection[index][1]
-        }
-
-      }
-      if (sortedData.includes('EKH')) {
-        for (let index = 0; index < cYears.length - 1; index++) {
-          total_number_of_municipal_posts_data[index][2] = voterTurnoutCollection[index][2]
-          municipal_management_vacancies_data[index][2] = MunicipalVacanciesCollection[index][2]
-          number_of_senior_management_vacancies_data[index][2] = NumberOfSeniorManagementVacanciesCollection[index][2]
-        }
-      }
-      if (sortedData.includes('ETK')) {
-        for (let index = 0; index < cYears.length - 1; index++) {
-          total_number_of_municipal_posts_data[index][3] = voterTurnoutCollection[index][3]
-          municipal_management_vacancies_data[index][3] = MunicipalVacanciesCollection[index][3]
-          number_of_senior_management_vacancies_data[index][3] = NumberOfSeniorManagementVacanciesCollection[index][3]
-        }
-      }
-      if (sortedData.includes('JHB')) {
-        for (let index = 0; index < cYears.length - 1; index++) {
-          total_number_of_municipal_posts_data[index][4] = voterTurnoutCollection[index][4]
-          municipal_management_vacancies_data[index][4] = MunicipalVacanciesCollection[index][4]
-          number_of_senior_management_vacancies_data[index][4] = NumberOfSeniorManagementVacanciesCollection[index][4]
-        }
-      }
-      if (sortedData.includes('MAN')) {
-        for (let index = 0; index < cYears.length - 1; index++) {
-          total_number_of_municipal_posts_data[index][5] = voterTurnoutCollection[index][5]
-          municipal_management_vacancies_data[index][5] = MunicipalVacanciesCollection[index][5]
-          number_of_senior_management_vacancies_data[index][5] = NumberOfSeniorManagementVacanciesCollection[index][5]
-        }
-      }
-      if (sortedData.includes('NMB')) {
-        for (let index = 0; index < cYears.length - 1; index++) {
-          total_number_of_municipal_posts_data[index][6] = voterTurnoutCollection[index][6]
-          municipal_management_vacancies_data[index][6] = MunicipalVacanciesCollection[index][6]
-          number_of_senior_management_vacancies_data[index][6] = NumberOfSeniorManagementVacanciesCollection[index][6]
-
-        }
-      }
-      if (sortedData.includes('TSH')) {
-        for (let index = 0; index < cYears.length - 1; index++) {
-          total_number_of_municipal_posts_data[index][7] = voterTurnoutCollection[index][7]
-          municipal_management_vacancies_data[index][7] = MunicipalVacanciesCollection[index][7]
-          number_of_senior_management_vacancies_data[index][7] = NumberOfSeniorManagementVacanciesCollection[index][7]
-        }
-      }
-
-      for (let index = 0; index < cYears.length - 1; index++) {
-        final_total_number_of_municipal_posts[index] = total_number_of_municipal_posts_data[index].filter(Boolean)
-        final_municipal_management_vacancies[index] = municipal_management_vacancies_data[index].filter(Boolean)
-        final_number_of_senior_management_vacancies[index] = number_of_senior_management_vacancies_data[index].filter(Boolean)
-      }
-        renderChart_number_of_municipal_posts();
-        renderChart_management_vacancies();
-        renderChart_senior_management_vacancies();
-    })
-  }
-
-  const renderChart_number_of_municipal_posts = () => {
-    let color = '#d6d6d6'
-    data_num_of_mp = {
-      labels: sortedData,
-      datasets: []
-    }
-    noYears.forEach(function (a, i) {
-      switch (i) {
-        case 0:
-          color = '#E0E0E0'
-          break;
-        case 1:
-          color = '#D0D1E6'
-          break;
-        case 2:
-          color = '#74A9CF'
-          break;
-        case 3:
-          color = '#0570B0'
-          break;
-        default:
-          color = '#d6d6d6'
-      }
-
-      data_num_of_mp.datasets.push({
-        label: a,
-        stack: 'Stack ' + i,
-        data: final_total_number_of_municipal_posts[i],
-        backgroundColor: color,
-        borderColor: color,
-      })
-    })
-    setNum_mp(data_num_of_mp)
-  }
-  const renderChart_management_vacancies = () => {
-    let color = '#d6d6d6'
-    data_manage_v = {
-      labels: sortedData,
-      datasets: []
-    }
-    noYears.forEach(function (a, i) {
-      switch (i) {
-        case 0:
-          color = '#E0E0E0'
-          break;
-        case 1:
-          color = '#D0D1E6'
-          break;
-        case 2:
-          color = '#74A9CF'
-          break;
-        case 3:
-          color = '#0570B0'
-          break;
-        default:
-          color = '#d6d6d6'
-      }
-
-      data_manage_v.datasets.push({
-        label: a,
-        stack: 'Stack ' + i,
-        data: final_municipal_management_vacancies[i],
-        backgroundColor: color,
-        borderColor: color,
-      })
-    })
-    setManage_v(data_manage_v)
-  }
-  const renderChart_senior_management_vacancies = () => {
-    let color = '#d6d6d6'
-    data_senior_mv = {
-      labels: sortedData,
-      datasets: []
-    }
-    noYears1.forEach(function (a, i) {
-      switch (i) {
-        case 0:
-          color = '#E0E0E0'
-          break;
-        case 1:
-          color = '#D0D1E6'
-          break;
-        case 2:
-          color = '#74A9CF'
-          break;
-        case 3:
-          color = '#0570B0'
-          break;
-        default:
-          color = '#d6d6d6'
-      }
-
-      data_senior_mv.datasets.push({
-        label: a,
-        stack: 'Stack ' + i,
-        data: final_number_of_senior_management_vacancies[i],
-        backgroundColor: color,
-        borderColor: color,
-      })
-    })
-    setSenior_m_vac(data_senior_mv)
-  }
-
-  //Pie chart
-  const renderChart_municipal_management_posts = () => {
-    let color = '#d6d6d6'
-    data_m_m_posts = {
-      labels:['Total filled Posts','Vacancies'],
-      datasets: []
-    }
-    pie.forEach(function (a, i) {
-      switch (i) {
-        case 0:
-          color =  ['#0570B0','#E7E7E7']
-          break;
-        default:
-          color = '#d6d6d6'
-      }
-
-      data_m_m_posts.datasets.push({
-        data:management_posts,
-        backgroundColor: color,
-        borderColor: color,
-      })
-    })
-    setMuni_m_posts(data_m_m_posts)
-
-  }
-  const renderChart_senior_management_posts = () => {
-    let color = '#d6d6d6'
-    data_s_manage_p = {
-      labels:['Total filled Posts','Vacancies'],
-      datasets: []
-    }
-    pie.forEach(function (a, i) {
-      switch (i) {
-        case 0:
-          color =  ['#0570B0','#E7E7E7']
-          break;
-        default:
-          color = '#d6d6d6'
-      }
-
-      data_s_manage_p.datasets.push({
-        data:senior_management_posts,
-        backgroundColor: color,
-        borderColor: color,
-      })
-    })
-    setSenior_m_p(data_s_manage_p)
-  }
 
   return (
     <div >
-      {loader ?
-        <Modal id="loader" isOpen={loader} className="modal-dialog-centered loader">
+      { total_posts.length < 1 && municipal_posts.length < 1 && senior_management.length < 1?
+        <Modal id="loader" isOpen={total_posts.length < 1 && municipal_posts.length < 1 && senior_management.length < 1} className="modal-dialog-centered loader">
           <ModalBody>
             <div className="row">
               <div className="col-2"></div>
@@ -493,90 +278,145 @@ const CitizenEngagmentes = () => {
         : ''
       }
       <div className='container-fluid charts_dashboards'>
-          <div className='charts_dashboards--left_container p-0'>
-            <div className='charts_dashboards--select'>
-              <div className='charts_dashboards--select-container'>
-                  <Select
-                    id='multiple'
-                    name="filters"
-                    placeholder="Filter City"
-                    value={multiValue}
-                    options={filterOptions}
-                    onChange={handleMultiChange}
-                    isMulti={isMulti}
-                    styles={style}
-                  />
-              </div>
+        <div className='charts_dashboards--left_container p-0'>
+          <div className='charts_dashboards--select'>
+            <div className='charts_dashboards--select-container'>
+              <Select
+                id='multiple'
+                name="filters"
+                placeholder="Filter City"
+                value={select_values}
+                options={cities}
+                onChange={onChange}
+                isMulti={true}
+                styles={style}
+              />
             </div>
-            <div className='charts_dashboards--barcharts'>
-              <div className='row'>
-                <div className='col-md-4 left-container'>
-                  <div className='charts'>
-                    <div className='row'>
-                      <div className='col-md-9'><h1 className='charts_dashboards--households'>Total number of municipal posts</h1></div>
-                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/#/codebook-explorer/392' target='_blank' /></div>
-                    </div>
-                    <Barchart data={num_mp} stepSize={5000} hundred={true} divide={1000}/>
+          </div>
+          <div className='charts_dashboards--barcharts'>
+            <div className='row'>
+              <div className='col-md-4 left-container'>
+                <div className='charts'>
+                  <div className='row'>
+                    <div className='col-md-9'><h1 className='charts_dashboards--households'>Total number of municipal posts</h1></div>
+                    <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/scoda/toolkit#/codebook-explorer/970' target='_blank' /></div>
                   </div>
-                  <div className='post_breakdown-container'>
-                      <h1>Municipal Post Breakdown</h1>
+                  {total_posts ? 
+                  <Barchart stepSize={5000} hundred={true} divide={1000} x_label="Number of Posts"
+                    data={{
+                      labels: _.map(select_values, 'label'),
+                      datasets: total_posts.map(data => {
+                        return ({
+                          backgroundColor: data.color,
+                          borderColor: data.color,
+                          data: data.values,
+                          label: data.year,
+                          stack: data.year
+                        })
+                      })
+                    }}
+                  />:""
+                  }
+                </div>
+                <div className='post_breakdown-container'>
+                  <h1>Municipal Post Breakdown</h1>
                   <table>
                     <tr>
                       <th>Department</th>
                       <th className='right'>Codebook ID</th>
                     </tr>
-                    {data.map((item, i) => (
+                    {HumanResourcesData.map((item, i) => (
                       <tr key={i}>
                         <td>{item.department}</td>
                         <td className='right'><a href={item.link} target='_blank'>{item.codebook_id}</a></td>
                       </tr>
                     ))}
                   </table>
-                  </div>
                 </div>
-                <div className='col-md-4'>
-                  <div className='charts'>
-                    <div className='row'>
-                      <div className='col-md-9'><h1 className='charts_dashboards--households'>Municipal Management Vacancies</h1></div>
-                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='#' target='_blank' /></div>
-                    </div>
-                    <Barchart data={senior_m_vac} stepSize={2} hundred={false} divide={1}/>
+              </div>
+              <div className='col-md-4'>
+                <div className='charts'>
+                  <div className='row'>
+                    <div className='col-md-9'><h1 className='charts_dashboards--households'>Municipal Management Vacancies</h1></div>
+                    <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/scoda/toolkit#/codebook-explorer/968' target='_blank' /></div>
                   </div>
-                  <div>
+                  <Barchart data={{
+                    labels: _.map(select_values, 'label'),
+                    datasets: municipal_posts.map(data => {
+                      return ({
+                        backgroundColor: data.color,
+                        borderColor: data.color,
+                        data: data.values,
+                        label: data.year,
+                        stack: data.year
+                      })
+                    })
+                  }} stepSize={2} hundred={false} divide={1} x_label="Number of Vacancies" />
+                </div>
+                <div>
                   <div className='charts'>
                     <div className='row'>
                       <div className='col-md-9'><h1 className='charts_dashboards--households'>Municipal Management Posts</h1></div>
 
                     </div>
-                    <Piechart data={muni_m_posts} />
-                  </div>
+                    <Piechart data={{
+                      labels: ['Total filled Posts', 'Vacancies'],
+                      datasets: [{
+                        data: [total_posts_sum, municipal_posts_sum],
+                        backgroundColor: ['#0570B0', '#E7E7E7'],
+                        borderColor: ['#0570B0', '#E7E7E7'],
+                      }
+
+                      ]
+                    }} />
                   </div>
                 </div>
-                <div className='col-md-4'>
-                  <div className='charts'>
-                    <div className='row'>
-                      <div className='col-md-9'><h1 className='charts_dashboards--households'>Number of Senior Management Vacancies</h1></div>
-                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data'  href='#' target='_blank' /></div>
-                    </div>
-                    <Barchart data={manage_v} stepSize={2} hundred={false} divide={1}/>
+              </div>
+              <div className='col-md-4'>
+                <div className='charts'>
+                  <div className='row'>
+                    <div className='col-md-9'><h1 className='charts_dashboards--households'>Number of Senior Management Vacancies</h1></div>
+                    <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/scoda/toolkit#/codebook-explorer/969' target='_blank' /></div>
                   </div>
-                  <div>
+                  <Barchart data={{
+                    labels: _.map(select_values, 'label'),
+                    datasets: senior_management.map(data => {
+                      return ({
+                        backgroundColor: data.color,
+                        borderColor: data.color,
+                        data: data.values,
+                        label: data.year,
+                        stack: data.year
+                      })
+                    })
+                  }} stepSize={2} hundred={false} divide={1} x_label="Number of Vacancies" />
+                </div>
+                <div>
                   <div className='charts'>
                     <div className='row'>
                       <div className='col-md-9'><h1 className='charts_dashboards--households'>Senior Management Posts</h1></div>
                     </div>
-                    <Piechart data={senior_m_p}/>
+                    <Piechart data={{
+                      labels: ['Total filled Posts', 'Vacancies'],
+                      datasets: [{
+                        data: [total_posts_sum, senior_management_sum],
+                        backgroundColor: ['#0570B0', '#E7E7E7'],
+                        borderColor: ['#0570B0', '#E7E7E7'],
+                      }
 
-                  </div>
+                      ]
+                    }} />
+
                   </div>
                 </div>
               </div>
-
             </div>
+
           </div>
         </div>
-        <div className='spacer'></div>
       </div>
+      <div className='spacer'></div>
+    </div>
   )
 }
 export default CitizenEngagmentes;

@@ -8,14 +8,14 @@ function GetCardInfo(){
               subheader:" (From SoCR 2021)",
               type:'DASHBOARD',
               class:'_citizen_engagement',
-              href:'/'
+              href:'/scoda/socr#/citizen_engagement'
             },
             {
               header:'City Finances',
               subheader:" (From SoCR 2021)",
               type:'DASHBOARD',
               class:'_city_finances',
-              href:'/'
+              href:'/scoda/socr#/city_finances'
             },
             {
               header:'Household Bills & Affordability',
@@ -29,14 +29,14 @@ function GetCardInfo(){
                 subheader:" (From SoCR 2021)",
                 type:'DASHBOARD',
                 class:'_human_resources',
-                href:'/'
+                href:'/scoda/socr#/human_resources'
               },
               {
                 header:'Service Delivery',
                 subheader:" (From SoCR 2021)",
                 type:'DASHBOARD',
                 class:'_service_delivery',
-                href:'/'
+                href:'/scoda/socr#/service_delivery'
               },
               {
                 header:'State of Municipal Finance',
