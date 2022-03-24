@@ -3,6 +3,7 @@ import Select from "react-select";
 import Button from '../Button';
 import { Modal, ModalBody, Spinner } from 'reactstrap';
 import { Bar } from 'react-chartjs-2';
+import BarChart from '../Barchart'
 import HumanResourcesData from '../../data/HumanResourceData'
 
 //Units Receiving Free Basic Services data , static for now since it's still not part of codebook.
@@ -59,8 +60,22 @@ let unauthorised_expend = [
   [1, 1, 2, 0.3, 1.4, 0.3, 1.4, 1],//2016
   [2, 0.5, 1.5, 1.7, 0.6, 0.8, 0.5, 1.4],//2017
 ]
-
-
+let data_waste_exp = {
+  labels: sortedData,
+  datasets: []
+}
+let irregular_expend = {
+  labels: sortedData,
+  datasets: []
+}
+let data_fruit_expend = {
+  labels: sortedData,
+  datasets: []
+}
+let data_unauth_expend = {
+  labels: sortedData,
+  datasets: []
+}
 //chart declarations
 var chartRef1,chartRef2,chartRef3,chartRef4
 
@@ -91,6 +106,10 @@ const CitizenEngagmentes = () => {
   const mounted = useRef();
   // let [final_wasteful_expenditure, setFinal_wasteful_expenditure] = useState([])
   const [stepSize, setStepSize] = useState(200000);
+  const [waste_exp, setWaste_exp] = useState();
+  const [fruit_ex, setFruit_ex] = useState();
+  const [irreg_expend, setIrre_expend] = useState();
+  const [unauth_exp, setUnauth_exp] = useState();
   const [isMulti, setIsMulti] = useState(true);
   const [loader, setLoader] = useState(false);
   const [chartYears, setChartYears] = useState(['Year', '2014', '2015', '2016', '2017']);
@@ -141,7 +160,7 @@ const CitizenEngagmentes = () => {
       renderChart_fruitless_expenditure();
       renderChart_unauthorised_expenditure();
     }
-  });
+  },[]);
   const func_wasteful_expenditure = () => {
     let toNum = new Object()
     let years = 2020
@@ -331,13 +350,17 @@ const CitizenEngagmentes = () => {
         final_fruitless_expenditure[index] = fruitless_expenditure_data[index].filter(Boolean)
         final_unauthorised_expenditure[index] = unauthorised_expenditure_data[index].filter(Boolean)
       }
+      renderChart_wasteful_expenditure();
+      renderChart_irregular_expenditure();
+      renderChart_fruitless_expenditure();
+      renderChart_unauthorised_expenditure();
 
     })
   }
 
   const renderChart_wasteful_expenditure = () => {
     let color = '#d6d6d6'
-    let data = {
+    data_waste_exp = {
       labels: sortedData,
       datasets: []
     }
@@ -359,7 +382,7 @@ const CitizenEngagmentes = () => {
           color = '#d6d6d6'
       }
 
-      data.datasets.push({
+      data_waste_exp.datasets.push({
         label: a,
         stack: 'Stack ' + i,
         data: final_wasteful_expenditure[i],
@@ -367,77 +390,11 @@ const CitizenEngagmentes = () => {
         borderColor: color,
       })
     })
-
-    if (chartRef1) { chartRef1.destroy(); }
-    var ctx = document.getElementById('wasteful_expenditure').getContext('2d');
-    chartRef1 = new Chart(ctx, {
-      type: 'bar',
-      data,
-      options: {
-        legend: {
-          labels: {
-            fontColor: "#4A4A4A",
-            fontSize: 8,
-            fontFamily: "Montserrat",
-          }
-        },
-        title: {
-          display: false,
-          text: 'Title',
-          fontFamily: "Montserrat",
-        },
-        tooltips: {
-          mode: 'index',
-          intercept: false,
-          callbacks: {
-            label: function (tooltipItem, data) {
-              var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-              if (label) {
-                label += ': ';
-              }
-              label += Math.round(tooltipItem.yLabel * 100) / 100;
-              return label;
-            }
-          }
-        },
-        responsive: true,
-        scales: {
-          xAxes: [{
-            stacked: true,
-            ticks: { fontStyle: 'bold', steps: 4, fontFamily: "Montserrat", },
-            gridLines: {
-              display: false,
-            }
-          }],
-          yAxes: [{
-            stacked: true,
-            ticks: {
-              stepSize: 2,
-              callback: function (value, index, values) {
-                return value+' '
-              },
-
-            },
-            gridLines: {
-              drawTicks: false,
-            },
-            scaleLabel: {
-              display: true,
-              labelString: "Rands (In Millions)",
-              fontStyle: 'bold',
-              fontFamily: "Montserrat",
-              fontSize: 12
-            }
-          }],
-
-        }
-      }
-    });
+    setWaste_exp(data_waste_exp)
   }
   const renderChart_irregular_expenditure = () => {
     let color = '#d6d6d6'
-    let data = {
+    irregular_expend = {
       labels: sortedData,
       datasets: []
     }
@@ -458,8 +415,7 @@ const CitizenEngagmentes = () => {
         default:
           color = '#d6d6d6'
       }
-
-      data.datasets.push({
+      irregular_expend.datasets.push({
         label: a,
         stack: 'Stack ' + i,
         data: final_irregular_expenditure[i],
@@ -467,77 +423,11 @@ const CitizenEngagmentes = () => {
         borderColor: color,
       })
     })
-
-    if (chartRef3) { chartRef3.destroy(); }
-    var ctx = document.getElementById('irregular_expenditure').getContext('2d');
-    chartRef3 = new Chart(ctx, {
-      type: 'bar',
-      data,
-      options: {
-        legend: {
-          labels: {
-            fontColor: "#4A4A4A",
-            fontSize: 8,
-            fontFamily: "Montserrat",
-          }
-        },
-        title: {
-          display: false,
-          text: 'Title',
-          fontFamily: "Montserrat",
-        },
-        tooltips: {
-          mode: 'index',
-          intercept: false,
-          callbacks: {
-            label: function (tooltipItem, data) {
-              var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-              if (label) {
-                label += ': ';
-              }
-              label += Math.round(tooltipItem.yLabel * 100) / 100;
-              return label;
-            }
-          }
-        },
-        responsive: true,
-        scales: {
-          xAxes: [{
-            stacked: true,
-            ticks: { fontStyle: 'bold', steps: 4, fontFamily: "Montserrat", },
-            gridLines: {
-              display: false,
-            }
-          }],
-          yAxes: [{
-            stacked: true,
-            ticks: {
-              stepSize: 2,
-              callback: function (value, index, values) {
-                return value+"   "
-              },
-
-            },
-            gridLines: {
-              drawTicks: false,
-            },
-            scaleLabel: {
-              display: true,
-              labelString: "Rands (In Millions)",
-              fontStyle: 'bold',
-              fontFamily: "Montserrat",
-              fontSize: 12
-            }
-          }],
-
-        }
-      }
-    });
+    setIrre_expend(irregular_expend)
   }
   const renderChart_fruitless_expenditure  = () => {
     let color = '#d6d6d6'
-    let data = {
+    data_fruit_expend = {
       labels: sortedData,
       datasets: []
     }
@@ -559,7 +449,7 @@ const CitizenEngagmentes = () => {
           color = '#d6d6d6'
       }
 
-      data.datasets.push({
+      data_fruit_expend.datasets.push({
         label: a,
         stack: 'Stack ' + i,
         data: final_fruitless_expenditure[i],
@@ -567,77 +457,11 @@ const CitizenEngagmentes = () => {
         borderColor: color,
       })
     })
-
-    if (chartRef2) { chartRef2.destroy(); }
-    var ctx = document.getElementById('fruitless_expenditure').getContext('2d');
-    chartRef2 = new Chart(ctx, {
-      type: 'bar',
-      data,
-      options: {
-        legend: {
-          labels: {
-            fontColor: "#4A4A4A",
-            fontSize: 8,
-            fontFamily: "Montserrat",
-          }
-        },
-        title: {
-          display: false,
-          text: 'Title',
-          fontFamily: "Montserrat",
-        },
-        tooltips: {
-          mode: 'index',
-          intercept: false,
-          callbacks: {
-            label: function (tooltipItem, data) {
-              var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-              if (label) {
-                label += ': ';
-              }
-              label += Math.round(tooltipItem.yLabel * 100) / 100;
-              return label;
-            }
-          }
-        },
-        responsive: true,
-        scales: {
-          xAxes: [{
-            stacked: true,
-            ticks: { fontStyle: 'bold', steps: 4, fontFamily: "Montserrat", },
-            gridLines: {
-              display: false,
-            }
-          }],
-          yAxes: [{
-            stacked: true,
-            ticks: {
-              stepSize: 0.2,
-              callback: function (value, index, values) {
-                return value+" "
-              },
-
-            },
-            gridLines: {
-              drawTicks: false,
-            },
-            scaleLabel: {
-              display: true,
-              labelString: "Rands (In Millions)",
-              fontStyle: 'bold',
-              fontFamily: "Montserrat",
-              fontSize: 12
-            }
-          }],
-
-        }
-      }
-    });
+    setFruit_ex(data_fruit_expend)
   }
   const renderChart_unauthorised_expenditure  = () => {
     let color = '#d6d6d6'
-    let data = {
+    data_unauth_expend = {
       labels: sortedData,
       datasets: []
     }
@@ -659,7 +483,7 @@ const CitizenEngagmentes = () => {
           color = '#d6d6d6'
       }
 
-      data.datasets.push({
+      data_unauth_expend.datasets.push({
         label: a,
         stack: 'Stack ' + i,
         data: final_unauthorised_expenditure[i],
@@ -667,77 +491,10 @@ const CitizenEngagmentes = () => {
         borderColor: color,
       })
     })
-
-    if (chartRef4) { chartRef4.destroy(); }
-    var ctx = document.getElementById('unauthorised_expenditure').getContext('2d');
-    chartRef4 = new Chart(ctx, {
-      type: 'bar',
-      data,
-      options: {
-        legend: {
-          labels: {
-            fontColor: "#4A4A4A",
-            fontSize: 8,
-            fontFamily: "Montserrat",
-          }
-        },
-        title: {
-          display: false,
-          text: 'Title',
-          fontFamily: "Montserrat",
-        },
-        tooltips: {
-          mode: 'index',
-          intercept: false,
-          callbacks: {
-            label: function (tooltipItem, data) {
-              var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-              if (label) {
-                label += ': ';
-              }
-              label += Math.round(tooltipItem.yLabel * 100) / 100;
-              return label;
-            }
-          }
-        },
-        responsive: true,
-        scales: {
-          xAxes: [{
-            stacked: true,
-            ticks: { fontStyle: 'bold', steps: 4, fontFamily: "Montserrat", },
-            gridLines: {
-              display: false,
-            }
-          }],
-          yAxes: [{
-            stacked: true,
-            ticks: {
-              stepSize: 0.5,
-              callback: function (value, index, values) {
-                return value+" "
-              },
-
-            },
-            gridLines: {
-              drawTicks: false,
-            },
-            scaleLabel: {
-              display: true,
-              labelString: "Rands (In Millions)",
-              fontStyle: 'bold',
-              fontFamily: "Montserrat",
-              fontSize: 12
-            }
-          }],
-
-        }
-      }
-    });
+    setUnauth_exp(data_unauth_expend)
   }
 
   //Pie chart
-
 
   return (
     <div >
@@ -783,7 +540,8 @@ const CitizenEngagmentes = () => {
                       <div className='col-md-9'><h1 className='charts_dashboards--households'>Unauthorised, irregular, fruitless & wastful expenditure</h1></div>
                       <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='#' target='_blank' /></div>
                     </div>
-                    <canvas id='wasteful_expenditure'></canvas>
+                    {/* <canvas id='wasteful_expenditure'></canvas> */}
+                    <BarChart data={waste_exp} stepSize={2} hundred={false} divide={1}/>
                   </div>
                   <div className='post_breakdown-container'>
                       <h1>Context Notes</h1>
@@ -805,7 +563,7 @@ const CitizenEngagmentes = () => {
                       <div className='col-md-9'><h1 className='charts_dashboards--households'>Irregular Expenditure</h1></div>
                       <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='#' target='_blank' /></div>
                     </div>
-                    <canvas id='fruitless_expenditure'></canvas>
+                    <BarChart data={irreg_expend} stepSize={2} hundred={false} divide={1}/>
                   </div>
                   <div className='post_breakdown-container'>
                         <h1>Definitions</h1>
@@ -835,7 +593,7 @@ const CitizenEngagmentes = () => {
                       <div className='col-md-9'><h1 className='charts_dashboards--households'>Fruitless & Wasteful Expenditure</h1></div>
                       <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data'  href='#' target='_blank' /></div>
                     </div>
-                    <canvas id='irregular_expenditure'></canvas>
+                    <BarChart data={fruit_ex} stepSize={0.2} hundred={false} divide={1} finance={true}/>
                   </div>
                   <div>
                   <div className='charts'>
@@ -843,7 +601,7 @@ const CitizenEngagmentes = () => {
                       <div className='col-md-9'><h1 className='charts_dashboards--households'>Unauthorised Expenditure</h1></div>
                       <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data'  href='#' target='_blank' /></div>
                     </div>
-                    <canvas id='unauthorised_expenditure'></canvas>
+                    <BarChart data={unauth_exp} stepSize={0.5} hundred={false} divide={1} finance={true}/>
                   </div>
                   </div>
                 </div>
