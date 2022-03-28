@@ -90,10 +90,10 @@ const CitizenEngagmentStatPanel = () => {
         <div className='stat_display_panel'>
             <div className='row stat_display_panel--numbers w-100'>
                 <div className='col-md-6 first_panel'>
-                    <p className='catagory-name '>Averages 2019 <span>(Voting and Registration)</span></p>
+                    <p className='catagory-name '>Averages 2019/2016 <span>(Voting and Registration)</span></p>
                     <div className='row'>
                         {voting_and_reg_2019_averages.map((item, i) => (
-                            <div className='col p-0'>
+                            <div className='col-md-3 p-0'>
                                 <h1>{item.percentage}%</h1>
                                 <p dangerouslySetInnerHTML={{__html:item.type}}></p>
                             </div>
@@ -117,7 +117,7 @@ const CitizenEngagmentStatPanel = () => {
                     </div>
                     <div className='row'>
                         {municipality_focus.map((item, i) => (
-                            <div className='col'>
+                            <div className='col-md-3'>
                                 <h1 className={item.percentage > voting_and_reg_2019_averages[i].percentage ? 'green' : item.percentage < voting_and_reg_2019_averages[i].percentage ? 'red' : 'none'}>{item.percentage}%</h1>
                                 <p dangerouslySetInnerHTML={{__html:item.type}}></p>
                             </div>

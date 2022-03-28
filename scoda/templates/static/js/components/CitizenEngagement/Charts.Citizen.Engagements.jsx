@@ -98,16 +98,15 @@ const CitizenEngagment = () => {
       .then(res => {
         callback_select(res.data.table, setRegistered_voters, e, colorsByYearOrange)
       })
-
-    axios.get(`/api/explore/codebook?indicator_id=983`)
-      .then(res => {
-        callback_select(res.data.table, setLocalRegistered_voters, e, colorsByYearGreen)
-      })
-
       axios.get(`/api/explore/codebook?indicator_id=987`)
       .then(res => {
-        callback_select(res.data.table, setLocalTurnout, e, colorsByYearOrange)
+        callback_select(res.data.table, setLocalTurnout, e, colorsByYearGreen)
       })
+    axios.get(`/api/explore/codebook?indicator_id=983`)
+      .then(res => {
+        callback_select(res.data.table, setLocalRegistered_voters, e, colorsByYearOrange)
+      })
+
 
   }
 
@@ -220,40 +219,6 @@ const registered_voters_callback = (table)=>{
   console.log('setRegistered_voters', data)
   setRegistered_voters(data)
 }
-
-const local_registered_voters_callback = (table)=>{
-  let data = []
-  let current_year = 2000
-  let sum = 0 
-  let count = 0
-  while (current_year <= new Date().getFullYear() ) {
-    if(table.filter(value => { return (value[1] === current_year.toString()) }).length > 0){
-      let current_data = table.filter(value => { return (value[1] === current_year.toString()) })
-      let chart_labels = []
-      let values = []
-
-      for (let i = 0; i < current_data.length; i++) {
-        current_data[i][0] = labels(current_data[i][0])
-        chart_labels.push({ label: current_data[i][0], value: current_data[i][0] })
-        values.push(current_data[i][2])
-        sum += current_data[i][2] ? current_data[i][2] : 0
-      }
-      data.push({
-        year: current_year,
-        //data :  current_data,
-        labels: chart_labels,
-        values: values,
-        color: colorsByYearGreen(count)
-      })
-      setLocalRegistered_voters(data)
-      count = count + 1
-
-    }
-    current_year = current_year + 1
-  }
-  console.log('LocalRegistered_voters', data)
-  setTurnout(data)
-}
 const local_voter_turnout_callback = (table)=>{
   let data = []
   let current_year = 2000
@@ -276,7 +241,7 @@ const local_voter_turnout_callback = (table)=>{
         //data :  current_data,
         labels: chart_labels,
         values: values,
-        color: colorsByYearOrange(count)
+        color: colorsByYearGreen(count)
       })
       count = count + 1
 
@@ -286,13 +251,47 @@ const local_voter_turnout_callback = (table)=>{
   console.log('local_voter_turnout_callback', data)
   setLocalTurnout(data)
 }
+const local_registered_voters_callback = (table)=>{
+  let data = []
+  let current_year = 2000
+  let sum = 0 
+  let count = 0
+  while (current_year <= new Date().getFullYear() ) {
+    if(table.filter(value => { return (value[1] === current_year.toString()) }).length > 0){
+      let current_data = table.filter(value => { return (value[1] === current_year.toString()) })
+      let chart_labels = []
+      let values = []
+
+      for (let i = 0; i < current_data.length; i++) {
+        current_data[i][0] = labels(current_data[i][0])
+        chart_labels.push({ label: current_data[i][0], value: current_data[i][0] })
+        values.push(current_data[i][2])
+        sum += current_data[i][2] ? current_data[i][2] : 0
+      }
+      data.push({
+        year: current_year,
+        //data :  current_data,
+        labels: chart_labels,
+        values: values,
+        color: colorsByYearOrange(count)
+      })
+      count = count + 1
+
+    }
+    current_year = current_year + 1
+  }
+  console.log('LocalRegistered_voters', data)
+  setLocalRegistered_voters(data)
+}
+
 
 
   useEffect(() => {
     api(`/api/explore/codebook?indicator_id=989`, voter_turnout_callback)
     api( `/api/explore/codebook?indicator_id=985`, registered_voters_callback)
-    api( `/api/explore/codebook?indicator_id=983`, local_registered_voters_callback)
     api( `/api/explore/codebook?indicator_id=987`, local_voter_turnout_callback)
+    api( `/api/explore/codebook?indicator_id=983`, local_registered_voters_callback)
+
   }, [])
   return (
     <div >
@@ -378,31 +377,10 @@ const local_voter_turnout_callback = (table)=>{
               </div>
               <hr/>
               <div className='row'>
-              <div className='col-md-6'>
-                  <div className='charts'>
-                    <div className='row'>
-                      <div className='col-md-9'><h1 className='charts_dashboards--households'>Local Election: Voter Turnout</h1></div>
-                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/scoda/toolkit#/codebook-explorer/983' target='_blank' /></div>
-                    </div>
-                     {/**Local election voter turnout chart */}
-                     <BarChart data={{
-                      labels: _.map(select_values, 'label'),
-                      datasets: local_registered_voters.map(data => {
-                        return ({
-                          backgroundColor: data.color,
-                          borderColor: data.color,
-                          data: data.values,
-                          label: data.year,
-                          stack: data.year
-                        })
-                      })
-                    }} stepSize={200000} hundred={true} divide={1000} x_label="Number of People"/>
-                  </div>
-                </div>
                 <div className='col-md-6'>
                   <div className='charts'>
                     <div className='row'>
-                      <div className='col-md-9'><h1 className='charts_dashboards--households'>Local Election: Rgistered Voters</h1></div>
+                      <div className='col-md-9'><h1 className='charts_dashboards--households'>Local Election: Voter Turnout</h1></div>
                       <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/scoda/toolkit#/codebook-explorer/987' target='_blank' /></div>
                     </div>
                     {/**Local election registered voters chart */}
@@ -418,6 +396,27 @@ const local_voter_turnout_callback = (table)=>{
                         })
                       })
                     }} stepSize={500000} hundred={true} divide={1000} x_label="Number of People"/>
+                  </div>
+                </div>
+                <div className='col-md-6'>
+                  <div className='charts'>
+                    <div className='row'>
+                      <div className='col-md-9'><h1 className='charts_dashboards--households'>Local Election: Registered Voters</h1></div>
+                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/scoda/toolkit#/codebook-explorer/983' target='_blank' /></div>
+                    </div>
+                     {/**Local election voter turnout chart */}
+                     <BarChart data={{
+                      labels: _.map(select_values, 'label'),
+                      datasets: local_registered_voters.map(data => {
+                        return ({
+                          backgroundColor: data.color,
+                          borderColor: data.color,
+                          data: data.values,
+                          label: data.year,
+                          stack: data.year
+                        })
+                      })
+                    }} stepSize={200000} hundred={true} divide={1000} x_label="Number of People"/>
                   </div>
                 </div>
               </div>

@@ -79,10 +79,10 @@ const HumanResourcesStatPanel = () => {
         <div className='stat_display_panel'>
             <div className='row stat_display_panel--numbers w-100'>
                 <div className='col-md-6 first_panel'>
-                    <p className='catagory-name '>Averages 2019 <span>(Voting and Registration)</span></p>
+                    <p className='catagory-name '>Averages 2017 <span>(Municipal Posts and Vacancies)</span></p>
                     <div className='row'>
                         {municipal_posts_and_vacancies.map((item, i) => (
-                            <div className='col p-0'>
+                            <div className='col-md-4 p-0'>
                                 <h1>{item.percentage}</h1>
                                 <p dangerouslySetInnerHTML={{__html:item.type}}></p>
                             </div>
@@ -106,7 +106,7 @@ const HumanResourcesStatPanel = () => {
                     </div>
                     <div className='row'>
                         {municipality_focus.map((item, i) => (
-                            <div className='col'>
+                            <div className='col-md-4'>
                                 {i !=0 ? <h1 className={item.percentage < municipal_posts_and_vacancies[i].percentage ? 'green' : item.percentage > municipal_posts_and_vacancies[i].percentage ? 'red' : 'none'}>{item.percentage}</h1> :<h1>{item.percentage}</h1>}
                                 <p dangerouslySetInnerHTML={{__html:item.type}}></p>
                             </div>
