@@ -80,7 +80,7 @@ const HumanResourcesStatPanel = () => {
                     <p className='catagory-name '>Averages 2019 <span>(Expenditure)</span></p>
                     <div className='row'>
                         {expenditure.map((item, i) => (
-                            <div className='col p-0'>
+                            <div className='col-md-4 p-0'>
                                 <h1>R{(Math.abs(Number(item.percentage)) / 1.0e+6).toFixed(2) + "M"}</h1>
                                 <p dangerouslySetInnerHTML={{__html:item.type}}></p>
                             </div>
@@ -104,7 +104,7 @@ const HumanResourcesStatPanel = () => {
                     </div>
                     <div className='row'>
                         {municipality_focus.map((item, i) => (
-                            <div className='col'>
+                            <div className='col-md-4'>
                                 <h1 className={item.percentage > expenditure[i].percentage ? 'green' : item.percentage < expenditure[i].percentage ? 'red' : 'none'}>R{(Math.abs(Number(item.percentage)) / 1.0e+6).toFixed(2) + "M"}</h1>
                                 <p dangerouslySetInnerHTML={{__html:item.type}}></p>
                             </div>

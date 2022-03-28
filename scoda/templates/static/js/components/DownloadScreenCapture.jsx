@@ -10,7 +10,7 @@ const DownloadScreenCapture = (props) => {
     setLoader(true)
     var htmlToImage = require('html-to-image');
     e.preventDefault()
-    htmlToImage.toJpeg(document.getElementById('content-scoda'), { quality: 0.95 })
+    htmlToImage.toJpeg(document.getElementById('content'), { quality: 0.95 })
       .then(function (dataUrl) {
         setLoader(false)
         var link = document.createElement('a');

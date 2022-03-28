@@ -37,7 +37,7 @@ const Charts = ({
             if (label) {
               label += ': ';
             }
-            label += Math.round(tooltipItem.yLabel * 100) / 100;
+            label += isNaN(tooltipItem.yLabel) ? '0' : Math.round(tooltipItem.yLabel * 100) / 100;
             return label;
           }
         }
