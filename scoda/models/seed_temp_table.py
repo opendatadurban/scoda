@@ -5,7 +5,7 @@ import datetime
 import json
 
 def seed_temp_indicators(db):
-    df = pd.read_excel('%s/data/%s' % (app.root_path, "codebook-data/temp/indicators_db_seed.xlsx")). \
+    df = pd.read_excel('%s/data/%s' % (app.root_path, "codebook-data/temp/SACN_non_codebook_data.xlsx")). \
         fillna(value='')
     for index, row in df.iterrows():
         if row["value"] and not isinstance(row["value"], str):
