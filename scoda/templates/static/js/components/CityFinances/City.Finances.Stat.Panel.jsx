@@ -77,7 +77,9 @@ const HumanResourcesStatPanel = () => {
         <div className='stat_display_panel'>
             <div className='row stat_display_panel--numbers w-100'>
                 <div className='col-md-6 first_panel'>
+                <div className='stat_display_panel--averages'>
                     <p className='catagory-name '>Averages 2019 <span>(Expenditure)</span></p>
+                    </div>
                     <div className='row'>
                         {expenditure.map((item, i) => (
                             <div className='col-md-4 p-0'>
