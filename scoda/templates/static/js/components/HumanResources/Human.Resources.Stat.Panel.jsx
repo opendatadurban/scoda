@@ -79,7 +79,9 @@ const HumanResourcesStatPanel = () => {
         <div className='stat_display_panel'>
             <div className='row stat_display_panel--numbers w-100'>
                 <div className='col-md-6 first_panel'>
-                    <p className='catagory-name '>Averages 2017 <span>(Municipal Posts and Vacancies)</span></p>
+                <div className='stat_display_panel--averages'>
+                <p className='catagory-name '>Averages 2017 <span>(Municipal Posts and Vacancies)</span></p>
+                </div>
                     <div className='row'>
                         {municipal_posts_and_vacancies.map((item, i) => (
                             <div className='col-md-4 p-0'>
@@ -93,7 +95,7 @@ const HumanResourcesStatPanel = () => {
                 <div className='col-md-6'>
                     <div className='row'>
                         <div className='col-md-8'> <p className='catagory-name '>Municipality Focus 2018: {place}</p></div>
-                        <div className='col-md-3'>
+                        <div className='col-md-3 select-container'>
                             <Select
                                 value={place}
                                 placeholder='Select a City'

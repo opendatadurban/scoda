@@ -90,7 +90,9 @@ const CitizenEngagmentStatPanel = () => {
         <div className='stat_display_panel'>
             <div className='row stat_display_panel--numbers w-100'>
                 <div className='col-md-6 first_panel'>
+                    <div className='stat_display_panel--averages'>
                     <p className='catagory-name '>Averages 2019/2016 <span>(Voting and Registration)</span></p>
+                    </div>
                     <div className='row'>
                         {voting_and_reg_2019_averages.map((item, i) => (
                             <div className='col-md-3 p-0'>
@@ -104,7 +106,7 @@ const CitizenEngagmentStatPanel = () => {
                 <div className='col-md-6'>
                     <div className='row'>
                         <div className='col-md-8'> <p className='catagory-name '>Municipality Focus 2018: {place}</p></div>
-                        <div className='col-md-3'>
+                        <div className='col-md-3 '>
                             <Select
                                 value={place}
                                 placeholder='Select a City'
