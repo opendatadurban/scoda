@@ -335,12 +335,12 @@ const CitizenEngagmentes = ({ }) => {
                 </div>
               </div>
               <div className='col-md-4'>
-                <div className='charts'>
+                <div className='charts '>
                   <div className='row'>
                     <div className='col-md-9'><h1 className='charts_dashboards--households'>Municipal Management Vacancies</h1></div>
                     <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/scoda/toolkit#/codebook-explorer/968' target='_blank' /></div>
                   </div>
-                  <Barchart data={{
+                  <Barchart height={null} width={null} data={{
                     labels: _.map(select_values, 'label'),
                     datasets: municipal_posts.map(data => {
                       return ({
@@ -353,24 +353,6 @@ const CitizenEngagmentes = ({ }) => {
                     })
                   }} stepSize={2} hundred={false} divide={1} x_label="Number of Vacancies" />
                 </div>
-                <div>
-                  <div className='charts'>
-                    <div className='row'>
-                      <div className='col-md-9'><h1 className='charts_dashboards--households'>Municipal Management Posts</h1></div>
-
-                    </div>
-                    <Piechart data={{
-                      labels: ['Total filled Posts', 'Vacancies'],
-                      datasets: [{
-                        data: [total_posts_sum, municipal_posts_sum],
-                        backgroundColor: ['#0570B0', '#E7E7E7'],
-                        borderColor: ['#0570B0', '#E7E7E7'],
-                      }
-
-                      ]
-                    }} />
-                  </div>
-                </div>
               </div>
               <div className='col-md-4'>
                 <div className='charts'>
@@ -378,7 +360,7 @@ const CitizenEngagmentes = ({ }) => {
                     <div className='col-md-9'><h1 className='charts_dashboards--households'>Number of Senior Management Vacancies</h1></div>
                     <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/scoda/toolkit#/codebook-explorer/969' target='_blank' /></div>
                   </div>
-                  <Barchart data={{
+                  <Barchart height={null} width={null} data={{
                     labels: _.map(select_values, 'label'),
                     datasets: senior_management.map(data => {
                       return ({
@@ -391,27 +373,8 @@ const CitizenEngagmentes = ({ }) => {
                     })
                   }} stepSize={2} hundred={false} divide={1} x_label="Number of Vacancies" />
                 </div>
-                <div>
-                  <div className='charts'>
-                    <div className='row'>
-                      <div className='col-md-9'><h1 className='charts_dashboards--households'>Senior Management Posts</h1></div>
-                    </div>
-                    <Piechart data={{
-                      labels: ['Total filled Posts', 'Vacancies'],
-                      datasets: [{
-                        data: [total_posts_sum, senior_management_sum],
-                        backgroundColor: ['#0570B0', '#E7E7E7'],
-                        borderColor: ['#0570B0', '#E7E7E7'],
-                      }
-
-                      ]
-                    }} />
-
-                  </div>
-                </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>

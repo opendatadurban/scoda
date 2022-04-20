@@ -19,15 +19,10 @@ const subNavContent = {
           active: false 
         }, 
         {
-          name: "City Finances", 
-          href: "socr#/city_finances", 
-          active: false 
-      }, 
-      {
-         name: "Human Resources", 
-         href: "socr#/human_resources", 
-         active: true 
-      }
+          name: "Human Resources", 
+          href: "socr#/human_resources", 
+          active: true 
+        }
     ]
   }
 
