@@ -93,7 +93,7 @@ export default class IndicatorExplorerDataCardHeader extends Component {
                             <div className="col">
                               <select id="selector" className="ie-dropdown mb-2" onChange={this.enableFilter}>                     
                                   {/* <option value="0">Empty</option> */}
-                                  {selectorOptions.length ? selectorOptions : <option value="0">test</option>}
+                                  {selectorOptions.length ? selectorOptions : <option value="0">Empty</option>}
 
                               </select>
                             </div>
