@@ -35,14 +35,6 @@ export default class IndicatorExplorerDataCardHeader extends Component {
                 document.getElementById('button-search').classList.add('ie-button-inactive');
             }
         });
-        if (this.props.datasetOptions.length) {
-            // arr is not empty
-            this.currentIndicator;
-            console.log('array not empty')
-        }
-        else{
-            console.log('array empty')
-        }
     }
 
 
@@ -71,8 +63,6 @@ export default class IndicatorExplorerDataCardHeader extends Component {
 
         //populate select option with the current indicator
         const currentOption = this.props.datasetOptions.map((dataset,index) =>{
-             console.log('index :',dataset[0])
-             console.log('indicator id :',this.props.indicator_id)
             if(dataset[0] === this.props.indicator_id) {
                 return  <option key={index} value={dataset[0]}>{dataset[1]}</option>
             }
