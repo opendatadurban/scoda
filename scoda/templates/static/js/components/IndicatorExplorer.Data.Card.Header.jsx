@@ -35,6 +35,14 @@ export default class IndicatorExplorerDataCardHeader extends Component {
                 document.getElementById('button-search').classList.add('ie-button-inactive');
             }
         });
+        if (this.props.datasetOptions.length) {
+            // arr is not empty
+            this.currentIndicator;
+            console.log('array not empty')
+        }
+        else{
+            console.log('array empty')
+        }
     }
 
 
@@ -54,10 +62,20 @@ export default class IndicatorExplorerDataCardHeader extends Component {
     }
     
     render() {
+        console.log('current option',this.props.datasetOptions)
+          
         const selectorOptions = this.props.datasetOptions.map((dataset,index) =>{
             // <option key={index} value={dataset[0]}>{dataset[1].match(/.{1,10}(\s|$)/g)}</option>
-            return index < 1 ? <option key={index} value={dataset[this.props.indicator_id]}>{dataset[1]}</option> :
-            <option key={index} value={dataset[0]}>{dataset[1]}</option>
+            return <option key={index} value={dataset[0]}>{dataset[1]}</option>
+        });
+
+        //populate select option with the current indicator
+        const currentOption = this.props.datasetOptions.map((dataset,index) =>{
+             console.log('index :',dataset[0])
+             console.log('indicator id :',this.props.indicator_id)
+            if(dataset[0] === this.props.indicator_id) {
+                return  <option key={index} value={dataset[0]}>{dataset[1]}</option>
+            }
         });
 
 
@@ -88,12 +106,11 @@ export default class IndicatorExplorerDataCardHeader extends Component {
                                 Choose Your Indicator:
                             </div>
                         </div>
-
                         <div className="row">
                             <div className="col">
                               <select id="selector" className="ie-dropdown mb-2" onChange={this.enableFilter}>                     
-                                  {/* <option value="0">Empty</option> */}
-                                  {selectorOptions.length ? selectorOptions : <option value="0">Empty</option>}
+                                  {currentOption.length ? currentOption : <option value="0">Empty</option>}
+                                  {selectorOptions}
 
                               </select>
                             </div>
