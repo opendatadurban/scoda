@@ -1,9 +1,12 @@
 .charts {
     padding: 15px;
 }
+
 .sorc_dashboards {
     background-color: #F1F1F1;
-
+    &--citizen_engagement {
+        margin-top: 15px;
+    }
     .stat_display_panel {
         background-color: white;
         margin-bottom: 15px;
@@ -12,21 +15,27 @@
         .first_panel {
             border-right: 1px solid #B2BEC3;
         }
+        &--averages {
+            height: 28px;
+        }
         .catagory-name {
             font-style: normal;
             font-weight: 600;
             font-size: 12px;
             line-height: 15px;
-            padding: 15px;
+            padding: 0 15px;
             text-align: left;
             color: #2F3442;
             text-transform: capitalize;
-
             span {
                 font-weight: 400;
                 font-size:13px;
             }
         }
+         .select-container {
+             position: relative;
+             bottom: 4px;
+         }
         &--numbers {
 
           h1 {
@@ -83,7 +92,7 @@
             border-bottom: 2px solid #F1F1F1;
             //here
             &-container {
-                width: 60%;
+                width: 70%;
             }
         }
         &--button {
