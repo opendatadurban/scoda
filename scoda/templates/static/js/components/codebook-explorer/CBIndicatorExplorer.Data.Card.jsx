@@ -182,6 +182,7 @@ export default class IndicatorExplorerDataCard extends Component {
                                                 filterHook={this.filterIndicatorData}
                                                 toggle={this.toggleComponentDisplay}
                                                 filterYear={this.state.selectedYear}
+                                                indicator_id={this.state.id}
                                             />
                                         </div>
                                     </div>
