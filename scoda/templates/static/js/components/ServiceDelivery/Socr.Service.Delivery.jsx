@@ -19,15 +19,10 @@ const Socr_dashboards =()=>{
           active: false 
         }, 
         {
-          name: "City Finances", 
-          href: "socr#/city_finances", 
+          name: "Human Resources", 
+          href: "socr#/human_resources", 
           active: false 
-      }, 
-      {
-         name: "Human Resources", 
-         href: "socr#/human_resources", 
-         active: false 
-      }
+        }
     ]
   }
     return(

@@ -28,15 +28,15 @@ const panelData = [
     {
       "municipal_posts_and_vacancies" : [
           {
-              "percentage": 14856,
+              "percentage": 16977,
               "type": `Total Municipal<br/>Posts`
           },
           {
-              "percentage": 62,
+              "percentage": 4,
               "type": `Municipal Management<br/>Vacancies`
           },
           {
-              "percentage": 57,
+              "percentage": 4,
               "type": `Senior Management<br/>Vacancies`
           },
 

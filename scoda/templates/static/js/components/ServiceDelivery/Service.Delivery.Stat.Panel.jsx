@@ -277,7 +277,9 @@ export default class Statistics_display extends Component {
             <div className='stat_display_panel'>
                 <div className='row stat_display_panel--numbers w-100'>
                     <div className='col-md-6 first_panel'>
+                    <div className='stat_display_panel--averages'>
                     <p className='catagory-name '>Averages 2018 <span>(Access to Basic Services)</span></p>
+                    </div>
                         <div className='row'>
                         <div className='col p-0'>
                         <h1>{this.state.water_supply_average}%</h1>
