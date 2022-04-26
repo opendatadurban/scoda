@@ -104,6 +104,9 @@ const HumanResourcesStatPanel = ({
             }
             setTotalMunPostsSum(sum)
         }
+    }, [last_total_posts])
+    
+    useEffect(() => {
         if (!isObjectEmpty(last_municipal_posts)) {
             setVacancies(last_municipal_posts[0][2])
             let sum = 0;
@@ -112,6 +115,10 @@ const HumanResourcesStatPanel = ({
             }
             setTotalManagementMunPostsSum(sum)
         }
+    }, [last_municipal_posts])
+
+
+    useEffect(() => {
         if (!isObjectEmpty(last_senior_management_posts)) {
             setSenior_management_vacancies(last_senior_management_posts[0][2])
             let sum = 0;
