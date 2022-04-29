@@ -102,7 +102,7 @@ const HumanResourcesStatPanel = ({
             for (let i = 0; i < last_total_posts.length; i++) {
                 sum += last_total_posts[i][2]
             }
-            setTotalMunPostsSum(sum)
+            setTotalMunPostsSum((sum/last_total_posts.length).toFixed(0))
         }
     }, [last_total_posts])
     
@@ -113,7 +113,7 @@ const HumanResourcesStatPanel = ({
             for (let i = 0; i < last_municipal_posts.length; i++) {
                 sum += last_municipal_posts[i][2]
             }
-            setTotalManagementMunPostsSum(sum)
+            setTotalManagementMunPostsSum((sum/last_municipal_posts.length).toFixed(0))
         }
     }, [last_municipal_posts])
 
@@ -125,7 +125,7 @@ const HumanResourcesStatPanel = ({
             for (let i = 0; i < last_senior_management_posts.length; i++) {
                 sum += last_senior_management_posts[i][2]
             }
-            setSeniorPostsSum(sum)
+            setSeniorPostsSum((sum/last_senior_management_posts.length).toFixed(0))
         }
     }, [last_senior_management_posts])
 
@@ -134,7 +134,7 @@ const HumanResourcesStatPanel = ({
             <div className='row stat_display_panel--numbers w-100'>
                 <div className='col-md-6 first_panel'>
                     <div className='stat_display_panel--averages'>
-                        <p className='catagory-name '>Averages 2017 <span>(Municipal Posts and Vacancies)</span></p>
+                        <p className='catagory-name '>Averages {!isObjectEmpty(last_municipal_posts) ?last_municipal_posts[0][1] : ""}  <span>(Municipal Posts and Vacancies)</span></p>
                     </div>
                     <div className='row'>
                         <div className='col-md-4 p-0'>
@@ -168,15 +168,18 @@ const HumanResourcesStatPanel = ({
                     </div>
                     <div className='row'>
                         <div className='col-md-4'>
-                        <h1 className={total_municipal_posts < total_mun_posts_sum ? 'green' : total_municipal_posts > total_mun_posts_sum ? 'red' : 'none'}>{total_municipal_posts}</h1>
+                        {/* <h1 className={total_municipal_posts < total_mun_posts_sum ? 'green' : total_municipal_posts > total_mun_posts_sum ? 'red' : 'none'}>{total_municipal_posts}</h1> */}
+                        <h1 className={ 'none'}>{total_municipal_posts?total_municipal_posts:0}</h1>
                             <p>Total Municipal<br />Posts</p>
                         </div>
                         <div className='col-md-4'>
-                            <h1 className={municipal_management_vacancies < mangement_mun_posts_sum ? 'green' : municipal_management_vacancies > mangement_mun_posts_sum ? 'red' : 'none'}>{municipal_management_vacancies}</h1>
+                            {/* <h1 className={municipal_management_vacancies < mangement_mun_posts_sum ? 'green' : municipal_management_vacancies > mangement_mun_posts_sum ? 'red' : 'none'}>{municipal_management_vacancies}</h1> */}
+                            <h1 className={ 'none'}>{municipal_management_vacancies?municipal_management_vacancies:0}</h1>
                             <p>Municipal Management<br />Vacancies</p>
                         </div>
                         <div className='col-md-4'>
-                            <h1 className={senior_posts_sum < senior_management_vacancies ? 'green' : senior_posts_sum > senior_management_vacancies ? 'red' : 'none'}>{senior_management_vacancies}</h1>
+                            {/* <h1 className={senior_posts_sum < senior_management_vacancies ? 'green' : senior_posts_sum > senior_management_vacancies ? 'red' : 'none'}>{senior_management_vacancies}</h1> */}
+                            <h1 className={ 'none'}>{senior_management_vacancies ? senior_management_vacancies : 0}</h1>
                             <p>Senior Management<br />Vacancies</p>
                         </div>
                     </div>
