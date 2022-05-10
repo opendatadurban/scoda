@@ -3,7 +3,7 @@ const panelData = [
       "places": {
         "id": "my-select",
         "multiple": false,
-        "data": ['Buffalo City', 'City of Cape Town', 'City of Joburg', 'Ekurhuleni', 'eThekwini', 'Mangaung', 'Nelson Mandela Bay', 'Tshwane']
+        "data": ['Buffalo City', 'City of Cape Town', 'City of Joburg', 'Ekurhuleni', 'eThekwini', 'Mangaung','Msunduzi', 'Nelson Mandela Bay', 'Tshwane']
       }
     },{
       "voting_and_reg_2019_averages" : [
