@@ -302,7 +302,7 @@ export default class Statistics_display extends Component {
 
                     <div className='col-md-6'>
                         <div className='row'>
-                            <div className='col-md-8'> <p className='catagory-name '>Municipality Focus 2018: {this.state.place}</p></div>
+                            <div className='col-md-8'> <p className='catagory-name catagory-name--focusName'>Municipality Focus 2018: {this.state.place}</p></div>
                             <div className='col-md-3'>                               
                              <Select 
                                     value={this.state.place}
