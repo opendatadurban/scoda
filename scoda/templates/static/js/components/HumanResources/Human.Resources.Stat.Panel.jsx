@@ -154,7 +154,7 @@ const HumanResourcesStatPanel = ({
                 </div>
                 <div className='col-md-6'>
                     <div className='row'>
-                        <div className='col-md-8'> <p className='catagory-name catagory-name--focusName'> {!isObjectEmpty(last_municipal_posts) ? "Municipality Focus " + last_municipal_posts[0][1] + ":" : "Municipality Focus : "} {place}</p></div>
+                        <div className='col-md-8'> <p className='catagory-name '> {!isObjectEmpty(last_municipal_posts) ? "Municipality Focus " + last_municipal_posts[0][1] + ":" : "Municipality Focus : "} {place}</p></div>
                         <div className='col-md-3 select-container'>
                             <Select
                                 value={place}
