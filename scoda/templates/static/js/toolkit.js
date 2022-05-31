@@ -6,6 +6,8 @@ import loader from "./gif/Spinner.gif"
 
 
 const DataStoriesSpacial =  lazy(() => import('./templates/datastories/Spatial_transformation'));
+const HouseholdBills =  lazy(() => import('./templates/datastories/DatastoryHouseholdBills'));
+const StateOfTheCityFinance =  lazy(() => import('./templates/datastories/DatastoryStateOfTheCityFin2020'));
 const DataStoriesUrbanSafety =  lazy(() => import('./templates/datastories/Urban_safety'));
 const DataStoriesEPW =  lazy(() => import('./templates/datastories/EPW_metro'));
 const DataStoriesAffordability =  lazy(() => import('./templates/datastories/Affordability'));
@@ -36,6 +38,8 @@ export default (
       <Route exact path="/codebook" component={() => <Codebook />} />
       <Route exact path="/ds-state-of-finance-2018" component={()=> <State_of_finance />} />
       <Route exact path="/ds-spatial-transformation-2018" component={()=> <DataStoriesSpacial />} />
+      <Route exact path="/ds-household-bills-and-affordibility" component={()=> <HouseholdBills />} />
+      <Route exact path="/ds-state-of-the-city-finance-2020" component={()=> <StateOfTheCityFinance />} />
       <Route exact path="/ds-urban-safety-2018" component={()=> <DataStoriesUrbanSafety />} />
       <Route exact path="/ds-epw-metro-2018" component={()=> <DataStoriesEPW />} />
       <Route exact path="/ds-affordability-2018" component={()=> <DataStoriesAffordability />} />

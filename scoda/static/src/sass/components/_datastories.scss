@@ -364,6 +364,19 @@ display: block !important;
     padding-top: 1px;
     cursor: pointer;
 }
+.ds-main-navigation-button-back2 {
+    box-sizing: border-box;
+    height: 30px;
+    width: 200px;
+    border: 1px solid $scoda-grey-dark;
+    border-radius: 5px;
+    background-color: $scoda-white;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.3);
+    margin-top: 115px !important;
+    margin-left: 8px !important;
+    padding-top: 1px;
+    cursor: pointer;
+}
 
 .ds-main-navigation-button-back-text {
     height: 19px;

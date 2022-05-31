@@ -17,13 +17,6 @@ function GetCardInfo(){
             //   class:'_city_finances',
             //   href:'/scoda/socr#/city_finances'
             // },
-            // {
-            //   header:'Household Bills & Affordability',
-            //   subheader:" (From SoCR 2021)",
-            //   type:'DATA STORY',
-            //   class:'_household_bills_affordability',
-            //   href:'/'
-            // },
             {
                 header:'Human Resources',
                 subheader:" (From SoCR 2021)",
@@ -38,13 +31,20 @@ function GetCardInfo(){
                 class:'_service_delivery',
                 href:'/scoda/socr#/service_delivery'
               },
-              // {
-              //   header:'State of Municipal Finance',
-              //   subheader:" (From SoCR 2021)",
-              //   type:'DATA STORY',
-              //   class:'_state_of_municipal_finance',
-              //   href:'/'
-              // },
+              {
+                header:'State of City Finances 2020: An Introduction',
+                subheader:" (From SoCR 2021)",
+                type:'DATA STORY',
+                class:'_state_of_municipal_finance',
+                href:'/scoda/toolkit#/ds-state-of-the-city-finance-2020'
+              },
+              {
+              header:'Household Bills & Affordability',
+              subheader:" (From SoCR 2021)",
+              type:'DATA STORY',
+              class:'_household_bills_affordability',
+              href:'/scoda/toolkit#/ds-household-bills-and-affordibility'
+            },
           ]
     );
 
