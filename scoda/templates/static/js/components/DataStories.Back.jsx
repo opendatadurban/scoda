@@ -9,7 +9,7 @@ export default class DataStoriesNavigation extends Component {
 
     render() {
 
-        let homeUrl = '/scoda/socr#/';
+        let homeUrl = '/scoda/toolkit#/data-stories-details';
 
         return (
             <div className="container-fluid mt-3">
