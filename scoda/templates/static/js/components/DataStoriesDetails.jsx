@@ -33,6 +33,16 @@ export default class DataStoriesDetails extends Component {
         let sacnSectionOneSubTitle = 'Financing Spatial Transformation';
         let sacnSectionOneContent = 'Despite the fact that South Africa’s national urban agenda prioritises urban densification, the municipal revenue mode…';
 
+        let  sacnSectionTwoImage = 'simon-hurry-_h-L45TSmGM-unsplash 1.png';
+        let  sacnSectionTwoTitle = 'State of City Finances 2020: An Introduction';
+        let  sacnSectionTwoSubTitle = '';
+        let  sacnSectionTwoContent = 'Cities rely on a mix of grants and their own revenue sources to fund constitutionally mandated expenditure responsibilities.';
+        
+        let  sacnSectionThreeImage = 'leo-moko-M59-iDrnoA0-unsplash 1.png';
+        let  sacnSectionThreeTitle = 'Household Bills and Affordability';
+        let  sacnSectionThreeSubTitle = '';
+        let  sacnSectionThreeContent = 'The affordability of municipal services is an important concern for cities. Social policy in South Africa is focussed on...';
+        
         return (
             <div className="container data-story-landig-page">
                 <nav>
@@ -61,6 +71,36 @@ export default class DataStoriesDetails extends Component {
                                         colors={sacnColors}
                                     />
                                     <ContentSectionRight
+                                        img={sacnSectionTwoImage}
+                                        title={sacnSectionTwoTitle}
+                                        subtitle={sacnSectionTwoSubTitle}
+                                        content={sacnSectionTwoContent}
+                                        filterColor="#196CDB"
+                                        filter="Well Governed Cities"
+                                        imageTag="W"
+                                        filter_type="data-story-card-well"
+                                        filter_id="data-story-card-well-governed2"
+                                        infoBannerTitle="South African Cities Network"
+                                        infoBannerDate="SoCF 2020"
+                                        infoBannerMins="5"
+                                        href_='/scoda/toolkit#/ds-state-of-the-city-finance-2020'
+                                    />
+                                    <ContentSectionRight
+                                        img={sacnSectionThreeImage}
+                                        title={sacnSectionThreeTitle}
+                                        subtitle={sacnSectionThreeSubTitle}
+                                        content={sacnSectionThreeContent}
+                                        filterColor="#196CDB"
+                                        filter="Well Governed Cities"
+                                        imageTag="W"
+                                        filter_type="data-story-card-well"
+                                        filter_id="data-story-card-well-governed3"
+                                        infoBannerTitle="South African Cities Network"
+                                        infoBannerDate="SoCF 2020"
+                                        infoBannerMins="4"
+                                        href_='/scoda/toolkit#/ds-household-bills-and-affordibility'
+                                    />
+                                   <ContentSectionRight
                                         img={sacnSectionOneImage}
                                         title={sacnSectionOneTitle}
                                         subtitle={sacnSectionOneSubTitle}
