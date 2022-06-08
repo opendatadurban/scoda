@@ -269,7 +269,7 @@ const Socr_Human_Resources = () => {
             <div className='sorc_dashboards'>
                 <div className='spacer--top'></div>
                 <Subnav name='State of Cities Reports' dropdownName='Municipal Human Resources' dropDownItem={subNavContent} buttonText="Download as PNG" />
-                <Sidebar_left />
+                {/* <Sidebar_left /> */}
                 <div id='content'>
                 <Stat_Panel
                 last_municipal_posts = {last_municipal_posts}
