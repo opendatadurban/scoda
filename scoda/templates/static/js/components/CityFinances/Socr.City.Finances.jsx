@@ -17,7 +17,7 @@ const subNavContent = {
           active: false 
         }, 
         {
-          name: "Human Resources", 
+          name: "Municipal Human Resources", 
           href: "socr#/human_resources", 
           active: false 
         }

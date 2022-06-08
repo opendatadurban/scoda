@@ -19,7 +19,7 @@ const Socr_Citizens_Engagement = () => {
           active: true 
         },  
         {
-          name: "Human Resources", 
+          name: "Municipal Human Resources", 
           href: "socr#/human_resources", 
           active: false 
         }
