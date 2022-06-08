@@ -19,7 +19,7 @@ const subNavContent = {
           active: false 
         }, 
         {
-          name: "Human Resources", 
+          name: "Municipal Human Resources", 
           href: "socr#/human_resources", 
           active: true 
         }
@@ -268,7 +268,7 @@ const Socr_Human_Resources = () => {
         return (
             <div className='sorc_dashboards'>
                 <div className='spacer--top'></div>
-                <Subnav name='State of Cities Reports' dropdownName='Human Resources' dropDownItem={subNavContent} buttonText="Download as PNG" />
+                <Subnav name='State of Cities Reports' dropdownName='Municipal Human Resources' dropDownItem={subNavContent} buttonText="Download as PNG" />
                 <Sidebar_left />
                 <div id='content'>
                 <Stat_Panel
