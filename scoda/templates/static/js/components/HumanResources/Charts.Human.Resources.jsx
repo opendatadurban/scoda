@@ -3,11 +3,11 @@ import Select from "react-select";
 import Button from '../Button';
 import { Modal, ModalBody, Spinner } from 'reactstrap';
 import { Bar } from 'react-chartjs-2';
-import HumanResourcesData from '../../data/HumanResourceData'
 import Barchart from '../Barchart'
 import Piechart from '../PieChart'
 import axios from 'axios'
 import _ from 'lodash';
+import Table from './Table';
 
 
 const style = {
@@ -70,7 +70,9 @@ const CitizenEngagmentes = ({
           </div>
           <div className='charts_dashboards--barcharts'>
             <div className='row'>
-              <div className='col-md-4 left-container'>
+              <div className='col-md-12 left-container'>
+                <div className='row'>
+                 <div className='col-12 col-md-6'>
                 <div className='charts'>
                   <div className='row'>
                     <div className='col-md-9'><h1 className='charts_dashboards--households'>Total number of municipal posts</h1></div>
@@ -92,30 +94,15 @@ const CitizenEngagmentes = ({
                     }}
                   />:""
                   }
+                  </div>
                 </div>
-                <div className='post_breakdown-container'>
-                  <h1>Municipal Post Breakdown</h1>
-                  <table>
-                    <tr>
-                      <th>Department</th>
-                      <th className='right'>Codebook ID</th>
-                    </tr>
-                    {HumanResourcesData.map((item, i) => (
-                      <tr key={i}>
-                        <td>{item.department}</td>
-                        <td className='right'><a href={item.link} target='_blank'>{item.codebook_id}</a></td>
-                      </tr>
-                    ))}
-                  </table>
-                </div>
-              </div>
-              <div className='col-md-4'>
+                <div className='col-md-6'>
                 <div className='charts '>
                   <div className='row'>
                     <div className='col-md-9'><h1 className='charts_dashboards--households'>Municipal Management Vacancies</h1></div>
                     <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/scoda/toolkit#/codebook-explorer/968' target='_blank' /></div>
                   </div>
-                  <Barchart height={null} width={null} data={{
+                  <Barchart data={{
                     labels: _.map(select_values, 'label'),
                     datasets: municipal_posts.map(data => {
                       return ({
@@ -128,14 +115,21 @@ const CitizenEngagmentes = ({
                     })
                   }} stepSize={2} hundred={false} divide={1} x_label="Number of Vacancies" />
                 </div>
+                </div>
+                </div>
               </div>
-              <div className='col-md-4'>
-                <div className='charts'>
+              <div className='col-md-12'>
+                <div className='row'>
+                  <div className='col-12 col-md-6'>
+                    <Table/>
+                  </div>
+                      <div className='col-12 col-md-6'>
+                      <div className='charts'>
                   <div className='row'>
                     <div className='col-md-9'><h1 className='charts_dashboards--households'>Number of Senior Management Vacancies</h1></div>
                     <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/scoda/toolkit#/codebook-explorer/969' target='_blank' /></div>
                   </div>
-                  <Barchart height={null} width={null} data={{
+                  <Barchart data={{
                     labels: _.map(select_values, 'label'),
                     datasets: senior_management.map(data => {
                       return ({
@@ -148,6 +142,9 @@ const CitizenEngagmentes = ({
                     })
                   }} stepSize={2} hundred={false} divide={1} x_label="Number of Vacancies" />
                 </div>
+                      </div>
+                </div>
+
               </div>
             </div>
           </div>
