@@ -38,7 +38,7 @@ const Table = () => {
             <td >
               <p>Total number of municipal posts{item.department}</p>
               <a href={item.link} target="_blank">
-                    View Indicator in the Codebook
+                    View Indicator in the  Data Explorer
               </a>
                <div className=""></div>
             </td>
