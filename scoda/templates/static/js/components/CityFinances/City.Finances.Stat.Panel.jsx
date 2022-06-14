@@ -77,7 +77,9 @@ const HumanResourcesStatPanel = () => {
         <div className='stat_display_panel'>
             <div className='row stat_display_panel--numbers w-100'>
                 <div className='col-md-6 first_panel'>
+                <div className='stat_display_panel--averages'>
                     <p className='catagory-name '>Averages 2019 <span>(Expenditure)</span></p>
+                    </div>
                     <div className='row'>
                         {expenditure.map((item, i) => (
                             <div className='col-md-4 p-0'>
@@ -90,7 +92,7 @@ const HumanResourcesStatPanel = () => {
                 </div>
                 <div className='col-md-6'>
                     <div className='row'>
-                        <div className='col-md-8'> <p className='catagory-name '>Municipality Focus 2018: {place}</p></div>
+                        <div className='col-md-8'> <p className='catagory-name catagory-name--focusName'>Municipality Focus 2018: {place}</p></div>
                         <div className='col-md-3'>
                             <Select
                                 value={place}

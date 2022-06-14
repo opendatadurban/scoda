@@ -19,22 +19,17 @@ const Socr_dashboards =()=>{
           active: false 
         }, 
         {
-          name: "City Finances", 
-          href: "socr#/city_finances", 
+          name: "Municipal Human Resources", 
+          href: "socr#/human_resources", 
           active: false 
-      }, 
-      {
-         name: "Human Resources", 
-         href: "socr#/human_resources", 
-         active: false 
-      }
+        }
     ]
   }
     return(
     <div className='sorc_dashboards'>
         <div className='spacer--top'></div>
           <Subnav name='State of Cities Reports' dropdownName='Service Delivery' dropDownItem={subNavContent} buttonText="Download as PNG"/>
-          <Sidebar_left/>
+          {/* <Sidebar_left/> */}
           <div id='content'>
            <Stat_Panel/>
            <Charts_dashboards/>

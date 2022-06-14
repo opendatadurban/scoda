@@ -17,26 +17,20 @@ const Socr_Citizens_Engagement = () => {
           name: "Citizen Engagement", 
           href: "socr#/citizen_engagement", 
           active: true 
-        }, 
+        },  
         {
-          name: "City Finances", 
-          href: "socr#/city_finances", 
+          name: "Municipal Human Resources", 
+          href: "socr#/human_resources", 
           active: false 
-      }, 
-      {
-         name: "Human Resources", 
-         href: "socr#/human_resources", 
-         active: false 
-      }
+        }
     ]
   }
         return (
             <div className='sorc_dashboards'>
                 <div className='spacer--top'></div>
                 <Subnav name='State of Cities Reports' dropdownName='Citizen Engagement' dropDownItem={subNavContent} buttonText="Download as PNG" />
-                <Sidebar_left />
-                <div id='content'>
-                <Stat_Panel/>
+                {/* <Sidebar_left /> */}
+                <div id='content' className='sorc_dashboards sorc_dashboards--citizen_engagement'>
                 <Charts_dashboards/>
                 </div>
             </div>

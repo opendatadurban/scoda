@@ -11,10 +11,12 @@ const Charts = ({
   h3class,
   title,
   data,
-  source
+  source,
+  height
 }) => {
 
     const [options] = useState({
+      aspectRatio: 1,
       legend: {
         labels: {
           fontColor: "#4A4A4A",
@@ -43,6 +45,7 @@ const Charts = ({
         }
       },
       responsive: true,
+      maintainAspectRatio: true,
       scales: {
         xAxes: [{
           stacked: true,
@@ -90,11 +93,11 @@ const Charts = ({
     })
 
         return (
-          <div className={"container doughnut chart " + className}>
-                <div className="row">
-                    <div className="col-12">
+          <div className={"container doughnut chart" + className}>
+                <div className="row  ">
+                    <div className="col-12 ">
                         <h3 className={h3class}>{title}</h3>
-                        <Bar options={options}  data={data} redraw={true}/>
+                        <Bar options={options}  data={data} redraw={true} height={height}/>
                         <p className="source">{source}</p>
                     </div>
                 </div>

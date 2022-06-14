@@ -49,15 +49,24 @@ export default class IndicatorExplorerDataCardHeader extends Component {
 
     filterData() {
         let selectedIndex = document.getElementById('selector').value;
-
+        console.log('filtered',selectedIndex)
         this.props.filterHook(selectedIndex);
     }
     
     render() {
-        const selectorOptions = this.props.datasetOptions.map((dataset,index) =>(
+        console.log('current option',this.props.datasetOptions)
+          
+        const selectorOptions = this.props.datasetOptions.map((dataset,index) =>{
             // <option key={index} value={dataset[0]}>{dataset[1].match(/.{1,10}(\s|$)/g)}</option>
-            <option key={index} value={dataset[0]}>{dataset[1]}</option>
-        ));
+            return <option key={index} value={dataset[0]}>{dataset[1]}</option>
+        });
+
+        //populate select option with the current indicator
+        const currentOption = this.props.datasetOptions.map((dataset,index) =>{
+            if(dataset[0] === this.props.indicator_id) {
+                return  <option key={index} value={dataset[0]}>{dataset[1]}</option>
+            }
+        });
 
 
             
@@ -87,11 +96,10 @@ export default class IndicatorExplorerDataCardHeader extends Component {
                                 Choose Your Indicator:
                             </div>
                         </div>
-
                         <div className="row">
                             <div className="col">
                               <select id="selector" className="ie-dropdown mb-2" onChange={this.enableFilter}>                     
-                                  <option value="0">Empty</option>
+                                  {currentOption.length ? currentOption : <option value="0">Empty</option>}
                                   {selectorOptions}
 
                               </select>

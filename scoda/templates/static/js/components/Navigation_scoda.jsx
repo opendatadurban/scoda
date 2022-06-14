@@ -112,13 +112,12 @@ export default class Navigation_scoda extends Component {
                                         SoCR
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a className="dropdown-item" href="/scoda/socr">Introduction</a>
+                                        <a className="dropdown-item" href="/scoda/socr">SoCR Directory</a>
                                         <a className="dropdown-item" href="/scoda/socr#/citizen_engagement">Citizen Engagement</a>
-                                        <a className="dropdown-item" href="/scoda/socr#/city_finances">City Finances</a>
-                                        <a className="dropdown-item" href="/scoda/socr">Household Bills & Affordability</a>
-                                        <a className="dropdown-item" href="/scoda/socr#/human_resources">Human Resources</a>
+                                        {/* <a className="dropdown-item" href="/scoda/socr">Household Bills & Affordability</a> */}
+                                        <a className="dropdown-item" href="/scoda/socr#/human_resources">Municipal Human Resources</a>
                                         <a className="dropdown-item" href="/scoda/socr#/service_delivery">Service Delivery</a>
-                                        <a className="dropdown-item" href="/scoda/socr">State of Municipal Finance</a>
+                                        {/* <a className="dropdown-item" href="/scoda/socr">State of Municipal Finance</a> */}
                                     </div>
                                 </li>
                                 <li className="nav-item about_">
