@@ -21,7 +21,7 @@ def seed_temp_indicators(db):
             data_point.ds_name = row["ds_name"]
             data_point.indicator_id = row["indicator_id"]
             db.session.add(data_point)
-        print(F" {row} updated")
+        print(F" {index} updated")
     try:
         db.session.commit()
     except Exception as e:
