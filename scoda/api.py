@@ -27,6 +27,179 @@ def api_indicators_list(check):
     # payload = {"indicators_list": indicators_list}
     return jsonify(indicators_list)
 
+@app.route('/api/explore_new/', defaults={'check': ''})
+@app.route('/api/explore_new/<check>', methods=['GET', 'POST'])
+def explore_new(check):
+    form = ExploreForm()
+    status = 200
+    plot = 0
+    tour = 1
+    #ind = 76
+    #Note: Riaan Snyders: 10 June 2020 - Removed for now. Only functions on GET at the moment.
+    #if request.method == 'POST':
+        #if form.validate():
+            #data_json = request.get_json()
+            #ind = data_json["indicator_id"]
+    if request.args.get('indicator_id'):
+        ind = request.args.get('indicator_id')
+    else:
+        ind = 76
+    print(ind)
+    plot = 1
+    tour = 2
+    print(check)
+    # codebook query
+    if check == "codebook":
+        query = db.session.query(CbRegion.name.label('re_name'), CbDataPoint.start_dt,
+                                 CbIndicator.name.label('ds_name'), CbDataPoint.value,
+                                 CbDataPoint.end_dt). \
+            filter(CbDataPoint.indicator_id == ind).filter(CbDataPoint.indicator_id == CbIndicator.id). \
+            filter(CbDataPoint.region_id == CbRegion.id)
+        df = read_sql_query(query.statement, query.session.bind)
+        print(df['start_dt'].iloc[0])
+        print(df['end_dt'].iloc[0])
+        df = df.rename(columns={'name': 're_name', 'name.1': 'ds_name'})
+        if df['start_dt'].iloc[0]:
+            df["year"] = df["start_dt"].apply(lambda x: int(x.strftime('%Y')))
+            df["start_dt"] = df["year"]
+        elif df['end_dt'].iloc[0]:
+            df["year"] = df["end_dt"].apply(lambda x: int(x.strftime('%Y')))
+            df["start_dt"] = df["year"]
+            del df["end_dt"]
+
+    else:
+        query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value). \
+            filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
+            filter(DataPoint.region_id == Region.id)
+        df = read_sql_query(query.statement, query.session.bind)
+    df = df.drop_duplicates()
+    # print(app.root_path)
+    # df.to_csv('%s/data/%s' % (app.root_path, "data_test.csv"), index=False)
+    table = []
+    table_plot = []
+    years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
+    cities = [c for c in cities]
+    print(df)
+    options_list = [{'optid': i, 'optname': d} for i, d in enumerate(datasets, start=1)]
+    years_list = [{'optid': i, 'optname': 'Year: %s' % d} for i, d in enumerate(sorted(years), start=1)]
+
+    plot_type = 1
+    print(len(years))
+    if (len(datasets) > 1) or (len(years) == 1):
+        plot_type = 2
+
+    colours = ['#f44336', '#03a9f4', '#4caf50', '#ffc107', '#03a9f4', '#ff5722', '#9c27b0', '#8bc34a',
+               '#ffeb3b', '#9e9e9e', '#3f51b5', '#e91e63']
+    series = {i: {'color': colours[i]} for i in range(len(datasets))}
+    view = list(range(2, len(datasets) + 2))
+    view.insert(0, 0)
+
+    minVal = min(map(float, list(df.value.unique())))
+    maxVal = max(map(float, list(df.value.unique()))) * 1.1
+
+    head = ['City', 'Year']
+    chart_data = []
+    for i in datasets:
+        head.append(str(i))
+    table.append(head)
+    table_plot.append(head)
+
+    # df.re_name = df.re_name.str.encode('utf-8')
+    if plot_type == 1:
+        df_i = df.iloc[:, [0, 1, 3]]
+
+        schema = [('City', 'string'), ('Year', 'string'), ('%s' % datasets[0], 'number')]
+
+        data_table = gviz_api.DataTable(schema)
+        data_table.LoadData(df_i.values)
+        table_plot = data_table.ToJSon(columns_order=('City', '%s' % datasets[0], 'Year'))
+        for y in years:
+            labels = []
+            values = []
+            for c in cities:
+                labels.append(c)
+                row = [str(y), str(c)]
+                for d in datasets:
+                    datapoint = df.loc[(df["re_name"] == c) & (df["year"] == y) & (df["ds_name"] == d), "value"]
+                    if len(datapoint) == 0:
+                        row.append(None)
+                    else:
+                        values.append(
+                            float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
+                            df["ds_name"] == d), "value"])
+                        )
+                        row.append(
+                            float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
+                            df["ds_name"] == d), "value"]))
+                table.append(row)
+            chart_data.append({
+                    'labels' :labels,
+                    'year': str(y),
+                    'values':values
+                })
+
+
+        # for c in cities:
+        #     for y in years:
+        #         row = [str(c), str(y)]
+        #         for d in datasets:
+        #             datapoint = df.loc[(df["re_name"] == c) & (df["year"] == y) & (df["ds_name"] == d), "value"]
+        #             if len(datapoint) == 0:
+        #                 row.append(None)
+        #             else:
+        #                 row.append(
+        #                     float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
+        #                     df["ds_name"] == d), "value"]))
+        #         table.append(row)
+    else:
+
+        for y in years:
+            labels = []
+            values = []
+            for c in cities:
+                labels.append(c)
+                row = [str(y), str(c)]
+                for d in datasets:
+                    datapoint = df.loc[(df["re_name"] == c) & (df["year"] == y) & (df["ds_name"] == d), "value"]
+                    if len(datapoint) == 0:
+                        row.append(None)
+                    else:
+                        values.append(
+                            float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
+                            df["ds_name"] == d), "value"])
+                        )
+                        row.append(
+                            float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
+                            df["ds_name"] == d), "value"]))
+                table.append(row)
+            chart_data.append({
+                    'labels' :labels,
+                    'year': str(y),
+                    'values':values
+                })
+
+        # for c in cities:
+        #     for y in years:
+        #         row = [str(c), str(y)]
+        #         for d in datasets:
+        #             datapoint = df.loc[(df["re_name"] == c) & (df["year"] == y) & (df["ds_name"] == d), "value"]
+        #             if len(datapoint) == 0:
+        #                 row.append(None)
+        #             else:
+        #                 row.append(
+        #                     float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
+        #                     df["ds_name"] == d), "value"]))
+        #         table.append(row)
+    yrs = ['Year'] + [str(y) for y in years[::-1]]
+    payload = {"plot":plot, "table":table, "table_plot":table_plot,"colours":colours,"year":str(max(years)), "series":series,
+             "view":view, "plot_type":plot_type,"min":minVal,"max":maxVal, "cities":cities, "options_list":options_list,
+             "years_list":years_list,"tour":tour, "years":yrs}
+    return jsonify(chart_data)
+        # else:
+        #     form_errors = form.errors
+        #     return {"form_errors":form_errors}
+
+
 @app.route('/api/explore/', defaults={'check': ''})
 @app.route('/api/explore/<check>', methods=['GET', 'POST'])
 def api_explore(check):
