@@ -987,7 +987,7 @@ def api_codebook(page=1):
 
     if request.method == 'POST':
         data = request.get_json()
-
+        print(f'data: {data}')
         if data['c88']:
             query = query.filter(CbIndicator.c88_theme.in_(data['c88']))
 
@@ -1000,8 +1000,8 @@ def api_codebook(page=1):
         if data['search']:
             query = search(query, data['search'], sort=True)
 
-    else:
-        query = query.limit(150).offset((page - 1) * 20)
+    # else:
+    #     query = query.limit(150).offset((page - 1) * 20)
 
     row_count = query.count()
     query = query.all()
@@ -1022,14 +1022,14 @@ def api_codebook(page=1):
             "source": dicts_for_group_code[0].source.name if dicts_for_group_code[0].source else None,
             "reportingResponsibility": dicts_for_group_code[0].reporting_responsibility,
             "notesOnCalculation": dicts_for_group_code[0].notes_on_calculation,
-            "variableType": dicts_for_group_code[0].unit.name,
+            "variableType": dicts_for_group_code[0].unit.name if dicts_for_group_code[0].unit else None,
             "frequencyOfCollection": dicts_for_group_code[0].frequency_of_collection,
             "automatibility": dicts_for_group_code[0].automatable,
             "granulity": dicts_for_group_code[0].granularity,
             "gathering_method": dicts_for_group_code[0].gathering_method,
             "expandability": dicts_for_group_code[0].expandable,
             "period": dicts_for_group_code[0].period,
-            "unit_of_measurement": dicts_for_group_code[0].unit.name,
+            "unit_of_measurement": dicts_for_group_code[0].unit.name if dicts_for_group_code[0].unit else None,
             "source_link": dicts_for_group_code[0].url_link,
             "data_check":True if dicts_for_group_code[0].indicator_data else False
         }
@@ -1048,14 +1048,14 @@ def api_codebook(page=1):
                 "source": d.source.name if d.source else None,
                 "reportingResponsibility": d.reporting_responsibility,
                 "notesOnCalculation": d.notes_on_calculation,
-                "variableType": d.unit.name,
+                "variableType": d.unit.name if d.unit else None,
                 "frequencyOfCollection": d.frequency_of_collection,
                 "automatibility": d.automatable,
                 "granulity": d.granularity,
                 "gathering_method": d.gathering_method,
                 "expandability": d.expandable,
                 "period": d.period,
-                "unit_of_measurement": d.unit.name,
+                "unit_of_measurement": d.unit.name if d.unit else None,
                 "source_link": d.url_link,
                 "data_check": bool(d.indicator_data),
             }
@@ -1063,5 +1063,4 @@ def api_codebook(page=1):
             children.append(child)
         day_dict.update({"children": children})
         result_list.append(day_dict)
-
     return jsonify(result_list)
