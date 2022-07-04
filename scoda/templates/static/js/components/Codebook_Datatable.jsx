@@ -12,7 +12,7 @@ export default class CodebookDatatable extends Component {
             filters: this.props.filteredData,
             selected: null,
             currentPage: 1,
-            isLoading: false
+            isLoading: true
         };
 
         this.selectChild = this.selectChild.bind(this);
