@@ -27,6 +27,60 @@ def api_indicators_list(check):
     # payload = {"indicators_list": indicators_list}
     return jsonify(indicators_list)
 
+@app.route('/api/explore_new/', defaults={'check': ''})
+@app.route('/api/explore_new/<check>', methods=['GET', 'POST'])
+def explore_new(check):
+    if request.args.get('indicator_id'):
+        ind = request.args.get('indicator_id')
+    else:
+        ind = 76
+    # codebook query
+    if check == "codebook":
+        query = db.session.query(CbRegion.name.label('re_name'), CbDataPoint.start_dt,
+                                 CbIndicator.name.label('ds_name'), CbDataPoint.value,
+                                 CbDataPoint.end_dt). \
+            filter(CbDataPoint.indicator_id == ind).filter(CbDataPoint.indicator_id == CbIndicator.id). \
+            filter(CbDataPoint.region_id == CbRegion.id)
+        df = read_sql_query(query.statement, query.session.bind)
+        print(df['start_dt'].iloc[0])
+        print(df['end_dt'].iloc[0])
+        df = df.rename(columns={'name': 're_name', 'name.1': 'ds_name'})
+        if df['start_dt'].iloc[0]:
+            df["year"] = df["start_dt"].apply(lambda x: int(x.strftime('%Y')))
+            df["start_dt"] = df["year"]
+        elif df['end_dt'].iloc[0]:
+            df["year"] = df["end_dt"].apply(lambda x: int(x.strftime('%Y')))
+            df["start_dt"] = df["year"]
+            del df["end_dt"]
+
+    else:
+        query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value). \
+            filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
+            filter(DataPoint.region_id == Region.id)
+        df = read_sql_query(query.statement, query.session.bind)
+    df = df.drop_duplicates()
+    years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
+    cities = [c for c in cities]
+    chart_data = []
+    for y in years:
+        labels = []
+        values = []
+        for c in cities:
+            labels.append(c)
+            for d in datasets:
+                datapoint = df.loc[(df["re_name"] == c) & (df["year"] == y) & (df["ds_name"] == d), "value"]
+                if len(datapoint) != 0:
+                    values.append(
+                        float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (df["ds_name"] == d), "value"]) )
+        chart_data.append(
+            {
+                'labels' :labels,
+                'year': str(y),
+                'values':values
+            })
+    return jsonify(chart_data)
+
+
 @app.route('/api/explore/', defaults={'check': ''})
 @app.route('/api/explore/<check>', methods=['GET', 'POST'])
 def api_explore(check):
