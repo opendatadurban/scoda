@@ -31,6 +31,8 @@ export default class FilterPill extends Component {
             $('#' + well + "1").toggle()
             $('#' + well + "2").toggle()
             $('#' + well + "3").toggle()
+            $('#' + well + "4").toggle()
+            $('#' + well + "5").toggle()
             $(e.target).toggleClass('selected')
         }
         if (e.target.classList.contains(employnent)) {

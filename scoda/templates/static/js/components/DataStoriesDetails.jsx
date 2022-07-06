@@ -137,16 +137,16 @@ export default class DataStoriesDetails extends Component {
                                                 imgSrc={bannerImageSACN}
                                             />
                                         </div>
-                                        <div id="data-story-card-inclusive1" className={"col-md-4 "+main_class+" data-story-card-inclusives data-story-card-inclusive"}>
+                                        <div id="data-story-card-well-governed4" className={"col-md-4 "+main_class+" data-story-card-inclusives data-story-card-inclusive"}>
                                             <ContentSectionTop
                                                 img="affordability.png"
-                                                title="State of the City Finances 2018"
+                                                title="State of City Finances 2018"
                                                 subtitle="Affordability"
                                                 content="A key message from the State of City Finances 2018 report is that citizens are in crisis. Although growth in the cost of munic..."
-                                                filterColor="#FFC057"
-                                                filter="Inclusive Cities"
-                                                imageTag="I"
-                                                filter_type="data-story-card-inclusives"
+                                                filterColor="#196CDB"
+                                                filter="Well Governed Cities"
+                                                imageTag="W"
+                                                filter_type="data-story-card-well"
                                                 href_='/scoda/toolkit#/ds-affordability-2018'
                                             />
                                             <DataStoriesInfoBanner
@@ -158,7 +158,7 @@ export default class DataStoriesDetails extends Component {
                                                 imgSrc={bannerImageSACN}
                                             />
                                         </div>
-                                        <div id="data-story-card-well-governed" className={"col-md-4 "+main_class+" data-story-card-well"}>
+                                        <div id="data-story-card-well-governed5" className={"col-md-4 "+main_class+" data-story-card-well"}>
                                             <ContentSectionTop
                                                 img="urban-safety.png"
                                                 title="Urban Safety"
