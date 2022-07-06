@@ -35,7 +35,6 @@ def help():
 
 
 
-
 @app.route('/demographics/<region_id>/<city_ward_code>/download', methods=['GET'])
 def demographics_download(region_id, city_ward_code):
     region = Region.query.get(region_id).re_name
