@@ -332,42 +332,28 @@ def explore():
             # ensure the browser refreshes the page when Back is pressed
             {'Cache-Control': 'no-cache, no-store, must-revalidate'})
 
-@app.route('/api-temp/explore/', defaults={'check': ''})
-@app.route('/api-temp/explore/<check>', methods=['GET', 'POST'])
-def api_explore_temp(check):
+@app.route('/api-temp/explore/')
+def api_explore_temp():
     indicator_id = request.args.get('indicator_id')
-    print(indicator_id)
-    plot = 1
-    tour = 2
-    print(check)
+    city = request.args.get('city')
+    year_filter = request.args.getlist('year')
     # codebook query
     query = db.session.query(CbTempIndicators.re_name, CbTempIndicators.start_dt,
                              CbTempIndicators.ds_name, CbTempIndicators.value,
                              CbTempIndicators.year).filter(CbTempIndicators.indicator_id == indicator_id)
     if not query.first():
         return jsonify({})
+    if city:
+        query = query.filter(CbTempIndicators.re_name == city)
+    if year_filter:
+        query = query.filter(CbTempIndicators.year.in_([int(yr) for yr in year_filter]))
     df = read_sql_query(query.statement, query.session.bind)
     df = df.drop_duplicates()
-    # print(app.root_path)
-    # df.to_csv('%s/data/%s' % (app.root_path, "data_test.csv"), index=False)
+
     table = []
-    table_plot = []
     years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
     cities = [c for c in cities]
-    # print(df)
     options_list = [{'optid': i, 'optname': d} for i, d in enumerate(datasets, start=1)]
-    years_list = [{'optid': i, 'optname': 'Year: %s' % d} for i, d in enumerate(sorted(years), start=1)]
-
-    plot_type = 1
-    # print(len(years))
-    if (len(datasets) > 1) or (len(years) == 1):
-        plot_type = 2
-
-    colours = ['#f44336', '#03a9f4', '#4caf50', '#ffc107', '#03a9f4', '#ff5722', '#9c27b0', '#8bc34a',
-               '#ffeb3b', '#9e9e9e', '#3f51b5', '#e91e63']
-    series = {i: {'color': colours[i]} for i in range(len(datasets))}
-    view = list(range(2, len(datasets) + 2))
-    view.insert(0, 0)
 
     minVal = min(map(float, list(df.value.unique())))
     maxVal = max(map(float, list(df.value.unique()))) * 1.1
@@ -376,45 +362,28 @@ def api_explore_temp(check):
     for i in datasets:
         head.append(str(i))
     table.append(head)
-    table_plot.append(head)
+    df_i = df.iloc[:, [0, 1, 3]]
 
-    # df.re_name = df.re_name.str.encode('utf-8')
-    if plot_type == 1:
-        df_i = df.iloc[:, [0, 1, 3]]
+    schema = [('City', 'string'), ('Year', 'string'), (f'{datasets[0]}', 'number')]
 
-        schema = [('City', 'string'), ('Year', 'string'), ('%s' % datasets[0], 'number')]
+    data_table = gviz_api.DataTable(schema)
+    data_table.LoadData(df_i.values)
 
-        data_table = gviz_api.DataTable(schema)
-        data_table.LoadData(df_i.values)
-        table_plot = data_table.ToJSon(columns_order=('City', '%s' % datasets[0], 'Year'))
-
-        for c in cities:
-            for y in years:
-                row = [str(c), str(y)]
-                for d in datasets:
-                    datapoint = df.loc[(df["re_name"] == c) & (df["year"] == y) & (df["ds_name"] == d), "value"]
-                    if len(datapoint) == 0:
-                        row.append(None)
-                    else:
-                        row.append(
-                            float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
-                            df["ds_name"] == d), "value"]))
-                table.append(row)
-    else:
-        for c in cities:
-            for y in years:
-                row = [str(c), str(y)]
-                for d in datasets:
-                    datapoint = df.loc[(df["re_name"] == c) & (df["year"] == y) & (df["ds_name"] == d), "value"]
-                    if len(datapoint) == 0:
-                        row.append(None)
-                    else:
-                        row.append(
-                            float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
-                            df["ds_name"] == d), "value"]))
-                table.append(row)
+    for c in cities:
+        for y in years:
+            row = [str(c), str(y)]
+            for d in datasets:
+                datapoint = df.loc[(df["re_name"] == c) & (df["year"] == y) & (df["ds_name"] == d), "value"]
+                if len(datapoint) == 0:
+                    row.append(None)
+                else:
+                    row.append(
+                        float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
+                        df["ds_name"] == d), "value"]))
+            table.append(row)
     yrs = ['Year'] + [str(y) for y in years[::-1]]
-    payload = {"plot":plot, "table":table, "table_plot":table_plot,"colours":colours,"year":str(max(years)), "series":series,
-             "view":view, "plot_type":plot_type,"min":minVal,"max":maxVal, "cities":cities, "options_list":options_list,
-             "years_list":years_list,"tour":tour, "years":yrs}
+    payload = {"table":table,"year":str(max(years)),"min":minVal,"max":maxVal,
+               "cities":cities,
+               "options_list":options_list,
+              "years":yrs}
     return jsonify(payload)
