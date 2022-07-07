@@ -23,8 +23,6 @@ def api_indicators_list(check):
         indicators_list = [[str(c.id), c.name] for c in CbIndicator.query.join(CbDataPoint,CbDataPoint.indicator_id == CbIndicator.id).all() if c.name not in remove_list]
     else:
         indicators_list = [[str(c.id), c.in_name] for c in Indicator.all() if c.in_name not in remove_list]
-    # print(indicators_list)
-    # payload = {"indicators_list": indicators_list}
     return jsonify(indicators_list)
 
 
@@ -50,18 +48,13 @@ def explore_new():
         # No data found
         return jsonify({})
     if df['start_dt'].iloc[0]:
-        print("here")
-        print(df['start_dt'].iloc[0])
         df["year"] = df["start_dt"].apply(lambda x: int(x.strftime('%Y')))
         df["start_dt"] = df["year"]
-        print(df)
     elif df['end_dt'].iloc[0]:
-        print("here22")
         df["year"] = df["end_dt"].apply(lambda x: int(x.strftime('%Y')))
         df["start_dt"] = df["year"]
         del df["end_dt"]
     df = df.drop_duplicates()
-    print(df)
     years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
     cities = list(cities)
     chart_data = []
