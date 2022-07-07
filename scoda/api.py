@@ -1,7 +1,7 @@
 from scoda.app import app
 from flask import request, url_for, redirect, flash, make_response, session, render_template, jsonify, Response
 from flask_security import current_user
-from itertools import zip_longest
+from itertools import product, zip_longest
 from .models import *
 from .models.user import UserAnalysis
 from .models.datasets import ExploreForm
@@ -27,40 +27,43 @@ def api_indicators_list(check):
     # payload = {"indicators_list": indicators_list}
     return jsonify(indicators_list)
 
-@app.route('/api/explore_new/', defaults={'check': ''})
-@app.route('/api/explore_new/<check>', methods=['GET', 'POST'])
-def explore_new(check):
-    if request.args.get('indicator_id'):
-        ind = request.args.get('indicator_id')
-    else:
-        ind = 76
-    # codebook query
-    if check == "codebook":
-        query = db.session.query(CbRegion.name.label('re_name'), CbDataPoint.start_dt,
-                                 CbIndicator.name.label('ds_name'), CbDataPoint.value,
-                                 CbDataPoint.end_dt). \
-            filter(CbDataPoint.indicator_id == ind).filter(CbDataPoint.indicator_id == CbIndicator.id). \
-            filter(CbDataPoint.region_id == CbRegion.id)
-        df = read_sql_query(query.statement, query.session.bind)
-        print(df['start_dt'].iloc[0])
-        print(df['end_dt'].iloc[0])
-        df = df.rename(columns={'name': 're_name', 'name.1': 'ds_name'})
-        if df['start_dt'].iloc[0]:
-            df["year"] = df["start_dt"].apply(lambda x: int(x.strftime('%Y')))
-            df["start_dt"] = df["year"]
-        elif df['end_dt'].iloc[0]:
-            df["year"] = df["end_dt"].apply(lambda x: int(x.strftime('%Y')))
-            df["start_dt"] = df["year"]
-            del df["end_dt"]
 
-    else:
-        query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value). \
-            filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
-            filter(DataPoint.region_id == Region.id)
-        df = read_sql_query(query.statement, query.session.bind)
+@app.route('/api/explore_new', methods=['GET', 'POST'])
+def explore_new():
+    ind = request.args.get('indicator_id') or 76
+    city = request.args.get('city')
+    year_filter = request.args.getlist('year')
+    query = db.session.query(CbRegion.name.label('re_name'), CbDataPoint.start_dt,
+                             CbIndicator.name.label('ds_name'), CbDataPoint.value,
+                             CbDataPoint.end_dt). \
+        filter(CbDataPoint.indicator_id == ind).filter(CbDataPoint.indicator_id == CbIndicator.id). \
+        filter(CbDataPoint.region_id == CbRegion.id)
+    if city:
+        query = query.filter(CbRegion.name == city)
+    if year_filter:
+        years_db = db.session.query(CbYear.id).filter(CbYear.name.in_([int(yr) for yr in year_filter]))
+        query = query.filter(CbDataPoint.year_start_id.in_([yr[0] for yr in years_db]))
+    df = read_sql_query(query.statement, query.session.bind)
+
+    df = df.rename(columns={'name': 're_name', 'name.1': 'ds_name'})
+    if not query.first():
+        # No data found
+        return jsonify({})
+    if df['start_dt'].iloc[0]:
+        print("here")
+        print(df['start_dt'].iloc[0])
+        df["year"] = df["start_dt"].apply(lambda x: int(x.strftime('%Y')))
+        df["start_dt"] = df["year"]
+        print(df)
+    elif df['end_dt'].iloc[0]:
+        print("here22")
+        df["year"] = df["end_dt"].apply(lambda x: int(x.strftime('%Y')))
+        df["start_dt"] = df["year"]
+        del df["end_dt"]
     df = df.drop_duplicates()
+    print(df)
     years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
-    cities = [c for c in cities]
+    cities = list(cities)
     chart_data = []
     for y in years:
         labels = []
@@ -84,23 +87,15 @@ def explore_new(check):
 @app.route('/api/explore/', defaults={'check': ''})
 @app.route('/api/explore/<check>', methods=['GET', 'POST'])
 def api_explore(check):
-    form = ExploreForm()
-    status = 200
-    plot = 0
-    tour = 1
-    #ind = 76
-    #Note: Riaan Snyders: 10 June 2020 - Removed for now. Only functions on GET at the moment.
-    #if request.method == 'POST':
-        #if form.validate():
-            #data_json = request.get_json()
-            #ind = data_json["indicator_id"]
     if request.args.get('indicator_id'):
         ind = request.args.get('indicator_id')
     else:
         ind = 76
+
+    city = request.args.get('city')
+    year_filter = request.args.getlist('year')
     print(ind)
     plot = 1
-    tour = 2
     print(check)
     # codebook query
     if check == "codebook":
@@ -109,9 +104,14 @@ def api_explore(check):
                                  CbDataPoint.end_dt). \
             filter(CbDataPoint.indicator_id == ind).filter(CbDataPoint.indicator_id == CbIndicator.id). \
             filter(CbDataPoint.region_id == CbRegion.id)
+        if city:
+            query = query.filter(CbTempIndicators.re_name == city)
+        if year_filter:
+            years_db = db.session.query(CbYear.id).filter(CbYear.name.in_([int(yr) for yr in year_filter]))
+            query = query.filter(CbDataPoint.year_start_id.in_([yr[0] for yr in years_db]))
+        if not query.first():
+            return jsonify({})
         df = read_sql_query(query.statement, query.session.bind)
-        print(df['start_dt'].iloc[0])
-        print(df['end_dt'].iloc[0])
         df = df.rename(columns={'name': 're_name', 'name.1': 'ds_name'})
         if df['start_dt'].iloc[0]:
             df["year"] = df["start_dt"].apply(lambda x: int(x.strftime('%Y')))
@@ -157,7 +157,6 @@ def api_explore(check):
     table.append(head)
     table_plot.append(head)
 
-    # df.re_name = df.re_name.str.encode('utf-8')
     if plot_type == 1:
         df_i = df.iloc[:, [0, 1, 3]]
 
@@ -195,11 +194,8 @@ def api_explore(check):
     yrs = ['Year'] + [str(y) for y in years[::-1]]
     payload = {"plot":plot, "table":table, "table_plot":table_plot,"colours":colours,"year":str(max(years)), "series":series,
              "view":view, "plot_type":plot_type,"min":minVal,"max":maxVal, "cities":cities, "options_list":options_list,
-             "years_list":years_list,"tour":tour, "years":yrs}
+             "years_list":years_list, "years":yrs}
     return jsonify(payload)
-        # else:
-        #     form_errors = form.errors
-        #     return {"form_errors":form_errors}
 
 
 
@@ -352,7 +348,7 @@ def api_explore_temp():
 
     table = []
     years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
-    cities = [c for c in cities]
+    cities = list(cities)
     options_list = [{'optid': i, 'optname': d} for i, d in enumerate(datasets, start=1)]
 
     minVal = min(map(float, list(df.value.unique())))
@@ -362,25 +358,18 @@ def api_explore_temp():
     for i in datasets:
         head.append(str(i))
     table.append(head)
-    df_i = df.iloc[:, [0, 1, 3]]
 
-    schema = [('City', 'string'), ('Year', 'string'), (f'{datasets[0]}', 'number')]
-
-    data_table = gviz_api.DataTable(schema)
-    data_table.LoadData(df_i.values)
-
-    for c in cities:
-        for y in years:
-            row = [str(c), str(y)]
-            for d in datasets:
-                datapoint = df.loc[(df["re_name"] == c) & (df["year"] == y) & (df["ds_name"] == d), "value"]
-                if len(datapoint) == 0:
-                    row.append(None)
-                else:
-                    row.append(
-                        float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
-                        df["ds_name"] == d), "value"]))
-            table.append(row)
+    for c, y in product(cities, years):
+        row = [str(c), str(y)]
+        for d in datasets:
+            datapoint = df.loc[(df["re_name"] == c) & (df["year"] == y) & (df["ds_name"] == d), "value"]
+            if len(datapoint) == 0:
+                row.append(None)
+            else:
+                row.append(
+                    float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
+                    df["ds_name"] == d), "value"]))
+        table.append(row)
     yrs = ['Year'] + [str(y) for y in years[::-1]]
     payload = {"table":table,"year":str(max(years)),"min":minVal,"max":maxVal,
                "cities":cities,
