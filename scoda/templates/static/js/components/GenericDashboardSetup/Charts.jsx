@@ -6,8 +6,8 @@ import { chartGridStyles } from './helpers/styles';
 
 export const Charts = ({ minYear, maxYear, indicator_ids, yearColors }) => {
 
-  const [chartGroup, setChartGroup] = useState(null)
-  const [labelGroup, setLabelGroup] = useState(null)
+  const [chartGroup, setChartGroup] = useState([])
+  const [labelGroup, setLabelGroup] = useState([])
 
   useEffect(() => {
 
@@ -22,13 +22,12 @@ export const Charts = ({ minYear, maxYear, indicator_ids, yearColors }) => {
 
   return (
     <div>
-      {chartGroup && labelGroup ?
+      {(chartGroup.length > 1) && (labelGroup.length > 1) ?
 
         <div className="grid-container" style={chartGridStyles}>
           {
             chartGroup.map((chart, index) => {
               
-              console.log("parent", chart)
               return <div key={index.toString()} className="chart-wrapper" style={{ padding: '30px' }}>
                 <Chart graphData={chart} labels={labelGroup} />
               </div>

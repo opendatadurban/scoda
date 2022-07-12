@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useState } from 'react';
 import { BarChartGeneric } from '../BarChartGeneric';
 
 export const Chart = ({ graphData, labels }) => {
+
+    const [chartState, setChartState] = useState(null)
+
+    useEffect(() => {
+        setChartState(graphData)
+    }, [])
 
     const options = {
         responsive: true,
@@ -34,15 +41,24 @@ export const Chart = ({ graphData, labels }) => {
             }],
         },
     };
-  
-    const data = {
+
+    console.log(chartState, "child")
+
+
+    const data = chartState ? {
         labels: labels,
         datasets:
-            [{}]
-           
-    }
-    console.log(graphData, "loop test")
-    
+            chartState.map((item, index) => {
+                console.log(item,"loop test")
+                return {
+                
+                    data: item.values
+                }
+            })
+
+    } : {}
+
+
     return (
         <BarChartGeneric options={options} data={data} />
     )
