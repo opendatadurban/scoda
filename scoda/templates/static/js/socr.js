@@ -4,11 +4,14 @@ import { HashRouter, Route } from 'react-router-dom';
 import createHistory from "history/createBrowserHistory"
 import loader from "./gif/Spinner.gif"
 
+
 const SoCR =  lazy(() => import('./templates/SoCR'));
 const CitizenEngagements =  lazy(() => import('./templates/CitizenEngagements'));
 const ServiceDelivery =  lazy(() => import('./templates/ServiceDelivery'));
 const HumanResources =  lazy(() => import('./templates/HumanResources'));
 const CityFinances =  lazy(() => import('./templates/CityFinances'));
+const PeopleAndHousehold =  lazy(() => import('./templates/PeopleAndHousehold'));
+
 
 const style = {
       position: 'absolute', left: '50%', top: '50%',
@@ -32,6 +35,8 @@ export default (
       <Route exact path='/human_resources' component={HumanResources} />
       <Route exact path='/city_finances' component={CityFinances} />
 
+      <Route exact path='/people_household' component={PeopleAndHousehold} />
+   
       </Suspense>
     </HashRouter>
 );
