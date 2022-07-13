@@ -4,6 +4,8 @@ import { Chart } from './Chart';
 import { populateChartGroup } from './data/api';
 import { chartGridStyles } from './helpers/styles';
 import Stat_Panel from './Human.Resources.Stat.Panel';
+import panelData from '../../data/panelData';
+import Select from '../Select';
 import Button from '../Button'
 
 export const Charts = ({ minYear, maxYear, indicator_ids, yearColors }) => {
@@ -12,9 +14,13 @@ export const Charts = ({ minYear, maxYear, indicator_ids, yearColors }) => {
   const [labelGroup, setLabelGroup] = useState([{}])
 
   //stats
-  const [last_municipal_posts, setLastMunicipalPost] =useState({})
-  const [last_total_posts, setLastTotalPosts] =useState({})
-  const [last_senior_management_posts, setLastSeniorManagementPost] =useState({})
+  const [last_municipal_posts, setLastMunicipalPost] = useState({})
+  const [last_total_posts, setLastTotalPosts] = useState({})
+  const [last_senior_management_posts, setLastSeniorManagementPost] = useState({})
+
+  //select
+  const [place,setPlace] = useState('Buffalo City')
+  const [data,setData] = useState(panelData[0])
 
   useEffect(() => {
 
@@ -23,11 +29,15 @@ export const Charts = ({ minYear, maxYear, indicator_ids, yearColors }) => {
       indicator_ids, minYear,
       maxYear, yearColors
     )
-    
+
   }, [])
 
+  const places = (e) => {
+   
+}
+
   const chartGridData = () => {
-    
+
 
     if (chartGroup === [{}]) return
 
@@ -40,13 +50,13 @@ export const Charts = ({ minYear, maxYear, indicator_ids, yearColors }) => {
       const codebookUrl = `/scoda/toolkit#/codebook-explorer/${element.indicator_id}`
 
       items.push(<div className='chart-wrapper'>
-       <div className='row'>
-                      <div className='col-md-9'><h1 className='charts_dashboards--households'>National Election: Voter Turnout</h1></div>
-                      <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href={codebookUrl} target='_blank' /></div>
+        <div className='row'>
+          <div className='col-md-9'><h1 className='charts_dashboards--households'>National Election: Voter Turnout</h1></div>
+          <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href={codebookUrl} target='_blank' /></div>
         </div>
         <div key={i.toString()} className="chart-wrapper" style={{ padding: '30px' }}>
-        <Chart graphData={element} labels={labelGroup} />
-      </div>
+          <Chart graphData={element} labels={labelGroup} />
+        </div>
       </div>
       )
 
@@ -57,21 +67,32 @@ export const Charts = ({ minYear, maxYear, indicator_ids, yearColors }) => {
 
   return (
     <div>
-      { chartGroup ?
+      {chartGroup ?
         <>
-         <Stat_Panel
-                last_municipal_posts = {last_municipal_posts}
-                last_total_posts = {last_total_posts}
-                last_senior_management_posts = {last_senior_management_posts}
-                />
-         <div className="grid-container" style={chartGridStyles}>
-         
-         {
-           chartGridData()
-         }
-       </div>
+          <Stat_Panel
+            last_municipal_posts={last_municipal_posts}
+            last_total_posts={last_total_posts}
+            last_senior_management_posts={last_senior_management_posts}
+          />
+
+          <Select
+            value={place}
+            placeholder='Select a City'
+            id={data.places.id}
+            multiple={data.places.multiple}
+            data={data.places.data}
+            name='gender'
+            onChange={places}
+          />
+
+          <div className="grid-container" style={chartGridStyles}>
+
+            {
+              chartGridData()
+            }
+          </div>
         </>
-       
+
         :
         <Modal id="loader" isOpen={true} className="modal-dialog-centered loader">
           <ModalBody>
