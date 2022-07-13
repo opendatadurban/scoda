@@ -7,17 +7,20 @@ const chartData = (graphData, setDatasets) => {
     setDatasets(graphData)
 }
 
-export const Chart = ({ graphData, labels }) => {
+export const Chart = ({ graphData, labels,loaded }) => {
 
     const [dataset, setDatasets] = useState([{}])
 
     useEffect(() => {
 
         setTimeout(() => {
- 
+            console.log("loaded change")
             if(graphData[0].year && graphData[0].labels && graphData[0].values){
+                console.log("loaded change")
                 chartData(graphData, setDatasets)
+                loaded(true)
             }
+            loaded(false)
         }, 5000);
     }, [graphData])
 

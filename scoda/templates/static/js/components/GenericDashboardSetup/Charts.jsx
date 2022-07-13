@@ -22,6 +22,9 @@ export const Charts = ({ minYear, maxYear, indicator_ids, yearColors }) => {
   const [place,setPlace] = useState('Buffalo City')
   const [data,setData] = useState(panelData[0])
 
+  //loading
+  const [loaded, isLoaded] = useState(true)
+
   useEffect(() => {
 
     populateChartGroup(
@@ -55,7 +58,7 @@ export const Charts = ({ minYear, maxYear, indicator_ids, yearColors }) => {
           <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href={codebookUrl} target='_blank' /></div>
         </div>
         <div key={i.toString()} className="chart-wrapper" style={{ padding: '30px' }}>
-          <Chart graphData={element} labels={labelGroup} />
+          <Chart graphData={element} labels={labelGroup} loaded={isLoaded} />
         </div>
       </div>
       )
@@ -89,6 +92,23 @@ export const Charts = ({ minYear, maxYear, indicator_ids, yearColors }) => {
 
             {
               chartGridData()
+            }
+            {
+              loaded ? <Modal id="loader" isOpen={true} className="modal-dialog-centered loader">
+              <ModalBody>
+                <div className="row">
+                  <div className="col-2"></div>
+                  <div className="col-0 ml-3 pt-4">
+                    <Spinner type="grow" color="secondary" size="sm" />
+                    <Spinner type="grow" color="success" size="sm" />
+                    <Spinner type="grow" color="danger" size="sm" />
+                    <Spinner type="grow" color="warning" size="sm" />
+                  </div>
+                  <div className="col-0 pt-4 pl-4 float-left">Loading Content...</div>
+                </div>
+                <br />
+              </ModalBody>
+            </Modal>:''
             }
           </div>
         </>
