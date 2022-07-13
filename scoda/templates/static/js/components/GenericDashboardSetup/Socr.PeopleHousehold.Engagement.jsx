@@ -32,7 +32,7 @@ const PeopleHousehold = () => {
       <Subnav name='State of Cities Reports' dropdownName='Citizen Engagement' dropDownItem={subNavContent} buttonText="Download as PNG" />
       <div id='content' className='sorc_dashboards sorc_dashboards--citizen_engagement'>
        <Charts minYear={2015} maxYear={2018} 
-       indicator_ids={[704, 699,701]} yearColors={peopleHouseholdColors}/>
+       indicator_ids={[704, 699,701,600,344]} yearColors={peopleHouseholdColors}/>
       </div>
     </div>
   )
