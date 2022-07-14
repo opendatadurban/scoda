@@ -231,6 +231,7 @@ const Socr_Human_Resources = () => {
     }
   
     const callback_select = (table, callback, select_values, sum_callback) => {
+      console.log(table,"table value")
       var cit = _.map(select_values, 'value')
       let data = []
       let current_year = 2014

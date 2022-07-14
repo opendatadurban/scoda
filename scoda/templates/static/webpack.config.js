@@ -24,6 +24,7 @@ const config = {
   },
   module: {
     rules: [
+      
       {
         test: /\.jsx?/,
         loader: "babel-loader",
@@ -34,6 +35,17 @@ const config = {
         loader: "style-loader!css-loader?modules",
       },
       {
+        test: /\.s[ac]ss$/i,
+        use: [
+    
+          "style-loader",
+       
+          "css-loader",
+        
+          "sass-loader",
+        ],
+      },
+      {
         test: /\.(jpg|png|svg|gif)$/,
         use: {
           loader: "url-loader",
@@ -42,6 +54,7 @@ const config = {
           },
         },
       },
+      
     ],
   },
 };

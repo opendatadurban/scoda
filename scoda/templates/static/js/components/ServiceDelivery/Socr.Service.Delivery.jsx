@@ -8,21 +8,26 @@ const Charts_dashboards =  lazy(() => import('./Charts.Service.Delivery'));
 const Socr_dashboards =()=>{
   const subNavContent = {
     dropdownMenu: [ 
-        {
-          name: "Service Delivery", 
-          href: "socr#/service_delivery", 
-          active: true 
-        },
-        { 
-          name: "Citizen Engagement", 
-          href: "socr#/citizen_engagement", 
-          active: false 
-        }, 
-        {
-          name: "Municipal Human Resources", 
-          href: "socr#/human_resources", 
-          active: false 
-        }
+      {
+        name: "Service Delivery",
+        href: "socr#/service_delivery",
+        active: true
+      },
+      {
+        name: "Citizen Engagement",
+        href: "socr#/citizen_engagement",
+        active: false
+      },
+      {
+        name: "Municipal Human Resources",
+        href: "socr#/human_resources",
+        active: false
+      },
+      {
+        name: "People and Households",
+        href: "socr#/people_household",
+        active: false
+      }
     ]
   }
     return(

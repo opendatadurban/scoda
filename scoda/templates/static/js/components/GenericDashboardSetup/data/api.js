@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const populateChartGroup = (setChartGroup, setLabelGroup, indicator_ids, minYear, maxYear, yearColors) => {
+export const populateChartGroup = (setChartGroup, setLabelGroup, indicator_ids, minYear, maxYear, yearColors, isLoaded) => {
   let gridData = []
   let labels = ['BUF', 'CPT', 'EKU', 'ETH', 'JHB', 'MAN', 'NMB', 'TSH']
 
@@ -18,7 +18,6 @@ export const populateChartGroup = (setChartGroup, setLabelGroup, indicator_ids, 
 
         // add corresponding color to each year/ dataset label
         item['color'] = yearColors[colorCount]
-        item['indicator_id'] = id
 
         filterData.push(item)
 
@@ -31,10 +30,13 @@ export const populateChartGroup = (setChartGroup, setLabelGroup, indicator_ids, 
   })
 
   if (gridData.length === indicator_ids.length) {
-    setChartGroup(gridData)
-    setLabelGroup(labels)
+    setTimeout(() => {
+      console.log("Worked")
+      setChartGroup(gridData)
+      setLabelGroup(labels)
+      isLoaded(true)
+    }, 6000);
   }
-
-
+  
 }
 

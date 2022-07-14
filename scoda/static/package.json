@@ -17,6 +17,10 @@
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11"
   },
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp build"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.10.0",
     "bootstrap": "^4.1.3",

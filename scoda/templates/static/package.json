@@ -22,6 +22,8 @@
     "react-dom": "^16.13.1",
     "react-select": "^4.3.1",
     "react-strap": "0.0.1",
+    "sass": "^1.53.0",
+    "sass-loader": "^10.1.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   },

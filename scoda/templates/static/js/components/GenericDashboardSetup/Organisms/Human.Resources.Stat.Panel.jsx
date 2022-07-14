@@ -1,8 +1,8 @@
-import React, { Component, useEffect, useState } from 'react'
-import Select from '../Select'
-import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import Select from '../../Select';
 
-import panelData from '../../data/panelData.js';
+
+import panelData from '../../../data/panelData';
 
 const HumanResourcesStatPanel = ({
     last_municipal_posts,
@@ -39,7 +39,6 @@ const HumanResourcesStatPanel = ({
 
     const places = (e) => {
         setPlace(e.target.value);
-        console.log('selected city :', e.target.value)
         if (e.target.value === 'Buffalo City') {
             setTotal_municipal_posts(last_total_posts[0][2])
             setVacancies(last_municipal_posts[0][2])
@@ -164,7 +163,9 @@ const HumanResourcesStatPanel = ({
                                 data={data.places.data}
                                 name='gender'
                                 onChange={places}
-                            /></div>
+                            />
+                    
+                            </div>
                     </div>
                     <div className='row'>
                         <div className='col-md-4'>
