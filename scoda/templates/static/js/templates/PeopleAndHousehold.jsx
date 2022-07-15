@@ -7,7 +7,7 @@ const PeopleHousehold = lazy(() => import('../components/GenericDashboardSetup/S
 const Home = () => {
 
     return(
-        <div className="socr--home">
+        <div className="socr--home" style={{backgroundColor:"white",overflowX:'hidden'}}>
             <Navigation_scoda logoHide={false} box_shadow={true} />
             <PeopleHousehold/>
             <Footer />

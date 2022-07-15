@@ -2,8 +2,9 @@ import React from 'react'
 
 import Subnav from '../Subnav'
 
-import { Charts } from './Charts'
+import { ChartGrid } from './ChartGrid'
 import { peopleHouseholdColors } from './helpers/helpers'
+import { GenericStatsPanel } from './Organisms/GenericStatsPanel'
 
 const PeopleHousehold = () => {
 
@@ -33,10 +34,16 @@ const PeopleHousehold = () => {
   }
   return (
     <div className='sorc_dashboards'>
-      <div className='spacer--top'></div>
+    
+      
+      <div id='content' className='sorc_dashboards sorc_dashboards--citizen_engagement' style={{paddingTop: '80px'}}>
       <Subnav name='State of Cities Reports' dropdownName='People and Households' dropDownItem={subNavContent} buttonText="Download as PNG" />
-      <div id='content' className='sorc_dashboards sorc_dashboards--citizen_engagement'>
-       <Charts minYear={2015} maxYear={2018} 
+      <GenericStatsPanel
+      last_municipal_posts={["E"]}
+      last_total_posts={["E"]}
+      last_senior_management_posts={["E"]}
+      />
+       <ChartGrid minYear={2015} maxYear={2018} 
        indicator_ids={[704, 699,701,706,711]} yearColors={peopleHouseholdColors}/>
       </div>
     </div>

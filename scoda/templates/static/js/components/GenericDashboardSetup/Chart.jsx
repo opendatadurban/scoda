@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useState } from 'react';
+
 import { BarChartGeneric } from '../BarChartGeneric';
 
 
@@ -23,7 +23,7 @@ export const Chart = ({ graphData, labels }) => {
                 gridLines: {
                     display: false
                 },
-                ticks: { fontFamily: "Montserrat", fontSize: 8, fontWeight:'bold' },
+                ticks: { fontFamily: "Montserrat", fontSize: 8, fontStyle:'600' },
                 gridLines: {
                     display: false,
                 }
@@ -40,7 +40,6 @@ export const Chart = ({ graphData, labels }) => {
     const data = {
         labels: labels,
         datasets: graphData.map( (item, index)=> {
-            console.log(item)
             return {
                 label: item.year,
                 data: item.values,
@@ -48,7 +47,6 @@ export const Chart = ({ graphData, labels }) => {
             }
         })
     }
-    console.log(data)
 
     return (
         <>

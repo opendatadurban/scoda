@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import Select from '../../Select';
-
+import React, { Component, useEffect, useState } from 'react'
+import Select from '../../Select'
+import axios from 'axios';
 
 import panelData from '../../../data/panelData';
 
-const HumanResourcesStatPanel = ({
+export const GenericStatsPanel= ({
     last_municipal_posts,
     last_total_posts,
     last_senior_management_posts
 }) => {
 
-    const [place, setPlace] = useState('Buffalo City')
+    const [place, setPlace] = useState('Tshwane')
     const [total_municipal_posts, setTotal_municipal_posts] = useState()
     const [municipal_management_vacancies, setVacancies] = useState()
     const [senior_management_vacancies, setSenior_management_vacancies] = useState()
@@ -24,21 +24,22 @@ const HumanResourcesStatPanel = ({
     let municipality_focus = [
         {
             percentage: total_municipal_posts,
-            type: `Total Municipal<br/>Posts`
+            type: `TOTAL Households`
         },
         {
             percentage: municipal_management_vacancies,
-            type: `Municipal Management<br/>Vacancies`
+            type: `Household size`
         },
         {
             percentage: senior_management_vacancies,
-            type: `Senior Management<br/>Vacancies`
+            type: `Population Density`
         },
 
     ]
 
     const places = (e) => {
         setPlace(e.target.value);
+        console.log('selected city :', e.target.value)
         if (e.target.value === 'Buffalo City') {
             setTotal_municipal_posts(last_total_posts[0][2])
             setVacancies(last_municipal_posts[0][2])
@@ -133,27 +134,27 @@ const HumanResourcesStatPanel = ({
             <div className='row stat_display_panel--numbers w-100'>
                 <div className='col-md-6 first_panel'>
                     <div className='stat_display_panel--averages'>
-                        <p className='catagory-name '>Averages {!isObjectEmpty(last_municipal_posts) ?last_municipal_posts[0][1] : ""}  <span>(Municipal Posts and Vacancies)</span></p>
+                        <p className='catagory-name '>Household Overview:  <span>City Averages 2018</span></p>
                     </div>
                     <div className='row'>
                         <div className='col-md-4 p-0'>
-                            <h1>{total_mun_posts_sum ? total_mun_posts_sum : ""}</h1>
-                            <p > Total Municipal<br />Posts</p>
+                            <h1>{1023392}</h1>
+                            <p > TOTAL Households</p>
                         </div>
                         <div className='col-md-4 p-0'>
-                            <h1>{mangement_mun_posts_sum ? mangement_mun_posts_sum : ""}</h1>
-                            <p>Municipal Management<br />Vacancies</p>
+                            <h1>{3.14}</h1>
+                            <p>Household size</p>
                         </div>
                         <div className='col-md-4 p-0'>
-                            <h1>{senior_posts_sum ? senior_posts_sum : ""}</h1>
-                            <p>Senior Management<br />Vacancies</p>
+                            <h1>{1438}</h1>
+                            <p>Population Density</p>
                         </div>
 
                     </div>
                 </div>
                 <div className='col-md-6'>
                     <div className='row'>
-                        <div className='col-md-8'> <p className='catagory-name catagory-name--focusName'> {!isObjectEmpty(last_municipal_posts) ? "Municipality Focus " + last_municipal_posts[0][1] + ":" : "Municipality Focus : "} {place}</p></div>
+                        <div className='col-md-8'> <p className='catagory-name catagory-name--focusName'> Household Overview: <span>Municipality Focus 2018</span></p></div>
                         <div className='col-md-3 select-container'>
                             <Select
                                 value={place}
@@ -163,25 +164,23 @@ const HumanResourcesStatPanel = ({
                                 data={data.places.data}
                                 name='gender'
                                 onChange={places}
-                            />
-                    
-                            </div>
+                            /></div>
                     </div>
                     <div className='row'>
                         <div className='col-md-4'>
                         {/* <h1 className={total_municipal_posts < total_mun_posts_sum ? 'green' : total_municipal_posts > total_mun_posts_sum ? 'red' : 'none'}>{total_municipal_posts}</h1> */}
                         <h1 className={ 'none'}>{total_municipal_posts?total_municipal_posts:0}</h1>
-                            <p>Total Municipal<br />Posts</p>
+                            <p>TOTAL Households</p>
                         </div>
                         <div className='col-md-4'>
                             {/* <h1 className={municipal_management_vacancies < mangement_mun_posts_sum ? 'green' : municipal_management_vacancies > mangement_mun_posts_sum ? 'red' : 'none'}>{municipal_management_vacancies}</h1> */}
                             <h1 className={ 'none'}>{municipal_management_vacancies?municipal_management_vacancies:0}</h1>
-                            <p>Municipal Management<br />Vacancies</p>
+                            <p>Household size</p>
                         </div>
                         <div className='col-md-4'>
                             {/* <h1 className={senior_posts_sum < senior_management_vacancies ? 'green' : senior_posts_sum > senior_management_vacancies ? 'red' : 'none'}>{senior_management_vacancies}</h1> */}
                             <h1 className={ 'none'}>{senior_management_vacancies ? senior_management_vacancies : 0}</h1>
-                            <p>Senior Management<br />Vacancies</p>
+                            <p>Population Density</p>
                         </div>
                     </div>
                 </div>
@@ -190,4 +189,3 @@ const HumanResourcesStatPanel = ({
         </div>
     )
 }
-export default HumanResourcesStatPanel;
