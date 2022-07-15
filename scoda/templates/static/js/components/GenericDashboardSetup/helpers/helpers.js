@@ -79,8 +79,6 @@ export const cityLabels = city => {
 }
 
 export const populateSelect = (chartData,setOriginal,cityLabels,setSelected) => {
-
-  console.log(chartData,"CHART DATA")
  
     const chartLabels = chartData.map(chart => {
       return chart[0].labels
