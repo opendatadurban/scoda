@@ -79,17 +79,20 @@ export const cityLabels = city => {
 }
 
 export const populateSelect = (chartData,setOriginal,cityLabels,setSelected) => {
-    
-  const chartLabels = chartData.map(chart => {
+
+  console.log(chartData,"CHART DATA")
+ 
+    const chartLabels = chartData.map(chart => {
       return chart[0].labels
   })
-  
-  console.log(chartLabels,"chart labels")
-  
+    
  const abbrevLabels = chartLabels[0].map(city => {
   return cityLabels(city)
  })
 
  setSelected(abbrevLabels) 
  setOriginal(abbrevLabels)
+  
+    
+  
 }
