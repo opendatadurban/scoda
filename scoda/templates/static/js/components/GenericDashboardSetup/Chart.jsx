@@ -2,8 +2,6 @@ import React, { useEffect } from 'react'
 
 import { BarChartGeneric } from '../BarChartGeneric';
 
-
-
 export const Chart = ({ graphData, labels,title }) => {
 
     const options = {

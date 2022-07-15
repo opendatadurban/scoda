@@ -8,7 +8,6 @@ export const ChartWrapper = ({ title, chartGroup, indicator_ids, labelGroup }) =
 
   let items = []
   
-  
   for (let i = 0; i < chartGroup.length; i++) {
   
     const element = chartGroup[i]

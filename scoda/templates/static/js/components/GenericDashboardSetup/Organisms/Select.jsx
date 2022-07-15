@@ -9,9 +9,9 @@ export const Select = ({ chartData, setChartData, setOriginal, setSelected, setO
     const [show, visibility] = useState(false)
 
     useEffect(() => {
-      
-            populateSelect(chartData, setOriginal, cityLabels, setSelected)
-        
+      setTimeout(() => {
+        populateSelect(chartData, setOriginal, cityLabels, setSelected)
+      }, 8000);
 
     }, [chartData])
 
@@ -31,23 +31,6 @@ export const Select = ({ chartData, setChartData, setOriginal, setSelected, setO
             console.log(labelGroupNew)
             return labelGroupNew
         } ))
-
-
-
-        // setChartData(prev => {
-
-        //     let newArr = prev.map((chart, chartIndex) => {
-
-        //         return chart.map((year, yearIndex) => {
-                   
-
-        //             let filteredCity = year.labels.filter(remove => remove !== selected[index])
-              
-        //             return year
-        //         })
-        //     })
-        //     return newArr
-        // })
     }
     const clearAll = (setSelected, setOptions, original) => {
 

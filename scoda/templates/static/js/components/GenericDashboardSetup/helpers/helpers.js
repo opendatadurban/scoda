@@ -6,9 +6,9 @@ export const peopleHouseholdColors = [
 ]
 
 export const chartTitles = {
-  yAxes: ["Number of Households","Average Number of People","Percentage","Population", "Population Density","Percentage"],
-  main: ["Total Households", "Household Size - Average Number of People per Household","Percentage of Population Change",
-"Total Population in Metro","Population Density - Population Size per Square km ","Net migration rate"] 
+  yAxes: ["Number of Households", "Average Number of People", "Percentage", "Population", "Population Density", "Percentage"],
+  main: ["Total Households", "Household Size - Average Number of People per Household", "Percentage of Population Change",
+    "Total Population in Metro", "Population Density - Population Size per Square km ", "Net migration rate"]
 }
 
 //TODO: use select to alter cities labels within chart grid 
@@ -78,19 +78,17 @@ export const cityLabels = city => {
   }
 }
 
-export const populateSelect = (chartData,setOriginal,cityLabels,setSelected) => {
- 
-    const chartLabels = chartData.map(chart => {
-      return chart[0].labels
-  })
-    
- const abbrevLabels = chartLabels[0].map(city => {
-  return cityLabels(city)
- })
+export const populateSelect = (chartData, setOriginal, cityLabels, setSelected) => {
 
- setSelected(abbrevLabels) 
- setOriginal(abbrevLabels)
-  
-    
-  
+  const chartLabels = chartData.map(chart => {
+    return chart[0].labels
+  })
+
+  const abbrevLabels = chartLabels[0].map(city => {
+    return cityLabels(city)
+  })
+
+  setSelected(abbrevLabels)
+  setOriginal(abbrevLabels)
+
 }

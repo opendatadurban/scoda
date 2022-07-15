@@ -7,11 +7,8 @@ import panelData from '../../../data/panelData';
 export const GenericStatsPanel = () => {
 
     const [place, setPlace] = useState('Tshwane')
-  
-    //set data
+
     const [data, setData] = useState(panelData[0])
-   
-   
 
     const [totalHouseHolds, setHouseHolds] = useState(null)
     const [houseAverage, setAverage] = useState(0)
@@ -24,17 +21,17 @@ export const GenericStatsPanel = () => {
         ]
 
         axios.get(endpoints[0].toString()).then((res) => {
-            setHouseHolds(res.data)
+            let total = 0
+            res.data[0].values.forEach((item)=> total += item)
+            setHouseHolds(total)
         })
 
         axios.get(endpoints[1].toString()).then((res) => {
             let houseSizeData = res.data.table
-            console.log(houseSizeData)
+
             averageHouseSize(houseSizeData, setAverage)
         })
     }, [place])
-
-
 
     const averageHouseSize = (houseData, setAverage) => {
 
@@ -42,28 +39,29 @@ export const GenericStatsPanel = () => {
             let total = 0
             let count = 0
             let average = 0
+
             houseData.forEach((item, index) => {
-                if (item[0] === place && item[1] === 2018) {
+
+                if (item[0] === place && item[1] === '2013') {
                     total = total + item[2]
                     count++
                 }
             });
 
-
             average = total / count
-            setAverage(average)
+
+            
+            setAverage(Math.round((average + Number.EPSILON) * 100) / 100)
 
         } else {
             return
         }
     }
 
-
     const places = (e) => {
+        console.log(e.target.value)
         setPlace(e.target.value);
     }
-
-
 
     return (
         <div className='stat_display_panel'>
@@ -78,7 +76,7 @@ export const GenericStatsPanel = () => {
                             <p > TOTAL Households</p>
                         </div>
                         <div className='col-md-4 p-0'>
-                            <h1>{houseAverage.toString() && 0}</h1>
+                            <h1>0</h1>
                             <p>Household size</p>
                         </div>
                         <div className='col-md-4 p-0'>
@@ -105,12 +103,12 @@ export const GenericStatsPanel = () => {
                     <div className='row'>
                         <div className='col-md-4'>
                             {/* <h1 className={total_municipal_posts < total_mun_posts_sum ? 'green' : total_municipal_posts > total_mun_posts_sum ? 'red' : 'none'}>{total_municipal_posts}</h1> */}
-                            <h1 className={'none'}>0</h1>
+                            <h1 className={'none'}>{totalHouseHolds}</h1>
                             <p>TOTAL Households</p>
                         </div>
                         <div className='col-md-4'>
                             {/* <h1 className={municipal_management_vacancies < mangement_mun_posts_sum ? 'green' : municipal_management_vacancies > mangement_mun_posts_sum ? 'red' : 'none'}>{municipal_management_vacancies}</h1> */}
-                            <h1 className={'none'}>0</h1>
+                            <h1 className={'none'}>{houseAverage}</h1>
                             <p>Household size</p>
                         </div>
                         <div className='col-md-4'>
