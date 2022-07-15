@@ -40,10 +40,10 @@ export const populateChartGroup = (setChartGroup, setLabelGroup, indicator_ids, 
   })
 
   if (gridData.length === indicator_ids.length) {
-    setTimeout(() => {
+   setTimeout(() => {
 
       if((gridData.length === indicator_ids.length) && gridData[0][0].values){
-       
+     
         setChartGroup(gridData)
        setLabelGroup(labels)
         isLoaded(true)
