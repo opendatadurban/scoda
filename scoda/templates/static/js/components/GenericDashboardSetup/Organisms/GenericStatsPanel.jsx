@@ -4,130 +4,66 @@ import axios from 'axios';
 
 import panelData from '../../../data/panelData';
 
-export const GenericStatsPanel= ({
-    last_municipal_posts,
-    last_total_posts,
-    last_senior_management_posts
-}) => {
+export const GenericStatsPanel = () => {
 
     const [place, setPlace] = useState('Tshwane')
-    const [total_municipal_posts, setTotal_municipal_posts] = useState()
-    const [municipal_management_vacancies, setVacancies] = useState()
-    const [senior_management_vacancies, setSenior_management_vacancies] = useState()
+  
     //set data
     const [data, setData] = useState(panelData[0])
-    const [total_mun_posts_sum, setTotalMunPostsSum] = useState()
-    const [mangement_mun_posts_sum, setTotalManagementMunPostsSum] = useState()
-    const [senior_posts_sum, setSeniorPostsSum] = useState()
+   
+   
+
+    const [totalHouseHolds, setHouseHolds] = useState(null)
+    const [houseAverage, setAverage] = useState(0)
+
+    useEffect(() => {
+
+        const endpoints = [
+            `/api/explore_new?indicator_id=2&city=${place}&year=2018`, //Total households
+            `/api-temp/explore/?indicator_id=2&city=${place}&year=2013`, //Gini coefficient being used in place of house hold size
+        ]
+
+        axios.get(endpoints[0].toString()).then((res) => {
+            setHouseHolds(res.data)
+        })
+
+        axios.get(endpoints[1].toString()).then((res) => {
+            let houseSizeData = res.data.table
+            console.log(houseSizeData)
+            averageHouseSize(houseSizeData, setAverage)
+        })
+    }, [place])
 
 
-    let municipality_focus = [
-        {
-            percentage: total_municipal_posts,
-            type: `TOTAL Households`
-        },
-        {
-            percentage: municipal_management_vacancies,
-            type: `Household size`
-        },
-        {
-            percentage: senior_management_vacancies,
-            type: `Population Density`
-        },
 
-    ]
+    const averageHouseSize = (houseData, setAverage) => {
+
+        if (houseData) {
+            let total = 0
+            let count = 0
+            let average = 0
+            houseData.forEach((item, index) => {
+                if (item[0] === place && item[1] === 2018) {
+                    total = total + item[2]
+                    count++
+                }
+            });
+
+
+            average = total / count
+            setAverage(average)
+
+        } else {
+            return
+        }
+    }
+
 
     const places = (e) => {
         setPlace(e.target.value);
-        console.log('selected city :', e.target.value)
-        if (e.target.value === 'Buffalo City') {
-            setTotal_municipal_posts(last_total_posts[0][2])
-            setVacancies(last_municipal_posts[0][2])
-            setSenior_management_vacancies(last_senior_management_posts[0][2])
-        }
-        if (e.target.value === 'City of Cape Town') {
-            setTotal_municipal_posts(last_total_posts[1][2])
-            setVacancies(last_municipal_posts[1][2])
-            setSenior_management_vacancies(last_senior_management_posts[1][2])
-        }
-        if (e.target.value === 'City of Joburg') {
-            setTotal_municipal_posts(last_total_posts[2][2])
-            setVacancies(last_municipal_posts[2][2])
-            setSenior_management_vacancies(last_senior_management_posts[2][2])
-        }
-        if (e.target.value === 'Ekurhuleni') {
-            setTotal_municipal_posts(last_total_posts[3][2])
-            setVacancies(last_municipal_posts[3][2])
-            setSenior_management_vacancies(last_senior_management_posts[3][2])
-        }
-        if (e.target.value === 'eThekwini') {
-            setTotal_municipal_posts(last_total_posts[8][2])
-            setVacancies(last_municipal_posts[8][2])
-            setSenior_management_vacancies(last_senior_management_posts[8][2])
-        }
-        if (e.target.value === 'Mangaung') {
-            setTotal_municipal_posts(last_total_posts[4][2])
-            setVacancies(last_municipal_posts[4][2])
-            setSenior_management_vacancies(last_senior_management_posts[4][2])
-        }
-        if (e.target.value === 'Nelson Mandela Bay') {
-            setTotal_municipal_posts(last_total_posts[6][2])
-            setVacancies(last_municipal_posts[6][2])
-            setSenior_management_vacancies(last_senior_management_posts[6][2])
-        }
-        if (e.target.value === 'Tshwane') {
-            setTotal_municipal_posts(last_total_posts[7][2])
-            setVacancies(last_municipal_posts[7][2])
-            setSenior_management_vacancies(last_senior_management_posts[7][2])
-        }
-        if (e.target.value === 'Msunduzi') {
-            setTotal_municipal_posts(last_total_posts[5][2])
-            setVacancies(last_municipal_posts[5][2])
-            setSenior_management_vacancies(last_senior_management_posts[5][2])
-        }
     }
 
-    const isObjectEmpty = (obj) => {
-        return (
-            obj // 👈 null and undefined check
-            && Object.keys(obj).length === 0
-            && Object.getPrototypeOf(obj) === Object.prototype
-        )
-    }
 
-    useEffect(() => {
-        if (!isObjectEmpty(last_total_posts)) {
-            setTotal_municipal_posts(last_total_posts[0][2])
-            let sum = 0;
-            for (let i = 0; i < last_total_posts.length; i++) {
-                sum += last_total_posts[i][2]
-            }
-            setTotalMunPostsSum((sum/last_total_posts.length).toFixed(0))
-        }
-    }, [last_total_posts])
-    
-    useEffect(() => {
-        if (!isObjectEmpty(last_municipal_posts)) {
-            setVacancies(last_municipal_posts[0][2])
-            let sum = 0;
-            for (let i = 0; i < last_municipal_posts.length; i++) {
-                sum += last_municipal_posts[i][2]
-            }
-            setTotalManagementMunPostsSum((sum/last_municipal_posts.length).toFixed(0))
-        }
-    }, [last_municipal_posts])
-
-
-    useEffect(() => {
-        if (!isObjectEmpty(last_senior_management_posts)) {
-            setSenior_management_vacancies(last_senior_management_posts[0][2])
-            let sum = 0;
-            for (let i = 0; i < last_senior_management_posts.length; i++) {
-                sum += last_senior_management_posts[i][2]
-            }
-            setSeniorPostsSum((sum/last_senior_management_posts.length).toFixed(0))
-        }
-    }, [last_senior_management_posts])
 
     return (
         <div className='stat_display_panel'>
@@ -138,15 +74,15 @@ export const GenericStatsPanel= ({
                     </div>
                     <div className='row'>
                         <div className='col-md-4 p-0'>
-                            <h1>{1023392}</h1>
+                            <h1>1023392</h1>
                             <p > TOTAL Households</p>
                         </div>
                         <div className='col-md-4 p-0'>
-                            <h1>{3.14}</h1>
+                            <h1>{houseAverage.toString() && 0}</h1>
                             <p>Household size</p>
                         </div>
                         <div className='col-md-4 p-0'>
-                            <h1>{1438}</h1>
+                            <h1>1438</h1>
                             <p>Population Density</p>
                         </div>
 
@@ -168,18 +104,18 @@ export const GenericStatsPanel= ({
                     </div>
                     <div className='row'>
                         <div className='col-md-4'>
-                        {/* <h1 className={total_municipal_posts < total_mun_posts_sum ? 'green' : total_municipal_posts > total_mun_posts_sum ? 'red' : 'none'}>{total_municipal_posts}</h1> */}
-                        <h1 className={ 'none'}>{total_municipal_posts?total_municipal_posts:0}</h1>
+                            {/* <h1 className={total_municipal_posts < total_mun_posts_sum ? 'green' : total_municipal_posts > total_mun_posts_sum ? 'red' : 'none'}>{total_municipal_posts}</h1> */}
+                            <h1 className={'none'}>0</h1>
                             <p>TOTAL Households</p>
                         </div>
                         <div className='col-md-4'>
                             {/* <h1 className={municipal_management_vacancies < mangement_mun_posts_sum ? 'green' : municipal_management_vacancies > mangement_mun_posts_sum ? 'red' : 'none'}>{municipal_management_vacancies}</h1> */}
-                            <h1 className={ 'none'}>{municipal_management_vacancies?municipal_management_vacancies:0}</h1>
+                            <h1 className={'none'}>0</h1>
                             <p>Household size</p>
                         </div>
                         <div className='col-md-4'>
                             {/* <h1 className={senior_posts_sum < senior_management_vacancies ? 'green' : senior_posts_sum > senior_management_vacancies ? 'red' : 'none'}>{senior_management_vacancies}</h1> */}
-                            <h1 className={ 'none'}>{senior_management_vacancies ? senior_management_vacancies : 0}</h1>
+                            <h1 className={'none'}>0</h1>
                             <p>Population Density</p>
                         </div>
                     </div>

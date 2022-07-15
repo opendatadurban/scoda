@@ -9,9 +9,11 @@ export const Select = ({ chartData, setChartData, setOriginal, setSelected, setO
     const [show, visibility] = useState(false)
 
     useEffect(() => {
+      
+            populateSelect(chartData, setOriginal, cityLabels, setSelected)
+        
 
-        populateSelect(chartData, setOriginal, cityLabels, setSelected)
-    }, [])
+    }, [chartData])
 
     const removeItem = (setSelected, setOptions, index, setChartData,setLabelGroup) => {
         let labelGroupNew = selected.filter(exclusion => exclusion !== selected[index])
