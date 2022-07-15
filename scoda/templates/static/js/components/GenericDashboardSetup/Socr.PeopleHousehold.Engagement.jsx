@@ -37,11 +37,8 @@ const PeopleHousehold = () => {
     
       
       <div id='content' className='sorc_dashboards sorc_dashboards--citizen_engagement' style={{paddingTop: '80px'}}>
-      <Subnav name='State of Cities Reports' dropdownName='People and Households' dropDownItem={subNavContent} buttonText="Download as PNG" />
+      <Subnav name='State of Cities Reports' dropdownName='People and Households' dropDownItem={subNavContent} buttonText="Download as PNG" />   
       <GenericStatsPanel
-      last_municipal_posts={["E"]}
-      last_total_posts={["E"]}
-      last_senior_management_posts={["E"]}
       />
        <ChartGrid minYear={2015} maxYear={2018} 
        indicator_ids={[704, 699,701,706,711]} yearColors={peopleHouseholdColors}/>

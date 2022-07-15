@@ -4,7 +4,7 @@ import { BarChartGeneric } from '../BarChartGeneric';
 
 
 
-export const Chart = ({ graphData, labels }) => {
+export const Chart = ({ graphData, labels,title }) => {
 
     const options = {
         responsive: true,
@@ -20,6 +20,7 @@ export const Chart = ({ graphData, labels }) => {
         },
         scales: {
             xAxes: [{
+               
                 gridLines: {
                     display: false
                 },
@@ -29,6 +30,13 @@ export const Chart = ({ graphData, labels }) => {
                 }
             }],
             yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: title,
+                    fontFamily: "Montserrat", 
+                    fontSize: 8, 
+                    fontStyle:'600' 
+                  },
                 gridLines: {
                     display: false
                 },
