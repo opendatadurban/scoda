@@ -50,7 +50,7 @@ export const populateChartGroup = (setChartGroup, setLabelGroup, indicator_ids, 
       }else{
         alert("You might have a slow internet connection, Please refresh the page !")
       }
-    }, 10000);
+    }, 12000);
   }
 }
 

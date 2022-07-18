@@ -23,7 +23,7 @@ export const GenericStatsPanel = () => {
         axios.get(endpoints[0].toString()).then((res) => {
             let total = 0
             res.data[0].values.forEach((item)=> total += item)
-            setHouseHolds(total)
+            setHouseHolds(Math.round((total + Number.EPSILON) * 100) / 100)
         }).catch(()=> console.log("server error in household stats"))
 
         axios.get(endpoints[1].toString()).then((res) => {
@@ -39,17 +39,20 @@ export const GenericStatsPanel = () => {
             let total = 0
             let count = 0
             let average = 0
-
+            console.log(houseData)
             houseData.forEach((item, index) => {
+                console.log(item[0],"item")
 
-                if (item[0] === place && item[1] === '2013') {
+                if (item[0] === place ) {
                     total = total + item[2]
                     count++
+                }else{
+                    return
                 }
             });
 
             average = total / count
-
+            console.log(average,"average")
             
             setAverage(Math.round((average + Number.EPSILON) * 100) / 100)
 
