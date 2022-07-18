@@ -22,9 +22,7 @@ const SoCR_Modal = ({ isOpen, setIsOpen }) => {
                                     SoCR 2021
                                 </h5>
                                 <p className="report--content--p">
-                                    State of Cities Reports produce solid and up-to-date information that helps
-                                    inform and support the work of urban actors across different sectors of society, as well as research into how to make South
-                                    African cities functional.
+                                The fifth SoCR uses a governance lens to diagnose progress made towards achieving productive, inclusive, sustainable and spatially transformed cities, with a focus on cooperative governance and the all-of-society approach. 
                                 </p>
                                 <a href="https://www.sacities.net/wp-content/uploads/2022/04/SoCR-V-2021_WEB-144dpi.pdf" className="report--content--btn-download" target='_blank' download>Download Report</a>
                             </div>
