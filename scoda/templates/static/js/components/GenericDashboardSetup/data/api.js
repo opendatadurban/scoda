@@ -11,7 +11,7 @@ export const populateChartGroup = (setChartGroup, setLabelGroup, indicator_ids, 
     let colorCount = 0
     let chartIndex = 0
 
-    axios.get(`/api/explore_new/codebook?indicator_id=${id}`).then((res) => {
+    axios.get(`/api/explore_new?indicator_id=${id}`).then((res) => {
 
       const abbrev = res.data[0].labels.map(item => cityLabels(item))
       labels.push(abbrev)
@@ -50,7 +50,7 @@ export const populateChartGroup = (setChartGroup, setLabelGroup, indicator_ids, 
       }else{
         alert("You might have a slow internet connection, Please refresh the page !")
       }
-    }, 8000);
+    }, 10000);
   }
 }
 

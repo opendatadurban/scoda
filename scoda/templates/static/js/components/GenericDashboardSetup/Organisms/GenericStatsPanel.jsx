@@ -16,21 +16,21 @@ export const GenericStatsPanel = () => {
     useEffect(() => {
 
         const endpoints = [
-            `/api/explore_new?indicator_id=2&city=${place}&year=2018`, //Total households
-            `/api-temp/explore/?indicator_id=2&city=${place}&year=2013`, //Gini coefficient being used in place of house hold size
+            `/api/explore_new?indicator_id=704&city=${place}&year=2002`, //Total households
+            `/api-temp/explore/?indicator_id=2&city=${place}&year=2002`, //Gini coefficient being used in place of house hold size
         ]
 
         axios.get(endpoints[0].toString()).then((res) => {
             let total = 0
             res.data[0].values.forEach((item)=> total += item)
             setHouseHolds(total)
-        })
+        }).catch(()=> console.log("server error in household stats"))
 
         axios.get(endpoints[1].toString()).then((res) => {
             let houseSizeData = res.data.table
 
             averageHouseSize(houseSizeData, setAverage)
-        })
+        }).catch(()=>console.log("server error in house size stats"))
     }, [place])
 
     const averageHouseSize = (houseData, setAverage) => {
