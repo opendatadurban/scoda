@@ -39,9 +39,10 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors, seconda
   },[])
 
   return (
-    <div>
+    <div className='chart_grid'>
       {chartGroup && labelGroup ?
-        <>
+        <div className='rounded_container'>
+          <div className="select_wrapper">
           <Select chartData={chartGroup}
             setOriginal={setOriginal}
             setSelected={setSelected}
@@ -51,6 +52,8 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors, seconda
             original={original}
             setChartData={setChartGroup}
             setLabelGroup={setLabelGroup} />
+          </div>
+          
 
           <div className="grid-container" style={chartGridStyles}>
 
@@ -59,7 +62,7 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors, seconda
               labelGroup={labelGroup} manualChart={manualChart}/>
             }          
           </div>
-        </>
+        </div>
         :
 
         <Modal id="loader" isOpen={true} className="modal-dialog-centered loader">

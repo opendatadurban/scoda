@@ -32,17 +32,16 @@ const PeopleHousehold = () => {
     ]
   }
   return (
-    <div className='sorc_dashboards'>
-
-      <div id='content' className='sorc_dashboards sorc_dashboards--citizen_engagement' style={{ paddingTop: '80px' }}>
-        <Subnav name='State of Cities Reports' dropdownName='People and Households' dropDownItem={subNavContent} buttonText="Download as PNG" />
+    <div className='people_household_dashboard'>
+    
+       <Subnav name='State of Cities Reports' dropdownName='People and Households' dropDownItem={subNavContent} buttonText="Download as PNG" />
         <GenericStatsPanel
-        />
+        /> 
         <ChartGrid minYear={2015} maxYear={2018}
           indicator_ids={[704, "manual", 699, 701, 706, 711]} 
           yearColors={peopleHouseholdColors}
           secondaryColor={secondaryColors} />
-      </div>
+      <div className="spacer"></div>
     </div>
   )
 }

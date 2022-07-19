@@ -1,3 +1,54 @@
-#content{
-    background-color: white;
+.people_household_dashboard {
+    margin: 100px 0 0 0;
+    background-color: rgba(241, 241, 241, 1);
+
+    .catagory-name {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 17px;
+    }
+
+    .stat_display_panel {
+        background-color: white;
+        .row {
+            margin: 0;
+            .p-0 > p{
+                text-transform: uppercase
+            }
+            .col-md-4 > p{
+                text-transform: uppercase
+
+            }
+            .first_panel {
+                border-right: 1px solid #B2BEC3;
+                margin: 10px 0;
+            }
+
+            .second_panel {
+                margin: 10px 0;
+            }
+
+        }
+
+    }
+
+    .chart_grid{
+        background-color: rgba(241, 241, 241, 1);
+        
+        .rounded_container{
+            border-radius: 5px 5px 0 0 ;
+            background-color: white;
+            margin: 15px;
+            .select_wrapper{
+                border-bottom: 2px solid #F1F1F1;
+                padding: 7px 0;
+            }
+        }
+    }
+.spacer{
+    height: 30px;
+    background-color: rgba(241, 241, 241, 1) ;
+}
 }

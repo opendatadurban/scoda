@@ -60,7 +60,7 @@ export const GenericStatsPanel = () => {
     }
 
     const places = (e) => {
-        
+
         setPlace(e.target.value);
     }
 
@@ -87,7 +87,7 @@ export const GenericStatsPanel = () => {
 
                     </div>
                 </div>
-                <div className='col-md-6'>
+                <div className='col-md-6 second_panel'>
                     <div className='row'>
                         <div className='col-md-8'> <p className='catagory-name catagory-name--focusName'> Household Overview: <span>Municipality Focus 2018</span></p></div>
                         <div className='col-md-3 select-container'>
