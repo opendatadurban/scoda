@@ -4,6 +4,7 @@ import { BarChartGeneric } from '../BarChartGeneric';
 
 export const Chart = ({ graphData, labels,title }) => {
 
+
     const options = {
         responsive: true,
         maintainAspectRatio: false,
@@ -63,7 +64,7 @@ export const Chart = ({ graphData, labels,title }) => {
             }
         })
     }
-
+    console.log(data,"generic chart data")
     return (
         <>
             <BarChartGeneric options={options} data={data} />

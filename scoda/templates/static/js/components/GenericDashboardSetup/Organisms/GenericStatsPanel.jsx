@@ -39,9 +39,8 @@ export const GenericStatsPanel = () => {
             let total = 0
             let count = 0
             let average = 0
-            console.log(houseData)
+         
             houseData.forEach((item, index) => {
-                console.log(item[0],"item")
 
                 if (item[0] === place ) {
                     total = total + item[2]
@@ -52,7 +51,6 @@ export const GenericStatsPanel = () => {
             });
 
             average = total / count
-            console.log(average,"average")
             
             setAverage(Math.round((average + Number.EPSILON) * 100) / 100)
 
@@ -62,7 +60,7 @@ export const GenericStatsPanel = () => {
     }
 
     const places = (e) => {
-        console.log(e.target.value)
+        
         setPlace(e.target.value);
     }
 

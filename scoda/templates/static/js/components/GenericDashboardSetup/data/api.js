@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { cityLabels, secondaryColors } from '../helpers/helpers'
 
-export const populateChartGroup = (setChartGroup, setLabelGroup, indicator_ids, minYear, maxYear, yearColors, isLoaded) => {
+export const populateChartGroup = (setChartGroup, setLabelGroup, indicator_ids, minYear, maxYear, yearColors) => {
+
   let gridData = []
   let labels = []
 
@@ -13,6 +14,7 @@ export const populateChartGroup = (setChartGroup, setLabelGroup, indicator_ids, 
 
     if (id === "manual") {
       labels.push(['BUF', 'CCT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETK'])
+      
     } else {
 
       axios.get(`/api/explore_new?indicator_id=${id}`).then((res) => {
@@ -34,7 +36,7 @@ export const populateChartGroup = (setChartGroup, setLabelGroup, indicator_ids, 
           // add corresponding color to each year/ dataset label
           item['color'] = yearColors[colorCount]
 
-          if(index === 5){
+          if (index === 5) {
             item['color'] = secondaryColors[colorCount]
           }
 
@@ -49,18 +51,17 @@ export const populateChartGroup = (setChartGroup, setLabelGroup, indicator_ids, 
     gridData.push(filterData)
   })
 
-  if (gridData.length === indicator_ids.length) {
-    setTimeout(() => {
-
-      if ((gridData.length === indicator_ids.length) && gridData[0][0].values) {
-
-        setChartGroup(gridData)
-        setLabelGroup(labels)
-        isLoaded(true)
-      } else {
-        alert("You might have a slow internet connection, Please refresh the page !")
-      }
-    }, 12000);
-  }
+  
+      setTimeout(() => {
+        if(gridData.length === indicator_ids.length){
+       
+          setChartGroup(gridData)
+          setLabelGroup(labels)
+        }else{
+          console.warn("Slow internet connection ")
+        }
+       
+      }, 10000);
+  
 }
 

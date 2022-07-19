@@ -3,6 +3,7 @@ import Subnav from '../Subnav'
 import { ChartGrid } from './ChartGrid'
 import { peopleHouseholdColors, secondaryColors } from './helpers/helpers'
 import { GenericStatsPanel } from './Organisms/GenericStatsPanel'
+import '../../../scss/components/PeopleHouseHold.scss'
 
 const PeopleHousehold = () => {
 

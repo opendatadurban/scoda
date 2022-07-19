@@ -1,20 +1,10 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { Chart } from '../Chart'
 import '../../../../scss/components/chart/ChartHeader.scss'
-import { chartTitles, tableData } from "../helpers/helpers"
+import { chartTitles } from "../helpers/helpers"
 import axios from "axios"
 
-export const ChartWrapper = ({ title, chartGroup, indicator_ids, labelGroup }) => {
-
-  const [manualChart, setManualData] = useState(null)
-
-  useEffect(() => {
-    axios.get("/api-temp/explore/?indicator_id=1").then((res) => {
-
-      const table = res.data.table
-      setManualData(tableData(table))
-    })
-  },[])
+export const ChartWrapper = ({ title, chartGroup, indicator_ids, labelGroup,manualChart }) => {
 
   let items = []
 
@@ -35,8 +25,8 @@ export const ChartWrapper = ({ title, chartGroup, indicator_ids, labelGroup }) =
       </div>
       )
     } else {
-      
-      items.push(manualChart? <div className='chart_wrapper' >
+      console.log(manualChart, "manual chart")
+      items.push(manualChart ? <div className='chart_wrapper' >
         <div className='heading_wrapper'>
           <div className='heading'>{chartTitles.main[i]}</div>
           <a className='link' href={'/scoda/toolkit#/codebook-explorer/1'} target='_blank' >Raw Data</a>

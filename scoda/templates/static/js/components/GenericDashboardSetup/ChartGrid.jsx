@@ -4,8 +4,10 @@ import { populateChartGroup } from './data/api';
 import { chartGridStyles } from './helpers/styles';
 import { Select } from './Organisms/Select';
 import { ChartWrapper } from './Organisms/ChartWrapper';
+import { tableData } from './helpers/helpers';
+import axios from 'axios';
 
-export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors,secondaryColor }) => {
+export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors, secondaryColor }) => {
 
   const [loaded, isLoaded] = useState(false)
 
@@ -16,16 +18,25 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors,secondar
   const [selected, setSelected] = useState(original)
   const [options, setOptions] = useState([])
 
+  const [manualChart, setManualData] = useState(null)
+
   useEffect(() => {
     populateChartGroup(
       setChartGroup, setLabelGroup,
       indicator_ids, // this array determines the number of charts generated on your grid
       minYear, maxYear, //year min max
       yearColors, //color presets
-      isLoaded// check the grid datahas arrived sychronously
     )
 
   }, [minYear, maxYear, indicator_ids, yearColors])
+
+  useEffect(()=>{
+    axios.get("/api-temp/explore/?indicator_id=1").then((res) => {
+      
+      const table = res.data.table
+      setManualData(tableData(table))
+    })
+  },[])
 
   return (
     <div>
@@ -43,7 +54,10 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors,secondar
 
           <div className="grid-container" style={chartGridStyles}>
 
-            <ChartWrapper title={"Title"} chartGroup={chartGroup} indicator_ids={indicator_ids} labelGroup={labelGroup} />
+            {
+              manualChart && <ChartWrapper title={"Title"} chartGroup={chartGroup} indicator_ids={indicator_ids}
+              labelGroup={labelGroup} manualChart={manualChart}/>
+            }          
           </div>
         </>
         :
