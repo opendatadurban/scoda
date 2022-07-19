@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { cityLabels } from '../helpers/helpers'
+import { cityLabels, secondaryColors } from '../helpers/helpers'
 
 export const populateChartGroup = (setChartGroup, setLabelGroup, indicator_ids, minYear, maxYear, yearColors, isLoaded) => {
   let gridData = []
@@ -11,43 +11,53 @@ export const populateChartGroup = (setChartGroup, setLabelGroup, indicator_ids, 
     let colorCount = 0
     let chartIndex = 0
 
-    axios.get(`/api/explore_new?indicator_id=${id}`).then((res) => {
+    if (id === "manual") {
+      labels.push(['BUF', 'CCT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETK'])
+    } else {
 
-      const abbrev = res.data[0].labels.map(item => cityLabels(item))
-      labels.push(abbrev)
+      axios.get(`/api/explore_new?indicator_id=${id}`).then((res) => {
 
-      res.data.forEach( (item,) => {
+        const abbrev = res.data[0].labels.map(item => cityLabels(item))
+        labels.push(abbrev)
 
-        /**
-         * Filter out min max year range, or 
-         * specify range for individual graphs on grid by using chartIndex
-         */
-        if ( 
-          (parseInt(item.year) < minYear || parseInt(item.year) > maxYear) 
-          &&
-          index !== 4
+        res.data.forEach((item,) => {
+
+          /**
+           * Filter out min max year range, or 
+           * specify range for individual graphs on grid by using chartIndex
+           */
+          if (
+            (parseInt(item.year) < minYear || parseInt(item.year) > maxYear)
+            &&
+            index !== 5
           ) return
-        // add corresponding color to each year/ dataset label
-        item['color'] = yearColors[colorCount]
+          // add corresponding color to each year/ dataset label
+          item['color'] = yearColors[colorCount]
 
-        filterData.push(item)
+          if(index === 5){
+            item['color'] = secondaryColors[colorCount]
+          }
 
-        colorCount++
-        
-      })
-    });
+          filterData.push(item)
+
+          colorCount++
+
+        })
+      });
+    }
+
     gridData.push(filterData)
   })
 
   if (gridData.length === indicator_ids.length) {
-   setTimeout(() => {
+    setTimeout(() => {
 
-      if((gridData.length === indicator_ids.length) && gridData[0][0].values){
-     
+      if ((gridData.length === indicator_ids.length) && gridData[0][0].values) {
+
         setChartGroup(gridData)
-       setLabelGroup(labels)
+        setLabelGroup(labels)
         isLoaded(true)
-      }else{
+      } else {
         alert("You might have a slow internet connection, Please refresh the page !")
       }
     }, 12000);

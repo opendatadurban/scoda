@@ -44,8 +44,18 @@ export const Chart = ({ graphData, labels,title }) => {
     };
 
     const data = {
-        labels: labels,
-        datasets: graphData.map( (item, index)=> {
+        labels:  graphData[0].chartData ? labels[0].labels :labels,
+        datasets: graphData[0].chartData?
+
+        graphData.map( (item, index)=> {
+            return {
+                label: item.chartData.label,
+                data: item.chartData.values,
+                backgroundColor: item.chartData.color
+            }
+        })
+        
+        :graphData.map( (item, index)=> {
             return {
                 label: item.year,
                 data: item.values,

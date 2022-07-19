@@ -5,7 +5,7 @@ import { chartGridStyles } from './helpers/styles';
 import { Select } from './Organisms/Select';
 import { ChartWrapper } from './Organisms/ChartWrapper';
 
-export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors }) => {
+export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors,secondaryColor }) => {
 
   const [loaded, isLoaded] = useState(false)
 

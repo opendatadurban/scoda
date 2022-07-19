@@ -4,18 +4,19 @@ import '../../../../scss/components/Select.scss'
 import { cityLabels, populateSelect } from '../helpers/helpers'
 
 export const Select = ({ chartData, setChartData, setOriginal, setSelected, setOptions,
-    options, selected, original,setLabelGroup }) => {
+    options, selected, original, setLabelGroup }) => {
 
     const [show, visibility] = useState(false)
 
     useEffect(() => {
-      setTimeout(() => {
-        populateSelect(chartData, setOriginal, cityLabels, setSelected)
-      }, 8000);
 
+        if (chartData[0][0].labels && chartData) {
+            console.log(chartData,"new data")
+            populateSelect(chartData, setOriginal, cityLabels, setSelected)
+        }
     }, [chartData])
 
-    const removeItem = (setSelected, setOptions, index, setChartData,setLabelGroup) => {
+    const removeItem = (setSelected, setOptions, index, setChartData, setLabelGroup) => {
         let labelGroupNew = selected.filter(exclusion => exclusion !== selected[index])
 
         setSelected(prev => {
@@ -30,7 +31,7 @@ export const Select = ({ chartData, setChartData, setOriginal, setSelected, setO
         setLabelGroup(prev => prev.map((item, index) => {
             console.log(labelGroupNew)
             return labelGroupNew
-        } ))
+        }))
     }
     const clearAll = (setSelected, setOptions, original) => {
 
@@ -39,7 +40,7 @@ export const Select = ({ chartData, setChartData, setOriginal, setSelected, setO
     }
     const addItem = (setSelected, setOptions, index) => {
         let labelGroupNew = selected.filter(exclusion => exclusion !== selected[index])
-        
+
 
         setOptions(prev => prev.filter(inclusion => inclusion !== prev[index]))
         setSelected(prev => [...prev, options[index]])
@@ -47,7 +48,7 @@ export const Select = ({ chartData, setChartData, setOriginal, setSelected, setO
         setLabelGroup(prev => prev.map((item, index) => {
             console.log(labelGroupNew)
             return labelGroupNew
-        } ))
+        }))
     }
 
     return (
@@ -56,7 +57,7 @@ export const Select = ({ chartData, setChartData, setOriginal, setSelected, setO
                 selected.map((tag, index) => {
 
                     return <p className="tag">{tag}<XIcon cancel={() => {
-                        removeItem(setSelected, setOptions, index, setChartData,setLabelGroup)
+                        removeItem(setSelected, setOptions, index, setChartData, setLabelGroup)
                     }} /></p>
                 })
 
