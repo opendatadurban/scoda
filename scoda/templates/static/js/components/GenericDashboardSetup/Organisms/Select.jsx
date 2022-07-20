@@ -24,7 +24,7 @@ export const Select = ({ chartData, selected, options,setSelected,removeItem,add
 
         setSelected(filtered)
     }
-
+console.log(options,"array ?")
     return (
         <div className='custom_select'>
             {
@@ -37,11 +37,10 @@ export const Select = ({ chartData, selected, options,setSelected,removeItem,add
             }
             <div className={"dropdownbox " + `${ show ? "show" : ""}`} >
                 {
-                    options.map((city, index) => {       
-                        console.log(city)
+                    options.length && options[0].map((city, index) => {       
+                        console.log(city,"push next")
                         return <p key={index.toString()} className="drop_content" onClick={() => {
-                            addItem(index)
-                        }}>{1}</p>
+                            addItem(index)}}>{city}</p>
                     })
                 }
             </div>
