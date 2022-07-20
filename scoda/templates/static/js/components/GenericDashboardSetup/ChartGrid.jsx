@@ -7,60 +7,48 @@ import { ChartWrapper } from './Organisms/ChartWrapper';
 import { tableData } from './helpers/helpers';
 import axios from 'axios';
 
-export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors, secondaryColor }) => {
+export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors}) => {
 
-  const [loaded, isLoaded] = useState(false)
-
-  const [chartGroup, setChartGroup] = useState(null)
-  const [labelGroup, setLabelGroup] = useState(null)
-
-  const [original, setOriginal] = useState([])
-  const [selected, setSelected] = useState(original)
-  const [options, setOptions] = useState([])
-
-  const [manualChart, setManualData] = useState(null)
+  const [chartGroup, setChartGroup] = useState([])
+  const [selected, setSelected] = useState([])
 
   useEffect(() => {
     populateChartGroup(
-      setChartGroup, setLabelGroup,
+      setChartGroup,
       indicator_ids, // this array determines the number of charts generated on your grid
       minYear, maxYear, //year min max
       yearColors, //color presets
     )
-
   }, [minYear, maxYear, indicator_ids, yearColors])
 
-  useEffect(()=>{
-    axios.get("/api-temp/explore/?indicator_id=1").then((res) => {
-      
-      const table = res.data.table
-      setManualData(tableData(table))
-    })
-  },[])
+  const handleSelect = (newValue) =>{
+    console.log(newValue)
+    setChartGroup(newValue)
+  }
+
+  console.log(chartGroup, "state change toparent ?")
 
   return (
     <div className='chart_grid'>
-      {chartGroup && labelGroup ?
+      { chartGroup.length === 6 ?
         <div className='rounded_container'>
           <div className="select_wrapper">
-          <Select chartData={chartGroup}
-            setOriginal={setOriginal}
-            setSelected={setSelected}
-            setOptions={setOptions}
-            selected={selected}
-            options={options}
-            original={original}
-            setChartData={setChartGroup}
-            setLabelGroup={setLabelGroup} />
+            <Select
+              chartData={chartGroup}
+              handleSelect={handleSelect}
+              selected={selected}
+              setSelected={setSelected}
+              
+            />
           </div>
-          
 
           <div className="grid-container" style={chartGridStyles}>
-
             {
-              manualChart && <ChartWrapper title={"Title"} chartGroup={chartGroup} indicator_ids={indicator_ids}
-              labelGroup={labelGroup} manualChart={manualChart}/>
-            }          
+               <ChartWrapper
+                chartGroup={chartGroup}
+                indicator_ids={indicator_ids}
+                manualChart={chartGroup[1]} />
+            }
           </div>
         </div>
         :

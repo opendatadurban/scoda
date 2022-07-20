@@ -40,7 +40,7 @@ const PeopleHousehold = () => {
         <ChartGrid minYear={2015} maxYear={2018}
           indicator_ids={[704, "manual", 699, 701, 706, 711]} 
           yearColors={peopleHouseholdColors}
-          secondaryColor={secondaryColors} />
+        />
       <div className="spacer"></div>
     </div>
   )

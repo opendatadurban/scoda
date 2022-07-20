@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 
 import { BarChartGeneric } from '../BarChartGeneric';
+import { cityLabels } from './helpers/helpers';
 
-export const Chart = ({ graphData, labels,title }) => {
-
+export const Chart = ({ graphData, title }) => {
 
     const options = {
         responsive: true,
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
         legend: {
             display: true,
             labels: {
@@ -19,11 +19,11 @@ export const Chart = ({ graphData, labels,title }) => {
         },
         scales: {
             xAxes: [{
-               
+
                 gridLines: {
                     display: false
                 },
-                ticks: { fontFamily: "Montserrat", fontSize: 8, fontStyle:'600' },
+                ticks: { fontFamily: "Montserrat", fontSize: 8, fontStyle: '600' },
                 gridLines: {
                     display: false,
                 }
@@ -32,10 +32,10 @@ export const Chart = ({ graphData, labels,title }) => {
                 scaleLabel: {
                     display: true,
                     labelString: title,
-                    fontFamily: "Montserrat", 
-                    fontSize: 8, 
-                    fontStyle:'600' 
-                  },
+                    fontFamily: "Montserrat",
+                    fontSize: 8,
+                    fontStyle: '600'
+                },
                 gridLines: {
                     display: false
                 },
@@ -45,18 +45,8 @@ export const Chart = ({ graphData, labels,title }) => {
     };
 
     const data = {
-        labels:  graphData[0].chartData ? labels[0].labels :labels,
-        datasets: graphData[0].chartData?
-
-        graphData.map( (item, index)=> {
-            return {
-                label: item.chartData.label,
-                data: item.chartData.values,
-                backgroundColor: item.chartData.color
-            }
-        })
-        
-        :graphData.map( (item, index)=> {
+        labels: graphData[0].labels.map(city => cityLabels(city)),
+        datasets: graphData.map((item, index) => {
             return {
                 label: item.year,
                 data: item.values,
@@ -64,7 +54,7 @@ export const Chart = ({ graphData, labels,title }) => {
             }
         })
     }
-    console.log(data,"generic chart data")
+
     return (
         <>
             <BarChartGeneric options={options} data={data} />

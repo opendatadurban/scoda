@@ -1,28 +1,23 @@
 import axios from 'axios'
 import { cityLabels, secondaryColors } from '../helpers/helpers'
+import { tableData } from '../helpers/helpers'
 
-export const populateChartGroup = (setChartGroup, setLabelGroup, indicator_ids, minYear, maxYear, yearColors) => {
+export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYear, yearColors) => {
 
   let gridData = []
-  let labels = []
 
   indicator_ids.forEach((id, index) => {
 
     let filterData = []
     let colorCount = 0
-    let chartIndex = 0
 
-    if (id === "manual") {
-      labels.push(['BUF', 'CCT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETK'])
-      
-    } else {
+
+    if (id !== "manual") {
 
       axios.get(`/api/explore_new?indicator_id=${id}`).then((res) => {
 
-        const abbrev = res.data[0].labels.map(item => cityLabels(item))
-        labels.push(abbrev)
-
         res.data.forEach((item,) => {
+          
 
           /**
            * Filter out min max year range, or 
@@ -40,28 +35,39 @@ export const populateChartGroup = (setChartGroup, setLabelGroup, indicator_ids, 
             item['color'] = secondaryColors[colorCount]
           }
 
+          item.labels = item.labels.map((city)=> cityLabels(city))
+          
           filterData.push(item)
 
           colorCount++
 
         })
-      });
-    }
+      })
 
+    } else {
+
+      axios.get("/api-temp/explore/?indicator_id=1").then((res) => {
+
+        const table = tableData(res.data.table)
+
+        filterData.push(...table)
+      })
+    }
+   
     gridData.push(filterData)
   })
 
-  
-      setTimeout(() => {
-        if(gridData.length === indicator_ids.length){
-       
-          setChartGroup(gridData)
-          setLabelGroup(labels)
-        }else{
-          console.warn("Slow internet connection ")
-        }
-       
-      }, 10000);
-  
+
+  setTimeout(() => {
+
+    if (gridData.length === 6) {
+
+      setChartGroup(gridData)
+    } else {
+
+      console.warn("Slow internet connection ")
+    }
+
+  }, 20000);
 }
 

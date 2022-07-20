@@ -1,78 +1,135 @@
 import React, { useEffect, useState } from 'react'
 import { XIcon, Line, ChevronDown } from '../../../../svg_components/SelectIcons'
+import { cityLabels } from '../helpers/helpers'
 import '../../../../scss/components/Select.scss'
-import { cityLabels, populateSelect } from '../helpers/helpers'
 
-export const Select = ({ chartData, setChartData, setOriginal, setSelected, setOptions,
-    options, selected, original, setLabelGroup }) => {
+export const Select = ({ chartData, handleSelect, selected, setSelected }) => {
 
     const [show, visibility] = useState(false)
+    const [options, setOptions] = useState([])
+
+    
 
     useEffect(() => {
 
-        if (chartData[0][0].labels && chartData) {
-            console.log(chartData,"new data")
-            populateSelect(chartData, setOriginal, cityLabels, setSelected)
-        }
-    }, [chartData])
+        selectedOptions()
+    }, [chartData,options])
 
-    const removeItem = (setSelected, setOptions, index, setChartData, setLabelGroup) => {
-        let labelGroupNew = selected.filter(exclusion => exclusion !== selected[index])
+    const selectedOptions = () => { // Choose which charts will be affected by the selector using their index on the Chart Grid
 
-        setSelected(prev => {
-            const newlySelected = prev.filter(exclusion => exclusion !== prev[index])
+        let filtered = []
 
-            labelGroupNew = newlySelected
+        chartData.forEach((chart, index) => {
 
-            return newlySelected
+            if (index > 4) return
+            filtered.push(chart)
         })
-        setOptions(prev => [...prev, selected[index]])
 
-        setLabelGroup(prev => prev.map((item, index) => {
-            console.log(labelGroupNew)
-            return labelGroupNew
-        }))
+        setSelected(filtered)
     }
-    const clearAll = (setSelected, setOptions, original) => {
 
-        setSelected([])
-        setOptions(original)
+    const removeItem = (index) => {
+    
+        let filteredByChart = []
+        let addOption = []
+
+
+        selected.forEach((chart) => {
+            let filteredByYear = []
+            let  addOptionByYear = []
+
+
+            chart.forEach((year) => {
+
+                let optionLabel = year.labels[index]
+                let optionValue = year.values[index]
+
+                year.labels = year.labels.filter((exclude) => exclude !== year.labels[index])
+                year.values = year.values.filter((exclude) => exclude !== year.values[index])
+
+                filteredByYear.push(year)
+
+                let newOption = {label: [optionLabel],values: [optionValue], year: year.year, color: year.color}
+
+                addOptionByYear.push(newOption)
+            })
+            filteredByChart.push(filteredByYear)
+            addOption.push(addOptionByYear)
+
+        })
+        let newArr = chartData
+        newArr[0] = filteredByChart[0]
+        newArr[1] = filteredByChart[1]
+        newArr[2] = filteredByChart[2]
+        newArr[3] = filteredByChart[3]
+        newArr[4] = filteredByChart[4]
+      
+        setOptions([...addOption])
+        setSelected([...filteredByChart])
+        handleSelect([...newArr])
     }
-    const addItem = (setSelected, setOptions, index) => {
-        let labelGroupNew = selected.filter(exclusion => exclusion !== selected[index])
 
+    const addItem = (index) => {
 
-        setOptions(prev => prev.filter(inclusion => inclusion !== prev[index]))
-        setSelected(prev => [...prev, options[index]])
-
-        setLabelGroup(prev => prev.map((item, index) => {
-            console.log(labelGroupNew)
-            return labelGroupNew
-        }))
     }
+
+    const clearAll = () => {
+
+        let filteredByChart = []
+
+
+        selected.forEach((chart) => {
+            let filteredByYear = []
+
+
+            chart.forEach((year) => {
+                year.labels = year.labels.filter((exclude) => exclude === "")
+                year.values = year.values.filter((exclude) => exclude === "")
+
+                filteredByYear.push(year)
+
+            })
+            filteredByChart.push(filteredByYear)
+
+        })
+        setSelected(filteredByChart)
+
+        let newArr = chartData
+        newArr[0] = filteredByChart[0]
+        newArr[1] = filteredByChart[1]
+        newArr[2] = filteredByChart[2]
+        newArr[3] = filteredByChart[3]
+        newArr[4] = filteredByChart[4]
+
+        handleSelect([...newArr])
+    }
+
 
     return (
         <div className='custom_select'>
             {
-                selected.map((tag, index) => {
+                selected.length > 1 ? selected[0][0].labels.map((tag, index) => {
 
-                    return <p className="tag">{tag}<XIcon cancel={() => {
-                        removeItem(setSelected, setOptions, index, setChartData, setLabelGroup)
+                    return <p key={index.toString()} className="tag">{cityLabels(tag)}<XIcon cancel={() => {
+                        removeItem(index)
                     }} /></p>
-                })
+                }) :
+                    ""
 
             }
             <div className={"dropdownbox " + `${show ? "show" : ""}`} >
                 {
-                    options.map((city, index) => {
-                        return <p className="drop_content" onClick={() => {
-                            addItem(setSelected, setOptions, index)
-                        }}>{city}</p>
-                    })
+                    options[0] > 1  ?  
+                    options[0][0].labels.map((city, index) => {
+                        console.log(city)
+                        return <p key={index.toString()} className="drop_content" onClick={() => {
+                            addItem(index)
+                        }}>{1}</p>
+                    }) : ''
                 }
             </div>
             <XIcon cancel={() => {
-                clearAll(setSelected, setOptions, original)
+                clearAll()
             }} />
             <Line />
             <ChevronDown drop={() => {
