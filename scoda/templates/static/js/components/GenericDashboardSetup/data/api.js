@@ -2,7 +2,7 @@ import axios from 'axios'
 import { cityLabels, secondaryColors } from '../helpers/helpers'
 import { tableData } from '../helpers/helpers'
 
-export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYear, yearColors) => {
+export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYear, yearColors, setOriginalValues) => {
 
   let gridData = []
 
@@ -61,8 +61,10 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
   setTimeout(() => {
 
     if (gridData.length === 6) {
-
-      setChartGroup(gridData)
+      
+      const copy = JSON.parse(JSON.stringify(gridData))
+      setOriginalValues([...gridData])
+      setChartGroup([...copy])
     } else {
 
       console.warn("Slow internet connection ")
