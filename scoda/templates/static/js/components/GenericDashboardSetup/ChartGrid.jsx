@@ -25,122 +25,211 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors }) => {
     )
   }, [minYear, maxYear, indicator_ids, yearColors])
 
-  const handleSelect = (newValue) => {
 
-    setChartGroup(newValue)
+
+  const filterCharts = () => {
+
+    setChartGroup(prev => {
+
+      let newArr = prev
+
+      newArr[0] = selected[0]
+      newArr[1] = selected[1]
+      newArr[2] = selected[2]
+      newArr[3] = selected[3]
+      newArr[4] = selected[4]
+
+      return [...newArr]
+    })
   }
 
-  const removeItem = (index) => {
 
-    let filteredByChart = []
-    let addOption = []
+  const removeItem = (clickIndex) => {
+    //set labels and chart data
+    let optionsTemp = []
+    let selectTemp = []
 
-    selected.forEach((chart, chartIndex) => {
-      let filteredByYear = []
-      let addOptionByYear = []
-      let reference = originalValues[chartIndex]
+    selected.forEach((chart, cIndex) => {
+      let optionsChart = []
+      let selectChart = []
 
-      chart.forEach((year, yearIndex) => {
-        console.log(year,"year")
-        let optionLabel = reference[yearIndex].labels.filter((exclude) => exclude === year.labels[index])
-        let optionValue = reference[yearIndex].values.filter((exclude) => exclude === year.values[index])
+      chart.forEach((year, yIndex) => {
 
-        year.labels = year.labels.filter((exclude) => exclude !== year.labels[index])
-        year.values = year.values.filter((exclude) => exclude !== year.values[index])
-
-        filteredByYear.push(year)
-
-        let newOption = { label: [optionLabel], values: [optionValue], year: year.year, color: year.color }
-
-        addOptionByYear.push(newOption)
+        let optionYear = {
+          ...year,
+          labels: year.labels.filter(clicked => clicked === year.labels[clickIndex]),
+          values: year.values.filter(clicked => clicked === year.values[clickIndex])
+        }
+        let selectYear = {
+          ...year,
+          labels: year.labels.filter(clicked => clicked !== year.labels[clickIndex]),
+          values: year.values.filter(clicked => clicked !== year.values[clickIndex])
+        }
+        optionsChart.push(optionYear)
+        selectChart.push(selectYear)
       })
-      filteredByChart.push(filteredByYear)
-      addOption.push(addOptionByYear)
 
+      optionsTemp.push(optionsChart)
+      selectTemp.push(selectChart)
     })
-    let newArr = chartGroup
-    newArr[0] = filteredByChart[0]
-    newArr[1] = filteredByChart[1]
-    newArr[2] = filteredByChart[2]
-    newArr[3] = filteredByChart[3]
-    newArr[4] = filteredByChart[4]
 
     setOptions(prev => {
 
       let newArr = prev
 
-      let newOptions = newArr.length > 1 ? newArr.map((item, stateIndex) => {
+      let optionState = newArr.length > 1 ? newArr.map((chart, cIndex) => {
 
-        let newNode = addOption[stateIndex]
-        return item.map((secondLayer, secondIndex) => {
-          console.log(secondLayer.label,"push")
-          newNode[secondIndex].label[0].push(...secondLayer.label[0])
-          newNode[secondIndex].values[0].push(...secondLayer.values[0])
-          secondLayer.label =  newNode[secondIndex].label
-          secondLayer.values = newNode[secondIndex].values
-          console.log(secondLayer.label ,"newLABEL?")
-          return secondLayer
+        let optionChart = optionsTemp[cIndex]
+
+        return chart.map((year, yIndex) => {
+
+          let optionYear = {
+            ...year,
+            labels: [...year.labels].concat(optionChart[yIndex].labels[0]),
+            values: [...year.values].concat(optionChart[yIndex].values[0])
+          }
+
+          console.log(optionYear, "yearchanged")
+          return optionYear
         })
-      }) : addOption
+      }) : optionsTemp
 
-      return [...newOptions]
+      return [...optionState]
     })
-    setSelected([...filteredByChart])
-    handleSelect([...newArr])
+
+    setSelected(prev => {
+
+      let newArr = prev
+
+      let selectedState = newArr.map((chart, cIndex) => {
+
+        let selectedChart = selectTemp[cIndex]
+
+        return chart.map((year, yIndex) => {
+
+          let selectedYear = selectedChart[yIndex]
+          console.log(selectedYear)
+          return selectedYear
+        })
+      })
+
+      setChartGroup(prev => {
+
+        let newArr = prev
+  
+        newArr[0] = selectedState[0]
+        newArr[1] = selectedState[1]
+        newArr[2] = selectedState[2]
+        newArr[3] = selectedState[3]
+        newArr[4] = selectedState[4]
+  
+        return [...newArr]
+      })
+
+      return [...selectedState]
+    })
+
+    
   }
 
-  const addItem = (index) => {
+
+
+  const addItem = (clickIndex) => {
+
+    let optionsTemp = []
+    let selectTemp = []
+
+    options.forEach((chart, cIndex) => {
+      let optionsChart = []
+      let selectChart = []
+
+      chart.forEach((year, yIndex) => {
+
+        let optionYear = {
+          ...year,
+          labels: year.labels.filter(clicked => clicked === year.labels[clickIndex]),
+          values: year.values.filter(clicked => clicked === year.values[clickIndex])
+        }
+        let selectYear = {
+          ...year,
+          labels: year.labels.filter(clicked => clicked !== year.labels[clickIndex]),
+          values: year.values.filter(clicked => clicked !== year.values[clickIndex])
+        }
+        optionsChart.push(optionYear)
+        selectChart.push(selectYear)
+      })
+
+      optionsTemp.push(optionsChart)
+      selectTemp.push(selectChart)
+    })
+
+
+
+    setSelected(prev => {
+
+      let newArr = prev
+
+      let optionState = newArr.length > 1 ? newArr.map((chart, cIndex) => {
+
+        let optionChart = optionsTemp[cIndex]
+
+        return chart.map((year, yIndex) => {
+
+          let optionYear = {
+            ...year,
+            labels: [...year.labels].concat(optionChart[yIndex].labels[0]),
+            values: [...year.values].concat(optionChart[yIndex].values[0])
+          }
+
+          console.log(optionYear, "yearchanged")
+          return optionYear
+        })
+      }) : optionsTemp
+
+
+      setChartGroup(prev => {
+
+        let newArr = prev
+  
+        newArr[0] = optionState[0]
+        newArr[1] = optionState[1]
+        newArr[2] = optionState[2]
+        newArr[3] = optionState[3]
+        newArr[4] = optionState[4]
+  
+        return [...newArr]
+      })
+
+      return [...optionState]
+    })
 
     setOptions(prev => {
 
       let newArr = prev
-      
-      let newOptions = newArr.map((item, index) => {
 
-        let reference = options[index]
+      let selectedState = newArr.map((chart, cIndex) => {
 
-        return item.map((secondLayer, secondIndex)=> {
-          console.log(reference[secondIndex])
+        let selectedChart = selectTemp[cIndex]
 
+        return chart.map((year, yIndex) => {
 
-          return secondLayer
+          let selectedYear = selectedChart[yIndex]
+          console.log(selectedYear)
+          return selectedYear
         })
       })
-      return newOptions
+
+      return [...selectedState]
     })
 
+  
   }
 
   const clearAll = () => {
 
-    let filteredByChart = []
 
-    selected.forEach((chart) => {
-      let filteredByYear = []
-
-
-      chart.forEach((year) => {
-        year.labels = year.labels.filter((exclude) => exclude === "")
-        year.values = year.values.filter((exclude) => exclude === "")
-
-        filteredByYear.push(year)
-
-      })
-      filteredByChart.push(filteredByYear)
-
-    })
-    setSelected(filteredByChart)
-
-    let newArr = chartGroup
-    newArr[0] = filteredByChart[0]
-    newArr[1] = filteredByChart[1]
-    newArr[2] = filteredByChart[2]
-    newArr[3] = filteredByChart[3]
-    newArr[4] = filteredByChart[4]
-
-    handleSelect([...newArr])
   }
-console.log(options.length >1 ? options[0][0]: "d",selected.length >1 ? selected[0][0]: "d")
+console.log(selected,options,"does it work/?")
 
   return (
     <div className='chart_grid'>
@@ -149,9 +238,9 @@ console.log(options.length >1 ? options[0][0]: "d",selected.length >1 ? selected
           <div className="select_wrapper">
             <Select
               chartData={chartGroup}
-              selected={selected.length > 1 ? selected[0][0].labels : []}
+              selected={selected}
               setSelected={setSelected}
-              options={options.length > 1 ? options[0][0].label : []}
+              options={options}
               setOptions={setOptions}
               removeItem={removeItem}
               addItem={addItem}

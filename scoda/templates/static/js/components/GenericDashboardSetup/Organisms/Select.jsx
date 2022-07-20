@@ -3,7 +3,7 @@ import { XIcon, Line, ChevronDown } from '../../../../svg_components/SelectIcons
 import { cityLabels } from '../helpers/helpers'
 import '../../../../scss/components/Select.scss'
 
-export const Select = ({ chartData, selected, options,setSelected,removeItem,addItem,clearAll }) => {
+export const Select = ({ chartData, selected, options, setSelected, removeItem, addItem, clearAll }) => {
 
     const [show, visibility] = useState(false)
 
@@ -24,24 +24,28 @@ export const Select = ({ chartData, selected, options,setSelected,removeItem,add
 
         setSelected(filtered)
     }
-console.log(options,"array ?")
+console.log(options)
     return (
         <div className='custom_select'>
             {
-                selected.map((tag, index) => {
+                selected.length > 1 ? selected[0][0].labels.map((tag, index) => {
 
-                    return <p key={index.toString()} className="tag">{cityLabels(tag)}<XIcon cancel={() => {
-                        removeItem(index)
-                    }} /></p>
-                })
+                    console.log(tag)
+                    return <p key={index.toString()} className="tag">
+                        {tag}
+                        <XIcon cancel={() => { removeItem(index) }} />
+                    </p>
+                }) :
+                    ""
             }
-            <div className={"dropdownbox " + `${ show ? "show" : ""}`} >
+            <div className={"dropdownbox " + `${show ? "show" : ""}`} >
                 {
-                    options.length && options[0].map((city, index) => {       
-                        console.log(city,"push next")
+                    options.length > 1 ? options[0][0].labels.map((city, index) => {
+                        console.log(city)
                         return <p key={index.toString()} className="drop_content" onClick={() => {
-                            addItem(index)}}>{city}</p>
-                    })
+                            addItem(index)
+                        }}>{city}</p>
+                    }):""
                 }
             </div>
             <XIcon cancel={() => {
