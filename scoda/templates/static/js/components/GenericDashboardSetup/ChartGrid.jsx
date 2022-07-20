@@ -7,7 +7,7 @@ import { ChartWrapper } from './Organisms/ChartWrapper';
 import { tableData } from './helpers/helpers';
 import axios from 'axios';
 
-export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors}) => {
+export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors }) => {
 
   const [chartGroup, setChartGroup] = useState([])
   const [originalValues, setOriginalValues] = useState([])
@@ -25,99 +25,222 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors}) => {
     )
   }, [minYear, maxYear, indicator_ids, yearColors])
 
-  const handleSelect = (newValue) =>{
 
-    setChartGroup(newValue)
+
+  const filterCharts = () => {
+
+    setChartGroup(prev => {
+
+      let newArr = prev
+
+      newArr[0] = selected[0]
+      newArr[1] = selected[1]
+      newArr[2] = selected[2]
+      newArr[3] = selected[3]
+      newArr[4] = selected[4]
+
+      return [...newArr]
+    })
   }
 
-const removeItem = (index) => {
 
-    let filteredByChart = []
-    let addOption = []
-    
+  const removeItem = (clickIndex) => {
+    //set labels and chart data
+    let optionsTemp = []
+    let selectTemp = []
 
-    selected.forEach((chart,chartIndex) => {
-        let filteredByYear = []
-        let  addOptionByYear = []
-        let reference = originalValues[chartIndex]
-      
+    selected.forEach((chart, cIndex) => {
+      let optionsChart = []
+      let selectChart = []
 
+      chart.forEach((year, yIndex) => {
 
-        chart.forEach((year,yearIndex) => {
+        let optionYear = {
+          ...year,
+          labels: year.labels.filter(clicked => clicked === year.labels[clickIndex]),
+          values: year.values.filter(clicked => clicked === year.values[clickIndex])
+        }
+        let selectYear = {
+          ...year,
+          labels: year.labels.filter(clicked => clicked !== year.labels[clickIndex]),
+          values: year.values.filter(clicked => clicked !== year.values[clickIndex])
+        }
+        optionsChart.push(optionYear)
+        selectChart.push(selectYear)
+      })
 
-            let optionLabel = reference[yearIndex].labels.filter((exclude) => exclude === year.labels[index])
-            let optionValue = reference[yearIndex].values.filter((exclude) => exclude === year.values[index])
-
-            year.labels = year.labels.filter((exclude) => exclude !== year.labels[index])
-            year.values = year.values.filter((exclude) => exclude !== year.values[index])
-
-            filteredByYear.push(year)
-            console.log(optionLabel,"label exclude",reference)
-            let newOption = {label: [optionLabel],values: [optionValue], year: year.year, color: year.color}
-
-            addOptionByYear.push(newOption)
-        })
-        filteredByChart.push(filteredByYear)
-        addOption.push(addOptionByYear)
-
+      optionsTemp.push(optionsChart)
+      selectTemp.push(selectChart)
     })
-    let newArr = chartGroup
-    newArr[0] = filteredByChart[0]
-    newArr[1] = filteredByChart[1]
-    newArr[2] = filteredByChart[2]
-    newArr[3] = filteredByChart[3]
-    newArr[4] = filteredByChart[4]
+
+    setOptions(prev => {
+
+      let newArr = prev
+
+      let optionState = newArr.length > 1 ? newArr.map((chart, cIndex) => {
+
+        let optionChart = optionsTemp[cIndex]
+
+        return chart.map((year, yIndex) => {
+
+          let optionYear = {
+            ...year,
+            labels: [...year.labels].concat(optionChart[yIndex].labels[0]),
+            values: [...year.values].concat(optionChart[yIndex].values[0])
+          }
+
+          console.log(optionYear, "yearchanged")
+          return optionYear
+        })
+      }) : optionsTemp
+
+      return [...optionState]
+    })
+
+    setSelected(prev => {
+
+      let newArr = prev
+
+      let selectedState = newArr.map((chart, cIndex) => {
+
+        let selectedChart = selectTemp[cIndex]
+
+        return chart.map((year, yIndex) => {
+
+          let selectedYear = selectedChart[yIndex]
+          console.log(selectedYear)
+          return selectedYear
+        })
+      })
+
+      setChartGroup(prev => {
+
+        let newArr = prev
   
-    setOptions([...addOption])
-    setSelected([...filteredByChart])
-   handleSelect([...newArr])
-}
+        newArr[0] = selectedState[0]
+        newArr[1] = selectedState[1]
+        newArr[2] = selectedState[2]
+        newArr[3] = selectedState[3]
+        newArr[4] = selectedState[4]
+  
+        return [...newArr]
+      })
 
-const addItem = (index) => {
-
-}
-
-const clearAll = () => {
-
-    let filteredByChart = []
-
-    selected.forEach((chart) => {
-        let filteredByYear = []
-        
-
-        chart.forEach((year) => {
-            year.labels = year.labels.filter((exclude) => exclude === "")
-            year.values = year.values.filter((exclude) => exclude === "")
-
-            filteredByYear.push(year)
-
-        })
-        filteredByChart.push(filteredByYear)
-
+      return [...selectedState]
     })
-    setSelected(filteredByChart)
 
-    let newArr = chartGroup
-    newArr[0] = filteredByChart[0]
-    newArr[1] = filteredByChart[1]
-    newArr[2] = filteredByChart[2]
-    newArr[3] = filteredByChart[3]
-    newArr[4] = filteredByChart[4]
+    
+  }
 
-    handleSelect([...newArr])
-}
 
+
+  const addItem = (clickIndex) => {
+
+    let optionsTemp = []
+    let selectTemp = []
+
+    options.forEach((chart, cIndex) => {
+      let optionsChart = []
+      let selectChart = []
+
+      chart.forEach((year, yIndex) => {
+
+        let optionYear = {
+          ...year,
+          labels: year.labels.filter(clicked => clicked === year.labels[clickIndex]),
+          values: year.values.filter(clicked => clicked === year.values[clickIndex])
+        }
+        let selectYear = {
+          ...year,
+          labels: year.labels.filter(clicked => clicked !== year.labels[clickIndex]),
+          values: year.values.filter(clicked => clicked !== year.values[clickIndex])
+        }
+        optionsChart.push(optionYear)
+        selectChart.push(selectYear)
+      })
+
+      optionsTemp.push(optionsChart)
+      selectTemp.push(selectChart)
+    })
+
+
+
+    setSelected(prev => {
+
+      let newArr = prev
+
+      let optionState = newArr.length > 1 ? newArr.map((chart, cIndex) => {
+
+        let optionChart = optionsTemp[cIndex]
+
+        return chart.map((year, yIndex) => {
+
+          let optionYear = {
+            ...year,
+            labels: [...year.labels].concat(optionChart[yIndex].labels[0]),
+            values: [...year.values].concat(optionChart[yIndex].values[0])
+          }
+
+          console.log(optionYear, "yearchanged")
+          return optionYear
+        })
+      }) : optionsTemp
+
+
+      setChartGroup(prev => {
+
+        let newArr = prev
+  
+        newArr[0] = optionState[0]
+        newArr[1] = optionState[1]
+        newArr[2] = optionState[2]
+        newArr[3] = optionState[3]
+        newArr[4] = optionState[4]
+  
+        return [...newArr]
+      })
+
+      return [...optionState]
+    })
+
+    setOptions(prev => {
+
+      let newArr = prev
+
+      let selectedState = newArr.map((chart, cIndex) => {
+
+        let selectedChart = selectTemp[cIndex]
+
+        return chart.map((year, yIndex) => {
+
+          let selectedYear = selectedChart[yIndex]
+          console.log(selectedYear)
+          return selectedYear
+        })
+      })
+
+      return [...selectedState]
+    })
+
+  
+  }
+
+  const clearAll = () => {
+
+
+  }
+console.log(selected,options,"does it work/?")
 
   return (
     <div className='chart_grid'>
-      { chartGroup.length === 6 ?
+      {chartGroup.length === 6 ?
         <div className='rounded_container'>
           <div className="select_wrapper">
             <Select
               chartData={chartGroup}
-              selected={selected.length > 1 ? selected[0][0].labels: []}
+              selected={selected}
               setSelected={setSelected}
-              options={options.length > 1 ? options[0][0].label: []}
+              options={options}
               setOptions={setOptions}
               removeItem={removeItem}
               addItem={addItem}
@@ -127,7 +250,7 @@ const clearAll = () => {
 
           <div className="grid-container" style={chartGridStyles}>
             {
-               <ChartWrapper
+              <ChartWrapper
                 chartGroup={chartGroup}
                 indicator_ids={indicator_ids}
                 manualChart={chartGroup[1]} />
