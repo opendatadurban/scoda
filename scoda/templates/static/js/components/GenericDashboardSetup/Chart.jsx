@@ -1,9 +1,21 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { BarChartGeneric } from '../BarChartGeneric';
 import { cityLabels } from './helpers/helpers';
 
 export const Chart = ({ graphData, title }) => {
+
+    const [windowDimensions, setWindowDimensions] = useState(getWindowSize());
+
+    useEffect(() => {
+        function handleResize() {
+            setWindowDimensions(getWindowDimensions());
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
 
     const options = {
         responsive: true,
@@ -15,7 +27,7 @@ export const Chart = ({ graphData, title }) => {
                 boxWidth: 25,
                 fontColor: 'rgba(74, 74, 74, 1)',
                 fontFamily: 'Montserrat',
-                padding: (40/1140) * windowSize.innerWidth
+                padding: (40 / 1140) * windowDimensions.innerWidth
             },
             onHover: function (e) {
                 e.target.style.cursor = 'pointer';
@@ -67,6 +79,6 @@ export const Chart = ({ graphData, title }) => {
 }
 
 function getWindowSize() {
-    const {innerWidth, innerHeight} = window;
-    return {innerWidth, innerHeight};
-  }
+    const { innerWidth, innerHeight } = window;
+    return { innerWidth, innerHeight };
+}
