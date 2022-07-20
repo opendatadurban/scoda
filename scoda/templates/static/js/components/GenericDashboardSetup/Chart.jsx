@@ -27,7 +27,7 @@ export const Chart = ({ graphData, title }) => {
                 boxWidth: 25,
                 fontColor: 'rgba(74, 74, 74, 1)',
                 fontFamily: 'Montserrat',
-                padding: (40 / 1140) * windowDimensions.innerWidth
+                padding:25
             },
             onHover: function (e) {
                 e.target.style.cursor = 'pointer';
