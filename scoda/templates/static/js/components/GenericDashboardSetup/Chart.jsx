@@ -7,7 +7,7 @@ export const Chart = ({ graphData, labels,title }) => {
 
     const options = {
         responsive: true,
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
         legend: {
             display: true,
             labels: {
