@@ -81,7 +81,8 @@ export const cityLabels = city => {
       return "NC"
     case "Western Cape":
       return "WC"
-      
+    default:
+      return city
   }
 }
 
@@ -102,12 +103,13 @@ export const populateSelect = (chartData, setOriginal, cityLabels, setSelected) 
   } else {
 
     const manualGraph = ['Buffalo City', 'City of Cape Town', 'City of Joburg', 'Ekurhuleni', 'Mangaung', 'Msunduzi', 'Nelson Mandela Bay', 'Tshwane', 'eThekwini']
+    
     const abbrevLabels = manualGraph.map(city => {
       return cityLabels(city)
     })
+
     setSelected(abbrevLabels)
     setOriginal(abbrevLabels)
-
   }
 }
 
@@ -154,16 +156,15 @@ export const tableData = (table) => {
     byYear.push(valuesByYear)
   })
 
-  graphData = byYear.map((item,index) => {
+  graphData = byYear.map((year,index) => {
 
-    const label = item[0][1]
-
-    const values = item.map((value) => {
+    const values = year.map((value) => {
       return value[2]
     })
   
-    return {labels: abbrev, chartData: {label, values, color: peopleHouseholdColors[index]}}
+    return {labels: abbrev, values, color: peopleHouseholdColors[index], year: year[0][1]}
   })
 
   return graphData
 }
+

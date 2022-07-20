@@ -1,23 +1,9 @@
 import React, { useEffect,useState } from 'react'
 
 import { BarChartGeneric } from '../BarChartGeneric';
+import { cityLabels } from './helpers/helpers';
 
-export const Chart = ({ graphData, labels, title }) => {
-
-    const [windowSize, setWindowSize] = useState(getWindowSize());
-
-    useEffect(() => {
-        function handleWindowResize() {
-            setWindowSize(getWindowSize());
-        }
-
-        window.addEventListener('resize', handleWindowResize);
-
-        return () => {
-            window.removeEventListener('resize', handleWindowResize);
-        };
-    }, []);
-
+export const Chart = ({ graphData, title }) => {
 
     const options = {
         responsive: true,
@@ -63,26 +49,16 @@ export const Chart = ({ graphData, labels, title }) => {
     };
 
     const data = {
-        labels: graphData[0].chartData ? labels[0].labels : labels,
-        datasets: graphData[0].chartData ?
-
-            graphData.map((item, index) => {
-                return {
-                    label: item.chartData.label,
-                    data: item.chartData.values,
-                    backgroundColor: item.chartData.color
-                }
-            })
-
-            : graphData.map((item, index) => {
-                return {
-                    label: item.year,
-                    data: item.values,
-                    backgroundColor: item.color
-                }
-            })
+        labels: graphData[0].labels.map(city => cityLabels(city)),
+        datasets: graphData.map((item, index) => {
+            return {
+                label: item.year,
+                data: item.values,
+                backgroundColor: item.color
+            }
+        })
     }
-    console.log(data, "generic chart data")
+
     return (
         <>
             <BarChartGeneric options={options} data={data} />

@@ -1,78 +1,55 @@
 import React, { useEffect, useState } from 'react'
 import { XIcon, Line, ChevronDown } from '../../../../svg_components/SelectIcons'
+import { cityLabels } from '../helpers/helpers'
 import '../../../../scss/components/Select.scss'
-import { cityLabels, populateSelect } from '../helpers/helpers'
 
-export const Select = ({ chartData, setChartData, setOriginal, setSelected, setOptions,
-    options, selected, original, setLabelGroup }) => {
+export const Select = ({ chartData, selected, options, setSelected, removeItem, addItem, clearAll }) => {
 
     const [show, visibility] = useState(false)
 
     useEffect(() => {
 
-        if (chartData[0][0].labels && chartData) {
-            console.log(chartData,"new data")
-            populateSelect(chartData, setOriginal, cityLabels, setSelected)
-        }
+        selectedOptions()
     }, [chartData])
 
-    const removeItem = (setSelected, setOptions, index, setChartData, setLabelGroup) => {
-        let labelGroupNew = selected.filter(exclusion => exclusion !== selected[index])
+    const selectedOptions = () => { // Choose which charts will be affected by the selector using their index on the Chart Grid
 
-        setSelected(prev => {
-            const newlySelected = prev.filter(exclusion => exclusion !== prev[index])
+        let filtered = []
 
-            labelGroupNew = newlySelected
+        chartData.forEach((chart, index) => {
 
-            return newlySelected
+            if (index > 4) return
+            filtered.push(chart)
         })
-        setOptions(prev => [...prev, selected[index]])
 
-        setLabelGroup(prev => prev.map((item, index) => {
-            console.log(labelGroupNew)
-            return labelGroupNew
-        }))
+        setSelected(filtered)
     }
-    const clearAll = (setSelected, setOptions, original) => {
-
-        setSelected([])
-        setOptions(original)
-    }
-    const addItem = (setSelected, setOptions, index) => {
-        let labelGroupNew = selected.filter(exclusion => exclusion !== selected[index])
-
-
-        setOptions(prev => prev.filter(inclusion => inclusion !== prev[index]))
-        setSelected(prev => [...prev, options[index]])
-
-        setLabelGroup(prev => prev.map((item, index) => {
-            console.log(labelGroupNew)
-            return labelGroupNew
-        }))
-    }
-
+console.log(options)
     return (
         <div className='custom_select'>
             {
-                selected.map((tag, index) => {
+                selected.length > 1 ? selected[0][0].labels.map((tag, index) => {
 
-                    return <p className="tag">{tag}<XIcon cancel={() => {
-                        removeItem(setSelected, setOptions, index, setChartData, setLabelGroup)
-                    }} /></p>
-                })
-
+                    console.log(tag)
+                    return <p key={index.toString()} className="tag">
+                        {tag}
+                        <XIcon cancel={() => { removeItem(index) }} />
+                    </p>
+                }) :
+                    ""
             }
             <div className={"dropdownbox " + `${show ? "show" : ""}`} >
                 {
-                    options.map((city, index) => {
-                        return <p className="drop_content" onClick={() => {
-                            addItem(setSelected, setOptions, index)
+                    options.length > 1 ? options[0][0].labels.map((city, index) => {
+                        console.log(city)
+                        return <p key={index.toString()} className="drop_content" onClick={() => {
+                            addItem(index)
                         }}>{city}</p>
-                    })
+                    }):""
                 }
             </div>
             <XIcon cancel={() => {
-                clearAll(setSelected, setOptions, original)
+                clearAll()
             }} />
             <Line />
             <ChevronDown drop={() => {
