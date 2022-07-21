@@ -34,7 +34,7 @@ const Socr_Citizens_Engagement = () => {
             <div className='sorc_dashboards'>
                 <div className='spacer--top'></div>
                 <Subnav name='State of Cities Reports' dropdownName='Citizen Engagement' dropDownItem={subNavContent} buttonText="Download as PNG" />
-                {/* <Sidebar_left /> */}
+                <Sidebar_left />
                 <div id='content' className='sorc_dashboards sorc_dashboards--citizen_engagement'>
                 <Charts_dashboards/>
                 </div>

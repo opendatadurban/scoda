@@ -13,7 +13,6 @@
 
         .first_panel {
             position: relative;
-
             padding: 12px 24px 12px 15px;
 
 
@@ -33,7 +32,7 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
-                width: 50vw;
+                width: calc(50vw - 39px);
 
                 .stat {
                     padding-left: calc(23px - 15px);
@@ -67,12 +66,12 @@
             }
 
             &:after {
-                content: "";
+                content: " ";
                 position: absolute;
                 right: 0;
                 bottom: 11.5%;
                 height: 77%;
-                border: 1px solid #B2BEC3;
+                outline:1px solid #B2BEC3 ;
             }
 
 
