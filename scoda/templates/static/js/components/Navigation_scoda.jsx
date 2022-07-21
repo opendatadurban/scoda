@@ -117,7 +117,7 @@ export default class Navigation_scoda extends Component {
                                         {/* <a className="dropdown-item" href="/scoda/socr">Household Bills & Affordability</a> */}
                                         <a className="dropdown-item" href="/scoda/socr#/human_resources">Municipal Human Resources</a>
                                         <a className="dropdown-item" href="/scoda/socr#/service_delivery">Service Delivery</a>
-                                        <a className="dropdown-item" href="/scoda/socr#/people_household">People and House Hold</a>
+                                        <a className="dropdown-item" href="/scoda/socr#/people_household">People and Households</a>
                                         {/* <a className="dropdown-item" href="/scoda/socr">State of Municipal Finance</a> */}
                                     </div>
                                 </li>

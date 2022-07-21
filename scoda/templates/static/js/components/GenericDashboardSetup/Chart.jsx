@@ -8,6 +8,7 @@ export const Chart = ({ graphData, title }) => {
     const options = {
         responsive: true,
         maintainAspectRatio: true,
+        
         legend: {
             display: true,
             labels: {
@@ -48,10 +49,27 @@ export const Chart = ({ graphData, title }) => {
                     display: false
                 },
                 ticks: { fontFamily: "Montserrat", fontSize: 8,
-               
+                callback: function(value, index, values) {
+                    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+                }     
             },
             }],
         },
+        tooltips: {
+            mode: 'index',
+            intercept: false,
+            callbacks: {
+              label: function (tooltipItem, data) {
+                var label = data.datasets[tooltipItem.datasetIndex].label || '';
+    
+                if (label) {
+                  label += ': ';
+                }
+                label += isNaN(tooltipItem.yLabel) ? '0' : Math.round(tooltipItem.yLabel * 100) / 100;
+                return label;
+              }
+            }
+          },
     };
 
     const data = {
