@@ -70,6 +70,6 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
       console.warn("Slow internet connection ")
     }
 
-  }, 20000);
+  }, 14000);
 }
 
