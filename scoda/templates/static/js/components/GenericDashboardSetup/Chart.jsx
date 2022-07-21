@@ -5,18 +5,6 @@ import { cityLabels } from './helpers/helpers';
 
 export const Chart = ({ graphData, title }) => {
 
-    const [windowDimensions, setWindowDimensions] = useState(getWindowSize());
-
-    useEffect(() => {
-        function handleResize() {
-            setWindowDimensions(getWindowDimensions());
-        }
-
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-
     const options = {
         responsive: true,
         maintainAspectRatio: true,
@@ -27,7 +15,7 @@ export const Chart = ({ graphData, title }) => {
                 boxWidth: 25,
                 fontColor: 'rgba(74, 74, 74, 1)',
                 fontFamily: 'Montserrat',
-                padding:25
+                padding: 25
             },
             onHover: function (e) {
                 e.target.style.cursor = 'pointer';
@@ -39,7 +27,10 @@ export const Chart = ({ graphData, title }) => {
                 gridLines: {
                     display: false
                 },
-                ticks: { fontFamily: "Montserrat", fontSize: 8, fontStyle: '600' },
+                ticks: {
+                    fontFamily: "Montserrat", fontSize: 8, fontStyle: '600',
+                
+                },
                 gridLines: {
                     display: false,
                 }
@@ -49,13 +40,16 @@ export const Chart = ({ graphData, title }) => {
                     display: true,
                     labelString: title,
                     fontFamily: "Montserrat",
-                    fontSize: 8,
-                    fontStyle: '600'
+                    fontSize:8,
+                    fontStyle: '600',
+                    fontColor:"rgba(74, 74, 74, 1)"
                 },
                 gridLines: {
                     display: false
                 },
-                ticks: { fontFamily: "Montserrat", fontSize: 8 },
+                ticks: { fontFamily: "Montserrat", fontSize: 8,
+               
+            },
             }],
         },
     };
@@ -78,7 +72,3 @@ export const Chart = ({ graphData, title }) => {
     )
 }
 
-function getWindowSize() {
-    const { innerWidth, innerHeight } = window;
-    return { innerWidth, innerHeight };
-}

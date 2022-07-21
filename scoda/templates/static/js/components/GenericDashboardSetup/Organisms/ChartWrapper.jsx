@@ -8,6 +8,8 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, labelGroup}) => {
 
   let items = []
 
+  let percentage = [false,false,true,false]
+
   for (let i = 0; i < chartGroup.length; i++) {
     const element = chartGroup[i]
 

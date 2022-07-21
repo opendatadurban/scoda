@@ -226,6 +226,43 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors }) => {
   }
 
   const clearAll = () => {
+    // ['BUF', 'CCT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETK']
+
+    setSelected(prev => {
+      let newArr = prev
+
+      let cleared = newArr.map((chart)=>{
+        return chart.map((year)=>{
+          year.labels = []
+          year.values = []
+          return year
+        })
+      })
+
+      return cleared
+    })
+
+    setOptions(prev => {
+      let newArr = prev
+
+      let fallbackValue = JSON.parse(JSON.stringify(originalValues))
+      let removed = fallbackValue.splice(-1)
+
+      let filled = newArr.length > 1 ? newArr.map((chart,cIndex)=>{
+
+        let fillRef = fallbackValue[cIndex]
+        return chart.map((year,  yIndex)=>{
+    
+          year.labels = ['BUF', 'CCT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETK']
+          year.values = fillRef[yIndex].values
+          console.log(year,"clear year")
+          return year
+        })
+      }) : fallbackValue
+
+
+      return filled
+    })
 
 
   }
