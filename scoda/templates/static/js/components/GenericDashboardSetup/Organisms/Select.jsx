@@ -24,13 +24,13 @@ export const Select = ({ chartData, selected, options, setSelected, removeItem, 
 
         setSelected(filtered)
     }
-console.log(options)
+
     return (
         <div className='custom_select'>
             {
                 selected.length > 1 ? selected[0][0].labels.map((tag, index) => {
 
-                    console.log(tag)
+              
                     return <p key={index.toString()} className="tag">
                         {tag}
                         <XIcon cancel={() => { removeItem(index) }} />
@@ -41,7 +41,7 @@ console.log(options)
             <div className={"dropdownbox " + `${show ? "show" : ""}`} >
                 {
                     options.length > 1 ? options[0][0].labels.map((city, index) => {
-                        console.log(city)
+                   
                         return <p key={index.toString()} className="drop_content" onClick={() => {
                             addItem(index)
                         }}>{city}</p>

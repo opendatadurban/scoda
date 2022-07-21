@@ -89,7 +89,6 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors }) => {
             values: [...year.values].concat(optionChart[yIndex].values[0])
           }
 
-          console.log(optionYear, "yearchanged")
           return optionYear
         })
       }) : optionsTemp
@@ -108,7 +107,7 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors }) => {
         return chart.map((year, yIndex) => {
 
           let selectedYear = selectedChart[yIndex]
-          console.log(selectedYear)
+
           return selectedYear
         })
       })
@@ -181,7 +180,6 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors }) => {
             values: [...year.values].concat(optionChart[yIndex].values[0])
           }
 
-          console.log(optionYear, "yearchanged")
           return optionYear
         })
       }) : optionsTemp
@@ -214,7 +212,6 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors }) => {
         return chart.map((year, yIndex) => {
 
           let selectedYear = selectedChart[yIndex]
-          console.log(selectedYear)
           return selectedYear
         })
       })
@@ -255,7 +252,7 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors }) => {
     
           year.labels = ['BUF', 'CCT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETK']
           year.values = fillRef[yIndex].values
-          console.log(year,"clear year")
+
           return year
         })
       }) : fallbackValue
@@ -266,7 +263,6 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors }) => {
 
 
   }
-console.log(selected,options,"does it work/?")
 
   return (
     <div className='chart_grid'>
