@@ -4,7 +4,7 @@ import { populateChartGroup } from './data/api';
 import { Select } from './Organisms/Select';
 import { ChartWrapper } from './Organisms/ChartWrapper';
 
-export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors }) => {
+export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors, getStatTotals }) => {
 
   const [chartGroup, setChartGroup] = useState([])
   const [originalValues, setOriginalValues] = useState([])
@@ -22,6 +22,11 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors }) => {
     )
   }, [minYear, maxYear, indicator_ids, yearColors])
 
+  useEffect(() => {
+
+    getStatTotals( originalValues)
+    
+  }, [originalValues])
 
 
   const filterCharts = () => {
@@ -112,20 +117,20 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors }) => {
       setChartGroup(prev => {
 
         let newArr = prev
-  
+
         newArr[0] = selectedState[0]
         newArr[1] = selectedState[1]
         newArr[2] = selectedState[2]
         newArr[3] = selectedState[3]
         newArr[4] = selectedState[4]
-  
+
         return [...newArr]
       })
 
       return [...selectedState]
     })
 
-    
+
   }
 
 
@@ -185,13 +190,13 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors }) => {
       setChartGroup(prev => {
 
         let newArr = prev
-  
+
         newArr[0] = optionState[0]
         newArr[1] = optionState[1]
         newArr[2] = optionState[2]
         newArr[3] = optionState[3]
         newArr[4] = optionState[4]
-  
+
         return [...newArr]
       })
 
@@ -216,7 +221,7 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors }) => {
       return [...selectedState]
     })
 
-  
+
   }
 
   const clearAll = () => {
@@ -225,8 +230,8 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors }) => {
     setSelected(prev => {
       let newArr = prev
 
-      let cleared = newArr.map((chart)=>{
-        return chart.map((year)=>{
+      let cleared = newArr.map((chart) => {
+        return chart.map((year) => {
           year.labels = []
           year.values = []
           return year
@@ -242,11 +247,11 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors }) => {
       let fallbackValue = JSON.parse(JSON.stringify(originalValues))
       let removed = fallbackValue.splice(-1)
 
-      let filled = newArr.length > 1 ? newArr.map((chart,cIndex)=>{
+      let filled = newArr.length > 1 ? newArr.map((chart, cIndex) => {
 
         let fillRef = fallbackValue[cIndex]
-        return chart.map((year,  yIndex)=>{
-    
+        return chart.map((year, yIndex) => {
+
           year.labels = ['BUF', 'CCT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETK']
           year.values = fillRef[yIndex].values
 
