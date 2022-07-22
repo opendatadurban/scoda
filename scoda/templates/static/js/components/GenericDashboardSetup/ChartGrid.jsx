@@ -1,50 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { Modal, ModalBody, Spinner } from 'reactstrap';
-import { populateChartGroup } from './data/api';
+import React, {useState } from 'react'
+
 import { Select } from './Organisms/Select';
 import { ChartWrapper } from './Organisms/ChartWrapper';
 
-export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors, getStatTotals }) => {
+export const ChartGrid = ({ indicator_ids,
+  chartGroup, setChartGroup,originalValues}) => {
 
-  const [chartGroup, setChartGroup] = useState([])
-  const [originalValues, setOriginalValues] = useState([])
   const [selected, setSelected] = useState([])
   const [options, setOptions] = useState([])
-
-  useEffect(() => {
-
-    populateChartGroup(
-      setChartGroup,
-      indicator_ids, // this array determines the number of charts generated on your grid
-      minYear, maxYear, //year min max
-      yearColors, //color presets
-      setOriginalValues
-    )
-  }, [minYear, maxYear, indicator_ids, yearColors])
-
-  useEffect(() => {
-
-    getStatTotals( originalValues)
-    
-  }, [originalValues])
-
-
-  const filterCharts = () => {
-
-    setChartGroup(prev => {
-
-      let newArr = prev
-
-      newArr[0] = selected[0]
-      newArr[1] = selected[1]
-      newArr[2] = selected[2]
-      newArr[3] = selected[3]
-      newArr[4] = selected[4]
-
-      return [...newArr]
-    })
-  }
-
 
   const removeItem = (clickIndex) => {
     //set labels and chart data
@@ -132,8 +95,6 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors, getStat
 
 
   }
-
-
 
   const addItem = (clickIndex) => {
 
@@ -268,7 +229,7 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors, getStat
 
   return (
     <div className='chart_grid'>
-      {chartGroup.length === 6 ?
+      {
         <div className='rounded_container'>
           <div className="select_wrapper">
             <Select
@@ -292,23 +253,6 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors, getStat
             }
           </div>
         </div>
-        :
-
-        <Modal id="loader" isOpen={true} className="modal-dialog-centered loader">
-          <ModalBody>
-            <div className="row">
-              <div className="col-2"></div>
-              <div className="col-0 ml-3 pt-4">
-                <Spinner type="grow" color="secondary" size="sm" />
-                <Spinner type="grow" color="success" size="sm" />
-                <Spinner type="grow" color="danger" size="sm" />
-                <Spinner type="grow" color="warning" size="sm" />
-              </div>
-              <div className="col-0 pt-4 pl-4 float-left">Loading Content...</div>
-            </div>
-            <br />
-          </ModalBody>
-        </Modal>
       }
     </div>
   )

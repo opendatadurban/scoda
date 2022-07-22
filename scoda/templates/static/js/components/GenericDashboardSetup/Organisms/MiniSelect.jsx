@@ -22,7 +22,7 @@ export const MiniSelect = ({names,selected,setSelected}) => {
                 {
                     names.map((city, index) => {
 
-                        return <p  className="drop_content" onClick={() => {
+                        return <p key={index.toString()} className="drop_content" onClick={() => {
                             select(index)
                         }}>{city}</p>
                     })

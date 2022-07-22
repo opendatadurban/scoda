@@ -3,8 +3,61 @@ import axios from 'axios';
 
 import panelData from '../../../data/panelData';
 import { MiniSelect } from './MiniSelect';
+import { cityLabels } from '../helpers/helpers';
 
-export const GenericStatsPanel = ({statsValues, selected,setSelected}) => {
+export const GenericStatsPanel = ({originalValues}) => {
+
+    const [statsValues, setStats] = useState({ totalHouseHolds: 0, houseHoldSize: 0, populationDensity: 0 })
+    const [selected, setSelected] = useState('Tshwane')
+
+    useEffect(()=>{
+
+        getStatTotals(originalValues)
+    },[selected])
+
+    const getStatTotals = (originalValues) => {
+
+        let totalHouseHolds = 0
+        let houseHoldSize = 0
+        let populationDensity = 0
+    
+        if (originalValues.length < 1) return
+    
+        originalValues[0].forEach((values, index) => {
+    
+          let valueIndex = values.labels.indexOf(cityLabels(selected))
+    
+          if (values.year !== "2018" && valueIndex !== -1) return
+    
+          totalHouseHolds = values.values[valueIndex]
+        })
+    
+        originalValues[1].forEach((values, index) => {
+    
+          let valueIndex = values.labels.indexOf(cityLabels(selected))
+    
+          if (values.year !== "2018" && valueIndex !== -1) return
+    
+          houseHoldSize = values.values[valueIndex]
+        })
+    
+        originalValues[4].forEach((values, index) => {
+    
+          let valueIndex = values.labels.indexOf(cityLabels(selected))
+    
+          if (values.year !== "2018" && valueIndex !== -1) return
+    
+          populationDensity = values.values[valueIndex]
+        })
+    
+        setStats({
+        
+          totalHouseHolds: Math.round((totalHouseHolds + Number.EPSILON) * 100) / 100,
+          houseHoldSize: Math.round((houseHoldSize + Number.EPSILON) * 100) / 100,
+          populationDensity: Math.round((populationDensity + Number.EPSILON) * 100) / 100
+        })
+    
+      }
 
     // const [totalHouseHolds, setHouseHolds] = useState(null)
     // const [houseAverage, setAverage] = useState(0)
