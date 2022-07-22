@@ -42,11 +42,8 @@ const PeopleHousehold = () => {
     let totalHouseHolds = 0
     let houseHoldSize = 0
     let populationDensity = 0
-    console.log("not triggered")
 
     if (originalValues.length < 1) return
-
-    console.log("triggered")
 
     originalValues[0].forEach((values, index) => {
 
@@ -74,7 +71,7 @@ const PeopleHousehold = () => {
 
       populationDensity = values.values[valueIndex]
     })
-console.log({ totalHouseHolds, houseHoldSize, populationDensity })
+
     setStats({
       ...statsValues,
       totalHouseHolds: Math.round((totalHouseHolds + Number.EPSILON) * 100) / 100,
@@ -84,7 +81,6 @@ console.log({ totalHouseHolds, houseHoldSize, populationDensity })
   
   }
 
-  console.log(statsValues, "stats values")
   return (
     <div className='people_household_dashboard'>
 
