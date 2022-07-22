@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import Subnav from '../Subnav'
 import { ChartGrid } from './ChartGrid'
 import { peopleHouseholdColors, secondaryColors } from './helpers/helpers'
@@ -6,11 +6,11 @@ import { GenericStatsPanel } from './Organisms/GenericStatsPanel'
 import { cityLabels } from './helpers/helpers'
 import '../../../scss/components/PeopleHouseHold.scss'
 import { populateChartGroup } from './data/api'
-import { Modal,ModalBody,Spinner } from 'reactstrap'
+import { Modal, ModalBody, Spinner } from 'reactstrap'
 
 const PeopleHousehold = () => {
 
- 
+
 
   const [chartGroup, setChartGroup] = useState([])
   const [originalValues, setOriginalValues] = useState([])
@@ -56,21 +56,21 @@ const PeopleHousehold = () => {
     maxYear: 2018
   }
 
- 
-
   return (
     chartGroup.length === 6 ? <div className='people_household_dashboard'>
 
       <Subnav name='State of Cities Reports' dropdownName='People and Households' dropDownItem={subNavContent} buttonText="Download as PNG" />
-      <GenericStatsPanel
-      originalValues={originalValues}
-      />
-      <ChartGrid
-        indicator_ids={dashboardProps.indicator_ids}
-        chartGroup={chartGroup}
-        setChartGroup={setChartGroup}
-    originalValues={originalValues}
-      />
+      <div id='content'>
+        <GenericStatsPanel
+          originalValues={originalValues}
+        />
+        <ChartGrid
+          indicator_ids={dashboardProps.indicator_ids}
+          chartGroup={chartGroup}
+          setChartGroup={setChartGroup}
+          originalValues={originalValues}
+        />
+      </div>
       <div className="spacer"></div>
     </div> :
       <Modal id="loader" isOpen={true} className="modal-dialog-centered loader">
