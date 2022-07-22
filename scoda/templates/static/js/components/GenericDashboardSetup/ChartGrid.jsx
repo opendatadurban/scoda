@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Modal, ModalBody, Spinner } from 'reactstrap';
 import { populateChartGroup } from './data/api';
-import { chartGridStyles } from './helpers/styles';
 import { Select } from './Organisms/Select';
 import { ChartWrapper } from './Organisms/ChartWrapper';
-import { tableData } from './helpers/helpers';
-import axios from 'axios';
 
 export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors }) => {
 
@@ -281,7 +278,7 @@ export const ChartGrid = ({ minYear, maxYear, indicator_ids, yearColors }) => {
             />
           </div>
 
-          <div className="grid-container" style={chartGridStyles}>
+          <div className="grid-container">
             {
               <ChartWrapper
                 chartGroup={chartGroup}
