@@ -1,0 +1,187 @@
+.people_household_dashboard {
+    margin: 100px 0 0 0;
+    background-color: rgba(241, 241, 241, 1);
+
+
+
+
+    .stat_display_panel {
+        background-color: white;
+        display: flex;
+        flex-direction: row;
+
+
+        .first_panel {
+            position: relative;
+            padding: 12px 24px 12px 15px;
+
+
+            .catagory-name {
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 17px;
+                padding: 0;
+                margin: 0;
+                color: rgba(47, 52, 66, 1);
+            }
+
+            .row {
+                margin: 0;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                width: calc(50vw - 39px);
+
+                .stat {
+                    padding-left: calc(23px - 15px);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    >p {
+                        font-family: 'Montserrat';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 10px;
+                        line-height: 12px;
+                        text-transform: uppercase;
+                        color: #2F3442;
+                    }
+
+                    >h1 {
+
+                        font-family: 'Montserrat';
+                        font-style: normal;
+                        font-weight: 600;
+                        font-size: 24px;
+                        line-height: 30px;
+
+                        color: #2F3442;
+                        padding: 11px 0 3px 0;
+                    }
+
+                }
+            }
+
+            &:after {
+                content: " ";
+                position: absolute;
+                right: 0;
+                bottom: 11.5%;
+                height: 77%;
+                outline:1px solid #B2BEC3 ;
+            }
+
+
+        }
+
+        .second_panel {
+
+            padding: 12px 24px 12px 15px;
+            width: 100%;
+
+            .top {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                .catagory-name {
+                    font-family: 'Montserrat';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 14px;
+                    line-height: 17px;
+                    padding: 0;
+                    margin: 0;
+                    color: rgba(47, 52, 66, 1);
+                }
+            }
+
+            .bottom {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                .stat {
+                    padding-left: calc(23px - 15px);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    >p {
+                        font-family: 'Montserrat';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 10px;
+                        line-height: 12px;
+                        text-transform: uppercase;
+                        color: #2F3442;
+                    }
+
+                    >h1 {
+
+                        font-family: 'Montserrat';
+                        font-style: normal;
+                        font-weight: 600;
+                        font-size: 24px;
+                        line-height: 30px;
+
+                        color: #2F3442;
+                        padding: 11px 0 3px 0;
+                    }
+
+                }
+
+            }
+
+
+        }
+    }
+
+    .chart_grid {
+        background-color: rgba(241, 241, 241, 1);
+
+        .rounded_container {
+            border-radius: 5px 5px 5px 5px;
+            background-color: white;
+            margin: 15px;
+
+            .select_wrapper {
+                border-bottom: 2px solid #F1F1F1;
+                padding: 7px 0;
+            }
+
+            .grid-container{
+
+                display: grid;
+                grid-column-gap:30px;
+                grid-row-gap:21px;
+                grid-template-columns: calc((100vw/3) - 50px) calc((100vw/3) - 50px) calc((100vw/3) - 50px) ;
+                background-color: white;
+                padding: 30px;
+                position: relative;
+                border-radius: 0 0 5px 5px;
+                &:after{
+                    content: "";
+                    position: absolute;
+                    width: 2px;
+                    background: #F1F1F1;
+                    height:calc(100% - 60px);
+                    left: calc(66.6% + 7.5px);
+                    top: 30px;
+                }
+
+                .chart_wrapper{
+
+                }
+            }
+        }
+    }
+
+    .spacer {
+        height: 30px;
+        background-color: rgba(241, 241, 241, 1);
+    }
+}

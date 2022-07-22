@@ -8,21 +8,26 @@ import _ from 'lodash';
 
 const subNavContent = {
     dropdownMenu: [ 
-        {
-          name: "Service Delivery", 
-          href: "socr#/service_delivery", 
-          active: false 
-        },
-        { 
-          name: "Citizen Engagement", 
-          href: "socr#/citizen_engagement", 
-          active: false 
-        }, 
-        {
-          name: "Municipal Human Resources", 
-          href: "socr#/human_resources", 
-          active: true 
-        }
+      {
+        name: "Service Delivery",
+        href: "socr#/service_delivery",
+        active: false
+      },
+      {
+        name: "Citizen Engagement",
+        href: "socr#/citizen_engagement",
+        active: false
+      },
+      {
+        name: "Municipal Human Resources",
+        href: "socr#/human_resources",
+        active: true
+      },
+      {
+        name: "People and Households",
+        href: "socr#/people_household",
+        active: false
+      }
     ]
   }
 
@@ -231,6 +236,7 @@ const Socr_Human_Resources = () => {
     }
   
     const callback_select = (table, callback, select_values, sum_callback) => {
+      console.log(table,"table value")
       var cit = _.map(select_values, 'value')
       let data = []
       let current_year = 2014

@@ -87,6 +87,7 @@ const CitizenEngagment = () => {
     setLocalTurnout([])
   }
   const onChange = (e) => {
+    console.log(e,"whats happening?")
     setSelectValues(e)
     emptyChartsData()
     axios.get(`/api/explore/codebook?indicator_id=989`)
@@ -147,7 +148,6 @@ const CitizenEngagment = () => {
   const api = (url, callback) => {
     axios.get(url)
       .then(res => {
-        console.log(res)
         callback(res.data.table)
       })
   }
