@@ -4,11 +4,9 @@ import '../../../../scss/components/chart/ChartHeader.scss'
 import { chartTitles } from "../helpers/helpers"
 import axios from "axios"
 
-export const ChartWrapper = ({ chartGroup, indicator_ids, labelGroup}) => {
+export const ChartWrapper = ({ chartGroup, indicator_ids}) => {
 
   let items = []
-
-  let percentage = [false,false,true,false]
 
   for (let i = 0; i < chartGroup.length; i++) {
     const element = chartGroup[i]
