@@ -14,7 +14,7 @@ const DownloadScreenCapture = (props) => {
       .then(function (dataUrl) {
         setLoader(false)
         var link = document.createElement('a');
-        link.download = 'data-snapshot.jpeg';
+        link.download = 'data-snapshot.png';
         link.href = dataUrl;
         link.click();
       });

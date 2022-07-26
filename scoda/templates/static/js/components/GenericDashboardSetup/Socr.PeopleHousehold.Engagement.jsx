@@ -7,10 +7,9 @@ import { cityLabels } from './helpers/helpers'
 import '../../../scss/components/PeopleHouseHold.scss'
 import { populateChartGroup } from './data/api'
 import { Modal, ModalBody, Spinner } from 'reactstrap'
+import Sidebar_left from '../Sidebar_left'
 
 const PeopleHousehold = () => {
-
-
 
   const [chartGroup, setChartGroup] = useState([])
   const [originalValues, setOriginalValues] = useState([])
@@ -60,6 +59,7 @@ const PeopleHousehold = () => {
     chartGroup.length === 6 ? <div className='people_household_dashboard'>
 
       <Subnav name='State of Cities Reports' dropdownName='People and Households' dropDownItem={subNavContent} buttonText="Download as PNG" />
+      <Sidebar_left/>
       <div id='content'>
         <GenericStatsPanel
           originalValues={originalValues}
