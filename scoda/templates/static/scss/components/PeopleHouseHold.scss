@@ -1,10 +1,7 @@
 .people_household_dashboard {
     margin: 100px 0 0 0;
     background-color: rgba(241, 241, 241, 1);
-
-
-
-
+    
     .stat_display_panel {
         background-color: white;
         display: flex;
@@ -13,7 +10,7 @@
 
         .first_panel {
             position: relative;
-            padding: 12px 24px 12px 15px;
+            padding: 12px 24px 20px 15px;
 
 
             .catagory-name {
@@ -21,10 +18,13 @@
                 font-style: normal;
                 font-weight: 700;
                 font-size: 14px;
-                line-height: 17px;
+                line-height: 14px;
                 padding: 0;
                 margin: 0;
                 color: rgba(47, 52, 66, 1);
+                span {
+                    font-size: 14px;
+                }
             }
 
             .row {
@@ -59,7 +59,7 @@
                         line-height: 30px;
 
                         color: #2F3442;
-                        padding: 11px 0 3px 0;
+                        padding: 10px 0 3px 0;
                     }
 
                 }
@@ -71,7 +71,7 @@
                 right: 0;
                 bottom: 11.5%;
                 height: 77%;
-                outline:1px solid #B2BEC3 ;
+                outline: 1px solid #B2BEC3;
             }
 
 
@@ -79,7 +79,7 @@
 
         .second_panel {
 
-            padding: 12px 24px 12px 15px;
+            padding: 12px 24px 20px 15px;
             width: 100%;
 
             .top {
@@ -92,10 +92,14 @@
                     font-style: normal;
                     font-weight: 700;
                     font-size: 14px;
-                    line-height: 17px;
+                    line-height: 14px;
                     padding: 0;
                     margin: 0;
                     color: rgba(47, 52, 66, 1);
+
+                    span {
+                        font-size: 14px;
+                    }
                 }
             }
 
@@ -129,7 +133,7 @@
                         line-height: 30px;
 
                         color: #2F3442;
-                        padding: 11px 0 3px 0;
+                        padding: 10px 0 3px 0;
                     }
 
                 }
@@ -153,28 +157,25 @@
                 padding: 7px 0;
             }
 
-            .grid-container{
+            .grid-container {
 
                 display: grid;
-                grid-column-gap:30px;
-                grid-row-gap:21px;
-                grid-template-columns: calc((100vw/3) - 50px) calc((100vw/3) - 50px) calc((100vw/3) - 50px) ;
+                grid-column-gap: 30px;
+                grid-row-gap: 21px;
+                grid-template-columns: calc((100vw/3) - 50px) calc((100vw/3) - 50px) calc((100vw/3) - 50px);
                 background-color: white;
                 padding: 30px;
                 position: relative;
                 border-radius: 0 0 5px 5px;
-                &:after{
+
+                &:after {
                     content: "";
                     position: absolute;
                     width: 2px;
                     background: #F1F1F1;
-                    height:calc(100% - 60px);
-                    left: calc(66.6% + 7.5px);
+                    height: calc(100% - 60px);
+                    left: calc(66% + 15px);
                     top: 30px;
-                }
-
-                .chart_wrapper{
-
                 }
             }
         }

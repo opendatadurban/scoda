@@ -248,8 +248,7 @@ export const ChartGrid = ({ indicator_ids,
             {
               <ChartWrapper
                 chartGroup={chartGroup}
-                indicator_ids={indicator_ids}
-                manualChart={chartGroup[1]} />
+                indicator_ids={indicator_ids} />
             }
           </div>
         </div>
