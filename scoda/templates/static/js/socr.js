@@ -3,14 +3,14 @@ import React, {Suspense, lazy} from 'react';
 import { HashRouter, Route } from 'react-router-dom';
 import createHistory from "history/createBrowserHistory"
 import loader from "./gif/Spinner.gif"
-
+import { SOCRPeopleAndHouseholds } from './components/PeopleAndHouseHold/SOCRPeopleAndHouseholds';
 
 const SoCR =  lazy(() => import('./templates/SoCR'));
 const CitizenEngagements =  lazy(() => import('./templates/CitizenEngagements'));
 const ServiceDelivery =  lazy(() => import('./templates/ServiceDelivery'));
 const HumanResources =  lazy(() => import('./templates/HumanResources'));
 const CityFinances =  lazy(() => import('./templates/CityFinances'));
-const PeopleAndHousehold =  lazy(() => import('./templates/PeopleAndHousehold'));
+const PeopleAndHouseHold = lazy(()=> import('./components/PeopleAndHouseHold/SOCRPeopleAndHouseholds'));
 
 
 const style = {
@@ -35,7 +35,7 @@ export default (
       <Route exact path='/human_resources' component={HumanResources} />
       <Route exact path='/city_finances' component={CityFinances} />
 
-      <Route exact path='/people_household' component={PeopleAndHousehold} />
+      <Route exact path='/people_household' component={PeopleAndHouseHold} />
    
       </Suspense>
     </HashRouter>
