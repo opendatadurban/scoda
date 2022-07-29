@@ -126,6 +126,8 @@
     cursor: pointer;
 
     .title {
+        display: flex;
+        align-items: center;
         font-family: 'Montserrat';
         font-style: normal;
         font-weight: 400;
