@@ -3,13 +3,12 @@ import Subnav from '../Subnav'
 import { ChartGrid } from './ChartGrid'
 import { peopleHouseholdColors, secondaryColors } from './helpers/helpers'
 import { GenericStatsPanel } from './Organisms/GenericStatsPanel'
-import { cityLabels } from './helpers/helpers'
 import '../../../scss/components/PeopleHouseHold.scss'
 import { populateChartGroup } from './data/api'
 import { Modal, ModalBody, Spinner } from 'reactstrap'
 import Sidebar_left from '../Sidebar_left'
 
-const PeopleHousehold = () => {
+const PeopleHousehold = ({ indicator_ids, minYear, maxYear, gridItems }) => {
 
   const [chartGroup, setChartGroup] = useState([])
   const [originalValues, setOriginalValues] = useState([])
@@ -18,12 +17,12 @@ const PeopleHousehold = () => {
 
     populateChartGroup(
       setChartGroup,
-      dashboardProps.indicator_ids, // this array determines the number of charts generated on your grid
-      dashboardProps.minYear, dashboardProps.maxYear, //year min max
+      indicator_ids, // this array determines the number of charts generated on your grid
+      minYear, maxYear, //year min max
       peopleHouseholdColors, //color presets
       setOriginalValues
     )
-  }, [dashboardProps])
+  }, [indicator_ids, minYear, maxYear])
 
   const subNavContent = {
     dropdownMenu: [
@@ -49,23 +48,19 @@ const PeopleHousehold = () => {
       }
     ]
   }
-  const dashboardProps = {
-    indicator_ids: [704, "manual", 706, 699, 701, 711],
-    minYear: 2015,
-    maxYear: 2018
-  }
+
 
   return (
     chartGroup.length === 6 ? <div className='people_household_dashboard'>
 
       <Subnav name='State of Cities Reports' dropdownName='People and Households' dropDownItem={subNavContent} buttonText="Download as PNG" />
-      <Sidebar_left/>
+      <Sidebar_left />
       <div id='content'>
         <GenericStatsPanel
           originalValues={originalValues}
         />
         <ChartGrid
-          indicator_ids={dashboardProps.indicator_ids}
+          indicator_ids={indicator_ids}
           chartGroup={chartGroup}
           setChartGroup={setChartGroup}
           originalValues={originalValues}
