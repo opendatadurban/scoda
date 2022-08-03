@@ -1,5 +1,3 @@
-import { data } from "jquery"
-
 export const peopleHouseholdColors = [
   'rgba(208, 209, 230, 1)',
   'rgba(116, 169, 207, 1)',
@@ -13,10 +11,20 @@ export const secondaryColors = [
   'rgba(94, 201, 146, 1)'
 ]
 
-export const chartTitles = {
+export const phChartTitles = {
   yAxes: ["Number of Households", "Average Number of People", "Percentage", "Population", "Population Density", "Percentage"],
   main: ["Total Households", "Household Size - Average Number of People per Household", "Percentage of Population Change",
     "Total Population in Metro", "Population Density - Population Size per Square km ", "Net migration rate"]
+}
+
+export const echartTitles = {
+  yAxes: ["Households","Population","Number of People Employed","Percentage"],
+  main:["Number of people employed and seeking employment within the 15–66 year age group","Number of Unemployed People","Informal Sector Employment","Unemployment Rate: Percentage of Unemployed Workers as a Proportion of the Total Labour Force"]
+}
+
+export const dChartTitles = {
+  yAxes: ["Percentage","Percentage","Percentage","Percentage","Percentage"],
+  main:["Formal Dwellings","Informal Dwellings","Traditional Dwellings","Other Dwellings"]
 }
 
 //TODO: use select to alter cities labels within chart grid 

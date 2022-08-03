@@ -8,7 +8,8 @@ import { populateChartGroup } from './data/api'
 import { Modal, ModalBody, Spinner } from 'reactstrap'
 import Sidebar_left from '../Sidebar_left'
 
-const PeopleHousehold = ({ indicator_ids, minYear, maxYear, gridItems }) => {
+const PeopleHousehold = ({ indicator_ids, minYear, maxYear, gridItems, subNavContent,
+  dropdownName, colors }) => {
 
   const [chartGroup, setChartGroup] = useState([])
   const [originalValues, setOriginalValues] = useState([])
@@ -19,51 +20,29 @@ const PeopleHousehold = ({ indicator_ids, minYear, maxYear, gridItems }) => {
       setChartGroup,
       indicator_ids, // this array determines the number of charts generated on your grid
       minYear, maxYear, //year min max
-      peopleHouseholdColors, //color presets
-      setOriginalValues
+      colors, //color presets
+      setOriginalValues,
+      gridItems
     )
-  }, [indicator_ids, minYear, maxYear])
-
-  const subNavContent = {
-    dropdownMenu: [
-      {
-        name: "Service Delivery",
-        href: "socr#/service_delivery",
-        active: false
-      },
-      {
-        name: "Citizen Engagement",
-        href: "socr#/citizen_engagement",
-        active: false
-      },
-      {
-        name: "Municipal Human Resources",
-        href: "socr#/human_resources",
-        active: false
-      },
-      {
-        name: "People and Households",
-        href: "socr#/people_household",
-        active: true
-      }
-    ]
-  }
-
+  }, [indicator_ids, minYear, maxYear, colors])
 
   return (
-    chartGroup.length === 6 ? <div className='people_household_dashboard'>
+    chartGroup.length === gridItems ? <div className='people_household_dashboard'>
 
-      <Subnav name='State of Cities Reports' dropdownName='People and Households' dropDownItem={subNavContent} buttonText="Download as PNG" />
+      <Subnav name='State of Cities Reports' dropdownName={dropdownName} dropDownItem={subNavContent} buttonText="Download as PNG" />
       <Sidebar_left />
       <div id='content'>
         <GenericStatsPanel
           originalValues={originalValues}
+          dropName={dropdownName}
         />
         <ChartGrid
           indicator_ids={indicator_ids}
           chartGroup={chartGroup}
           setChartGroup={setChartGroup}
           originalValues={originalValues}
+          gridItems={gridItems}
+          dropdownName={dropdownName}
         />
       </div>
       <div className="spacer"></div>

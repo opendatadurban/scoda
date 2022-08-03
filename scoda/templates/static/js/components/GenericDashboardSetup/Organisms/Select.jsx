@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { XIcon, Line, ChevronDown } from '../../../../svg_components/SelectIcons'
 import '../../../../scss/components/Select.scss'
 
-export const Select = ({ chartData, selected, options, setSelected, removeItem, addItem, clearAll }) => {
+export const Select = ({ chartData,originalValues, selected, options,
+     setSelected,setChartGroup,setOptions,
+      removeItem, addItem, clearAll }) => {
 
     const [show, visibility] = useState(false)
 
@@ -30,7 +32,10 @@ export const Select = ({ chartData, selected, options, setSelected, removeItem, 
 
                     return <p key={index.toString()} className="tag">
                         {tag}
-                        <XIcon cancel={() => { removeItem(index) }} />
+
+                        <span>
+                        <XIcon cancel={() => { removeItem(index,selected,setSelected,setChartGroup,setOptions) }} />
+                        </span>
                     </p>
                 }) : ""
                     
@@ -40,13 +45,13 @@ export const Select = ({ chartData, selected, options, setSelected, removeItem, 
                     options.length > 1 ? options[0][0].labels.map((city, index) => {
                    
                         return <p key={index.toString()} className="drop_content" onClick={() => {
-                            addItem(index)
+                            addItem(index,options,setSelected,setChartGroup,setOptions)
                         }}>{city}</p>
                     }):""
                 }
             </div>
             <XIcon cancel={() => {
-                clearAll()
+                clearAll(originalValues,setSelected,setOptions)
             }} />
             <Line />
             <ChevronDown drop={() => {

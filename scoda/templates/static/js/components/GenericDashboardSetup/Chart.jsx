@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { BarChartGeneric } from '../BarChartGeneric';
 import { cityLabels } from './helpers/helpers';
 
-export const Chart = ({ graphData, title }) => {
+export const Chart = ({ graphData, title,dropdownName,stacked }) => {
 
     const options = {
         responsive: true,
@@ -24,7 +24,7 @@ export const Chart = ({ graphData, title }) => {
         },
         scales: {
             xAxes: [{
-
+                stacked:stacked,
                 gridLines: {
                     display: false
                 },
@@ -37,6 +37,7 @@ export const Chart = ({ graphData, title }) => {
                 }
             }],
             yAxes: [{
+                stacked: stacked,
                 scaleLabel: {
                     display: true,
                     labelString: title,
@@ -85,7 +86,7 @@ export const Chart = ({ graphData, title }) => {
 
     return (
         <>
-            <BarChartGeneric options={options} data={data} />
+            <BarChartGeneric options={options} data={data} height={dropdownName === "Employment"? 170 : 210} />
         </>
     )
 }

@@ -1,99 +1,43 @@
 import React, { useEffect, useState } from 'react'
 import { MiniSelect } from './MiniSelect';
 import { cityLabels } from '../helpers/helpers';
+import { getStatTotals, getEmploymentStatTotals } from '../helpers/statsBar';
 
-export const GenericStatsPanel = ({ originalValues }) => {
+const initialValues = (dropName) => {
 
-    const [statsValues, setStats] = useState({ totalHouseHolds: 0, houseHoldSize: 0, populationDensity: 0,
-        totalHouseHoldsAverage: 0,
-        houseHoldSizeAverage: 0,
-        populationDensityAverage: 0})
-    const [selected, setSelected] = useState('Tshwane')
+    const statsInit = dropName === "People and Households" ?
+        {
+            totalHouseHolds: [0, "TOTAL Households"], houseHoldSize: [0, "Household size"], populationDensity: [0, "Population Density"],
+            totalHouseHoldsAverage: [0, "TOTAL Households"],
+            houseHoldSizeAverage: [0, "Household size"],
+            populationDensityAverage: [0, "Population Density"],
+            heading: null
+        } :
+        dropName === "Employment" ? {
+            heading: "Proportion of households whose main source of income is:",
+            salaries: [0, "Salaries/wages/commission"], businessIncome: [0, "Income from a business"], remittances: [0, "Remittances"], grants: [0, "Grants"], other: [0, "Other"],
+            salariesAve: [0, "Salaries/wages/commission"], businessIncomeAve: [0, "Income from a business"], remittancesAve: [0, "Remittances"], grantsAve: [0, "Grants"], otherAve: [0, "Other"]
+        } : { }
+
+    return statsInit
+}
+
+
+export const GenericStatsPanel = ({ originalValues, dropName }) => {
+
+    const [statsValues, setStats] = useState(initialValues(dropName))
+    const [selected, setSelected] = useState('eThekwini')
 
     useEffect(() => {
+        if (dropName === "People and Households") {
+            getStatTotals(originalValues, cityLabels, setStats, selected)
+        } else if (dropName === "Employment") {
+            getEmploymentStatTotals(setStats, selected)
+        }
 
-        getStatTotals(originalValues)
     }, [selected])
-
-    const getStatTotals = (originalValues) => {
-
-        let totalHouseHolds = 0
-        let houseHoldSize = 0
-        let populationDensity = 0
-        let totalHouseHoldsAverage = 0
-        let houseHoldSizeAverage = 0
-        let populationDensityAverage = 0
-
-        if (originalValues.length < 1) return
-        //Totals
-        originalValues[0].forEach((values, index) => {
-
-            let valueIndex = values.labels.indexOf(cityLabels(selected))
-
-            if (values.year !== "2018" && valueIndex !== -1) return
-
-            totalHouseHolds = values.values[valueIndex]
-        })
-
-        originalValues[1].forEach((values, index) => {
-
-            let valueIndex = values.labels.indexOf(cityLabels(selected))
-
-            if (values.year !== "2018" && valueIndex !== -1) return
-
-            houseHoldSize = values.values[valueIndex]
-        })
-
-        originalValues[4].forEach((values, index) => {
-
-            let valueIndex = values.labels.indexOf(cityLabels(selected))
-
-            if (values.year !== "2018" && valueIndex !== -1) return
-
-            populationDensity = values.values[valueIndex]
-        })
-
-        //Averages
-        let thAverageCount = 0
-        let hsAverageCount = 0
-        let pdAverageCount = 0
-
-        originalValues[0].forEach((values, index) => {
-
-            if ( values.year !== "2018") return
-
-            thAverageCount++
-            totalHouseHoldsAverage = values.values.reduce((a, b) => a + b, 0) / values.values.length
-        })
-
-        originalValues[1].forEach((values, index) => {
-
-            if (values.year !== "2018") return
-            hsAverageCount++
-            houseHoldSizeAverage = values.values.reduce((a, b) => a + b, 0) / values.values.length
-        })
-
-        originalValues[4].forEach((values, index) => {
-
-            if (values.year !== "2018") return
-
-            pdAverageCount++
-            populationDensityAverage = values.values.reduce((a, b) => a + b, 0) / values.values.length
-        })
-
-        setStats({
-
-            totalHouseHolds: Math.round((totalHouseHolds + Number.EPSILON) * 100) / 100,
-            houseHoldSize: Math.round((houseHoldSize + Number.EPSILON) * 100) / 100,
-            populationDensity: Math.round((populationDensity + Number.EPSILON) * 100) / 100,
-            totalHouseHoldsAverage: Math.round((totalHouseHoldsAverage + Number.EPSILON) * 100) / 100,
-            houseHoldSizeAverage: Math.round((houseHoldSizeAverage + Number.EPSILON) * 100) / 100,
-            populationDensityAverage: Math.round((populationDensityAverage + Number.EPSILON) * 100) / 100
-        })
-
-    }
-
-    return (
+    console.log(statsValues, "stats values")
+    return (dropName === "People and Households" ?
         <div className='stat_display_panel'>
 
             <div className='first_panel'>
@@ -101,16 +45,16 @@ export const GenericStatsPanel = ({ originalValues }) => {
                 <p className='catagory-name '>Household Overview:  <span>City Averages 2018</span></p>
                 <div className='row'>
                     <div className='stat'>
-                        <h1>{statsValues.totalHouseHoldsAverage}</h1>
-                        <p > TOTAL Households</p>
+                        <h1>{statsValues.totalHouseHoldsAverage[0]}</h1>
+                        <p > {statsValues.totalHouseHoldsAverage[1]}</p>
                     </div>
                     <div className='stat'>
-                        <h1>{statsValues.houseHoldSizeAverage}</h1>
-                        <p>Household size</p>
+                        <h1>{statsValues.houseHoldSizeAverage[0]}</h1>
+                        <p>{statsValues.houseHoldSizeAverage[1]}</p>
                     </div>
                     <div className='stat'>
-                        <h1>{statsValues.populationDensityAverage}</h1>
-                        <p>Population Density</p>
+                        <h1>{statsValues.populationDensityAverage[0]}</h1>
+                        <p>{statsValues.populationDensityAverage[1]}</p>
                     </div>
 
                 </div>
@@ -124,21 +68,79 @@ export const GenericStatsPanel = ({ originalValues }) => {
                 <div className='bottom'>
                     <div className='stat'>
                         {/* <h1 className={total_municipal_posts < total_mun_posts_sum ? 'green' : total_municipal_posts > total_mun_posts_sum ? 'red' : 'none'}>{total_municipal_posts}</h1> */}
-                        <h1>{statsValues.totalHouseHolds}</h1>
-                        <p>TOTAL Households</p>
+                        <h1>{statsValues.totalHouseHolds[0]}</h1>
+                        <p>{statsValues.totalHouseHolds[1]}</p>
                     </div>
                     <div className='stat'>
                         {/* <h1 className={municipal_management_vacancies < mangement_mun_posts_sum ? 'green' : municipal_management_vacancies > mangement_mun_posts_sum ? 'red' : 'none'}>{municipal_management_vacancies}</h1> */}
-                        <h1 >{statsValues.houseHoldSize}</h1>
-                        <p>Household size</p>
+                        <h1 >{statsValues.houseHoldSize[0]}</h1>
+                        <p>{statsValues.houseHoldSize[1]}</p>
                     </div>
                     <div className='stat'>
                         {/* <h1 className={senior_posts_sum < senior_management_vacancies ? 'green' : senior_posts_sum > senior_management_vacancies ? 'red' : 'none'}>{senior_management_vacancies}</h1> */}
-                        <h1 >{statsValues.populationDensity}</h1>
-                        <p>Population Density</p>
+                        <h1 >{statsValues.populationDensity[0]}</h1>
+                        <p>{statsValues.populationDensity[1]}</p>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> : dropName === "Employment" ?
+            <div className='stat_display_panel'>
+
+                <div className='first_panel'>
+
+                    <p className='catagory-name '>Household Overview:  <span>City Averages 2018</span></p>
+                    <div className='row'>
+                        <div className='stat'>
+                            <h1>{statsValues.salariesAve[0]}</h1>
+                            <p > {statsValues.salariesAve[1]}</p>
+                        </div>
+                        <div className='stat'>
+                            <h1>{statsValues.businessIncomeAve[0]}</h1>
+                            <p>{statsValues.businessIncomeAve[1]}</p>
+                        </div>
+                        <div className='stat'>
+                            <h1>{statsValues.remittancesAve[0]}</h1>
+                            <p>{statsValues.remittancesAve[1]}</p>
+                        </div>
+                        <div className='stat'>
+                            <h1>{statsValues.grantsAve[0]}</h1>
+                            <p>{statsValues.grantsAve[1]}</p>
+                        </div>
+                        <div className='stat'>
+                            <h1>{statsValues.otherAve[0]}</h1>
+                            <p>{statsValues.otherAve[1]}</p>
+                        </div>
+                    </div>
+                </div>
+                <div className='second_panel'>
+                    <div className='top'>
+                        <p className='catagory-name'> Household Overview: <span>Municipality Focus 2018</span></p>
+
+                        <MiniSelect names={['Buffalo City', 'City of Cape Town', 'City of Joburg', 'Ekurhuleni', 'eThekwini', 'Mangaung', 'Msunduzi', 'Nelson Mandela Bay', 'Tshwane']} setSelected={setSelected} selected={selected} />
+                    </div>
+                    <div className='bottom'>
+                        <div className='stat'>
+                            <h1>{statsValues.salaries[0]}</h1>
+                            <p > {statsValues.salaries[1]}</p>
+                        </div>
+                        <div className='stat'>
+                            <h1>{statsValues.businessIncome[0]}</h1>
+                            <p>{statsValues.businessIncome[1]}</p>
+                        </div>
+                        <div className='stat'>
+                            <h1>{statsValues.remittances[0]}</h1>
+                            <p>{statsValues.remittances[1]}</p>
+                        </div>
+                        <div className='stat'>
+                            <h1>{statsValues.grants[0]}</h1>
+                            <p>{statsValues.grants[1]}</p>
+                        </div>
+                        <div className='stat'>
+                            <h1>{statsValues.other[0]}</h1>
+                            <p>{statsValues.other[1]}</p>
+                        </div>
+                    </div>
+                </div>
+            </div> : ""
     )
 }
