@@ -30,6 +30,7 @@ def api_indicators_list(check):
 def explore_new():
     ind = request.args.get('indicator_id') or 76
     city = request.args.get('city')
+    avg_filter = request.args.get('average')
     year_filter = request.args.getlist('year')
     query = db.session.query(CbRegion.name.label('re_name'), CbDataPoint.start_dt,
                              CbIndicator.name.label('ds_name'), CbDataPoint.value,
@@ -56,7 +57,17 @@ def explore_new():
         del df["end_dt"]
     df = df.drop_duplicates()
     years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
-    cities = list(cities)
+    if avg_filter:
+        total_average = df['value'].sum() / len(cities)  / len(years)
+        yearly_average_list =[]
+        for y in years:
+            year_data = df.loc[df['year'] == y]
+            yearly_average = year_data['value'].sum() / len(cities)
+            yearly_average_list.append({'year':str(y),'city_average':round(yearly_average,2)})
+        return jsonify({'indicators':datasets,
+                        'total_average':round(total_average,2),
+                        'yearly_averages':yearly_average_list,
+                        'cities':cities})
     chart_data = []
     for y in years:
         labels = []
