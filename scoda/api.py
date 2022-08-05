@@ -57,17 +57,6 @@ def explore_new():
         del df["end_dt"]
     df = df.drop_duplicates()
     years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
-    if avg_filter:
-        total_average = df['value'].sum() / len(cities)  / len(years)
-        yearly_average_list =[]
-        for y in years:
-            year_data = df.loc[df['year'] == y]
-            yearly_average = year_data['value'].sum() / len(cities)
-            yearly_average_list.append({'year':str(y),'city_average':round(yearly_average,2)})
-        return jsonify({'indicators':datasets,
-                        'total_average':round(total_average,2),
-                        'yearly_averages':yearly_average_list,
-                        'cities':cities})
     chart_data = []
     for y in years:
         labels = []
@@ -426,6 +415,8 @@ class IndicatorService():
 
     def average_calculation(self,city:str,year_filter,indicator_id:int):
         df = self.df_query(city=city,indicator_id=indicator_id,year_filter=year_filter)
+        if not year_filter:
+            df = df.loc[df['year'] == df['year'].max()]
         years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
         total_average = df['value'].sum() / len(cities)  / len(years)
         yearly_average_list =[]
