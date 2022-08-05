@@ -87,6 +87,17 @@ def explore_new():
             })
     return jsonify(chart_data)
 
+@app.route('/api/stats', methods=['GET', 'POST'])
+def indicator_stats():
+    indicator_id = request.args.get('indicator_id')
+    if not indicator_id:
+        return jsonify({"message": "Please choose an indicator"}), 404
+    city = request.args.get('city')
+    avg_filter = request.args.get('average')
+    year_filter = request.args.getlist('year')
+    if avg_filter:
+        return IndicatorService().average_calculation(city=city,indicator_id=indicator_id,year_filter=year_filter)
+    return jsonify({"message": "No filters selected"}), 404
 
 @app.route('/api/explore/', defaults={'check': ''})
 @app.route('/api/explore/<check>', methods=['GET', 'POST'])
@@ -380,3 +391,49 @@ def api_explore_temp():
                "options_list":options_list,
               "years":yrs}
     return jsonify(payload)
+
+class IndicatorService():
+
+    def __init__(self):
+        self.safe = 1
+
+    def df_query(self,city:str,year_filter,indicator_id:int):
+        query = db.session.query(CbRegion.name.label('re_name'), CbDataPoint.start_dt,
+                                 CbIndicator.name.label('ds_name'), CbDataPoint.value,
+                                 CbDataPoint.end_dt). \
+            filter(CbDataPoint.indicator_id == indicator_id).filter(CbDataPoint.indicator_id == CbIndicator.id). \
+            filter(CbDataPoint.region_id == CbRegion.id)
+        if city:
+            query = query.filter(CbRegion.name == city)
+        if year_filter:
+            years_db = db.session.query(CbYear.id).filter(CbYear.name.in_([int(yr) for yr in year_filter]))
+            query = query.filter(CbDataPoint.year_start_id.in_([yr[0] for yr in years_db]))
+        df = read_sql_query(query.statement, query.session.bind)
+
+        df = df.rename(columns={'name': 're_name', 'name.1': 'ds_name'})
+        if not query.first():
+            # No data found
+            return jsonify({})
+        if df['start_dt'].iloc[0]:
+            df["year"] = df["start_dt"].apply(lambda x: int(x.strftime('%Y')))
+            df["start_dt"] = df["year"]
+        elif df['end_dt'].iloc[0]:
+            df["year"] = df["end_dt"].apply(lambda x: int(x.strftime('%Y')))
+            df["start_dt"] = df["year"]
+            del df["end_dt"]
+        df = df.drop_duplicates()
+        return df
+
+    def average_calculation(self,city:str,year_filter,indicator_id:int):
+        df = self.df_query(city=city,indicator_id=indicator_id,year_filter=year_filter)
+        years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
+        total_average = df['value'].sum() / len(cities)  / len(years)
+        yearly_average_list =[]
+        for y in years:
+            year_data = df.loc[df['year'] == y]
+            yearly_average = year_data['value'].sum() / len(cities)
+            yearly_average_list.append({'year':str(y),'city_average':round(yearly_average,2)})
+        return jsonify({'indicators':datasets,
+                        'total_average':round(total_average,2),
+                        'yearly_averages':yearly_average_list,
+                        'cities':cities})
