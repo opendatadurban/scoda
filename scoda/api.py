@@ -395,14 +395,18 @@ class IndicatorService():
         if city:
             query = query.filter(CbRegion.name == city)
         if year_filter:
-            years_db = db.session.query(CbYear.id).filter(CbYear.name.in_([int(yr) for yr in year_filter]))
-            query = query.filter(CbDataPoint.year_start_id.in_([yr[0] for yr in years_db]))
+            try:
+                if not year_filter[0] == "all":
+                    years_db = db.session.query(CbYear.id).filter(CbYear.name.in_([int(yr) for yr in year_filter]))
+                    query = query.filter(CbDataPoint.year_start_id.in_([yr[0] for yr in years_db]))
+            except Exception as e:
+                print(e)
         df = read_sql_query(query.statement, query.session.bind)
 
         df = df.rename(columns={'name': 're_name', 'name.1': 'ds_name'})
         if not query.first():
             # No data found
-            return jsonify({})
+            return df
         if df['start_dt'].iloc[0]:
             df["year"] = df["start_dt"].apply(lambda x: int(x.strftime('%Y')))
             df["start_dt"] = df["year"]
@@ -415,6 +419,8 @@ class IndicatorService():
 
     def average_calculation(self,city:str,year_filter,indicator_id:int):
         df = self.df_query(city=city,indicator_id=indicator_id,year_filter=year_filter)
+        if df.empty:
+            return jsonify({"message": "No data found"}), 400
         if not year_filter:
             df = df.loc[df['year'] == df['year'].max()]
         years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
