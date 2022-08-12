@@ -37,8 +37,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids,dropdownName}) => {
             <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
           </div>: 
                       <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
-        }
-          
+        }   
         </div>
         <div className="chart">
           <Chart graphData={element}  title={chartTitles.yAxes[i]} dropdownName={dropdownName} stacked={false} />
