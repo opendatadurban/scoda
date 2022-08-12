@@ -33,8 +33,8 @@ export const ChartWrapper = ({ chartGroup, indicator_ids,dropdownName, toggle}) 
           <div className='heading'>{chartTitles.main[i]}</div>
           {dropdownName === "Household Income" ? 
           <div className="button_group">
-            <button className="number" onClick={toggle(true)}>Number</button>
-            <button className="percent" onClick={toggle(false)}>Percent</button>
+            <button className="number" onClick={()=>{toggle(true)}}>Number</button>
+            <button className="percent" onClick={()=>{toggle(false)}}>Percent</button>
             <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
           </div>: 
                       <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
