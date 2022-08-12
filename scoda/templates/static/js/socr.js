@@ -12,6 +12,7 @@ const CityFinances =  lazy(() => import('./templates/CityFinances'));
 const PeopleAndHousehold =  lazy(() => import('./templates/PeopleAndHousehold'));
 const Employment =  lazy(() => import('./templates/Employment'));
 const Dwellings =  lazy(() => import('./templates/Dwellings'));
+const HouseholdIncome =  lazy(() => import('./templates/HouseholdIncome'));
 
 const style = {
       position: 'absolute', left: '50%', top: '50%',
@@ -37,6 +38,7 @@ export default (
       <Route exact path='/people_household' component={PeopleAndHousehold} />
       <Route exact path='/employment' component={Employment} />
       <Route exact path='/dwellings' component={Dwellings} />
+      <Route exact path='/household_income' component={HouseholdIncome} />
       </Suspense>
     </HashRouter>
 );

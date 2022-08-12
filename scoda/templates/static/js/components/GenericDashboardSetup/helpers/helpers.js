@@ -24,6 +24,11 @@ export const phChartTitles = {
     "Total Population in Metro", "Population Density - Population Size per Square km ", "Net migration rate"]
 }
 
+export const hiChartTitles = {
+  yAxes: ["Households"],
+  main:["Main Source of Income"]
+}
+
 export const echartTitles = {
   yAxes: ["Households","Population","Number of People Employed","Percentage"],
   main:["Number of people employed and seeking employment within the 15–66 year age group","Number of Unemployed People","Informal Sector Employment","Unemployment Rate: Percentage of Unemployed Workers as a Proportion of the Total Labour Force"]

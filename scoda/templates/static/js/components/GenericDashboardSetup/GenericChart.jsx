@@ -6,6 +6,19 @@ import '../../../scss/components/PeopleHouseHold.scss'
 import { populateChartGroup } from './data/api'
 import { Modal, ModalBody, Spinner } from 'reactstrap'
 import Sidebar_left from '../Sidebar_left'
+import { indicator_text_box_data } from './data/data';
+
+const hhiDropdownNames = () => {
+
+  const options = indicator_text_box_data.map((item, index) => {
+    let shortName = item.number.name.split(": ")
+    let endpoints = item.endpoints
+    return { shortName: shortName[1], endpoints: endpoints,index:index }
+  })
+
+  return options
+
+}
 
 const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavContent,
   dropdownName, colors }) => {
@@ -13,8 +26,12 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
   const [chartGroup, setChartGroup] = useState([])
   const [originalValues, setOriginalValues] = useState([])
 
-  useEffect(() => {
+  const [selectedChart, setSelectedChart] = useState(0)
+  const [selectedName, setSelectedName] = useState(hhiDropdownNames()[selectedChart].shortName)
+  const [isNumber, toggle] = useState(true)
 
+  useEffect(() => {
+    if (dropdownName === "HouseHold Income") return
     populateChartGroup(
       setChartGroup,
       indicator_ids, // this array determines the number of charts generated on your grid
@@ -24,12 +41,35 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
     )
   }, [indicator_ids, minYear, maxYear, colors])
 
+  useEffect(() => {
+
+    if (dropdownName === "Household Income") {
+
+      setChartGroup([])
+
+      populateChartGroup(
+        setChartGroup,
+        [hhiDropdownNames()[selectedChart].endpoints[isNumber ? 0 : 1], "indicator text box"], // this array determines the number of charts generated on your grid
+        minYear, maxYear, //year min max
+        colors, //color presets
+        setOriginalValues
+      )
+      let chartDropDownNames = hhiDropdownNames().map(item=>{
+        return item.shortName
+      })
+      setSelectedChart(
+        chartDropDownNames.indexOf(selectedName)
+      )
+    }
+  }, [isNumber,selectedName])
+
+
   return (
     chartGroup.length === gridItems ? <div className='people_household_dashboard'>
 
       <Subnav name='State of Cities Reports' dropdownName={dropdownName} dropDownItem={subNavContent} buttonText="Download as PNG" />
       <Sidebar_left />
-      <div id='content'>
+      <div id='content' >
         <GenericStatsPanel
           originalValues={originalValues}
           dropName={dropdownName}
@@ -41,6 +81,11 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
           originalValues={originalValues}
           gridItems={gridItems}
           dropdownName={dropdownName}
+          secondDropDown={dropdownName === "Household Income" ? hhiDropdownNames() : null}
+          selectedName={selectedName}
+          setSelectedName={setSelectedName}
+          setSelectedChart={setSelectedChart}
+    
         />
       </div>
       <div className="spacer"></div>

@@ -13,7 +13,7 @@ const initialValues = (dropName) => {
             populationDensityAverage: [0, "Population Density"],
             heading: null
         } :
-        dropName === "Employment" ? {
+        dropName === "Employment" || dropName === "Household Income" ? {
             heading: "Proportion of households whose main source of income is:",
             salaries: [0, "Salaries/wages/commission"], businessIncome: [0, "Income from a business"], remittances: [0, "Remittances"], grants: [0, "Grants"], other: [0, "Other"],
             salariesAve: [0, "Salaries/wages/commission"], businessIncomeAve: [0, "Income from a business"], remittancesAve: [0, "Remittances"], grantsAve: [0, "Grants"], otherAve: [0, "Other"]
@@ -28,7 +28,6 @@ const initialValues = (dropName) => {
     return statsInit
 }
 
-
 export const GenericStatsPanel = ({ originalValues, dropName }) => {
 
     const [statsValues, setStats] = useState(initialValues(dropName))
@@ -37,7 +36,7 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
     useEffect(() => {
         if (dropName === "People and Households") {
             getStatTotals(originalValues, cityLabels, setStats, selected)
-        } else if (dropName === "Employment") {
+        } else if (dropName === "Employment" || dropName === "Household Income") {
             getEmploymentStatTotals(setStats, selected)
         }else if (dropName === "Dwellings") {
             getDwellingsStatTotals(originalValues,cityLabels,setStats,selected)
@@ -91,7 +90,7 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                     </div>
                 </div>
             </div>
-        </div> : dropName === "Employment" ?
+        </div> : dropName === "Employment" || dropName === "Household Income" ?
             <div className='stat_display_panel'>
 
                 <div className='first_panel'>

@@ -214,7 +214,7 @@ export const getEmploymentStatTotals = (setStats, selected) => {
 
 
             data.forEach((item, index) => {
-                console.log(item, " number of items")
+           
                 item.data.forEach((values, index) => {
 
                     let valueIndex = values.labels.indexOf(selected)

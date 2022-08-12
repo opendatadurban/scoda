@@ -38,6 +38,11 @@ const Home = () => {
             name: "Dwellings",
             href: "socr#/dwellings",
             active: false
+          },
+          {
+            name: "Household Income",
+            href: "socr#/household_income",
+            active: false
           }
         ]
       }
