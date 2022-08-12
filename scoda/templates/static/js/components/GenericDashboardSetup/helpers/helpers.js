@@ -11,6 +11,13 @@ export const secondaryColors = [
   'rgba(94, 201, 146, 1)'
 ]
 
+export const combinationColors = [
+  '#C8E6F6',
+  '#D9F0D3',
+  '#FFE79B',
+  '#F4BB8C'
+]
+
 export const phChartTitles = {
   yAxes: ["Number of Households", "Average Number of People", "Percentage", "Population", "Population Density", "Percentage"],
   main: ["Total Households", "Household Size - Average Number of People per Household", "Percentage of Population Change",
@@ -24,7 +31,7 @@ export const echartTitles = {
 
 export const dChartTitles = {
   yAxes: ["Percentage","Percentage","Percentage","Percentage","Percentage"],
-  main:["Formal Dwellings","Informal Dwellings","Traditional Dwellings","Other Dwellings"]
+  main:["Formal Dwellings","Informal Dwellings","Dwellings Comparison","Traditional Dwellings","Other Dwellings"]
 }
 
 //TODO: use select to alter cities labels within chart grid 
@@ -60,7 +67,7 @@ export const cityLabels = city => {
     case 'City of Joburg':
       return "JHB"
     case 'Ekurhuleni':
-      return "EKH"
+      return "EKU"
     case "Mangaung":
       return "MAN"
     case "Msunduzi":
@@ -70,7 +77,7 @@ export const cityLabels = city => {
     case "Tshwane":
       return "TSH"
     case "eThekwini":
-      return "ETK"
+      return "ETH"
     case 'Eastern Cape':
       return "EC";
     case 'Free State':
@@ -123,15 +130,17 @@ export const populateSelect = (chartData, setOriginal, cityLabels, setSelected) 
 
 
 
-export const tableData = (table) => {
+export const tableData = (table, cities) => {
 
   const years = ["2015","2016","2017","2018"]
-  const labels = ['Buffalo City', 'City of Cape Town', 'City of Joburg', 'Ekurhuleni', 'Mangaung', 'Msunduzi', 'Nelson Mandela Bay', 'Tshwane', 'eThekwini']
+  const labels = cities
   let newTable = []
   let byLabel = []
   let byYear = []
   let graphData = []
   let abbrev = labels.map( city=> cityLabels(city))
+
+  console.log(abbrev,"abbrec")
   
   table.forEach(element => {
     if(element[0] === "City" || (parseInt(element[1]) < 2015 || parseInt(element[1]) > 2018) ) return

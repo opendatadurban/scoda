@@ -250,3 +250,103 @@ export const getEmploymentStatTotals = (setStats, selected) => {
 
 
 }
+
+export const getDwellingsStatTotals = (originalValues, cityLabels, setStats, selected) => {
+
+    let formal = 0
+    let informal = 0
+    let traditional = 0
+    let other = 0
+    let formalTot = 0
+    let informalTot = 0
+    let traditionalTot = 0
+    let otherTot = 0
+
+    if (originalValues.length < 1) return
+    //Totals
+    originalValues[0].forEach((values, index) => {
+
+        let valueIndex = values.labels.indexOf(cityLabels(selected))
+
+        if (values.year !== "2018" && valueIndex !== -1) return
+
+        formal = values.values[valueIndex]
+    })
+
+    originalValues[1].forEach((values, index) => {
+
+        let valueIndex = values.labels.indexOf(cityLabels(selected))
+
+        if (values.year !== "2018" && valueIndex !== -1) return
+
+        informal = values.values[valueIndex]
+    })
+
+    originalValues[3].forEach((values, index) => {
+
+        let valueIndex = values.labels.indexOf(cityLabels(selected))
+
+        if (values.year !== "2018" && valueIndex !== -1) return
+
+        traditional = values.values[valueIndex]
+    })
+
+    originalValues[4].forEach((values, index) => {
+
+        let valueIndex = values.labels.indexOf(cityLabels(selected))
+
+        if (values.year !== "2018" && valueIndex !== -1) return
+
+        other = values.values[valueIndex]
+    })
+
+    //Averages
+    let thAverageCount = 0
+    let hsAverageCount = 0
+    let pdAverageCount = 0
+    let otherCount = 0
+
+    originalValues[0].forEach((values, index) => {
+
+        if (values.year !== "2018") return
+
+        thAverageCount++
+        formalTot = values.values.reduce((a, b) => a + b, 0) / values.values.length
+    })
+
+    originalValues[1].forEach((values, index) => {
+
+        if (values.year !== "2018") return
+        hsAverageCount++
+        informalTot = values.values.reduce((a, b) => a + b, 0) / values.values.length
+    })
+
+    originalValues[3].forEach((values, index) => {
+
+        if (values.year !== "2018") return
+
+        pdAverageCount++
+        traditionalTot = values.values.reduce((a, b) => a + b, 0) / values.values.length
+    })
+
+    originalValues[4].forEach((values, index) => {
+
+        if (values.year !== "2018") return
+
+        pdAverageCount++
+        otherTot = values.values.reduce((a, b) => a + b, 0) / values.values.length
+    })
+
+    setStats({
+
+        formal: [Math.round((formal + Number.EPSILON) * 100) / 100, "Formal Dwelling"],
+        informal: [Math.round((informal + Number.EPSILON) * 100) / 100, "Informal Dwelling"],
+        traditional: [Math.round((traditional + Number.EPSILON) * 100) / 100, "Traditional Dwelling"],
+        other: [Math.round((other + Number.EPSILON) * 100) / 100, "Other Dwelling"],
+        formalTot: [Math.round((formalTot + Number.EPSILON) * 100) / 100, "Formal Dwelling"],
+        informalTot: [Math.round((informalTot + Number.EPSILON) * 100) / 100, "Informal Dwelling"],
+        traditionalTot: [Math.round((traditionalTot + Number.EPSILON) * 100) / 100, "Traditional Dwelling"],
+        otherTot: [Math.round((otherTot + Number.EPSILON) * 100) / 100, "Other Dwelling"],
+    })
+
+}

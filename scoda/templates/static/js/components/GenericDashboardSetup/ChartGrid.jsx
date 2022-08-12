@@ -29,7 +29,7 @@ export const ChartGrid = ({ indicator_ids,
   }:{
 
   }
-  console.log(chartGroup,"chartGroup")
+
   return (
     <div className='chart_grid'>
       {

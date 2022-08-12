@@ -247,7 +247,7 @@ console.log(originalValues,"fallbackvalue")
         let optionChart = optionsTemp[cIndex]
 
         return chart.map((year, yIndex) => {
-//TODO: evaluate selection process further
+
           let optionYear = {
             ...year,
             labels: [...year.labels].concat(optionChart[yIndex].labels[0]),
@@ -263,10 +263,11 @@ console.log(originalValues,"fallbackvalue")
 
         let newArr = prev
 
+        //dictates number of charts effected by add operation
         newArr[0] = optionState[0]
         newArr[1] = optionState[1]
         newArr[2] = optionState[2]
-       // newArr[3] = optionState[3]
+        newArr[3] = optionState[3]
   
 
         return [...newArr]
@@ -337,7 +338,7 @@ export const eRemoveItem = (clickIndex,selected,setSelected,setChartGroup,setOpt
             labels: [...year.labels].concat(optionChart[yIndex].labels[0]),
             values: [...year.values].concat(optionChart[yIndex].values[0])
           }
-          console.log(optionYear,"setOptions")
+        
           return optionYear
         })
       }) : optionsTemp
@@ -356,7 +357,7 @@ export const eRemoveItem = (clickIndex,selected,setSelected,setChartGroup,setOpt
         return chart.map((year, yIndex) => {
 
           let selectedYear = selectedChart[yIndex]
-          console.log(selectedYear,"setSelected")
+
           return selectedYear
         })
       })
@@ -365,11 +366,11 @@ export const eRemoveItem = (clickIndex,selected,setSelected,setChartGroup,setOpt
 
         let newArr = prev
 
+        //dictates number of charts effected by remove operation
         newArr[0] = selectedState[0]
         newArr[1] = selectedState[1]
         newArr[2] = selectedState[2]
-       // newArr[3] = selectedState[3]
-    
+        newArr[3] = selectedState[3]
 
         return [...newArr]
       })
@@ -476,9 +477,9 @@ export const eClearAll = (originalValues,setSelected,setOptions) => {
         newArr[0] = optionState[0]
         newArr[1] = optionState[1]
         newArr[2] = optionState[2]
-       // newArr[3] = optionState[3]
+        newArr[3] = optionState[3]
+        newArr[4] = optionState[3]
   
-
         return [...newArr]
       })
 
@@ -578,7 +579,8 @@ export const dRemoveItem = (clickIndex,selected,setSelected,setChartGroup,setOpt
         newArr[0] = selectedState[0]
         newArr[1] = selectedState[1]
         newArr[2] = selectedState[2]
-       // newArr[3] = selectedState[3]
+        newArr[3] = selectedState[3]
+        newArr[4] = selectedState[4]
     
 
         return [...newArr]

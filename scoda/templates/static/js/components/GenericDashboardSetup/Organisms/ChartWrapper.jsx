@@ -2,7 +2,6 @@ import React from "react"
 import { Chart } from '../Chart'
 import '../../../../scss/components/chart/ChartHeader.scss'
 import { phChartTitles,echartTitles,dChartTitles } from "../helpers/helpers"
-import axios from "axios"
 
 export const ChartWrapper = ({ chartGroup, indicator_ids,dropdownName}) => {
 
@@ -30,9 +29,9 @@ export const ChartWrapper = ({ chartGroup, indicator_ids,dropdownName}) => {
         </div>
       </div>
       )
-    } else if( indicator_ids[i] === 'manual' ) {
+    } else if( indicator_ids[i] === 'n1' ) {
       
-      items.push( <div className='chart_wrapper' key={"manual"} >
+      items.push( <div className='chart_wrapper' key={"n1"} >
         <div className='heading_wrapper'>
           <div className='heading'>{chartTitles.main[i]}</div>
           <a className='link' href={'/scoda/toolkit#/codebook-explorer/1'} target='_blank' >Raw Data</a>
@@ -62,6 +61,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids,dropdownName}) => {
         </div>
       </div>)
     }  else if(indicator_ids[i] === "combination"){
+  
       items.push( <div className='chart_wrapper' key={i.toString()} >
         <div className='heading_wrapper'>
           <div className='heading'>{chartTitles.main[i]}</div>

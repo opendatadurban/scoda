@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { MiniSelect } from './MiniSelect';
 import { cityLabels } from '../helpers/helpers';
-import { getStatTotals, getEmploymentStatTotals } from '../helpers/statsBar';
+import { getStatTotals, getEmploymentStatTotals,getDwellingsStatTotals } from '../helpers/statsBar';
 
 const initialValues = (dropName) => {
 
@@ -17,7 +17,13 @@ const initialValues = (dropName) => {
             heading: "Proportion of households whose main source of income is:",
             salaries: [0, "Salaries/wages/commission"], businessIncome: [0, "Income from a business"], remittances: [0, "Remittances"], grants: [0, "Grants"], other: [0, "Other"],
             salariesAve: [0, "Salaries/wages/commission"], businessIncomeAve: [0, "Income from a business"], remittancesAve: [0, "Remittances"], grantsAve: [0, "Grants"], otherAve: [0, "Other"]
-        } : { }
+        } :
+        dropName === "Dwellings" ? {
+            formal: [0, "Formal Dwelling"], informal: [0, "Informal Dwelling"], traditional: [0, "Traditional Dwelling"], other: [0, "Other Dwelling"], 
+            formalTot: [0, "Formal Dwelling"], informalTot: [0, "Informal Dwelling"], traditionalTot: [0, "Traditional Dwelling"], otherTot: [0, "Other Dwelling"], 
+
+        } :
+        { }
 
     return statsInit
 }
@@ -33,10 +39,12 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
             getStatTotals(originalValues, cityLabels, setStats, selected)
         } else if (dropName === "Employment") {
             getEmploymentStatTotals(setStats, selected)
+        }else if (dropName === "Dwellings") {
+            getDwellingsStatTotals(originalValues,cityLabels,setStats,selected)
         }
 
     }, [selected])
-    console.log(statsValues, "stats values")
+
     return (dropName === "People and Households" ?
         <div className='stat_display_panel'>
 
@@ -141,6 +149,58 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                         </div>
                     </div>
                 </div>
-            </div> : ""
+            </div> : dropName === "Dwellings" ?
+            <div className='stat_display_panel'>
+
+            <div className='first_panel'>
+
+                <p className='catagory-name '>Household Overview:  <span>City Averages 2018</span></p>
+                <div className='row'>
+                    <div className='stat'>
+                        <h1>{statsValues.formalTot[0]}</h1>
+                        <p > {statsValues.formalTot[1]}</p>
+                    </div>
+                    <div className='stat'>
+                        <h1>{statsValues.informalTot[0]}</h1>
+                        <p>{statsValues.informalTot[1]}</p>
+                    </div>
+                    <div className='stat'>
+                        <h1>{statsValues.traditionalTot[0]}</h1>
+                        <p>{statsValues.traditionalTot[1]}</p>
+                    </div>
+                    <div className='stat'>
+                        <h1>{statsValues.otherTot[0]}</h1>
+                        <p>{statsValues.otherTot[1]}</p>
+                    </div>
+                    
+                </div>
+            </div>
+            <div className='second_panel'>
+                <div className='top'>
+                    <p className='catagory-name'> Dwelling Type: <span>Municipality Focus 2018</span></p>
+
+                    <MiniSelect names={['Buffalo City', 'City of Cape Town','Ekurhuleni', 'eThekwini' ,'City of Joburg' , 'Mangaung','Nelson Mandela Bay',"Tshwane"]} setSelected={setSelected} selected={selected} />
+                </div>
+                <div className='bottom'>
+                    <div className='stat'>
+                        <h1>{statsValues.formal[0]}</h1>
+                        <p > {statsValues.formal[1]}</p>
+                    </div>
+                    <div className='stat'>
+                        <h1>{statsValues.informal[0]}</h1>
+                        <p>{statsValues.informal[1]}</p>
+                    </div>
+                    <div className='stat'>
+                        <h1>{statsValues.traditional[0]}</h1>
+                        <p>{statsValues.traditional[1]}</p>
+                    </div>
+                    <div className='stat'>
+                        <h1>{statsValues.other[0]}</h1>
+                        <p>{statsValues.other[1]}</p>
+                    </div>
+                </div>
+            </div>
+        </div> : ""
+
     )
 }

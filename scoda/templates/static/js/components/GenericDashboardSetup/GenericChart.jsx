@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Subnav from '../Subnav'
 import { ChartGrid } from './ChartGrid'
-import { peopleHouseholdColors, secondaryColors } from './helpers/helpers'
 import { GenericStatsPanel } from './Organisms/GenericStatsPanel'
 import '../../../scss/components/PeopleHouseHold.scss'
 import { populateChartGroup } from './data/api'
 import { Modal, ModalBody, Spinner } from 'reactstrap'
 import Sidebar_left from '../Sidebar_left'
 
-const PeopleHousehold = ({ indicator_ids, minYear, maxYear, gridItems, subNavContent,
+const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavContent,
   dropdownName, colors }) => {
 
   const [chartGroup, setChartGroup] = useState([])
@@ -21,8 +20,7 @@ const PeopleHousehold = ({ indicator_ids, minYear, maxYear, gridItems, subNavCon
       indicator_ids, // this array determines the number of charts generated on your grid
       minYear, maxYear, //year min max
       colors, //color presets
-      setOriginalValues,
-      gridItems
+      setOriginalValues
     )
   }, [indicator_ids, minYear, maxYear, colors])
 
@@ -64,4 +62,4 @@ const PeopleHousehold = ({ indicator_ids, minYear, maxYear, gridItems, subNavCon
       </Modal>
   )
 }
-export default PeopleHousehold;
+export default GenericChart;

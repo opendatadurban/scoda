@@ -17,8 +17,8 @@ export const Select = ({ chartData,originalValues, selected, options,
         let filtered = []
 
         chartData.forEach((chart, index) => {
-
-            if (index > 4) return
+           
+            if (index > 4 ) return
             filtered.push(chart)
         })
 

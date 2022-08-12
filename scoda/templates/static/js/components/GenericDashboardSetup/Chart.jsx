@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { BarChartGeneric } from '../BarChartGeneric';
 import { cityLabels } from './helpers/helpers';
 
-export const Chart = ({ graphData, title,dropdownName,stacked }) => {
+export const Chart = ({ graphData, title, dropdownName, stacked }) => {
 
     const options = {
         responsive: true,
         maintainAspectRatio: true,
-        
+
         legend: {
             display: true,
             labels: {
@@ -24,13 +24,13 @@ export const Chart = ({ graphData, title,dropdownName,stacked }) => {
         },
         scales: {
             xAxes: [{
-                stacked:stacked,
+                stacked: stacked,
                 gridLines: {
                     display: false
                 },
                 ticks: {
                     fontFamily: "Montserrat", fontSize: 8, fontStyle: '600',
-                
+
                 },
                 gridLines: {
                     display: false,
@@ -42,35 +42,43 @@ export const Chart = ({ graphData, title,dropdownName,stacked }) => {
                     display: true,
                     labelString: title,
                     fontFamily: "Montserrat",
-                    fontSize:8,
+                    fontSize: 8,
                     fontStyle: '600',
-                    fontColor:"rgba(74, 74, 74, 1)"
+                    fontColor: "rgba(74, 74, 74, 1)"
                 },
                 gridLines: {
                     display: false
                 },
-                ticks: { fontFamily: "Montserrat", fontSize: 8,
-                callback: function(value, index, values) {
-                    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-                }     
-            },
+                ticks: stacked ? {
+                    fontFamily: "Montserrat", fontSize: 8,
+                    min: 0,
+                    max: 100,
+                    callback: function (value) { return value + "%" }
+                    }
+                    :
+                    {
+                        fontFamily: "Montserrat", fontSize: 8,
+                        callback: function (value, index, values) {
+                            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+                        }
+                    },
             }],
         },
         tooltips: {
             mode: 'index',
             intercept: false,
             callbacks: {
-              label: function (tooltipItem, data) {
-                var label = data.datasets[tooltipItem.datasetIndex].label || '';
-    
-                if (label) {
-                  label += ': ';
+                label: function (tooltipItem, data) {
+                    var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                    if (label) {
+                        label += ': ';
+                    }
+                    label += isNaN(tooltipItem.yLabel) ? '0' : Math.round(tooltipItem.yLabel * 100) / 100;
+                    return label;
                 }
-                label += isNaN(tooltipItem.yLabel) ? '0' : Math.round(tooltipItem.yLabel * 100) / 100;
-                return label;
-              }
             }
-          },
+        },
     };
 
     const data = {
@@ -86,7 +94,7 @@ export const Chart = ({ graphData, title,dropdownName,stacked }) => {
 
     return (
         <>
-            <BarChartGeneric options={options} data={data} height={dropdownName === "Employment"? 170 : 210} />
+            <BarChartGeneric options={options} data={data} height={dropdownName === "Employment" ? 170 : 210} />
         </>
     )
 }
