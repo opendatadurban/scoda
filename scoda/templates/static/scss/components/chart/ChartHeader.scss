@@ -72,13 +72,12 @@
             }
         }
 
-
     }
 
     .text {
 
         .headings {
-            
+
             display: flex;
             flex-direction: row;
             gap: 4vw;
@@ -90,8 +89,7 @@
                 font-size: 10px;
                 line-height: 12px;
                 text-transform: uppercase;
-                color: #979797;
-                
+                color: #979797;       
             }
             .code{
                 width: 84px;

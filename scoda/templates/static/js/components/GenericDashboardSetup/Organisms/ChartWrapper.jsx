@@ -5,7 +5,8 @@ import { phChartTitles,echartTitles,dChartTitles,hiChartTitles } from "../helper
 import { indicator_text_box_data } from "../data/data"
 import { Button } from "reactstrap"
 
-export const ChartWrapper = ({ chartGroup, indicator_ids,dropdownName}) => {
+export const ChartWrapper = ({ chartGroup, indicator_ids,dropdownName, toggle}) => {
+
   const [type,setType] = useState("number")
   const [textIndex,setTextIndex] = useState(0)
   const [selectedCode,setCode] = useState(indicator_text_box_data[textIndex][type].code)
@@ -32,8 +33,8 @@ export const ChartWrapper = ({ chartGroup, indicator_ids,dropdownName}) => {
           <div className='heading'>{chartTitles.main[i]}</div>
           {dropdownName === "Household Income" ? 
           <div className="button_group">
-            <button className="number">Number</button>
-            <button className="percent">Percent</button>
+            <button className="number" onClick={toggle(true)}>Number</button>
+            <button className="percent" onClick={toggle(false)}>Percent</button>
             <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
           </div>: 
                       <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>

@@ -44,9 +44,6 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
   useEffect(() => {
 
     if (dropdownName === "Household Income") {
-
-      setChartGroup([])
-
       populateChartGroup(
         setChartGroup,
         [hhiDropdownNames()[selectedChart].endpoints[isNumber ? 0 : 1], "indicator text box"], // this array determines the number of charts generated on your grid
@@ -85,6 +82,7 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
           selectedName={selectedName}
           setSelectedName={setSelectedName}
           setSelectedChart={setSelectedChart}
+          toggle={toggle}
     
         />
       </div>

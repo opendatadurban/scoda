@@ -14,7 +14,7 @@ export const ChartGrid = ({ indicator_ids,
   secondDropDown,
   selectedName,
   setSelectedName,
-  setSelectedChart
+toggle
 
   
 }) => {
@@ -75,7 +75,8 @@ export const ChartGrid = ({ indicator_ids,
               <ChartWrapper
                 chartGroup={chartGroup}
                 indicator_ids={indicator_ids}
-                dropdownName={dropdownName} />
+                dropdownName={dropdownName}
+                toggle={toggle} />
             }
           </div>
         </div>
