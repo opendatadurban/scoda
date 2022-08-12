@@ -3,6 +3,7 @@ import { Chart } from '../Chart'
 import '../../../../scss/components/chart/ChartHeader.scss'
 import { phChartTitles,echartTitles,dChartTitles,hiChartTitles } from "../helpers/helpers"
 import { indicator_text_box_data } from "../data/data"
+import { Button } from "reactstrap"
 
 export const ChartWrapper = ({ chartGroup, indicator_ids,dropdownName}) => {
   const [type,setType] = useState("number")
@@ -29,7 +30,15 @@ export const ChartWrapper = ({ chartGroup, indicator_ids,dropdownName}) => {
       items.push(<div className='chart_wrapper' key={i.toString()} >
         <div className='heading_wrapper'>
           <div className='heading'>{chartTitles.main[i]}</div>
-          <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
+          {dropdownName === "Household Income" ? 
+          <div className="button_group">
+            <button className="number">Number</button>
+            <button className="percent">Percent</button>
+            <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
+          </div>: 
+                      <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
+        }
+          
         </div>
         <div className="chart">
           <Chart graphData={element}  title={chartTitles.yAxes[i]} dropdownName={dropdownName} stacked={false} />

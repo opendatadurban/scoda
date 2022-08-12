@@ -1,11 +1,12 @@
 .chart_wrapper {
-    
+
     .heading_wrapper {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
         padding: 0 0 0 0;
+
         .heading {
             padding: 0;
             margin: 0;
@@ -15,6 +16,38 @@
             font-size: 12px !important;
             line-height: 15px;
             color: #2F3442;
+        }
+
+        .button_group {
+            button {
+                border: 1px solid #B0B4B9;
+                ;
+            }
+
+            .number {
+                border-radius: 11px 0 0 11px;
+                background: #646B75;
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 10px;
+                line-height: 14px;
+                text-align: center;
+                color: #FFFFFF;
+                outline: none;
+            }
+            .percent{
+                border-radius: 0 11px 11px 0;
+                background: white;
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 10px;
+                line-height: 14px;
+                text-align: center;
+                color: #646B75;
+                outline: none;
+            }
         }
 
         .link {
@@ -30,7 +63,8 @@
             border-radius: 11px;
             padding: 0 5px 0 5px;
             width: 70px;
-            &:hover{
+
+            &:hover {
                 text-decoration: none;
             }
         }
