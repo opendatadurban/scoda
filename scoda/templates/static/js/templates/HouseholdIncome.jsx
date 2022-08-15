@@ -1,11 +1,14 @@
-import React,{lazy,useContext} from 'react';
+import React,{lazy,useContext,useState} from 'react';
 import { peopleHouseholdColors } from '../components/GenericDashboardSetup/helpers/helpers';
+import { SelectContext } from '../context';
 
 const Footer =  lazy(() => import('../components/Footer'));
 const Navigation_scoda =  lazy(() => import('../components/Navigation_scoda'));
 const HouseholdIncome = lazy(() => import('../components/GenericDashboardSetup/GenericChart'));
 
 const Home = () => {
+
+  const [selectOpen, setSelect] = useState(false)
 
     const subNavContent = {
         dropdownMenu: [
@@ -35,15 +38,24 @@ const Home = () => {
             active: false
           },
           {
+            name: "Dwellings",
+            href: "socr#/dwellings",
+            active: false
+          },
+          {
             name: "Household Income",
             href: "socr#/household_income",
             active: true
-          },
+          }
         ]
       }
 
     return(
-        <div className="socr--home" style={{backgroundColor:"white",overflowX:'hidden'}}>
+         <SelectContext.Provider value={{ selectOpen, setSelect }}>
+        <div className="socr--home" style={{backgroundColor:"white",overflowX:'hidden'}}
+        onClick={() => {
+          if (selectOpen) { setSelect(false) }
+        }}>
             <Navigation_scoda logoHide={false} box_shadow={true} />
             <HouseholdIncome 
             indicator_ids= {[901,"indicator text box"]}
@@ -51,11 +63,11 @@ const Home = () => {
             maxYear={2018}
             subNavContent={subNavContent}
             gridItems={2}
-            dropdownName={subNavContent.dropdownMenu[5].name}
+            dropdownName={subNavContent.dropdownMenu[6].name}
             colors={peopleHouseholdColors}
             />
             <Footer />
-        </div>
+        </div> </SelectContext.Provider>
     )
 };
 

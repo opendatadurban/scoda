@@ -9,6 +9,8 @@ export const Select = ({ chartData,originalValues, selected, options,
 
     const {selectOpen, setSelect} = useContext(SelectContext)
 
+    console.log(selectOpen,"select open")
+
     useEffect(() => {
 
         selectedOptions()
