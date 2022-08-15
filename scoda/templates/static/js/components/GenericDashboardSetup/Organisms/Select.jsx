@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useContext } from 'react'
 import { XIcon, Line, ChevronDown } from '../../../../svg_components/SelectIcons'
 import '../../../../scss/components/Select.scss'
+import { SelectContext } from '../../../context'
 
 export const Select = ({ chartData,originalValues, selected, options,
      setSelected,setChartGroup,setOptions,
       removeItem, addItem, clearAll,chartDropName }) => {
 
-    const [show, visibility] = useState(false)
+    const {selectOpen, setSelect} = useContext(SelectContext)
 
     useEffect(() => {
 
@@ -41,7 +42,7 @@ export const Select = ({ chartData,originalValues, selected, options,
     }
 
     return (
-        <div className='custom_select' onClick={()=> visibility(!show)}>
+        <div className='custom_select' onClick={()=> setSelect(!selectOpen)}>
             {
                 selected.length > 0 ? selected[0][0].labels.map((tag, index) => {
 
@@ -53,7 +54,7 @@ export const Select = ({ chartData,originalValues, selected, options,
                     </p>
                 }) : ""       
             }
-            <div className={"dropdownbox " + `${show ? "show" : ""}`} >
+            <div className={"dropdownbox " + `${selectOpen ? "show" : ""}`} >
                 {
                     options.length > 0 ? options[0][0].labels.map((city, index) => {
                    
