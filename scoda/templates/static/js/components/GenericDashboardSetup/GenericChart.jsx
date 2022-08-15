@@ -17,7 +17,6 @@ const hhiDropdownNames = () => {
   })
 
   return options
-
 }
 
 const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavContent,
@@ -60,6 +59,10 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
     }
   }, [isNumber,selectedName])
 
+  const selectedDropDownChart = hhiDropdownNames().map(item=>{
+    return item.shortName
+  }).indexOf(selectedName)
+
 
   return (
     chartGroup.length === gridItems ? <div className='people_household_dashboard'>
@@ -83,6 +86,8 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
           setSelectedName={setSelectedName}
           setSelectedChart={setSelectedChart}
           toggle={toggle}
+          isNumber= {isNumber}
+          selectedDropDownChart = {selectedDropDownChart}
     
         />
       </div>

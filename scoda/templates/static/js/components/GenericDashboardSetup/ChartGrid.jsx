@@ -1,22 +1,25 @@
-import React, {useState } from 'react'
-import { phAddItem,phRemoveItem,phClearAll,
-eAddItem,eRemoveItem,eClearAll,
- dAddItem,dClearAll,dRemoveItem} from './helpers/citySelect';
+import React, { useState } from 'react'
+import {
+  phAddItem, phRemoveItem, phClearAll,
+  eAddItem, eRemoveItem, eClearAll,
+  dAddItem, dClearAll, dRemoveItem,
+  hiAddItem,hiRemoveItem,hiClearAll
+} from './helpers/citySelect';
 import { Select } from './Organisms/Select';
 import { ChartWrapper } from './Organisms/ChartWrapper';
 import { MiniSelect } from './Organisms/MiniSelect';
 
 export const ChartGrid = ({ indicator_ids,
   chartGroup,
-   setChartGroup,
-   originalValues,
-  dropdownName, 
+  setChartGroup,
+  originalValues,
+  dropdownName,
   secondDropDown,
   selectedName,
   setSelectedName,
-toggle
-
-  
+  toggle,
+  isNumber,
+  selectedDropDownChart,
 }) => {
 
   const [selected, setSelected] = useState([])
@@ -37,15 +40,20 @@ toggle
     removeItem: eRemoveItem,
     addItem: eAddItem,
     clearAll: eClearAll,
-  } : dropdownName === "Dwellings"?{
+  } : dropdownName === "Dwellings" ? {
     removeItem: dRemoveItem,
     addItem: dAddItem,
     clearAll: dClearAll,
-  }:{
+  } :dropdownName === "Household Income" ? {
+    removeItem: hiRemoveItem,
+    addItem: hiAddItem,
+    clearAll: hiClearAll,
+  } : {
 
   }
-  
+
   const hhiDash = dropdownName === "Household Income"
+  console.log(isNumber,"isnUmber")
 
   return (
     <div className='chart_grid'>
@@ -62,21 +70,24 @@ toggle
               setSelected={setSelected}
               removeItem={selectControls.removeItem}
               addItem={selectControls.addItem}
-              clearAll={selectControls.clearAll}    
+              clearAll={selectControls.clearAll}
+              chartDropName={dropdownName}
             />
             {
-              dropdownName === "Household Income" ? <MiniSelect names={secondDropDown} selected={selectedName} setSelected={setSelectedName} textSelect={true}/> : ""
+              dropdownName === "Household Income" ? <MiniSelect names={secondDropDown} selected={selectedName} setSelected={setSelectedName} textSelect={true} /> : ""
             }
           </div>
 
-          <div className={(dropdownName==="People and Households") || (dropdownName === "Dwellings")? "grid-container":
-           (dropdownName === "Household Income")? "grid-2-text" : "grid-container-4"}>
+          <div className={(dropdownName === "People and Households") || (dropdownName === "Dwellings") ? "grid-container" :
+            (dropdownName === "Household Income") ? "grid-2-text" : "grid-container-4"}>
             {
               <ChartWrapper
                 chartGroup={chartGroup}
                 indicator_ids={indicator_ids}
                 dropdownName={dropdownName}
-                toggle={toggle} />
+                toggle={toggle}
+                isNumber={isNumber}
+                selectedDropDownChart={selectedDropDownChart} />
             }
           </div>
         </div>

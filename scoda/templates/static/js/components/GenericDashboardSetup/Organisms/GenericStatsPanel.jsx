@@ -96,6 +96,7 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                 <div className='first_panel'>
 
                     <p className='catagory-name '>Household Overview:  <span>City Averages 2018</span></p>
+                    <p className="heading">{statsValues.heading}</p>
                     <div className='row'>
                         <div className='stat'>
                             <h1>{statsValues.salariesAve[0]}</h1>
@@ -125,6 +126,7 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
 
                         <MiniSelect names={['Buffalo City', 'City of Cape Town', 'City of Joburg', 'Ekurhuleni', 'eThekwini', 'Mangaung', 'Msunduzi', 'Nelson Mandela Bay', 'Tshwane']} setSelected={setSelected} selected={selected} />
                     </div>
+                    <p className="heading">{statsValues.heading}</p>
                     <div className='bottom'>
                         <div className='stat'>
                             <h1>{statsValues.salaries[0]}</h1>

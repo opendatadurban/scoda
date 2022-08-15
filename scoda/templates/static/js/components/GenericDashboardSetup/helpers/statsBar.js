@@ -238,7 +238,7 @@ export const getEmploymentStatTotals = (setStats, selected) => {
                     , "Other"]
                 newArr.otherAve = [
                     Math.round(((total) + Number.EPSILON) * 100) / 100
-                    , "other"
+                    , "Other"
                 ]
                 return {...newArr}
             })

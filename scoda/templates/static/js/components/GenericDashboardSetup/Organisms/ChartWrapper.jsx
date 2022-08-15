@@ -1,16 +1,19 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Chart } from '../Chart'
 import '../../../../scss/components/chart/ChartHeader.scss'
 import { phChartTitles,echartTitles,dChartTitles,hiChartTitles } from "../helpers/helpers"
 import { indicator_text_box_data } from "../data/data"
-import { Button } from "reactstrap"
 
-export const ChartWrapper = ({ chartGroup, indicator_ids,dropdownName, toggle}) => {
+export const ChartWrapper = ({ chartGroup, indicator_ids,dropdownName, toggle,isNumber,selectedDropDownChart}) => {
 
-  const [type,setType] = useState("number")
-  const [textIndex,setTextIndex] = useState(0)
-  const [selectedCode,setCode] = useState(indicator_text_box_data[textIndex][type].code)
-  const [selectedName,setName] = useState(indicator_text_box_data[textIndex][type].name)
+
+  const [selectedCode,setCode] = useState(indicator_text_box_data[0]["number"].code)
+  const [selectedName,setName] = useState(indicator_text_box_data[0]["number"].name)
+  
+  useEffect(()=>{
+    setCode(indicator_text_box_data[selectedDropDownChart][isNumber?"number":"percent"].code)
+    setName(indicator_text_box_data[selectedDropDownChart][isNumber?"number":"percent"].name)
+  },[isNumber,selectedDropDownChart])
 
   let items = []
 

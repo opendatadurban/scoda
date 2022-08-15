@@ -4,7 +4,7 @@ import '../../../../scss/components/Select.scss'
 
 export const Select = ({ chartData,originalValues, selected, options,
      setSelected,setChartGroup,setOptions,
-      removeItem, addItem, clearAll }) => {
+      removeItem, addItem, clearAll,chartDropName }) => {
 
     const [show, visibility] = useState(false)
 
@@ -15,34 +15,47 @@ export const Select = ({ chartData,originalValues, selected, options,
 
     const selectedOptions = () => { 
         let filtered = []
+        
 
-        chartData.forEach((chart, index) => {
+        if(chartDropName === "People and Households"){
+            chartData.forEach((chart, index) => {
            
-            if (index > 4 ) return
-            filtered.push(chart)
-        })
-
+                if (index > 4 ) return
+                filtered.push(chart)
+            })
+        }else if(chartDropName === "People and Households"){
+            chartData.forEach((chart, index) => {
+           
+                if (index > 0 ) return
+                filtered.push(chart)
+            })
+        }else{
+            chartData.forEach((chart, index) => {
+           
+                filtered.push(chart)
+            })
+        }
+        
+     
         setSelected(filtered)
     }
 
     return (
         <div className='custom_select' onClick={()=> visibility(!show)}>
             {
-                selected.length > 1 ? selected[0][0].labels.map((tag, index) => {
+                selected.length > 0 ? selected[0][0].labels.map((tag, index) => {
 
                     return <p key={index.toString()} className="tag">
                         {tag}
 
-                        <span>
                         <XIcon cancel={() => { removeItem(index,selected,setSelected,setChartGroup,setOptions) }} />
-                        </span>
+                       
                     </p>
-                }) : ""
-                    
+                }) : ""       
             }
             <div className={"dropdownbox " + `${show ? "show" : ""}`} >
                 {
-                    options.length > 1 ? options[0][0].labels.map((city, index) => {
+                    options.length > 0 ? options[0][0].labels.map((city, index) => {
                    
                         return <p key={index.toString()} className="drop_content" onClick={() => {
                             addItem(index,options,setSelected,setChartGroup,setOptions)

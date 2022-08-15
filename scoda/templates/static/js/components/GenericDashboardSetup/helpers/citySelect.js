@@ -630,3 +630,206 @@ export const dClearAll = (originalValues,setSelected,setOptions) => {
       return filled
     })
   }
+
+  export const hiAddItem = (clickIndex,options,setSelected,setChartGroup,setOptions) => {
+
+    let optionsTemp = []
+    let selectTemp = []
+
+    options.forEach((chart, cIndex) => {
+      let optionsChart = []
+      let selectChart = []
+
+      chart.forEach((year, yIndex) => {
+
+        let optionYear = {
+          ...year,
+          labels: year.labels.filter(clicked => clicked === year.labels[clickIndex]),
+          values: year.values.filter(clicked => clicked === year.values[clickIndex])
+        }
+        let selectYear = {
+          ...year,
+          labels: year.labels.filter(clicked => clicked !== year.labels[clickIndex]),
+          values: year.values.filter(clicked => clicked !== year.values[clickIndex])
+        }
+        optionsChart.push(optionYear)
+        selectChart.push(selectYear)
+      })
+
+      optionsTemp.push(optionsChart)
+      selectTemp.push(selectChart)
+    })
+
+    setSelected(prev => {
+
+      let newArr = prev
+
+      let optionState = newArr.length > 1 ? newArr.map((chart, cIndex) => {
+
+        let optionChart = optionsTemp[cIndex]
+
+        return chart.map((year, yIndex) => {
+//TODO: evaluate selection process further
+          let optionYear = {
+            ...year,
+            labels: [...year.labels].concat(optionChart[yIndex].labels[0]),
+            values: [...year.values].concat(optionChart[yIndex].values[0])
+          }
+
+          return optionYear
+        })
+      }) : optionsTemp
+
+
+      setChartGroup(prev => {
+
+        let newArr = prev
+
+        newArr[0] = optionState[0]
+  
+        return [...newArr]
+      })
+
+      return [...optionState]
+    })
+
+    setOptions(prev => {
+
+      let newArr = prev
+
+      let selectedState = newArr.map((chart, cIndex) => {
+
+        let selectedChart = selectTemp[cIndex]
+
+        return chart.map((year, yIndex) => {
+
+          let selectedYear = selectedChart[yIndex]
+          return selectedYear
+        })
+      })
+
+      return [...selectedState]
+    })
+  }
+
+  export const hiRemoveItem = (clickIndex,selected,setSelected,setChartGroup,setOptions) => {
+    //set labels and chart data
+    let optionsTemp = []
+    let selectTemp = []
+
+    selected.forEach((chart, cIndex) => {
+      let optionsChart = []
+      let selectChart = []
+      chart.forEach((year, yIndex) => {
+
+        let optionYear = {
+          ...year,
+          labels: year.labels.filter(clicked => clicked === year.labels[clickIndex]),
+          values: year.values.filter(clicked => clicked === year.values[clickIndex])
+        }
+        let selectYear = {
+          ...year,
+          labels: year.labels.filter(clicked => clicked !== year.labels[clickIndex]),
+          values: year.values.filter(clicked => clicked !== year.values[clickIndex])
+        }
+        optionsChart.push(optionYear)
+        selectChart.push(selectYear)
+      })
+
+      optionsTemp.push(optionsChart)
+      selectTemp.push(selectChart)
+    })
+
+    setOptions(prev => {
+
+      let newArr = prev
+
+      let optionState = newArr.length > 1 ? newArr.map((chart, cIndex) => {
+
+        let optionChart = optionsTemp[cIndex]
+
+        return chart.map((year, yIndex) => {
+
+          let optionYear = {
+            ...year,
+            labels: [...year.labels].concat(optionChart[yIndex].labels[0]),
+            values: [...year.values].concat(optionChart[yIndex].values[0])
+          }
+          console.log(optionYear,"setOptions")
+          return optionYear
+        })
+      }) : optionsTemp
+
+      return [...optionState]
+    })
+
+    setSelected(prev => {
+
+      let newArr = prev
+
+      let selectedState = newArr.map((chart, cIndex) => {
+
+        let selectedChart = selectTemp[cIndex]
+
+        return chart.map((year, yIndex) => {
+
+          let selectedYear = selectedChart[yIndex]
+          console.log(selectedYear,"setSelected")
+          return selectedYear
+        })
+      })
+
+      setChartGroup(prev => {
+
+        let newArr = prev
+
+        newArr[0] = selectedState[0]
+
+        return [...newArr]
+      })
+
+      return [...selectedState]
+    })
+
+
+  }
+
+  export const hiClearAll = (originalValues,setSelected,setOptions) => {
+
+    setSelected(prev => {
+      
+      let newArr = prev
+
+      let cleared = newArr.map((chart) => {
+        return chart.map((year) => {
+          year.labels = []
+          year.values = []
+          return year
+        })
+      })
+
+      return cleared
+    })
+
+    setOptions(prev => {
+     
+      let newArr = prev
+
+      let fallbackValue = JSON.parse(JSON.stringify(originalValues))
+
+      let filled = newArr.length > 1 ? newArr.map((chart, cIndex) => {
+     
+        let fillRef = fallbackValue[cIndex]
+        return chart.map((year, yIndex) => {
+
+          year.labels = ['BUF', 'CCT', 'JHB', 'EKU', 'MAN', 'NMB', 'TSH', 'ETH']
+          year.values = fillRef[yIndex].values
+
+          return year
+        })
+      }) : fallbackValue
+
+      return filled
+    })
+  }
+  

@@ -46,7 +46,7 @@ const Home = () => {
         <div className="socr--home" style={{backgroundColor:"white",overflowX:'hidden'}}>
             <Navigation_scoda logoHide={false} box_shadow={true} />
             <HouseholdIncome 
-            indicator_ids= {[900,"indicator text box"]}
+            indicator_ids= {[901,"indicator text box"]}
             minYear={2015}
             maxYear={2018}
             subNavContent={subNavContent}
