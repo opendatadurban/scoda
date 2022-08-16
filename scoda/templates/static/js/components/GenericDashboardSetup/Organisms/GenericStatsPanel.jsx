@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { MiniSelect } from './MiniSelect';
 import { cityLabels } from '../helpers/helpers';
 import { getStatTotals, getEmploymentStatTotals,getDwellingsStatTotals } from '../helpers/statsBar';
+import { useGlobalClose } from '../../../context';
 
 const initialValues = (dropName) => {
 
@@ -33,19 +34,21 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
     const [statsValues, setStats] = useState(initialValues(dropName))
     const [selected, setSelected] = useState('eThekwini')
 
-    useEffect(() => {
-        if (dropName === "People and Households") {
-            getStatTotals(originalValues, cityLabels, setStats, selected)
-        } else if (dropName === "Employment" || dropName === "Household Income") {
-            getEmploymentStatTotals(setStats, selected)
-        }else if (dropName === "Dwellings") {
-            getDwellingsStatTotals(originalValues,cityLabels,setStats,selected)
-        }
+    // useEffect(() => {
+    //     if (dropName === "People and Households") {
+    //         getStatTotals(originalValues, cityLabels, setStats, selected)
+    //     } else if (dropName === "Employment" || dropName === "Household Income") {
+    //         getEmploymentStatTotals(setStats, selected)
+    //     }else if (dropName === "Dwellings") {
+    //         getDwellingsStatTotals(originalValues,cityLabels,setStats,selected)
+    //     }
 
-    }, [selected])
+    // }, [selected])
+
+    const globalCityDropDownClose = useGlobalClose()
 
     return (dropName === "People and Households" ?
-        <div className='stat_display_panel'>
+        <div className='stat_display_panel' onClick={()=>{globalCityDropDownClose()}}>
 
             <div className='first_panel'>
 
@@ -91,7 +94,7 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                 </div>
             </div>
         </div> : dropName === "Employment" || dropName === "Household Income" ?
-            <div className='stat_display_panel'>
+            <div className='stat_display_panel'onClick={()=>{globalCityDropDownClose()}}>
 
                 <div className='first_panel'>
 
@@ -151,7 +154,7 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                     </div>
                 </div>
             </div> : dropName === "Dwellings" ?
-            <div className='stat_display_panel'>
+            <div className='stat_display_panel'onClick={()=>{globalCityDropDownClose()}}>
 
             <div className='first_panel'>
 

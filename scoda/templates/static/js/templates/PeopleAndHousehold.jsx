@@ -1,6 +1,6 @@
-import React, { lazy, useContext,useState } from 'react';
+import React, { lazy} from 'react';
 import { peopleHouseholdColors } from '../components/GenericDashboardSetup/helpers/helpers';
-import { SelectContext } from '../context';
+
 
 const Footer = lazy(() => import('../components/Footer'));
 const Navigation_scoda = lazy(() => import('../components/Navigation_scoda'));
@@ -8,7 +8,6 @@ const PeopleHousehold = lazy(() => import('../components/GenericDashboardSetup/G
 
 const Home = () => {
 
-    const [selectOpen, setSelect] = useState(false)
 
     const subNavContent = {
         dropdownMenu: [
@@ -51,11 +50,9 @@ const Home = () => {
     }
 
     return (
-        <SelectContext.Provider value={{ selectOpen, setSelect }}>
+
             <div className="socr--home" style={{ backgroundColor: "white", overflowX: 'hidden' }}
-                onClick={() => {
-                    if (selectOpen) { setSelect(false) }
-                }}>
+              >
                 <Navigation_scoda logoHide={false} box_shadow={true} />
                 <PeopleHousehold
                     indicator_ids={[704, "n1", 706, 699, 701, 711]}
@@ -67,7 +64,6 @@ const Home = () => {
                 />
                 <Footer />
             </div>
-        </SelectContext.Provider>
 
     )
 };

@@ -206,7 +206,7 @@ export const getEmploymentStatTotals = (setStats, selected) => {
         })
     })
 
-    axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
+    Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
         (data) => {
 
             let totalOther = 0

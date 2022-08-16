@@ -36,7 +36,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
     (chartData) => {
 
       chartData.forEach((chart, index) => {
-        console.log(chart)
+
         let filterData = []
 
 

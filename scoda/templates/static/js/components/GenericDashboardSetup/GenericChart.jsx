@@ -7,13 +7,15 @@ import { populateChartGroup } from './data/api'
 import { Modal, ModalBody, Spinner } from 'reactstrap'
 import Sidebar_left from '../Sidebar_left'
 import { indicator_text_box_data } from './data/data';
+import { SelectContextState } from '../../context'
+
 
 const hhiDropdownNames = () => {
 
   const options = indicator_text_box_data.map((item, index) => {
     let shortName = item.number.name.split(": ")
     let endpoints = item.endpoints
-    return { shortName: shortName[1], endpoints: endpoints,index:index }
+    return { shortName: shortName[1], endpoints: endpoints, index: index }
   })
 
   return options
@@ -43,56 +45,62 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
   useEffect(() => {
 
     if (dropdownName === "Household Income") {
+
+      let chartDropDownNames = hhiDropdownNames().map(item => {
+        return item.shortName
+      })
+
+      setSelectedChart(
+        chartDropDownNames.indexOf(selectedName)
+      )
+
       populateChartGroup(
         setChartGroup,
-        [hhiDropdownNames()[selectedChart].endpoints[isNumber ? 0 : 1], "indicator text box"], // this array determines the number of charts generated on your grid
+        [hhiDropdownNames()[selectedChart].endpoints[isNumber ? 1 : 0], "indicator text box"], // this array determines the number of charts generated on your grid
         minYear, maxYear, //year min max
         colors, //color presets
         setOriginalValues
       )
-      let chartDropDownNames = hhiDropdownNames().map(item=>{
-        return item.shortName
-      })
-      setSelectedChart(
-        chartDropDownNames.indexOf(selectedName)
-      )
-    }
-  }, [isNumber,selectedName])
 
-  const selectedDropDownChart = hhiDropdownNames().map(item=>{
+    }
+  }, [isNumber, selectedName])
+
+  const selectedDropDownChart = hhiDropdownNames().map(item => {
     return item.shortName
   }).indexOf(selectedName)
 
-
   return (
-    chartGroup.length === gridItems ? <div className='people_household_dashboard'>
+    chartGroup.length === gridItems ?
+      <SelectContextState>
+        <div className='people_household_dashboard' >
 
-      <Subnav name='State of Cities Reports' dropdownName={dropdownName} dropDownItem={subNavContent} buttonText="Download as PNG" />
-      <Sidebar_left />
-      <div id='content' >
-        <GenericStatsPanel
-          originalValues={originalValues}
-          dropName={dropdownName}
-        />
-        <ChartGrid
-          indicator_ids={indicator_ids}
-          chartGroup={chartGroup}
-          setChartGroup={setChartGroup}
-          originalValues={originalValues}
-          gridItems={gridItems}
-          dropdownName={dropdownName}
-          secondDropDown={dropdownName === "Household Income" ? hhiDropdownNames() : null}
-          selectedName={selectedName}
-          setSelectedName={setSelectedName}
-          setSelectedChart={setSelectedChart}
-          toggle={toggle}
-          isNumber= {isNumber}
-          selectedDropDownChart = {selectedDropDownChart}
-    
-        />
-      </div>
-      <div className="spacer"></div>
-    </div> :
+          <Subnav name='State of Cities Reports' dropdownName={dropdownName} dropDownItem={subNavContent} buttonText="Download as PNG" />
+          <Sidebar_left />
+          <div id='content' >
+            <GenericStatsPanel
+              originalValues={originalValues}
+              dropName={dropdownName}
+            />
+            <ChartGrid
+              indicator_ids={indicator_ids}
+              chartGroup={chartGroup}
+              setChartGroup={setChartGroup}
+              originalValues={originalValues}
+              gridItems={gridItems}
+              dropdownName={dropdownName}
+              secondDropDown={dropdownName === "Household Income" ? hhiDropdownNames() : null}
+              selectedName={selectedName}
+              setSelectedName={setSelectedName}
+              setSelectedChart={setSelectedChart}
+              toggle={toggle}
+              isNumber={isNumber}
+              selectedDropDownChart={selectedDropDownChart}
+
+            />
+          </div>
+          <div className="spacer"></div>
+        </div>
+      </SelectContextState> :
       <Modal id="loader" isOpen={true} className="modal-dialog-centered loader">
         <ModalBody>
           <div className="row">
@@ -108,6 +116,7 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
           <br />
         </ModalBody>
       </Modal>
+  
   )
 }
 export default GenericChart;

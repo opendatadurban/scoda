@@ -664,7 +664,7 @@ export const dClearAll = (originalValues,setSelected,setOptions) => {
 
       let newArr = prev
 
-      let optionState = newArr.length > 1 ? newArr.map((chart, cIndex) => {
+      let optionState = newArr.length > 0 ? newArr.map((chart, cIndex) => {
 
         let optionChart = optionsTemp[cIndex]
 
@@ -686,7 +686,7 @@ export const dClearAll = (originalValues,setSelected,setOptions) => {
         let newArr = prev
 
         newArr[0] = optionState[0]
-  
+
         return [...newArr]
       })
 
@@ -720,8 +720,11 @@ export const dClearAll = (originalValues,setSelected,setOptions) => {
     selected.forEach((chart, cIndex) => {
       let optionsChart = []
       let selectChart = []
+      console.log(chart,"full chart")
       chart.forEach((year, yIndex) => {
-
+        console.log(clickIndex, "clicked index" , yIndex, "index of year")
+        
+        console.log(year.labels[clickIndex], "clicked" , yIndex, "index of year")
         let optionYear = {
           ...year,
           labels: year.labels.filter(clicked => clicked === year.labels[clickIndex]),
@@ -744,7 +747,7 @@ export const dClearAll = (originalValues,setSelected,setOptions) => {
 
       let newArr = prev
 
-      let optionState = newArr.length > 1 ? newArr.map((chart, cIndex) => {
+      let optionState = newArr.length > 0 ? newArr.map((chart, cIndex) => {
 
         let optionChart = optionsTemp[cIndex]
 

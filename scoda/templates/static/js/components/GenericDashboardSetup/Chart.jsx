@@ -95,7 +95,10 @@ export const Chart = ({ graphData, title, dropdownName, stacked }) => {
     return (
         <>
             <BarChartGeneric options={options} data={data} height={dropdownName === "Employment" ? 170 :
-            dropdownName === "Household Income" ? 100 : 210} />
+            dropdownName === "Household Income" ?
+             100 :
+             dropdownName === "Employment" ? 100:
+             210} />
         </>
     )
 }
