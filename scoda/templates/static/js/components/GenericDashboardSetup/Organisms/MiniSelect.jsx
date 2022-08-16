@@ -1,7 +1,6 @@
-import React from 'react'
 import { ChevronDown } from '../../../../svg_components/SelectIcons'
 import '../../../../scss/components/Select.scss'
-import { useState } from 'react'
+import React,{ useState } from 'react'
 
 export const MiniSelect = ({names,selected,setSelected}) => {
 
@@ -10,13 +9,13 @@ export const MiniSelect = ({names,selected,setSelected}) => {
     const select = (index) =>{
         setSelected(names[index])
     }
+
     return (
         <div className='mini_select' onClick={()=>{visibility(!show)}}>
 
             <p  className="title">
                 {selected}
             </p>
-
 
             <div className={"dropdownbox " + `${show ? "show" : ""}`} >
                 {

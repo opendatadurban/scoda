@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import Subnav from '../Subnav'
 import { ChartGrid } from './ChartGrid'
 import { peopleHouseholdColors, secondaryColors } from './helpers/helpers'
@@ -7,13 +7,14 @@ import { cityLabels } from './helpers/helpers'
 import '../../../scss/components/PeopleHouseHold.scss'
 import { populateChartGroup } from './data/api'
 import { Modal, ModalBody, Spinner } from 'reactstrap'
+import Sidebar_left from '../Sidebar_left'
+import { SelectContext } from '../../context'
 
 const PeopleHousehold = () => {
 
-
-
   const [chartGroup, setChartGroup] = useState([])
   const [originalValues, setOriginalValues] = useState([])
+  const [selectOpen, setSelect] = useState(false)
 
   useEffect(() => {
 
@@ -57,22 +58,30 @@ const PeopleHousehold = () => {
   }
 
   return (
-    chartGroup.length === 6 ? <div className='people_household_dashboard'>
+    chartGroup.length === 6 ?
 
-      <Subnav name='State of Cities Reports' dropdownName='People and Households' dropDownItem={subNavContent} buttonText="Download as PNG" />
-      <div id='content'>
-        <GenericStatsPanel
-          originalValues={originalValues}
-        />
-        <ChartGrid
-          indicator_ids={dashboardProps.indicator_ids}
-          chartGroup={chartGroup}
-          setChartGroup={setChartGroup}
-          originalValues={originalValues}
-        />
-      </div>
-      <div className="spacer"></div>
-    </div> :
+      <SelectContext.Provider value={{ selectOpen, setSelect }}>
+
+        <div className='people_household_dashboard' onClick={()=>{
+          if(selectOpen){setSelect(false)}
+          }}>
+          <Subnav name='State of Cities Reports' dropdownName='People and Households' dropDownItem={subNavContent} buttonText="Download as PNG" />
+          <Sidebar_left />
+          <div id='content'>
+            <GenericStatsPanel
+              originalValues={originalValues}
+            />
+            <ChartGrid
+              indicator_ids={dashboardProps.indicator_ids}
+              chartGroup={chartGroup}
+              setChartGroup={setChartGroup}
+              originalValues={originalValues}
+            />
+          </div>
+          <div className="spacer"></div>
+        </div>
+      </SelectContext.Provider>
+      :
       <Modal id="loader" isOpen={true} className="modal-dialog-centered loader">
         <ModalBody>
           <div className="row">
