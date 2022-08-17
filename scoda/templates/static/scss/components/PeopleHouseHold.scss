@@ -191,6 +191,7 @@
                     display: flex;
                     flex-direction: column;
                     gap: 6px;
+                    width: 28vw;
                     .select_title {
                         margin-left: 45px;
                         font-family: 'Montserrat';
@@ -256,11 +257,11 @@
             .grid-2-text {
 // 30 outside + 60 inside + 64px 
                 display: grid;
-                grid-column-gap: 30px;
+                grid-column-gap: 60px;
                 grid-row-gap: 10px;
-                grid-template-columns: 66vw 33vw;
+                grid-template-columns: 62.5vw 40vw;
                 background-color: white;
-                padding: 30px;
+                padding: 32px;
                 position: relative;
                 border-radius: 0 0 5px 5px;
 
@@ -270,7 +271,7 @@
                     width: 2px;
                     background: #F1F1F1;
                     height: calc(100% - 60px);
-                    left: calc(70% + 8px);
+                    left: calc(30px + 62.5vw + 32px);
                     top: 30px;
                 }
             }

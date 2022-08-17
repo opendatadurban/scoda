@@ -79,7 +79,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
             return {
               year: category,
               labels: ['BUF', 'CPT', 'JHB', 'EKU', 'MAN', 'NMB', 'TSH', 'ETH'],
-              values: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+              values: [0, 0, 0, 0, 0, 0, 0, 0],
               color: yearColors[index]
             }
           })

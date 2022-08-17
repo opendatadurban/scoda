@@ -11,8 +11,6 @@ export const ChartWrapper = ({ chartGroup, indicator_ids,dropdownName, toggle,is
   const [selectedCode,setCode] = useState(indicator_text_box_data[0]["number"].code)
   const [selectedName,setName] = useState(indicator_text_box_data[0]["number"].name)
   const [error, setError] = useState([{ errorThrown: false},{ errorThrown: false},{ errorThrown: false},{ errorThrown: false},{ errorThrown: false},{ errorThrown: false}])
-
-  console.log(error,"error message")
   
   useEffect(()=>{
     setCode(indicator_text_box_data[selectedDropDownChart][isNumber?"number":"percent"].code)
@@ -33,7 +31,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids,dropdownName, toggle,is
   };
 
   const clearErrorState = (index) => {
-    console.log("closed")
+  
     const newState = error.map((obj,errorIndex) => {
   
       if (errorIndex === index) {
@@ -57,7 +55,6 @@ export const ChartWrapper = ({ chartGroup, indicator_ids,dropdownName, toggle,is
   for (let i = 0; i < chartGroup.length; i++) {
 
     const element = chartGroup[i]
-    console.log(indicator_ids,"chart readout")
 
     if (typeof(indicator_ids[i]) === "number"  ) {
       
@@ -82,7 +79,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids,dropdownName, toggle,is
       )
     } else if( indicator_ids[i] === 'n8' || indicator_ids[i] === 'n1' || indicator_ids[i] === 'n35' ||indicator_ids[i] === 'n36'||indicator_ids[i] === 'n37'||indicator_ids[i] === 'n38'  ){
       
-      items.push( <div className='chart_wrapper' key={"n8"} >
+      items.push( <div className='chart_wrapper' key={indicator_ids[i].toString() } >
         <div className='heading_wrapper'>
           <div className='heading'>{chartTitles.main[i]}</div>
           <a className='link'  onClick={()=> {
