@@ -23,8 +23,9 @@ export default class Button extends Component {
 
         {this.props.text}{this.props.icon}{this.props.children}
 
-        <img className="subnav--cta---download_icon" style={imageBootstapStyleOverride} src="/static/dist/img/icon_download.png" alt="download_icon" />
-      </a>
+ { this.props.downloadBtn?
+        <img className="subnav--cta---download_icon" style={imageBootstapStyleOverride} src="/static/dist/img/icon_download.png" alt="download_icon" />:""
+}      </a>
     )
   }
 }
