@@ -90,7 +90,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids,dropdownName, toggle,is
           }} style={{opacity:"0.4"}}>Raw Data</a>
         </div>
         <div className="chart">
-          <Chart graphData={element} title={"Average Number of People"} dropdownName={dropdownName} stacked={false}/>
+          <Chart graphData={element} title={"Average Number of People"} dropdownName={dropdownName} stacked={false} chartIndex={i}/>
         </div>
         {error[i].errorThrown ? 
         <div className="error_message">

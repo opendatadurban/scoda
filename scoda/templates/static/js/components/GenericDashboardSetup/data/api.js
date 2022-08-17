@@ -78,7 +78,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
           const combinationChart = yearEquivalent.map((category, index) => {
             return {
               year: category,
-              labels: ['BUF', 'CCT', 'JHB', 'EKU', 'MAN', 'NMB', 'TSH', 'ETH'],
+              labels: ['BUF', 'CPT', 'JHB', 'EKU', 'MAN', 'NMB', 'TSH', 'ETH'],
               values: [0, 0, 0, 0, 0, 0, 0, 0, 0],
               color: yearColors[index]
             }
