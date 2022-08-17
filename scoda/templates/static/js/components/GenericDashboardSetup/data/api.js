@@ -5,7 +5,6 @@ import { indicator_text_box_data } from './data'
 
 export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYear, yearColors, setOriginalValues
 ) => {
-
   let newApiUri = "/api/explore_new?indicator_id="
   let oldApiUri = "/api-temp/explore/?indicator_id="
 
@@ -91,7 +90,6 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
 
           filterData.push(...indicator_text_box_data)
         }
-        
         else {
 
           return
@@ -172,7 +170,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
         })
 
       }
-
+      console.log(gridData,"GRID DATA FETCHED")
       setOriginalValues([...gridData])
       const copy = JSON.parse(JSON.stringify(gridData)) // deep copy to be manipuilated
       setChartGroup([...copy])
