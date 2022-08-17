@@ -1,58 +1,114 @@
-import React, { useEffect, useState,useContext } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { XIcon, Line, ChevronDown } from '../../../../svg_components/SelectIcons'
 import '../../../../scss/components/Select.scss'
-import { SelectContext } from '../../../context'
+import { SelectContext, useSelectOpen } from '../../../context'
 
-export const Select = ({ chartData, selected, options, setSelected, removeItem, addItem, clearAll }) => {
-
-    const {selectOpen, setSelect} = useContext(SelectContext)
+export const Select = ({ chartData, originalValues, selected, options,
+    setSelected, setChartGroup, setOptions,
+    removeItem, addItem, clearAll, chartDropName }) => {
 
     useEffect(() => {
 
         selectedOptions()
     }, [chartData])
 
-    const selectedOptions = () => { 
+    const selectContext = useSelectOpen()
+
+    const selectedOptions = () => {
         let filtered = []
+        console.log(filtered,"original options")
 
-        chartData.forEach((chart, index) => {
+        if (chartDropName === "People and Households") {
+            chartData.forEach((chart, index) => {
 
-            if (index > 4) return
-            filtered.push(chart)
-        })
+                if (index > 4) return
+                filtered.push(chart)
+            })
+        } else if (chartDropName === "Household Income") {
+            chartData.forEach((chart, index) => {
+
+                if (index > 0) return
+                filtered.push(chart)
+            })
+        } else {
+            chartData.forEach((chart, index) => {
+
+                filtered.push(chart)
+            })
+        }
 
         setSelected(filtered)
     }
 
-    return (
-        <div className='custom_select' onClick={()=> setSelect(!selectOpen)}>
-            {
-                selected.length > 1 ? selected[0][0].labels.map((tag, index) => {
+    return (<div className="conditional_select_wrapper">
+        {
+            chartDropName === "Household Income" ? <>
+                <p className="select_title">Choose Cities:</p>
+                <div className='custom_select' onClick={() => selectContext.setSelect(!selectContext.selectOpen)}>
+                    {
+                        selected.length > 0 ? selected[0][0].labels.map((tag, index) => {
 
-                    return <p key={index.toString()} className="tag">
-                        {tag}
-                        <XIcon cancel={() => { removeItem(index) }} />
-                    </p>
-                }) : ""
-                    
-            }
-            <div className={"dropdownbox " + `${selectOpen ? "show" : ""}`} >
-                {
-                    options.length > 1 ? options[0][0].labels.map((city, index) => {
-                   
-                        return <p key={index.toString()} className="drop_content" onClick={() => {
-                            addItem(index)
-                        }}>{city}</p>
-                    }):""
-                }
-            </div>
-            <XIcon cancel={() => {
-                clearAll()
-            }} />
-            <Line />
-            <ChevronDown drop={() => {
-               
-            }} />
-        </div>
+                            return <p key={index.toString()} className="tag">
+                                {tag}
+
+                                <XIcon cancel={() => { removeItem(index, selected, setSelected, setChartGroup, setOptions) }} />
+
+                            </p>
+                        }) : ""
+                    }
+                    <div className={"dropdownbox " + `${selectContext.selectOpen ? "show" : ""}`} >
+                        {
+                            options.length > 0 ? options[0][0].labels.map((city, index) => {
+
+                                return <p key={index.toString()} className="drop_content" onClick={() => {
+                                    addItem(index, options, setSelected, setChartGroup, setOptions)
+                                }}>{city}</p>
+                            }) : ""
+                        }
+                    </div>
+                    <XIcon cancel={() => {
+                        clearAll(originalValues, setSelected, setOptions)
+                    }} />
+                    <Line />
+                    <ChevronDown drop={() => {
+
+                    }} />
+                </div>
+            </>
+                :
+                <div className='custom_select' onClick={() => selectContext.setSelect(!selectContext.selectOpen)}>
+                    {
+                        selected.length > 0 ? selected[0][0].labels.map((tag, index) => {
+
+                            return <p key={index.toString()} className="tag">
+                                {tag}
+
+                                <XIcon cancel={() => { removeItem(index, selected, setSelected, setChartGroup, setOptions) }} />
+
+                            </p>
+                        }) : ""
+                    }
+                    <div className={"dropdownbox " + `${selectContext.selectOpen ? "show" : ""}`} >
+                        {
+                            options.length > 0 ? options[0][0].labels.map((city, index) => {
+
+                                return <p key={index.toString()} className="drop_content" onClick={() => {
+                                    addItem(index, options, setSelected, setChartGroup, setOptions)
+                                }}>{city}</p>
+                            }) : ""
+                        }
+                    </div>
+                    <XIcon cancel={() => {
+                        clearAll(originalValues, setSelected, setOptions)
+                    }} />
+                    <Line />
+                    <ChevronDown drop={() => {
+
+                    }} />
+                </div>
+        }
+    </div>
+
+
     )
 }

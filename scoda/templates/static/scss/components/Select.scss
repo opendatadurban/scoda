@@ -24,20 +24,26 @@
         width: 69.3px;
         line-height: 13px;
         padding: 0 10px;
-        color: rgba(74, 74, 74, 1);  
+        color: rgba(74, 74, 74, 1);
         background: rgba(207, 221, 232, 0.6);
         backdrop-filter: blur(10.8731px);
         border-radius: 12.5px;
         margin: 0 10px 0 0;
         cursor: pointer;
 
-        >svg {
-            height: 8px;
-            width: 8px;
-            margin-left: 5px;
+        span {
+            padding: 5px;
 
             &:hover {
-                stroke: rgba($color: red, $alpha: 0.4);
+                background-color: rgba($color: red, $alpha: 0.4);
+            }
+
+            >svg {
+                height: 8px;
+                width: 8px;
+                margin-left: 5px;
+
+
             }
         }
     }
@@ -91,7 +97,7 @@
         height: 12px;
         width: 12px;
         position: absolute;
-        right: 12px;
+        right: 13px;
         top: 50%;
         transform: translate(0, -50%);
         cursor: pointer;
@@ -124,6 +130,51 @@
     border-radius: 12.5px;
     margin-left: 45px;
     cursor: pointer;
+
+    &.macro_select {
+        width: 29vw;
+        height: 36.2px;
+        border-radius: 28px;
+
+        .title {
+            display: flex;
+            align-items: center;
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 13.6px;
+            line-height: 13px;
+            color: #4A4A4A;
+        }
+
+        .dropdownbox {
+            display: none;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+            &.show {
+                display: flex;
+                background-color: white;
+                flex-direction: column;
+                align-items: flex-start;
+                position: absolute;
+                width: 29vw;
+                top: calc(100% + 10px);
+                right: 0;
+                z-index: 100;
+                border-radius: 5px;
+
+                >p {
+                    display: block;
+                    font-family: 'Montserrat';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 13.6px;
+                    line-height: 13px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
 
     .title {
         display: flex;
@@ -181,5 +232,143 @@
         cursor: pointer;
     }
 
+
+}
+
+.title_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    .dropdown_title {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 10px;
+        line-height: 12px;
+        text-transform: uppercase;
+        color: #2F3442;
+        opacity: 0.8;
+        margin-left: 45px;
+    }
+
+    .mini_select {
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        width: 140px;
+        height: 20px;
+        padding: 4px 0 4px 10px;
+        background: #FFFFFF;
+        border: 1px solid #4A4A4A;
+        border-radius: 12.5px;
+        margin-left: 45px;
+        cursor: pointer;
+
+
+
+        &.macro_select {
+            width: 29vw;
+            height: 36.2px;
+            border-radius: 28px;
+
+            .title {
+                display: flex;
+                align-items: center;
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 13.6px;
+                line-height: 13px;
+                color: #4A4A4A;
+            }
+
+            .dropdownbox {
+                display: none;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+                &.show {
+                    display: flex;
+                    background-color: white;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    position: absolute;
+                    width: 29vw;
+                    top: calc(100% + 10px);
+                    right: 0;
+                    z-index: 100;
+                    border-radius: 5px;
+
+                    >p {
+                        display: block;
+                        font-family: 'Montserrat';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 13.6px;
+                        line-height: 13px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        .title {
+            display: flex;
+            align-items: center;
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 10px;
+            line-height: 13px;
+            color: #4A4A4A;
+        }
+
+        .dropdownbox {
+            display: none;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+            &.show {
+                display: flex;
+                background-color: white;
+                flex-direction: column;
+                align-items: flex-start;
+                position: absolute;
+                width: 140px;
+                top: calc(100% + 10px);
+                right: 0;
+                z-index: 100;
+                border-radius: 5px;
+
+                >p {
+                    display: block;
+                    font-family: 'Montserrat';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 10px;
+                    line-height: 13px;
+                    color: rgba(74, 74, 74, 1);
+                    padding: 5px 0 5px 8px;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: rgba($color: aqua, $alpha: 0.15);
+                        transition: background-color 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+                    }
+                }
+            }
+        }
+
+
+
+        .chevron_icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translate(0, -50%);
+            cursor: pointer;
+        }
+
+
+    }
 
 }

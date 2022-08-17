@@ -112,8 +112,8 @@ const filterData = [
           "selected": true
         },
         {
-          "label": "Goal 5",
-          "value": "Goal 5",
+          "label": "Goal 5. Achieve gender equality and empower all women and girls",
+          "value": "Goal 5. Achieve gender equality and empower all women and girls",
           "selected": true
         },
         {
@@ -157,8 +157,8 @@ const filterData = [
           "selected": true
         },
         {
-          "label": "Goal 14",
-          "value": "Goal 14",
+          "label": "Goal 14. Conserve and sustainably use the oceans, seas and marine resources for sustainable development",
+          "value": "Goal 14. Conserve and sustainably use the oceans, seas and marine resources for sustainable development",
           "selected": true
         },
         {
