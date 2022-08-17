@@ -11,21 +11,33 @@ import React from 'react'
 import DownloadScreenCapture from './../components/DownloadScreenCapture';
 import Dropdown from './../components/Dropdown';
 import PropTypes from 'prop-types';
+import { useGlobalClose } from '../context';
 
 
 const SubNav = (props) => {
 
+  const newChartsCondition = props.dropdownName === "Employment" || props.dropdownName === "Dwellings" || props.dropdownName === "Household Income"
+  
+  let globalCityDropDownClose = () =>{}
+
+  if (newChartsCondition) {
+    
+    globalCityDropDownClose = useGlobalClose()
+  }
+
+
   return (
-    <div className={["subnav subnav--wrapper container-fluid "] + props.className}>
+    <div className={["subnav subnav--wrapper container-fluid "] + props.className}
+    onClick={()=>{globalCityDropDownClose()}}>
       <div className="subnav--breadcrumbs">
-      <strong>{props.name}</strong> / <Dropdown name={props.dropdownName} header={props.dropdownHeading} menu={props.dropdownMenu} dropDownItem={props.dropDownItem} ></Dropdown>
+        <strong>{props.name}</strong> / <Dropdown name={props.dropdownName} header={props.dropdownHeading} menu={props.dropdownMenu} dropDownItem={props.dropDownItem} ></Dropdown>
       </div>
- 
+
       <div className="subnav--cta">
         <div className='row'>
-          <div className=''><DownloadScreenCapture targetID="charts-container" filename="image.png" className="round btn_secondary" buttonText={props.buttonText}></DownloadScreenCapture> <img className="subnav--cta---download_icon" src="/static/dist/img/icon_download.png" alt="download_icon" /></div>
+          <div className=''><DownloadScreenCapture targetID="charts-container" filename="image.png" className="round btn_secondary" buttonText={props.buttonText}></DownloadScreenCapture> </div>
 
-          </div>
+        </div>
       </div>
     </div>
   );

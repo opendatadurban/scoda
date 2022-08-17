@@ -1,7 +1,7 @@
 .people_household_dashboard {
     margin: 100px 0 0 0;
     background-color: rgba(241, 241, 241, 1);
-    
+
     .stat_display_panel {
         background-color: white;
         display: flex;
@@ -12,6 +12,16 @@
             position: relative;
             padding: 12px 24px 20px 15px;
 
+            .heading {
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 10px;
+                line-height: 12px;
+                text-transform: uppercase;
+                color: #2F3442;
+                padding: 16px 0 0 0;
+            }
 
             .catagory-name {
                 font-family: 'Montserrat';
@@ -22,6 +32,7 @@
                 padding: 0;
                 margin: 0;
                 color: rgba(47, 52, 66, 1);
+
                 span {
                     font-size: 14px;
                 }
@@ -81,6 +92,17 @@
 
             padding: 12px 24px 20px 15px;
             width: 100%;
+
+            .heading {
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 10px;
+                line-height: 12px;
+                text-transform: uppercase;
+                color: #2F3442;
+                padding: 16px 0 0 0;
+            }
 
             .top {
                 display: flex;
@@ -155,14 +177,41 @@
             .select_wrapper {
                 border-bottom: 2px solid #F1F1F1;
                 padding: 7px 0;
+
+            }
+
+            .double {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding-right: 30px;
+
+                .conditional_select_wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 6px;
+                    width: 28vw;
+                    .select_title {
+                        margin-left: 45px;
+                        font-family: 'Montserrat';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 10px;
+                        line-height: 12px;
+                        text-transform: uppercase;
+                        color: #2F3442;
+                        opacity: 0.8;
+                    }
+                }
             }
 
             .grid-container {
 
                 display: grid;
-                grid-column-gap: 30px;
+                grid-column-gap: 32px;
                 grid-row-gap: 21px;
-                grid-template-columns: calc((100vw/3) - 50px) calc((100vw/3) - 50px) calc((100vw/3) - 50px);
+                grid-template-columns: calc((100vw/3) - (154px/3)) calc((100vw/3) - (154px/3)) calc((100vw/3) - (154px/3));
                 background-color: white;
                 padding: 30px;
                 position: relative;
@@ -174,10 +223,59 @@
                     width: 2px;
                     background: #F1F1F1;
                     height: calc(100% - 60px);
-                    left: calc(66% + 15px);
+                    left: calc( (2*(100vw/3) - 2*(154px/3)) + 32px + 30px + 15px);
                     top: 30px;
                 }
             }
+
+            .grid-container-4 {
+// 30 outside + 50 inside + 22px : spacing excluding chart blocks
+                display: grid;
+                grid-column-gap: 22px;
+                grid-row-gap: 10px;
+                grid-template-columns: calc((100vw/2) - (102px/2)) calc((100vw/2) - (102px/2));
+                background-color: white;
+                padding: 25px;
+                position: relative;
+                border-radius: 0 0 5px 5px;
+
+                &:after {
+                    content: "";
+                    position: absolute;
+                    width: 2px;
+                    background: #F1F1F1;
+                    height: calc(100% - 20px);
+                    left: calc(50% + 8px);
+                    top: 10px;
+                }
+
+                .chart_wrapper > .heading_wrapper > .heading{
+                    width: 418px;
+                }
+            }
+
+            .grid-2-text {
+// 30 outside + 60 inside + 64px 
+                display: grid;
+                grid-column-gap: 60px;
+                grid-row-gap: 10px;
+                grid-template-columns: 62.5vw 40vw;
+                background-color: white;
+                padding: 32px;
+                position: relative;
+                border-radius: 0 0 5px 5px;
+
+                &:after {
+                    content: "";
+                    position: absolute;
+                    width: 2px;
+                    background: #F1F1F1;
+                    height: calc(100% - 60px);
+                    left: calc(30px + 62.5vw + 32px);
+                    top: 30px;
+                }
+            }
+
         }
     }
 

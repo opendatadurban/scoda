@@ -1,11 +1,13 @@
 .chart_wrapper {
-    
+    position: relative;
+
     .heading_wrapper {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
         padding: 0 0 0 0;
+
         .heading {
             padding: 0;
             margin: 0;
@@ -15,6 +17,45 @@
             font-size: 12px !important;
             line-height: 15px;
             color: #2F3442;
+            height: 32px;
+            width: 261px;
+        }
+
+        .button_group {
+
+            button {
+                border: 1px solid #B0B4B9;
+                height: 15px;
+                text-align: center;
+                padding: 0 9px;
+            }
+
+            .number {
+                border-radius: 11px 0 0 11px;
+                background: #646B75;
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 10px;
+                line-height: 14px;
+                text-align: center;
+                color: #FFFFFF;
+                outline: none;
+            }
+
+            .percent {
+                border-radius: 0 11px 11px 0;
+                background: white;
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 10px;
+                line-height: 14px;
+                text-align: center;
+                color: #646B75;
+                outline: none;
+                margin-right: 20px;
+            }
         }
 
         .link {
@@ -30,9 +71,109 @@
             border-radius: 11px;
             padding: 0 5px 0 5px;
             width: 70px;
-            &:hover{
+
+            &:hover {
                 text-decoration: none;
             }
+        }
+
+    }
+
+    .text {
+
+        .headings {
+
+            display: flex;
+            flex-direction: row;
+            gap: 4vw;
+            padding: 14px 0 7px 0;
+
+            p {
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 10px;
+                line-height: 12px;
+                text-transform: uppercase;
+                color: #979797;
+            }
+
+            .code {
+                width: 84px;
+            }
+        }
+
+        .content {
+            display: flex;
+            flex-direction: row;
+            gap: 4vw;
+
+            .name {
+                width: 210px;
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 14px;
+                color: #2F3442;
+            }
+
+            .code {
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 14px;
+                color: #2F3442;
+                width: 84px;
+            }
+        }
+    }
+
+    .error_message {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #FFD1D1;
+        border-radius: 12.5px;
+        width: 173px;
+        padding: 10px 10px 20px 10px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      
+        .top {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            p {
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 24px;
+                color: #4A4A4A;
+            }
+
+            .cancel{
+                cursor: pointer;
+            }
+        }
+
+        .body {
+            
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 300;
+                font-size: 12px;
+                line-height: 16px;
+                width: 153px;
+                color: #4A4A4A;
+        
         }
     }
 }

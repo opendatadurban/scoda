@@ -22,7 +22,7 @@ const DownloadScreenCapture = (props) => {
   }
   return (
     <>
-      <Button className={["download-screen-capture "] + props.className} onClick={download} text={props.buttonText} id="download" />
+      <Button className={["download-screen-capture "] + props.className} onClick={download} text={props.buttonText} id="download" downloadBtn={true}/>
       {loader ?
         <Modal id="loader" isOpen={loader} className="modal-dialog-centered loader">
           <ModalBody>
