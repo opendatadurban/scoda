@@ -15,9 +15,9 @@ export const Select = ({ chartData, originalValues, selected, options,
     const selectContext = useSelectOpen()
 
     const selectedOptions = () => {
-        let filtered = []
-        console.log(filtered,"original options")
 
+        let filtered = []
+        
         if (chartDropName === "People and Households") {
             chartData.forEach((chart, index) => {
 

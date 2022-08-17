@@ -144,8 +144,6 @@ export const tableData = (table, cities) => {
   let byYear = []
   let graphData = []
   let abbrev = labels.map( city=> cityLabels(city))
-
-  console.log(abbrev,"abbrec")
   
   table.forEach(element => {
     if(element[0] === "City" || (parseInt(element[1]) < 2015 || parseInt(element[1]) > 2018) ) return

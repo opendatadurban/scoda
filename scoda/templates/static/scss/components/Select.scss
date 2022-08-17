@@ -132,9 +132,10 @@
     cursor: pointer;
 
     &.macro_select {
-        width: 29vw;
+        width: 28vw;
         height: 36.2px;
         border-radius: 28px;
+        margin-left:0;
 
         .title {
             display: flex;
@@ -249,7 +250,6 @@
         text-transform: uppercase;
         color: #2F3442;
         opacity: 0.8;
-        margin-left: 45px;
     }
 
     .mini_select {
@@ -268,9 +268,10 @@
 
 
         &.macro_select {
-            width: 29vw;
+            width: 28vw;
             height: 36.2px;
             border-radius: 28px;
+            margin-left:0;
 
             .title {
                 display: flex;
@@ -293,7 +294,7 @@
                     flex-direction: column;
                     align-items: flex-start;
                     position: absolute;
-                    width: 29vw;
+                    width: 28vw;
                     top: calc(100% + 10px);
                     right: 0;
                     z-index: 100;
