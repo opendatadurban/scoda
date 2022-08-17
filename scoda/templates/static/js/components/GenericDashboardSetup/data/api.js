@@ -19,13 +19,16 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
       && id !== "combination" && id !== "indicator text box") {
 
       indicator_id_requests.push({ request: axios.get(newApiUri + id), type: "new" })
-    } else if (id === "combination") {
+    } 
+    else if (id === "combination") {
 
       indicator_id_requests.push({ request: { data: [] }, type: "combination" })
-    } else if (typeof (id) === "string" && id.charAt(0) === "n") {
+    } 
+    else if (typeof (id) === "string" && id.charAt(0) === "n") {
 
       indicator_id_requests.push({ request: axios.get(oldApiUri + id.substring(1)), type: "old" })
-    } else if (typeof (id) === "string" && id === "indicator text box") {
+    } 
+    else if (typeof (id) === "string" && id === "indicator text box") {
 
       indicator_id_requests.push({ request: { data: [] }, type: "indicator text box" })
     }
@@ -38,7 +41,6 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
       chartData.forEach((chart, index) => {
 
         let filterData = []
-
 
         if (indicator_id_requests[index].type === "new") {
           let colorCount = 0
@@ -99,10 +101,10 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
       })
 
       if (indicator_ids.includes("combination")) {
-        let formalDwellings = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-        let informalDwellings = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-        let traditionalDwellings = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-        let otherDwellings = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+        let formalDwellings = [0, 0, 0, 0, 0, 0, 0, 0]
+        let informalDwellings = [0, 0, 0, 0, 0, 0, 0, 0]
+        let traditionalDwellings = [0, 0, 0, 0, 0, 0, 0, 0]
+        let otherDwellings = [0, 0, 0, 0, 0, 0, 0, 0]
 
         gridData.forEach((element, elementIndex) => {
           if (elementIndex === 2) return
