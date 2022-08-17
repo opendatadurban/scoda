@@ -583,7 +583,6 @@ export const dRemoveItem = (clickIndex,selected,setSelected,setChartGroup,setOpt
         newArr[3] = selectedState[3]
         newArr[4] = selectedState[4]
     
-
         return [...newArr]
       })
 
