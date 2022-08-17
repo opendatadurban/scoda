@@ -68,12 +68,12 @@ export const getStatTotals = (originalValues, cityLabels, setStats, selected) =>
 
     setStats({
 
-        totalHouseHolds: [Math.round((totalHouseHolds + Number.EPSILON) * 100) / 100, "TOTAL Households"],
-        houseHoldSize: [Math.round((houseHoldSize + Number.EPSILON) * 100) / 100, "Household size"],
-        populationDensity: [Math.round((populationDensity + Number.EPSILON) * 100) / 100, "Population Density"],
-        totalHouseHoldsAverage: [Math.round((totalHouseHoldsAverage + Number.EPSILON) * 100) / 100, "TOTAL Households"],
-        houseHoldSizeAverage: [Math.round((houseHoldSizeAverage + Number.EPSILON) * 100) / 100, "Household size"],
-        populationDensityAverage: [Math.round((populationDensityAverage + Number.EPSILON) * 100) / 100, "Population Density"]
+        totalHouseHolds: [Math.round(totalHouseHolds ) , "TOTAL Households"],
+        houseHoldSize: [Math.round(houseHoldSize ) , "Household size"],
+        populationDensity: [Math.round(populationDensity ) , "Population Density"],
+        totalHouseHoldsAverage: [Math.round(totalHouseHoldsAverage ) , "TOTAL Households"],
+        houseHoldSizeAverage: [Math.round(houseHoldSizeAverage ) , "Household size"],
+        populationDensityAverage: [Math.round(populationDensityAverage ) , "Population Density"]
     })
 
 }
@@ -105,10 +105,10 @@ export const getEmploymentStatTotals = (setStats, selected) => {
                 let newArr = {...prev}
 
                 newArr.salaries = [
-                    Math.round((values.values[valueIndex] + Number.EPSILON) * 100) / 100
+                    Math.round(values.values[valueIndex] ) 
                     , "Income from a business"]
                 newArr.salariesAve = [
-                    Math.round((salariesAve + Number.EPSILON) * 100) / 100
+                    Math.round(salariesAve ) 
                     , "Income from a business"
                 ]
                 return {...newArr}
@@ -134,10 +134,10 @@ export const getEmploymentStatTotals = (setStats, selected) => {
                 let newArr = prev
 
                 newArr.businessIncome = [
-                    Math.round((values.values[valueIndex] + Number.EPSILON) * 100) / 100
+                    Math.round(values.values[valueIndex] ) 
                     , "Income from a business"]
                 newArr.businessIncomeAve = [
-                    Math.round((businessAve + Number.EPSILON) * 100) / 100
+                    Math.round(businessAve ) 
                     , "Income from a business"
                 ]
                 return newArr
@@ -164,10 +164,10 @@ export const getEmploymentStatTotals = (setStats, selected) => {
                 let newArr = {...prev}
 
                 newArr.remittances = [
-                    Math.round((remAve + Number.EPSILON) * 100) / 100
+                    Math.round(remAve ) 
                     , "Remittances"]
                 newArr.remittancesAve = [
-                    Math.round((businessAve + Number.EPSILON) * 100) / 100
+                    Math.round(businessAve ) 
                     , "Remittances"
                 ]
                 return {...newArr}
@@ -194,10 +194,10 @@ export const getEmploymentStatTotals = (setStats, selected) => {
                 let newArr = prev
 
                 newArr.grants = [
-                    Math.round((values.values[valueIndex] + Number.EPSILON) * 100) / 100
+                    Math.round(values.values[valueIndex] ) 
                     , "Grants"]
                 newArr.grantsAve = [
-                    Math.round((grantAve + Number.EPSILON) * 100) / 100
+                    Math.round(grantAve ) 
                     , "Grants"
                 ]
                 return {...newArr}
@@ -234,10 +234,10 @@ export const getEmploymentStatTotals = (setStats, selected) => {
                 let newArr = {...prev}
 
                 newArr.other = [
-                    Math.round((totalOther + Number.EPSILON) * 100) / 100
+                    Math.round(totalOther ) 
                     , "Other"]
                 newArr.otherAve = [
-                    Math.round(((total) + Number.EPSILON) * 100) / 100
+                    Math.round(total ) 
                     , "Other"
                 ]
                 return {...newArr}
@@ -339,14 +339,14 @@ export const getDwellingsStatTotals = (originalValues, cityLabels, setStats, sel
 
     setStats({
 
-        formal: [Math.round((formal + Number.EPSILON) * 100) / 100, "Formal Dwelling"],
-        informal: [Math.round((informal + Number.EPSILON) * 100) / 100, "Informal Dwelling"],
-        traditional: [Math.round((traditional + Number.EPSILON) * 100) / 100, "Traditional Dwelling"],
-        other: [Math.round((other + Number.EPSILON) * 100) / 100, "Other Dwelling"],
-        formalTot: [Math.round((formalTot + Number.EPSILON) * 100) / 100, "Formal Dwelling"],
-        informalTot: [Math.round((informalTot + Number.EPSILON) * 100) / 100, "Informal Dwelling"],
-        traditionalTot: [Math.round((traditionalTot + Number.EPSILON) * 100) / 100, "Traditional Dwelling"],
-        otherTot: [Math.round((otherTot + Number.EPSILON) * 100) / 100, "Other Dwelling"],
+        formal: [Math.round(formal ) , "Formal Dwelling"],
+        informal: [Math.round(informal ) , "Informal Dwelling"],
+        traditional: [Math.round(traditional ) , "Traditional Dwelling"],
+        other: [Math.round(other ) , "Other Dwelling"],
+        formalTot: [Math.round(formalTot ) , "Formal Dwelling"],
+        informalTot: [Math.round(informalTot ) , "Informal Dwelling"],
+        traditionalTot: [Math.round(traditionalTot ) , "Traditional Dwelling"],
+        otherTot: [Math.round(otherTot ) , "Other Dwelling"],
     })
 
 }

@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { BarChartGeneric } from '../BarChartGeneric';
 import { cityLabels } from './helpers/helpers';
 
-export const Chart = ({ graphData, title, dropdownName, stacked }) => {
-
+export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex }) => {
     const options = {
         responsive: true,
         maintainAspectRatio: true,
@@ -29,7 +28,7 @@ export const Chart = ({ graphData, title, dropdownName, stacked }) => {
                     display: false
                 },
                 ticks: {
-                    fontFamily: "Montserrat", fontSize: 8, fontStyle: '600',
+                    fontFamily: "Montserrat", fontSize: 12, fontStyle: '600',
 
                 },
                 gridLines: {
@@ -42,7 +41,7 @@ export const Chart = ({ graphData, title, dropdownName, stacked }) => {
                     display: true,
                     labelString: title,
                     fontFamily: "Montserrat",
-                    fontSize: 8,
+                    fontSize: 12,
                     fontStyle: '600',
                     fontColor: "rgba(74, 74, 74, 1)"
                 },
@@ -50,17 +49,29 @@ export const Chart = ({ graphData, title, dropdownName, stacked }) => {
                     display: false
                 },
                 ticks: stacked ? {
-                    fontFamily: "Montserrat", fontSize: 8,
+                    fontFamily: "Montserrat",
                     min: 0,
                     max: 100,
                     callback: function (value) { return value + "%" }
-                    }
+                } : (chartIndex === 1 && dropdownName === "People and Households") ||
+                ((chartIndex === 3 || chartIndex === 4) && dropdownName === "Dwellings")? {
+                    fontFamily: "Montserrat",
+                    beginAtZero:true,
+                    step: 0.5,
+                    stepValue: 0.5
+                }
                     :
                     {
-                        fontFamily: "Montserrat", fontSize: 8,
+                        fontFamily: "Montserrat",
+                        beginAtZero: true,
                         callback: function (value, index, values) {
-                            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-                        }
+
+                            if (value < 1000000 && value > 1000) { values = Math.round(value) / 1000 + 'K ' }
+                            else if (value >= 1000000) { values = Math.round(value) / 1000000 + 'M ' }
+                            else if (value <= 1000 && value > 11) { values = Math.round(value) / 1 }
+                            else if (value <= 11) { values = Math.round(value) }
+                            return values
+                        },
                     },
             }],
         },
@@ -95,10 +106,10 @@ export const Chart = ({ graphData, title, dropdownName, stacked }) => {
     return (
         <>
             <BarChartGeneric options={options} data={data} height={dropdownName === "Employment" ? 170 :
-            dropdownName === "Household Income" ?
-             100 :
-             dropdownName === "Employment" ? 100:
-             210} />
+                dropdownName === "Household Income" ?
+                    100 :
+                    dropdownName === "Employment" ? 100 :
+                        210} />
         </>
     )
 }

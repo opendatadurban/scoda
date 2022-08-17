@@ -68,7 +68,7 @@ export const cityLabels = city => {
     case 'Buffalo City':
       return "BUF";
     case 'City of Cape Town':
-      return "CCT"
+      return "CPT"
     case 'City of Joburg':
       return "JHB"
     case 'Ekurhuleni':

@@ -97,7 +97,7 @@
         height: 12px;
         width: 12px;
         position: absolute;
-        right: 12px;
+        right: 13px;
         top: 50%;
         transform: translate(0, -50%);
         cursor: pointer;
@@ -240,16 +240,16 @@
     flex-direction: column;
     gap: 6px;
 
-    .dropdown_title{
+    .dropdown_title {
         font-family: 'Montserrat';
-font-style: normal;
-font-weight: 400;
-font-size: 10px;
-line-height: 12px;
-text-transform: uppercase;
-color: #2F3442;
-opacity: 0.8;
-margin-left: 45px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 10px;
+        line-height: 12px;
+        text-transform: uppercase;
+        color: #2F3442;
+        opacity: 0.8;
+        margin-left: 45px;
     }
 
     .mini_select {
@@ -266,12 +266,12 @@ margin-left: 45px;
         cursor: pointer;
 
 
-    
+
         &.macro_select {
             width: 29vw;
             height: 36.2px;
             border-radius: 28px;
-    
+
             .title {
                 display: flex;
                 align-items: center;
@@ -282,11 +282,11 @@ margin-left: 45px;
                 line-height: 13px;
                 color: #4A4A4A;
             }
-    
+
             .dropdownbox {
                 display: none;
                 box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    
+
                 &.show {
                     display: flex;
                     background-color: white;
@@ -298,7 +298,7 @@ margin-left: 45px;
                     right: 0;
                     z-index: 100;
                     border-radius: 5px;
-    
+
                     >p {
                         display: block;
                         font-family: 'Montserrat';
@@ -311,7 +311,7 @@ margin-left: 45px;
                 }
             }
         }
-    
+
         .title {
             display: flex;
             align-items: center;
@@ -322,11 +322,11 @@ margin-left: 45px;
             line-height: 13px;
             color: #4A4A4A;
         }
-    
+
         .dropdownbox {
             display: none;
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    
+
             &.show {
                 display: flex;
                 background-color: white;
@@ -338,7 +338,7 @@ margin-left: 45px;
                 right: 0;
                 z-index: 100;
                 border-radius: 5px;
-    
+
                 >p {
                     display: block;
                     font-family: 'Montserrat';
@@ -349,7 +349,7 @@ margin-left: 45px;
                     color: rgba(74, 74, 74, 1);
                     padding: 5px 0 5px 8px;
                     cursor: pointer;
-    
+
                     &:hover {
                         background-color: rgba($color: aqua, $alpha: 0.15);
                         transition: background-color 1s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -357,9 +357,9 @@ margin-left: 45px;
                 }
             }
         }
-    
-    
-    
+
+
+
         .chevron_icon {
             position: absolute;
             right: 10px;
@@ -367,8 +367,8 @@ margin-left: 45px;
             transform: translate(0, -50%);
             cursor: pointer;
         }
-    
-    
+
+
     }
 
 }

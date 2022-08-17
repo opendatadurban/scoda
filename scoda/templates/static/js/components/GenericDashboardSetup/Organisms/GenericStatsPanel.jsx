@@ -4,6 +4,10 @@ import { cityLabels } from '../helpers/helpers';
 import { getStatTotals, getEmploymentStatTotals,getDwellingsStatTotals } from '../helpers/statsBar';
 import { useGlobalClose } from '../../../context';
 
+const makeHumanReadable = (number) => {
+    return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, " ");
+}
+
 const initialValues = (dropName) => {
 
     const statsInit = dropName === "People and Households" ?
@@ -34,16 +38,16 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
     const [statsValues, setStats] = useState(initialValues(dropName))
     const [selected, setSelected] = useState('eThekwini')
 
-    // useEffect(() => {
-    //     if (dropName === "People and Households") {
-    //         getStatTotals(originalValues, cityLabels, setStats, selected)
-    //     } else if (dropName === "Employment" || dropName === "Household Income") {
-    //         getEmploymentStatTotals(setStats, selected)
-    //     }else if (dropName === "Dwellings") {
-    //         getDwellingsStatTotals(originalValues,cityLabels,setStats,selected)
-    //     }
+    useEffect(() => {
+        if (dropName === "People and Households") {
+            getStatTotals(originalValues, cityLabels, setStats, selected)
+        } else if (dropName === "Employment" || dropName === "Household Income") {
+            getEmploymentStatTotals(setStats, selected)
+        }else if (dropName === "Dwellings") {
+            getDwellingsStatTotals(originalValues,cityLabels,setStats,selected)
+        }
 
-    // }, [selected])
+    }, [selected])
 
     const globalCityDropDownClose = useGlobalClose()
 
@@ -55,16 +59,16 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                 <p className='catagory-name '>Household Overview:  <span>City Averages 2018</span></p>
                 <div className='row'>
                     <div className='stat'>
-                        <h1>{statsValues.totalHouseHoldsAverage[0]}</h1>
-                        <p > {statsValues.totalHouseHoldsAverage[1]}</p>
+                        <h1>{makeHumanReadable(statsValues.totalHouseHoldsAverage[0])}</h1>
+                        <p > {makeHumanReadable(statsValues.totalHouseHoldsAverage[1])}</p>
                     </div>
                     <div className='stat'>
-                        <h1>{statsValues.houseHoldSizeAverage[0]}</h1>
-                        <p>{statsValues.houseHoldSizeAverage[1]}</p>
+                        <h1>{makeHumanReadable(statsValues.houseHoldSizeAverage[0])}</h1>
+                        <p>{makeHumanReadable(statsValues.houseHoldSizeAverage[1])}</p>
                     </div>
                     <div className='stat'>
-                        <h1>{statsValues.populationDensityAverage[0]}</h1>
-                        <p>{statsValues.populationDensityAverage[1]}</p>
+                        <h1>{makeHumanReadable(statsValues.populationDensityAverage[0])}</h1>
+                        <p>{makeHumanReadable(statsValues.populationDensityAverage[1])}</p>
                     </div>
 
                 </div>
@@ -78,18 +82,18 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                 <div className='bottom'>
                     <div className='stat'>
                         {/* <h1 className={total_municipal_posts < total_mun_posts_sum ? 'green' : total_municipal_posts > total_mun_posts_sum ? 'red' : 'none'}>{total_municipal_posts}</h1> */}
-                        <h1>{statsValues.totalHouseHolds[0]}</h1>
-                        <p>{statsValues.totalHouseHolds[1]}</p>
+                        <h1>{makeHumanReadable(statsValues.totalHouseHolds[0])}</h1>
+                        <p>{makeHumanReadable(statsValues.totalHouseHolds[1])}</p>
                     </div>
                     <div className='stat'>
                         {/* <h1 className={municipal_management_vacancies < mangement_mun_posts_sum ? 'green' : municipal_management_vacancies > mangement_mun_posts_sum ? 'red' : 'none'}>{municipal_management_vacancies}</h1> */}
-                        <h1 >{statsValues.houseHoldSize[0]}</h1>
-                        <p>{statsValues.houseHoldSize[1]}</p>
+                        <h1 >{makeHumanReadable(statsValues.houseHoldSize[0])}</h1>
+                        <p>{makeHumanReadable(statsValues.houseHoldSize[1])}</p>
                     </div>
                     <div className='stat'>
                         {/* <h1 className={senior_posts_sum < senior_management_vacancies ? 'green' : senior_posts_sum > senior_management_vacancies ? 'red' : 'none'}>{senior_management_vacancies}</h1> */}
-                        <h1 >{statsValues.populationDensity[0]}</h1>
-                        <p>{statsValues.populationDensity[1]}</p>
+                        <h1 >{makeHumanReadable(statsValues.populationDensity[0])}</h1>
+                        <p>{makeHumanReadable(statsValues.populationDensity[1])}</p>
                     </div>
                 </div>
             </div>
@@ -102,24 +106,24 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                     <p className="heading">{statsValues.heading}</p>
                     <div className='row'>
                         <div className='stat'>
-                            <h1>{statsValues.salariesAve[0]}</h1>
-                            <p > {statsValues.salariesAve[1]}</p>
+                            <h1>{makeHumanReadable(statsValues.salariesAve[0])}</h1>
+                            <p > {makeHumanReadable(statsValues.salariesAve[1])}</p>
                         </div>
                         <div className='stat'>
-                            <h1>{statsValues.businessIncomeAve[0]}</h1>
-                            <p>{statsValues.businessIncomeAve[1]}</p>
+                            <h1>{makeHumanReadable(statsValues.businessIncomeAve[0])}</h1>
+                            <p>{makeHumanReadable(statsValues.businessIncomeAve[1])}</p>
                         </div>
                         <div className='stat'>
-                            <h1>{statsValues.remittancesAve[0]}</h1>
-                            <p>{statsValues.remittancesAve[1]}</p>
+                            <h1>{makeHumanReadable(statsValues.remittancesAve[0])}</h1>
+                            <p>{makeHumanReadable(statsValues.remittancesAve[1])}</p>
                         </div>
                         <div className='stat'>
-                            <h1>{statsValues.grantsAve[0]}</h1>
-                            <p>{statsValues.grantsAve[1]}</p>
+                            <h1>{makeHumanReadable(statsValues.grantsAve[0])}</h1>
+                            <p>{makeHumanReadable(statsValues.grantsAve[1])}</p>
                         </div>
                         <div className='stat'>
-                            <h1>{statsValues.otherAve[0]}</h1>
-                            <p>{statsValues.otherAve[1]}</p>
+                            <h1>{makeHumanReadable(statsValues.otherAve[0])}</h1>
+                            <p>{makeHumanReadable(statsValues.otherAve[1])}</p>
                         </div>
                     </div>
                 </div>
@@ -132,24 +136,24 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                     <p className="heading">{statsValues.heading}</p>
                     <div className='bottom'>
                         <div className='stat'>
-                            <h1>{statsValues.salaries[0]}</h1>
-                            <p > {statsValues.salaries[1]}</p>
+                            <h1>{makeHumanReadable(statsValues.salaries[0])}</h1>
+                            <p > {makeHumanReadable(statsValues.salaries[1])}</p>
                         </div>
                         <div className='stat'>
-                            <h1>{statsValues.businessIncome[0]}</h1>
-                            <p>{statsValues.businessIncome[1]}</p>
+                            <h1>{makeHumanReadable(statsValues.businessIncome[0])}</h1>
+                            <p>{makeHumanReadable(statsValues.businessIncome[1])}</p>
                         </div>
                         <div className='stat'>
-                            <h1>{statsValues.remittances[0]}</h1>
-                            <p>{statsValues.remittances[1]}</p>
+                            <h1>{makeHumanReadable(statsValues.remittances[0])}</h1>
+                            <p>{makeHumanReadable(statsValues.remittances[1])}</p>
                         </div>
                         <div className='stat'>
-                            <h1>{statsValues.grants[0]}</h1>
-                            <p>{statsValues.grants[1]}</p>
+                            <h1>{makeHumanReadable(statsValues.grants[0])}</h1>
+                            <p>{makeHumanReadable(statsValues.grants[1])}</p>
                         </div>
                         <div className='stat'>
-                            <h1>{statsValues.other[0]}</h1>
-                            <p>{statsValues.other[1]}</p>
+                            <h1>{makeHumanReadable(statsValues.other[0])}</h1>
+                            <p>{makeHumanReadable(statsValues.other[1])}</p>
                         </div>
                     </div>
                 </div>
@@ -161,20 +165,20 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                 <p className='catagory-name '>Household Overview:  <span>City Averages 2018</span></p>
                 <div className='row'>
                     <div className='stat'>
-                        <h1>{statsValues.formalTot[0]}</h1>
-                        <p > {statsValues.formalTot[1]}</p>
+                        <h1>{makeHumanReadable(statsValues.formalTot[0])}</h1>
+                        <p > {makeHumanReadable(statsValues.formalTot[1])}</p>
                     </div>
                     <div className='stat'>
-                        <h1>{statsValues.informalTot[0]}</h1>
-                        <p>{statsValues.informalTot[1]}</p>
+                        <h1>{makeHumanReadable(statsValues.informalTot[0])}</h1>
+                        <p>{makeHumanReadable(statsValues.informalTot[1])}</p>
                     </div>
                     <div className='stat'>
-                        <h1>{statsValues.traditionalTot[0]}</h1>
-                        <p>{statsValues.traditionalTot[1]}</p>
+                        <h1>{makeHumanReadable(statsValues.traditionalTot[0])}</h1>
+                        <p>{makeHumanReadable(statsValues.traditionalTot[1])}</p>
                     </div>
                     <div className='stat'>
-                        <h1>{statsValues.otherTot[0]}</h1>
-                        <p>{statsValues.otherTot[1]}</p>
+                        <h1>{makeHumanReadable(statsValues.otherTot[0])}</h1>
+                        <p>{makeHumanReadable(statsValues.otherTot[1])}</p>
                     </div>
                     
                 </div>
@@ -187,20 +191,20 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                 </div>
                 <div className='bottom'>
                     <div className='stat'>
-                        <h1>{statsValues.formal[0]}</h1>
-                        <p > {statsValues.formal[1]}</p>
+                        <h1>{makeHumanReadable(statsValues.formal[0])}</h1>
+                        <p > {makeHumanReadable(statsValues.formal[1])}</p>
                     </div>
                     <div className='stat'>
-                        <h1>{statsValues.informal[0]}</h1>
-                        <p>{statsValues.informal[1]}</p>
+                        <h1>{makeHumanReadable(statsValues.informal[0])}</h1>
+                        <p>{makeHumanReadable(statsValues.informal[1])}</p>
                     </div>
                     <div className='stat'>
-                        <h1>{statsValues.traditional[0]}</h1>
-                        <p>{statsValues.traditional[1]}</p>
+                        <h1>{makeHumanReadable(statsValues.traditional[0])}</h1>
+                        <p>{makeHumanReadable(statsValues.traditional[1])}</p>
                     </div>
                     <div className='stat'>
-                        <h1>{statsValues.other[0]}</h1>
-                        <p>{statsValues.other[1]}</p>
+                        <h1>{makeHumanReadable(statsValues.other[0])}</h1>
+                        <p>{makeHumanReadable(statsValues.other[1])}</p>
                     </div>
                 </div>
             </div>

@@ -9,7 +9,6 @@ import Sidebar_left from '../Sidebar_left'
 import { indicator_text_box_data } from './data/data';
 import { SelectContextState } from '../../context'
 
-
 const hhiDropdownNames = () => {
 
   const options = indicator_text_box_data.map((item, index) => {
@@ -61,7 +60,6 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
         colors, //color presets
         setOriginalValues
       )
-
     }
   }, [isNumber, selectedName])
 
@@ -95,7 +93,6 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
               toggle={toggle}
               isNumber={isNumber}
               selectedDropDownChart={selectedDropDownChart}
-
             />
           </div>
           <div className="spacer"></div>
