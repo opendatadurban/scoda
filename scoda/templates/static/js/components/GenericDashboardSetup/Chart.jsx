@@ -52,7 +52,7 @@ export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex }) =
                     fontFamily: "Montserrat",
                     min: 0,
                     max: 100,
-                    callback: function (value) { return value + "%" }
+                    callback: function (value) { return value + "" }
                 } : (chartIndex === 1 && dropdownName === "People and Households") ||
                 ((chartIndex === 3 || chartIndex === 4) && dropdownName === "Dwellings")? {
                     fontFamily: "Montserrat",

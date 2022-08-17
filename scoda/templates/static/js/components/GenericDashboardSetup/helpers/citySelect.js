@@ -478,7 +478,7 @@ export const eClearAll = (originalValues,setSelected,setOptions) => {
         newArr[1] = optionState[1]
         newArr[2] = optionState[2]
         newArr[3] = optionState[3]
-        newArr[4] = optionState[3]
+        newArr[4] = optionState[4]
   
         return [...newArr]
       })
@@ -537,7 +537,7 @@ export const dRemoveItem = (clickIndex,selected,setSelected,setChartGroup,setOpt
 
       let newArr = prev
 
-      let optionState = newArr.length > 1 ? newArr.map((chart, cIndex) => {
+      let optionState = newArr.length > 0 ? newArr.map((chart, cIndex) => {
 
         let optionChart = optionsTemp[cIndex]
 
@@ -552,9 +552,11 @@ export const dRemoveItem = (clickIndex,selected,setSelected,setChartGroup,setOpt
           return optionYear
         })
       }) : optionsTemp
-
+      console.log("X dwellings options", optionState)
       return [...optionState]
     })
+
+    let selectedStateOriginal = [ ]
 
     setSelected(prev => {
 
@@ -567,7 +569,6 @@ export const dRemoveItem = (clickIndex,selected,setSelected,setChartGroup,setOpt
         return chart.map((year, yIndex) => {
 
           let selectedYear = selectedChart[yIndex]
-          console.log(selectedYear,"setSelected")
           return selectedYear
         })
       })
