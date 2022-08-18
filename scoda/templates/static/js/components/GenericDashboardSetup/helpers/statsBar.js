@@ -5,9 +5,6 @@ export const getStatTotals = (originalValues, cityLabels, setStats, selected) =>
     let totalHouseHolds = 0
     let houseHoldSize = 0
     let populationDensity = 0
-    let totalHouseHoldsAverage = 0
-    let houseHoldSizeAverage = 0
-    let populationDensityAverage = 0
 
     if (originalValues.length < 1) return
     //Totals
@@ -38,43 +35,40 @@ export const getStatTotals = (originalValues, cityLabels, setStats, selected) =>
         populationDensity = values.values[valueIndex]
     })
 
-    //Averages
-    let thAverageCount = 0
-    let hsAverageCount = 0
-    let pdAverageCount = 0
-
-    originalValues[0].forEach((values, index) => {
-
-        if (values.year !== "2018") return
-
-        thAverageCount++
-        totalHouseHoldsAverage = values.values.reduce((a, b) => a + b, 0) / values.values.length
+    axios.get("/api/stats?indicator_id=704&average=True&year=2018").then(res=>{
+        setStats((prev) =>(
+            {...prev,
+                totalHouseHoldsAverage: [Math.round(res.data.total_average ) , "TOTAL Households"],
+            }    
+        ))
+    } )
+    axios.get(`/api/stats?indicator_id=1&average=True&year=2018&temp_indicator=${true}`).then(res=>{
+        setStats((prev)=>(
+            {...prev,
+                houseHoldSizeAverage: [Math.round(res.data.total_average ) , "Household size"],
+            }
+        ))
     })
+    axios.get("/api/stats?indicator_id=701&average=True&year=2018").then(res => {
+        setStats((prev) =>(
+            {...prev, 
+                populationDensityAverage: [Math.round(res.data.total_average) , "Population Density"]
+            }
+        )
+            
+        )
+    } )
+    // totalHouseHoldsAverage: [Math.round(totalHouseHoldsAverage ) , "TOTAL Households"],
+    // houseHoldSizeAverage: [Math.round(houseHoldSizeAverage ) , "Household size"],
+    // populationDensityAverage: [Math.round(populationDensityAverage ) , "Population Density"]
 
-    originalValues[1].forEach((values, index) => {
-
-        if (values.year !== "2018") return
-        hsAverageCount++
-        houseHoldSizeAverage = values.values.reduce((a, b) => a + b, 0) / values.values.length
-    })
-
-    originalValues[4].forEach((values, index) => {
-
-        if (values.year !== "2018") return
-
-        pdAverageCount++
-        populationDensityAverage = values.values.reduce((a, b) => a + b, 0) / values.values.length
-    })
-
-    setStats({
-
+    setStats((prev)=>({
+        ...prev,
         totalHouseHolds: [Math.round(totalHouseHolds ) , "TOTAL Households"],
         houseHoldSize: [Math.round(houseHoldSize ) , "Household size"],
         populationDensity: [Math.round(populationDensity ) , "Population Density"],
-        totalHouseHoldsAverage: [Math.round(totalHouseHoldsAverage ) , "TOTAL Households"],
-        houseHoldSizeAverage: [Math.round(houseHoldSizeAverage ) , "Household size"],
-        populationDensityAverage: [Math.round(populationDensityAverage ) , "Population Density"]
-    })
+
+    }))
 
 }
 
@@ -106,10 +100,10 @@ export const getEmploymentStatTotals = (setStats, selected) => {
 
                 newArr.salaries = [
                     Math.round(values.values[valueIndex] ) 
-                    , "Income from a business"]
+                    , "Salaries/wages/ commission"]
                 newArr.salariesAve = [
                     Math.round(salariesAve ) 
-                    , "Income from a business"
+                    , "Salaries/wages/ commission"
                 ]
                 return {...newArr}
             })

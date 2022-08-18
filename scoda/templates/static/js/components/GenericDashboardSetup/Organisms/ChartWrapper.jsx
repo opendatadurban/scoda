@@ -57,7 +57,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
   for (let i = 0; i < chartGroup.length; i++) {
 
     const element = chartGroup[i]
-
+    console.log(chartTitles)
     if (typeof (indicator_ids[i]) === "number") {
 
       const codebookUrl = `/scoda/toolkit#/codebook-explorer/${indicator_ids[i]}`
@@ -93,13 +93,13 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
           }} style={{ opacity: "0.4" }}>Raw Data</a>
         </div>
         <div className="chart">
-          <Chart graphData={element} title={"Average Number of People"} dropdownName={dropdownName} stacked={false} chartIndex={i} />
+          <Chart graphData={element} title={chartTitles.yAxes[i]} dropdownName={dropdownName} stacked={false} chartIndex={i} />
         </div>
         {error[i].errorThrown ?
           <div className="error_message">
             <div className="top">
               <p className="title">Sorry!</p>
-              <div className="cancel" onClick={() => { clearErrorState(i) }}><ErrorClose /></div>
+            <ErrorClose onClick={() => { clearErrorState(i) }} />
             </div>
             <p className="body">
               Raw data is not available for this indicator.

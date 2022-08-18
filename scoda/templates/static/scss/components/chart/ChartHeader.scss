@@ -88,7 +88,7 @@
             width: 70px;
 
             &:hover {
-                text-decoration: none;
+                color: #58C1AE ;
             }
         }
 
@@ -190,7 +190,10 @@
             }
 
             .cancel {
+                margin: 5px 5px 0 0;
                 cursor: pointer;
+                width: 12px;
+                height: 12px;
             }
         }
 
