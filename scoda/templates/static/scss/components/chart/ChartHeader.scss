@@ -1,5 +1,6 @@
 .chart_wrapper {
     position: relative;
+
     .heading_wrapper {
         display: flex;
         flex-direction: row;
@@ -18,7 +19,8 @@
             color: #2F3442;
             height: 32px;
             width: 261px;
-            .combination_year{
+
+            .combination_year {
                 font-size: 12px;
             }
         }
@@ -30,13 +32,15 @@
             font-size: 12px;
             line-height: 15px;
             color: #2F3442;
-            span{
+
+            span {
                 font-weight: 600;
                 font-size: 12px;
             }
         }
 
         .button_group {
+            display: flex;
 
             button {
                 border: 1px solid #B0B4B9;
@@ -45,7 +49,7 @@
                 padding: 0 9px;
             }
 
-           
+
             .number {
                 border-radius: 11px 0 0 11px;
                 background-color: #646B75;
@@ -57,9 +61,12 @@
                 text-align: center;
                 color: #FFFFFF;
                 outline: none;
-                &.deselect{
-                    color:#646B75;
+                border: 1px solid #646B75;
+
+                &.deselect {
+                    color: #646B75;
                     background-color: white;
+                    border: 1px solid #B0B4B9;
                 }
             }
 
@@ -75,13 +82,16 @@
                 color: #646B75;
                 outline: none;
                 margin-right: 20px;
-                &.select{
-                    color: white ;
+                border: 1px solid #B0B4B9;
+
+                &.select {
+                    color: white;
                     background-color: #646B75;
+                    border: 1px solid #646B75
                 }
             }
-         
-            
+
+
         }
 
         .link {
@@ -99,7 +109,7 @@
             width: 70px;
 
             &:hover {
-                color: #58C1AE ;
+                color: #58C1AE;
             }
         }
 
