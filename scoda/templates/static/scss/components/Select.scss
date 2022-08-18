@@ -135,7 +135,7 @@
         width: 28vw;
         height: 36.2px;
         border-radius: 28px;
-        margin-left:0;
+        margin-left: 0;
 
         .title {
             display: flex;
@@ -271,7 +271,7 @@
             width: 28vw;
             height: 36.2px;
             border-radius: 28px;
-            margin-left:0;
+            margin-left: 0;
 
             .title {
                 display: flex;
@@ -310,6 +310,12 @@
                         cursor: pointer;
                     }
                 }
+            }
+
+            .chevron_icon {
+                height: 12px;
+                width: 12px;
+                right: 13px;
             }
         }
 
