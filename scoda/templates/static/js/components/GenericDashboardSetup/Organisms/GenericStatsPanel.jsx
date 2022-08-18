@@ -20,8 +20,8 @@ const initialValues = (dropName) => {
         } :
         dropName === "Employment" || dropName === "Household Income" ? {
             heading: "Proportion of households whose main source of income is:",
-            salaries: [0, "Salaries/wages/commission"], businessIncome: [0, "Income from a business"], remittances: [0, "Remittances"], grants: [0, "Grants"], other: [0, "Other"],
-            salariesAve: [0, "Salaries/wages/commission"], businessIncomeAve: [0, "Income from a business"], remittancesAve: [0, "Remittances"], grantsAve: [0, "Grants"], otherAve: [0, "Other"]
+            salaries: [0, "Salaries/wages/ commission"], businessIncome: [0, "Income from a business"], remittances: [0, "Remittances"], grants: [0, "Grants"], other: [0, "Other"],
+            salariesAve: [0, "Salaries/wages/ commission"], businessIncomeAve: [0, "Income from a business"], remittancesAve: [0, "Remittances"], grantsAve: [0, "Grants"], otherAve: [0, "Other"]
         } :
         dropName === "Dwellings" ? {
             formal: [0, "Formal Dwelling"], informal: [0, "Informal Dwelling"], traditional: [0, "Traditional Dwelling"], other: [0, "Other Dwelling"], 
@@ -102,16 +102,20 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
 
                 <div className='first_panel'>
 
-                    <p className='catagory-name '>Household Overview:  <span>City Averages 2018</span></p>
+                    <p className='catagory-name '>
+                        {dropName === "Household Income"?
+                        "Main Source of Income: ":"Household Overview: " }
+                        <span>City Averages 2018</span>
+                        </p>
                     <p className="heading">{statsValues.heading}</p>
                     <div className='row'>
                         <div className='stat'>
                             <h1>{makeHumanReadable(statsValues.salariesAve[0])}%</h1>
-                            <p > {makeHumanReadable(statsValues.salariesAve[1])}</p>
+                            <p style={{width:'95px',display:"flex",textAlign:"center"}} > {makeHumanReadable(statsValues.salariesAve[1])}</p>
                         </div>
                         <div className='stat'>
                             <h1>{makeHumanReadable(statsValues.businessIncomeAve[0])}%</h1>
-                            <p>{makeHumanReadable(statsValues.businessIncomeAve[1])}</p>
+                            <p style={{width:'80px',display:"flex",textAlign:"center"}}>{makeHumanReadable(statsValues.businessIncomeAve[1])}</p>
                         </div>
                         <div className='stat'>
                             <h1>{makeHumanReadable(statsValues.remittancesAve[0])}%</h1>
@@ -129,7 +133,11 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                 </div>
                 <div className='second_panel'>
                     <div className='top'>
-                        <p className='catagory-name'> Household Overview: <span>Municipality Focus 2018</span></p>
+                        <p className='catagory-name'>
+                        {dropName === "Household Income"?
+                        "Main Source of Income:":"Household Overview:" }
+                             <span>Municipality Focus 2018
+                                </span></p>
 
                         <MiniSelect names={['Buffalo City', 'City of Cape Town', 'City of Joburg', 'Ekurhuleni', 'eThekwini', 'Mangaung', 'Msunduzi', 'Nelson Mandela Bay', 'Tshwane']} setSelected={setSelected} selected={selected} />
                     </div>
@@ -137,11 +145,11 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                     <div className='bottom'>
                         <div className='stat'>
                             <h1>{makeHumanReadable(statsValues.salaries[0])}%</h1>
-                            <p > {makeHumanReadable(statsValues.salaries[1])}</p>
+                            <p style={{width:'95px',display:"flex",textAlign:"center" }} > {makeHumanReadable(statsValues.salaries[1])}</p>
                         </div>
                         <div className='stat'>
                             <h1>{makeHumanReadable(statsValues.businessIncome[0])}%</h1>
-                            <p>{makeHumanReadable(statsValues.businessIncome[1])}</p>
+                            <p style={{width:'80px',display:"flex",textAlign:"center"}}>{makeHumanReadable(statsValues.businessIncome[1])}</p>
                         </div>
                         <div className='stat'>
                             <h1>{makeHumanReadable(statsValues.remittances[0])}%</h1>
@@ -162,7 +170,7 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
 
             <div className='first_panel'>
 
-                <p className='catagory-name '>Household Overview:  <span>City Averages 2018</span></p>
+                <p className='catagory-name '>Dwelling Type:  <span>City Averages 2018</span></p>
                 <div className='row'>
                     <div className='stat'>
                         <h1>{makeHumanReadable(statsValues.formalTot[0])}%</h1>

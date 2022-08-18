@@ -86,8 +86,9 @@ const CitizenEngagment = () => {
     setLocalRegistered_voters([])
     setLocalTurnout([])
   }
+
   const onChange = (e) => {
-    console.log(e,"whats happening?")
+  
     setSelectValues(e)
     emptyChartsData()
     axios.get(`/api/explore/codebook?indicator_id=989`)
@@ -183,7 +184,7 @@ const CitizenEngagment = () => {
       }
       current_year = current_year + 1
     }
-    console.log('voter_turnout', data)
+    
     setTurnout(data)
 }
 
@@ -216,7 +217,6 @@ const registered_voters_callback = (table)=>{
     }
     current_year = current_year + 1
   }
-  console.log('setRegistered_voters', data)
   setRegistered_voters(data)
 }
 const local_voter_turnout_callback = (table)=>{
@@ -248,7 +248,6 @@ const local_voter_turnout_callback = (table)=>{
     }
     current_year = current_year + 1
   }
-  console.log('local_voter_turnout_callback', data)
   setLocalTurnout(data)
 }
 const local_registered_voters_callback = (table)=>{
@@ -280,7 +279,6 @@ const local_registered_voters_callback = (table)=>{
     }
     current_year = current_year + 1
   }
-  console.log('LocalRegistered_voters', data)
   setLocalRegistered_voters(data)
 }
 

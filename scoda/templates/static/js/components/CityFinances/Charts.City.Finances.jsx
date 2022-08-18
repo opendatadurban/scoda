@@ -139,7 +139,7 @@ const CitizenEngagmentes = () => {
   ]);
 
   useEffect(() => {
-    console.log(data)
+  
     if (!mounted.current) {
       //equivilent to componentdidmount
       func_wasteful_expenditure();
