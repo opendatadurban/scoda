@@ -71,8 +71,10 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
 
           {dropdownName === "Household Income" ?
             <div className="button_group">
-              <button className="number" onClick={() => { toggle(true) }}>Number</button>
-              <button className="percent" onClick={() => { toggle(false) }}>Percent</button>
+              <button className={isNumber?"number":"number deselect"} onClick={() => { toggle(true) }}
+            
+              >Number</button>
+              <button className={isNumber ? "percent": "percent select"}  onClick={() => { toggle(false) }}>Percent</button>
               <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
             </div> :
             <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
@@ -112,7 +114,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
 
       items.push(<div className='chart_wrapper' key={i.toString()} >
         <div className='heading_wrapper'>
-          <p className='heading'>{chartTitles.main[i]}<span className="combination_year">(2018)</span></p>
+          <p className='heading'>{chartTitles.main[i]}<span className="combination_year">{" (2018)"}</span></p>
           <a className='link' onClick={() => {
             setErrorState(i)
           }} style={{ opacity: "0.4" }}>Raw Data</a>

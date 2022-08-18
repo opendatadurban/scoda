@@ -102,7 +102,11 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
 
                 <div className='first_panel'>
 
-                    <p className='catagory-name '>Household Overview:  <span>City Averages 2018</span></p>
+                    <p className='catagory-name '>
+                        {dropName === "Household Income"?
+                        "Main Source of Income: ":"Household Overview: " }
+                        <span>City Averages 2018</span>
+                        </p>
                     <p className="heading">{statsValues.heading}</p>
                     <div className='row'>
                         <div className='stat'>
@@ -129,7 +133,11 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                 </div>
                 <div className='second_panel'>
                     <div className='top'>
-                        <p className='catagory-name'> Household Overview: <span>Municipality Focus 2018</span></p>
+                        <p className='catagory-name'>
+                        {dropName === "Household Income"?
+                        "Main Source of Income:":"Household Overview:" }
+                             <span>Municipality Focus 2018
+                                </span></p>
 
                         <MiniSelect names={['Buffalo City', 'City of Cape Town', 'City of Joburg', 'Ekurhuleni', 'eThekwini', 'Mangaung', 'Msunduzi', 'Nelson Mandela Bay', 'Tshwane']} setSelected={setSelected} selected={selected} />
                     </div>
@@ -162,7 +170,7 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
 
             <div className='first_panel'>
 
-                <p className='catagory-name '>Household Overview:  <span>City Averages 2018</span></p>
+                <p className='catagory-name '>Dwelling Type:  <span>City Averages 2018</span></p>
                 <div className='row'>
                     <div className='stat'>
                         <h1>{makeHumanReadable(statsValues.formalTot[0])}%</h1>

@@ -213,7 +213,7 @@
                 grid-row-gap: 21px;
                 grid-template-columns: calc((100vw/3) - (154px/3)) calc((100vw/3) - (154px/3)) calc((100vw/3) - (154px/3));
                 background-color: white;
-                padding: 30px;
+                padding: 15px 30px 15px 30px;
                 position: relative;
                 border-radius: 0 0 5px 5px;
 
@@ -222,9 +222,9 @@
                     position: absolute;
                     width: 2px;
                     background: #F1F1F1;
-                    height: calc(100% - 60px);
+                    height: calc(100% - 30px);
                     left: calc( (2*(100vw/3) - 2*(154px/3)) + 32px + 30px + 15px);
-                    top: 30px;
+                    top: 15px;
                 }
             }
 
@@ -261,7 +261,7 @@
                 grid-row-gap: 10px;
                 grid-template-columns: 62.5vw 40vw;
                 background-color: white;
-                padding: 32px;
+                padding: 12px 32px;
                 position: relative;
                 border-radius: 0 0 5px 5px;
 
@@ -270,9 +270,9 @@
                     position: absolute;
                     width: 2px;
                     background: #F1F1F1;
-                    height: calc(100% - 60px);
+                    height: calc(100% - 24px);
                     left: calc(30px + 62.5vw + 32px);
-                    top: 30px;
+                    top: 12px;
                 }
             }
 
