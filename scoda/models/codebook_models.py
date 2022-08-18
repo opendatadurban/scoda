@@ -4,7 +4,8 @@ from wtforms import StringField, validators, SelectField, SelectMultipleField, I
 from sqlalchemy import func
 from sqlalchemy.orm import relationship
 from wtforms.widgets import TextArea, HiddenInput
-
+from wtforms import SelectField
+from wtforms.validators import DataRequired
 from sqlalchemy import (
     Column,
     Date,
@@ -231,3 +232,17 @@ class CbSource(db.Model):
 
     def __repr__(self):
         return "<CbSource='%s'>" % (self.name)
+
+class APIForm(Form):
+
+    indicator_id     = IntegerField('Select indicator_id', [DataRequired()], coerce=int, id="unit_measurement_id")
+    city     = SelectField('Select city', [DataRequired()], coerce=int, id="line_id")
+    year     = SelectField('Select year', [DataRequired()], coerce=int, id="mixer_id")
+
+    # date_fill = DateField('Select shift time', [DataRequired()], id="date_fill")
+    def __init__(self, *args, **kwargs):
+        super(APIForm, self).__init__(*args, **kwargs)
+        city_choices = db.session.query(CbRegion.id, CbRegion.name).all()
+        self.city.choices = [[i[0], i[1]] for i in city_choices]
+        year_choices = db.session.query(CbYear.id, CbYear.name).all()
+        self.year.choices = [[i[0], i[1]] for i in year_choices]

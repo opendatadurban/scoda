@@ -79,13 +79,18 @@ def explore_new():
 @app.route('/api/stats', methods=['GET', 'POST'])
 def indicator_stats():
     indicator_id = request.args.get('indicator_id')
+    codebook = True
     if not indicator_id:
         return jsonify({"message": "Please choose an indicator"}), 404
     city = request.args.get('city')
     avg_filter = request.args.get('average')
     year_filter = request.args.getlist('year')
     if avg_filter:
-        return IndicatorService().average_calculation(city=city,indicator_id=indicator_id,year_filter=year_filter)
+        return IndicatorService().average_calculation(city=city,
+                                                      indicator_id=indicator_id,
+                                                      year_filter=year_filter,
+                                                      temp_indicator_check=
+                                                      True if request.args.getlist('temp_indicator') else False)
     return jsonify({"message": "No filters selected"}), 404
 
 @app.route('/api/explore/', defaults={'check': ''})
@@ -337,7 +342,7 @@ def api_explore_temp():
     indicator_id = request.args.get('indicator_id')
     city = request.args.get('city')
     year_filter = request.args.getlist('year')
-    # codebook query
+    # non codebook query
     query = db.session.query(CbTempIndicators.re_name, CbTempIndicators.start_dt,
                              CbTempIndicators.ds_name, CbTempIndicators.value,
                              CbTempIndicators.year).filter(CbTempIndicators.indicator_id == indicator_id)
@@ -381,10 +386,31 @@ def api_explore_temp():
               "years":yrs}
     return jsonify(payload)
 
+@app.route('/search-api', methods=['GET', 'POST'])
+def api_search():
+    form = APIForm()
+    if request.method == 'POST' and form.validate():
+
+        print(request.data)
+    return render_template('indicators-api/generate-api.html',form=form,form_url='/search-api')
+
 class IndicatorService():
 
     def __init__(self):
         self.safe = 1
+
+    def df_temp_query(self,city:str,year_filter,indicator_id:int):
+        # non codebook query
+        query = db.session.query(CbTempIndicators.re_name, CbTempIndicators.start_dt,
+                                 CbTempIndicators.ds_name, CbTempIndicators.value,
+                                 CbTempIndicators.year).filter(CbTempIndicators.indicator_id == indicator_id)
+        if city:
+            query = query.filter(CbTempIndicators.re_name == city)
+        if year_filter:
+            query = query.filter(CbTempIndicators.year.in_([int(yr) for yr in year_filter]))
+        df = read_sql_query(query.statement, query.session.bind)
+        df = df.drop_duplicates()
+        return df
 
     def df_query(self,city:str,year_filter,indicator_id:int):
         query = db.session.query(CbRegion.name.label('re_name'), CbDataPoint.start_dt,
@@ -417,8 +443,11 @@ class IndicatorService():
         df = df.drop_duplicates()
         return df
 
-    def average_calculation(self,city:str,year_filter,indicator_id:int):
-        df = self.df_query(city=city,indicator_id=indicator_id,year_filter=year_filter)
+    def average_calculation(self,city:str,year_filter,indicator_id:int,temp_indicator_check:bool):
+        if temp_indicator_check:
+            df = self.df_temp_query(city=city,indicator_id=indicator_id,year_filter=year_filter)
+        else:
+            df = self.df_query(city=city,indicator_id=indicator_id,year_filter=year_filter)
         if df.empty:
             return jsonify({"message": "No data found"}), 400
         if not year_filter:
