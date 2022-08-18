@@ -42,6 +42,7 @@ export const ChartGrid = ({ indicator_ids,
     clearAll: hiClearAll,
   } : {}
 
+
   const hhiDash = dropdownName === "Household Income"
   const globalCityDropDownClose = useGlobalClose()
 

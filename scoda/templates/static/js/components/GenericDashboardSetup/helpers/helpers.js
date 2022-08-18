@@ -188,3 +188,61 @@ export const tableData = (table, cities) => {
   return graphData
 }
 
+export const isNewApiIndicator= (indicator) => {
+
+  /*Check if indicator id belongs to the new API
+    if not returns false
+    This can be expanded upon as the number and complexity of dashboards increase
+    build this out as you add new charts for seperation of concerns and readability */
+
+  const isNewApi = (indicator !== "n1" && indicator !== "n8" && indicator !== "n35" && indicator !== "n36"
+                    && indicator !== "n37" && indicator !== "n38" && indicator !== "combination" &&
+                    indicator !== "indicator text box")
+
+  return isNewApi
+}
+
+export const isCombinationIndicator = (indicator) => {
+
+  /*Checks if indicator id is for a chart which represents a combination of
+  other charts data within the same dashboard pages
+  build this out as you add new charts for seperation of concerns and readability
+  */
+
+  const isCombinationChart = (indicator === "combination")
+
+  return isCombinationChart
+
+}
+
+export const isOldApiIndicator = (indicator) => {
+
+  /*Checks if indicator id belongs to the older API/api-temp
+    build this out as you add new charts for seperation of concerns and readability */
+
+  const isOldApi = (typeof (indicator) === "string" && indicator.charAt(0) === "n")
+
+  return isOldApi
+}
+
+export const isTextBoxIndicator = (indicator) => {
+
+  /*Check if indicator id is for a non-chart entity within the ChartGrid Layout
+    right now there is only a text box, but this could be any other type of component.
+    build this out as you add new charts for seperation of concerns and readability */
+
+  const isTextBox = (typeof (indicator) === "string" && indicator === "indicator text box")
+
+  return isTextBox
+}
+
+export const chartHeights = (dropdownName) => {
+
+  /* Create a conditional list of chart heights specified for each dashboard*/
+
+  const heightByDropName = (dropdownName === "Employment" ? 170 
+  : dropdownName === "Household Income" ? 100 
+  : 210) // 210 is the fallback value if height not specified
+
+  return heightByDropName
+}

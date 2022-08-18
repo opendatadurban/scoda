@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { cityLabels, combinationColors, secondaryColors } from '../helpers/helpers'
+import { cityLabels, combinationColors, isCombinationIndicator, isNewApiIndicator, isOldApiIndicator, isTextBoxIndicator, secondaryColors } from '../helpers/helpers'
 import { tableData } from '../helpers/helpers'
 import { indicator_text_box_data } from './data'
 
@@ -14,20 +14,19 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
 
   indicator_ids.forEach(id => {
 
-    if (id !== "n1" && id !== "n8" && id !== "n35" && id !== "n36" && id !== "n37" && id !== "n38"
-      && id !== "combination" && id !== "indicator text box") {
+    if (isNewApiIndicator(id)) {
 
       indicator_id_requests.push({ request: axios.get(newApiUri + id), type: "new" })
     } 
-    else if (id === "combination") {
+    else if (isCombinationIndicator(id)) {
 
       indicator_id_requests.push({ request: { data: [] }, type: "combination" })
     } 
-    else if (typeof (id) === "string" && id.charAt(0) === "n") {
+    else if (isOldApiIndicator(id)) {
 
       indicator_id_requests.push({ request: axios.get(oldApiUri + id.substring(1)), type: "old" })
     } 
-    else if (typeof (id) === "string" && id === "indicator text box") {
+    else if (isTextBoxIndicator(id)) {
 
       indicator_id_requests.push({ request: { data: [] }, type: "indicator text box" })
     }
@@ -62,7 +61,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
               item['color'] = secondaryColors[colorCount]
             }
 
-            item.labels = item.labels.map((city) => cityLabels(city))
+            item.labels = item.labels.sort().map((city) => cityLabels(city))
 
             filterData.push(item)
 
@@ -70,7 +69,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
           })
         } else if (indicator_id_requests[index].type === "old") {
 
-          const table = tableData(chart.data.table, chart.data.cities)
+          const table = tableData(chart.data.table, chart.data.cities.sort())
 
           filterData.push(...table)
         } else if (indicator_id_requests[index].type === "combination") {

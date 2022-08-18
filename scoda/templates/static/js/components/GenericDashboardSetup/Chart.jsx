@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import { BarChartGeneric } from '../BarChartGeneric';
-import { cityLabels } from './helpers/helpers';
+import { cityLabels,chartHeights } from './helpers/helpers';
 
 export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex }) => {
     const options = {
@@ -52,13 +52,7 @@ export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex }) =
                     min: 0,
                     max: 100,
                     callback: function (value) { return value + "" }
-                } : (chartIndex === 1 && dropdownName === "People and Households") ||
-                    ((chartIndex === 3 || chartIndex === 4) && dropdownName === "Dwellings") ? {
-                    fontFamily: "Montserrat",
-                    beginAtZero: true,
-                    step: 0.5,
-                    stepValue: 0.5
-                }
+                } 
                     :
                     {
                         fontFamily: "Montserrat",
@@ -68,7 +62,7 @@ export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex }) =
                             if (value < 1000000 && value > 1000) { values = Math.round(value) / 1000 + 'K ' }
                             else if (value >= 1000000) { values = Math.round(value) / 1000000 + 'M ' }
                             else if (value <= 1000 && value > 11) { values = Math.round(value) / 1 }
-                            else if (value <= 11) { values = Math.round(value) }
+                            else if (value <= 11) { values = value }
                             return values
                         },
                     },
@@ -104,11 +98,7 @@ export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex }) =
 
     return (
         <>
-            <BarChartGeneric options={options} data={data} height={dropdownName === "Employment" ? 170 :
-                dropdownName === "Household Income" ?
-                    100 :
-                    dropdownName === "Employment" ? 100 :
-                        210} />
+            <BarChartGeneric options={options} data={data} height={chartHeights(dropdownName)} />
         </>
     )
 }
