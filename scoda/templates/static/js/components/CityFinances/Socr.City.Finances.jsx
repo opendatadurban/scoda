@@ -20,6 +20,26 @@ const subNavContent = {
           name: "Municipal Human Resources", 
           href: "socr#/human_resources", 
           active: false 
+        },
+        {
+          name: "People and Households",
+          href: "socr#/people_household",
+          active: false
+        },
+        {
+          name: "Employment",
+          href: "socr#/employment",
+          active: false
+        },
+        {
+          name: "Dwellings",
+          href: "socr#/dwellings",
+          active: false
+        },
+        {
+          name: "Household Income",
+          href: "socr#/household_income",
+          active: false
         }
     ]
   }
