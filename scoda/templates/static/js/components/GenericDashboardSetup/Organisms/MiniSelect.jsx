@@ -7,7 +7,6 @@ export const MiniSelect = ({ names, selected, setSelected, chartDropName}) => {
     const [show, visibility] = useState(false)
 
     const select = (index) => {
-        console.log(names[index],"dropname thing")
         setSelected(typeof (names[index]) === "string" ? names[index] : names[index].shortName)
     }
 
