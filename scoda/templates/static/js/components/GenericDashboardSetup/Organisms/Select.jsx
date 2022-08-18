@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect } from 'react'
 import { XIcon, Line, ChevronDown } from '../../../../svg_components/SelectIcons'
 import '../../../../scss/components/Select.scss'
-import { SelectContext, useSelectOpen } from '../../../context'
+import { useSelectOpen } from '../../../context'
 
 export const Select = ({ chartData, originalValues, selected, options,
     setSelected, setChartGroup, setOptions,
@@ -17,7 +17,7 @@ export const Select = ({ chartData, originalValues, selected, options,
     const selectedOptions = () => {
 
         let filtered = []
-        
+
         if (chartDropName === "People and Households") {
             chartData.forEach((chart, index) => {
 

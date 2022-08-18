@@ -27,7 +27,7 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
   const [originalValues, setOriginalValues] = useState([])
 
   const [selectedChart, setSelectedChart] = useState(0)
-  const [selectedName, setSelectedName] = useState(hhiDropdownNames()[selectedChart].shortName)
+  const [selectedName, setSelectedName] = useState(hhiDropdownNames()[0].shortName)
   const [isNumber, toggle] = useState(true)
 
   useEffect(() => {
@@ -44,11 +44,11 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
   useEffect(() => {
 
     if (dropdownName === "Household Income") {
-
+    
       let chartDropDownNames = hhiDropdownNames().map(item => {
         return item.shortName
       })
-
+     
       setSelectedChart(
         chartDropDownNames.indexOf(selectedName)
       )
@@ -61,7 +61,7 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
         setOriginalValues
       )
     }
-  }, [isNumber, selectedName])
+  }, [isNumber, selectedName,selectedChart])
 
   const selectedDropDownChart = hhiDropdownNames().map(item => {
     return item.shortName
@@ -70,8 +70,7 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
   return (
     chartGroup.length === gridItems ?
       <SelectContextState>
-        <div className='people_household_dashboard' >
-
+        <div className='people_household_dashboard'>
           <Subnav name='State of Cities Reports' dropdownName={dropdownName} dropDownItem={subNavContent} buttonText="Download as PNG" />
           <Sidebar_left />
           <div id='content' >

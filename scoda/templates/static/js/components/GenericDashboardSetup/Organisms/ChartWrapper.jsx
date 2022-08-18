@@ -17,6 +17,8 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
     setName(indicator_text_box_data[selectedDropDownChart][isNumber ? "number" : "percent"].name)
   }, [isNumber, selectedDropDownChart])
 
+  const viewCodebookIndicator = indicator_text_box_data[selectedDropDownChart].endpoints[isNumber ? 1 : 0]
+
   const setErrorState = (index) => {
     const newState = error.map((obj, errorIndex) => {
 
@@ -62,7 +64,11 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
 
       items.push(<div className='chart_wrapper' key={i.toString()} >
         <div className='heading_wrapper'>
-          <div className='heading'>{chartTitles.main[i]}</div>
+          {dropdownName === "Household Income" ?
+            <p className="title">Main Source of Income:<span className="category">{selectedName.split(":")[1]}</span></p> :
+            <div className='heading'>{chartTitles.main[i]}</div>
+          }
+
           {dropdownName === "Household Income" ?
             <div className="button_group">
               <button className="number" onClick={() => { toggle(true) }}>Number</button>
@@ -106,14 +112,30 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
 
       items.push(<div className='chart_wrapper' key={i.toString()} >
         <div className='heading_wrapper'>
-          <div className='heading'>{chartTitles.main[i]}</div>
-          <a className='link' href={'/scoda/toolkit#/codebook-explorer/8'} target='_blank' >Raw Data</a>
+          <p className='heading'>{chartTitles.main[i]}<span className="combination_year">(2018)</span></p>
+          <a className='link' onClick={() => {
+            setErrorState(i)
+          }} style={{ opacity: "0.4" }}>Raw Data</a>
         </div>
         <div className="chart">
           <Chart graphData={element} title={chartTitles.yAxes[i]} dropdownName={dropdownName} stacked={true} />
         </div>
+        {error[i].errorThrown ?
+          <div className="error_message">
+            <div className="top">
+              <p className="title">Sorry!</p>
+              <div className="cancel" onClick={() => { clearErrorState(i) }}><ErrorClose /></div>
+            </div>
+            <p className="body">
+              Raw data is not available for this indicator.
+            </p>
+          </div> : ""
+
+        }
       </div>)
     } else if (indicator_ids[i] === "indicator text box") {
+
+      const codebookUrlForText = `/scoda/toolkit#/codebook-explorer/${viewCodebookIndicator}`
 
       items.push(<div className='chart_wrapper' key={i.toString()} >
         <div className='heading_wrapper text_box'>
@@ -128,6 +150,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
             <p className="code">{selectedCode}</p>
             <p className="name">{selectedName}</p>
           </div>
+          <a className="view_codebook" href={codebookUrlForText} target='_blank'>View Indicator in the Codebook</a>
         </div>
       </div>)
     }
