@@ -103,7 +103,7 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                 <div className='first_panel'>
 
                     <p className='catagory-name '>
-                        Main Source of Income:  
+                        {"Main Source of Income: "}  
                         <span>City Averages 2018</span>
                         </p>
                     <p className="heading">{statsValues.heading}</p>
@@ -133,7 +133,7 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                 <div className='second_panel'>
                     <div className='top'>
                         <p className='catagory-name'>
-                        Main Source of Income:
+                        {"Main Source of Income: "} 
                              <span>Municipality Focus 2018
                                 </span></p>
 

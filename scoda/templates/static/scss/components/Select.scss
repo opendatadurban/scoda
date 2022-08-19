@@ -131,51 +131,7 @@
     margin-left: 45px;
     cursor: pointer;
 
-    &.macro_select {
-        width: 28vw;
-        height: 36.2px;
-        border-radius: 28px;
-        margin-left: 0;
-
-        .title {
-            display: flex;
-            align-items: center;
-            font-family: 'Montserrat';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 13.6px;
-            line-height: 13px;
-            color: #4A4A4A;
-        }
-
-        .dropdownbox {
-            display: none;
-            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
-            &.show {
-                display: flex;
-                background-color: white;
-                flex-direction: column;
-                align-items: flex-start;
-                position: absolute;
-                width: 29vw;
-                top: calc(100% + 10px);
-                right: 0;
-                z-index: 100;
-                border-radius: 5px;
-
-                >p {
-                    display: block;
-                    font-family: 'Montserrat';
-                    font-style: normal;
-                    font-weight: 400;
-                    font-size: 13.6px;
-                    line-height: 13px;
-                    cursor: pointer;
-                }
-            }
-        }
-    }
+    
 
     .title {
         display: flex;
