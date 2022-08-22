@@ -22,10 +22,9 @@ export default class CodebookDatatable extends Component {
     componentDidMount() {
         axios.get('/api/codebook/1').then(res => {
             const copyData = res.data.slice(1, res.data.length);
-
+            this.setState({isSelection: true})
             this.setOpen(copyData);
         });
-
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -368,7 +367,7 @@ export default class CodebookDatatable extends Component {
 
     render() {
         return(
-            <div className="data-table" onScroll={(event) => this.trackScrolling(event)}>
+            <div className="data-table">
               {!window.innerWidth <= 768
                 ? this.renderDesktopTable() : this.renderMobileTable()
               }
