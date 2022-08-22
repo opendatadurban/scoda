@@ -181,17 +181,17 @@
             }
 
             .double {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                padding-right: 30px;
+              display:flex;
+              flex-direction: row;
+              
+position: relative;
 
                 .conditional_select_wrapper {
                     display: flex;
                     flex-direction: column;
                     gap: 6px;
-                    width: 28vw;
+                   
+
                     .select_title {
                         margin-left: 45px;
                         font-family: 'Montserrat';
@@ -202,6 +202,72 @@
                         text-transform: uppercase;
                         color: #2F3442;
                         opacity: 0.8;
+                    }
+                }
+                .title_wrapper{
+                    position: absolute;
+                    left: calc(45px + 63vw + 30px);
+                    .dropdown_title{
+
+                    }
+                    .macro_select {
+                        display: inline!important;
+                        width: 400px !important;
+                        height: 36.2px;
+                        border-radius: 28px;
+                    
+                        position: relative;
+    
+                        >.title {
+                            position: absolute;
+                            top: 50%;
+                            left:12px;
+                            transform: translate(0,-50%);
+                            display: block!important;      
+                            width: 280px!important;
+                            white-space: nowrap!important;
+                            overflow: hidden!important;
+                         
+                            text-overflow: ellipsis!important;
+                            align-items: center;
+                            font-family: 'Montserrat';
+                            font-style: normal;
+                            font-weight: 400;
+                            font-size: 13.6px;
+                            line-height: 13px;
+                            color: #4A4A4A;
+    
+                        }
+    
+                }
+
+                
+                    .dropdownbox {
+                        display: none;
+                        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+                        &.show {
+                            display: flex;
+                            background-color: white;
+                            flex-direction: column;
+                            align-items: flex-start;
+                            position: absolute;
+                            width: 400px;
+                            top: calc(100% + 10px);
+                            right: 0;
+                            z-index: 100;
+                            border-radius: 5px;
+
+                            >p {
+                                display: block;
+                                font-family: 'Montserrat';
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 13.6px;
+                                line-height: 13px;
+                                cursor: pointer;
+                            }
+                        }
                     }
                 }
             }
@@ -223,13 +289,13 @@
                     width: 2px;
                     background: #F1F1F1;
                     height: calc(100% - 30px);
-                    left: calc( (2*(100vw/3) - 2*(154px/3)) + 32px + 30px + 15px);
+                    left: calc((2*(100vw/3) - 2*(154px/3)) + 32px + 30px + 15px);
                     top: 15px;
                 }
             }
 
             .grid-container-4 {
-// 30 outside + 50 inside + 32px : spacing excluding chart blocks
+                // 30 outside + 50 inside + 32px : spacing excluding chart blocks
                 display: grid;
                 grid-column-gap: 32px;
                 grid-row-gap: 10px;
@@ -249,13 +315,13 @@
                     top: 10px;
                 }
 
-                .chart_wrapper > .heading_wrapper > .heading{
+                .chart_wrapper>.heading_wrapper>.heading {
                     width: 418px;
                 }
             }
 
             .grid-2-text {
-// 30 outside + 60 inside + 64px 
+                // 30 outside + 60 inside + 64px 
                 display: grid;
                 grid-column-gap: 60px;
                 grid-row-gap: 10px;
