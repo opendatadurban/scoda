@@ -109,35 +109,35 @@ export default class CodebookDatatable extends Component {
         return code.match(/(?:)([0-9]+)/)[0];
     }
 
-    fetchData() {
-        let nextPage = this.state.currentPage + 1;
+    // fetchData() {
+    //     let nextPage = this.state.currentPage + 1;
 
-        axios.get(`/api/codebook/${nextPage}`).then(res => {
-            const copyData = res.data.slice(1, res.data.length);
-            // Append open property to each parent item
-            for(let item of copyData) {
-                item.open = false;
-            }
+    //     axios.get(`/api/codebook/${nextPage}`).then(res => {
+    //         const copyData = res.data.slice(1, res.data.length);
+    //         // Append open property to each parent item
+    //         for(let item of copyData) {
+    //             item.open = false;
+    //         }
 
-            const combinedData = [...this.state.data, ...copyData];
+    //         const combinedData = [...this.state.data, ...copyData];
 
-            this.setState({
-                data: combinedData,
-                currentPage: nextPage,
-                isLoading: false,
-            });
-        });
-    }
+    //         this.setState({
+    //             data: combinedData,
+    //             currentPage: nextPage,
+    //             isLoading: false,
+    //         });
+    //     });
+    // }
 
-    trackScrolling(event) {
-        const bottom = event.target.scrollHeight - event.target.scrollTop === event.target.clientHeight;
-        if (bottom) {
-            this.setState({
-                isLoading: true
-            });
-            this.fetchData();
-        }
-    }
+    // trackScrolling(event) {
+    //     const bottom = event.target.scrollHeight - event.target.scrollTop === event.target.clientHeight;
+    //     if (bottom) {
+    //         this.setState({
+    //             isLoading: true
+    //         });
+    //         this.fetchData();
+    //     }
+    // }
 
     renderDesktopChildren(parent) {
         const { selected } = this.state
