@@ -12,7 +12,8 @@ export default class CodebookDatatable extends Component {
             filters: this.props.filteredData,
             selected: null,
             currentPage: 1,
-            isLoading: false
+            isLoading: false,
+            isSelection: false
         };
 
         this.selectChild = this.selectChild.bind(this);
@@ -31,10 +32,11 @@ export default class CodebookDatatable extends Component {
         if(prevProps.filteredData !== this.props.filteredData) {
             axios.post('/api/codebook/1', this.props.filteredData).then(data => {
                 const copyData = data.data.slice(1, data.data.length);
-
+                this.setState({isSelection: true})
                this.setOpen(copyData);
             });
         }
+        
     }
 
     setOpen(data) {
@@ -109,16 +111,16 @@ export default class CodebookDatatable extends Component {
 
     // fetchData() {
     //     let nextPage = this.state.currentPage + 1;
-    //
+
     //     axios.get(`/api/codebook/${nextPage}`).then(res => {
     //         const copyData = res.data.slice(1, res.data.length);
     //         // Append open property to each parent item
     //         for(let item of copyData) {
     //             item.open = false;
     //         }
-    //
+
     //         const combinedData = [...this.state.data, ...copyData];
-    //
+
     //         this.setState({
     //             data: combinedData,
     //             currentPage: nextPage,
@@ -242,6 +244,7 @@ export default class CodebookDatatable extends Component {
                     </th>
                 </tr>
             </thead>
+            {this.state.isSelection ?
             <tbody width="100%">
             {
                 this.state.data.map((parentItem, index) => {
@@ -287,6 +290,9 @@ export default class CodebookDatatable extends Component {
                 })
             }
             </tbody>
+            :
+            <h1 className='no-result'>No results related to your search/filter selection</h1>
+            }
             {
                 this.renderLoading()
             }
@@ -308,6 +314,7 @@ export default class CodebookDatatable extends Component {
                     </th>
                 </tr>
             </thead>
+            {this.state.isSelection ?
             <tbody width="100%">
             {
                 this.state.data.map((parentItem, index) => {
@@ -349,6 +356,9 @@ export default class CodebookDatatable extends Component {
                 })
             }
             </tbody>
+            :
+            <h1 className='no-result'>No results related to your search/filter selection</h1>
+            }
             {
                 this.renderLoading()
             }
