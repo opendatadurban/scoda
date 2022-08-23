@@ -22,7 +22,12 @@ export default class CodebookDatatable extends Component {
     componentDidMount() {
         axios.get('/api/codebook/1').then(res => {
             const copyData = res.data.slice(1, res.data.length);
-            this.setState({isSelection: true})
+            if(copyData.length > 0){
+                this.setState({isSelection: true})
+            }
+            else {
+                this.setState({isSelection: false})
+            }
             this.setOpen(copyData);
         });
     }
@@ -31,7 +36,12 @@ export default class CodebookDatatable extends Component {
         if(prevProps.filteredData !== this.props.filteredData) {
             axios.post('/api/codebook/1', this.props.filteredData).then(data => {
                 const copyData = data.data.slice(1, data.data.length);
-                this.setState({isSelection: true})
+                if(copyData.length > 0){
+                    this.setState({isSelection: true})
+                }
+                else {
+                    this.setState({isSelection: false})
+                }
                this.setOpen(copyData);
             });
         }
