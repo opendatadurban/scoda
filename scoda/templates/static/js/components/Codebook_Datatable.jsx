@@ -13,7 +13,7 @@ export default class CodebookDatatable extends Component {
             selected: null,
             currentPage: 1,
             isLoading: false,
-            isSelection: false
+            isSelection: true
         };
 
         this.selectChild = this.selectChild.bind(this);
