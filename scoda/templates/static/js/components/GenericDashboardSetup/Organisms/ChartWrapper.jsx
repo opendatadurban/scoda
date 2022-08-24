@@ -46,6 +46,27 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
     setError(newState);
   };
 
+  const clearAllErrors = () => {
+
+    let isClearable = false
+
+    error.forEach((item)=>{
+      if(item.errorThrown === true){
+        isClearable = true
+      }
+    })
+    
+    if(isClearable){
+      console.log("clearing")
+      const newState = error.map((obj) => {
+
+        return { errorThrown: false };
+    });
+
+    setError(newState);
+    }
+  }
+
   let items = []
 
   let chartTitles = dropdownName === "People and Households" ?
@@ -57,12 +78,11 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
   for (let i = 0; i < chartGroup.length; i++) {
 
     const element = chartGroup[i]
-    console.log(chartTitles)
     if (typeof (indicator_ids[i]) === "number") {
 
       const codebookUrl = `/scoda/toolkit#/codebook-explorer/${indicator_ids[i]}`
 
-      items.push(<div className='chart_wrapper' key={i.toString()} >
+      items.push(<div className='chart_wrapper' key={i.toString()} onClick={clearAllErrors}>
         <div className='heading_wrapper'>
           {dropdownName === "Household Income" ?
             <p className="title">Main Source of Income:<span className="category">{selectedName.split(":")[1]}</span></p> :
@@ -71,23 +91,22 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
 
           {dropdownName === "Household Income" ?
             <div className="button_group">
-              <button className={isNumber?"number":"number deselect"} onClick={() => { toggle(true) }}
-            
-              >Number</button>
-              <button className={isNumber ? "percent": "percent select"}  onClick={() => { toggle(false) }}>Percent</button>
+              <button className={isNumber ? "number" : "number deselect"} onClick={() => { toggle(true) }}>Number</button>
+              <button className={isNumber ? "percent" : "percent select"} onClick={() => { toggle(false) }}>Percent</button>
               <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
-            </div> :
+            </div>
+            :
             <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
           }
         </div>
         <div className="chart">
-          <Chart graphData={element} title={chartTitles.yAxes[i]} dropdownName={dropdownName} stacked={false} chartIndex={i} />
+          <Chart graphData={element} title={(dropdownName === "Household Income" && !isNumber)?"Percent of Households":chartTitles.yAxes[i]} dropdownName={dropdownName} stacked={false} chartIndex={i} />
         </div>
       </div>
       )
     } else if (indicator_ids[i] === 'n8' || indicator_ids[i] === 'n1' || indicator_ids[i] === 'n35' || indicator_ids[i] === 'n36' || indicator_ids[i] === 'n37' || indicator_ids[i] === 'n38') {
 
-      items.push(<div className='chart_wrapper' key={indicator_ids[i].toString()} >
+      items.push(<div className='chart_wrapper' key={indicator_ids[i].toString()} onClick={clearAllErrors} >
         <div className='heading_wrapper'>
           <div className='heading'>{chartTitles.main[i]}</div>
           <a className='link' onClick={() => {
@@ -101,7 +120,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
           <div className="error_message">
             <div className="top">
               <p className="title">Sorry!</p>
-            <ErrorClose onClick={() => { clearErrorState(i) }} />
+              <ErrorClose onClick={() => { clearErrorState(i) }} />
             </div>
             <p className="body">
               Raw data is not available for this indicator.
@@ -112,7 +131,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
       </div>)
     } else if (indicator_ids[i] === "combination") {
 
-      items.push(<div className='chart_wrapper' key={i.toString()} >
+      items.push(<div className='chart_wrapper' key={i.toString()} onClick={clearAllErrors} >
         <div className='heading_wrapper'>
           <p className='heading'>{chartTitles.main[i]}<span className="combination_year">{" (2018)"}</span></p>
           <a className='link' onClick={() => {
@@ -126,7 +145,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
           <div className="error_message">
             <div className="top">
               <p className="title">Sorry!</p>
-              <div className="cancel" onClick={() => { clearErrorState(i) }}><ErrorClose /></div>
+              <ErrorClose onClick={() => { clearErrorState(i) }} />
             </div>
             <p className="body">
               Raw data is not available for this indicator.
@@ -152,7 +171,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
             <p className="code">{selectedCode}</p>
             <p className="name">{selectedName}</p>
           </div>
-          <a className="view_codebook" href={codebookUrlForText} target='_blank'>View Indicator in the Codebook</a>
+          <a className="view_codebook" href={codebookUrlForText} target='_blank'>View Indicator in data explorer</a>
         </div>
       </div>)
     }

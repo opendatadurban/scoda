@@ -25,12 +25,12 @@ export const phChartTitles = {
 }
 
 export const hiChartTitles = {
-  yAxes: ["Households"],
+  yAxes: ["Number of Households"],
   main:["Main Source of Income"]
 }
 
 export const echartTitles = {
-  yAxes: ["Households","Population","Number of People Employed","Percentage"],
+  yAxes: ["Population","Population","Number of People Employed","Percentage"],
   main:["Number of people employed and seeking employment within the 15–66 year age group","Number of Unemployed People","Informal Sector Employment","Unemployment Rate: Percentage of Unemployed Workers as a Proportion of the Total Labour Force"]
 }
 
@@ -78,7 +78,7 @@ export const cityLabels = city => {
     case "Msunduzi":
       return "PMB"
     case "Nelson Mandela Bay":
-      return "NMB"
+      return "NMA"
     case "Tshwane":
       return "TSH"
     case "eThekwini":

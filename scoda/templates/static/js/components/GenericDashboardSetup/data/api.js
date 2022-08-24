@@ -43,7 +43,6 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
         if (indicator_id_requests[index].type === "new") {
           let colorCount = 0
           chart.data.forEach((item) => {
-
             /**
              * Filter out min max year range, or 
              * specify range for individual graphs on grid by using chartIndex

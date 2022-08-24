@@ -80,14 +80,30 @@ export const getEmploymentStatTotals = (setStats, selected) => {
         '/api/explore_new?indicator_id=918',
         '/api/explore_new?indicator_id=921',
     ];
-
+    
     let salariesAve = 0
+
+    axios.get("/api/stats?indicator_id=900&average=True&year=2018").then(res => {
+
+            setStats(prev => {
+
+                let newArr = {...prev}
+
+                newArr.salariesAve = [
+                    Math.round( res.data.total_average) 
+                    , "Salaries/wages/ commission"
+                ]
+
+                return {...newArr}
+            })
+
+    })
 
     axios.get("/api/explore_new?indicator_id=900").then(res => {
         res.data.forEach((values, index) => {
 
             let valueIndex = values.labels.indexOf(selected)
-
+     
             if (values.year !== "2018") return
 
             salariesAve = values.values.reduce((a, b) => a + b, 0) / values.values.length
@@ -101,10 +117,7 @@ export const getEmploymentStatTotals = (setStats, selected) => {
                 newArr.salaries = [
                     Math.round(values.values[valueIndex] ) 
                     , "Salaries/wages/ commission"]
-                newArr.salariesAve = [
-                    Math.round(salariesAve ) 
-                    , "Salaries/wages/ commission"
-                ]
+
                 return {...newArr}
             })
 
@@ -148,7 +161,6 @@ export const getEmploymentStatTotals = (setStats, selected) => {
             let valueIndex = values.labels.indexOf(selected)
 
             if (values.year !== "2018") return
-
             remAve = values.values.reduce((a, b) => a + b, 0) / values.values.length
 
             if (values.year !== "2018" && valueIndex !== -1) return
@@ -158,10 +170,10 @@ export const getEmploymentStatTotals = (setStats, selected) => {
                 let newArr = {...prev}
 
                 newArr.remittances = [
-                    Math.round(remAve ) 
+                    Math.round(values.values[valueIndex] ) 
                     , "Remittances"]
                 newArr.remittancesAve = [
-                    Math.round(businessAve ) 
+                    Math.round(remAve ) 
                     , "Remittances"
                 ]
                 return {...newArr}
