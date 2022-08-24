@@ -12,7 +12,8 @@ export default class CodebookDatatable extends Component {
             filters: this.props.filteredData,
             selected: null,
             currentPage: 1,
-            isLoading: false
+            isLoading: false,
+            isSelection: true
         };
 
         this.selectChild = this.selectChild.bind(this);
@@ -21,20 +22,30 @@ export default class CodebookDatatable extends Component {
     componentDidMount() {
         axios.get('/api/codebook/1').then(res => {
             const copyData = res.data.slice(1, res.data.length);
-
+            if(copyData.length > 0){
+                this.setState({isSelection: true})
+            }
+            else {
+                this.setState({isSelection: false})
+            }
             this.setOpen(copyData);
         });
-
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevProps.filteredData !== this.props.filteredData) {
             axios.post('/api/codebook/1', this.props.filteredData).then(data => {
                 const copyData = data.data.slice(1, data.data.length);
-
+                if(copyData.length > 0){
+                    this.setState({isSelection: true})
+                }
+                else {
+                    this.setState({isSelection: false})
+                }
                this.setOpen(copyData);
             });
         }
+        
     }
 
     setOpen(data) {
@@ -109,16 +120,16 @@ export default class CodebookDatatable extends Component {
 
     // fetchData() {
     //     let nextPage = this.state.currentPage + 1;
-    //
+
     //     axios.get(`/api/codebook/${nextPage}`).then(res => {
     //         const copyData = res.data.slice(1, res.data.length);
     //         // Append open property to each parent item
     //         for(let item of copyData) {
     //             item.open = false;
     //         }
-    //
+
     //         const combinedData = [...this.state.data, ...copyData];
-    //
+
     //         this.setState({
     //             data: combinedData,
     //             currentPage: nextPage,
@@ -242,6 +253,7 @@ export default class CodebookDatatable extends Component {
                     </th>
                 </tr>
             </thead>
+            {this.state.isSelection ?
             <tbody width="100%">
             {
                 this.state.data.map((parentItem, index) => {
@@ -287,6 +299,9 @@ export default class CodebookDatatable extends Component {
                 })
             }
             </tbody>
+            :
+            <h1 className='no-result'>No results related to your search/filter selection</h1>
+            }
             {
                 this.renderLoading()
             }
@@ -308,6 +323,7 @@ export default class CodebookDatatable extends Component {
                     </th>
                 </tr>
             </thead>
+            {this.state.isSelection ?
             <tbody width="100%">
             {
                 this.state.data.map((parentItem, index) => {
@@ -349,6 +365,9 @@ export default class CodebookDatatable extends Component {
                 })
             }
             </tbody>
+            :
+            <h1 className='no-result'>No results related to your search/filter selection</h1>
+            }
             {
                 this.renderLoading()
             }
@@ -358,7 +377,7 @@ export default class CodebookDatatable extends Component {
 
     render() {
         return(
-            <div className="data-table" onScroll={(event) => this.trackScrolling(event)}>
+            <div className="data-table">
               {!window.innerWidth <= 768
                 ? this.renderDesktopTable() : this.renderMobileTable()
               }
