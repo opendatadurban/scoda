@@ -14,9 +14,12 @@ export const useGlobalClose = () => {
     return useContext(CloseDropdownGlobal)
 }
 
+
+
 export const SelectContextState = ({ children }) => {
 
     const [selectOpen, setSelect] = useState(false)
+
 
     const closeGlobally = () => {
         if (selectOpen) {

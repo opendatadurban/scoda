@@ -1,16 +1,19 @@
 import React from 'react'
 
 import { BarChartGeneric } from '../BarChartGeneric';
-import { cityLabels,chartHeights } from './helpers/helpers';
+import { cityLabels, chartHeights } from './helpers/helpers';
+import { tickExceptionsForDwellings } from './helpers/tickExceptions';
 
 export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex }) => {
+
+
     const options = {
         responsive: true,
         maintainAspectRatio: true,
         legend: {
             display: true,
             labels: {
-                fontSize: 8,
+                fontSize: 12,
                 boxWidth: 25,
                 fontColor: 'rgba(74, 74, 74, 1)',
                 fontFamily: 'Montserrat',
@@ -48,24 +51,31 @@ export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex }) =
                     display: false
                 },
                 ticks: stacked ? {
+
                     fontFamily: "Montserrat",
                     min: 0,
                     max: 100,
-                    callback: function (value) { return value + "" }
-                } 
+                    callback: function (value) {
+                        return value + ""
+                    }
+                }
                     :
-                    {
-                        fontFamily: "Montserrat",
-                        beginAtZero: true,
-                        callback: function (value, index, values) {
+                    dropdownName === "Dwellings" ?
 
-                            if (value < 1000000 && value > 1000) { values = Math.round(value) / 1000 + 'K ' }
-                            else if (value >= 1000000) { values = Math.round(value) / 1000000 + 'M ' }
-                            else if (value <= 1000 && value > 11) { values = Math.round(value) / 1 }
-                            else if (value <= 11) { values = value }
-                            return values
+                        tickExceptionsForDwellings(dropdownName, chartIndex)
+                        :
+                        {
+                            fontFamily: "Montserrat",
+                            beginAtZero: true,
+                            callback: function (value, index, values) {
+
+                                if (value < 1000000 && value > 1000) { values = Math.round(value) / 1000 + 'K ' }
+                                else if (value >= 1000000) { values = Math.round(value) / 1000000 + 'M ' }
+                                else if (value <= 1000 && value > 11) { values = Math.round(value) / 1 }
+                                else if (value <= 11) { values = value }
+                                return values
+                            },
                         },
-                    },
             }],
         },
         tooltips: {

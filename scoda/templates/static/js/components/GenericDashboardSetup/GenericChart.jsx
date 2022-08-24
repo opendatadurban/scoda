@@ -29,6 +29,7 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
   const [selectedChart, setSelectedChart] = useState(0)
   const [selectedName, setSelectedName] = useState(hhiDropdownNames()[0].shortName)
   const [isNumber, toggle] = useState(true)
+  
 
   useEffect(() => {
     if (dropdownName === "HouseHold Income") return
