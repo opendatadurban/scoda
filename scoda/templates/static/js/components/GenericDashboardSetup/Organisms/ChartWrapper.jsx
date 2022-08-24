@@ -65,6 +65,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
 
     setError(newState);
     }
+    
   }
 
   let items = []
