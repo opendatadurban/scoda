@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import '../../scss/components/Subnav.scss'
 
 const Example = (props) => {
   const [dropdownOpen, setOpen] = useState(false);

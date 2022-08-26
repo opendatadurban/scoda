@@ -29,7 +29,6 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
   const [selectedChart, setSelectedChart] = useState(0)
   const [selectedName, setSelectedName] = useState(hhiDropdownNames()[0].shortName)
   const [isNumber, toggle] = useState(true)
-  
 
   useEffect(() => {
     if (dropdownName === "HouseHold Income") return
@@ -41,14 +40,13 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
       setOriginalValues
     )
   }, [indicator_ids, minYear, maxYear, colors])
+  const chartDropDownNames = hhiDropdownNames().map(item => {
+    return item.shortName
+  })
 
   useEffect(() => {
 
     if (dropdownName === "Household Income") {
-    
-      let chartDropDownNames = hhiDropdownNames().map(item => {
-        return item.shortName
-      })
      
       setSelectedChart(
         chartDropDownNames.indexOf(selectedName)

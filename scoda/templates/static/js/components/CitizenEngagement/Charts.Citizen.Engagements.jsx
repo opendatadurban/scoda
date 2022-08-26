@@ -6,6 +6,7 @@ import { Bar } from 'react-chartjs-2';
 import BarChart from '../Barchart'
 import axios from 'axios'
 import _ from 'lodash';
+import '../../../scss/components/Subnav.scss'
 
 const style = {
   control: (base) => ({
