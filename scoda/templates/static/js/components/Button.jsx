@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+
 export default class Button extends Component {
 
   render() {
@@ -13,7 +15,8 @@ export default class Button extends Component {
       display: "flex",
       flexDirection: "row",
       alignItems: "center",
-      gap: "12px"
+      gap: "12px",
+   
     }
 
     return (

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { XIcon, Line, ChevronDown } from '../../../../svg_components/SelectIcons'
 import '../../../../scss/components/Select.scss'
 import { useSelectOpen } from '../../../context'
+import { useCloseAllErrors } from '../../../context'
 
 export const Select = ({ chartData, originalValues, selected, options,
     setSelected, setChartGroup, setOptions,
@@ -13,6 +14,29 @@ export const Select = ({ chartData, originalValues, selected, options,
     }, [chartData])
 
     const selectContext = useSelectOpen()
+    const closeAlerts = useCloseAllErrors()
+
+    const closeAllAlerts = () => {
+     
+
+        let isClearable = false
+
+        closeAlerts.error.forEach((item) => {
+            if (item.errorThrown === true) {
+                isClearable = true
+            }
+        })
+
+        if (isClearable) {
+
+            const newState = closeAlerts.error.map((obj) => {
+
+                return { errorThrown: false };
+            });
+
+            closeAlerts.setError(newState);
+        }
+    }
 
     const selectedOptions = () => {
 
@@ -40,7 +64,7 @@ export const Select = ({ chartData, originalValues, selected, options,
         setSelected(filtered)
     }
 
-    return (<div className="conditional_select_wrapper">
+    return (<div className="conditional_select_wrapper" onClick={closeAllAlerts}>
         {
             chartDropName === "Household Income" ? <>
                 <p className="select_title">Choose Cities:</p>

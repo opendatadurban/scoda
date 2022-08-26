@@ -3328,7 +3328,7 @@ tbody.collapse.in {
 .input-group-btn:not(:first-child) > .btn-group:focus,
 .input-group-btn:not(:first-child) > .btn-group:active,
 .input-group-btn:not(:first-child) > .btn-group:hover {
-  z-index: 3;
+ 
 }
 
 .input-group-addon,

@@ -12,6 +12,7 @@ import DownloadScreenCapture from './../components/DownloadScreenCapture';
 import Dropdown from './../components/Dropdown';
 import PropTypes from 'prop-types';
 import { useGlobalClose } from '../context';
+import { useCloseAllErrors } from '../context';
 
 
 const SubNav = (props) => {
@@ -25,10 +26,34 @@ const SubNav = (props) => {
     globalCityDropDownClose = useGlobalClose()
   }
 
+  const closeAlerts = useCloseAllErrors()
+
+  const closeAllAlerts = () => {
+    globalCityDropDownClose()
+    
+    let isClearable = false
+
+    closeAlerts.error.forEach((item)=>{
+      if(item.errorThrown === true){
+        isClearable = true
+      }
+    })
+    
+    if(isClearable){
+    
+      const newState = closeAlerts.error.map((obj) => {
+
+        return { errorThrown: false };
+    });
+
+    closeAlerts.setError(newState);
+    }
+  }
+
 
   return (
     <div className={["subnav subnav--wrapper container-fluid "] + props.className}
-    onClick={()=>{globalCityDropDownClose()}}>
+    onClick={()=>{closeAllAlerts()}}>
       <div className="subnav--breadcrumbs">
         <strong>{props.name}</strong> / <Dropdown name={props.dropdownName} header={props.dropdownHeading} menu={props.dropdownMenu} dropDownItem={props.dropDownItem} ></Dropdown>
       </div>

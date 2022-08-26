@@ -4,23 +4,24 @@ import '../../../../scss/components/chart/ChartHeader.scss'
 import { phChartTitles, echartTitles, dChartTitles, hiChartTitles } from "../helpers/helpers"
 import { indicator_text_box_data } from "../data/data"
 import { ErrorClose } from "../../../../svg_components/ErrorClose"
+import { useCloseAllErrors } from "../../../context"
 
 export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, isNumber, selectedDropDownChart }) => {
 
 
   const [selectedCode, setCode] = useState(indicator_text_box_data[0]["number"].code)
   const [selectedName, setName] = useState(indicator_text_box_data[0]["number"].name)
-  const [error, setError] = useState([{ errorThrown: false }, { errorThrown: false }, { errorThrown: false }, { errorThrown: false }, { errorThrown: false }, { errorThrown: false }])
-
+ 
   useEffect(() => {
     setCode(indicator_text_box_data[selectedDropDownChart][isNumber ? "number" : "percent"].code)
     setName(indicator_text_box_data[selectedDropDownChart][isNumber ? "number" : "percent"].name)
   }, [isNumber, selectedDropDownChart])
-
+  
+  const errorContext = useCloseAllErrors()
   const viewCodebookIndicator = indicator_text_box_data[selectedDropDownChart].endpoints[isNumber ? 1 : 0]
 
   const setErrorState = (index) => {
-    const newState = error.map((obj, errorIndex) => {
+    const newState = errorContext.error.map((obj, errorIndex) => {
 
       if (errorIndex === index) {
         return { ...obj, errorThrown: true };
@@ -29,12 +30,12 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
       return obj;
     });
 
-    setError(newState);
+    errorContext.setError(newState);
   };
 
   const clearErrorState = (index) => {
 
-    const newState = error.map((obj, errorIndex) => {
+    const newState = errorContext.error.map((obj, errorIndex) => {
 
       if (errorIndex === index) {
         return { ...obj, errorThrown: false };
@@ -43,27 +44,27 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
       return obj;
     });
 
-    setError(newState);
+    errorContext.setError(newState);
   };
 
   const clearAllErrors = () => {
 
     let isClearable = false
 
-    error.forEach((item)=>{
+    errorContext.error.forEach((item)=>{
       if(item.errorThrown === true){
         isClearable = true
       }
     })
     
     if(isClearable){
-      console.log("clearing")
-      const newState = error.map((obj) => {
+    
+      const newState = errorContext.error.map((obj) => {
 
         return { errorThrown: false };
     });
 
-    setError(newState);
+    errorContext.setError(newState);
     }
     
   }
@@ -117,7 +118,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
         <div className="chart">
           <Chart graphData={element} title={chartTitles.yAxes[i]} dropdownName={dropdownName} stacked={false} chartIndex={i} />
         </div>
-        {error[i].errorThrown ?
+        {errorContext.error[i].errorThrown ?
           <div className="error_message">
             <div className="top">
               <p className="title">Sorry!</p>
@@ -142,7 +143,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
         <div className="chart">
           <Chart graphData={element} title={chartTitles.yAxes[i]} dropdownName={dropdownName} stacked={true} />
         </div>
-        {error[i].errorThrown ?
+        {errorContext.error[i].errorThrown ?
           <div className="error_message">
             <div className="top">
               <p className="title">Sorry!</p>
