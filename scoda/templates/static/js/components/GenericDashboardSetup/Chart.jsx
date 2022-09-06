@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { BarChartGeneric } from '../BarChartGeneric';
+import {BarChartGeneric}  from '../BarChartGeneric';
 import { cityLabels, chartHeights } from './helpers/helpers';
 import { tickExceptionsForDwellings } from './helpers/tickExceptions';
 
@@ -10,19 +10,26 @@ export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex }) =
     const options = {
         responsive: true,
         maintainAspectRatio: true,
+
         legend: {
             display: true,
+           
             labels: {
                 fontSize: 12,
                 boxWidth: 25,
                 fontColor: 'rgba(74, 74, 74, 1)',
                 fontFamily: 'Montserrat',
-                padding: 25
+            
+            
             },
             onHover: function (e) {
                 e.target.style.cursor = 'pointer';
-            }
+            },
+        
+           
         },
+        
+        
         scales: {
             xAxes: [{
                 stacked: stacked,
@@ -68,7 +75,8 @@ export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex }) =
                             fontFamily: "Montserrat",
                             beginAtZero: true,
                             callback: function (value, index, values) {
-
+                             
+                            
                                 if (value < 1000000 && value > 1000) { values = Math.round(value) / 1000 + 'K ' }
                                 else if (value >= 1000000) { values = Math.round(value) / 1000000 + 'M ' }
                                 else if (value <= 1000 && value > 11) { values = Math.round(value) / 1 }

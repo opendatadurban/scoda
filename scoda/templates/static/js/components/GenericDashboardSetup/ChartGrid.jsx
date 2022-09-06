@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import {phAddItem, phRemoveItem, phClearAll,
+import {
+  phAddItem, phRemoveItem, phClearAll,
   eAddItem, eRemoveItem, eClearAll,
   dAddItem, dClearAll, dRemoveItem,
-  hiAddItem,hiRemoveItem,hiClearAll} from './helpers/citySelect';
+  hiAddItem, hiRemoveItem, hiClearAll
+} from './helpers/citySelect';
 import { Select } from './Organisms/Select';
 import { ChartWrapper } from './Organisms/ChartWrapper';
 import { MiniSelect } from './Organisms/MiniSelect';
@@ -16,14 +18,16 @@ export const ChartGrid = ({ indicator_ids,
   secondDropDown,
   selectedName,
   setSelectedName,
-  toggle,
-  isNumber,
+  setSelectedChart,
   selectedDropDownChart,
 }) => {
 
+  const [isNumber, toggle] = useState(true)
   const [selected, setSelected] = useState([])
   const [options, setOptions] = useState([])
 
+  const chartData = chartGroup
+  
   const selectControls = dropdownName === "People and Households" ? {
     removeItem: phRemoveItem,
     addItem: phAddItem,
@@ -36,21 +40,20 @@ export const ChartGrid = ({ indicator_ids,
     removeItem: dRemoveItem,
     addItem: dAddItem,
     clearAll: dClearAll,
-  } :dropdownName === "Household Income" ? {
+  } : dropdownName === "Household Income" ? {
     removeItem: hiRemoveItem,
     addItem: hiAddItem,
     clearAll: hiClearAll,
   } : {}
 
-
   const hhiDash = dropdownName === "Household Income"
   const globalCityDropDownClose = useGlobalClose()
-
+ 
   return (
-    <div className='chart_grid' onClick={()=>{globalCityDropDownClose()}}>
+    <div className='chart_grid' onClick={() => { globalCityDropDownClose() }}>
       {
         <div className='rounded_container'>
-          <div className={hhiDash ? "select_wrapper double": "select_wrapper"}>
+          <div className={hhiDash ? "select_wrapper double" : "select_wrapper"}>
             <Select chartData={chartGroup}
               originalValues={originalValues}
               selected={selected}
@@ -61,9 +64,10 @@ export const ChartGrid = ({ indicator_ids,
               removeItem={selectControls.removeItem}
               addItem={selectControls.addItem}
               clearAll={selectControls.clearAll}
-              chartDropName={dropdownName}/>
+              chartDropName={dropdownName} />
             {
-              dropdownName === "Household Income" ? <MiniSelect names={secondDropDown} selected={selectedName} setSelected={setSelectedName} chartDropName={"Household Income"} /> : ""
+              dropdownName === "Household Income" ? <MiniSelect names={secondDropDown} selected={selectedName}
+              setSelectedChart={setSelectedChart} setSelected={setSelectedName} chartDropName={"Household Income"} /> : ""
             }
           </div>
 
@@ -71,7 +75,7 @@ export const ChartGrid = ({ indicator_ids,
             (dropdownName === "Household Income") ? "grid-2-text" : "grid-container-4"}>
             {
               <ChartWrapper
-                chartGroup={chartGroup}
+                chartGroup={chartData}
                 indicator_ids={indicator_ids}
                 dropdownName={dropdownName}
                 toggle={toggle}

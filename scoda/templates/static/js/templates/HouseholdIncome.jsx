@@ -1,4 +1,5 @@
 import React,{lazy} from 'react';
+import { indicator_text_box_data } from '../components/GenericDashboardSetup/data/data';
 import { peopleHouseholdColors } from '../components/GenericDashboardSetup/helpers/helpers';
 
 
@@ -53,7 +54,7 @@ const Home = () => {
         <div className="socr--home" style={{backgroundColor:"white",overflowX:'hidden'}}>
             <Navigation_scoda logoHide={false} box_shadow={true} />
             <HouseholdIncome 
-            indicator_ids= {[901,"indicator text box"]}
+            indicator_ids= {[[indicator_text_box_data],"indicator text box"]}
             minYear={2015}
             maxYear={2018}
             subNavContent={subNavContent}

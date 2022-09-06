@@ -1,3 +1,5 @@
+import { indicator_text_box_data } from "../data/data"
+
 export const peopleHouseholdColors = [
   'rgba(208, 209, 230, 1)',
   'rgba(116, 169, 207, 1)',
@@ -76,7 +78,7 @@ export const cityLabels = city => {
     case "Mangaung":
       return "MAN"
     case "Msunduzi":
-      return "PMB"
+      return "MSU"
     case "Nelson Mandela Bay":
       return "NMA"
     case "Tshwane":
@@ -197,7 +199,7 @@ export const isNewApiIndicator= (indicator) => {
 
   const isNewApi = (indicator !== "n1" && indicator !== "n8" && indicator !== "n35" && indicator !== "n36"
                     && indicator !== "n37" && indicator !== "n38" && indicator !== "combination" &&
-                    indicator !== "indicator text box")
+                    indicator !== "indicator text box" && typeof(indicator) !== "object")
 
   return isNewApi
 }
@@ -245,4 +247,23 @@ export const chartHeights = (dropdownName) => {
   : 210) // 210 is the fallback value if height not specified
 
   return heightByDropName
+}
+
+export const hhiDropdownNames = ( ) => {
+
+  const options = indicator_text_box_data.map((item, index) => {
+
+    let shortName = item.number.name.split(": ")
+
+    return {
+      numberName: item.number.name,
+      percentName: item.percent.name,
+      shortName: shortName[1],
+      endpoints: item.endpoints,
+      percentCode: item.percent.code,
+      numberCode: item.number.code,
+      index: index }
+  })
+
+  return options
 }

@@ -6,65 +6,27 @@ import '../../../scss/components/PeopleHouseHold.scss'
 import { populateChartGroup } from './data/api'
 import { Modal, ModalBody, Spinner } from 'reactstrap'
 import Sidebar_left from '../Sidebar_left'
-import { indicator_text_box_data } from './data/data';
 import { SelectContextState } from '../../context'
-
-const hhiDropdownNames = () => {
-
-  const options = indicator_text_box_data.map((item, index) => {
-    let shortName = item.number.name.split(": ")
-    let endpoints = item.endpoints
-    return { shortName: shortName[1], endpoints: endpoints, index: index }
-  })
-
-  return options
-}
+import { hhiDropdownNames } from './helpers/helpers'
 
 const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavContent,
   dropdownName, colors }) => {
 
   const [chartGroup, setChartGroup] = useState([])
   const [originalValues, setOriginalValues] = useState([])
-
   const [selectedChart, setSelectedChart] = useState(0)
   const [selectedName, setSelectedName] = useState(hhiDropdownNames()[0].shortName)
-  const [isNumber, toggle] = useState(true)
 
   useEffect(() => {
-    if (dropdownName === "HouseHold Income") return
-    populateChartGroup(
-      setChartGroup,
-      indicator_ids, // this array determines the number of charts generated on your grid
-      minYear, maxYear, //year min max
-      colors, //color presets
-      setOriginalValues
-    )
-  }, [indicator_ids, minYear, maxYear, colors])
-  const chartDropDownNames = hhiDropdownNames().map(item => {
-    return item.shortName
-  })
-
-  useEffect(() => {
-
-    if (dropdownName === "Household Income") {
-     
-      setSelectedChart(
-        chartDropDownNames.indexOf(selectedName)
-      )
-
+      setChartGroup([])
       populateChartGroup(
         setChartGroup,
-        [hhiDropdownNames()[selectedChart].endpoints[isNumber ? 1 : 0], "indicator text box"], // this array determines the number of charts generated on your grid
+        Array.isArray(indicator_ids[0]) ? [indicator_ids[0][0][selectedChart],indicator_ids[1]] : indicator_ids,
         minYear, maxYear, //year min max
         colors, //color presets
-        setOriginalValues
+        setOriginalValues,
       )
-    }
-  }, [isNumber, selectedName,selectedChart])
-
-  const selectedDropDownChart = hhiDropdownNames().map(item => {
-    return item.shortName
-  }).indexOf(selectedName)
+  }, [selectedName,selectedChart])
 
   return (
     chartGroup.length === gridItems ?
@@ -88,9 +50,7 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
               selectedName={selectedName}
               setSelectedName={setSelectedName}
               setSelectedChart={setSelectedChart}
-              toggle={toggle}
-              isNumber={isNumber}
-              selectedDropDownChart={selectedDropDownChart}
+              selectedDropDownChart={selectedChart}
             />
           </div>
           <div className="spacer"></div>
@@ -111,7 +71,7 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
           <br />
         </ModalBody>
       </Modal>
-  
+
   )
 }
 export default GenericChart;
