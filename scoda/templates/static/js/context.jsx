@@ -30,6 +30,7 @@ export const SelectContextState = ({ children }) => {
 
     const closeGlobally = () => {
         if (selectOpen) {
+
             setSelect(false)
         }
     }

@@ -457,7 +457,7 @@ export const hiAddItem = (clickIndex, options, setSelected, setChartGroup, setOp
       let optionChart = optionsTemp[cIndex]
 
       return chart.map((year, yIndex) => {
-        //TODO: evaluate selection process further
+
         let optionYear = {
           ...year,
           labels: [...year.labels].concat(optionChart[yIndex].labels[0]),
@@ -473,7 +473,8 @@ export const hiAddItem = (clickIndex, options, setSelected, setChartGroup, setOp
 
       let newArr = prev
 
-      newArr[0] = optionState[0]
+      newArr[0][0][0] = optionState[0]
+      newArr[0][0][1] = optionState[1]
 
       return [...newArr]
     })
@@ -508,6 +509,7 @@ export const hiRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
   selected.forEach((chart, cIndex) => {
     let optionsChart = []
     let selectChart = []
+
     chart.forEach((year, yIndex) => {
 
       let optionYear = {
@@ -527,6 +529,7 @@ export const hiRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
     optionsTemp.push(optionsChart)
     selectTemp.push(selectChart)
   })
+ 
 
   setOptions(prev => {
 
@@ -543,10 +546,10 @@ export const hiRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
           labels: [...year.labels].concat(optionChart[yIndex].labels[0]),
           values: [...year.values].concat(optionChart[yIndex].values[0])
         }
+
         return optionYear
       })
     }) : optionsTemp
-
     return [...optionState]
   })
 
@@ -561,26 +564,35 @@ export const hiRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
       return chart.map((year, yIndex) => {
 
         let selectedYear = selectedChart[yIndex]
+
         return selectedYear
       })
     })
 
     setChartGroup(prev => {
 
-      let newArr = prev
-
-      newArr[0] = selectedState[0]
-
-      return [...newArr]
+      let newArr2 = prev
+      newArr2[0][0][0] = selectedState[0]
+      newArr2[0][0][1] = selectedState[1]
+      return prev
     })
 
     return [...selectedState]
   })
 
 
+
 }
 
 export const hiClearAll = (originalValues, setSelected, setOptions) => {
+
+  setOptions(prev => {
+
+    let fallbackValue = JSON.parse(JSON.stringify(originalValues))
+    console.log(fallbackValue[0][0],"CLEAR ALL VALUE")
+
+    return fallbackValue[0][0]
+  })
 
   setSelected(prev => {
 
@@ -595,27 +607,6 @@ export const hiClearAll = (originalValues, setSelected, setOptions) => {
     })
 
     return cleared
-  })
-
-  setOptions(prev => {
-
-    let newArr = prev
-
-    let fallbackValue = JSON.parse(JSON.stringify(originalValues))
-
-    let filled = newArr.length > 1 ? newArr.map((chart, cIndex) => {
-
-      let fillRef = fallbackValue[cIndex]
-      return chart.map((year, yIndex) => {
-
-        year.labels = ['BUF', 'CCT', 'JHB', 'EKU', 'MAN', 'NMB', 'TSH', 'ETH']
-        year.values = fillRef[yIndex].values
-
-        return year
-      })
-    }) : fallbackValue
-
-    return filled
   })
 }
 
@@ -811,7 +802,7 @@ export const dClearAll = (originalValues, setSelected, setOptions) => {
 
       let fillRef = fallbackValue[cIndex]
       return chart.map((year, yIndex) => {
-      
+
         year.labels = ['BUF', 'CPT', 'JHB', 'EKU', 'MAN', 'NMB', 'TSH', 'ETH']
         year.values = fillRef[yIndex].values
         return year

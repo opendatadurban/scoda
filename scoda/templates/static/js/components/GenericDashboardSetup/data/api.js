@@ -3,8 +3,10 @@ import { cityLabels, combinationColors, isCombinationIndicator, isNewApiIndicato
 import { tableData } from '../helpers/helpers'
 import { indicator_text_box_data } from './data'
 
-export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYear, yearColors, setOriginalValues
+export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYear, yearColors, setOriginalValues,
+  
 ) => {
+
   let newApiUri = "/api/explore_new?indicator_id="
   let oldApiUri = "/api-temp/explore/?indicator_id="
 
@@ -25,7 +27,13 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
     else if (isOldApiIndicator(id)) {
 
       indicator_id_requests.push({ request: axios.get(oldApiUri + id.substring(1)), type: "old" })
-    } 
+    } else if(typeof(id) === "object"){
+
+      indicator_id_requests.push({ request: Promise.all([
+        axios.get(newApiUri + id.endpoints[1]),
+        axios.get(newApiUri + id.endpoints[0])])
+        , type: "toggle" })
+    }
     else if (isTextBoxIndicator(id)) {
 
       indicator_id_requests.push({ request: { data: [] }, type: "indicator text box" })
@@ -33,6 +41,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
   });
 
   Promise.all(indicator_id_requests.map(request => request.request)).then(
+   
 
     (chartData) => {
 
@@ -77,13 +86,25 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
           const combinationChart = yearEquivalent.map((category, index) => {
             return {
               year: category,
-              labels: ['BUF', 'CPT', 'JHB', 'EKU', 'MAN', 'NMB', 'TSH', 'ETH'],
+              labels: ['BUF', 'CPT', 'JHB', 'EKU', 'MAN', 'NMA', 'TSH', 'ETH'],
               values: [0, 0, 0, 0, 0, 0, 0, 0],
               color: yearColors[index]
             }
           })
 
           filterData.push(...combinationChart)
+        }else if (indicator_id_requests[index].type === "toggle") {
+          const toggleCharts = chart.map((data) => {return data.data})
+
+          const toggleChartWithColor = toggleCharts.map(chart => {
+            return chart.map((year,yearIndex) => {
+                year.color = yearColors[yearIndex]
+                year.labels = year.labels.sort().map((city) => cityLabels(city))
+                return year
+              })
+          })
+
+          filterData.push(toggleChartWithColor)
         }else if (indicator_id_requests[index].type === "indicator text box") {
 
           filterData.push(...indicator_text_box_data)
@@ -92,7 +113,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
 
           return
         }
-
+        
         gridData.push(filterData)
       })
 
@@ -171,8 +192,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
       setOriginalValues([...gridData])
       const copy = JSON.parse(JSON.stringify(gridData)) // deep copy to be manipuilated
       setChartGroup([...copy])
-
     }
-  ).catch(err => console.warn(err))
+  ).catch(err => console.warn(err + "error fetching chart data in api.js"))
 }
 

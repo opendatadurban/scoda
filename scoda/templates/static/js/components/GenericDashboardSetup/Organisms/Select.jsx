@@ -16,8 +16,9 @@ export const Select = ({ chartData, originalValues, selected, options,
     const selectContext = useSelectOpen()
     const closeAlerts = useCloseAllErrors()
 
+
     const closeAllAlerts = () => {
-     
+
 
         let isClearable = false
 
@@ -44,23 +45,23 @@ export const Select = ({ chartData, originalValues, selected, options,
 
         if (chartDropName === "People and Households") {
             chartData.forEach((chart, index) => {
-
+               
                 if (index > 4) return
                 filtered.push(chart)
             })
         } else if (chartDropName === "Household Income") {
-            chartData.forEach((chart, index) => {
 
-                if (index > 0) return
-                filtered.push(chart)
+            chartData[0][0].forEach((chart, index) => {
+        
+                filtered.push(chart)           
             })
         } else {
+
             chartData.forEach((chart, index) => {
 
                 filtered.push(chart)
             })
         }
-
         setSelected(filtered)
     }
 
@@ -68,7 +69,8 @@ export const Select = ({ chartData, originalValues, selected, options,
         {
             chartDropName === "Household Income" ? <>
                 <p className="select_title">Choose Cities:</p>
-                <div className='custom_select' onClick={() => selectContext.setSelect(!selectContext.selectOpen)}>
+                <div className='custom_select'
+                onClick={ () => selectContext.setSelect(!selectContext.selectOpen)}>
                     {
                         selected.length > 0 ? selected[0][0].labels.map((tag, index) => {
 
@@ -76,9 +78,9 @@ export const Select = ({ chartData, originalValues, selected, options,
                                 {tag}
 
                                 <XIcon cancel={() => { removeItem(index, selected, setSelected, setChartGroup, setOptions) }} />
-
                             </p>
-                        }) : ""
+                        }) :
+                         ""
                     }
                     <div className={"dropdownbox " + `${selectContext.selectOpen ? "show" : ""}`} >
                         {
@@ -87,7 +89,8 @@ export const Select = ({ chartData, originalValues, selected, options,
                                 return <p key={index.toString()} className="drop_content" onClick={() => {
                                     addItem(index, options, setSelected, setChartGroup, setOptions)
                                 }}>{city}</p>
-                            }) : ""
+                            })
+                               :""
                         }
                     </div>
                     <XIcon cancel={() => {
@@ -102,7 +105,7 @@ export const Select = ({ chartData, originalValues, selected, options,
                 :
                 <div className='custom_select' onClick={() => selectContext.setSelect(!selectContext.selectOpen)}>
                     {
-                        selected.length > 0 ? selected[0][0].labels.map((tag, index) => {
+                        selected.length > 0? selected[0][0].labels.map((tag, index) => {
 
                             return <p key={index.toString()} className="tag">
                                 {tag}
@@ -110,7 +113,8 @@ export const Select = ({ chartData, originalValues, selected, options,
                                 <XIcon cancel={() => { removeItem(index, selected, setSelected, setChartGroup, setOptions) }} />
 
                             </p>
-                        }) : ""
+                        }) :
+                        ""
                     }
                     <div className={"dropdownbox " + `${selectContext.selectOpen ? "show" : ""}`} >
                         {
@@ -119,7 +123,8 @@ export const Select = ({ chartData, originalValues, selected, options,
                                 return <p key={index.toString()} className="drop_content" onClick={() => {
                                     addItem(index, options, setSelected, setChartGroup, setOptions)
                                 }}>{city}</p>
-                            }) : ""
+                            }) 
+                            :""
                         }
                     </div>
                     <XIcon cancel={() => {

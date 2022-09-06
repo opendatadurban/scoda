@@ -2,14 +2,16 @@ import { ChevronDown } from '../../../../svg_components/SelectIcons'
 import '../../../../scss/components/Select.scss'
 import React, { useState } from 'react'
 
-export const MiniSelect = ({ names, selected, setSelected, chartDropName}) => {
+export const MiniSelect = ({ names, selected, setSelected, chartDropName,setSelectedChart}) => {
 
     const [show, visibility] = useState(false)
 
     const select = (index) => {
         setSelected(typeof (names[index]) === "string" ? names[index] : names[index].shortName)
+        if(chartDropName === "Household Income"){
+            setSelectedChart(index)
+        }
     }
-
 
     return (
         chartDropName === "Household Income" ?
