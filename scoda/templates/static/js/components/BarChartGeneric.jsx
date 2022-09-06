@@ -13,9 +13,7 @@ export const BarChartGeneric = ({options,data,height}) => {
            
             if (chart.legend.margins) {
               // Put some padding around the legend/labels
-              chart.legend.options.labels.padding = 16;
-              chart.legend.margins.bottom += 400
-
+              chart.legend.options.labels.padding = 12;
             }
           };
         }
