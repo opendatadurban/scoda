@@ -53,7 +53,7 @@ let final_num_of_household = []
 var chartRef1,chartRef2,chartRef3,chartRef4,chartRef5,chartRef6
 
 //City and year data
-let sortedData = ["BUF", "CCT", "EKH", "ETK","JHB", "MAN", "NMB", "TSH"]
+let sortedData = ["BUF", "CPT", "EKU", "ETH","JHB", "MAN", "NMA", "TSH"]
 
 //Units Receiving Free Basic Services data , static for now since it's still not part of codebook.
 
@@ -91,22 +91,22 @@ export default class Charts_dashboards extends Component {
             noYears:[],
             multiValue: [
             { value: "BUF", label: "Buffalo City" },
-            { value: "CCT", label: "City of Cape Town" },
+            { value: "CPT", label: "City of Cape Town" },
             { value: "JHB", label: "City of Joburg" },
-            { value: "EKH", label: "Ekurhuleni" },
-            { value: "ETK", label: "Ethekwini" },
+            { value: "EKU", label: "Ekurhuleni" },
+            { value: "ETH", label: "Ethekwini" },
             { value: "MAN", label: "Mangaung" },
-            { value: "NMB", label: "Nelson Mandela Bay" },
+            { value: "NMA", label: "Nelson Mandela Bay" },
             { value: "TSH", label: "Tshwane" }
           ],
           filterOptions: [
             { value: "BUF", label: "Buffalo City" },
-            { value: "CCT", label: "City of Cape Town" },
+            { value: "CPT", label: "City of Cape Town" },
             { value: "JHB", label: "City of Joburg" },
-            { value: "EKH", label: "Ekurhuleni" },
-            { value: "ETK", label: "Ethekwini" },
+            { value: "EKU", label: "Ekurhuleni" },
+            { value: "ETH", label: "Ethekwini" },
             { value: "MAN", label: "Mangaung" },
-            { value: "NMB", label: "Nelson Mandela Bay" },
+            { value: "NMA", label: "Nelson Mandela Bay" },
             { value: "TSH", label: "Tshwane" }
           ]
         };

@@ -63,21 +63,21 @@ const CitizenEngagment = () => {
       case 'Buffalo City':
         return "BUF";
       case 'City of Cape Town':
-        return "CCT"
+        return "CPT"
       case 'City of Joburg':
         return "JHB"
       case 'Ekurhuleni':
-        return "EKH"
+        return "EKU"
       case "Mangaung":
         return "MAN"
       case "Msunduzi":
-        return "PMB"
+        return "MSU"
       case "Nelson Mandela Bay":
-        return "NMB"
+        return "NMA"
       case "Tshwane":
         return "TSH"
       case "eThekwini":
-        return "ETK"
+        return "ETH"
     }
   }
 
