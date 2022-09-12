@@ -45,13 +45,13 @@ export default class DataStoriesDetails extends Component {
         
         return (
             <div className="container data-story-landig-page">
-                <nav>
-                    <div className="nav nav-tabs" id="nav-tab" role="tablist">
+                {/* <nav>
+                    <div className="nav nav-tabs" id="nav-tab" role="tablist" style={{width:"unset"}}>
                       
                         <a className="nav-item nav-link active" id="nav-sacn-tab" data-toggle="tab" href="#nav-sacn-content" role="tab" aria-controls="nav-sacn-content" aria-selected="true">SACN</a>
                         <a className="nav-item nav-link" id="nav-eThekwini-tab" data-toggle="tab" href="#nav-eThekwini-content" role="tab" aria-controls="nav-eThekwini-content" aria-selected="false">eThekwini</a>
                     </div>
-                </nav>
+                </nav> */}
                 <div className="tab-content" id="nav-tabContent">
                     <div className="tab-pane fade show active" id="nav-sacn-content" role="tabpanel" aria-labelledby="nav-sacn-tab">
                         <div className="container-fluid">
@@ -204,120 +204,123 @@ export default class DataStoriesDetails extends Component {
                         </div>
                     </div>
                     {/*TAB2 Content*/}
-                    <div className="tab-pane fade" id="nav-eThekwini-content" role="tabpanel" aria-labelledby="nav-eThekwini-tab">
-                    <div className="ds-content-hspacer"></div>
-                        <div className="container-fluid">
-                            <div className="row">
-                            
-                                <Banner
-                                    section="edge"
-                                    title="eThekwini Data Stories (via the Durban EDGE)"
-                                    content={edgeContent}
-                                    viewType="Portal"
-                                    siteLink='https://edge.durban/'
-                                />
-                                <FilterBar filters={edgeFilters} colors={edgeColors} />
-                                <div className="row ml-1 mr-1">
-                                <div id="data-story-card-employment" className={"col-md-4 "+main_class+" data-story-card-employment"}>
-                                        <ContentSectionTop
-                                            img="unemployed.png"
-                                            title="Unemployment in SA’s Major Cities"
-                                            subtitle=""
-                                            content="StatsSA has recently released 2019 Q2 unemployment figures, which show alarming rates of unemployment last seen…"
-                                            filterColor="#F05252"
-                                            filter="Employment"
-                                            imageTag="E"
-                                            filter_type="data-story-card-employment"
-                                            href_='https://data-stories.edge.durban/edge/unemployed_around_major_citiies'
-                                        />
-
-                                        {/**here */}
-                                        <div className="">
-                                            <DataStoriesInfoBanner
-                                                showTitle="The Durban EDGE"
-                                                title="The Durban EDGE"
-                                                subtitle="2 August 2019"
-                                                minutes="5"
+                    {/* TAB2 CONTENT IS HIDDEN WITH DISPLAY:NONE */}
+                    <div className="tab-pane fade" id="nav-eThekwini-content" role="tabpanel" aria-labelledby="nav-eThekwini-tab" style={{display:"none"}}>
+                        <div className="ds-content-hspacer"></div>
+                            <div className="container-fluid">
+                                <div className="row">
+                                
+                                    <Banner
+                                        section="edge"
+                                        title="eThekwini Data Stories (via the Durban EDGE)"
+                                        content={edgeContent}
+                                        viewType="Portal"
+                                        siteLink='https://edge.durban/'
+                                    />
+                                    <FilterBar filters={edgeFilters} colors={edgeColors} />
+                                    <div className="row ml-1 mr-1">
+                                    <div id="data-story-card-employment" className={"col-md-4 "+main_class+" data-story-card-employment"}>
+                                            <ContentSectionTop
+                                                img="unemployed.png"
+                                                title="Unemployment in SA’s Major Cities"
+                                                subtitle=""
+                                                content="StatsSA has recently released 2019 Q2 unemployment figures, which show alarming rates of unemployment last seen…"
+                                                filterColor="#F05252"
+                                                filter="Employment"
+                                                imageTag="E"
                                                 filter_type="data-story-card-employment"
-                                                imgSrc = {bannerImage}
+                                                href_='https://data-stories.edge.durban/edge/unemployed_around_major_citiies'
                                             />
+
+                                            {/**here */}
+                                            <div className="">
+                                                <DataStoriesInfoBanner
+                                                    showTitle="The Durban EDGE"
+                                                    title="The Durban EDGE"
+                                                    subtitle="2 August 2019"
+                                                    minutes="5"
+                                                    filter_type="data-story-card-employment"
+                                                    imgSrc = {bannerImage}
+                                                />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div id="data-story-card-economy" className={"col-md-4 "+main_class+" data-story-card-economy"}>
-                                        <ContentSectionTop
-                                            img="durban.png"
-                                            title="Durban's Economy Recovers in the Second Quarter"
-                                            subtitle=""
-                                            content="GDP data on Durban's performance has recently been released. As expected, Durban's economy has recovered from the…"
-                                            filterColor="#196CDB"
-                                            filter="Economy"
-                                            imageTag="Ec"
-                                            filter_type="data-story-card-economy"
-                                            href_='https://data-stories.edge.durban/edge/durban_economy_2nd_Q'
-                                        />
-                                        <div className="">
-                                            <DataStoriesInfoBanner
-                                                showTitle="The Durban EDGE"
-                                                title="The Durban EDGE"
-                                                subtitle="14 October 2019"
-                                                minutes="4"
+                                        <div id="data-story-card-economy" className={"col-md-4 "+main_class+" data-story-card-economy"}>
+                                            <ContentSectionTop
+                                                img="durban.png"
+                                                title="Durban's Economy Recovers in the Second Quarter"
+                                                subtitle=""
+                                                content="GDP data on Durban's performance has recently been released. As expected, Durban's economy has recovered from the…"
+                                                filterColor="#196CDB"
+                                                filter="Economy"
+                                                imageTag="Ec"
                                                 filter_type="data-story-card-economy"
-                                                imgSrc = {bannerImage}
+                                                href_='https://data-stories.edge.durban/edge/durban_economy_2nd_Q'
                                             />
+                                            <div className="">
+                                                <DataStoriesInfoBanner
+                                                    showTitle="The Durban EDGE"
+                                                    title="The Durban EDGE"
+                                                    subtitle="14 October 2019"
+                                                    minutes="4"
+                                                    filter_type="data-story-card-economy"
+                                                    imgSrc = {bannerImage}
+                                                />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div id="data-story-card-service" className={"col-md-4 "+main_class+" data-story-card-service"}>
-                                        <ContentSectionTop
-                                            img="electricity.png"
-                                            title="Electricity Usage"
-                                            subtitle=""
-                                            content="The cost of getting electricity in South Africa is 13 US cents per kilo watt hour on average, while the cost of getting electricity in Durb…"
-                                            filterColor="#FFC057"
-                                            filter="Service"
-                                            imageTag="S"
-                                            filter_type="data-story-card-service"
-                                            href_=''
-                                        />
-                                        <div className="">
-                                            <DataStoriesInfoBanner
-                                                 showTitle="The Durban EDGE"
-                                                title="The Durban EDGE"
-                                                subtitle="June 2019"
-                                                minutes="6"
+                                        <div id="data-story-card-service" className={"col-md-4 "+main_class+" data-story-card-service"}>
+                                            <ContentSectionTop
+                                                img="electricity.png"
+                                                title="Electricity Usage"
+                                                subtitle=""
+                                                content="The cost of getting electricity in South Africa is 13 US cents per kilo watt hour on average, while the cost of getting electricity in Durb…"
+                                                filterColor="#FFC057"
+                                                filter="Service"
+                                                imageTag="S"
                                                 filter_type="data-story-card-service"
-                                                imgSrc = {bannerImage}
+                                                href_=''
                                             />
+                                            <div className="">
+                                                <DataStoriesInfoBanner
+                                                    showTitle="The Durban EDGE"
+                                                    title="The Durban EDGE"
+                                                    subtitle="June 2019"
+                                                    minutes="6"
+                                                    filter_type="data-story-card-service"
+                                                    imgSrc = {bannerImage}
+                                                />
+                                            </div>
+
                                         </div>
+                                    </div>
+                                    <div className="row mt-4">
 
                                     </div>
-                                </div>
-                                <div className="row mt-4">
 
+                                    <div id="data-story-card-economy1" className="ds-ecomomy-image">
+                                    <ContentSectionRightEdge
+                                        img="economy.png"
+                                        title="Economic Overview: State of the Durban Economy"
+                                        subtitle=""
+                                        content="The total gross value added (GVA) of Durban grew by R278 billion in 2018. This is a 0.5% increase from the 2017. In 2018, Durban exp…"
+                                        filterColor="rgb(25, 108, 219)"
+                                        filter="Economy"
+                                        imageTag="Ec"
+                                        infoBannerTitle="The Durban EDGE"
+                                        infoBannerDate="June 2019"
+                                        infoBannerMins="8"
+                                        filter_type="data-story-card-economy"
+                                        href_='https://data-stories.edge.durban/edge/durban_economy'
+                                    />
+                                    </div>
                                 </div>
+                                
+                                <div className="ds-content-vspacer"></div>
 
-                                <div id="data-story-card-economy1" className="ds-ecomomy-image">
-                                <ContentSectionRightEdge
-                                    img="economy.png"
-                                    title="Economic Overview: State of the Durban Economy"
-                                    subtitle=""
-                                    content="The total gross value added (GVA) of Durban grew by R278 billion in 2018. This is a 0.5% increase from the 2017. In 2018, Durban exp…"
-                                    filterColor="rgb(25, 108, 219)"
-                                    filter="Economy"
-                                    imageTag="Ec"
-                                    infoBannerTitle="The Durban EDGE"
-                                    infoBannerDate="June 2019"
-                                    infoBannerMins="8"
-                                    filter_type="data-story-card-economy"
-                                    href_='https://data-stories.edge.durban/edge/durban_economy'
-                                />
-                                </div>
                             </div>
+                            <div className="pt-5"></div>
                             <div className="ds-content-vspacer"></div>
-
                         </div>
-                        <div className="pt-5"></div>
-                        <div className="ds-content-vspacer"></div>
-                    </div>
+                    
                 </div>
 
             </div>
