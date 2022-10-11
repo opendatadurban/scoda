@@ -1,6 +1,6 @@
 import React, { lazy } from 'react';
 import { peopleHouseholdColors } from '../components/GenericDashboardSetup/helpers/helpers';
-import { SelectContextState, useGlobalClose, useSelectOpen } from '../context';
+import { SelectContextState} from '../context';
 
 
 const Footer = lazy(() => import('../components/Footer'));
