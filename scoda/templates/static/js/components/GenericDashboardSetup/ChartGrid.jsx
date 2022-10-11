@@ -3,7 +3,7 @@ import {
   phAddItem, phRemoveItem, phClearAll,
   eAddItem, eRemoveItem, eClearAll,
   dAddItem, dClearAll, dRemoveItem,
-  hiAddItem, hiRemoveItem, hiClearAll
+  hiAddItem, hiRemoveItem, hiClearAll, leRemoveItem, leAddItem, leClearAll
 } from './helpers/citySelect';
 import { Select } from './Organisms/Select';
 import { ChartWrapper } from './Organisms/ChartWrapper';
@@ -15,6 +15,7 @@ export const ChartGrid = ({ indicator_ids,
   setChartGroup,
   originalValues,
   dropdownName,
+  gridItems,
   secondDropDown,
   selectedName,
   setSelectedName,
@@ -27,7 +28,7 @@ export const ChartGrid = ({ indicator_ids,
   const [options, setOptions] = useState([])
 
   const chartData = chartGroup
-  
+
   const selectControls = dropdownName === "People and Households" ? {
     removeItem: phRemoveItem,
     addItem: phAddItem,
@@ -44,11 +45,19 @@ export const ChartGrid = ({ indicator_ids,
     removeItem: hiRemoveItem,
     addItem: hiAddItem,
     clearAll: hiClearAll,
+  } : dropdownName === "Life Expectancy & Health" ? {
+    removeItem: leRemoveItem,
+    addItem: leAddItem,
+    clearAll: leClearAll,
+  } : dropdownName === "Life Expectancy & Health" ? {
+    removeItem: leRemoveItem,
+    addItem: leAddItem,
+    clearAll: leClearAll,
   } : {}
 
   const hhiDash = dropdownName === "Household Income"
   const globalCityDropDownClose = useGlobalClose()
- 
+
   return (
     <div className='chart_grid' onClick={() => { globalCityDropDownClose() }}>
       {
@@ -67,12 +76,12 @@ export const ChartGrid = ({ indicator_ids,
               chartDropName={dropdownName} />
             {
               dropdownName === "Household Income" ? <MiniSelect names={secondDropDown} selected={selectedName}
-              setSelectedChart={setSelectedChart} setSelected={setSelectedName} chartDropName={"Household Income"} /> : ""
+                setSelectedChart={setSelectedChart} setSelected={setSelectedName} chartDropName={"Household Income"} /> : ""
             }
           </div>
 
-          <div className={(dropdownName === "People and Households") || (dropdownName === "Dwellings") ? "grid-container" :
-            (dropdownName === "Household Income") ? "grid-2-text" : "grid-container-4"}>
+          <div className={gridItems > 4  ? "grid-container" :
+            gridItems === 2 ? "grid-2-text" : "grid-container-4"}>
             {
               <ChartWrapper
                 chartGroup={chartData}

@@ -35,10 +35,10 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
           <Subnav name='State of Cities Reports' dropdownName={dropdownName} dropDownItem={subNavContent} buttonText="Download as PNG" />
           <Sidebar_left />
           <div id='content' >
-            <GenericStatsPanel
+            {/* <GenericStatsPanel
               originalValues={originalValues}
               dropName={dropdownName}
-            />
+            /> */}
             <ChartGrid
               indicator_ids={indicator_ids}
               chartGroup={chartGroup}

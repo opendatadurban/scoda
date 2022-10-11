@@ -6,7 +6,7 @@ import { indicator_text_box_data } from './data'
 export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYear, yearColors, setOriginalValues,
   
 ) => {
-
+  console.log(indicator_ids)
   let newApiUri = "/api/explore_new?indicator_id="
   let oldApiUri = "/api-temp/explore/?indicator_id="
 
@@ -17,7 +17,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
   indicator_ids.forEach(id => {
 
     if (isNewApiIndicator(id)) {
-
+    
       indicator_id_requests.push({ request: axios.get(newApiUri + id), type: "new" })
     } 
     else if (isCombinationIndicator(id)) {
@@ -25,7 +25,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
       indicator_id_requests.push({ request: { data: [] }, type: "combination" })
     } 
     else if (isOldApiIndicator(id)) {
-
+      
       indicator_id_requests.push({ request: axios.get(oldApiUri + id.substring(1)), type: "old" })
     } else if(typeof(id) === "object"){
 
@@ -44,9 +44,9 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
    
 
     (chartData) => {
-
+      
       chartData.forEach((chart, index) => {
-
+        console.log(chart.data)
         let filterData = []
 
         if (indicator_id_requests[index].type === "new") {
