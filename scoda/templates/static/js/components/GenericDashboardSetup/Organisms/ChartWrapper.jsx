@@ -1,7 +1,8 @@
 import React,{useEffect,useState} from "react"
 import { Chart } from '../Chart'
 import '../../../../scss/components/chart/ChartHeader.scss'
-import { phChartTitles, echartTitles, dChartTitles, hiChartTitles, hhiDropdownNames } from "../helpers/helpers"
+import { phChartTitles, echartTitles, dChartTitles,
+   hiChartTitles, hhiDropdownNames, leChartTitles, fsChartTitles } from "../helpers/helpers"
 import { ErrorClose } from "../../../../svg_components/ErrorClose"
 import { useCloseAllErrors } from "../../../context"
 
@@ -64,7 +65,9 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
     phChartTitles : dropdownName === "Employment" ?
       echartTitles : dropdownName === "Dwellings" ?
         dChartTitles : dropdownName === "Household Income" ?
-          hiChartTitles : []
+          hiChartTitles :dropdownName === "Life Expectancy & Health" ?
+          leChartTitles :dropdownName === "Food Security, Literacy and Inequality" ?
+          fsChartTitles : []
 
   const elements = chartGroup
 
@@ -73,8 +76,6 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
     const element = elements[i]
 
     if (typeof (indicator_ids[i]) === "number" ) {
-
-      
 
       const codebookUrl = `/scoda/toolkit#/codebook-explorer/${indicator_ids[i]}`
 
@@ -95,6 +96,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
             <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
           }
         </div>
+        {chartTitles.source[i] && <p className="source_title">Source: {chartTitles.source[i]}</p>}
         <div className="chart">
           <Chart graphData={element} title={(dropdownName === "Household Income" && !isNumber) ? "Percent of Households" : chartTitles.yAxes[i]} dropdownName={dropdownName} stacked={false} chartIndex={i} />
         </div>
@@ -129,7 +131,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
       </div>
       )
     }
-    else if (indicator_ids[i] === 'n8' || indicator_ids[i] === 'n1' || indicator_ids[i] === 'n35' || indicator_ids[i] === 'n36' || indicator_ids[i] === 'n37' || indicator_ids[i] === 'n38') {
+    else if (typeof (indicator_ids[i]) === "string" && indicator_ids[i].charAt(0) === "n") {
 
       items.push(<div className='chart_wrapper' key={indicator_ids[i].toString()} onClick={clearAllErrors} >
         <div className='heading_wrapper'>
@@ -138,6 +140,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
             setErrorState(i)
           }} style={{ opacity: "0.4" }}>Raw Data</a>
         </div>
+        {chartTitles.source[i] && <p className="source_title">Source: {chartTitles.source[i]}</p>}
         <div className="chart">
           <Chart graphData={element} title={chartTitles.yAxes[i]} dropdownName={dropdownName} stacked={false} chartIndex={i} />
         </div>
