@@ -12,7 +12,7 @@ const Home = () => {
 
   const subNavContent = {
     dropdownMenu: [
-      {
+      {//0
         name: "Service Delivery",
         href: "socr#/service_delivery",
         active: false
@@ -48,14 +48,24 @@ const Home = () => {
         active: false
       },
       {
+        name: "Food Security, Literacy and Inequality", //7
+        href: "socr#/food_security",
+        active: true
+      },
+      {
         name: "Life Expectancy & Health",
         href: "socr#/life_expectancy",
         active: false
       },
       {
-        name: "Food Security, Literacy and Inequality",
-        href: "socr#/food_security",
-        active: true
+        name: "Education",
+        href: "socr#/education",
+        active: false
+      },
+      {
+        name: "Sustainability",
+        href: "socr#/sustainability",
+        active: false
       }
     ]
   }
@@ -71,7 +81,7 @@ const Home = () => {
           maxYear={2018}
           subNavContent={subNavContent}
           gridItems={6}
-          dropdownName={subNavContent.dropdownMenu[8].name}
+          dropdownName={subNavContent.dropdownMenu[7].name}
           colors={peopleHouseholdColors} />
         <Footer />
       </div>

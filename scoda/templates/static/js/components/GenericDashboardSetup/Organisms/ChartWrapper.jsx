@@ -2,9 +2,10 @@ import React,{useEffect,useState} from "react"
 import { Chart } from '../Chart'
 import '../../../../scss/components/chart/ChartHeader.scss'
 import { phChartTitles, echartTitles, dChartTitles,
-   hiChartTitles, hhiDropdownNames, leChartTitles, fsChartTitles } from "../helpers/helpers"
+   hiChartTitles, hhiDropdownNames, leChartTitles, fsChartTitles, sustainabilityChartTitles } from "../helpers/helpers"
 import { ErrorClose } from "../../../../svg_components/ErrorClose"
 import { useCloseAllErrors } from "../../../context"
+import { dropdownChartTitle } from "../helpers/dropdownChartTitles"
 
 export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, isNumber, selectedDropDownChart }) => {
 
@@ -67,12 +68,13 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
         dChartTitles : dropdownName === "Household Income" ?
           hiChartTitles :dropdownName === "Life Expectancy & Health" ?
           leChartTitles :dropdownName === "Food Security, Literacy and Inequality" ?
-          fsChartTitles : []
+          fsChartTitles : dropdownName === "Sustainability" ?
+          sustainabilityChartTitles :[]
 
   const elements = chartGroup
 
   for (let i = 0; i < elements.length; i++) {
-
+   
     const element = elements[i]
 
     if (typeof (indicator_ids[i]) === "number" ) {
@@ -96,7 +98,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
             <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
           }
         </div>
-        {chartTitles.source[i] && <p className="source_title">Source: {chartTitles.source[i]}</p>}
+        {chartTitles.hasOwnProperty("source") && <p className="source_title">Source: {chartTitles.source[i]}</p>}
         <div className="chart">
           <Chart graphData={element} title={(dropdownName === "Household Income" && !isNumber) ? "Percent of Households" : chartTitles.yAxes[i]} dropdownName={dropdownName} stacked={false} chartIndex={i} />
         </div>
@@ -104,28 +106,24 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
       )
     }else if (Array.isArray(indicator_ids[i])){
 
-      const codebookUrl = `/scoda/toolkit#/codebook-explorer/${hhiDropdownNames()[selectedDropDownChart].endpoints[isNumber?1:0]}`
+      const codebookUrl = `/scoda/toolkit#/codebook-explorer/${hhiDropdownNames(indicator_ids[0])[selectedDropDownChart].endpoints[isNumber?1:0]}`
 
       items.push(<div className='chart_wrapper' key={i.toString()} onClick={clearAllErrors}>
         <div className='heading_wrapper'>
-          {dropdownName === "Household Income" ?
-            <p className="title">Main Source of Income:<span className="category">{hhiDropdownNames()[selectedDropDownChart].shortName}</span></p> :
-            <div className='heading'>{chartTitles.main[i]}</div>
-          }
-
-          {dropdownName === "Household Income" ?
+          
+          {dropdownChartTitle(indicator_ids,hhiDropdownNames,selectedDropDownChart)}
+            {/* <p className="title">Main Source of Income:<span className="category">{hhiDropdownNames(indicator_ids[0])[selectedDropDownChart].shortName}</span></p>  */}
+          
             <div className="button_group">
+
               <button className={isNumber ? "number" : "number deselect"} onClick={() => { toggle(true) }}>Number</button>
               <button className={isNumber ? "percent" : "percent select"} onClick={() => { toggle(false) }}>Percent</button>
               <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
-            </div>
-            :
-            <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
-          }
+            </div>    
         </div>
         <div className="chart">
           <Chart graphData={isNumber ?  JSON.parse(JSON.stringify(chartGroup[0][0][0])) : JSON.parse(JSON.stringify(chartGroup[0][0][1])) } 
-          title={(dropdownName === "Household Income" && !isNumber) ? "Percent of Households" : chartTitles.yAxes[i]}
+          title={ isNumber ? "Population" : "Percentage of Population"}
           dropdownName={dropdownName} stacked={false} chartIndex={i} />
         </div>
       </div>
@@ -140,7 +138,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
             setErrorState(i)
           }} style={{ opacity: "0.4" }}>Raw Data</a>
         </div>
-        {chartTitles.source[i] && <p className="source_title">Source: {chartTitles.source[i]}</p>}
+        {chartTitles.hasOwnProperty("source") && <p className="source_title">Source: {chartTitles.source[i]}</p>}
         <div className="chart">
           <Chart graphData={element} title={chartTitles.yAxes[i]} dropdownName={dropdownName} stacked={false} chartIndex={i} />
         </div>
@@ -184,7 +182,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
       </div>)
     } else if (indicator_ids[i] === "indicator text box") {
 
-      const codebookUrlForText = `/scoda/toolkit#/codebook-explorer/${hhiDropdownNames()[selectedDropDownChart].endpoints[isNumber?1:0]}`
+      const codebookUrlForText = `/scoda/toolkit#/codebook-explorer/${hhiDropdownNames(indicator_ids[0])[selectedDropDownChart].endpoints[isNumber?1:0]}`
 
       items.push(<div className='chart_wrapper' key={i.toString()} >
         <div className='heading_wrapper text_box'>
@@ -196,8 +194,8 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
             <p className="name">NAME</p>
           </div>
           <div className="content">
-            <p className="code">{isNumber? hhiDropdownNames()[selectedDropDownChart].numberCode:hhiDropdownNames()[selectedDropDownChart].percentCode}</p>
-            <p className="name">{isNumber ? hhiDropdownNames()[selectedDropDownChart].numberName:hhiDropdownNames()[selectedDropDownChart].percentName}</p>
+            <p className="code">{isNumber? hhiDropdownNames(indicator_ids[0])[selectedDropDownChart].numberCode:hhiDropdownNames(indicator_ids[0])[selectedDropDownChart].percentCode}</p>
+            <p className="name">{isNumber ? hhiDropdownNames(indicator_ids[0])[selectedDropDownChart].numberName:hhiDropdownNames(indicator_ids[0])[selectedDropDownChart].percentName}</p>
           </div>
           <a className="view_codebook" href={codebookUrlForText} target='_blank'>View Indicator in data explorer</a>
         </div>

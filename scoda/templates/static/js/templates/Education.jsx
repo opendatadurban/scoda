@@ -1,17 +1,17 @@
-import React, { lazy } from 'react';
+import React,{lazy} from 'react';
+import { education_text_box_data, indicator_text_box_data, sustainability_text_box_data, sustainability_text_box_data_2 } from '../components/GenericDashboardSetup/data/data';
 import { peopleHouseholdColors } from '../components/GenericDashboardSetup/helpers/helpers';
-import { SelectContextState } from '../context';
 
-const Footer = lazy(() => import('../components/Footer'));
-const Navigation_scoda = lazy(() => import('../components/Navigation_scoda'));
-const Dwellings = lazy(() => import('../components/GenericDashboardSetup/GenericChart'));
+
+const Footer =  lazy(() => import('../components/Footer'));
+const Navigation_scoda =  lazy(() => import('../components/Navigation_scoda'));
+const HouseholdIncome = lazy(() => import('../components/GenericDashboardSetup/GenericChart'));
 
 const Home = () => {
 
-
   const subNavContent = {
     dropdownMenu: [
-      {//0
+      {
         name: "Service Delivery",
         href: "socr#/service_delivery",
         active: false
@@ -39,7 +39,7 @@ const Home = () => {
       {
         name: "Dwellings",
         href: "socr#/dwellings",
-        active: true
+        active: false
       },
       {
         name: "Household Income",
@@ -47,7 +47,7 @@ const Home = () => {
         active: false
       },
       {
-        name: "Food Security, Literacy and Inequality", //7
+        name: "Food Security, Literacy and Inequality",
         href: "socr#/food_security",
         active: false
       },
@@ -59,7 +59,7 @@ const Home = () => {
       {
         name: "Education",
         href: "socr#/education",
-        active: false
+        active: true
       },
       {
         name: "Sustainability",
@@ -69,22 +69,22 @@ const Home = () => {
     ]
   }
 
-  return (
-    
-      <div className="socr--home" style={{ backgroundColor: "white", overflowX: 'hidden' }}>
-        <Navigation_scoda logoHide={false} box_shadow={true} />
-        <Dwellings
-          indicator_ids={["n35", "n36", "combination", "n37", "n38"]}
-          minYear={2015}
-          maxYear={2018}
-          subNavContent={subNavContent}
-          gridItems={5}
-          dropdownName={subNavContent.dropdownMenu[5].name}
-          colors={peopleHouseholdColors} />
-        <Footer />
-      </div>
-   
-  )
+    return(
+
+        <div className="socr--home" style={{backgroundColor:"white",overflowX:'hidden'}}>
+            <Navigation_scoda logoHide={false} box_shadow={true} />
+            <HouseholdIncome 
+            indicator_ids= {[education_text_box_data,"indicator text box"]}
+            minYear={2015}
+            maxYear={2018}
+            subNavContent={subNavContent}
+            gridItems={2}
+            dropdownName={subNavContent.dropdownMenu[9].name}
+            colors={peopleHouseholdColors}
+            />
+            <Footer />
+        </div> 
+    )
 };
 
 export default Home;

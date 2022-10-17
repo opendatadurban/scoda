@@ -19,8 +19,6 @@ export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex }) =
                 boxWidth: 25,
                 fontColor: 'rgba(74, 74, 74, 1)',
                 fontFamily: 'Montserrat',
-            
-            
             },
             onHover: function (e) {
                 e.target.style.cursor = 'pointer';
