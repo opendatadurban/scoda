@@ -316,7 +316,7 @@ export const eRemoveItem = (clickIndex, selected, setSelected, setChartGroup, se
       optionsChart.push(optionYear)
       selectChart.push(selectYear)
     })
-    console.log(optionsChart,"options")
+
     optionsTemp.push(optionsChart)
     selectTemp.push(selectChart)
   })
@@ -590,7 +590,6 @@ export const hiClearAll = (originalValues, setSelected, setOptions) => {
   setOptions(prev => {
 
     let fallbackValue = JSON.parse(JSON.stringify(originalValues))
-    console.log(fallbackValue[0][0],"CLEAR ALL VALUE")
 
     return fallbackValue[0][0]
   })
@@ -865,7 +864,7 @@ export const leAddItem = (clickIndex, options, setSelected, setChartGroup, setOp
 
 
     setChartGroup(prev => {
-      console.log(prev,"prev")
+   
 
       let newArr = prev
       newArr[2] = optionState[0]
@@ -921,7 +920,6 @@ export const leRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
       optionsChart.push(optionYear)
       selectChart.push(selectYear)
     })
-   console.log(optionsChart,"options")
     optionsTemp.push(optionsChart)
     selectTemp.push(selectChart)
   })
@@ -1069,7 +1067,6 @@ export const fsAddItem = (clickIndex, options, setSelected, setChartGroup, setOp
 
 
     setChartGroup(prev => {
-      console.log(prev,"prev")
 
       let newArr = prev
       newArr[0] = optionState[0]
@@ -1129,7 +1126,6 @@ export const fsRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
       optionsChart.push(optionYear)
       selectChart.push(selectYear)
     })
-   console.log(optionsChart,"options")
     optionsTemp.push(optionsChart)
     selectTemp.push(selectChart)
   })
@@ -1400,7 +1396,6 @@ export const edClearAll = (originalValues, setSelected, setOptions) => {
   setOptions(prev => {
 
     let fallbackValue = JSON.parse(JSON.stringify(originalValues))
-    console.log(fallbackValue[0][0],"CLEAR ALL VALUE")
 
     return fallbackValue[0][0]
   })
@@ -1607,8 +1602,6 @@ export const sustainabilityClearAll = (originalValues, setSelected, setOptions) 
     let newArr = prev
 
     let fallbackValue = JSON.parse(JSON.stringify(originalValues))
-    console.log(fallbackValue)
-    console.log(fallbackValue,"fallback values")
     let removed = fallbackValue.splice(-1)
     let filled = newArr.length > 1 ? newArr.map((chart, cIndex) => {
 

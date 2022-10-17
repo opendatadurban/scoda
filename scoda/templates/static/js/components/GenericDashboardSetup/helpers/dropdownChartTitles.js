@@ -16,3 +16,22 @@ export const dropdownChartTitle = (indicator_ids,hhiDropdownNames, selectedDropD
 
     return title
 }
+
+export const getYAxisTitle = (isNumber, genericIndex,dropname) => {
+    let yAxisTitles =  isNumber ? "Population" : "Percentage of Population"
+
+    if(genericIndex === 0 && dropname === "Sustainability"){
+        yAxisTitles = isNumber ? "Number of Households": "Percentage of Households"
+    }
+    if(genericIndex === 1 && dropname === "Sustainability"){
+        yAxisTitles = isNumber ? "Number of Households": "Percentage of Households"
+    }
+
+    return yAxisTitles
+}
+
+export const getSourceTitle= (genericIndex,dropname) => {
+    let source = <p className={"dropdown_chart_source"}>Source: Calculated from Stats SA General Household Survey</p>
+
+    return source
+}

@@ -13,7 +13,7 @@ export default class Chart extends Component {
         fetch('https://localhost:5000/react/test_data')
         .then(res => res.json())
         .then((data) => {
-            console.log(data);
+           
           this.setState({ test_data: data.test_data })
         })
         .catch(console.log)

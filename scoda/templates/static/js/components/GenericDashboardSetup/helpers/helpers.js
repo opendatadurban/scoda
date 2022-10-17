@@ -58,14 +58,29 @@ export const fsChartTitles = {
 "IHS Global Insight","Stats SA General Household Survey"]
 }
 
-export const sustainabilityChartTitles = {
-  yAxes: ["Percentage of Households", "Days where PM2.5 levels exceed guidelines", 
-  "Days where PM10 levels exceed guidelines"],
-  main: ["Recycling Profile of Households in South Africa’s Major Metros (2019)", 
-  "Ambient Air Quality: PM2.5", "Ambient Air Quality: PM10"],
-  source: ["Stats SA General Household Survey","South African Air Quality Information System (SAAQIS)",
-"South African Air Quality Information System (SAAQIS)"]
+export const sustainabilityChartTitles = (dropdownName,genericIndex) => {
+  let chartTitles = {yAxes:"", main:"",source:""}
+
+  if(dropdownName === "Sustainability" && genericIndex === 2){
+    chartTitles ={
+      yAxes: ["Percentage of Households"],
+        main: ["Recycling Profile of Households in South Africa’s Major Metros (2019)"],
+        source: ["Stats SA General Household Survey"]
+    }
+  }
+  if(dropdownName === "Sustainability" && genericIndex === 3){
+    chartTitles ={
+      yAxes: ["Days where PM2.5 levels exceed guidelines", "Days where PM10 levels\n\texceed guidelines"],
+        main: ["Ambient Air Quality: PM2.5", 
+        "Ambient Air Quality: PM10"],
+        source: ["South African Air Quality Information System (SAAQIS)",
+      "South African Air Quality Information System (SAAQIS)"]
+    }
+  }
+
+return chartTitles
 }
+
 //TODO: use select to alter cities labels within chart grid 
 export const handleSelectChange = (e, cities, setSelectedValues) => {
 
@@ -269,13 +284,16 @@ export const isTextBoxIndicator = (indicator) => {
   return isTextBox
 }
 
-export const chartHeights = (dropdownName) => {
+export const chartHeights = (dropdownName,genericIndex) => {
 
   /* Create a conditional list of chart heights specified for each dashboard*/
 
   const heightByDropName = (dropdownName === "Employment" ? 170
-    : dropdownName === "Household Income" || dropdownName === "Education" || dropdownName === "Sustainability" ? 100
-      : 210) // 210 is the fallback value if height not specified
+    : dropdownName === "Household Income" || dropdownName === "Education" ||
+    (dropdownName === "Sustainability" && genericIndex !== 3 && genericIndex !== 2) ? 100 :
+    (dropdownName === "Sustainability" && genericIndex === 3) ? 150:
+    (dropdownName === "Sustainability" && genericIndex === 2) ? 60
+    : 210) // 210 is the fallback value if height not specified
 
   return heightByDropName
 }

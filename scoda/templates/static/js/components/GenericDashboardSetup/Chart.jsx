@@ -4,7 +4,7 @@ import {BarChartGeneric}  from '../BarChartGeneric';
 import { cityLabels, chartHeights } from './helpers/helpers';
 import { tickExceptionsForDwellings } from './helpers/tickExceptions';
 
-export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex }) => {
+export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex,genericIndex }) => {
 
 
     const options = {
@@ -50,6 +50,7 @@ export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex }) =
                     fontFamily: "Montserrat",
                     fontSize: 12,
                     fontStyle: '600',
+                 
                     fontColor: "rgba(74, 74, 74, 1)"
                 },
                 gridLines: {
@@ -114,7 +115,7 @@ export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex }) =
 
     return (
         <>
-            <BarChartGeneric options={options} data={data} height={chartHeights(dropdownName)} />
+            <BarChartGeneric options={options} data={data} height={chartHeights(dropdownName,genericIndex)} />
         </>
     )
 }

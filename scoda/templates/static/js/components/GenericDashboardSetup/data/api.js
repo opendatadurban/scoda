@@ -50,7 +50,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
   Promise.all(indicator_id_requests.map(request => request.request)).then(
   
     (chartData) => {
-      console.log(chartData,"whole array")
+
       chartData.forEach((chart, index) => {
       
 
@@ -87,7 +87,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
             colorCount++
           })
         } else if (indicator_id_requests[index].type === "old") {
-          console.log(chart.data.table,"table data")
+  
           const table = tableData(chart.data.table, chart.data.cities.sort(),minYear,maxYear)
 
           filterData.push(...table)
@@ -288,8 +288,6 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
         })]
       }
 
-
-      console.log(gridData,"grid data api")
       setOriginalValues([...gridData])
       const copy = JSON.parse(JSON.stringify(gridData)) // deep copy to be manipuilated
       setChartGroup([...copy])

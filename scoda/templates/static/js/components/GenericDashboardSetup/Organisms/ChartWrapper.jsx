@@ -5,7 +5,7 @@ import { phChartTitles, echartTitles, dChartTitles,
    hiChartTitles, hhiDropdownNames, leChartTitles, fsChartTitles, sustainabilityChartTitles } from "../helpers/helpers"
 import { ErrorClose } from "../../../../svg_components/ErrorClose"
 import { useCloseAllErrors } from "../../../context"
-import { dropdownChartTitle } from "../helpers/dropdownChartTitles"
+import { dropdownChartTitle, getSourceTitle, getYAxisTitle } from "../helpers/dropdownChartTitles"
 
 export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, isNumber, selectedDropDownChart,
 genericIndex  }) => {
@@ -62,6 +62,7 @@ genericIndex  }) => {
   }
 
   let items = []
+  
 
   let chartTitles = dropdownName === "People and Households" ?
     phChartTitles : dropdownName === "Employment" ?
@@ -70,7 +71,7 @@ genericIndex  }) => {
           hiChartTitles :dropdownName === "Life Expectancy & Health" ?
           leChartTitles :dropdownName === "Food Security, Literacy and Inequality" ?
           fsChartTitles : dropdownName === "Sustainability" ?
-          sustainabilityChartTitles :[]
+          sustainabilityChartTitles(dropdownName,genericIndex) :[]
 
   const elements = chartGroup
 
@@ -80,6 +81,7 @@ genericIndex  }) => {
 
     if (typeof (indicator_ids[i]) === "number" ) {
 
+   
       const codebookUrl = `/scoda/toolkit#/codebook-explorer/${indicator_ids[i]}`
 
       items.push(<div className='chart_wrapper' key={i.toString()} onClick={clearAllErrors}>
@@ -101,12 +103,13 @@ genericIndex  }) => {
         </div>
         {chartTitles.hasOwnProperty("source") && <p className="source_title">Source: {chartTitles.source[i]}</p>}
         <div className="chart">
-          <Chart graphData={element} title={(dropdownName === "Household Income" && !isNumber) ? "Percent of Households" : chartTitles.yAxes[i]} dropdownName={dropdownName} stacked={false} chartIndex={i} />
+          <Chart graphData={element} title={(dropdownName === "Household Income" && !isNumber) ? "Percent of Households" : chartTitles.yAxes[i]} 
+          dropdownName={dropdownName} stacked={false} chartIndex={i} genericIndex={genericIndex} />
         </div>
       </div>
       )
     }else if (Array.isArray(indicator_ids[i])){
-
+      console.log(genericIndex,"genric index test")
       const codebookUrl = `/scoda/toolkit#/codebook-explorer/${hhiDropdownNames(indicator_ids[0])[selectedDropDownChart].endpoints[isNumber?1:0]}`
 
       items.push(<div className='chart_wrapper' key={i.toString()} onClick={clearAllErrors}>
@@ -123,16 +126,18 @@ genericIndex  }) => {
               <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
             </div>    
         </div>
+        {getSourceTitle(genericIndex,dropdownName)}
         <div className="chart">
           <Chart graphData={isNumber ?  JSON.parse(JSON.stringify(chartGroup[0][0][0])) : JSON.parse(JSON.stringify(chartGroup[0][0][1])) } 
-          title={ isNumber ? "Population" : "Percentage of Population"}
-          dropdownName={dropdownName} stacked={false} chartIndex={i} />
+          title={ getYAxisTitle(isNumber,genericIndex,dropdownName)}
+          dropdownName={dropdownName} stacked={false} chartIndex={i} genericIndex={genericIndex}/>
         </div>
       </div>
       )
     }
-    else if (typeof (indicator_ids[i]) === "string" && indicator_ids[i].charAt(0) === "n") {
-
+    else if (typeof (indicator_ids[i]) === "string" && 
+    (indicator_ids[i].charAt(0) === "n" || indicator_ids[i] === "single year combination chart")) {
+    
       items.push(<div className='chart_wrapper' key={indicator_ids[i].toString()} onClick={clearAllErrors} >
         <div className='heading_wrapper'>
           <div className='heading'>{chartTitles.main[i]}</div>
@@ -142,7 +147,8 @@ genericIndex  }) => {
         </div>
         {chartTitles.hasOwnProperty("source") && <p className="source_title">Source: {chartTitles.source[i]}</p>}
         <div className="chart">
-          <Chart graphData={element} title={chartTitles.yAxes[i]} dropdownName={dropdownName} stacked={false} chartIndex={i} />
+          <Chart graphData={element} title={chartTitles.yAxes[i]} dropdownName={dropdownName} 
+          stacked={false} chartIndex={i} genericIndex={genericIndex} />
         </div>
         {errorContext.error[i].errorThrown ?
           <div className="error_message">
@@ -167,7 +173,8 @@ genericIndex  }) => {
           }} style={{ opacity: "0.4" }}>Raw Data</a>
         </div>
         <div className="chart">
-          <Chart graphData={element} title={chartTitles.yAxes[i]} dropdownName={dropdownName} stacked={true} />
+          <Chart graphData={element} title={chartTitles.yAxes[i]} dropdownName={dropdownName} 
+          stacked={true}  genericIndex={genericIndex}  />
         </div>
         {errorContext.error[i].errorThrown ?
           <div className="error_message">
@@ -204,5 +211,6 @@ genericIndex  }) => {
       </div>)
     }
   }
+
   return items
 }

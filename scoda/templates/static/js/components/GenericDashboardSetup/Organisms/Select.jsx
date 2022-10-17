@@ -16,7 +16,7 @@ export const Select = ({ chartData, originalValues, selected, options,
     const selectContext = useSelectOpen()
     const closeAlerts = useCloseAllErrors()
 
-console.log(originalValues)
+
     const closeAllAlerts = () => {
 
 
