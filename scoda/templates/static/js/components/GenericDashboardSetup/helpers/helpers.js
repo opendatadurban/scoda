@@ -57,6 +57,15 @@ export const fsChartTitles = {
 "Calculated from Stats SA General Household Survey","IHS Global Insight",
 "IHS Global Insight","Stats SA General Household Survey"]
 }
+
+export const sustainabilityChartTitles = {
+  yAxes: ["Percentage of Households", "Days where PM2.5 levels exceed guidelines", 
+  "Days where PM10 levels exceed guidelines"],
+  main: ["Recycling Profile of Households in South Africa’s Major Metros (2019)", 
+  "Ambient Air Quality: PM2.5", "Ambient Air Quality: PM10"],
+  source: ["Stats SA General Household Survey","South African Air Quality Information System (SAAQIS)",
+"South African Air Quality Information System (SAAQIS)"]
+}
 //TODO: use select to alter cities labels within chart grid 
 export const handleSelectChange = (e, cities, setSelectedValues) => {
 
@@ -153,9 +162,9 @@ export const populateSelect = (chartData, setOriginal, cityLabels, setSelected) 
 
 
 
-export const tableData = (table, cities) => {
+export const tableData = (table, cities,min, max) => {
 
-  const years = ["2015", "2016", "2017", "2018"]
+  const years = [2015, 2016, 2017, 2018,2019,2020]
   const labels = cities
   let newTable = []
   let byLabel = []
@@ -164,7 +173,7 @@ export const tableData = (table, cities) => {
   let abbrev = labels.map(city => cityLabels(city))
 
   table.forEach(element => {
-    if (element[0] === "City" || (parseInt(element[1]) < 2015 || parseInt(element[1]) > 2018)) return
+    if (element[0] === "City" || (parseInt(element[1]) < min || parseInt(element[1]) > max)) return
     newTable.push(element)
   });
 
@@ -182,11 +191,13 @@ export const tableData = (table, cities) => {
 
   years.forEach((year) => {
 
+    if (year < min || year > max) return
+
     let valuesByYear = []
 
     byLabel.forEach(valueSet => {
 
-      if (valueSet[1] !== year) return
+      if (valueSet[1] !== year.toString()) return
 
       valuesByYear.push(valueSet)
     });
@@ -231,6 +242,12 @@ export const isCombinationIndicator = (indicator) => {
 
 }
 
+export const isSingleYearIndicator = (indicator) => {
+  const isSingleYearChart = (indicator === "single year combination chart")
+
+  return isSingleYearChart
+}
+
 export const isOldApiIndicator = (indicator) => {
 
   /*Checks if indicator id belongs to the older API/api-temp
@@ -257,15 +274,15 @@ export const chartHeights = (dropdownName) => {
   /* Create a conditional list of chart heights specified for each dashboard*/
 
   const heightByDropName = (dropdownName === "Employment" ? 170
-    : dropdownName === "Household Income" ? 100
+    : dropdownName === "Household Income" || dropdownName === "Education" || dropdownName === "Sustainability" ? 100
       : 210) // 210 is the fallback value if height not specified
 
   return heightByDropName
 }
 
-export const hhiDropdownNames = () => {
+export const hhiDropdownNames = (input) => {
 
-  const options = indicator_text_box_data.map((item, index) => {
+  const options = input.map((item, index) => {
 
     let shortName = item.number.name.split(": ")
 

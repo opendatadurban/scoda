@@ -1,14 +1,16 @@
 import axios from 'axios'
-import { cityLabels, combinationColors, isCombinationIndicator, isNewApiIndicator, isOldApiIndicator, isTextBoxIndicator, secondaryColors } from '../helpers/helpers'
+import { cityLabels, combinationColors, isCombinationIndicator, isNewApiIndicator, isOldApiIndicator, isSingleYearIndicator, isTextBoxIndicator, peopleHouseholdColors, secondaryColors } from '../helpers/helpers'
 import { tableData } from '../helpers/helpers'
 import { indicator_text_box_data } from './data'
 
-export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYear, yearColors, setOriginalValues,
+export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYear,
+   yearColors, setOriginalValues,dropdownName
   
 ) => {
-  console.log(indicator_ids)
+
   let newApiUri = "/api/explore_new?indicator_id="
   let oldApiUri = "/api-temp/explore/?indicator_id="
+  
 
   let gridData = []
 
@@ -24,10 +26,15 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
 
       indicator_id_requests.push({ request: { data: [] }, type: "combination" })
     } 
+    else if (isSingleYearIndicator(id)) {
+
+      indicator_id_requests.push({ request: { data: [] }, type: "single year combination chart" })
+    } 
     else if (isOldApiIndicator(id)) {
-      
+    
       indicator_id_requests.push({ request: axios.get(oldApiUri + id.substring(1)), type: "old" })
-    } else if(typeof(id) === "object"){
+    } 
+    else if(typeof(id) === "object"){
 
       indicator_id_requests.push({ request: Promise.all([
         axios.get(newApiUri + id.endpoints[1]),
@@ -41,12 +48,12 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
   });
 
   Promise.all(indicator_id_requests.map(request => request.request)).then(
-   
-
+  
     (chartData) => {
-      
+      console.log(chartData,"whole array")
       chartData.forEach((chart, index) => {
-        console.log(chart.data)
+      
+
         let filterData = []
 
         if (indicator_id_requests[index].type === "new") {
@@ -65,8 +72,12 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
             // add corresponding color to each year/ dataset label
             item['color'] = yearColors[colorCount]
 
-            if (index === 5) {
+            if (index === 5 && dropdownName === "People and Households") {
               item['color'] = secondaryColors[colorCount]
+            }
+
+            if (index === 5) {
+              item['color'] = peopleHouseholdColors[colorCount + 2]
             }
 
             item.labels = item.labels.sort().map((city) => cityLabels(city))
@@ -76,8 +87,8 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
             colorCount++
           })
         } else if (indicator_id_requests[index].type === "old") {
-
-          const table = tableData(chart.data.table, chart.data.cities.sort())
+          console.log(chart.data.table,"table data")
+          const table = tableData(chart.data.table, chart.data.cities.sort(),minYear,maxYear)
 
           filterData.push(...table)
         } else if (indicator_id_requests[index].type === "combination") {
@@ -108,6 +119,19 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
         }else if (indicator_id_requests[index].type === "indicator text box") {
 
           filterData.push(...indicator_text_box_data)
+        }
+        else if( indicator_id_requests[index].type === "single year combination chart" ){
+          const yearEquivalent = ["Do not sort waste", "Waste is sorted for or by Waster Picker", "Waste is collected or dropped at recycling depot", "No data"]
+          const combinationChart = yearEquivalent.map((category, index) => {
+            return {
+              year: category,
+              labels: ['BUF', 'CPT', 'JHB', 'EKU', 'MAN', 'NMA', 'TSH', 'ETH'],
+              values: [0, 0, 0, 0, 0, 0, 0, 0],
+              color: yearColors[index]
+            }
+          })
+
+          filterData.push(...combinationChart)
         }
         else {
 
@@ -189,6 +213,83 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
         })
 
       }
+
+      if (indicator_ids.includes("single year combination chart")) {
+        let sortedWaste = [0, 0, 0, 0, 0, 0, 0, 0]
+        let wastePicker = [0, 0, 0, 0, 0, 0, 0, 0]
+        let recyclingDepot = [0, 0, 0, 0, 0, 0, 0, 0]
+        let noData = [0, 0, 0, 0, 0, 0, 0, 0]
+
+        gridData.forEach((element, elementIndex) => {
+          if (elementIndex === 2) return
+
+          if (elementIndex === 0) {
+
+            element.forEach((year, yearIndex) => {
+              if (year.year !== '2019') return
+              year.values.forEach((value, valueIndex) => {
+
+                sortedWaste[valueIndex] += value ? value : 0
+
+              })
+            })
+          }
+          if (elementIndex === 1) {
+
+            element.forEach((year, yearIndex) => {
+              if (year.year !== '2019') return
+              year.values.forEach((value, valueIndex) => {
+
+                wastePicker[valueIndex] += value ? value : 0
+
+              })
+            })
+          }
+          if (elementIndex === 3) {
+
+            element.forEach((year, yearIndex) => {
+              if (year.year !== '2019') return
+              year.values.forEach((value, valueIndex) => {
+
+                recyclingDepot[valueIndex] += value ? value : 0
+
+              })
+            })
+          }
+          if (elementIndex === 4) {
+
+            element.forEach((year, yearIndex) => {
+              if (year.year !== '2019') return
+              year.values.forEach((value, valueIndex) => {
+
+                noData[valueIndex] += value ? value : 0
+
+              })
+            })
+          }
+        });
+        let colorCount = 0
+        gridData = [gridData[2].map((item, index) => {
+
+          item.color = combinationColors[colorCount]
+          if (index === 0) {
+            item.values = sortedWaste
+          } else if (index === 1) {
+            item.values = wastePicker
+          } else if (index === 2) {
+            item.values = recyclingDepot
+          } else if (index === 3) {
+            item.values = noData
+          }
+          colorCount++
+
+          //gridData.length = 1
+          return item
+        })]
+      }
+
+
+      console.log(gridData,"grid data api")
       setOriginalValues([...gridData])
       const copy = JSON.parse(JSON.stringify(gridData)) // deep copy to be manipuilated
       setChartGroup([...copy])
