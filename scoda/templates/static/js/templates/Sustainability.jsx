@@ -80,6 +80,7 @@ const Home = () => {
         dropdownName={subNavContent.dropdownMenu[10].name}
         colors={peopleHouseholdColors}
         secondaryChart={false}
+        genericIndex = {0}
       />
       <Sustainability
         indicator_ids={[sustainability_text_box_data_2, "indicator text box"]}
@@ -90,6 +91,7 @@ const Home = () => {
         dropdownName={subNavContent.dropdownMenu[10].name}
         colors={peopleHouseholdColors}
         secondaryChart={true}
+        genericIndex = {1}
       />
       <Sustainability
         indicator_ids={["n4", "n5", "single year combination chart", "n6", "n7"]}
@@ -100,6 +102,7 @@ const Home = () => {
         dropdownName={subNavContent.dropdownMenu[10].name}
         colors={peopleHouseholdColors}
         secondaryChart={true}
+        genericIndex ={2}
       />
 
       <Sustainability
@@ -111,6 +114,7 @@ const Home = () => {
         dropdownName={subNavContent.dropdownMenu[10].name}
         colors={peopleHouseholdColors}
         secondaryChart={true}
+        genericIndex = {3}
       />
       <div style={{ height: "60px", backgroundColor: "rgb(241, 241, 241)" }}></div>
       <Footer />

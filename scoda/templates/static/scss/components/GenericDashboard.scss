@@ -4,6 +4,11 @@
     margin-top: 100px;
     background-color: rgba(241, 241, 241, 1);
 
+    .dropdown-menu.show {
+        top: 41px!important;
+        transform: none!important;
+    }
+
     .stat_display_panel {
         background-color: white;
         display: flex;

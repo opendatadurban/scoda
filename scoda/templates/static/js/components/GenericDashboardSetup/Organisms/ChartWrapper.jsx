@@ -7,10 +7,11 @@ import { ErrorClose } from "../../../../svg_components/ErrorClose"
 import { useCloseAllErrors } from "../../../context"
 import { dropdownChartTitle } from "../helpers/dropdownChartTitles"
 
-export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, isNumber, selectedDropDownChart }) => {
+export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, isNumber, selectedDropDownChart,
+genericIndex  }) => {
+
 
   const errorContext = useCloseAllErrors()
-
   const setErrorState = (index) => {
     const newState = errorContext.error.map((obj, errorIndex) => {
 
@@ -111,8 +112,9 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
       items.push(<div className='chart_wrapper' key={i.toString()} onClick={clearAllErrors}>
         <div className='heading_wrapper'>
           
-          {dropdownChartTitle(indicator_ids,hhiDropdownNames,selectedDropDownChart)}
-            {/* <p className="title">Main Source of Income:<span className="category">{hhiDropdownNames(indicator_ids[0])[selectedDropDownChart].shortName}</span></p>  */}
+          {dropdownChartTitle(indicator_ids,hhiDropdownNames,selectedDropDownChart, 
+            genericIndex,dropdownName,isNumber)}
+          
           
             <div className="button_group">
 

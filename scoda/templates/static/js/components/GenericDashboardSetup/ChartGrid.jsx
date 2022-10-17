@@ -23,6 +23,7 @@ export const ChartGrid = ({ indicator_ids,
   setSelectedName,
   setSelectedChart,
   selectedDropDownChart,
+  genericIndex
 }) => {
 
   const [isNumber, toggle] = useState(true)
@@ -63,8 +64,12 @@ export const ChartGrid = ({ indicator_ids,
     removeItem: hiRemoveItem,
     addItem: hiAddItem,
     clearAll: hiClearAll,
-  } : (dropdownName === "Sustainability" && !secondDropDown) ? {
+  } : (dropdownName === "Sustainability" && genericIndex === 2) ? {
     removeItem: sustainabilityRemoveItem,
+    addItem: sustainabilityAddItem,
+    clearAll: sustainabilityClearAll,
+  } : (dropdownName === "Sustainability" && genericIndex === 3) ? {
+    removeItem: ()=>{ console.log("deleted2")},
     addItem: sustainabilityAddItem,
     clearAll: sustainabilityClearAll,
   } :
@@ -107,7 +112,8 @@ export const ChartGrid = ({ indicator_ids,
                 dropdownName={dropdownName}
                 toggle={toggle}
                 isNumber={isNumber}
-                selectedDropDownChart={selectedDropDownChart} />
+                selectedDropDownChart={selectedDropDownChart}
+                genericIndex={genericIndex} />
             }
           </div>
         </div>

@@ -10,7 +10,8 @@ import { SelectContextState } from '../../context'
 import { hhiDropdownNames } from './helpers/helpers'
 import { indicator_text_box_data } from './data/data'
 
-const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavContent,
+const GenericChart = ({ indicator_ids, minYear, maxYear,
+   gridItems, subNavContent, genericIndex,
   dropdownName, colors,secondaryChart }) => {
 
   const [chartGroup, setChartGroup] = useState([])
@@ -63,6 +64,7 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
               setSelectedName={setSelectedName}
               setSelectedChart={setSelectedChart}
               selectedDropDownChart={selectedChart}
+              genericIndex={genericIndex}
             />
           </div>
         </div>
