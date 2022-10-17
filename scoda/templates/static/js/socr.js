@@ -15,6 +15,8 @@ const Dwellings = lazy(() => import('./templates/Dwellings'));
 const HouseholdIncome = lazy(() => import('./templates/HouseholdIncome'));
 const LifeExpectancy = lazy(()=> import('./templates/LifeExpectancyAndHealth'))
 const FoodSecurity = lazy(()=> import('./templates/FoodSecurityLiteracyAndInequality'))
+const Education = lazy(()=> import('./templates/Education'))
+const Sustainability = lazy(()=> import('./templates/Sustainability'))
 
 const style = {
   position: 'absolute', left: '50%', top: '50%',
@@ -44,6 +46,8 @@ export default (
       <Route exact path='/household_income' component={HouseholdIncome} />
       <Route exact path='/life_expectancy' component={LifeExpectancy} />
       <Route exact path='/food_security' component={FoodSecurity} />
+      <Route exact path='/education' component={Education} />
+      <Route exact path='/sustainability' component={Sustainability} />
     </Suspense>
   </HashRouter>
 );
