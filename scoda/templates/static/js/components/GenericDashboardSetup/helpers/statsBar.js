@@ -61,9 +61,6 @@ export const getStatTotals = (originalValues, cityLabels, setStats, selected) =>
 
         )
     })
-    // totalHouseHoldsAverage: [Math.round(totalHouseHoldsAverage ) , "TOTAL Households"],
-    // houseHoldSizeAverage: [Math.round(houseHoldSizeAverage ) , "Household size"],
-    // populationDensityAverage: [Math.round(populationDensityAverage ) , "Population Density"]
 
     setStats((prev) => ({
         ...prev,
@@ -379,83 +376,109 @@ export const getFoodSecurityStatTotals = (originalValues, cityLabels, setStats, 
     })
 }
 
-export const getLifeExpectancyStatTotals = (originalValues, cityLabels, setStats, selected) => {
+export const getLifeExpectancyStatTotals = async (originalValues, cityLabels, setStats, selected) => {
 
     let aveMale = 0
     let aveFemale = 0
     let publicHealthCare = 0
     let medicalAid = 0
+    
     let aveMaleTot = 0
     let aveFemaleTot = 0
     let publicHealthCareTot = 0
     let medicalAidTot = 0
 
+    // const [firstResponse, secondResponse, thirdResponse, fourthResponse,
+    // firstAve,secondAve,thirdAve,fourthAve] = await Promise.all([
+    //     axios.get(`/api/explore_new?indicator_id=719&city=${selected}&year=2018`),
+    //     axios.get(`/api/explore_new?indicator_id=721&city=${selected}&year=2018`),
+    //     axios.get(`/api/explore_new?indicator_id=1081&city=${selected}&year=2018`),
+    //     axios.get(`/api/explore_new?indicator_id=1078&city=${selected}&year=2018`),
+
+    //     axios.get(`/api/stats?indicator_id=719&average=True&year=2018`),
+    //     axios.get(`/api/stats?indicator_id=721&average=True&year=2018`),
+    //     axios.get(`/api/stats?indicator_id=1081&average=True&year=2018`),
+    //     axios.get(`/api/stats?indicator_id=1078&average=True&year=2018`)
+    // ]);
+
+    // aveMale = firstResponse.data[0].values
+
+    // aveFemale = secondResponse.data[0].values
+
+    // publicHealthCare = thirdResponse.data[0].values
+
+    // medicalAid = fourthResponse.data[0].values
+
+    // aveMaleTot = firstAve.data.total_average
+
+    // aveFemaleTot = secondAve.data.total_average
+
+    // publicHealthCareTot = thirdAve.data.total_average
+
+    // medicalAidTot = fourthAve.data.total_average
 
     setStats({
-
-        aveMale: [0, "AVE. Male life Expectancy"],
-        aveFemale: [0, "AVE. Female life Expectancy"],
-        publicHealthCare: [0, "Public Healthcare Usage"],
-        medicalAid: [0, "Medical Aid Coverage"],
-        aveMaleTot: [0, "AVE. Male life Expectancy"],
-        aveFemaleTot: [0, "AVE. Female life Expectancy"],
-        publicHealthCareTot: [0, "Public Healthcare Usage"],
-        medicalAidTot: [0, "Medical Aid Coverage"],
+        aveMale: [Math.round(aveMale), "AVE. Male life Expectancy"],
+        aveFemale: [Math.round(aveFemale), "AVE. Female life Expectancy"],
+        publicHealthCare: [Math.round(publicHealthCare* 10) / 10, "Public Healthcare Usage"],
+        medicalAid: [Math.round(medicalAid* 10) / 10, "Medical Aid Coverage"],
+        aveMaleTot: [Math.round(aveMaleTot), "AVE. Male life Expectancy"],
+        aveFemaleTot: [Math.round(aveFemaleTot), "AVE. Female life Expectancy"],
+        publicHealthCareTot: [Math.round(publicHealthCareTot* 10) / 10, "Public Healthcare Usage"],
+        medicalAidTot: [Math.round(medicalAidTot* 10) / 10, "Medical Aid Coverage"],
     })
 }
 
 export const getEducationStatTotals = async (originalValues, cityLabels, setStats, selected) => {
 
-
     let noSchooling = 0
     let primarySchooling = 0
     let secondarySchooling = 0
     let tertiaryEducation = 0
+    
+    let noSchoolingTot = 0
+    let primarySchoolingTot = 0
+    let secondarySchoolingTot = 0
+    let tertiaryEducationTot = 0
 
-    const [firstResponse, secondResponse, thirdResponse, fourthResponse] = await Promise.all([
-        axios.get(`/api/explore_new?indicator_id=1093`),
-        axios.get(`/api/explore_new?indicator_id=1099`),
-        axios.get(`/api/explore_new?indicator_id=1105`),
-        axios.get(`/api/explore_new?indicator_id=1108`)
-      ]);
+    const [firstResponse, secondResponse, thirdResponse, fourthResponse,
+    firstAve,secondAve,thirdAve,fourthAve] = await Promise.all([
+        axios.get(`/api/explore_new?indicator_id=1093&city=${selected}&year=2018`),
+        axios.get(`/api/explore_new?indicator_id=1099&city=${selected}&year=2018`),
+        axios.get(`/api/explore_new?indicator_id=1105&city=${selected}&year=2018`),
+        axios.get(`/api/explore_new?indicator_id=1108&city=${selected}&year=2018`),
 
-    firstResponse.data.forEach((values, index) => {
-        let valueIndex = values.labels.indexOf(selected)
+        axios.get(`/api/stats?indicator_id=1093&average=True&year=2018`),
+        axios.get(`/api/stats?indicator_id=1099&average=True&year=2018`),
+        axios.get(`/api/stats?indicator_id=1105&average=True&year=2018`),
+        axios.get(`/api/stats?indicator_id=1108&average=True&year=2018`)
+    ]);
 
-        if (values.year !== "2018" && valueIndex !== -1) return
-        noSchooling = values.values[valueIndex]
-    })
+    noSchooling = firstResponse.data[0].values
 
-    secondResponse.data.forEach((values, index) => {
-        let valueIndex = values.labels.indexOf(selected)
+    primarySchooling = secondResponse.data[0].values
 
-        if (values.year !== "2018" && valueIndex !== -1) return
-        primarySchooling = values.values[valueIndex]
-    })
+    secondarySchooling = thirdResponse.data[0].values
 
-    thirdResponse.data.forEach((values, index) => {
-        let valueIndex = values.labels.indexOf(selected)
+    tertiaryEducation = fourthResponse.data[0].values
 
-        if (values.year !== "2018" && valueIndex !== -1) return
-        secondarySchooling = values.values[valueIndex]
-    })
+    noSchoolingTot = firstAve.data.total_average
 
-    fourthResponse.data.forEach((values, index) => {
+    primarySchoolingTot = secondAve.data.total_average
 
-        let valueIndex = values.labels.indexOf(selected)
+    secondarySchoolingTot = thirdAve.data.total_average
 
-        if (values.year !== "2018" && valueIndex !== -1) return
-        tertiaryEducation = values.values[valueIndex]
-    })
+    tertiaryEducationTot = fourthAve.data.total_average
 
     setStats({
         noSchooling: [Math.round(noSchooling), "No Schooling"],
         primarySchooling: [Math.round(primarySchooling), "Primary School Completed"],
-        secondarySchooling: [Math.round(secondarySchooling), "Secondary SChool Completed"],
-        tertiaryEducation: [Math.round(tertiaryEducation), "Tertiary Edu. Completed"],
-        noSchoolingTot: [0, "No Schooling"],
-        primarySchoolingTot: [0, "Primary School Completed"],
-        secondarySchoolingTot: [0, "Secondary SChool Completed"],
-        tertiaryEducationTot: [0, "Tertiary Edu. Completed"],
+        secondarySchooling: [Math.round(secondarySchooling* 10) / 10, "Secondary SChool Completed"],
+        tertiaryEducation: [Math.round(tertiaryEducation* 10) / 10, "Tertiary Edu. Completed"],
+        noSchoolingTot: [Math.round(noSchoolingTot), "No Schooling"],
+        primarySchoolingTot: [Math.round(primarySchoolingTot), "Primary School Completed"],
+        secondarySchoolingTot: [Math.round(secondarySchoolingTot* 10) / 10, "Secondary SChool Completed"],
+        tertiaryEducationTot: [Math.round(tertiaryEducationTot* 10) / 10, "Tertiary Edu. Completed"],
     })
 } 
+

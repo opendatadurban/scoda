@@ -76,7 +76,7 @@ const Home = () => {
 <div className="socr--home" style={{ backgroundColor: "white", overflowX: 'hidden' }} >
         <Navigation_scoda logoHide={false} box_shadow={true} />
         <LifeExpectancy
-          indicator_ids={[719, 721, 1081, 1081]}
+          indicator_ids={[719, 721, 1081, 1078]}
           minYear={2015}
           maxYear={2018}
           subNavContent={subNavContent}
