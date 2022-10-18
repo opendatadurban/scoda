@@ -159,7 +159,59 @@
           }
         }
       }
-    
+      
+      &_people_household{
+        $image: '/static/dist/img/image_card-people_household.jpg';
+         &.module {
+            background: url($image) top left / cover;
+          }
+        @at-root {
+          .card {
+            &--gaussian-blur_people_household {
+          @include gaussian-blur($image,2px,#4fa68399);
+            }
+          }
+        }
+      }
+      &_employment{
+        $image: '/static/dist/img/image_card-employment.jpg';
+         &.module {
+            background: url($image) top left / cover;
+          }
+        @at-root {
+          .card {
+            &--gaussian-blur_employment {
+          @include gaussian-blur($image,2px,#4fa68399);
+            }
+          }
+        }
+      }
+      &_dwellings{
+        $image: '/static/dist/img/image_card-dwellings.jpg';
+         &.module {
+            background: url($image) top left / cover;
+          }
+        @at-root {
+          .card {
+            &--gaussian-blur_dwellings {
+          @include gaussian-blur($image,2px,#4fa68399);
+            }
+          }
+        }
+      }
+      &_household_income{
+        $image: '/static/dist/img/image_card-household_income.jpg';
+         &.module {
+            background: url($image) top left / cover;
+          }
+        @at-root {
+          .card {
+            &--gaussian-blur_household_income {
+          @include gaussian-blur($image,2px,#4fa68399);
+            }
+          }
+        }
+      }
     
     // General styling
     

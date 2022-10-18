@@ -31,6 +31,69 @@ function GetCardInfo(){
                 class:'_service_delivery',
                 href:'/scoda/socr#/service_delivery'
               },
+              // {
+              //   header:'Service Delivery',
+              //   subheader:" (From SoCR 2021)",
+              //   type:'DASHBOARD',
+              //   class:'_service_delivery',
+              //   href:'/scoda/socr#/service_delivery'
+              // },
+              // {
+              //   header:'Service Delivery',
+              //   subheader:" (From SoCR 2021)",
+              //   type:'DASHBOARD',
+              //   class:'_service_delivery',
+              //   href:'/scoda/socr#/service_delivery'
+              // },
+              // {
+              //   header:'Service Delivery',
+              //   subheader:" (From SoCR 2021)",
+              //   type:'DASHBOARD',
+              //   class:'_service_delivery',
+              //   href:'/scoda/socr#/service_delivery'
+              // },
+              // {
+              //   header:'Service Delivery',
+              //   subheader:" (From SoCR 2021)",
+              //   type:'DASHBOARD',
+              //   class:'_service_delivery',
+              //   href:'/scoda/socr#/service_delivery'
+              // },
+              // {
+              //   header:'Service Delivery',
+              //   subheader:" (From SoCR 2021)",
+              //   type:'DASHBOARD',
+              //   class:'_service_delivery',
+              //   href:'/scoda/socr#/service_delivery'
+              // }
+              {
+                header:'People and Households',
+                subheader:" (From SoCR 2022)",
+                type:'DASHBOARD',
+                class:'_people_household',
+                href:'/scoda/socr#/people_household'
+              },
+              {
+                header:'Employment',
+                subheader:" (From SoCR 2022)",
+                type:'DASHBOARD',
+                class:'_employment',
+                href:'/scoda/socr#/employment'
+              },
+              {
+                header:'Dwellings',
+                subheader:" (From SoCR 2022)",
+                type:'DASHBOARD',
+                class:'_dwellings',
+                href:'/scoda/socr#/dwellings'
+              },
+              {
+                header:'Household Income',
+                subheader:" (From SoCR 2022)",
+                type:'DASHBOARD',
+                class:'_household_income',
+                href:'/socr#/household_income'
+              }
             //   {
             //     header:'State of City Finances 2020: An Introduction',
             //     subheader:" (From SoCR 2021)",
