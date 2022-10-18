@@ -3,6 +3,8 @@ import GetCardInfo from "./CardInfo";
 
 const Card =() => {
     const{info} = GetCardInfo()
+
+    console.log(info,"info")
     return(
         <div className="container-fluid socr-cards">
         <div className="bootstrap-4">
