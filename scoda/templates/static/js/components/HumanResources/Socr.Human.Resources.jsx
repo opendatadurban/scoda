@@ -7,44 +7,64 @@ import Charts_dashboards from './Charts.Human.Resources'
 import _ from 'lodash';
 
 const subNavContent = {
-    dropdownMenu: [ 
-      {
-        name: "Service Delivery",
-        href: "socr#/service_delivery",
-        active: false
-      },
-      {
-        name: "Citizen Engagement",
-        href: "socr#/citizen_engagement",
-        active: false
-      },
-      {
-        name: "Municipal Human Resources",
-        href: "socr#/human_resources",
-        active: true
-      },
-      {
-        name: "People and Households",
-        href: "socr#/people_household",
-        active: false
-      },
-      {
-        name: "Employment",
-        href: "socr#/employment",
-        active: false
-      },
-      {
-        name: "Dwellings",
-        href: "socr#/dwellings",
-        active: false
-      },
-      {
-        name: "Household Income",
-        href: "socr#/household_income",
-        active: false
-      }
-    ]
-  }
+  dropdownMenu: [
+    {
+      name: "Service Delivery",
+      href: "socr#/service_delivery",
+      active: false
+    },
+    {
+      name: "Citizen Engagement",
+      href: "socr#/citizen_engagement",
+      active: false
+    },
+    {
+      name: "Municipal Human Resources",
+      href: "socr#/human_resources",
+      active: true
+    },
+    {
+      name: "People and Households",
+      href: "socr#/people_household",
+      active: false
+    },
+    {
+      name: "Employment",
+      href: "socr#/employment",
+      active: false
+    },
+    {
+      name: "Dwellings",
+      href: "socr#/dwellings",
+      active: false
+    },
+    {
+      name: "Household Income",
+      href: "socr#/household_income",
+      active: false
+    },
+    {
+      name: "Food Security, Literacy and Inequality",
+      href: "socr#/food_security",
+      active: false
+    },
+    {
+      name: "Life Expectancy & Health",
+      href: "socr#/life_expectancy",
+      active: false
+    },
+    {
+      name: "Education",
+      href: "socr#/education",
+      active: false
+    },
+    {
+      name: "Sustainability",
+      href: "socr#/sustainability",
+      active: false
+    }
+  ]
+}
 
 const Socr_Human_Resources = () => {
   const [senior_management, setSeniorManagement] = useState([])
