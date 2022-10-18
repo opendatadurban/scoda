@@ -2,43 +2,56 @@ import React, { useEffect, useState } from 'react'
 import Subnav from '../Subnav'
 import { ChartGrid } from './ChartGrid'
 import { GenericStatsPanel } from './Organisms/GenericStatsPanel'
-import '../../../scss/components/PeopleHouseHold.scss'
+import '../../../scss/components/GenericDashboard.scss'
 import { populateChartGroup } from './data/api'
 import { Modal, ModalBody, Spinner } from 'reactstrap'
 import Sidebar_left from '../Sidebar_left'
 import { SelectContextState } from '../../context'
 import { hhiDropdownNames } from './helpers/helpers'
+import { indicator_text_box_data } from './data/data'
 
-const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavContent,
-  dropdownName, colors }) => {
+const GenericChart = ({ indicator_ids, minYear, maxYear,
+   gridItems, subNavContent, genericIndex,
+  dropdownName, colors,secondaryChart }) => {
 
   const [chartGroup, setChartGroup] = useState([])
   const [originalValues, setOriginalValues] = useState([])
   const [selectedChart, setSelectedChart] = useState(0)
-  const [selectedName, setSelectedName] = useState(hhiDropdownNames()[0].shortName)
+  const [selectedName, setSelectedName] = useState(Array.isArray(indicator_ids[0]) ?
+  hhiDropdownNames(indicator_ids[0])[0].shortName: "")
 
   useEffect(() => {
-      setChartGroup([])
-      populateChartGroup(
-        setChartGroup,
-        Array.isArray(indicator_ids[0]) ? [indicator_ids[0][0][selectedChart],indicator_ids[1]] : indicator_ids,
-        minYear, maxYear, //year min max
-        colors, //color presets
-        setOriginalValues,
-      )
-  }, [selectedName,selectedChart])
+    setChartGroup([])
+    populateChartGroup(
+      setChartGroup,
+      Array.isArray(indicator_ids[0]) ?
+        [indicator_ids[0][selectedChart], indicator_ids[1]]
+        :
+        indicator_ids,
+      minYear, maxYear, //year min max
+      colors, //color presets
+      setOriginalValues,
+      dropdownName
+    )
+  }, [selectedName, selectedChart])
+
+  const isDropDownChart = Array.isArray(indicator_ids[0])
 
   return (
     chartGroup.length === gridItems ?
       <SelectContextState>
-        <div className='people_household_dashboard'>
-          <Subnav name='State of Cities Reports' dropdownName={dropdownName} dropDownItem={subNavContent} buttonText="Download as PNG" />
-          <Sidebar_left />
+        <div className={'generic_dashboard ' + (secondaryChart ? "secondary": "" )}>
+         {secondaryChart ? "":<>
+         <Subnav name='State of Cities Reports' dropdownName={dropdownName} dropDownItem={subNavContent} buttonText="Download as PNG" />
+         <Sidebar_left />
+         </>} 
           <div id='content' >
-            <GenericStatsPanel
-              originalValues={originalValues}
-              dropName={dropdownName}
-            />
+           {secondaryChart ? "":
+           <GenericStatsPanel
+           originalValues={originalValues}
+           dropName={dropdownName}
+         />} 
+
             <ChartGrid
               indicator_ids={indicator_ids}
               chartGroup={chartGroup}
@@ -46,14 +59,14 @@ const GenericChart = ({ indicator_ids, minYear, maxYear, gridItems, subNavConten
               originalValues={originalValues}
               gridItems={gridItems}
               dropdownName={dropdownName}
-              secondDropDown={dropdownName === "Household Income" ? hhiDropdownNames() : null}
+              secondDropDown={isDropDownChart ? hhiDropdownNames(indicator_ids[0]) : null}
               selectedName={selectedName}
               setSelectedName={setSelectedName}
               setSelectedChart={setSelectedChart}
               selectedDropDownChart={selectedChart}
+              genericIndex={genericIndex}
             />
           </div>
-          <div className="spacer"></div>
         </div>
       </SelectContextState> :
       <Modal id="loader" isOpen={true} className="modal-dialog-centered loader">

@@ -6,7 +6,7 @@ import { useCloseAllErrors } from '../../../context'
 
 export const Select = ({ chartData, originalValues, selected, options,
     setSelected, setChartGroup, setOptions,
-    removeItem, addItem, clearAll, chartDropName }) => {
+    removeItem, addItem, clearAll, chartDropName,isDropDownChart }) => {
 
     useEffect(() => {
 
@@ -49,13 +49,20 @@ export const Select = ({ chartData, originalValues, selected, options,
                 if (index > 4) return
                 filtered.push(chart)
             })
-        } else if (chartDropName === "Household Income") {
-
+        } else if (chartDropName === "Household Income" || chartDropName === "Education" || (chartDropName === "Sustainability" && isDropDownChart)) {
+            
             chartData[0][0].forEach((chart, index) => {
         
                 filtered.push(chart)           
             })
-        } else {
+        } else if(chartDropName === "Life Expectancy & Health"){
+            chartData.forEach((chart, index) => {
+               
+                if (index <= 1 ) return
+                filtered.push(chart)
+            })
+        }
+        else {
 
             chartData.forEach((chart, index) => {
 
@@ -65,9 +72,10 @@ export const Select = ({ chartData, originalValues, selected, options,
         setSelected(filtered)
     }
 
+
     return (<div className="conditional_select_wrapper" onClick={closeAllAlerts}>
         {
-            chartDropName === "Household Income" ? <>
+            isDropDownChart ? <>
                 <p className="select_title">Choose Cities:</p>
                 <div className='custom_select'
                 onClick={ () => selectContext.setSelect(!selectContext.selectOpen)}>

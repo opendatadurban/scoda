@@ -7,7 +7,7 @@ import Charts_dashboards from './Charts.Citizen.Engagements'
 const Socr_Citizens_Engagement = () => {
   
   const subNavContent = {
-    dropdownMenu: [ 
+    dropdownMenu: [
       {
         name: "Service Delivery",
         href: "socr#/service_delivery",
@@ -41,6 +41,26 @@ const Socr_Citizens_Engagement = () => {
       {
         name: "Household Income",
         href: "socr#/household_income",
+        active: false
+      },
+      {
+        name: "Food Security, Literacy and Inequality",
+        href: "socr#/food_security",
+        active: false
+      },
+      {
+        name: "Life Expectancy & Health",
+        href: "socr#/life_expectancy",
+        active: false
+      },
+      {
+        name: "Education",
+        href: "socr#/education",
+        active: false
+      },
+      {
+        name: "Sustainability",
+        href: "socr#/sustainability",
         active: false
       }
     ]

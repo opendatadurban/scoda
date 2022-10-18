@@ -1,0 +1,512 @@
+
+.generic_dashboard {
+ 
+    margin-top: 100px;
+    background-color: rgba(241, 241, 241, 1); 
+    padding-bottom: calc(20px + 15px);   
+    .dropdown-menu.show {
+        top: 41px!important;
+        transform: none!important;
+    }
+
+    .stat_display_panel {
+        background-color: white;
+        display: flex;
+        flex-direction: row;
+
+
+        .first_panel {
+            position: relative;
+            padding: 12px 24px 20px 15px;
+
+            .heading {
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 10px;
+                line-height: 12px;
+                text-transform: uppercase;
+                color: #2F3442;
+                padding: 16px 0 0 0;
+            }
+
+            .catagory-name {
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 14px;
+                padding: 0;
+                margin: 0;
+                color: rgba(47, 52, 66, 1);
+
+                span {
+                    font-size: 14px;
+                }
+            }
+
+            .row {
+                margin: 0;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                width: calc(50vw - 39px);
+
+                .stat {
+                    padding-left: calc(23px - 15px);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    >p {
+                        font-family: 'Montserrat';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 10px;
+                        line-height: 12px;
+                        text-transform: uppercase;
+                        color: #2F3442;
+                    }
+
+                    >h1 {
+
+                        font-family: 'Montserrat';
+                        font-style: normal;
+                        font-weight: 600;
+                        font-size: 24px;
+                        line-height: 30px;
+
+                        color: #2F3442;
+                        padding: 10px 0 3px 0;
+                    }
+
+                }
+            }
+
+            &:after {
+                content: " ";
+                position: absolute;
+                right: 0;
+                bottom: 11.5%;
+                height: 77%;
+                outline: 1px solid #B2BEC3;
+            }
+
+
+        }
+
+        .second_panel {
+
+            padding: 12px 24px 20px 15px;
+            width: 100%;
+
+            .heading {
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 10px;
+                line-height: 12px;
+                text-transform: uppercase;
+                color: #2F3442;
+                padding: 16px 0 0 0;
+            }
+
+            .top {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                .catagory-name {
+                    font-family: 'Montserrat';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 14px;
+                    line-height: 14px;
+                    padding: 0;
+                    margin: 0;
+                    color: rgba(47, 52, 66, 1);
+
+                    span {
+                        font-size: 14px;
+                    }
+                }
+            }
+
+            .bottom {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                .stat {
+                    padding-left: calc(23px - 15px);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    >p {
+                        font-family: 'Montserrat';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 10px;
+                        line-height: 12px;
+                        text-transform: uppercase;
+                        color: #2F3442;
+                    }
+
+                    >h1 {
+
+                        font-family: 'Montserrat';
+                        font-style: normal;
+                        font-weight: 600;
+                        font-size: 24px;
+                        line-height: 30px;
+
+                        color: #2F3442;
+                        padding: 10px 0 3px 0;
+                    }
+
+                }
+
+            }
+
+
+        }
+    }
+    .secondaryChartSpacer{
+        height: 13px;
+        background-color: rgba(241, 241, 241, 1);
+    }
+    .chart_grid {
+        background-color: rgba(241, 241, 241, 1);
+
+        
+
+        .rounded_container {
+            border-radius: 5px 5px 5px 5px;
+            background-color: white;
+            margin: 15px 15px 0 15px;
+
+            .select_wrapper {
+                border-bottom: 2px solid #F1F1F1;
+                padding: 7px 0;
+
+            }
+
+            .double {
+                display: flex;
+                flex-direction: row;
+
+                position: relative;
+
+                .conditional_select_wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 6px;
+
+
+                    .select_title {
+                        margin-left: 45px;
+                        font-family: 'Montserrat';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 10px;
+                        line-height: 12px;
+                        text-transform: uppercase;
+                        color: #2F3442;
+                        opacity: 0.8;
+                    }
+                }
+
+                .title_wrapper {
+                    position: absolute;
+                    left: calc(45px + 63vw + 30px);
+
+                    .dropdown_title {}
+
+                    .macro_select {
+                        display: inline !important;
+                        width: 400px !important;
+                        height: 36.2px;
+                        border-radius: 28px;
+
+                        position: relative;
+
+                        >.title {
+                            position: absolute;
+                            top: 50%;
+                            left: 12px;
+                            transform: translate(0, -50%);
+                            display: block !important;
+                            width: 280px !important;
+                            white-space: nowrap !important;
+                            overflow: hidden !important;
+
+                            text-overflow: ellipsis !important;
+                            align-items: center;
+                            font-family: 'Montserrat';
+                            font-style: normal;
+                            font-weight: 400;
+                            font-size: 13.6px;
+                            line-height: 13px;
+                            color: #4A4A4A;
+
+                        }
+
+                    }
+
+
+                    .dropdownbox {
+                        display: none;
+                        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+                        &.show {
+                            display: flex;
+                            background-color: white;
+                            flex-direction: column;
+                            align-items: flex-start;
+                            position: absolute;
+                            width: 400px;
+                            top: calc(100% + 10px);
+                            right: 0;
+                            z-index: 100;
+                            border-radius: 5px;
+
+                            >p {
+                                display: block;
+                                font-family: 'Montserrat';
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 13.6px;
+                                line-height: 13px;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .grid-container {
+
+                display: grid;
+                grid-column-gap: 32px;
+                grid-row-gap: 21px;
+                grid-template-columns: calc((100vw/3) - (154px/3)) calc((100vw/3) - (154px/3)) calc((100vw/3) - (154px/3));
+                background-color: white;
+                padding: 15px 30px 15px 30px;
+                position: relative;
+                border-radius: 0 0 5px 5px;
+
+                &:after {
+                    content: "";
+                    position: absolute;
+                    width: 2px;
+                    background: #F1F1F1;
+                    height: calc(100% - 30px);
+                    left: calc((2*(100vw/3) - 2*(154px/3)) + 32px + 30px + 15px);
+                    top: 15px;
+                }
+                .heading_wrapper{
+
+                    .heading{
+                        line-height: 1.2;
+                        height: unset;
+                    }
+                    
+                }
+                .source_title{
+                    margin: 0;
+                    padding: 0;
+                    font-family: 'Montserrat';
+                    font-style: italic;
+                    font-weight: 400;
+                    line-height: 1;
+                    font-size: 10px;
+                }
+            }
+
+            .grid-only-charts-2{
+                display: grid;
+                grid-column-gap: 36px;
+                grid-row-gap: 10px;
+                grid-template-columns: calc(50vw - 15px - 64px ) calc(50vw - 15px - 64px);
+                background-color: white;
+                padding: 12px 32px;
+                position: relative;
+                border-radius: 0 0 5px 5px;
+
+                .heading_wrapper{
+                    align-items: center;
+    
+                    .heading {
+                        height: unset;
+                        width: 418px;
+                        line-height: 1.2;
+
+                    }
+                   
+                }
+
+                .source_title{
+                    margin: 0;
+                    padding: 0;
+                    font-family: 'Montserrat';
+                    font-style: italic;
+                    font-weight: 400;
+                    line-height: 1;
+                    font-size: 10px;
+                }
+            }
+
+            .grid-container-1{
+                    // 30 outside + 50 inside + 32px : spacing excluding chart blocks
+                    display: grid;
+                    grid-column-gap: 0px;
+                    grid-row-gap: 0px;
+                    grid-template-columns: calc(100vw - 30px - 50px);
+                    background-color: white;
+                    padding: 25px;
+                    position: relative;
+                    border-radius: 0 0 5px 5px;
+    
+                    .chart_wrapper {
+    
+                        .source_title {
+                            margin: 0;
+                            padding: 0;
+                            font-family: 'Montserrat';
+                            font-style: italic;
+                            font-weight: 400;
+                            font-size: 10px;
+                            line-height: 1.2;
+                        }
+    
+                        .heading_wrapper {
+                            align-items: center;
+    
+                            .heading {
+                                height: unset;
+                               width: 100%;
+                                line-height: 1.2;
+    
+                            }
+    
+                        }
+    
+                    }
+            }
+
+            .grid-container-4 {
+                // 30 outside + 50 inside + 32px : spacing excluding chart blocks
+                display: grid;
+                grid-column-gap: 32px;
+                grid-row-gap: 10px;
+                grid-template-columns: calc((100vw/2) - (112px/2)) calc((100vw/2) - (112px/2));
+                background-color: white;
+                padding: 25px;
+                position: relative;
+                border-radius: 0 0 5px 5px;
+
+                &:after {
+                    content: "";
+                    position: absolute;
+                    width: 2px;
+                    background: #F1F1F1;
+                    height: calc(100% - 20px);
+                    left: calc(50% + 8px);
+                    top: 10px;
+                }
+
+
+
+                .chart_wrapper {
+
+                    .source_title {
+                        margin: 0;
+                        padding: 0;
+                        font-family: 'Montserrat';
+                        font-style: italic;
+                        font-weight: 400;
+                        font-size: 10px;
+                        line-height: 1.2;
+                    }
+
+                    .heading_wrapper {
+                        align-items: center;
+
+                        .heading {
+                            height: unset;
+                            width: 418px;
+
+                        }
+
+                    }
+
+                }
+            }
+
+            .grid-2-text {
+                // 30 outside + 60 inside + 64px 
+                display: grid;
+                grid-column-gap: 60px;
+                grid-row-gap: 10px;
+                grid-template-columns: 62.5vw 40vw;
+                background-color: white;
+                padding: 12px 32px;
+                position: relative;
+                border-radius: 0 0 5px 5px;
+
+                &:after {
+                    content: "";
+                    position: absolute;
+                    width: 2px;
+                    background: #F1F1F1;
+                    height: calc(100% - 24px);
+                    left: calc(30px + 62.5vw + 32px);
+                    top: 12px;
+                }
+
+                .chart_wrapper {
+    
+                    .source_title {
+                        margin: 0;
+                        padding: 0;
+                        font-family: 'Montserrat';
+                        font-style: italic;
+                        font-weight: 400;
+                        font-size: 10px;
+                    }
+                    .dropdown_chart_source{
+                        font-family: 'Montserrat';
+                        font-style: italic;
+                        font-weight: 400;
+                        line-height: 12px;
+                        font-size: 10px;
+                    }
+
+                   
+
+                }
+            }
+
+        }
+    }
+
+    .spacer {
+        height: 30px;
+        background-color: rgba(241, 241, 241, 1);
+    }
+}
+
+.secondary{
+    margin: 0;
+    padding: 15px 0 0 0;
+
+    .chart_grid {
+
+        .rounded_container{
+            padding: 0;
+            margin: 0px 15px 0 15px;
+           
+        }
+    } 
+}

@@ -28,17 +28,57 @@ export const phChartTitles = {
 
 export const hiChartTitles = {
   yAxes: ["Number of Households"],
-  main:["Main Source of Income"]
+  main: ["Main Source of Income"]
 }
 
 export const echartTitles = {
-  yAxes: ["Population","Population","Number of People Employed","Percentage"],
-  main:["Number of people employed and seeking employment within the 15–66 year age group","Number of Unemployed People","Informal Sector Employment","Unemployment Rate: Percentage of Unemployed Workers as a Proportion of the Total Labour Force"]
+  yAxes: ["Population", "Population", "Number of People Employed", "Percentage"],
+  main: ["Number of people employed and seeking employment within the 15–66 year age group", "Number of Unemployed People", "Informal Sector Employment", "Unemployment Rate: Percentage of Unemployed Workers as a Proportion of the Total Labour Force"]
 }
 
 export const dChartTitles = {
-  yAxes: ["Percentage","Percentage","Percentage","Percentage","Percentage"],
-  main:["Formal Dwellings","Informal Dwellings","Dwellings Comparison","Traditional Dwellings","Other Dwellings"]
+  yAxes: ["Percentage", "Percentage", "Percentage", "Percentage", "Percentage"],
+  main: ["Formal Dwellings", "Informal Dwellings", "Dwellings Comparison", "Traditional Dwellings", "Other Dwellings"]
+}
+
+export const leChartTitles = {
+  yAxes: ["Population", "Population", "Number of People Employed", "Percentage"],
+  main: ["Number of people employed and seeking employment within the 15–66 year age group", "Number of Unemployed People", "Informal Sector Employment", "Unemployment Rate: Percentage of Unemployed Workers as a Proportion of the Total Labour Force"],
+  source: ["Stats SA Mid-Year Population Estimates","Stats SA Mid-Year Population Estimates",
+  "Calculated from Stats SA General Household Survey","Calculated from Stats SA General Household Survey"]
+}
+
+export const fsChartTitles = {
+  yAxes: ["Percentage of Households", "Percentage of Households", "Percentage of Households",
+    "Gini Coefficient", "HDI", "Percentage of Population Aged 15 and Over"],
+  main: ["Adequate Access to Food", "Inadequate Access to Food", "Severely Inadequate Access to Food",
+    "Gini Coefficient", "Human Development Index (HDI)", "Literacy Rate"],
+  source: ["Calculated from Stats SA General Household Survey","Calculated from Stats SA General Household Survey",
+"Calculated from Stats SA General Household Survey","IHS Global Insight",
+"IHS Global Insight","Stats SA General Household Survey"]
+}
+
+export const sustainabilityChartTitles = (dropdownName,genericIndex) => {
+  let chartTitles = {yAxes:"", main:"",source:""}
+
+  if(dropdownName === "Sustainability" && genericIndex === 2){
+    chartTitles ={
+      yAxes: ["Percentage of Households"],
+        main: ["Recycling Profile of Households in South Africa’s Major Metros (2019)"],
+        source: ["Stats SA General Household Survey"]
+    }
+  }
+  if(dropdownName === "Sustainability" && genericIndex === 3){
+    chartTitles ={
+      yAxes: ["Days where PM2.5 levels exceed guidelines", "Days where PM10 levels\n\texceed guidelines"],
+        main: ["Ambient Air Quality: PM2.5", 
+        "Ambient Air Quality: PM10"],
+        source: ["South African Air Quality Information System (SAAQIS)",
+      "South African Air Quality Information System (SAAQIS)"]
+    }
+  }
+
+return chartTitles
 }
 
 //TODO: use select to alter cities labels within chart grid 
@@ -111,7 +151,7 @@ export const cityLabels = city => {
 export const populateSelect = (chartData, setOriginal, cityLabels, setSelected) => {
 
   if (chartData[1].length !== 0) {
- 
+
     const chartLabels = chartData.map(chart => {
       return chart[0].labels
     })
@@ -125,7 +165,7 @@ export const populateSelect = (chartData, setOriginal, cityLabels, setSelected) 
   } else {
 
     const manualGraph = ['Buffalo City', 'City of Cape Town', 'City of Joburg', 'Ekurhuleni', 'Mangaung', 'Msunduzi', 'Nelson Mandela Bay', 'Tshwane', 'eThekwini']
-    
+
     const abbrevLabels = manualGraph.map(city => {
       return cityLabels(city)
     })
@@ -137,40 +177,42 @@ export const populateSelect = (chartData, setOriginal, cityLabels, setSelected) 
 
 
 
-export const tableData = (table, cities) => {
+export const tableData = (table, cities,min, max) => {
 
-  const years = ["2015","2016","2017","2018"]
+  const years = [2015, 2016, 2017, 2018,2019,2020]
   const labels = cities
   let newTable = []
   let byLabel = []
   let byYear = []
   let graphData = []
-  let abbrev = labels.map( city=> cityLabels(city))
-  
+  let abbrev = labels.map(city => cityLabels(city))
+
   table.forEach(element => {
-    if(element[0] === "City" || (parseInt(element[1]) < 2015 || parseInt(element[1]) > 2018) ) return
+    if (element[0] === "City" || (parseInt(element[1]) < min || parseInt(element[1]) > max)) return
     newTable.push(element)
   });
 
-  labels.forEach((byCity)=>{
-      let valuesByCity = []
+  labels.forEach((byCity) => {
+    let valuesByCity = []
 
-      newTable.forEach((element)=>{
-        if(element[0] !== byCity) return
+    newTable.forEach((element) => {
+      if (element[0] !== byCity) return
 
-        valuesByCity.push(element)
-       })
+      valuesByCity.push(element)
+    })
 
-       byLabel.push(...valuesByCity)
+    byLabel.push(...valuesByCity)
   })
 
   years.forEach((year) => {
+
+    if (year < min || year > max) return
 
     let valuesByYear = []
 
     byLabel.forEach(valueSet => {
 
-      if (valueSet[1] !== year) return
+      if (valueSet[1] !== year.toString()) return
 
       valuesByYear.push(valueSet)
     });
@@ -178,28 +220,26 @@ export const tableData = (table, cities) => {
     byYear.push(valuesByYear)
   })
 
-  graphData = byYear.map((year,index) => {
+  graphData = byYear.map((year, index) => {
 
     const values = year.map((value) => {
       return value[2]
     })
-  
-    return {labels: abbrev, values, color: peopleHouseholdColors[index], year: year[0][1]}
+
+    return { labels: abbrev, values, color: peopleHouseholdColors[index], year: year[0][1] }
   })
 
   return graphData
 }
 
-export const isNewApiIndicator= (indicator) => {
+export const isNewApiIndicator = (indicator) => {
 
   /*Check if indicator id belongs to the new API
     if not returns false
     This can be expanded upon as the number and complexity of dashboards increase
     build this out as you add new charts for seperation of concerns and readability */
 
-  const isNewApi = (indicator !== "n1" && indicator !== "n8" && indicator !== "n35" && indicator !== "n36"
-                    && indicator !== "n37" && indicator !== "n38" && indicator !== "combination" &&
-                    indicator !== "indicator text box" && typeof(indicator) !== "object")
+  const isNewApi = (typeof (indicator) === "number")
 
   return isNewApi
 }
@@ -215,6 +255,12 @@ export const isCombinationIndicator = (indicator) => {
 
   return isCombinationChart
 
+}
+
+export const isSingleYearIndicator = (indicator) => {
+  const isSingleYearChart = (indicator === "single year combination chart")
+
+  return isSingleYearChart
 }
 
 export const isOldApiIndicator = (indicator) => {
@@ -238,20 +284,23 @@ export const isTextBoxIndicator = (indicator) => {
   return isTextBox
 }
 
-export const chartHeights = (dropdownName) => {
+export const chartHeights = (dropdownName,genericIndex) => {
 
   /* Create a conditional list of chart heights specified for each dashboard*/
 
-  const heightByDropName = (dropdownName === "Employment" ? 170 
-  : dropdownName === "Household Income" ? 100 
-  : 210) // 210 is the fallback value if height not specified
+  const heightByDropName = (dropdownName === "Employment" ? 170
+    : dropdownName === "Household Income" || dropdownName === "Education" ||
+    (dropdownName === "Sustainability" && genericIndex !== 3 && genericIndex !== 2) ? 100 :
+    (dropdownName === "Sustainability" && genericIndex === 3) ? 150:
+    (dropdownName === "Sustainability" && genericIndex === 2) ? 60
+    : 210) // 210 is the fallback value if height not specified
 
   return heightByDropName
 }
 
-export const hhiDropdownNames = ( ) => {
+export const hhiDropdownNames = (input) => {
 
-  const options = indicator_text_box_data.map((item, index) => {
+  const options = input.map((item, index) => {
 
     let shortName = item.number.name.split(": ")
 
@@ -262,7 +311,8 @@ export const hhiDropdownNames = ( ) => {
       endpoints: item.endpoints,
       percentCode: item.percent.code,
       numberCode: item.number.code,
-      index: index }
+      index: index
+    }
   })
 
   return options
