@@ -31,41 +31,6 @@ function GetCardInfo(){
                 class:'_service_delivery',
                 href:'/scoda/socr#/service_delivery'
               },
-              // {
-              //   header:'Service Delivery',
-              //   subheader:" (From SoCR 2021)",
-              //   type:'DASHBOARD',
-              //   class:'_service_delivery',
-              //   href:'/scoda/socr#/service_delivery'
-              // },
-              // {
-              //   header:'Service Delivery',
-              //   subheader:" (From SoCR 2021)",
-              //   type:'DASHBOARD',
-              //   class:'_service_delivery',
-              //   href:'/scoda/socr#/service_delivery'
-              // },
-              // {
-              //   header:'Service Delivery',
-              //   subheader:" (From SoCR 2021)",
-              //   type:'DASHBOARD',
-              //   class:'_service_delivery',
-              //   href:'/scoda/socr#/service_delivery'
-              // },
-              // {
-              //   header:'Service Delivery',
-              //   subheader:" (From SoCR 2021)",
-              //   type:'DASHBOARD',
-              //   class:'_service_delivery',
-              //   href:'/scoda/socr#/service_delivery'
-              // },
-              // {
-              //   header:'Service Delivery',
-              //   subheader:" (From SoCR 2021)",
-              //   type:'DASHBOARD',
-              //   class:'_service_delivery',
-              //   href:'/scoda/socr#/service_delivery'
-              // }
               {
                 header:'People and Households',
                 subheader:" (From SoCR 2022)",
@@ -92,7 +57,7 @@ function GetCardInfo(){
                 subheader:" (From SoCR 2022)",
                 type:'DASHBOARD',
                 class:'_household_income',
-                href:'/socr#/household_income'
+                href:'/scoda/socr#/household_income'
               }
             //   {
             //     header:'State of City Finances 2020: An Introduction',
