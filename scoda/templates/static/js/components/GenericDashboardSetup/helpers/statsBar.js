@@ -388,34 +388,35 @@ export const getLifeExpectancyStatTotals = async (originalValues, cityLabels, se
     let publicHealthCareTot = 0
     let medicalAidTot = 0
 
-    // const [firstResponse, secondResponse, thirdResponse, fourthResponse,
-    // firstAve,secondAve,thirdAve,fourthAve] = await Promise.all([
-    //     axios.get(`/api/explore_new?indicator_id=719&city=${selected}&year=2018`),
-    //     axios.get(`/api/explore_new?indicator_id=721&city=${selected}&year=2018`),
-    //     axios.get(`/api/explore_new?indicator_id=1081&city=${selected}&year=2018`),
-    //     axios.get(`/api/explore_new?indicator_id=1078&city=${selected}&year=2018`),
+    const [firstResponse, secondResponse, thirdResponse, fourthResponse,
+    firstAve,secondAve,thirdAve,fourthAve] = await Promise.all([
+        axios.get(`/api/explore_new?indicator_id=719&city=${selected}&year=2018`),
+        axios.get(`/api/explore_new?indicator_id=721&city=${selected}&year=2018`),
+        axios.get(`/api/explore_new?indicator_id=1081&city=${selected}&year=2018`),
+        axios.get(`/api/explore_new?indicator_id=1078&city=${selected}&year=2018`),
 
-    //     axios.get(`/api/stats?indicator_id=719&average=True&year=2018`),
-    //     axios.get(`/api/stats?indicator_id=721&average=True&year=2018`),
-    //     axios.get(`/api/stats?indicator_id=1081&average=True&year=2018`),
-    //     axios.get(`/api/stats?indicator_id=1078&average=True&year=2018`)
-    // ]);
+        axios.get(`/api/stats?indicator_id=719&average=True&year=2018`),
+        axios.get(`/api/stats?indicator_id=721&average=True&year=2018`),
+        axios.get(`/api/stats?indicator_id=1081&average=True&year=2018`),
+        axios.get(`/api/stats?indicator_id=1078&average=True&year=2018`)
+    ]);
 
-    // aveMale = firstResponse.data[0].values
+    aveMale = firstResponse.data[0] ? firstResponse.data[0].values : 0
 
-    // aveFemale = secondResponse.data[0].values
+    aveFemale = secondResponse.data[0] ? secondResponse.data[0].values : 0
 
-    // publicHealthCare = thirdResponse.data[0].values
+    publicHealthCare = thirdResponse.data[0] ? thirdResponse.data[0].values : 0
 
-    // medicalAid = fourthResponse.data[0].values
+    medicalAid = fourthResponse.data[0] ? fourthResponse.data[0].values : 0
 
-    // aveMaleTot = firstAve.data.total_average
+    aveMaleTot = firstAve.data.total_average ? firstAve.data.total_average : 0
 
-    // aveFemaleTot = secondAve.data.total_average
+    aveFemaleTot = secondAve.data.total_average ? secondAve.data.total_average : 0
 
-    // publicHealthCareTot = thirdAve.data.total_average
+    publicHealthCareTot = thirdAve.data.total_average ? thirdAve.data.total_average : 0
 
-    // medicalAidTot = fourthAve.data.total_average
+    medicalAidTot = fourthAve.data.total_average ? fourthAve.data.total_average : 0
+
 
     setStats({
         aveMale: [Math.round(aveMale), "AVE. Male life Expectancy"],
