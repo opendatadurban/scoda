@@ -1,12 +1,12 @@
-
 .generic_dashboard {
- 
+
     margin-top: 100px;
-    background-color: rgba(241, 241, 241, 1); 
-    padding-bottom: calc(20px + 15px);   
+    background-color: rgba(241, 241, 241, 1);
+    padding-bottom: calc(20px + 15px);
+
     .dropdown-menu.show {
-        top: 41px!important;
-        transform: none!important;
+        top: 41px !important;
+        transform: none !important;
     }
 
     .stat_display_panel {
@@ -57,6 +57,46 @@
                     display: flex;
                     flex-direction: column;
                     align-items: center;
+
+                    &.aveMaleTot>p {
+                        width: 93px;
+                        text-align: center;
+                    }
+
+                    &.aveFemaleTot>p {
+                        width: 93px;
+                        text-align: center;
+                    }
+
+                    &.publicHealthCareTot>p {
+                        width: 108px;
+                        text-align: center;
+                    }
+
+                    &.medicalAidTot>p {
+                        width: 69px;
+                        text-align: center;
+                    }
+
+                    &.noSchoolingTot  >p {
+                        width: 83px;
+                        text-align: center;
+                    }
+
+                    &.primarySchoolingTot >p {
+                        width: 95px;
+                        text-align: center;
+                    }
+
+                    &.secondarySchoolingTot>p {
+                        width: 115px;
+                        text-align: center;
+                    }
+
+                    &.tertiaryEducationTot>p {
+                        width: 77px;
+                        text-align: center;
+                    }
 
                     >p {
                         font-family: 'Montserrat';
@@ -143,6 +183,46 @@
                     flex-direction: column;
                     align-items: center;
 
+                    &.aveMale>p {
+                        width: 93px;
+                        text-align: center;
+                    }
+
+                    &.aveFemale>p {
+                        width: 93px;
+                        text-align: center;
+                    }
+
+                    &.publicHealthCare>p {
+                        width: 108px;
+                        text-align: center;
+                    }
+
+                    &.medicalAid>p {
+                        width: 69px;
+                        text-align: center;
+                    }
+
+                    &.noSchooling>p {
+                        width: 83px;
+                        text-align: center;
+                    }
+
+                    &.primarySchooling>p {
+                        width: 95px;
+                        text-align: center;
+                    }
+
+                    &.secondarySchooling>p {
+                        width: 115px;
+                        text-align: center;
+                    }
+
+                    &.tertiaryEducation>p {
+                        width: 77px;
+                        text-align: center;
+                    }
+
                     >p {
                         font-family: 'Montserrat';
                         font-style: normal;
@@ -172,14 +252,16 @@
 
         }
     }
-    .secondaryChartSpacer{
+
+    .secondaryChartSpacer {
         height: 13px;
         background-color: rgba(241, 241, 241, 1);
     }
+
     .chart_grid {
         background-color: rgba(241, 241, 241, 1);
 
-        
+
 
         .rounded_container {
             border-radius: 5px 5px 5px 5px;
@@ -305,15 +387,17 @@
                     left: calc((2*(100vw/3) - 2*(154px/3)) + 32px + 30px + 15px);
                     top: 15px;
                 }
-                .heading_wrapper{
 
-                    .heading{
+                .heading_wrapper {
+
+                    .heading {
                         line-height: 1.2;
                         height: unset;
                     }
-                    
+
                 }
-                .source_title{
+
+                .source_title {
                     margin: 0;
                     padding: 0;
                     font-family: 'Montserrat';
@@ -324,29 +408,29 @@
                 }
             }
 
-            .grid-only-charts-2{
+            .grid-only-charts-2 {
                 display: grid;
                 grid-column-gap: 36px;
                 grid-row-gap: 10px;
-                grid-template-columns: calc(50vw - 15px - 64px ) calc(50vw - 15px - 64px);
+                grid-template-columns: calc(50vw - 15px - 64px) calc(50vw - 15px - 64px);
                 background-color: white;
                 padding: 12px 32px;
                 position: relative;
                 border-radius: 0 0 5px 5px;
 
-                .heading_wrapper{
+                .heading_wrapper {
                     align-items: center;
-    
+
                     .heading {
                         height: unset;
                         width: 418px;
                         line-height: 1.2;
 
                     }
-                   
+
                 }
 
-                .source_title{
+                .source_title {
                     margin: 0;
                     padding: 0;
                     font-family: 'Montserrat';
@@ -357,42 +441,42 @@
                 }
             }
 
-            .grid-container-1{
-                    // 30 outside + 50 inside + 32px : spacing excluding chart blocks
-                    display: grid;
-                    grid-column-gap: 0px;
-                    grid-row-gap: 0px;
-                    grid-template-columns: calc(100vw - 30px - 50px);
-                    background-color: white;
-                    padding: 25px;
-                    position: relative;
-                    border-radius: 0 0 5px 5px;
-    
-                    .chart_wrapper {
-    
-                        .source_title {
-                            margin: 0;
-                            padding: 0;
-                            font-family: 'Montserrat';
-                            font-style: italic;
-                            font-weight: 400;
-                            font-size: 10px;
-                            line-height: 1.2;
-                        }
-    
-                        .heading_wrapper {
-                            align-items: center;
-    
-                            .heading {
-                                height: unset;
-                               width: 100%;
-                                line-height: 1.2;
-    
-                            }
-    
-                        }
-    
+            .grid-container-1 {
+                // 30 outside + 50 inside + 32px : spacing excluding chart blocks
+                display: grid;
+                grid-column-gap: 0px;
+                grid-row-gap: 0px;
+                grid-template-columns: calc(100vw - 30px - 50px);
+                background-color: white;
+                padding: 25px;
+                position: relative;
+                border-radius: 0 0 5px 5px;
+
+                .chart_wrapper {
+
+                    .source_title {
+                        margin: 0;
+                        padding: 0;
+                        font-family: 'Montserrat';
+                        font-style: italic;
+                        font-weight: 400;
+                        font-size: 10px;
+                        line-height: 1.2;
                     }
+
+                    .heading_wrapper {
+                        align-items: center;
+
+                        .heading {
+                            height: unset;
+                            width: 100%;
+                            line-height: 1.2;
+
+                        }
+
+                    }
+
+                }
             }
 
             .grid-container-4 {
@@ -466,7 +550,7 @@
                 }
 
                 .chart_wrapper {
-    
+
                     .source_title {
                         margin: 0;
                         padding: 0;
@@ -475,7 +559,8 @@
                         font-weight: 400;
                         font-size: 10px;
                     }
-                    .dropdown_chart_source{
+
+                    .dropdown_chart_source {
                         font-family: 'Montserrat';
                         font-style: italic;
                         font-weight: 400;
@@ -483,7 +568,7 @@
                         font-size: 10px;
                     }
 
-                   
+
 
                 }
             }
@@ -497,16 +582,16 @@
     }
 }
 
-.secondary{
+.secondary {
     margin: 0;
     padding: 15px 0 0 0;
 
     .chart_grid {
 
-        .rounded_container{
+        .rounded_container {
             padding: 0;
             margin: 0px 15px 0 15px;
-           
+
         }
-    } 
+    }
 }
