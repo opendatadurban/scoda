@@ -1599,12 +1599,10 @@ export const sustainabilityClearAll = (originalValues, setSelected, setOptions) 
   })
 
   setOptions(prev => {
+
     let newArr = prev
-
     let fallbackValue = JSON.parse(JSON.stringify(originalValues))
-    let removed = fallbackValue.splice(-1)
-    let filled = newArr.length > 1 ? newArr.map((chart, cIndex) => {
-
+    let filled = newArr.length > 0 ? newArr.map((chart, cIndex) => {
 
       let fillRef = fallbackValue[cIndex]
       return chart.map((year, yIndex) => {

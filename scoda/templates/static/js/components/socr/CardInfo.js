@@ -33,28 +33,28 @@ function GetCardInfo(){
               },
               {
                 header:'People and Households',
-                subheader:" (From SoCR 2022)",
+                subheader:" (From SoCR 2021)",
                 type:'DASHBOARD',
                 class:'_people_household',
                 href:'/scoda/socr#/people_household'
               },
               {
                 header:'Employment',
-                subheader:" (From SoCR 2022)",
+                subheader:" (From SoCR 2021)",
                 type:'DASHBOARD',
                 class:'_employment',
                 href:'/scoda/socr#/employment'
               },
               {
                 header:'Dwellings',
-                subheader:" (From SoCR 2022)",
+                subheader:" (From SoCR 2021)",
                 type:'DASHBOARD',
                 class:'_dwellings',
                 href:'/scoda/socr#/dwellings'
               },
               {
                 header:'Household Income',
-                subheader:" (From SoCR 2022)",
+                subheader:" (From SoCR 2021)",
                 type:'DASHBOARD',
                 class:'_household_income',
                 href:'/scoda/socr#/household_income'

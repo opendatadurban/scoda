@@ -69,13 +69,11 @@ export const ChartGrid = ({ indicator_ids,
     addItem: sustainabilityAddItem,
     clearAll: sustainabilityClearAll,
   } : (dropdownName === "Sustainability" && genericIndex === 3) ? {
-    removeItem: ()=>{ console.log("deleted2")},
+    removeItem: sustainabilityRemoveItem,
     addItem: sustainabilityAddItem,
     clearAll: sustainabilityClearAll,
   } :
   {}
-
-
   const isDropDownChart = Array.isArray(indicator_ids[0])
   const globalCityDropDownClose = useGlobalClose()
 
