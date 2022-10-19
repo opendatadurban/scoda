@@ -44,10 +44,10 @@ export default (
       <Route exact path='/employment' component={Employment} />
       <Route exact path='/dwellings' component={Dwellings} />
       <Route exact path='/household_income' component={HouseholdIncome} />
-      <Route exact path='/life_expectancy' component={LifeExpectancy} />
+      {/* <Route exact path='/life_expectancy' component={LifeExpectancy} />
       <Route exact path='/food_security' component={FoodSecurity} />
       <Route exact path='/education' component={Education} />
-      <Route exact path='/sustainability' component={Sustainability} />
+      <Route exact path='/sustainability' component={Sustainability} /> */}
     </Suspense>
   </HashRouter>
 );
