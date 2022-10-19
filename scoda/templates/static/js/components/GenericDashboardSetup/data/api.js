@@ -76,7 +76,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
               item['color'] = secondaryColors[colorCount]
             }
 
-            if (index === 5) {
+            if (index === 5 && dropdownName !== "People and Households") {
               item['color'] = peopleHouseholdColors[colorCount + 2]
             }
 
