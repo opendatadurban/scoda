@@ -310,11 +310,11 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                                         <h1>{makeHumanReadable(statsValues.adequite[0])}%</h1>
                                         <p > {makeHumanReadable(statsValues.adequite[1])}</p>
                                     </div>
-                                    <div className='stat adequite'>
+                                    <div className='stat inadequite'>
                                         <h1>{makeHumanReadable(statsValues.inadequite[0])}%</h1>
                                         <p>{makeHumanReadable(statsValues.inadequite[1])}</p>
                                     </div>
-                                    <div className='stat adequite'>
+                                    <div className='stat severelyInadequite'>
                                         <h1>{makeHumanReadable(statsValues.severelyInadequite[0])}%</h1>
                                         <p>{makeHumanReadable(statsValues.severelyInadequite[1])}</p>
                                     </div>

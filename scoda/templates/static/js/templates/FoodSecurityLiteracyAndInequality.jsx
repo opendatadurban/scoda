@@ -76,7 +76,7 @@ const Home = () => {
 <div className="socr--home" style={{ backgroundColor: "white", overflowX: 'hidden' }} >
         <Navigation_scoda logoHide={false} box_shadow={true} />
         <FoodSecurity
-          indicator_ids={[ 1069,  1070, 1071,"n2","n3",959]}
+          indicator_ids={[ 1069,  1072, 1075,"n2","n3",959]}
           minYear={2015}
           maxYear={2018}
           subNavContent={subNavContent}

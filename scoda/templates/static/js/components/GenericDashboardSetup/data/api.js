@@ -287,7 +287,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
           return item
         })]
       }
-
+      console.log(gridData,"API DATA")
       setOriginalValues([...gridData])
       const copy = JSON.parse(JSON.stringify(gridData)) // deep copy to be manipuilated
       setChartGroup([...copy])

@@ -1606,7 +1606,7 @@ export const sustainabilityClearAll = (originalValues, setSelected, setOptions) 
 
       let fillRef = fallbackValue[cIndex]
       return chart.map((year, yIndex) => {
-        year.labels = ['BUF', 'CPT', 'JHB', 'EKU', 'MAN', 'MSU', 'NMA', 'TSH', 'ETK']
+        year.labels = ['CPT', 'EKU', 'ETH', 'JHB', 'MAN', 'TSH']
         year.values = fillRef[yIndex].values
 
         return year
