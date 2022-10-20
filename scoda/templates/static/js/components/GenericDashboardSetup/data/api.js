@@ -50,7 +50,6 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
   Promise.all(indicator_id_requests.map(request => request.request)).then(
   
     (chartData) => {
-      console.log(chartData,"raw api data ")
 
       chartData.forEach((chart, index) => {
       

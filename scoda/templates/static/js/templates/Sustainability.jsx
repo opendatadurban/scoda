@@ -73,7 +73,7 @@ const Home = () => {
       <Navigation_scoda logoHide={false} box_shadow={true} />
       <Sustainability
         indicator_ids={[sustainability_text_box_data, "indicator text box"]}
-        minYear={2015}
+        minYear={2017}
         maxYear={2018}
         subNavContent={subNavContent}
         gridItems={2}
@@ -84,7 +84,7 @@ const Home = () => {
       />
       <Sustainability
         indicator_ids={[sustainability_text_box_data_2, "indicator text box"]}
-        minYear={2015}
+        minYear={2017}
         maxYear={2018}
         subNavContent={subNavContent}
         gridItems={2}
@@ -108,7 +108,7 @@ const Home = () => {
       <Sustainability
         indicator_ids={[85, 96]}
         minYear={2018}
-        maxYear={2020}
+        maxYear={2019}
         subNavContent={subNavContent}
         gridItems={2}
         dropdownName={subNavContent.dropdownMenu[10].name}
