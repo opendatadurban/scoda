@@ -45,27 +45,27 @@ const Home = () => {
         name: "Household Income",
         href: "socr#/household_income",
         active: true
+      },
+      {
+        name: "Food Security, Literacy and Inequality",
+        href: "socr#/food_security",
+        active: false
+      },
+      {
+        name: "Life Expectancy & Health",
+        href: "socr#/life_expectancy",
+        active: false
+      },
+      {
+        name: "Education",
+        href: "socr#/education",
+        active: false
+      },
+      {
+        name: "Sustainability",
+        href: "socr#/sustainability",
+        active: false
       }
-      // {
-      //   name: "Food Security, Literacy and Inequality",
-      //   href: "socr#/food_security",
-      //   active: false
-      // },
-      // {
-      //   name: "Life Expectancy & Health",
-      //   href: "socr#/life_expectancy",
-      //   active: false
-      // },
-      // {
-      //   name: "Education",
-      //   href: "socr#/education",
-      //   active: false
-      // },
-      // {
-      //   name: "Sustainability",
-      //   href: "socr#/sustainability",
-      //   active: false
-      // }
     ]
   }
 

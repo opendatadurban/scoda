@@ -1,10 +1,10 @@
 import axios from 'axios'
-import { cityLabels, combinationColors, isCombinationIndicator, isNewApiIndicator, isOldApiIndicator, isSingleYearIndicator, isTextBoxIndicator, peopleHouseholdColors, secondaryColors } from '../helpers/helpers'
+import { cityLabels, combinationColors, isCombinationIndicator, isNewApiIndicator, isOldApiIndicator, isSingleYearIndicator, isTextBoxIndicator, peopleHouseholdColors, secondaryColors, sustainabilityColors } from '../helpers/helpers'
 import { tableData } from '../helpers/helpers'
 import { indicator_text_box_data } from './data'
 
 export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYear,
-   yearColors, setOriginalValues,dropdownName
+   yearColors, setOriginalValues,dropdownName,genericIndex
   
 ) => {
 
@@ -59,11 +59,13 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
         if (indicator_id_requests[index].type === "new") {
           let colorCount = 0
           chart.data.forEach((item) => {
+
+            
             /**
              * Filter out min max year range, or 
              * specify range for individual graphs on grid by using chartIndex
              */
-            if (
+             if (
               (parseInt(item.year) < minYear || parseInt(item.year) > maxYear)
               &&
               index !== 5
@@ -71,6 +73,10 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
 
             // add corresponding color to each year/ dataset label
             item['color'] = yearColors[colorCount]
+
+            if(dropdownName === "Sustainability" && genericIndex === 3 ){
+              item['color'] = sustainabilityColors[colorCount]
+            }
 
             if (index === 5 && dropdownName === "People and Households") {
               item['color'] = secondaryColors[colorCount]
@@ -105,14 +111,21 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
 
           filterData.push(...combinationChart)
         }else if (indicator_id_requests[index].type === "toggle") {
+
           const toggleCharts = chart.map((data) => {return data.data})
 
           const toggleChartWithColor = toggleCharts.map(chart => {
-            return chart.map((year,yearIndex) => {
-                year.color = yearColors[yearIndex]
-                year.labels = year.labels.sort().map((city) => cityLabels(city))
-                return year
-              })
+
+            let newChart = []
+
+            chart.forEach((year,yearIndex) => {
+              if ((parseInt(year.year) < minYear || parseInt(year.year) > maxYear) ) return
+              year.color = yearColors[yearIndex]
+              year.labels = year.labels.sort().map((city) => cityLabels(city))
+              newChart.push(year)
+            })
+
+            return newChart 
           })
 
           filterData.push(toggleChartWithColor)
@@ -287,7 +300,6 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
           return item
         })]
       }
-      console.log(gridData,"API DATA")
       setOriginalValues([...gridData])
       const copy = JSON.parse(JSON.stringify(gridData)) // deep copy to be manipuilated
       setChartGroup([...copy])

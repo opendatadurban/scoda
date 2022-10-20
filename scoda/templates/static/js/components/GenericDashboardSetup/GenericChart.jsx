@@ -31,7 +31,8 @@ const GenericChart = ({ indicator_ids, minYear, maxYear,
       minYear, maxYear, //year min max
       colors, //color presets
       setOriginalValues,
-      dropdownName
+      dropdownName,
+      genericIndex
     )
   }, [selectedName, selectedChart])
 

@@ -109,7 +109,6 @@ genericIndex  }) => {
       </div>
       )
     }else if (Array.isArray(indicator_ids[i])){
-      console.log(genericIndex,"genric index test")
       const codebookUrl = `/scoda/toolkit#/codebook-explorer/${hhiDropdownNames(indicator_ids[0])[selectedDropDownChart].endpoints[isNumber?1:0]}`
 
       items.push(<div className='chart_wrapper' key={i.toString()} onClick={clearAllErrors}>
