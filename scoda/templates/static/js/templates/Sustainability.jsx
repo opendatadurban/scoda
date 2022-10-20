@@ -108,7 +108,7 @@ const Home = () => {
       <Sustainability
         indicator_ids={[85, 96]}
         minYear={2018}
-        maxYear={2019}
+        maxYear={2020}
         subNavContent={subNavContent}
         gridItems={2}
         dropdownName={subNavContent.dropdownMenu[10].name}

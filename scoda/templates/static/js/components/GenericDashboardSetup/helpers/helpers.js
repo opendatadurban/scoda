@@ -20,6 +20,12 @@ export const combinationColors = [
   '#F4BB8C'
 ]
 
+export const sustainabilityColors = [
+  '#023858',
+  '#BBF2B4',
+  '#8BDE9E'
+]
+
 export const phChartTitles = {
   yAxes: ["Number of Households", "Average Number of People", "Percentage", "Population", "Population Density", "Percentage"],
   main: ["Total Households", "Household Size - Average Number of People per Household", "Percentage of Population Change",
