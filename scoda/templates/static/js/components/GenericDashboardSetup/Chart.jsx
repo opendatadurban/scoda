@@ -27,7 +27,6 @@ export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex,gene
            
         },
         
-        
         scales: {
             xAxes: [{
                 stacked: stacked,

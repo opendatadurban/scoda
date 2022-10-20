@@ -50,6 +50,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
   Promise.all(indicator_id_requests.map(request => request.request)).then(
   
     (chartData) => {
+      console.log(chartData,"raw api data ")
 
       chartData.forEach((chart, index) => {
       
@@ -287,7 +288,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
           return item
         })]
       }
-
+      console.log(gridData,"API DATA")
       setOriginalValues([...gridData])
       const copy = JSON.parse(JSON.stringify(gridData)) // deep copy to be manipuilated
       setChartGroup([...copy])

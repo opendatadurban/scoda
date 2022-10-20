@@ -365,12 +365,12 @@ export const getFoodSecurityStatTotals = async (originalValues, cityLabels, setS
     const [firstResponse, secondResponse, thirdResponse,
     firstAve,secondAve,thirdAve] = await Promise.all([
         axios.get(`/api/explore_new?indicator_id=1069&city=${selected}&year=2018`),
-        axios.get(`/api/explore_new?indicator_id=1070&city=${selected}&year=2018`),
-        axios.get(`/api/explore_new?indicator_id=1071&city=${selected}&year=2018`),
+        axios.get(`/api/explore_new?indicator_id=1072&city=${selected}&year=2018`),
+        axios.get(`/api/explore_new?indicator_id=1075&city=${selected}&year=2018`),
 
         axios.get(`/api/stats?indicator_id=1069&average=True&year=2018`),
-        axios.get(`/api/stats?indicator_id=1070&average=True&year=2018`),
-        axios.get(`/api/stats?indicator_id=1071&average=True&year=2018`),
+        axios.get(`/api/stats?indicator_id=1072&average=True&year=2018`),
+        axios.get(`/api/stats?indicator_id=1075&average=True&year=2018`),
     ]);
 
     adequite = firstResponse.data[0].values
@@ -382,14 +382,14 @@ export const getFoodSecurityStatTotals = async (originalValues, cityLabels, setS
     severelyInadequiteTot = thirdAve.data.total_average
 
 
-    setStats({
+    setStats({...{
         adequite: [Math.round(adequite), "Adequate Access to Food"],
         inadequite: [Math.round(inadequite), "Inadequate Access to Food"],
         severelyInadequite: [Math.round(severelyInadequite* 10) / 10, "Severely Inadequate Access to Food"],
         adequiteTot: [Math.round(adequiteTot), "Adequate Access to Food"],
         inadequiteTot: [Math.round(inadequiteTot), "Inadequate Access to Food"],
         severelyInadequiteTot: [Math.round(severelyInadequiteTot* 10) / 10, "Severely Inadequate Access to Food"],   
-    })
+    }})
 }
 
 export const getLifeExpectancyStatTotals = async (originalValues, cityLabels, setStats, selected) => {

@@ -98,6 +98,21 @@
                         text-align: center;
                     }
 
+                    &.adequiteTot >p {
+                        width: 91px;
+                        text-align: center;
+                    }
+
+                    &.inadequiteTot>p {
+                        width: 91px;
+                        text-align: center;
+                    }
+
+                    &.severelyInadequiteTot>p {
+                        width: 126px;
+                        text-align: center;
+                    }
+
                     >p {
                         font-family: 'Montserrat';
                         font-style: normal;
@@ -220,6 +235,21 @@
 
                     &.tertiaryEducation>p {
                         width: 77px;
+                        text-align: center;
+                    }
+
+                    &.adequite >p {
+                        width: 91px;
+                        text-align: center;
+                    }
+
+                    &.inadequite>p {
+                        width: 91px;
+                        text-align: center;
+                    }
+
+                    &.severelyInadequite>p {
+                        width: 126px;
                         text-align: center;
                     }
 
