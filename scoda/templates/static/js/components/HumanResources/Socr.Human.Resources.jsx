@@ -49,7 +49,7 @@ const subNavContent = {
       active: false
     },
     {
-      name: "Life Expectancy & Health",
+      name: "Life Expectancy and Health",
       href: "socr#/life_expectancy",
       active: false
     },

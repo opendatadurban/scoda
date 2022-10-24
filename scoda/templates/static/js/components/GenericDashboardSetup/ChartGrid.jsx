@@ -48,7 +48,7 @@ export const ChartGrid = ({ indicator_ids,
     removeItem: hiRemoveItem,
     addItem: hiAddItem,
     clearAll: hiClearAll,
-  } : dropdownName === "Life Expectancy & Health" ? {
+  } : dropdownName === "Life Expectancy and Health" ? {
     removeItem: leRemoveItem,
     addItem: leAddItem,
     clearAll: leClearAll,
@@ -60,7 +60,7 @@ export const ChartGrid = ({ indicator_ids,
     removeItem: edRemoveItem,
     addItem: edAddItem,
     clearAll: edClearAll,
-  } :(dropdownName === "Sustainability" && secondDropDown) ? {
+  } : (dropdownName === "Sustainability" && secondDropDown) ? {
     removeItem: hiRemoveItem,
     addItem: hiAddItem,
     clearAll: hiClearAll,
@@ -73,9 +73,16 @@ export const ChartGrid = ({ indicator_ids,
     addItem: sustainabilityAddItem,
     clearAll: sustainabilityClearAll,
   } :
-  {}
+    {}
   const isDropDownChart = Array.isArray(indicator_ids[0])
   const globalCityDropDownClose = useGlobalClose()
+
+  const chartWrapperClassNames = gridItems > 4 && (dropdownName !== "Food Security, Literacy and Inequality") ? "grid-container" :
+  gridItems > 4 && (dropdownName === "Food Security, Literacy and Inequality") ? "grid-container horizontal_food" :
+    gridItems === 4 && (dropdownName === "Life Expectancy and Health") ? "grid-container-4 horizontal" :
+    gridItems === 4 && (dropdownName !== "Life Expectancy and Health") ? "grid-container-4" :
+    gridItems === 2 && indicator_ids.includes("indicator text box") ? "grid-2-text" :
+    gridItems === 2 ? "grid-only-charts-2" : "grid-container-1"
 
   return (
     <div className='chart_grid' onClick={() => { globalCityDropDownClose() }}>
@@ -96,13 +103,11 @@ export const ChartGrid = ({ indicator_ids,
               isDropDownChart={isDropDownChart} />
             {
               isDropDownChart ? <MiniSelect names={secondDropDown} selected={selectedName}
-                setSelectedChart={setSelectedChart} setSelected={setSelectedName} isDropDownChart={isDropDownChart} /> : ""
+                setSelectedChart={setSelectedChart} setSelected={setSelectedName} isDropDownChart={isDropDownChart} dropdownName={dropdownName} genericIndex={genericIndex} /> : ""
             }
           </div>
 
-          <div className={gridItems > 4 ? "grid-container" : gridItems === 4 ? "grid-container-4" :
-            (gridItems === 2 && indicator_ids.includes("indicator text box")) ? "grid-2-text" :
-            gridItems === 2 ? "grid-only-charts-2" : "grid-container-1"}>
+          <div className={chartWrapperClassNames}>
             {
               <ChartWrapper
                 chartGroup={chartData}

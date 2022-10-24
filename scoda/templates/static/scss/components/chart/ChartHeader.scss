@@ -8,6 +8,19 @@
         align-items: flex-start;
         padding: 0 0 0 0;
 
+      .heading_alternate{
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+        color: #2F3442;
+        .secondary_title{
+            font-weight: 600;
+            font-size: 12px;
+        }
+        }
+
         .heading {
             padding: 0;
             margin: 0;
@@ -114,7 +127,16 @@
         }
 
     }
-
+ .category{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 1.2;
+    color: #2F3442;
+    margin: 0;
+    padding: 0;
+ }
     .text {
         display: flex;
         flex-direction: column;

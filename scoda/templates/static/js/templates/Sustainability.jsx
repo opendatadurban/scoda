@@ -51,7 +51,7 @@ const Home = () => {
         active: false
       },
       {
-        name: "Life Expectancy & Health",
+        name: "Life Expectancy and Health",
         href: "socr#/life_expectancy",
         active: false
       },
@@ -116,7 +116,7 @@ const Home = () => {
         secondaryChart={true}
         genericIndex = {3}
       />
-      <div style={{ height: "60px", backgroundColor: "rgb(241, 241, 241)" }}></div>
+      <div style={{ height: "34px", backgroundColor: "rgb(241, 241, 241)" }}></div>
       <Footer />
     </div>
   )

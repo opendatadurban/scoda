@@ -37,11 +37,12 @@ const GenericChart = ({ indicator_ids, minYear, maxYear,
   }, [selectedName, selectedChart])
 
   const isDropDownChart = Array.isArray(indicator_ids[0])
+  const firstDashboardClass = (genericIndex === 0) ? "first_chart" : ""
 
   return (
     chartGroup.length === gridItems ?
       <SelectContextState>
-        <div className={'generic_dashboard ' + (secondaryChart ? "secondary": "" )}>
+        <div className={'generic_dashboard ' + (secondaryChart ? "secondary ": "" ) + firstDashboardClass }>
          {secondaryChart ? "":<>
          <Subnav name='State of Cities Reports' dropdownName={dropdownName} dropDownItem={subNavContent} buttonText="Download as PNG" />
          <Sidebar_left />
