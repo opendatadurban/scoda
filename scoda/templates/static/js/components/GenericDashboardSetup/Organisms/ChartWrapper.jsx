@@ -76,7 +76,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
                 sustainabilityChartTitles(dropdownName, genericIndex) : []
 
   const elements = chartGroup
-  console.log(indicator_ids)
+
   for (let i = 0; i < elements.length; i++) {
 
     const element = elements[i]
