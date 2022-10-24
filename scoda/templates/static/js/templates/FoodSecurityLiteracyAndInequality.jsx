@@ -53,7 +53,7 @@ const Home = () => {
         active: true
       },
       {
-        name: "Life Expectancy & Health",
+        name: "Life Expectancy and Health",
         href: "socr#/life_expectancy",
         active: false
       },

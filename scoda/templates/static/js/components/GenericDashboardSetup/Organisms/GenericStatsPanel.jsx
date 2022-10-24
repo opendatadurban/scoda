@@ -39,7 +39,7 @@ const initialValues = (dropName) => {
                     inadequiteTot: [0, "Inadequate Access to Food"],
                     severelyInadequiteTot: [0, "Severely Inadequate Access to Food"],
                 } :
-                    dropName === "Life Expectancy & Health" ? {
+                    dropName === "Life Expectancy and Health" ? {
                         aveMale: [0, "AVE. Male life Expectancy"],
                         aveFemale: [0, "AVE. Female life Expectancy"],
                         publicHealthCare: [0, "Public Healthcare Usage"],
@@ -80,7 +80,7 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
             getDwellingsStatTotals(originalValues, cityLabels, setStats, selected)
         } else if (dropName === "Food Security, Literacy and Inequality") {
             getFoodSecurityStatTotals(originalValues, cityLabels, setStats, selected)
-        } else if (dropName === "Life Expectancy & Health") {
+        } else if (dropName === "Life Expectancy and Health") {
             getLifeExpectancyStatTotals(originalValues, cityLabels, setStats, selected)
         }else if (dropName === "Education") {
             getEducationStatTotals(originalValues, cityLabels, setStats, selected)
@@ -321,7 +321,7 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
 
                                 </div>
                             </div>
-                        </div> : dropName === "Life Expectancy & Health" ?
+                        </div> : dropName === "Life Expectancy and Health" ?
                             <div className='stat_display_panel' onClick={() => { globalCityDropDownClose() }}>
                                 <div className='first_panel'>
                                     <p className='catagory-name '>Life & Health Overview:  <span>City Averages 2018</span></p>
@@ -373,13 +373,15 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                             <div className='stat_display_panel' onClick={() => { globalCityDropDownClose() }}>
                                 <div className='first_panel'>
                                     <p className='catagory-name '>Schooling Milestones:  <span>City Averages 2018</span></p>
+                                    <p className="title">PROPORTION OF POPULATION WITH:</p>
                                     <div className='row'>
+
                                         <div className='stat noSchoolingTot'>
-                                            <h1>{makeHumanReadable(statsValues.noSchoolingTot[0])}</h1>
+                                            <h1>{makeHumanReadable(statsValues.noSchoolingTot[0])}%</h1>
                                             <p > {makeHumanReadable(statsValues.noSchoolingTot[1])}</p>
                                         </div>
                                         <div className='stat primarySchoolingTot'>
-                                            <h1>{makeHumanReadable(statsValues.primarySchoolingTot[0])}</h1>
+                                            <h1>{makeHumanReadable(statsValues.primarySchoolingTot[0])}%</h1>
                                             <p>{makeHumanReadable(statsValues.primarySchoolingTot[1])}</p>
                                         </div>
                                         <div className='stat secondarySchoolingTot'>
@@ -398,13 +400,14 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
 
                                         <MiniSelect names={['Buffalo City', 'City of Cape Town', 'Ekurhuleni', 'eThekwini', 'City of Joburg', 'Mangaung', 'Nelson Mandela Bay', "Tshwane"]} setSelected={setSelected} selected={selected} />
                                     </div>
+                                    <p className="title_header">PROPORTION OF POPULATION WITH:</p>
                                     <div className='bottom'>
                                     <div className='stat noSchooling'>
-                                            <h1>{makeHumanReadable(statsValues.noSchooling[0])}</h1>
+                                            <h1>{makeHumanReadable(statsValues.noSchooling[0])}%</h1>
                                             <p > {makeHumanReadable(statsValues.noSchooling[1])}</p>
                                         </div>
                                         <div className='stat primarySchooling'>
-                                            <h1>{makeHumanReadable(statsValues.primarySchooling[0])}</h1>
+                                            <h1>{makeHumanReadable(statsValues.primarySchooling[0])}%</h1>
                                             <p>{makeHumanReadable(statsValues.primarySchooling[1])}</p>
                                         </div>
                                         <div className='stat secondarySchooling'>

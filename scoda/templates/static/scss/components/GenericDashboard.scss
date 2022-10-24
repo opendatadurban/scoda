@@ -7,6 +7,7 @@
     .dropdown-menu.show {
         top: 41px !important;
         transform: none !important;
+        width: 450px;
     }
 
     .stat_display_panel {
@@ -18,6 +19,17 @@
         .first_panel {
             position: relative;
             padding: 12px 24px 20px 15px;
+
+            .title {
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 10px;
+                line-height: 12px;
+                text-transform: uppercase;
+                color: #2F3442;
+                margin-top: 16px;
+            }
 
             .heading {
                 font-family: 'Montserrat';
@@ -78,12 +90,12 @@
                         text-align: center;
                     }
 
-                    &.noSchoolingTot  >p {
+                    &.noSchoolingTot>p {
                         width: 83px;
                         text-align: center;
                     }
 
-                    &.primarySchoolingTot >p {
+                    &.primarySchoolingTot>p {
                         width: 95px;
                         text-align: center;
                     }
@@ -98,7 +110,7 @@
                         text-align: center;
                     }
 
-                    &.adequiteTot >p {
+                    &.adequiteTot>p {
                         width: 91px;
                         text-align: center;
                     }
@@ -154,6 +166,17 @@
 
             padding: 12px 24px 20px 15px;
             width: 100%;
+
+            .title_header {
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 10px;
+                line-height: 12px;
+                text-transform: uppercase;
+                color: #2F3442;
+                margin-top: 16px;
+            }
 
             .heading {
                 font-family: 'Montserrat';
@@ -238,7 +261,7 @@
                         text-align: center;
                     }
 
-                    &.adequite >p {
+                    &.adequite>p {
                         width: 91px;
                         text-align: center;
                     }
@@ -274,12 +297,8 @@
                         color: #2F3442;
                         padding: 10px 0 3px 0;
                     }
-
                 }
-
             }
-
-
         }
     }
 
@@ -352,20 +371,16 @@
                             width: 280px !important;
                             white-space: nowrap !important;
                             overflow: hidden !important;
-
                             text-overflow: ellipsis !important;
                             align-items: center;
                             font-family: 'Montserrat';
                             font-style: normal;
                             font-weight: 400;
                             font-size: 13.6px;
-                            line-height: 13px;
+                            line-height: 1.5;
                             color: #4A4A4A;
-
                         }
-
                     }
-
 
                     .dropdownbox {
                         display: none;
@@ -429,12 +444,23 @@
 
                 .source_title {
                     margin: 0;
-                    padding: 0;
+                    padding: 3px 0 3px 0;
                     font-family: 'Montserrat';
                     font-style: italic;
                     font-weight: 400;
                     line-height: 1;
                     font-size: 10px;
+                    color: #8C8F97;
+
+                    .source_pre {
+                        font-family: 'Montserrat';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 8px;
+                        line-height: 10px;
+                        text-transform: uppercase;
+                        color: #8C8F97;
+                    }
                 }
             }
 
@@ -462,12 +488,23 @@
 
                 .source_title {
                     margin: 0;
-                    padding: 0;
+                    padding: 3px 0 3px 0;
                     font-family: 'Montserrat';
                     font-style: italic;
                     font-weight: 400;
                     line-height: 1;
                     font-size: 10px;
+                    color: #8C8F97;
+
+                    .source_pre {
+                        font-family: 'Montserrat';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 8px;
+                        line-height: 10px;
+                        text-transform: uppercase;
+                        color: #8C8F97;
+                    }
                 }
             }
 
@@ -476,7 +513,7 @@
                 display: grid;
                 grid-column-gap: 0px;
                 grid-row-gap: 0px;
-                grid-template-columns: calc(100vw - 30px - 50px);
+                grid-template-columns: calc(100vw - 30px - 85px);
                 background-color: white;
                 padding: 25px;
                 position: relative;
@@ -486,12 +523,23 @@
 
                     .source_title {
                         margin: 0;
-                        padding: 0;
+                        padding: 3px 0 3px 0;
                         font-family: 'Montserrat';
                         font-style: italic;
                         font-weight: 400;
+                        line-height: 1;
                         font-size: 10px;
-                        line-height: 1.2;
+                        color: #8C8F97;
+
+                        .source_pre {
+                            font-family: 'Montserrat';
+                            font-style: normal;
+                            font-weight: 400;
+                            font-size: 8px;
+                            line-height: 10px;
+                            text-transform: uppercase;
+                            color: #8C8F97;
+                        }
                     }
 
                     .heading_wrapper {
@@ -536,12 +584,23 @@
 
                     .source_title {
                         margin: 0;
-                        padding: 0;
+                        padding: 3px 0 3px 0;
                         font-family: 'Montserrat';
                         font-style: italic;
                         font-weight: 400;
+                        line-height: 1;
                         font-size: 10px;
-                        line-height: 1.2;
+                        color: #8C8F97;
+
+                        .source_pre {
+                            font-family: 'Montserrat';
+                            font-style: normal;
+                            font-weight: 400;
+                            font-size: 8px;
+                            line-height: 10px;
+                            text-transform: uppercase;
+                            color: #8C8F97;
+                        }
                     }
 
                     .heading_wrapper {
@@ -557,6 +616,37 @@
 
                 }
             }
+
+            .horizontal {
+                grid-row-gap: 34px;
+                grid-template-columns: calc((100vw/2) - 65px) calc((100vw/2) - 65px);
+
+                &:after {
+                    content: "";
+                    position: absolute;
+                    height: 2px;
+                    background: #F1F1F1;
+                    width: calc(100% - 50px);
+                    left: calc(25px);
+                    top: 50%;
+                }
+            }
+
+            .horizontal_food {
+                grid-row-gap: 32px;
+
+                &:after {
+                    content: "";
+                    position: absolute;
+                    height: 2px;
+                    background: #F1F1F1;
+                    width: calc(100% - 40px);
+                    left: calc(25px);
+                    top: 50%;
+                }
+            }
+
+
 
             .grid-2-text {
                 // 30 outside + 60 inside + 64px 
@@ -579,23 +669,31 @@
                     top: 12px;
                 }
 
+
+
                 .chart_wrapper {
 
-                    .source_title {
-                        margin: 0;
-                        padding: 0;
-                        font-family: 'Montserrat';
-                        font-style: italic;
-                        font-weight: 400;
-                        font-size: 10px;
-                    }
+
 
                     .dropdown_chart_source {
+                        margin: 0;
+                        padding: 3px 0 3px 0;
                         font-family: 'Montserrat';
                         font-style: italic;
                         font-weight: 400;
-                        line-height: 12px;
+                        line-height: 1;
                         font-size: 10px;
+                        color: #8C8F97;
+
+                        .source_pre {
+                            font-family: 'Montserrat';
+                            font-style: normal;
+                            font-weight: 400;
+                            font-size: 8px;
+                            line-height: 10px;
+                            text-transform: uppercase;
+                            color: #8C8F97;
+                        }
                     }
 
 
@@ -614,13 +712,27 @@
 
 .secondary {
     margin: 0;
-    padding: 15px 0 0 0;
+    padding: 13px 0 0 0;
 
     .chart_grid {
 
         .rounded_container {
             padding: 0;
             margin: 0px 15px 0 15px;
+
+        }
+    }
+}
+
+.first_chart {
+
+    padding: 0px 0 0 0;
+
+    .chart_grid {
+
+        .rounded_container {
+            padding: 0;
+            margin: 15px 15px 0 15px;
 
         }
     }

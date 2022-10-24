@@ -48,8 +48,8 @@ export const dChartTitles = {
 }
 
 export const leChartTitles = {
-  yAxes: ["Population", "Population", "Number of People Employed", "Percentage"],
-  main: ["Number of people employed and seeking employment within the 15–66 year age group", "Number of Unemployed People", "Informal Sector Employment", "Unemployment Rate: Percentage of Unemployed Workers as a Proportion of the Total Labour Force"],
+  yAxes: ["Average Number of Years", "Average Number of Years", "Percentage of Households", "Percentage of Population"],
+  main: ["Average Male Life Expectancy", "Average Female Life Expectancy", "Public Healthcare Usage", "Medical Aid Coverage"],
   source: ["Stats SA Mid-Year Population Estimates","Stats SA Mid-Year Population Estimates",
   "Calculated from Stats SA General Household Survey","Calculated from Stats SA General Household Survey"]
 }
@@ -69,7 +69,7 @@ export const sustainabilityChartTitles = (dropdownName,genericIndex) => {
 
   if(dropdownName === "Sustainability" && genericIndex === 2){
     chartTitles ={
-      yAxes: ["Percentage of Households"],
+      yAxes: [`Percentage of Household`],
         main: ["Recycling Profile of Households in South Africa’s Major Metros (2019)"],
         source: ["Stats SA General Household Survey"]
     }
