@@ -90,7 +90,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
           {dropdownName === "Household Income" ?
             <p className="title">Main Source of Income:<span className="category">{"placeholder"}</span></p> :
             dropdownName === "Sustainability" && genericIndex === 3 ? 
-            <p className="heading_alternate">{chartTitles.main[i].split(":")[0]}
+            <p className="heading_alternate">{chartTitles.main[i].split(":")[0] + ":"}
              <span className="secondary_title">{chartTitles.main[i].split(":")[1]}</span>
              </p>
             :
@@ -107,7 +107,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
             <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
           }
         </div>
-        {chartTitles.hasOwnProperty("source") && <p className="source_title"> <span className="source_pre">Source:</span>  {chartTitles.source[i]}</p>}
+        {chartTitles.hasOwnProperty("source") && <p className="source_title"> <span className="source_pre">Source:</span>{chartTitles.source[i]}</p>}
         <div className="chart">
           <Chart graphData={element} title={(dropdownName === "Household Income" && !isNumber) ? "Percent of Households" : chartTitles.yAxes[i]}
             dropdownName={dropdownName} stacked={false} chartIndex={i} genericIndex={genericIndex} />
@@ -151,7 +151,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
             setErrorState(i)
           }} style={{ opacity: "0.4" }}>Raw Data</a>
         </div>
-        {chartTitles.hasOwnProperty("source") && <p className="source_title"><span className="source_pre">Source: </span>{chartTitles.source[i]}</p>}
+        {chartTitles.hasOwnProperty("source") && <p className="source_title"> <span className="source_pre">Source:</span>{chartTitles.source[i]}</p>}
         <div className="chart">
           <Chart graphData={element} title={chartTitles.yAxes[i]} dropdownName={dropdownName}
             stacked={false} chartIndex={i} genericIndex={genericIndex} />
