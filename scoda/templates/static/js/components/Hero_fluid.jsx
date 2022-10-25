@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Button from './../components/Button';
-import contentImage from '../../../../static/dist/img/blackbox/hero-image.png';
-import contentMobileImage from '../../../../static/dist/img/blackbox/hero-image_mobile.png';
+import contentImage from '../../../../static/dist/img/blackbox/hero-image.webp';
+import contentMobileImage from '../../../../static/dist/img/blackbox/hero-image_mobile.webp';
 
 var heroContentImage = {
   backgroundImage: `url(${contentImage})` 

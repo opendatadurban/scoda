@@ -9,7 +9,7 @@ export default class Footer extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="span4 footer--col_one col-md-3">
-                            <a href="https://ckan.org/" target="blank__"><img className="ckan" src="../../../../static/dist/img/ckan-logo.png" alt="ckan logo" /></a>
+                            <a href="https://ckan.org/" target="blank__"><img className="ckan" src="../../../../static/dist/img/ckan-logo.webp" alt="ckan logo" /></a>
                             <span><span className="sacn"><a href="https://www.sacities.net/" target="blank__">SACN</a></span> in partnership with <span className="sacn"><a target="blank__" href="https://opencitieslab.org/odd/home">OCL</a></span> <br/> <span className="ccl"> Creative Commons License</span></span>
                         </div>
                         <div className="span4 footer--col_two col-md-6">
@@ -28,22 +28,22 @@ export default class Footer extends Component {
                         </div>
                         <div className="span4 footer--col_three col-md-3">
                             <a href="https://www.sacncloud.net/index.php/login" target="blank__">
-                                <img src="../../../../static/dist/img/cloud.png" alt="cloud logo" />
+                                <img src="../../../../static/dist/img/cloud.webp" alt="cloud logo" />
                             </a>
                             <a href="https://www.facebook.com/SACitiesNetwork" target="blank__">
-                                <img className="icon" src="../../../../static/dist/img/facebook.png" alt="facebook logo" />
+                                <img className="icon" src="../../../../static/dist/img/facebook.webp" alt="facebook logo" />
                             </a>
                             <a href="https://twitter.com/SACitiesNetwork" target="blank__">
-                                <img src="../../../../static/dist/img/twitter.png" alt="twitter logo" />
+                                <img src="../../../../static/dist/img/twitter.webp" alt="twitter logo" />
                             </a>
                             <a href="https://www.linkedin.com/company/3168975/admin/" target="blank__">
-                                <img className="icon" src="../../../../static/dist/img/linkedin.png" alt="linkedin logo" />
+                                <img className="icon" src="../../../../static/dist/img/linkedin.webp" alt="linkedin logo" />
                             </a>
                             <a href="https://www.instagram.com/sacitiesnetwork/" target="blank__">
-                                <img src="../../../../static/dist/img/instagram.png" alt="instagram logo" />
+                                <img src="../../../../static/dist/img/instagram.webp" alt="instagram logo" />
                             </a>
                             <a href="https://www.youtube.com/channel/UC1Ro42Ivb9f0La57fuhjJFA/videos?view_as=subscriber" target="blank__">
-                                <img className="icon" src="../../../../static/dist/img/youtube.png" alt="youtube logo" />
+                                <img className="icon" src="../../../../static/dist/img/youtube.webp" alt="youtube logo" />
                             </a>
                         </div>
                     </div>

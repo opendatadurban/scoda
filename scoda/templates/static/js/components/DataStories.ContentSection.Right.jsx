@@ -11,8 +11,8 @@ export default class ContentSectionRight extends Component {
 
     render() {
 
-         let bannerImage = `/static/dist/img/scoda/datastories/edge.png`;
-         let bannerImageSACN = `/static/dist/img/scoda/datastories/sacn.png`;
+         let bannerImage = `/static/dist/img/scoda/datastories/edge.webp`;
+         let bannerImageSACN = `/static/dist/img/scoda/datastories/sacn.webp`;
         let sectionImage = `/static/dist/img/scoda/datastories/${this.props.img}`;
         let main_class = `justify-content-center ml-0 mt-3 p-0 data-story-card ${this.props.filter_type}`
         let filterTag = {

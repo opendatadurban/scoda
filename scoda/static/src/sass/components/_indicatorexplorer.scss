@@ -141,7 +141,7 @@
     line-height: 32px;
     -webkit-appearance: none;
     padding-left: 18px;
-    //Use png at assets/selectArrow.png for the arrow on the right
+    //Use png at assets/selectArrow.webp for the arrow on the right
     //Set the background color to a BadAss Green color 
     &-icon{
         &::after {
@@ -171,7 +171,7 @@
     letter-spacing: 0;
     line-height: 13px;
     //-webkit-appearance: none; 
-    //background: url('/static/dist/img/scoda/dropdown_caret_small.png') no-repeat 96% 80% #FFFFFF;
+    //background: url('/static/dist/img/scoda/dropdown_caret_small.webp') no-repeat 96% 80% #FFFFFF;
 }
 .ie-spacer {
     display: block;
@@ -201,7 +201,7 @@
     letter-spacing: 0;
     line-height: 20px;
     -webkit-appearance: none;
-    background: url('/static/dist/img/scoda/dropdown_caret_small.png') no-repeat 96% 50% #FFFFFF;
+    background: url('/static/dist/img/scoda/dropdown_caret_small.webp') no-repeat 96% 50% #FFFFFF;
 }
 
 .goog-inline-block.goog-menu-button-dropdown {
@@ -416,7 +416,7 @@
         letter-spacing: 0;
         line-height: 20px;
         -webkit-appearance: none;
-        background: url('/static/dist/img/scoda/dropdown_caret_small.png') no-repeat 96% 50% #FFFFFF;
+        background: url('/static/dist/img/scoda/dropdown_caret_small.webp') no-repeat 96% 50% #FFFFFF;
     }
 
     .ie-dropdown {
@@ -432,9 +432,9 @@
         letter-spacing: 0;
         line-height: 32px;
         -webkit-appearance: none;
-        //Use png at assets/selectArrow.png for the arrow on the right
+        //Use png at assets/selectArrow.webp for the arrow on the right
         //Set the background color to a BadAss Green color 
-        background: url('/static/dist/img/scoda/dropdown_caret.png') no-repeat 98% 80% #FFFFFF;
+        background: url('/static/dist/img/scoda/dropdown_caret.webp') no-repeat 98% 80% #FFFFFF;
     }
 }
 
@@ -478,9 +478,9 @@
         letter-spacing: 0;
         line-height: 32px;
         -webkit-appearance: none;
-        //Use png at assets/selectArrow.png for the arrow on the right
+        //Use png at assets/selectArrow.webp for the arrow on the right
         //Set the background color to a BadAss Green color 
-        background: url('/static/dist/img/scoda/dropdown_caret.png') no-repeat 98% 80% #FFFFFF;
+        background: url('/static/dist/img/scoda/dropdown_caret.webp') no-repeat 98% 80% #FFFFFF;
     }
 
     .ie-box-card-header {
@@ -507,7 +507,7 @@
         letter-spacing: 0;
         line-height: 20px;
         -webkit-appearance: none;
-        background: url('/static/dist/img/scoda/dropdown_caret_small.png') no-repeat 96% 50% #FFFFFF;
+        background: url('/static/dist/img/scoda/dropdown_caret_small.webp') no-repeat 96% 50% #FFFFFF;
     }
 
 

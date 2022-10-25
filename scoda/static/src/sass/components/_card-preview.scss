@@ -95,7 +95,7 @@
         }
       }
       &_city_finances{
-        $image: '/static/dist/img/image_card-city_finances.png';
+        $image: '/static/dist/img/image_card-city_finances.webp';
          &.module {
             background: url($image) top left / cover;
           }
@@ -108,7 +108,7 @@
         }
       }
       &_household_bills_affordability{
-        $image: '/static/dist/img/image_card-household_bills_affordability.png';
+        $image: '/static/dist/img/image_card-household_bills_affordability.webp';
          &.module {
             background: url($image) top left / cover;
           }
@@ -121,7 +121,7 @@
         }
       }
       &_human_resources{
-        $image: '/static/dist/img/image_card-human_resources.png';
+        $image: '/static/dist/img/image_card-human_resources.webp';
          &.module {
             background: url($image) top left / cover;
           }
@@ -134,7 +134,7 @@
         }
       }
       &_service_delivery{
-        $image: '/static/dist/img/image_card-service_delivery.png';
+        $image: '/static/dist/img/image_card-service_delivery.webp';
          &.module {
             background: url($image) top left / cover;
           }
@@ -147,7 +147,7 @@
         }
       }
       &_state_of_municipal_finance{
-        $image: '/static/dist/img/image_card-state_of_municipal_finance.png';
+        $image: '/static/dist/img/image_card-state_of_municipal_finance.webp';
          &.module {
             background: url($image) top left / cover;
           }

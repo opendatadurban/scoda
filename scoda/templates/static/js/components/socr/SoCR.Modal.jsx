@@ -16,7 +16,7 @@ const SoCR_Modal = ({ isOpen, setIsOpen }) => {
                 <div className="row modal--body">
                     <div className="col-12 pr-0">
                         <div className="row">
-                            <div className="col-md-4 report--image" style={{ backgroundImage: "url(/static/dist/img/image_report-2021_new.png)" }}></div>
+                            <div className="col-md-4 report--image" style={{ backgroundImage: "url(/static/dist/img/image_report-2021_new.webp)" }}></div>
                             <div className="col report--content">
                                 <h5 className="report--content--title">
                                     SoCR 2021
@@ -28,7 +28,7 @@ const SoCR_Modal = ({ isOpen, setIsOpen }) => {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-md-4 report--image" style={{ backgroundImage: "url(/static/dist/img/image_report-2016.png)" }}></div>
+                            <div className="col-md-4 report--image" style={{ backgroundImage: "url(/static/dist/img/image_report-2016.webp)" }}></div>
                             <div className="col report--content">
                                 <h5 className="report--content--title">
                                     SoCR 2016
@@ -41,7 +41,7 @@ const SoCR_Modal = ({ isOpen, setIsOpen }) => {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-md-4 report--image" style={{ backgroundImage: "url(/static/dist/img/image_report-2011.png)" }}></div>
+                            <div className="col-md-4 report--image" style={{ backgroundImage: "url(/static/dist/img/image_report-2011.webp)" }}></div>
                             <div className="col report--content">
                                 <h5 className="report--content--title">
                                     SoCR 2011
@@ -53,7 +53,7 @@ const SoCR_Modal = ({ isOpen, setIsOpen }) => {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-md-4 report--image" style={{ backgroundImage: "url(/static/dist/img/image_report-2006.png)" }}></div>
+                            <div className="col-md-4 report--image" style={{ backgroundImage: "url(/static/dist/img/image_report-2006.webp)" }}></div>
                             <div className="col report--content">
                                 <h5 className="report--content--title">
                                     SoCR 2006
@@ -66,7 +66,7 @@ const SoCR_Modal = ({ isOpen, setIsOpen }) => {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-md-4 report--image" style={{ backgroundImage: "url(/static/dist/img/image_report-2004.png)" }}></div>
+                            <div className="col-md-4 report--image" style={{ backgroundImage: "url(/static/dist/img/image_report-2004.webp)" }}></div>
                             <div className="col report--content">
                                 <h5 className="report--content--title">
                                     SoCR 2004

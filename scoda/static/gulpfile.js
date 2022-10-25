@@ -8,6 +8,7 @@ var gulp = require('gulp'),
     butternut = require('gulp-butternut'),
     imagemin = require('gulp-imagemin'),
     spritesmith = require('gulp.spritesmith'),
+    webpImage = require('gulp-webp'),
     concat = require('gulp-concat');
 
 // Defining base paths
@@ -80,6 +81,14 @@ gulp.task('js-build', function() {
   .pipe(butternut())
   .pipe(concat('scripts.min.js'))
   .pipe(gulp.dest(basePaths.dist + 'js'))
+});
+
+
+//optimize and move images
+gulp.task('webpImage', function(){
+  gulp.src(basePaths.dist + 'img/**')
+  .pipe(webpImage())
+  .pipe(gulp.dest(basePaths.dist + 'img'))
 });
 
 // Run:

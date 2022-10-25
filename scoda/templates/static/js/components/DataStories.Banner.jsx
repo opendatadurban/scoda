@@ -10,7 +10,7 @@ export default class Banner extends Component {
 
     render() {
 
-        let bannerImage = `/static/dist/img/scoda/datastories/${this.props.section}.png`;
+        let bannerImage = `/static/dist/img/scoda/datastories/${this.props.section}.webp`;
         let viewButtonTitle = this.props.section.toUpperCase() + ' ' + this.props.viewType;
 
         return (

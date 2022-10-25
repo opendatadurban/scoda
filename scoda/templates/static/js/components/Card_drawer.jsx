@@ -10,7 +10,7 @@ class Card_drawer extends Component {
     return (
     <Container className={["card-drawer animated fadeIn "] + this.props.className}>
       <Button className="btn btn_link card-drawer--button" text="back to collection" icon={[<i key className="fas fa-arrow-up btn--icon_top"></i>]} onClick={this.props.mountCardChestData}/>
-      <Content_block imgSrc="../../../../static/dist/img/blackbox/project_ukzn.png" />
+      <Content_block imgSrc="../../../../static/dist/img/blackbox/project_ukzn.webp" />
     </Container>
   );
 };
