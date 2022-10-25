@@ -53,7 +53,6 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
 
       chartData.forEach((chart, index) => {
       
-
         let filterData = []
 
         if (indicator_id_requests[index].type === "new") {
@@ -300,6 +299,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
           return item
         })]
       }
+
       setOriginalValues([...gridData])
       const copy = JSON.parse(JSON.stringify(gridData)) // deep copy to be manipuilated
       setChartGroup([...copy])

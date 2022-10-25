@@ -1,10 +1,10 @@
 import React from 'react'
 
-import {BarChartGeneric}  from '../BarChartGeneric';
+import { BarChartGeneric } from '../BarChartGeneric';
 import { cityLabels, chartHeights } from './helpers/helpers';
 import { tickExceptionsForDwellings } from './helpers/tickExceptions';
 
-export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex,genericIndex }) => {
+export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex, genericIndex }) => {
 
 
     const options = {
@@ -13,7 +13,7 @@ export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex,gene
 
         legend: {
             display: true,
-           
+
             labels: {
                 fontSize: 12,
                 boxWidth: 25,
@@ -23,10 +23,10 @@ export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex,gene
             onHover: function (e) {
                 e.target.style.cursor = 'pointer';
             },
-        
-           
+
+
         },
-        
+
         scales: {
             xAxes: [{
                 stacked: stacked,
@@ -49,7 +49,7 @@ export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex,gene
                     fontFamily: "Montserrat",
                     fontSize: 12,
                     fontStyle: '600',
-                 
+
                     fontColor: "rgba(74, 74, 74, 1)"
                 },
                 gridLines: {
@@ -65,23 +65,8 @@ export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex,gene
                     }
                 }
                     :
-                    dropdownName === "Dwellings" ?
 
-                        tickExceptionsForDwellings(dropdownName, chartIndex)
-                        :
-                        {
-                            fontFamily: "Montserrat",
-                            beginAtZero: true,
-                            callback: function (value, index, values) {
-                             
-                            
-                                if (value < 1000000 && value > 1000) { values = Math.round(value) / 1000 + 'K ' }
-                                else if (value >= 1000000) { values = Math.round(value) / 1000000 + 'M ' }
-                                else if (value <= 1000 && value > 11) { values = Math.round(value) / 1 }
-                                else if (value <= 11) { values = value }
-                                return values
-                            },
-                        },
+                    tickExceptionsForDwellings(dropdownName, chartIndex),
             }],
         },
         tooltips: {
@@ -114,7 +99,7 @@ export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex,gene
 
     return (
         <>
-            <BarChartGeneric options={options} data={data} height={chartHeights(dropdownName,genericIndex)} />
+            <BarChartGeneric options={options} data={data} height={chartHeights(dropdownName, genericIndex)} />
         </>
     )
 }
