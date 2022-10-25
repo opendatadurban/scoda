@@ -58,7 +58,36 @@ function GetCardInfo(){
                 type:'DASHBOARD',
                 class:'_household_income',
                 href:'/scoda/socr#/household_income'
+              },
+              {
+                header:'Food Security, Literacy and Inequality',
+                subheader:" (From SoCR 2021)",
+                type:'DASHBOARD',
+                class:'_food_security',
+                href:'/scoda/socr#/food_security'
+              },
+              {
+                header:'Life Expectancy and Health',
+                subheader:" (From SoCR 2021)",
+                type:'DASHBOARD',
+                class:'_life_expectancy',
+                href:'/scoda/socr#/life_expectancy'
+              },
+              {
+                header:'Education',
+                subheader:" (From SoCR 2021)",
+                type:'DASHBOARD',
+                class:'_education',
+                href:'/scoda/socr#/education'
+              },
+              {
+                header:'Sustainability',
+                subheader:" (From SoCR 2021)",
+                type:'DASHBOARD',
+                class:'_sustainability',
+                href:'/scoda/socr#/sustainability'
               }
+
             //   {
             //     header:'State of City Finances 2020: An Introduction',
             //     subheader:" (From SoCR 2021)",

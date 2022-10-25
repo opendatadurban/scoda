@@ -212,9 +212,60 @@
           }
         }
       }
+      &_food_security{
+        $image: '/static/dist/img/image_card-food_security.jpg';
+         &.module {
+            background: url($image) top left / cover;
+          }
+        @at-root {
+          .card {
+            &--gaussian-blur_food_security {
+          @include gaussian-blur($image,2px,#4fa68399);
+            }
+          }
+        }
+      }
+      &_life_expectancy{
+        $image: '/static/dist/img/image_card-life_expectancy.jpg';
+         &.module {
+            background: url($image) top left / cover;
+          }
+        @at-root {
+          .card {
+            &--gaussian-blur_life_expectancy {
+          @include gaussian-blur($image,2px,#4fa68399);
+            }
+          }
+        }
+      }
+      &_education{
+        $image: '/static/dist/img/image_card-education.jpg';
+         &.module {
+            background: url($image) top left / cover;
+          }
+        @at-root {
+          .card {
+            &--gaussian-blur_education{
+          @include gaussian-blur($image,2px,#4fa68399);
+            }
+          }
+        }
+      }
+      &_sustainability{
+        $image: '/static/dist/img/image_card-sustainability.jpg';
+         &.module {
+            background: url($image) top left / cover;
+          }
+        @at-root {
+          .card {
+            &--gaussian-blur_sustainability {
+          @include gaussian-blur($image,2px,#4fa68399);
+            }
+          }
+        }
+      }
     
     // General styling
-    
       .label {
         text-transform: uppercase;
         font-weight: 200;
