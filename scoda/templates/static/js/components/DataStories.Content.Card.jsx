@@ -218,7 +218,7 @@ export default class DataStoriesContentCard extends Component {
                                    <div className="col p-3"></div>
                                </div>
                                <div className="row">
-                                 <Image imgSrc={imgOne} />
+                                 <Image alt='finance2018' imgSrc={imgOne} />
                                </div>
                                <div className="row">
                                    <div className="col p-3"></div>

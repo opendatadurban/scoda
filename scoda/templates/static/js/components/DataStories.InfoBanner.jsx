@@ -15,7 +15,7 @@ export default class DataStoriesInfoBanner extends Component {
             <div className={main_class}>
                <div className="row m-0" >
                    <div className="col-0 ds-info-banner-image">
-                       <Image imgSrc={this.props.imgSrc}/>
+                       <Image alt='sectionImage' imgSrc={this.props.imgSrc}/>
                    </div>
                    <div className="col-9 pl-3 ds-info-banner-width-flex">
                        <div className="row">

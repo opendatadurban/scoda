@@ -2764,29 +2764,29 @@ p {
 }
 
 .data-stories--story.epwp-data-story, .data-stories--title-block.epwp-data-story {
-  background-image: url("/static/dist/img/image_epwp-data-story_orange.jpg");
+  background-image: url("/static/dist/img/image_epwp-data-story_orange.webp");
   -webkit-transition: .2s background ease-in-out;
   transition: .2s background ease-in-out;
   cursor: pointer;
 }
 
 .data-stories--story.epwp-data-story:hover, .data-stories--title-block.epwp-data-story:hover {
-  background-image: url("/static/dist/img/image_epwp-data-story_selected.jpg");
+  background-image: url("/static/dist/img/image_epwp-data-story_selected.webp");
 }
 
 .data-stories--story.infrastructure, .data-stories--title-block.infrastructure {
-  background-image: url("/static/dist/img/image_socf_fin-infra_orange.jpg");
+  background-image: url("/static/dist/img/image_socf_fin-infra_orange.webp");
   -webkit-transition: .2s background ease-in-out;
   transition: .2s background ease-in-out;
   cursor: pointer;
 }
 
 .data-stories--story.infrastructure:hover, .data-stories--title-block.infrastructure:hover {
-  background-image: url("/static/dist/img/image_socf_fin-infra_selected.jpg");
+  background-image: url("/static/dist/img/image_socf_fin-infra_selected.webp");
 }
 
 .data-stories--story.urban-safety, .data-stories--title-block.urban-safety {
-  background-image: url("/static/dist/img/image_urban-safety_orange.jpg");
+  background-image: url("/static/dist/img/image_urban-safety_orange.webp");
   -webkit-transition: .2s background ease-in-out;
   transition: .2s background ease-in-out;
   cursor: pointer;
@@ -2794,22 +2794,22 @@ p {
 }
 
 .data-stories--story.urban-safety:hover, .data-stories--title-block.urban-safety:hover {
-  background-image: url("/static/dist/img/image_urban-safety_selected.jpg");
+  background-image: url("/static/dist/img/image_urban-safety_selected.webp");
 }
 
 .data-stories--story.affordability, .data-stories--title-block.affordability {
-  background-image: url("/static/dist/img/image_socf_afford_orange.jpg");
+  background-image: url("/static/dist/img/image_socf_afford_orange.webp");
   -webkit-transition: .2s background ease-in-out;
   transition: .2s background ease-in-out;
   cursor: pointer;
 }
 
 .data-stories--story.affordability:hover, .data-stories--title-block.affordability:hover {
-  background-image: url("/static/dist/img/image_socf_afford_selected.jpg");
+  background-image: url("/static/dist/img/image_socf_afford_selected.webp");
 }
 
 .data-stories--story.report, .data-stories--title-block.report {
-  background-image: url("/static/dist/img/image_socr_102-indicators_orange.jpg");
+  background-image: url("/static/dist/img/image_socr_102-indicators_orange.webp");
   -webkit-transition: .2s background ease-in-out;
   transition: .2s background ease-in-out;
   cursor: pointer;
@@ -2817,40 +2817,40 @@ p {
 }
 
 .data-stories--story.report:hover, .data-stories--title-block.report:hover {
-  background-image: url("/static/dist/img/image_socr_102-indicators_selected.jpg");
+  background-image: url("/static/dist/img/image_socr_102-indicators_selected.webp");
 }
 
 .data-stories--story.epwp-data-group, .data-stories--title-block.epwp-data-group {
-  background-image: url("/static/dist/img/image_epwp-data-group_orange.jpg");
+  background-image: url("/static/dist/img/image_epwp-data-group_orange.webp");
   -webkit-transition: .2s background ease-in-out;
   transition: .2s background ease-in-out;
   cursor: pointer;
 }
 
 .data-stories--story.epwp-data-group:hover, .data-stories--title-block.epwp-data-group:hover {
-  background-image: url("/static/dist/img/image_epwp-data-group_selected.jpg");
+  background-image: url("/static/dist/img/image_epwp-data-group_selected.webp");
 }
 
 .data-stories--story.finance, .data-stories--title-block.finance {
-  background-image: url("/static/dist/image_socf_finance-spatial-trans_orange.jpg");
+  background-image: url("/static/dist/image_socf_finance-spatial-trans_orange.webp");
   -webkit-transition: .2s background ease-in-out;
   transition: .2s background ease-in-out;
   cursor: pointer;
 }
 
 .data-stories--story.finance:hover, .data-stories--title-block.finance:hover {
-  background-image: url("/static/dist/img/image_socf_finance-spatial-trans_selected.jpg");
+  background-image: url("/static/dist/img/image_socf_finance-spatial-trans_selected.webp");
 }
 
 .data-stories--story.demographics, .data-stories--title-block.demographics {
-  background-image: url("/static/dist/img/image_demographics-model_orange.jpg");
+  background-image: url("/static/dist/img/image_demographics-model_orange.webp");
   -webkit-transition: .2s background ease-in-out;
   transition: .2s background ease-in-out;
   cursor: pointer;
 }
 
 .data-stories--story.demographics:hover, .data-stories--title-block.demographics:hover {
-  background-image: url("/static/dist/img/image_demographics-model_selected.jpg");
+  background-image: url("/static/dist/img/image_demographics-model_selected.webp");
 }
 
 .data-stories--map {

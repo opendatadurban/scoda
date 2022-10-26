@@ -256,7 +256,7 @@ export default class DataStoriesContentCardSpacial extends Component {
                                </div>
                                <div className="row mt-5"></div>
                                <div className="row">
-                                 <Image imgSrc={imgOne} />
+                                 <Image alt='spacial' imgSrc={imgOne} />
                                </div>
                                <div className="row">
                                    <div className="col p-3"></div>

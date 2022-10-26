@@ -6,7 +6,7 @@ const Hero = ({ setIsOpen }) => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-5 hero--image">
-                        <img src="/static/dist/img/image_hero-banner.webp" alt="" />
+                        <img src="/static/dist/img/image_hero-banner.webp" alt="banner" />
                     </div>
                     <div className="col-md-7 hero--content ">
                         <h5 className="hero--title">

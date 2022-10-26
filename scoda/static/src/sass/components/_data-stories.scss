@@ -156,69 +156,69 @@
 
     }
     &.epwp-data-story{
-        background-image: url("/static/dist/img/image_epwp-data-story_orange.jpg");
+        background-image: url("/static/dist/img/image_epwp-data-story_orange.webp");
         transition: .2s background ease-in-out;
         cursor: pointer;
         &:hover {
-            background-image: url("/static/dist/img/image_epwp-data-story_selected.jpg");
+            background-image: url("/static/dist/img/image_epwp-data-story_selected.webp");
         }
     }
     &.infrastructure{
-        background-image: url("/static/dist/img/image_socf_fin-infra_orange.jpg");
+        background-image: url("/static/dist/img/image_socf_fin-infra_orange.webp");
         transition: .2s background ease-in-out;
         cursor: pointer;
         &:hover {
-            background-image: url("/static/dist/img/image_socf_fin-infra_selected.jpg");
+            background-image: url("/static/dist/img/image_socf_fin-infra_selected.webp");
         }
     }
     &.urban-safety{
-        background-image: url("/static/dist/img/image_urban-safety_orange.jpg");
+        background-image: url("/static/dist/img/image_urban-safety_orange.webp");
         transition: .2s background ease-in-out;
         cursor: pointer;
         height: 455px;
         &:hover {
-            background-image: url("/static/dist/img/image_urban-safety_selected.jpg");
+            background-image: url("/static/dist/img/image_urban-safety_selected.webp");
         }
     }
     &.affordability{
-        background-image: url("/static/dist/img/image_socf_afford_orange.jpg");
+        background-image: url("/static/dist/img/image_socf_afford_orange.webp");
         transition: .2s background ease-in-out;
         cursor: pointer;
         &:hover {
-            background-image: url("/static/dist/img/image_socf_afford_selected.jpg");
+            background-image: url("/static/dist/img/image_socf_afford_selected.webp");
         }
     }
     &.report{
-        background-image: url("/static/dist/img/image_socr_102-indicators_orange.jpg");
+        background-image: url("/static/dist/img/image_socr_102-indicators_orange.webp");
         transition: .2s background ease-in-out;
         cursor: pointer;
         height: 470px;
         &:hover {
-            background-image: url("/static/dist/img/image_socr_102-indicators_selected.jpg");
+            background-image: url("/static/dist/img/image_socr_102-indicators_selected.webp");
         }
     }
     &.epwp-data-group {
-        background-image: url("/static/dist/img/image_epwp-data-group_orange.jpg");
+        background-image: url("/static/dist/img/image_epwp-data-group_orange.webp");
         transition: .2s background ease-in-out;
         cursor: pointer;
         &:hover {
-            background-image: url("/static/dist/img/image_epwp-data-group_selected.jpg");
+            background-image: url("/static/dist/img/image_epwp-data-group_selected.webp");
         }
     }
     &.finance{
-        background-image: url("/static/dist/image_socf_finance-spatial-trans_orange.jpg");
+        background-image: url("/static/dist/image_socf_finance-spatial-trans_orange.webp");
         transition: .2s background ease-in-out;
         cursor: pointer;
         &:hover {
-            background-image: url("/static/dist/img/image_socf_finance-spatial-trans_selected.jpg");
+            background-image: url("/static/dist/img/image_socf_finance-spatial-trans_selected.webp");
         }
     }
     &.demographics {
-        background-image: url("/static/dist/img/image_demographics-model_orange.jpg");
+        background-image: url("/static/dist/img/image_demographics-model_orange.webp");
         transition: .2s background ease-in-out;
         cursor: pointer;
         &:hover {
-            background-image: url("/static/dist/img/image_demographics-model_selected.jpg");
+            background-image: url("/static/dist/img/image_demographics-model_selected.webp");
         }
     }
 }

@@ -161,7 +161,7 @@
       }
       
       &_people_household{
-        $image: '/static/dist/img/image_card-people_household.jpg';
+        $image: '/static/dist/img/image_card-people_household.webp';
          &.module {
             background: url($image) top left / cover;
           }
@@ -174,7 +174,7 @@
         }
       }
       &_employment{
-        $image: '/static/dist/img/image_card-employment.jpg';
+        $image: '/static/dist/img/image_card-employment.webp';
          &.module {
             background: url($image) top left / cover;
           }
@@ -187,7 +187,7 @@
         }
       }
       &_dwellings{
-        $image: '/static/dist/img/image_card-dwellings.jpg';
+        $image: '/static/dist/img/image_card-dwellings.webp';
          &.module {
             background: url($image) top left / cover;
           }
@@ -200,7 +200,7 @@
         }
       }
       &_household_income{
-        $image: '/static/dist/img/image_card-household_income.jpg';
+        $image: '/static/dist/img/image_card-household_income.webp';
          &.module {
             background: url($image) top left / cover;
           }
@@ -213,7 +213,7 @@
         }
       }
       &_food_security{
-        $image: '/static/dist/img/image_card-food_security.jpg';
+        $image: '/static/dist/img/image_card-food_security.webp';
          &.module {
             background: url($image) top left / cover;
           }
@@ -226,7 +226,7 @@
         }
       }
       &_life_expectancy{
-        $image: '/static/dist/img/image_card-life_expectancy.jpg';
+        $image: '/static/dist/img/image_card-life_expectancy.webp';
          &.module {
             background: url($image) top left / cover;
           }
@@ -239,7 +239,7 @@
         }
       }
       &_education{
-        $image: '/static/dist/img/image_card-education.jpg';
+        $image: '/static/dist/img/image_card-education.webp';
          &.module {
             background: url($image) top left / cover;
           }
@@ -252,7 +252,7 @@
         }
       }
       &_sustainability{
-        $image: '/static/dist/img/image_card-sustainability.jpg';
+        $image: '/static/dist/img/image_card-sustainability.webp';
          &.module {
             background: url($image) top left / cover;
           }

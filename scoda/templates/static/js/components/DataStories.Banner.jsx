@@ -20,7 +20,7 @@ export default class Banner extends Component {
                    <ul className="ds-top-header-contents">
                        <li>
                           <div className="container ml-3 col-0">
-                              <Image className="ds-banner-logo" imgSrc={bannerImage}/>
+                              <Image alt='banner' className="ds-banner-logo" imgSrc={bannerImage}/>
                          </div>
                        </li>
                        <li>
