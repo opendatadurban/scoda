@@ -5,7 +5,7 @@ import { GenericStatsPanel } from './Organisms/GenericStatsPanel'
 import '../../../scss/components/GenericDashboard.scss'
 import { populateChartGroup } from './data/api'
 import { Modal, ModalBody, Spinner } from 'reactstrap'
-import Sidebar_left from '../Sidebar_left'
+//import Sidebar_left from '../Sidebar_left'
 import { SelectContextState } from '../../context'
 import { hhiDropdownNames } from './helpers/helpers'
 import { indicator_text_box_data } from './data/data'
@@ -45,7 +45,7 @@ const GenericChart = ({ indicator_ids, minYear, maxYear,
         <div className={'generic_dashboard ' + (secondaryChart ? "secondary ": "" ) + firstDashboardClass }>
          {secondaryChart ? "":<>
          <Subnav name='State of Cities Reports' dropdownName={dropdownName} dropDownItem={subNavContent} buttonText="Download as PNG" />
-         <Sidebar_left />
+         {/* <Sidebar_left /> */}
          </>} 
           <div id='content' >
            {secondaryChart ? "":

@@ -298,7 +298,8 @@ export const chartHeights = (dropdownName,genericIndex) => {
     : dropdownName === "Household Income" || dropdownName === "Education" ||
     (dropdownName === "Sustainability" && genericIndex !== 3 && genericIndex !== 2) ? 100 :
     (dropdownName === "Sustainability" && genericIndex === 3) ? 150:
-    (dropdownName === "Sustainability" && genericIndex === 2) ? 60
+    (dropdownName === "Sustainability" && genericIndex === 2) ? 60:
+    (dropdownName === "Life Expectancy and Health") ? 150
     : 210) // 210 is the fallback value if height not specified
 
   return heightByDropName

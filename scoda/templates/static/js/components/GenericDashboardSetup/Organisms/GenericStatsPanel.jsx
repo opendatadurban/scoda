@@ -59,7 +59,7 @@ const initialValues = (dropName) => {
                         secondarySchoolingTot: [0, "Secondary SChool Completed"],
                         tertiaryEducationTot: [0, "Tertiary Edu. Completed"],
                     } :
-                    dropName === "Ssutainability" ?
+                    dropName === "Sustainability" ?
                     null:
                     {}
 
@@ -283,7 +283,7 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                     </div> : dropName === "Food Security, Literacy and Inequality" ?
                         <div className='stat_display_panel' onClick={() => { globalCityDropDownClose() }}>
                             <div className='first_panel'>
-                                <p className='catagory-name '>Life & Health Overview:  <span>City Averages 2018</span></p>
+                                <p className='catagory-name '>Access to Food Overview:  <span>City Averages 2018</span></p>
                                 <div className='row'>
                                     <div className='stat adequiteTot'>
                                         <h1>{makeHumanReadable(statsValues.adequiteTot[0])}%</h1>
@@ -301,7 +301,7 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                             </div>
                             <div className='second_panel'>
                                 <div className='top'>
-                                    <p className='catagory-name'> Life & Health Overview: <span>Municipality Focus 2018</span></p>
+                                    <p className='catagory-name'> Access to Food Overview: <span>Municipality Focus 2018</span></p>
 
                                     <MiniSelect names={['Buffalo City', 'City of Cape Town', 'Ekurhuleni', 'eThekwini', 'City of Joburg', 'Mangaung', 'Nelson Mandela Bay', "Tshwane"]} setSelected={setSelected} selected={selected} />
                                 </div>
@@ -323,17 +323,17 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                             </div>
                         </div> : dropName === "Life Expectancy and Health" ?
                             <div className='stat_display_panel' onClick={() => { globalCityDropDownClose() }}>
-                                <div className='first_panel'>
+                                <div className='first_panel '>
                                     <p className='catagory-name '>Life & Health Overview:  <span>City Averages 2018</span></p>
-                                    <div className='row'>
-                                        <div className='stat aveMaleTot'>
+                                    <div className='row closer'>
+                                        {/* <div className='stat aveMaleTot'>
                                             <h1>{makeHumanReadable(statsValues.aveMaleTot[0])}</h1>
                                             <p > {makeHumanReadable(statsValues.aveMaleTot[1])}</p>
                                         </div>
                                         <div className='stat aveFemaleTot'>
                                             <h1>{makeHumanReadable(statsValues.aveFemaleTot[0])}</h1>
                                             <p>{makeHumanReadable(statsValues.aveFemaleTot[1])}</p>
-                                        </div>
+                                        </div> */}
                                         <div className='stat publicHealthCareTot'>
                                             <h1>{makeHumanReadable(statsValues.publicHealthCareTot[0])}%</h1>
                                             <p>{makeHumanReadable(statsValues.publicHealthCareTot[1])}</p>
@@ -350,15 +350,15 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
 
                                         <MiniSelect names={['Buffalo City', 'City of Cape Town', 'Ekurhuleni', 'eThekwini', 'City of Joburg', 'Mangaung', 'Nelson Mandela Bay', "Tshwane"]} setSelected={setSelected} selected={selected} />
                                     </div>
-                                    <div className='bottom'>
-                                    <div className='stat aveMale'>
+                                    <div className='bottom closer'>
+                                    {/* <div className='stat aveMale'>
                                             <h1>{makeHumanReadable(statsValues.aveMale[0])}</h1>
                                             <p > {makeHumanReadable(statsValues.aveMale[1])}</p>
                                         </div>
                                         <div className='stat aveFemale'>
                                             <h1>{makeHumanReadable(statsValues.aveFemale[0])}</h1>
                                             <p>{makeHumanReadable(statsValues.aveFemale[1])}</p>
-                                        </div>
+                                        </div> */}
                                         <div className='stat publicHealthCare'>
                                             <h1>{makeHumanReadable(statsValues.publicHealthCare[0])}%</h1>
                                             <p>{makeHumanReadable(statsValues.publicHealthCare[1])}</p>

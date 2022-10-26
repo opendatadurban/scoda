@@ -58,7 +58,7 @@ export const Select = ({ chartData, originalValues, selected, options,
         } else if(chartDropName === "Life Expectancy and Health"){
             chartData.forEach((chart, index) => {
                
-                if (index <= 1 ) return
+                if (index > 1 ) return
                 filtered.push(chart)
             })
         }
