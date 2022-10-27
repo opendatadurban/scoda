@@ -196,7 +196,7 @@ export const phClearAll = (originalValues, setSelected, setOptions) => {
 
       let fillRef = fallbackValue[cIndex]
       return chart.map((year, yIndex) => {
-        year.labels = ['BUF', 'CCT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETK']
+        year.labels = ['BUF', 'CPT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETK']
         year.values = fillRef[yIndex].values
 
         return year
@@ -406,7 +406,7 @@ export const eClearAll = (originalValues, setSelected, setOptions) => {
 
       let fillRef = fallbackValue[cIndex]
       return chart.map((year, yIndex) => {
-        year.labels = ['BUF', 'CCT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETK']
+        year.labels = ['BUF', 'CPT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETK']
         year.values = fillRef[yIndex].values
 
         return year
@@ -867,8 +867,8 @@ export const leAddItem = (clickIndex, options, setSelected, setChartGroup, setOp
    
 
       let newArr = prev
-      newArr[2] = optionState[0]
-      newArr[3] = optionState[1]
+      newArr[0] = optionState[0]
+      newArr[1] = optionState[1]
 
       return [...newArr]
     })
@@ -967,8 +967,8 @@ export const leRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
 
       let newArr = prev
 
-      newArr[2] = selectedState[0]
-      newArr[3] = selectedState[1]
+      newArr[0] = selectedState[0]
+      newArr[1] = selectedState[1]
 
       return [...newArr]
     })
@@ -1005,7 +1005,7 @@ export const leClearAll = (originalValues, setSelected, setOptions) => {
 
       let fillRef = fallbackValue[cIndex]
       return chart.map((year, yIndex) => {
-        year.labels = ['BUF', 'CCT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETK']
+        year.labels = ['BUF', 'CPT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETK']
         year.values = fillRef[yIndex].values
 
         return year
@@ -1215,7 +1215,7 @@ export const fsClearAll = (originalValues, setSelected, setOptions) => {
 
       let fillRef = fallbackValue[cIndex]
       return chart.map((year, yIndex) => {
-        year.labels = ['BUF', 'CCT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETK']
+        year.labels = ['BUF', 'CPT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETK']
         year.values = fillRef[yIndex].values
 
         return year
