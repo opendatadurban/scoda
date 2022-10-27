@@ -87,10 +87,6 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
                 item['color'] = yearColors[colorCount]
               }
 
-            // add corresponding color to each year/ dataset label
-        
-
-
             if(dropdownName === "Sustainability" && genericIndex === 3 ){
               item['color'] = sustainabilityColors[colorCount]
             }

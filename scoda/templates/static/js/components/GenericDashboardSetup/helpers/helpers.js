@@ -48,10 +48,10 @@ export const dChartTitles = {
 }
 
 export const leChartTitles = {
-  yAxes: ["Average Number of Years", "Average Number of Years", "Percentage of Households", "Percentage of Population"],
-  main: ["Average Male Life Expectancy", "Average Female Life Expectancy", "Public Healthcare Usage", "Medical Aid Coverage"],
-  source: ["Stats SA Mid-Year Population Estimates","Stats SA Mid-Year Population Estimates",
-  "Calculated from Stats SA General Household Survey","Calculated from Stats SA General Household Survey"]
+  yAxes: ["Percentage of Households", "Percentage of Population","Average Number of Years", "Average Number of Years"],
+  main: ["Public Healthcare Usage", "Medical Aid Coverage","Average Male Life Expectancy", "Average Female Life Expectancy",],
+  source: ["Calculated from Stats SA General Household Survey","Calculated from Stats SA General Household Survey",
+  "Stats SA Mid-Year Population Estimates","Stats SA Mid-Year Population Estimates"]
 }
 
 export const fsChartTitles = {
