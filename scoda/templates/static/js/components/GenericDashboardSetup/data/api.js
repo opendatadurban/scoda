@@ -1,16 +1,17 @@
 import axios from 'axios'
+import { Label } from 'reactstrap'
 import { cityLabels, combinationColors, isCombinationIndicator, isNewApiIndicator, isOldApiIndicator, isSingleYearIndicator, isTextBoxIndicator, peopleHouseholdColors, secondaryColors, sustainabilityColors } from '../helpers/helpers'
 import { tableData } from '../helpers/helpers'
 import { indicator_text_box_data } from './data'
 
 export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYear,
-   yearColors, setOriginalValues,dropdownName,genericIndex
-  
+  yearColors, setOriginalValues, dropdownName, genericIndex
+
 ) => {
 
   let newApiUri = "/api/explore_new?indicator_id="
   let oldApiUri = "/api-temp/explore/?indicator_id="
-  
+
 
   let gridData = []
 
@@ -19,27 +20,29 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
   indicator_ids.forEach(id => {
 
     if (isNewApiIndicator(id)) {
-    
+
       indicator_id_requests.push({ request: axios.get(newApiUri + id), type: "new" })
-    } 
+    }
     else if (isCombinationIndicator(id)) {
 
       indicator_id_requests.push({ request: { data: [] }, type: "combination" })
-    } 
+    }
     else if (isSingleYearIndicator(id)) {
 
       indicator_id_requests.push({ request: { data: [] }, type: "single year combination chart" })
-    } 
+    }
     else if (isOldApiIndicator(id)) {
-    
-      indicator_id_requests.push({ request: axios.get(oldApiUri + id.substring(1)), type: "old" })
-    } 
-    else if(typeof(id) === "object"){
 
-      indicator_id_requests.push({ request: Promise.all([
-        axios.get(newApiUri + id.endpoints[1]),
-        axios.get(newApiUri + id.endpoints[0])])
-        , type: "toggle" })
+      indicator_id_requests.push({ request: axios.get(oldApiUri + id.substring(1)), type: "old" })
+    }
+    else if (typeof (id) === "object") {
+
+      indicator_id_requests.push({
+        request: Promise.all([
+          axios.get(newApiUri + id.endpoints[1]),
+          axios.get(newApiUri + id.endpoints[0])])
+        , type: "toggle"
+      })
     }
     else if (isTextBoxIndicator(id)) {
 
@@ -48,46 +51,46 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
   });
 
   Promise.all(indicator_id_requests.map(request => request.request)).then(
-  
+
     (chartData) => {
 
       chartData.forEach((chart, index) => {
-      
+
         let filterData = []
 
         if (indicator_id_requests[index].type === "new") {
           let colorCount = 0
           chart.data.forEach((item) => {
 
-            
+
             /**
              * Filter out min max year range, or 
              * specify range for individual graphs on grid by using chartIndex
              */
-             if (
+            if (
               (parseInt(item.year) < minYear || parseInt(item.year) > maxYear)
               &&
               index !== 5
             ) return
 
-            
 
-              if(dropdownName === "Life Expectancy and Health" && index > 1 ){
 
-                if(parseInt(item.year) === 2015 || parseInt(item.year) === 2016 ){
-                
-                  item.year = parseInt(item.year) === 2015 ? "2011-2015": "2016-2020"
-                  item['color'] = item.year === "2011-2015" ? "#4AD2D5" : "#5F993B"
-                }else{
-                  return
-                }
-                
-            
-              }else{
-                item['color'] = yearColors[colorCount]
+            if (dropdownName === "Life Expectancy and Health" && index > 1) {
+
+              if (parseInt(item.year) === 2015 || parseInt(item.year) === 2016) {
+
+                item.year = parseInt(item.year) === 2015 ? "2011-2015" : "2016-2020"
+                item['color'] = item.year === "2011-2015" ? "#4AD2D5" : "#5F993B"
+              } else {
+                return
               }
 
-            if(dropdownName === "Sustainability" && genericIndex === 3 ){
+
+            } else {
+              item['color'] = yearColors[colorCount]
+            }
+
+            if (dropdownName === "Sustainability" && genericIndex === 3) {
               item['color'] = sustainabilityColors[colorCount]
             }
 
@@ -99,15 +102,37 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
               item['color'] = peopleHouseholdColors[colorCount + 2]
             }
 
-            item.labels = item.labels.sort().map((city) => cityLabels(city))
+
+/** Sorting labels and values alphabetically */
+            item.labels = item.labels.map((city) => cityLabels(city))
+
+            let ogLabels = [...item.labels]
+           
+
+            item.labels.sort(function (a, b) {
+              return a.toLowerCase().localeCompare(b.toLowerCase());
+            })
+            let indexes = []
+
+            item.labels.forEach((label,labelIndex)=>{
+              indexes.push(ogLabels.indexOf(label))
+            })
+
+            let newValues = []
+            indexes.forEach((newIndex_1)=> newValues.push(item.values[newIndex_1]))
+
+            item.values = newValues
+            
+/**End of Label/Value sorting */
+
 
             filterData.push(item)
 
             colorCount++
           })
         } else if (indicator_id_requests[index].type === "old") {
-  
-          const table = tableData(chart.data.table, chart.data.cities.sort(),minYear,maxYear)
+
+          const table = tableData(chart.data.table, chart.data.cities, minYear, maxYear)
 
           filterData.push(...table)
         } else if (indicator_id_requests[index].type === "combination") {
@@ -116,37 +141,37 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
           const combinationChart = yearEquivalent.map((category, index) => {
             return {
               year: category,
-              labels: ['BUF', 'CPT', 'JHB', 'EKU', 'MAN', 'NMA', 'TSH', 'ETH'],
+              labels: ['BUF', 'CPT','EKU', 'JHB', 'MAN', 'NMA', 'TSH', 'ETH'],
               values: [0, 0, 0, 0, 0, 0, 0, 0],
               color: yearColors[index]
             }
           })
 
           filterData.push(...combinationChart)
-        }else if (indicator_id_requests[index].type === "toggle") {
+        } else if (indicator_id_requests[index].type === "toggle") {
 
-          const toggleCharts = chart.map((data) => {return data.data})
+          const toggleCharts = chart.map((data) => { return data.data })
 
           const toggleChartWithColor = toggleCharts.map(chart => {
 
             let newChart = []
 
-            chart.forEach((year,yearIndex) => {
-              if ((parseInt(year.year) < minYear || parseInt(year.year) > maxYear) ) return
+            chart.forEach((year, yearIndex) => {
+              if ((parseInt(year.year) < minYear || parseInt(year.year) > maxYear)) return
               year.color = yearColors[yearIndex]
               year.labels = year.labels.sort().map((city) => cityLabels(city))
               newChart.push(year)
             })
 
-            return newChart 
+            return newChart
           })
 
           filterData.push(toggleChartWithColor)
-        }else if (indicator_id_requests[index].type === "indicator text box") {
+        } else if (indicator_id_requests[index].type === "indicator text box") {
 
           filterData.push(...indicator_text_box_data)
         }
-        else if( indicator_id_requests[index].type === "single year combination chart" ){
+        else if (indicator_id_requests[index].type === "single year combination chart") {
           const yearEquivalent = ["Do not sort waste", "Waste is sorted for or by Waster Picker", "Waste is collected or dropped at recycling depot", "No data"]
           const combinationChart = yearEquivalent.map((category, index) => {
             return {
@@ -163,7 +188,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
 
           return
         }
-        
+
         gridData.push(filterData)
       })
 
