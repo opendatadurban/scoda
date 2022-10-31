@@ -1201,7 +1201,7 @@ img {
 }
 
 .hero-mini .logo {
-  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_1 Hero Banner/logo_hero-banner_round-font.png");
+  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_1 Hero Banner/logo_hero-banner_round-font.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1210,7 +1210,7 @@ img {
 }
 
 .hero-mini .hero-image {
-  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_1 Hero Banner/image_hero-banner_island-sharp_binary.png");
+  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_1 Hero Banner/image_hero-banner_island-sharp_binary.webp");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -2061,7 +2061,7 @@ img {
 }
 
 .cta_block.cta_block_insight .cta-info .cta-image {
-  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_5 Insight Tools/image_evidence_data-stories_report.png");
+  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_5 Insight Tools/image_evidence_data-stories_report.webp");
   height: 400px;
   width: 455px;
   -webkit-box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
@@ -2072,7 +2072,7 @@ img {
 }
 
 .cta_block.cta_block_insight .cta-info .cta-image-magnified-glass {
-  content: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_5 Insight Tools/image_evidence_data-stories_magnifying-glass.png");
+  content: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_5 Insight Tools/image_evidence_data-stories_magnifying-glass.webp");
   height: 270px;
   position: absolute;
   top: 46%;
@@ -2097,7 +2097,7 @@ img {
 }
 
 .cta_block.cta_block_insight .info-block .icon {
-  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_5 Insight Tools/icon_products_insight-small.png");
+  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_5 Insight Tools/icon_products_insight-small.webp");
 }
 
 .cta_block.cta_block_analysis {
@@ -2111,7 +2111,7 @@ img {
 }
 
 .cta_block.cta_block_analysis .cta-info .cta-image-analysis-dashboard {
-  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_4 Analysis Tools/image_analysis-tools_dashboard.png");
+  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_4 Analysis Tools/image_analysis-tools_dashboard.webp");
   height: 275px;
   width: 455px;
   -webkit-box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
@@ -2120,7 +2120,7 @@ img {
 }
 
 .cta_block.cta_block_analysis .cta-info .cta-image-analysis-data-explore {
-  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_4 Analysis Tools/image_analysis-tools_data-explore.png");
+  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_4 Analysis Tools/image_analysis-tools_data-explore.webp");
   height: 140px;
   width: 455px;
   -webkit-box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
@@ -2129,7 +2129,7 @@ img {
 }
 
 .cta_block.cta_block_analysis .cta-info .cta-image-analysis-demo {
-  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_4 Analysis Tools/image_analysis_demo-modeller.png");
+  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_4 Analysis Tools/image_analysis_demo-modeller.webp");
   height: 416px;
   width: 455px;
   -webkit-box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2);
@@ -2139,7 +2139,7 @@ img {
 }
 
 .cta_block.cta_block_analysis .cta-info .cta-image-codebook {
-  background-image: url("/static/dist/img/SCODA Assets V3_2 Desktop/1 Landing Page/1_4 Analysis Tools/image_analysis-tools_codebook.png");
+  background-image: url("/static/dist/img/SCODA Assets V3_2 Desktop/1 Landing Page/1_4 Analysis Tools/image_analysis-tools_codebook.webp");
   height: 285px;
   width: 459px;
   margin-top: 20px;
@@ -2166,7 +2166,7 @@ img {
 }
 
 .cta_block.cta_block_analysis .info-block .icon {
-  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_4 Analysis Tools/icon_products_analysis-small.png");
+  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_4 Analysis Tools/icon_products_analysis-small.webp");
 }
 
 .cta_block .cta-container {
@@ -2225,7 +2225,7 @@ img {
 }
 
 .cta_block .cta-info .cta-image {
-  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_3 Evidence Tools/image_evidence_data-manage.png");
+  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_3 Evidence Tools/image_evidence_data-manage.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -2259,7 +2259,7 @@ img {
 }
 
 .cta_block .info-block .icon {
-  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_2 What Products Do We Offer/icon_products_evidence.png");
+  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_2 What Products Do We Offer/icon_products_evidence.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -2457,7 +2457,7 @@ p {
 }
 
 .preview_block .product-evidence .icon {
-  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_2 What Products Do We Offer/icon_products_evidence.png");
+  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_2 What Products Do We Offer/icon_products_evidence.webp");
 }
 
 .preview_block .product-analysis h5 {
@@ -2470,7 +2470,7 @@ p {
 }
 
 .preview_block .product-analysis .icon {
-  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_2 What Products Do We Offer/icon_products_analysis.png");
+  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_2 What Products Do We Offer/icon_products_analysis.webp");
 }
 
 .preview_block .product-insight h5 {
@@ -2483,7 +2483,7 @@ p {
 }
 
 .preview_block .product-insight .icon {
-  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_2 What Products Do We Offer/icon_products_insight.png");
+  background-image: url("/static/dist/img/SCODA Assets V3_1/1 Landing Page/1_2 What Products Do We Offer/icon_products_insight.webp");
 }
 
 .preview_block h2 {
@@ -3060,7 +3060,7 @@ p {
     line-height: 2;
   }
   .hero--image {
-    background-image: url("/static/dist/img/blackbox/hero-image_mobile.png") !important;
+    background-image: url("/static/dist/img/blackbox/hero-image_mobile.webp") !important;
     background-size: 250% auto;
   }
 }
@@ -4781,7 +4781,7 @@ input.select2-search__field {
   letter-spacing: 0;
   line-height: 20px;
   -webkit-appearance: none;
-  background: url("/static/dist/img/scoda/dropdown_caret_small.png") no-repeat 96% 50% #FFFFFF;
+  background: url("/static/dist/img/scoda/dropdown_caret_small.webp") no-repeat 96% 50% #FFFFFF;
 }
 
 .goog-inline-block.goog-menu-button-dropdown {
@@ -4994,7 +4994,7 @@ input.select2-search__field {
     letter-spacing: 0;
     line-height: 20px;
     -webkit-appearance: none;
-    background: url("/static/dist/img/scoda/dropdown_caret_small.png") no-repeat 96% 50% #FFFFFF;
+    background: url("/static/dist/img/scoda/dropdown_caret_small.webp") no-repeat 96% 50% #FFFFFF;
   }
   .ie-dropdown {
     height: 100%;
@@ -5010,7 +5010,7 @@ input.select2-search__field {
     letter-spacing: 0;
     line-height: 32px;
     -webkit-appearance: none;
-    background: url("/static/dist/img/scoda/dropdown_caret.png") no-repeat 98% 80% #FFFFFF;
+    background: url("/static/dist/img/scoda/dropdown_caret.webp") no-repeat 98% 80% #FFFFFF;
   }
 }
 
@@ -5051,7 +5051,7 @@ input.select2-search__field {
     letter-spacing: 0;
     line-height: 32px;
     -webkit-appearance: none;
-    background: url("/static/dist/img/scoda/dropdown_caret.png") no-repeat 98% 80% #FFFFFF;
+    background: url("/static/dist/img/scoda/dropdown_caret.webp") no-repeat 98% 80% #FFFFFF;
   }
   .ie-box-card-header {
     height: 40px;
@@ -5076,7 +5076,7 @@ input.select2-search__field {
     letter-spacing: 0;
     line-height: 20px;
     -webkit-appearance: none;
-    background: url("/static/dist/img/scoda/dropdown_caret_small.png") no-repeat 96% 50% #FFFFFF;
+    background: url("/static/dist/img/scoda/dropdown_caret_small.webp") no-repeat 96% 50% #FFFFFF;
   }
 }
 
@@ -5327,10 +5327,10 @@ input.select2-search__field {
     line-height: 32px;
   }
   .about-us .what-do-we-do img {
-    content: url("/static/dist/img/SCODA Assets V3_1 Mobile/3 About Us_Mobile/image_about_what-do-we-do.png");
+    content: url("/static/dist/img/SCODA Assets V3_1 Mobile/3 About Us_Mobile/image_about_what-do-we-do.webp");
   }
   .about-us .how-was-scoda-developed img {
-    content: url("/static/dist/img/SCODA Assets V3_1 Mobile/3 About Us_Mobile/image_about_how-was-scoda-developed_mobile.png");
+    content: url("/static/dist/img/SCODA Assets V3_1 Mobile/3 About Us_Mobile/image_about_how-was-scoda-developed_mobile.webp");
     width: 100%;
   }
 }
@@ -5410,7 +5410,7 @@ input.select2-search__field {
 }
 
 .toggle--indicator.clinics-bg.true {
-  background-image: url("/static/dist/img/marker_clinic_blue_white-outline.png");
+  background-image: url("/static/dist/img/marker_clinic_blue_white-outline.webp");
   background-size: cover;
 }
 
@@ -7334,7 +7334,7 @@ label.disabled, .label.disabled {
 }
 
 .card_data-story-preview.support-finder {
-  background-image: url("../../assets/img/card_support-finder_desktop.png");
+  background-image: url("../../assets/img/card_support-finder_desktop.webp");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -7356,7 +7356,7 @@ label.disabled, .label.disabled {
 .card_data-story-preview.covid_flyer .card-header {
   width: 89%;
   height: 55px;
-  background-image: url("../../assets/img/image_covid-card_header.png");
+  background-image: url("../../assets/img/image_covid-card_header.webp");
   background-position: center;
   background-size: cover;
   border-bottom: none;
@@ -7405,11 +7405,11 @@ label.disabled, .label.disabled {
 }
 
 .card_data-story-preview.read-our-data-stories.module {
-  background: url("../../assets/img/image_card-citizen_engagement.png ") top left/cover;
+  background: url("../../assets/img/image_card-citizen_engagement.webp ") top left/cover;
 }
 
 .card_data-story-preview_citizen_engagement.module {
-  background: url("/static/dist/img/image_card-citizen_engagement.png") top left/cover;
+  background: url("/static/dist/img/image_card-citizen_engagement.webp") top left/cover;
 }
 
 .card--gaussian-blur_citizen_engagement {
@@ -7419,7 +7419,7 @@ label.disabled, .label.disabled {
   display: block;
   top: 0;
   left: 0;
-  background-image: url("/static/dist/img/image_card-citizen_engagement.png");
+  background-image: url("/static/dist/img/image_card-citizen_engagement.webp");
   background-repeat: no-repeat;
   background-size: cover;
   -webkit-box-shadow: inset 0 0 0 1000px #4fa68399;
@@ -7434,7 +7434,7 @@ label.disabled, .label.disabled {
 }
 
 .card_data-story-preview_city_finances.module {
-  background: url("/static/dist/img/image_card-city_finances.png") top left/cover;
+  background: url("/static/dist/img/image_card-city_finances.webp") top left/cover;
 }
 
 .card--gaussian-blur_city_finances {
@@ -7444,7 +7444,7 @@ label.disabled, .label.disabled {
   display: block;
   top: 0;
   left: 0;
-  background-image: url("/static/dist/img/image_card-city_finances.png");
+  background-image: url("/static/dist/img/image_card-city_finances.webp");
   background-repeat: no-repeat;
   background-size: cover;
   -webkit-box-shadow: inset 0 0 0 1000px #4fa68399;
@@ -7459,7 +7459,7 @@ label.disabled, .label.disabled {
 }
 
 .card_data-story-preview_household_bills_affordability.module {
-  background: url("/static/dist/img/image_card-household_bills_affordability.png") top left/cover;
+  background: url("/static/dist/img/image_card-household_bills_affordability.webp") top left/cover;
 }
 
 .card--gaussian-blur_household_bills_affordability {
@@ -7469,7 +7469,7 @@ label.disabled, .label.disabled {
   display: block;
   top: 0;
   left: 0;
-  background-image: url("/static/dist/img/image_card-household_bills_affordability.png");
+  background-image: url("/static/dist/img/image_card-household_bills_affordability.webp");
   background-repeat: no-repeat;
   background-size: cover;
   -webkit-box-shadow: inset 0 0 0 1000px #4f9da699;
@@ -7484,7 +7484,7 @@ label.disabled, .label.disabled {
 }
 
 .card_data-story-preview_human_resources.module {
-  background: url("/static/dist/img/image_card-human_resources.png") top left/cover;
+  background: url("/static/dist/img/image_card-human_resources.webp") top left/cover;
 }
 
 .card--gaussian-blur_human_resources {
@@ -7494,7 +7494,7 @@ label.disabled, .label.disabled {
   display: block;
   top: 0;
   left: 0;
-  background-image: url("/static/dist/img/image_card-human_resources.png");
+  background-image: url("/static/dist/img/image_card-human_resources.webp");
   background-repeat: no-repeat;
   background-size: cover;
   -webkit-box-shadow: inset 0 0 0 1000px #4fa68399;
@@ -7509,7 +7509,7 @@ label.disabled, .label.disabled {
 }
 
 .card_data-story-preview_service_delivery.module {
-  background: url("/static/dist/img/image_card-service_delivery.png") top left/cover;
+  background: url("/static/dist/img/image_card-service_delivery.webp") top left/cover;
 }
 
 .card--gaussian-blur_service_delivery {
@@ -7519,7 +7519,7 @@ label.disabled, .label.disabled {
   display: block;
   top: 0;
   left: 0;
-  background-image: url("/static/dist/img/image_card-service_delivery.png");
+  background-image: url("/static/dist/img/image_card-service_delivery.webp");
   background-repeat: no-repeat;
   background-size: cover;
   -webkit-box-shadow: inset 0 0 0 1000px #4fa68399;
@@ -7534,7 +7534,7 @@ label.disabled, .label.disabled {
 }
 
 .card_data-story-preview_state_of_municipal_finance.module {
-  background: url("/static/dist/img/image_card-state_of_municipal_finance.png") top left/cover;
+  background: url("/static/dist/img/image_card-state_of_municipal_finance.webp") top left/cover;
 }
 
 .card--gaussian-blur_state_of_municipal_finance {
@@ -7544,7 +7544,7 @@ label.disabled, .label.disabled {
   display: block;
   top: 0;
   left: 0;
-  background-image: url("/static/dist/img/image_card-state_of_municipal_finance.png");
+  background-image: url("/static/dist/img/image_card-state_of_municipal_finance.webp");
   background-repeat: no-repeat;
   background-size: cover;
   -webkit-box-shadow: inset 0 0 0 1000px #4f9da699;

@@ -233,7 +233,7 @@ export default class IndicatorExplorerDataCard extends Component {
                 </div>
                 
                 <Modal isOpen={this.state.modal} toggle={this.toggleModal} modalclassname="fade">
-                <ModalHeader toggle={this.toggleModal} modalclassname="modal-header" close={modalCloseIcon}><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Server Error</ModalHeader>
+                <ModalHeader toggle={this.toggleModal} modalclassname="modal-header" close={modalCloseIcon}><i className="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Server Error</ModalHeader>
                     <ModalBody className="modal-body">
                         <br/>
                         There is currently no data available for the selected indicator!<br/><br/>

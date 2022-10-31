@@ -36,7 +36,7 @@ export default class CTA_block extends Component {
                     </div>
                  
                  
-                  <div class="col-md-6 jumbotron cta-field-description-list-detailed">
+                  <div className="col-md-6 jumbotron cta-field-description-list-detailed">
                       <h5>Data Explorer</h5>
 
                       <p>
@@ -64,7 +64,7 @@ export default class CTA_block extends Component {
                     </div>
                
                  
-                  <div class="col-md-6 jumbotron  cta-field-description-list-detailed">
+                  <div className="col-md-6 jumbotron  cta-field-description-list-detailed">
                       <h5>Codebook</h5>
 
                       <p>
@@ -92,7 +92,7 @@ export default class CTA_block extends Component {
                     </div>
                   
                  
-                  <div class="col-md-6 jumbotron cta-field-description-list-detailed">
+                  <div className="col-md-6 jumbotron cta-field-description-list-detailed">
                       <h5>Demographics Modeller</h5>
 
                       <p>
