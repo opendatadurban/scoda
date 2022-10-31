@@ -64,6 +64,11 @@
                 justify-content: space-between;
                 width: calc(50vw - 39px);
 
+                &.closer{
+                    justify-content: center;
+                    gap: 39px;
+                }
+
                 .stat {
                     padding-left: calc(23px - 15px);
                     display: flex;
@@ -214,6 +219,11 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
+                
+                &.closer{
+                    justify-content: center;
+                    gap: 39px;
+                }
 
                 .stat {
                     padding-left: calc(23px - 15px);
