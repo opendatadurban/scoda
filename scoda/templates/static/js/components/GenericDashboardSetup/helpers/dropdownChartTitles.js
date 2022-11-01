@@ -4,18 +4,25 @@ export const dropdownChartTitle = (indicator_ids, hhiDropdownNames, selectedDrop
 
     if (secondaryChartIndex === 0 && dropname === "Sustainability") {
 
-        return <p className="title">{isNumber ? "Number" : "Proportion"} of households whose main source of energy/fuel is: </p>
+        return <p className="title">{isNumber ? "Number" : "Proportion"} of households whose main source of energy/fuel is: 
+        <span className="category"> {hhiDropdownNames(indicator_ids[0])[selectedDropDownChart].shortName} </span>
+         </p>
     }
     if (secondaryChartIndex === 1 && dropname === "Sustainability") {
         
-        return <p className="title">{isNumber ? "Number" : "Proportion"} of households who experience:</p>
+        return <p className="title">{isNumber ? "Number" : "Proportion"} of households who experience:
+        <span className="category"> {hhiDropdownNames(indicator_ids[0])[selectedDropDownChart].shortName} </span>
+        </p>
     }
     if (dropname === "Education") {
 
-        return <p className="title">Schooling Level </p>
+        return <p className="title">Schooling Level 
+        <span className="category"> {hhiDropdownNames(indicator_ids[0])[selectedDropDownChart].shortName} </span></p>
     } else {
 
-        return <p className="title">Main Source of Income:</p>
+        return <p className="title">Main Source of Income:
+        <span className="category"> {hhiDropdownNames(indicator_ids[0])[selectedDropDownChart].shortName} </span>
+        </p>
     }
 }
 

@@ -196,7 +196,7 @@ export const phClearAll = (originalValues, setSelected, setOptions) => {
 
       let fillRef = fallbackValue[cIndex]
       return chart.map((year, yIndex) => {
-        year.labels = ['BUF', 'CPT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETK']
+        year.labels = ['BUF', 'CPT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETH']
         year.values = fillRef[yIndex].values
 
         return year
@@ -406,7 +406,7 @@ export const eClearAll = (originalValues, setSelected, setOptions) => {
 
       let fillRef = fallbackValue[cIndex]
       return chart.map((year, yIndex) => {
-        year.labels = ['BUF', 'CPT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETK']
+        year.labels = ['BUF', 'CPT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETH']
         year.values = fillRef[yIndex].values
 
         return year
@@ -900,6 +900,8 @@ export const leRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
   let optionsTemp = []
   let selectTemp = []
 
+  console.log(selected,"select initial")
+
   selected.forEach((chart, cIndex) => {
     let optionsChart = []
     let selectChart = []
@@ -920,6 +922,8 @@ export const leRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
       optionsChart.push(optionYear)
       selectChart.push(selectYear)
     })
+
+    console.log(optionsChart,"DROPDOWN",selectChart,"select")
     optionsTemp.push(optionsChart)
     selectTemp.push(selectChart)
   })
@@ -928,7 +932,7 @@ export const leRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
 
     let newArr = prev
 
-    let optionState = newArr.length > 1 ? newArr.map((chart, cIndex) => {
+    let optionState = newArr.length > 0 ? newArr.map((chart, cIndex) => {
 
       let optionChart = optionsTemp[cIndex]
 
@@ -1000,12 +1004,11 @@ export const leClearAll = (originalValues, setSelected, setOptions) => {
 
     let fallbackValue = JSON.parse(JSON.stringify(originalValues))
     let removed = fallbackValue.splice(-1)
-    let filled = newArr.length > 1 ? newArr.map((chart, cIndex) => {
-
+    let filled = newArr.length > 0 ? newArr.map((chart, cIndex) => {
 
       let fillRef = fallbackValue[cIndex]
       return chart.map((year, yIndex) => {
-        year.labels = ['BUF', 'CPT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETK']
+        year.labels = ['BUF', 'CPT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETH']
         year.values = fillRef[yIndex].values
 
         return year
@@ -1215,7 +1218,7 @@ export const fsClearAll = (originalValues, setSelected, setOptions) => {
 
       let fillRef = fallbackValue[cIndex]
       return chart.map((year, yIndex) => {
-        year.labels = ['BUF', 'CPT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETK']
+        year.labels = ['BUF', 'CPT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETH']
         year.values = fillRef[yIndex].values
 
         return year
