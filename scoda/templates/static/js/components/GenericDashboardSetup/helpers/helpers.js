@@ -191,7 +191,13 @@ export const tableData = (table, cities,min, max) => {
   let byLabel = []
   let byYear = []
   let graphData = []
-  let abbrev = labels.map(city => cityLabels(city))
+  
+  let labelsShallowCopy = [...labels]
+  let sortingShallowCopy = [...labels.map(city => cityLabels(city))]
+  let abbrev = labelsShallowCopy.map(city => cityLabels(city))
+  let abbrevSorted = sortingShallowCopy.sort(function (a, b) {
+    return a.toLowerCase().localeCompare(b.toLowerCase());
+  })
 
   table.forEach(element => {
     if (element[0] === "City" || (parseInt(element[1]) < min || parseInt(element[1]) > max)) return
@@ -226,13 +232,25 @@ export const tableData = (table, cities,min, max) => {
     byYear.push(valuesByYear)
   })
 
+ 
   graphData = byYear.map((year, index) => {
 
     const values = year.map((value) => {
+    
       return value[2]
     })
 
-    return { labels: abbrev, values, color: peopleHouseholdColors[index], year: year[0][1] }
+    let indexes = []
+  
+    abbrevSorted.forEach((label,labelIndex)=>{
+
+      indexes.push(abbrev.indexOf(label))
+    })
+  
+    let newValues = []
+  
+    indexes.forEach((newIndex_1) => newValues.push(values[newIndex_1]))
+    return { labels: abbrevSorted, values:newValues, color: peopleHouseholdColors[index], year: year[0][1] }
   })
 
   return graphData

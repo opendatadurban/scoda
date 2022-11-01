@@ -131,7 +131,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
             <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
           </div>
         </div>
-        <p className="category">{hhiDropdownNames(indicator_ids[0])[selectedDropDownChart].shortName}</p>
+      
         {getSourceTitle(genericIndex, dropdownName)}
         <div className="chart">
           <Chart graphData={isNumber ? JSON.parse(JSON.stringify(chartGroup[0][0][0])) : JSON.parse(JSON.stringify(chartGroup[0][0][1]))}
