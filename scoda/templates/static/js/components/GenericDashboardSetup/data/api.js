@@ -50,6 +50,8 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
     }
   });
 
+  console.log(indicator_id_requests, "request types")
+
   Promise.all(indicator_id_requests.map(request => request.request)).then(
 
     (chartData) => {
@@ -103,35 +105,33 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
             }
 
 
-/** Sorting labels and values alphabetically */
+            /** Sorting labels and values alphabetically */
             item.labels = item.labels.map((city) => cityLabels(city))
 
             let ogLabels = [...item.labels]
-           
+
 
             item.labels.sort(function (a, b) {
               return a.toLowerCase().localeCompare(b.toLowerCase());
             })
             let indexes = []
 
-            item.labels.forEach((label,labelIndex)=>{
+            item.labels.forEach((label, labelIndex) => {
               indexes.push(ogLabels.indexOf(label))
             })
 
             let newValues = []
-            indexes.forEach((newIndex_1)=> newValues.push(item.values[newIndex_1]))
+
+
+            indexes.forEach((newIndex_1) => newValues.push(item.values[newIndex_1]))
 
             item.values = newValues
-            
-/**End of Label/Value sorting */
-
-
+            /**End of Label/Value sorting */
             filterData.push(item)
 
             colorCount++
           })
         } else if (indicator_id_requests[index].type === "old") {
-
           const table = tableData(chart.data.table, chart.data.cities, minYear, maxYear)
 
           filterData.push(...table)
@@ -141,7 +141,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
           const combinationChart = yearEquivalent.map((category, index) => {
             return {
               year: category,
-              labels: ['BUF', 'CPT','EKU', 'JHB', 'MAN', 'NMA', 'TSH', 'ETH'],
+              labels: ['BUF', 'CPT', 'EKU', 'ETH', 'JHB', 'MAN', 'NMA', 'TSH'],
               values: [0, 0, 0, 0, 0, 0, 0, 0],
               color: yearColors[index]
             }
@@ -157,9 +157,30 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
             let newChart = []
 
             chart.forEach((year, yearIndex) => {
+
               if ((parseInt(year.year) < minYear || parseInt(year.year) > maxYear)) return
+
               year.color = yearColors[yearIndex]
-              year.labels = year.labels.sort().map((city) => cityLabels(city))
+              year.labels = year.labels.map((city) => cityLabels(city))
+              let ogLabels = [...year.labels]
+
+              year.labels.sort(function (a, b) {
+                return a.toLowerCase().localeCompare(b.toLowerCase());
+              })
+
+              let indexes = []
+
+              year.labels.forEach((label, labelIndex) => {
+                indexes.push(ogLabels.indexOf(label))
+              })
+
+              let newValues = []
+
+
+              indexes.forEach((newIndex_1) => newValues.push(year.values[newIndex_1]))
+  
+              year.values = newValues
+
               newChart.push(year)
             })
 
@@ -176,7 +197,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
           const combinationChart = yearEquivalent.map((category, index) => {
             return {
               year: category,
-              labels: ['BUF', 'CPT', 'JHB', 'EKU', 'MAN', 'NMA', 'TSH', 'ETH'],
+              labels: ['BUF', 'CPT', 'EKU', 'ETH', 'JHB', 'MAN', 'NMA', 'TSH'],
               values: [0, 0, 0, 0, 0, 0, 0, 0],
               color: yearColors[index]
             }
@@ -270,7 +291,6 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
         let wastePicker = [0, 0, 0, 0, 0, 0, 0, 0]
         let recyclingDepot = [0, 0, 0, 0, 0, 0, 0, 0]
         let noData = [0, 0, 0, 0, 0, 0, 0, 0]
-
         gridData.forEach((element, elementIndex) => {
           if (elementIndex === 2) return
 
