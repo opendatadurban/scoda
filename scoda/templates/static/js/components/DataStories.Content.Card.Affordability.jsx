@@ -691,7 +691,7 @@ export default class DataStoriesContentCardAffordability extends Component {
                                
                                <div className="row mt-5"></div>
                                <div className="row">
-                                 <Image imgSrc={imgOne} />
+                                 <Image alt='municipal' imgSrc={imgOne} />
                                </div>
                                <div className="row mt-4">
                                    <DataStoriesContentCardContentBlock
@@ -711,7 +711,7 @@ export default class DataStoriesContentCardAffordability extends Component {
                                </div>
                                <div className="row mt-2"></div>
                                <div className="row">
-                                 <Image imgSrc={imgTwo} />
+                                 <Image alt='muntable' imgSrc={imgTwo} />
                                </div>
                                <div className="row mt-3">
                                    <DataStoriesContentCardDataInformation

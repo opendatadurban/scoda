@@ -31,7 +31,7 @@ export default class Data_story_banner extends Component {
             <div className="hero-collapsible container">
                 <div className="row">
                     <div className="col-7">
-                        <h5>Data Management System <i class={this.state.carret} onClick={e => this.handleClickShow()} ></i></h5>
+                        <h5>Data Management System <i className={this.state.carret} onClick={e => this.handleClickShow()} ></i></h5>
                     </div>
                 </div>
                 <div className="row hero-collapsable-content ">

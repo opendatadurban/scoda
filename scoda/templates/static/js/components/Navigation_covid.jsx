@@ -100,7 +100,7 @@ componentDidMount(){
             <NavbarBrand href={this.props.brandHref} id="black-box-logo">
               <Media object src={this.state.logo} alt="Generic placeholder image" />
             </NavbarBrand>
-              <img className="durban-business-support-finder" src="https://i.imgur.com/Ajq6mO8.png" />
+              <img alt='durban business support' className="durban-business-support-finder" src="https://i.imgur.com/Ajq6mO8.png" />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav navbar>
                 {/* {this.props.menu.items.map((item, i) =>

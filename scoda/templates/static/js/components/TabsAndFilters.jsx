@@ -191,7 +191,7 @@ export default class TabAndFilters extends Component {
                     <div key={`pill-pane-${result.value.split(' ').join('-')}`} className={`tab-pane fade ${result.display} ${result.mode}`} id={`v-pills-${result.value.split(' ').join('-')}`} role="tabpanel" aria-labelledby={`v-pills-${result.value.split(' ').join('-')}-tab`}>
                         <div className="row ml-0 ds-tabs-filter-header mt-4">
                             <div id="title" className="col-8">{result.value}</div>
-                            <div className="col-0 float-right"><img src='/static/dist/img/scoda/download.png' /></div>
+                            <div className="col-0 float-right"><img alt="download" src='/static/dist/img/scoda/download.webp' /></div>
                             <div className="col-2 float-right ml-1 mt-2">
                              <div className="ds-banner-view-button" onClick={()=>window.open(`${websiteUrl}`,'_new')}>View the {parent} Website</div>
                             </div>

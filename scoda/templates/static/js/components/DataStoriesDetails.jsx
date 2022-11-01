@@ -16,8 +16,8 @@ export default class DataStoriesDetails extends Component {
 
     render() {
         let main_class = `ml-0 mt-3 p-0 data-story-card`
-        let bannerImage = `/static/dist/img/scoda/datastories/edge.png`;
-        let bannerImageSACN = `/static/dist/img/scoda/datastories/sacn.png`;
+        let bannerImage = `/static/dist/img/scoda/datastories/edge.webp`;
+        let bannerImageSACN = `/static/dist/img/scoda/datastories/sacn.webp`;
         let sacnContent = "The South African Cities Network data stories provide succinct visual insight into the key narratives from the South African Cities Network research outputs.";
 
         let edgeContent = "The eThekwini data stories provide succinct visual insight into the key narratives surrounding economic development and employment in the City.";
@@ -28,17 +28,17 @@ export default class DataStoriesDetails extends Component {
         let edgeFilters = "Employment,Services,Economy";
         let edgeColors = "#F05252,#FFC057,#196CDB";
 
-        let sacnSectionOneImage = 'spatial.png';
+        let sacnSectionOneImage = 'spatial.webp';
         let sacnSectionOneTitle = 'State of City Finances 2018';
         let sacnSectionOneSubTitle = 'Financing Spatial Transformation';
         let sacnSectionOneContent = 'Despite the fact that South Africa’s national urban agenda prioritises urban densification, the municipal revenue mode…';
 
-        let  sacnSectionTwoImage = 'simon-hurry-_h-L45TSmGM-unsplash 1.png';
+        let  sacnSectionTwoImage = 'simon-hurry-_h-L45TSmGM-unsplash 1.webp';
         let  sacnSectionTwoTitle = 'State of City Finances 2020: An Introduction';
         let  sacnSectionTwoSubTitle = '';
         let  sacnSectionTwoContent = 'Cities rely on a mix of grants and their own revenue sources to fund constitutionally mandated expenditure responsibilities.';
         
-        let  sacnSectionThreeImage = 'leo-moko-M59-iDrnoA0-unsplash 1.png';
+        let  sacnSectionThreeImage = 'leo-moko-M59-iDrnoA0-unsplash 1.webp';
         let  sacnSectionThreeTitle = 'Household Bills and Affordability';
         let  sacnSectionThreeSubTitle = '';
         let  sacnSectionThreeContent = 'The affordability of municipal services is an important concern for cities. Social policy in South Africa is focussed on...';
@@ -118,7 +118,7 @@ export default class DataStoriesDetails extends Component {
                                     <div className="row ml-1 mr-1">
                                         <div id="data-story-card-inclusive" className={"col-md-4 "+main_class+" data-story-card-inclusives data-story-card-inclusive"}>
                                             <ContentSectionTop
-                                                img="stateof.png"
+                                                img="stateof.webp"
                                                 title="State of the EPWP"
                                                 subtitle="South African Cities 2017/18"
                                                 content="The unemployment rate remains at an unfortunate 26.7% in South Africa. Curbing this rate has been a great challenge for the ..."
@@ -139,7 +139,7 @@ export default class DataStoriesDetails extends Component {
                                         </div>
                                         <div id="data-story-card-well-governed4" className={"col-md-4 "+main_class+" data-story-card-inclusives data-story-card-inclusive"}>
                                             <ContentSectionTop
-                                                img="affordability.png"
+                                                img="affordability.webp"
                                                 title="State of City Finances 2018"
                                                 subtitle="Affordability"
                                                 content="A key message from the State of City Finances 2018 report is that citizens are in crisis. Although growth in the cost of munic..."
@@ -160,7 +160,7 @@ export default class DataStoriesDetails extends Component {
                                         </div>
                                         <div id="data-story-card-well-governed5" className={"col-md-4 "+main_class+" data-story-card-well"}>
                                             <ContentSectionTop
-                                                img="urban-safety.png"
+                                                img="urban-safety.webp"
                                                 title="Urban Safety"
                                                 subtitle="South African Cities in Context"
                                                 content="Cities worldwide generate about 80% of the gross value added in their respective countries. Due to their association with opp..."
@@ -182,7 +182,7 @@ export default class DataStoriesDetails extends Component {
                                         </div>
                                     </div>
                                     <ContentSectionRight
-                                        img="infrastructure.png"
+                                        img="infrastructure.webp"
                                         title="State of City Finances 2018"
                                         subtitle="Financing Infrastructure"
                                         content="While revenues are sufficient to cover operating expenditures in the metros, they do not generate enough internal finance to…"
@@ -221,7 +221,7 @@ export default class DataStoriesDetails extends Component {
                                     <div className="row ml-1 mr-1">
                                     <div id="data-story-card-employment" className={"col-md-4 "+main_class+" data-story-card-employment"}>
                                             <ContentSectionTop
-                                                img="unemployed.png"
+                                                img="unemployed.webp"
                                                 title="Unemployment in SA’s Major Cities"
                                                 subtitle=""
                                                 content="StatsSA has recently released 2019 Q2 unemployment figures, which show alarming rates of unemployment last seen…"
@@ -246,7 +246,7 @@ export default class DataStoriesDetails extends Component {
                                         </div>
                                         <div id="data-story-card-economy" className={"col-md-4 "+main_class+" data-story-card-economy"}>
                                             <ContentSectionTop
-                                                img="durban.png"
+                                                img="durban.webp"
                                                 title="Durban's Economy Recovers in the Second Quarter"
                                                 subtitle=""
                                                 content="GDP data on Durban's performance has recently been released. As expected, Durban's economy has recovered from the…"
@@ -269,7 +269,7 @@ export default class DataStoriesDetails extends Component {
                                         </div>
                                         <div id="data-story-card-service" className={"col-md-4 "+main_class+" data-story-card-service"}>
                                             <ContentSectionTop
-                                                img="electricity.png"
+                                                img="electricity.webp"
                                                 title="Electricity Usage"
                                                 subtitle=""
                                                 content="The cost of getting electricity in South Africa is 13 US cents per kilo watt hour on average, while the cost of getting electricity in Durb…"
@@ -298,7 +298,7 @@ export default class DataStoriesDetails extends Component {
 
                                     <div id="data-story-card-economy1" className="ds-ecomomy-image">
                                     <ContentSectionRightEdge
-                                        img="economy.png"
+                                        img="economy.webp"
                                         title="Economic Overview: State of the Durban Economy"
                                         subtitle=""
                                         content="The total gross value added (GVA) of Durban grew by R278 billion in 2018. This is a 0.5% increase from the 2017. In 2018, Durban exp…"

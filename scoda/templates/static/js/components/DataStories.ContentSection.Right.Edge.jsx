@@ -11,8 +11,8 @@ export default class ContentSectionRightEdge extends Component {
 
     render() {
 
-         let bannerImage = `/static/dist/img/scoda/datastories/edge.png`;
-         let bannerImageSACN = `/static/dist/img/scoda/datastories/sacn.png`;
+         let bannerImage = `/static/dist/img/scoda/datastories/edge.webp`;
+         let bannerImageSACN = `/static/dist/img/scoda/datastories/sacn.webp`;
         let sectionImage = `/static/dist/img/scoda/datastories/${this.props.img}`;
         let main_class = `justify-content-center ml-0 mt-3 p-0 data-story-card ${this.props.filter_type}`
         let filterTag = {
@@ -41,7 +41,7 @@ export default class ContentSectionRightEdge extends Component {
                <div className="container row m-0">
                    <div className="col-md-6 col-lg-8 col-xl-8 p-0 ds-content-image">
                        <div style={filterTag}>{this.props.imageTag}</div>
-                       <Image imgSrc={sectionImage} className="ds-content-image-big" />
+                       <Image alt='sectionImage' imgSrc={sectionImage} className="ds-content-image-big" />
                    </div>
                    <div className="col-md-4 ds-content-diplay-text pr-0">
                        <div className="row m-0">

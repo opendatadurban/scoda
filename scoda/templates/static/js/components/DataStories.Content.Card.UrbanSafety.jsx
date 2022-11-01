@@ -107,7 +107,7 @@ export default class DataStoriesContentCardUrbanSafety extends Component {
                                        </div>
                                        <div className="row">
                                            <div className="col-0 w-100">
-                                            <Image imgSrc={imgOne} />
+                                            <Image alt='population' imgSrc={imgOne} />
                                            </div>
                                        </div>
                                        <div className="row">
@@ -147,7 +147,7 @@ export default class DataStoriesContentCardUrbanSafety extends Component {
                                        </div>
                                        <div className="row">
                                            <div className="col-0 w-100">
-                                            <Image imgSrc={imgTwo} />
+                                            <Image alt='percapita' imgSrc={imgTwo} />
                                            </div>
                                        </div>
                                        <div className="row">
@@ -175,7 +175,7 @@ export default class DataStoriesContentCardUrbanSafety extends Component {
                                        </div>
                                        <div className="row mt-5">
                                            <div className="col-0 w-100">
-                                            <Image imgSrc={imgThree} />
+                                            <Image alt='murder' imgSrc={imgThree} />
                                            </div>
                                        </div>
                                    </div>
@@ -202,7 +202,7 @@ export default class DataStoriesContentCardUrbanSafety extends Component {
                                        </div>
                                        <div className="row mt-5">
                                            <div className="col-0">
-                                            <Image imgSrc={imgFour} />
+                                            <Image alt='nummurders' imgSrc={imgFour} />
                                            </div>
                                        </div>
                                    </div>
@@ -222,7 +222,7 @@ export default class DataStoriesContentCardUrbanSafety extends Component {
 
                                    </div>
                                    <div className="col ml-2 mt-3 mb-3">
-                                    <Image imgSrc={imgFive} />
+                                    <Image alt='table' imgSrc={imgFive} />
                                    </div>
                                </div>
                                 <div className="row mt-3">

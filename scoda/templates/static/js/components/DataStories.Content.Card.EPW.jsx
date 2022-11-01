@@ -780,7 +780,7 @@ export default class DataStoriesContentCardEPW extends Component {
         <br/><br/>
         If you have any queries and further comment on this datastory, please email <o onClick="javascript:window.location='mailto:danga@sacities.net'">Danga Mughogho</o> at SACN.`;
 
-        let imgOne = `/static/dist/img/scoda/datastories/ds-epw-needs.png`;
+        let imgOne = `/static/dist/img/scoda/datastories/ds-epw-needs.webp`;
 
         return (
             <div className="mt-4 ml-2 pr-2">
@@ -828,27 +828,27 @@ export default class DataStoriesContentCardEPW extends Component {
                                 <div className="col-md-7 tabs_vertical--content">
                                     <div className="tab-content" id="v-pills-tabContent">
                                     <div className="tab-pane fade show active" id="v-pills-top-1a" role="tabpanel" aria-labelledby="v-pills-top-1a-tab">
-                                        <img src="/static/dist/img/scoda/datastories/diagram_sa-neets_slide-1.png" />
+                                        <img alt="diagram" src="/static/dist/img/scoda/datastories/diagram_sa-neets_slide-1.webp" />
                                     </div>
                                     <div className="tab-pane fade" id="v-pills-top-2a" role="tabpanel" aria-labelledby="v-pills-top-2a-tab">
                                         
-                                        <img src="/static/dist/img/scoda/datastories/diagram_sa-neets_slide-2.png"/>
+                                        <img alt="diagram" src="/static/dist/img/scoda/datastories/diagram_sa-neets_slide-2.webp"/>
                                     </div>
                                     <div className="tab-pane fade" id="v-pills-top-3a" role="tabpanel" aria-labelledby="v-pills-top-3a-tab">
                                         
-                                        <img src="/static/dist/img/scoda/datastories/diagram_sa-neets_slide-3.png"/>
+                                        <img alt="diagram" src="/static/dist/img/scoda/datastories/diagram_sa-neets_slide-3.webp"/>
                                     </div>
                                     <div className="tab-pane fade" id="v-pills-top-4a" role="tabpanel" aria-labelledby="v-pills-top-4a-tab">
                                         
-                                        <img src="/static/dist/img/scoda/datastories/diagram_sa-neets_slide-4.png"/>
+                                        <img alt="diagram" src="/static/dist/img/scoda/datastories/diagram_sa-neets_slide-4.webp"/>
                                     </div>
                                     <div className="tab-pane fade" id="v-pills-top-5a" role="tabpanel" aria-labelledby="v-pills-top-5a-tab">
                                         
-                                        <img src="/static/dist/img/scoda/datastories/diagram_sa-neets_slide-5.png"/>
+                                        <img alt="diagram" src="/static/dist/img/scoda/datastories/diagram_sa-neets_slide-5.webp"/>
                                     </div>
                                     <div className="tab-pane fade" id="v-pills-top-6a" role="tabpanel" aria-labelledby="v-pills-top-6a-tab">
                                         
-                                        <img src="/static/dist/img/scoda/datastories/diagram_sa-neets_slide-6.png"/>
+                                        <img alt="diagram" src="/static/dist/img/scoda/datastories/diagram_sa-neets_slide-6.webp"/>
                                     </div>
                                 </div>
                               </div>

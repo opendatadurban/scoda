@@ -28,7 +28,7 @@ export default class FilterPillSmall extends Component {
         return (
             <div style={pillStyle}>
                 <div className="col ml-0">
-                <i class="fas fa-times" style={cursorStyle}></i>&nbsp;&nbsp;{this.props.filter}
+                <i className="fas fa-times" style={cursorStyle}></i>&nbsp;&nbsp;{this.props.filter}
                 </div>
             </div>
         )

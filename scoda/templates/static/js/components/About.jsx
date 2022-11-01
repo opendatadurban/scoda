@@ -37,7 +37,7 @@ export default class CTA_block extends Component {
                 whether or not they are adequately achieving their objectives.{" "}
               </p>
               <img
-                src="/static/dist/img/SCODA Assets V3_2 Desktop/3 About Us/What We Do/image_about_what-do-we-do.png"
+                src="/static/dist/img/SCODA Assets V3_2 Desktop/3 About Us/What We Do/image_about_what-do-we-do.webp"
                 alt="What Do We Do"
               />
             </div>
@@ -46,7 +46,7 @@ export default class CTA_block extends Component {
             <div className="col-12">
               <h3>How Was SCODA Developed? </h3>
               <img
-                src="/static/dist/img/SCODA Assets V3_1/3 About Us/How Was SCODA Developed/image_about_how-was-scoda-developed.png"
+                src="/static/dist/img/SCODA Assets V3_1/3 About Us/How Was SCODA Developed/image_about_how-was-scoda-developed.webp"
                 alt="How Was SCODA Developed"
               />
             </div>
@@ -94,7 +94,7 @@ export default class CTA_block extends Component {
                   <div className="item">
                     <a href="https://www.sacities.net/">
                     <img
-                      src="/static/dist/img/SCODA Assets V3_1/3 About Us/Important Links/logo_important-links_sacn.png"
+                      src="/static/dist/img/SCODA Assets V3_1/3 About Us/Important Links/logo_important-links_sacn.webp"
                       alt="Important Links"
                     />
                     </a>
@@ -104,7 +104,7 @@ export default class CTA_block extends Component {
                   <div className="item">
                     <a href="https://www.socr.co.za/">
                     <img
-                      src="/static/dist/img/SCODA Assets V3_1/3 About Us/Important Links/logo_important-links_2016-state-of-cities-report.png"
+                      src="/static/dist/img/SCODA Assets V3_1/3 About Us/Important Links/logo_important-links_2016-state-of-cities-report.webp"
                       alt="Important Links"
                     />
                     </a>
@@ -114,7 +114,7 @@ export default class CTA_block extends Component {
                   <div className="item">
                     <a href="https://stepsa.org/about.html">
                     <img
-                      src="/static/dist/img/SCODA Assets V3_1/3 About Us/Important Links/logo_important-links_stepsa.png"
+                      src="/static/dist/img/SCODA Assets V3_1/3 About Us/Important Links/logo_important-links_stepsa.webp"
                       alt="Important Links"
                     />
                     </a>
@@ -124,7 +124,7 @@ export default class CTA_block extends Component {
                   <div className="item">
                     <a href="https://salga-unrest.herokuapp.com/salga/municipality">
                     <img
-                      src="/static/dist/img/SCODA Assets V3_1/3 About Us/Important Links/logo_important-links_salga.png"
+                      src="/static/dist/img/SCODA Assets V3_1/3 About Us/Important Links/logo_important-links_salga.webp"
                       alt="Important Links"
                     />
                     </a>
@@ -134,7 +134,7 @@ export default class CTA_block extends Component {
                   <div className="item">
                     <a href="https://www.statssa.gov.za/">
                     <img
-                      src="/static/dist/img/SCODA Assets V3_1/3 About Us/Important Links/logo_important-links_statssa.png"
+                      src="/static/dist/img/SCODA Assets V3_1/3 About Us/Important Links/logo_important-links_statssa.webp"
                       alt="Important Links"
                     />
                     </a>

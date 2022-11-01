@@ -38,7 +38,7 @@ export default class ContentSectionTop extends Component {
                <div className="row m-0">
                    <div className="col-0 ds-content-top-image">
                        <div style={filterTag}>{this.props.imageTag}</div>
-                       <Image imgSrc={sectionImage} />
+                       <Image alt='sectionImage' imgSrc={sectionImage} />
                    </div>
                 </div>
                 <div className="row m-0">
