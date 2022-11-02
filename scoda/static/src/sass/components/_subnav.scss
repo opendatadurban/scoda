@@ -38,6 +38,7 @@
         h6 {
           font-size: 22px;
           padding-left: 0;
+       
         }
         &-header {
           font-weight: bold;
@@ -48,6 +49,8 @@
          width: 400px;
          padding: $s-t $s-s $s-s;
          left: - $s-s !important;
+         top: 33px!important;
+         transform: none!important;
         }
   
         &-divider {
