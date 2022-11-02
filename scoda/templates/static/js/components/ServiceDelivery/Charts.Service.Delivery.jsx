@@ -540,7 +540,7 @@ export default class Charts_dashboards extends Component {
           free_basic_services_sortedNumber2[0] = free_basic_services_2018[0]
           
           }
-        if(sortedData.includes('CCT'))
+        if(sortedData.includes('CPT'))
           {
 
           for(let index=0;index < cYears.length - 1;index++){
@@ -553,7 +553,7 @@ export default class Charts_dashboards extends Component {
         
             free_basic_services_sortedNumber2[1] = free_basic_services_2018[1]
           }
-        if(sortedData.includes('EKH'))
+        if(sortedData.includes('EKU'))
           {
           for(let index=0;index < cYears.length - 1;index++){
             water_supply_data[index][2] = waterSupplyCollection[index][2]
@@ -565,7 +565,7 @@ export default class Charts_dashboards extends Component {
 
             free_basic_services_sortedNumber2[2] = free_basic_services_2018[2]
           }
-        if(sortedData.includes('ETK'))
+        if(sortedData.includes('ETH'))
           {
           for(let index=0;index < cYears.length - 1;index++){
             water_supply_data[index][3] = waterSupplyCollection[index][3]
@@ -601,7 +601,7 @@ export default class Charts_dashboards extends Component {
 
             free_basic_services_sortedNumber2[5] = free_basic_services_2018[5]
           }
-        if(sortedData.includes('NMB'))
+        if(sortedData.includes('NMA'))
           {
           for(let index=0;index < cYears.length - 1;index++){
             water_supply_data[index][6] = waterSupplyCollection[index][6]
