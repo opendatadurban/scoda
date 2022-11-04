@@ -4,11 +4,9 @@
   "description": "Flask and React integration",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "webpack serve --mode development",
-    "build": "webpack --mode production",
-    "watch": "webpack --progress -d --config webpack.config.js --watch",
-    "watch-bbx": "webpack --progress -d --config black-box-webpack.config.js --watch --watch-poll"
+  
+    "serve": "webpack serve --mode development --open",
+    "build": "webpack --mode production"
   },
   "author": "Ayanda Nene",
   "license": "ISC",

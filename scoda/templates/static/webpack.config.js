@@ -66,4 +66,18 @@ const config = {
   })],
  
 };
-module.exports = config;
+module.exports = (env, argv) =>{
+
+  if(argv.mode === "development"){
+    config.output.publicPath = resolve("../../static/public"),
+    config.devtool = "source-map"
+  }
+
+  if (argv.mode === 'production') {
+
+    
+  }
+
+
+ return config
+}
