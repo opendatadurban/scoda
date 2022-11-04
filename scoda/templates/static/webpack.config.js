@@ -4,8 +4,7 @@ const CompressionPlugin = require("compression-webpack-plugin");
 
 
 const config = {
-  devtool: 'eval-source-map',
-  //entry: __dirname + '/js/scoda-index.jsx',
+
   entry: {
     toolkit: ['react-app-polyfill/ie9', 'react-app-polyfill/stable', __dirname + '/js/toolkit.jsx'],
      home:  __dirname + '/js/home.jsx',
@@ -15,7 +14,7 @@ const config = {
   output: {
     path: resolve("../../static/public"),
     filename: "[name].js",
-   // publicPath: resolve("../../static/public"),
+    publicPath: resolve("../../static/public"),
   },
   devServer: {
     inline: true,
@@ -69,13 +68,15 @@ const config = {
 module.exports = (env, argv) =>{
 
   if(argv.mode === "development"){
+
     config.output.publicPath = resolve("../../static/public"),
-    config.devtool = "source-map"
+    //config.devtool = "source-map"
+    config.watch = true
+    console.log("development")
   }
 
   if (argv.mode === 'production') {
-
-    
+ 
   }
 
 
