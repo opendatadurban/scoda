@@ -1,6 +1,6 @@
 //Imports
 import React, {Suspense, lazy} from 'react';
-import { HashRouter, Route, Switch, hashHistory } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 import createHistory from "history/createBrowserHistory"
 import loader from "./gif/Spinner.gif"
 

@@ -1,12 +1,13 @@
 const webpack = require("webpack");
 const resolve = require("path").resolve;
+const CompressionPlugin = require("compression-webpack-plugin");
+
 
 const config = {
-  devtool: 'eval-source-map',
-  //entry: __dirname + '/js/scoda-index.jsx',
+
   entry: {
     toolkit: ['react-app-polyfill/ie9', 'react-app-polyfill/stable', __dirname + '/js/toolkit.jsx'],
-    home:  __dirname + '/js/home.jsx',
+     home:  __dirname + '/js/home.jsx',
     socr:  __dirname + '/js/socr.jsx',
     about:  __dirname + '/js/about.jsx',
   },
@@ -27,15 +28,17 @@ const config = {
       
       {
         test: /\.jsx?/,
-        loader: "babel-loader",
-        exclude: /node_modules/,
+        use:{
+          loader:"babel-loader",
+          options:{
+            presets:['@babel/preset-env','@babel/preset-react']
+          }
+        },
+          exclude: /node_modules/,
       },
+    
       {
-        test: /\.css$/,
-        loader: "style-loader!css-loader?modules",
-      },
-      {
-        test: /\.s[ac]ss$/i,
+        test: /\.(scss|css)$/,
         use: [
     
           "style-loader",
@@ -57,5 +60,25 @@ const config = {
       
     ],
   },
+  plugins: [new CompressionPlugin({
+    algorithm:'gzip'
+  })],
+ 
 };
-module.exports = config;
+module.exports = (env, argv) =>{
+
+  if(argv.mode === "development"){
+
+    config.output.publicPath = resolve("../../static/public"),
+    //config.devtool = "source-map"
+    config.watch = true
+    console.log("development")
+  }
+
+  if (argv.mode === 'production') {
+ 
+  }
+
+
+ return config
+}
