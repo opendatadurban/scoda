@@ -14,7 +14,7 @@ const config = {
   output: {
     path: resolve("../../static/public"),
     filename: "[name].js",
-    publicPath: resolve("../../static/public"),
+ 
   },
   devServer: {
     inline: true,
@@ -70,15 +70,15 @@ module.exports = (env, argv) =>{
   if(argv.mode === "development"){
 
     config.output.publicPath = resolve("../../static/public"),
-    //config.devtool = "source-map"
+    config.devtool = "eval-source-map"
     config.watch = true
-    console.log("development")
   }
 
   if (argv.mode === 'production') {
- 
+    config.optimization = {
+      chunkIds: 'named',
+    }
   }
-
 
  return config
 }
