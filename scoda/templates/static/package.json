@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
   
-    "watch": "webpack --mode development ",
+    "watch": "webpack --mode production",
     "build": "webpack --mode production"
+
   },
   "author": "Ayanda Nene",
   "license": "ISC",

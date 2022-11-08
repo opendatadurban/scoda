@@ -7,44 +7,41 @@ const config = {
 
   entry: {
     toolkit: ['react-app-polyfill/ie9', 'react-app-polyfill/stable', __dirname + '/js/toolkit.jsx'],
-     home:  __dirname + '/js/home.jsx',
-    socr:  __dirname + '/js/socr.jsx',
-    about:  __dirname + '/js/about.jsx',
+    home: __dirname + '/js/home.jsx',
+    socr: __dirname + '/js/socr.jsx',
+    about: __dirname + '/js/about.jsx',
   },
   output: {
-    path: resolve("../../static/public"),
+
     filename: "[name].js",
-    publicPath: resolve("../../static/public"),
+
   },
-  devServer: {
-    inline: true,
-    port: 5000,
-  },
+
   resolve: {
     extensions: [".js", ".jsx", ".css"],
   },
   module: {
     rules: [
-      
+
       {
         test: /\.jsx?/,
-        use:{
-          loader:"babel-loader",
-          options:{
-            presets:['@babel/preset-env','@babel/preset-react']
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react']
           }
         },
-          exclude: /node_modules/,
+        exclude: /node_modules/,
       },
-    
+
       {
         test: /\.(scss|css)$/,
         use: [
-    
+
           "style-loader",
-       
+
           "css-loader",
-        
+
           "sass-loader",
         ],
       },
@@ -57,28 +54,37 @@ const config = {
           },
         },
       },
-      
+
     ],
   },
   plugins: [new CompressionPlugin({
-    algorithm:'gzip'
+    algorithm: 'gzip'
   })],
- 
+
 };
-module.exports = (env, argv) =>{
+module.exports = (env, argv) => {
 
-  if(argv.mode === "development"){
+  if (argv.mode === "development") {
+    config.output.path = resolve("../../static/public/devBuild")
+    config.output.publicPath = resolve("../../static/public/devBuild")
+    config.devtool = "source-map"
 
-    config.output.publicPath = resolve("../../static/public"),
-    //config.devtool = "source-map"
-    config.watch = true
-    console.log("development")
+    config.devServer = {
+      contentBase: resolve("../../templates"),
+      port: 5000,
+    }
+
+  
   }
 
   if (argv.mode === 'production') {
- 
+
+    config.output.path = resolve("../../static/public")
+  
+    config.optimization = {
+      chunkIds: 'named',
+    }
   }
 
-
- return config
+  return config
 }

@@ -101,6 +101,7 @@ scoda/static/vendor/grChartImg/
 /scoda/templates/demographics/testMap.html
 /scoda/data/MunicipalWards2016.json
 /scoda/static/css/style.css.old
+/scoda/static/public/devBuild/
 /scoda/data/JHB_Grid.json
 /scoda/data/jhbgridmodel.csv
 scoda-env1/
