@@ -65,6 +65,7 @@ const config = {
 module.exports = (env, argv) => {
 
   if (argv.mode === "development") {
+
     config.output.path = resolve("../../static/public/devBuild")
     config.output.publicPath = resolve("../../static/public/devBuild")
     config.devtool = "source-map"
@@ -81,9 +82,6 @@ module.exports = (env, argv) => {
 
     config.output.path = resolve("../../static/public")
   
-    config.optimization = {
-      chunkIds: 'named',
-    }
   }
 
   return config
