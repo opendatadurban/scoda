@@ -23,7 +23,7 @@ SCODA Website Repository
 - [Staging Environment]()
 - No Live Environment yet
 
-## Frontend Setup
+## Gulp Setup
 ### Setting up Frontend Boiler Plate with Gulp and NPM
 #### The following dependencies are being used:
 - Util      - Log custom messages to the terminal
@@ -32,7 +32,7 @@ SCODA Website Repository
 - Concat    - Concatenate any JS or CSS files in the styles or js directories
 - Connect   - Live Server Reload
 
-_Before starting, make sure the gulpfile.js and package.json files are in the root/app directory._
+_Before starting, make sure the gulpfile.js and package.json files are in the static/ directory._
 Then do the following:
 1. Make sure you have [node.js](https://nodejs.org/dist/v8.11.2/node-v8.11.2-x64.msi) installed on your local machine
 2. [NPM](https://www.npmjs.com/get-npm) should be installed with node already, press the following to check if it has and what version
