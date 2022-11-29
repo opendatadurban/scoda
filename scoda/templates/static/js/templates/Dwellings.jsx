@@ -11,7 +11,7 @@ const Home = () => {
 
   const subNavContent = {
     dropdownMenu: [
-      {//0
+      {
         name: "Service Delivery",
         href: "socr#/service_delivery",
         active: false
@@ -47,7 +47,7 @@ const Home = () => {
         active: false
       },
       {
-        name: "Food Security, Literacy and Inequality", //7
+        name: "Food Security, Literacy and Inequality",
         href: "socr#/food_security",
         active: false
       },
@@ -64,6 +64,27 @@ const Home = () => {
       {
         name: "Sustainability",
         href: "socr#/sustainability",
+        active: false
+      },
+      {
+        name: "ICT Infrastructure",
+        href: "socr#/infrastructure",
+        active: false
+
+      },
+      {
+        name: "Transport Mode",
+        href: "socr#/transport_mode",
+        active: false
+      },
+      {
+        name: "Public Transport Spend",
+        href: "socr#/public_transport_spend",
+        active: false
+      },
+      {
+        name: "Travel Time",
+        href: "socr#/travel_time",
         active: false
       }
     ]
