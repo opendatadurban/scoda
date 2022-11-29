@@ -140,7 +140,9 @@
     .text {
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        gap: 15px;
+        max-height: 280px;
+        overflow-y:scroll;
 
         .headings {
 
