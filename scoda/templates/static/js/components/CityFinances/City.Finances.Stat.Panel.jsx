@@ -31,7 +31,7 @@ const HumanResourcesStatPanel = () => {
 
     const places = (e) => {
         setPlace(e.target.value);
-        console.log('selected city :',e.target.value)
+
         if(e.target.value ==='Buffalo City'){
             setTotal_municipal_posts(39300000)
             setirregular_expenditure(43000000)

@@ -6,6 +6,7 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const config = {
 
   entry: {
+
     toolkit: ['react-app-polyfill/ie9', 'react-app-polyfill/stable', __dirname + '/js/toolkit.jsx'],
     home: __dirname + '/js/home.jsx',
     socr: __dirname + '/js/socr.jsx',
@@ -14,15 +15,12 @@ const config = {
   output: {
 
     filename: "[name].js",
-
   },
-
   resolve: {
     extensions: [".js", ".jsx", ".css"],
   },
   module: {
     rules: [
-
       {
         test: /\.jsx?/,
         use: {
@@ -33,7 +31,6 @@ const config = {
         },
         exclude: /node_modules/,
       },
-
       {
         test: /\.(scss|css)$/,
         use: [
@@ -48,40 +45,33 @@ const config = {
       {
         test: /\.(jpg|png|svg|gif)$/,
         use: {
+
           loader: "url-loader",
           options: {
+
             limit: 1000000,
           },
         },
       },
 
     ],
-  },
-  plugins: [new CompressionPlugin({
-    algorithm: 'gzip'
-  })],
-
+  }
 };
 module.exports = (env, argv) => {
 
   if (argv.mode === "development") {
 
-    config.output.path = resolve("../../static/public/devBuild")
-    config.output.publicPath = resolve("../../static/public/devBuild")
+    config.output.path = resolve("../../static/public/")
     config.devtool = "source-map"
-
-    config.devServer = {
-      contentBase: resolve("../../templates"),
-      port: 5000,
-    }
-
-  
+    config.watch = true
   }
 
   if (argv.mode === 'production') {
+    // config.plugins = [new CompressionPlugin({
+    //   algorithm: 'gzip'
+    // })]
 
     config.output.path = resolve("../../static/public")
-  
   }
 
   return config

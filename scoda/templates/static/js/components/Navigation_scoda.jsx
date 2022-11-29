@@ -124,7 +124,11 @@ export default class Navigation_scoda extends Component {
                                         <a className="dropdown-item" href="/scoda/socr#/food_security">Food Security, Literacy and Inequality</a>
                                         <a className="dropdown-item" href="/scoda/socr#/life_expectancy">Life Expectancy and Health</a>
                                         <a className="dropdown-item" href="/scoda/socr#/education">Education</a>
-                                        <a className="dropdown-item" href="/scoda/socr#/sustainability">Sustainability</a>            
+                                        <a className="dropdown-item" href="/scoda/socr#/sustainability">Sustainability</a>
+                                        <a className="dropdown-item" href="/scoda/socr#/infrastructure">ICT Infrastructure</a> 
+                                        <a className="dropdown-item" href="/scoda/socr#/transport_mode">Transport Mode</a> 
+                                        <a className="dropdown-item" href="/scoda/socr#/public_transport_spend">Public Transport Spend</a>             
+                                        <a className="dropdown-item" href="/scoda/socr#/travel_time">Travel Time</a>  
                                         {/* <a className="dropdown-item" href="/scoda/socr">State of Municipal Finance</a> */}
                                     </div>
                                 </li>

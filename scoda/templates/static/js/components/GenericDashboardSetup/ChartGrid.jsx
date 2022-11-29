@@ -5,12 +5,13 @@ import {
   dAddItem, dClearAll, dRemoveItem,
   hiAddItem, hiRemoveItem, hiClearAll,
   leRemoveItem, leAddItem, leClearAll,
-  fsAddItem, fsRemoveItem, fsClearAll, edRemoveItem, edAddItem, edClearAll, sustainabilityAddItem, sustainabilityRemoveItem, sustainabilityClearAll
+  fsAddItem, fsRemoveItem, fsClearAll, edRemoveItem, edAddItem, edClearAll, sustainabilityAddItem, sustainabilityRemoveItem, sustainabilityClearAll, ictRemoveItem, ictAddItem, ictClearAll, ptsRemoveItem, ptsAddItem, ptsClearAll
 } from './helpers/citySelect';
 import { Select } from './Organisms/Select';
 import { ChartWrapper } from './Organisms/ChartWrapper';
 import { MiniSelect } from './Organisms/MiniSelect';
 import { useGlobalClose } from '../../context';
+import { SingleCitySelect } from './Organisms/SingleCitySelect';
 
 export const ChartGrid = ({ indicator_ids,
   chartGroup,
@@ -23,7 +24,9 @@ export const ChartGrid = ({ indicator_ids,
   setSelectedName,
   setSelectedChart,
   selectedDropDownChart,
-  genericIndex
+  genericIndex,
+  singleCityIndex,
+  setSingleCityIndex
 }) => {
 
   const [isNumber, toggle] = useState(true)
@@ -60,7 +63,9 @@ export const ChartGrid = ({ indicator_ids,
     removeItem: edRemoveItem,
     addItem: edAddItem,
     clearAll: edClearAll,
-  } : (dropdownName === "Sustainability" && secondDropDown) ? {
+  } : (dropdownName === "Sustainability" && secondDropDown) || (dropdownName === "Transport Mode") 
+  || (dropdownName === "Public Transport Spend" && genericIndex === 1) ||
+  (dropdownName === "Travel Time" && genericIndex === 0) ? {
     removeItem: hiRemoveItem,
     addItem: hiAddItem,
     clearAll: hiClearAll,
@@ -72,38 +77,69 @@ export const ChartGrid = ({ indicator_ids,
     removeItem: sustainabilityRemoveItem,
     addItem: sustainabilityAddItem,
     clearAll: sustainabilityClearAll,
-  } :
+  } : dropdownName === "ICT Infrastructure" ? {
+    removeItem: ictRemoveItem,
+    addItem: ictAddItem,
+    clearAll: ictClearAll,
+  } :(dropdownName === "Public Transport Spend" && genericIndex === 0) ? {
+    removeItem: ptsRemoveItem,
+    addItem: ptsAddItem,
+    clearAll: ptsClearAll,
+  }:
     {}
-  const isDropDownChart = Array.isArray(indicator_ids[0])
+
   const globalCityDropDownClose = useGlobalClose()
 
   const chartWrapperClassNames = gridItems > 4 && (dropdownName !== "Food Security, Literacy and Inequality") ? "grid-container" :
-  gridItems > 4 && (dropdownName === "Food Security, Literacy and Inequality") ? "grid-container horizontal_food" :
-    gridItems === 4 && (dropdownName === "Life Expectancy and Health") ? "grid-container-4 horizontal" :
-    gridItems === 4 && (dropdownName !== "Life Expectancy and Health") ? "grid-container-4" :
-    gridItems === 2 && indicator_ids.includes("indicator text box") ? "grid-2-text" :
-    gridItems === 2 ? "grid-only-charts-2" : "grid-container-1"
+    gridItems > 4 && (dropdownName === "Food Security, Literacy and Inequality") ? "grid-container horizontal_food" :
+      gridItems === 4 && (dropdownName === "Life Expectancy and Health") ? "grid-container-4 horizontal" :
+        (gridItems > 2 && gridItems <= 4) && (dropdownName !== "Life Expectancy and Health") ? "grid-container-4" :
+          gridItems === 2 && indicator_ids.includes("indicator text box") ? "grid-2-text" :
+            gridItems === 2 ? "grid-only-charts-2" : "grid-container-1"
+
+  const singleCityForYears = (dropdownName === "Public Transport Spend" && genericIndex === 1)
+  const isDropDownChart = Array.isArray(indicator_ids[0])
+  const isSingleCityDropdown = (dropdownName === "Travel Time" && genericIndex === 1)
+
 
   return (
     <div className='chart_grid' onClick={() => { globalCityDropDownClose() }}>
       {
         <div className='rounded_container'>
           <div className={isDropDownChart ? "select_wrapper double" : "select_wrapper"}>
-            <Select chartData={chartGroup}
-              originalValues={originalValues}
-              selected={selected}
-              options={options}
-              setChartGroup={setChartGroup}
-              setOptions={setOptions}
-              setSelected={setSelected}
-              removeItem={selectControls.removeItem}
-              addItem={selectControls.addItem}
-              clearAll={selectControls.clearAll}
-              chartDropName={dropdownName}
-              isDropDownChart={isDropDownChart} />
             {
-              isDropDownChart ? <MiniSelect names={secondDropDown} selected={selectedName}
-                setSelectedChart={setSelectedChart} setSelected={setSelectedName} isDropDownChart={isDropDownChart} dropdownName={dropdownName} genericIndex={genericIndex} /> : ""
+              (isSingleCityDropdown) ?
+
+                <SingleCitySelect singleCityIndex={singleCityIndex}
+                  setSingleCityIndex={setSingleCityIndex} />
+                :
+                <Select chartData={chartGroup}
+                  originalValues={originalValues}
+                  selected={selected}
+                  options={options}
+                  setChartGroup={setChartGroup}
+                  setOptions={setOptions}
+                  setSelected={setSelected}
+                  removeItem={selectControls.removeItem}
+                  addItem={selectControls.addItem}
+                  clearAll={selectControls.clearAll}
+                  chartDropName={dropdownName}
+                  isDropDownChart={isDropDownChart}
+                  genericIndex={genericIndex} />
+
+
+            }
+
+            {
+              (isDropDownChart && !singleCityForYears) ? <MiniSelect names={secondDropDown} selected={selectedName}
+                setSelectedChart={setSelectedChart} setSelected={setSelectedName}
+                isDropDownChart={isDropDownChart} dropdownName={dropdownName} genericIndex={genericIndex} />
+                :
+                singleCityForYears ?
+                  <SingleCitySelect singleCityIndex={singleCityIndex}
+                    setSingleCityIndex={setSingleCityIndex} isSingleYear={true} />
+                  :
+                  ""
             }
           </div>
 

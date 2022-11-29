@@ -17,8 +17,11 @@ const GenericChart = ({ indicator_ids, minYear, maxYear,
   const [chartGroup, setChartGroup] = useState([])
   const [originalValues, setOriginalValues] = useState([])
   const [selectedChart, setSelectedChart] = useState(0)
+  const [singleCityIndex, setSingleCityIndex] = useState(0)
   const [selectedName, setSelectedName] = useState(Array.isArray(indicator_ids[0]) ?
   hhiDropdownNames(indicator_ids[0])[0].shortName: "")
+
+// const singleCityName = ['BUF', 'CPT', 'EKU', 'ETH', 'JHB', 'MAN', 'NMA', 'TSH']
 
   useEffect(() => {
     setChartGroup([])
@@ -32,10 +35,10 @@ const GenericChart = ({ indicator_ids, minYear, maxYear,
       colors, //color presets
       setOriginalValues,
       dropdownName,
-      genericIndex
+      genericIndex,
+      singleCityIndex
     )
-  }, [selectedName, selectedChart])
-
+  }, [selectedName, selectedChart,singleCityIndex])
   const isDropDownChart = Array.isArray(indicator_ids[0])
   const firstDashboardClass = (genericIndex === 0) ? "first_chart" : ""
 
@@ -48,11 +51,14 @@ const GenericChart = ({ indicator_ids, minYear, maxYear,
          {/* <Sidebar_left /> */}
          </>} 
           <div id='content' >
-           {secondaryChart ? "":
+           {secondaryChart ? 
+           "":
            <GenericStatsPanel
            originalValues={originalValues}
            dropName={dropdownName}
-         />} 
+         />
+        
+         } 
 
             <ChartGrid
               indicator_ids={indicator_ids}
@@ -67,6 +73,8 @@ const GenericChart = ({ indicator_ids, minYear, maxYear,
               setSelectedChart={setSelectedChart}
               selectedDropDownChart={selectedChart}
               genericIndex={genericIndex}
+              singleCityIndex={singleCityIndex}
+              setSingleCityIndex={setSingleCityIndex}
             />
           </div>
         </div>

@@ -39,7 +39,6 @@ const HumanResourcesStatPanel = ({
 
     const places = (e) => {
         setPlace(e.target.value);
-        console.log('selected city :', e.target.value)
         if (e.target.value === 'Buffalo City') {
             setTotal_municipal_posts(last_total_posts[0][2])
             setVacancies(last_municipal_posts[0][2])

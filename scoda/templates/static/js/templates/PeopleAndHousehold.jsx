@@ -65,6 +65,27 @@ const Home = () => {
         name: "Sustainability",
         href: "socr#/sustainability",
         active: false
+      },
+      {
+        name: "ICT Infrastructure",
+        href: "socr#/infrastructure",
+        active: false
+
+      },
+      {
+        name: "Transport Mode",
+        href: "socr#/transport_mode",
+        active: false
+      },
+      {
+        name: "Public Transport Spend",
+        href: "socr#/public_transport_spend",
+        active: false
+      },
+      {
+        name: "Travel Time",
+        href: "socr#/travel_time",
+        active: false
       }
     ]
   }

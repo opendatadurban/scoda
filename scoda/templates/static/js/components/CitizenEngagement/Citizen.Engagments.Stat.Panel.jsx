@@ -36,7 +36,7 @@ const CitizenEngagmentStatPanel = () => {
 
     const places = (e) => {
         setPlace(e.target.value);
-        console.log('selected city :',e.target.value)
+   
         if(e.target.value ==='Buffalo City'){
             setwasteful_expenditure_national(40)
             setRegistered_national(64)

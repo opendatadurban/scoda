@@ -2,7 +2,8 @@ import { ChevronDown } from '../../../../svg_components/SelectIcons'
 import '../../../../scss/components/Select.scss'
 import React, { useState } from 'react'
 
-export const MiniSelect = ({ names, selected, setSelected,setSelectedChart,isDropDownChart,dropdownName,genericIndex}) => {
+export const MiniSelect = ({ names, selected, setSelected,setSelectedChart,
+    isDropDownChart,dropdownName,genericIndex}) => {
 
     const [show, visibility] = useState(false)
 
@@ -20,6 +21,8 @@ export const MiniSelect = ({ names, selected, setSelected,setSelectedChart,isDro
                     {dropdownName === "Education" ? "SCHOOLING LEVEL":
                     dropdownName === "Sustainability" && genericIndex === 0? "ENERGY TYPE":
                     dropdownName === "Sustainability" && genericIndex === 1? "POLLUTION TYPE":
+                    dropdownName === "Travel Time" && genericIndex === 0? "TRAVEL TIME":
+                    dropdownName === "Travel Time" && genericIndex === 1? "TRANSPORT METHOD":
                     "Main Source of Income:"}
                 </p>
                 <div className={'mini_select macro_select'} onClick={() => { visibility(!show) }}>

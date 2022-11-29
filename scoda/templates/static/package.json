@@ -4,10 +4,8 @@
   "description": "Flask and React integration",
   "main": "index.js",
   "scripts": {
-  
-    "watch": "webpack --mode production",
+    "watch": "webpack --mode development",
     "build": "webpack --mode production"
-
   },
   "author": "Ayanda Nene",
   "license": "ISC",
