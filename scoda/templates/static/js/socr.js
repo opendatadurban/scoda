@@ -17,6 +17,10 @@ const LifeExpectancy = lazy(()=> import('./templates/LifeExpectancyAndHealth'))
 const FoodSecurity = lazy(()=> import('./templates/FoodSecurityLiteracyAndInequality'))
 const Education = lazy(()=> import('./templates/Education'))
 const Sustainability = lazy(()=> import('./templates/Sustainability'))
+const Infrastructure = lazy(() => import('./templates/Infrastrucutre'))
+const TransportMode = lazy(() => import('./templates/TransportMode'))
+const PublicTransportSpend = lazy(() => import('./templates/PublicTransport'))
+const TravelTime = lazy(() => import('./templates/TravelTime'))
 
 const style = {
   position: 'absolute', left: '50%', top: '50%',
@@ -44,10 +48,14 @@ export default (
       <Route exact path='/employment' component={Employment} />
       <Route exact path='/dwellings' component={Dwellings} />
       <Route exact path='/household_income' component={HouseholdIncome} />
-      <Route exact path='/life_expectancy' component={LifeExpectancy} />
-      <Route exact path='/food_security' component={FoodSecurity} />
-      <Route exact path='/education' component={Education} />
-      <Route exact path='/sustainability' component={Sustainability} />
+      <Route exact path='/life_expectancy' component={LifeExpectancy}/>
+      <Route exact path='/food_security' component={FoodSecurity}/>
+      <Route exact path='/education' component={Education}/>
+      <Route exact path='/sustainability' component={Sustainability}/>
+      <Route exact path='/infrastructure' component={Infrastructure}/>
+      <Route exact path='/transport_mode' component={TransportMode}/>
+      <Route exact path='/public_transport_spend' component={PublicTransportSpend}/>
+      <Route exact path='/travel_time' component={TravelTime}/>
     </Suspense>
   </HashRouter>
 );
