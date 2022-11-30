@@ -113,18 +113,25 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
 
     useEffect(() => {
         if (dropName === "People and Households") {
+
             getStatTotals(originalValues, cityLabels, setStats, selected)
         } else if (dropName === "Employment" || dropName === "Household Income") {
+
             getEmploymentStatTotals(setStats, selected)
         } else if (dropName === "Dwellings") {
+
             getDwellingsStatTotals(originalValues, cityLabels, setStats, selected)
         } else if (dropName === "Food Security, Literacy and Inequality") {
+
             getFoodSecurityStatTotals(originalValues, cityLabels, setStats, selected)
         } else if (dropName === "Life Expectancy and Health") {
+
             getLifeExpectancyStatTotals(originalValues, cityLabels, setStats, selected)
         }else if (dropName === "Education") {
+
             getEducationStatTotals(originalValues, cityLabels, setStats, selected)
         }else if (dropName === "Sustainability") {
+
             setStats(null)
         }else if(dropName === "Travel Time"){
            
@@ -139,8 +146,6 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
            
             getPublicTransportSpendStatsTotals(setStats,selected)
         }
-
-
 
     }, [selected])
 
@@ -477,19 +482,19 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                             "" :dropName === "Travel Time" ?
                             <div className='stat_display_panel' onClick={() => { globalCityDropDownClose() }}>
                                 <div className='first_panel'>
-                                    <p className='catagory-name '>TRAVEL TIME:  <span>City Averages 2018</span></p>
+                                    <p className='catagory-name '>Travel Time:  <span>City Averages 2018</span></p>
                                     <p className="title">PROPORTION OF TRAVELLERS WHO TRAVEL:</p>
                                     <div className='row'>
 
-                                        <div className='stat noSchoolingTot'>
+                                        <div className='stat tertiaryEducationTot'>
                                             <h1>{makeHumanReadable(statsValues.firstTot[0])}%</h1>
                                             <p > {makeHumanReadable(statsValues.firstTot[1])}</p>
                                         </div>
-                                        <div className='stat primarySchoolingTot'>
+                                        <div className='stat tertiaryEducationTot'>
                                             <h1>{makeHumanReadable(statsValues.secondTot[0])}%</h1>
                                             <p>{makeHumanReadable(statsValues.secondTot[1])}</p>
                                         </div>
-                                        <div className='stat secondarySchoolingTot'>
+                                        <div className='stat tertiaryEducationTot'>
                                             <h1>{makeHumanReadable(statsValues.thirdTot[0])}%</h1>
                                             <p>{makeHumanReadable(statsValues.thirdTot[1])}</p>
                                         </div>
@@ -505,21 +510,21 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                                 </div>
                                 <div className='second_panel'>
                                     <div className='top'>
-                                        <p className='catagory-name'> TRAVEL TIME: <span>Municipality Focus 2018</span></p>
+                                        <p className='catagory-name'> Travel Time: <span>Municipality Focus 2018</span></p>
 
                                         <MiniSelect names={['Buffalo City', 'City of Cape Town', 'Ekurhuleni', 'eThekwini', 'City of Joburg', 'Mangaung', 'Nelson Mandela Bay', "Tshwane"].sort()} setSelected={setSelected} selected={selected} />
                                     </div>
                                     <p className="title_header">PROPORTION OF TRAVELLERS WHO TRAVEL:</p>
                                     <div className='bottom'>
-                                    <div className='stat noSchoolingTot'>
+                                    <div className='stat tertiaryEducationTot'>
                                             <h1>{makeHumanReadable(statsValues.first[0])}%</h1>
                                             <p > {makeHumanReadable(statsValues.first[1])}</p>
                                         </div>
-                                        <div className='stat primarySchoolingTot'>
+                                        <div className='stat tertiaryEducationTot'>
                                             <h1>{makeHumanReadable(statsValues.second[0])}%</h1>
                                             <p>{makeHumanReadable(statsValues.second[1])}</p>
                                         </div>
-                                        <div className='stat secondarySchoolingTot'>
+                                        <div className='stat tertiaryEducationTot'>
                                             <h1>{makeHumanReadable(statsValues.third[0])}%</h1>
                                             <p>{makeHumanReadable(statsValues.third[1])}</p>
                                         </div>

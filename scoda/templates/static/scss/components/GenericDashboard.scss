@@ -85,6 +85,19 @@
                         text-align: center;
                     }
 
+                    &.small>p{
+                        width: 70px;
+                        text-align: center;
+                    }
+                    &.medium>p{
+                        width: 85px;
+                        text-align: center;
+                    }
+                    &.large>p{
+                        width: 95px;
+                        text-align: center;
+                    }
+
                     &.publicHealthCareTot>p {
                         width: 108px;
                         text-align: center;
@@ -241,6 +254,19 @@
                         text-align: center;
                     }
 
+                    &.small>p{
+                        width: 70px;
+                        text-align: center;
+                    }
+                    &.medium>p{
+                        width: 85px;
+                        text-align: center;
+                    }
+                    &.large>p{
+                        width: 95px;
+                        text-align: center;
+                    }
+
                     &.publicHealthCare>p {
                         width: 108px;
                         text-align: center;
@@ -267,6 +293,11 @@
                     }
 
                     &.tertiaryEducation>p {
+                        width: 77px;
+                        text-align: center;
+                    }
+
+                    &.tertiaryEducationTot>p{
                         width: 77px;
                         text-align: center;
                     }

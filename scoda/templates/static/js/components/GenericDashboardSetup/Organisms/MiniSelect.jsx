@@ -23,6 +23,7 @@ export const MiniSelect = ({ names, selected, setSelected,setSelectedChart,
                     dropdownName === "Sustainability" && genericIndex === 1? "POLLUTION TYPE":
                     dropdownName === "Travel Time" && genericIndex === 0? "TRAVEL TIME":
                     dropdownName === "Travel Time" && genericIndex === 1? "TRANSPORT METHOD":
+                    dropdownName === "Transport Mode" ? "PASSENGERS BY MODE":
                     "Main Source of Income:"}
                 </p>
                 <div className={'mini_select macro_select'} onClick={() => { visibility(!show) }}>

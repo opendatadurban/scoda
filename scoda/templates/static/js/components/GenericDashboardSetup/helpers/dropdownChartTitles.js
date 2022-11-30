@@ -26,7 +26,7 @@ export const dropdownChartTitle = (indicator_ids, hhiDropdownNames, selectedDrop
 
         return <p className="title">Number of individuals travelling to work by:
             <span className="category"> {hhiDropdownNames(indicator_ids[0])[selectedDropDownChart].shortName} </span></p>
-    }  else if (dropname === "Transport Mode" && genericIndex === 0) {
+    }  else if (dropname === "Transport Mode") {
 
         return <p className="title">{hhiDropdownNames(indicator_ids[0])[selectedDropDownChart].longName}:
             <span className="category"> {hhiDropdownNames(indicator_ids[0])[selectedDropDownChart].shortName} </span></p>
@@ -61,9 +61,13 @@ export const getSourceTitle = (genericIndex, dropname) => {
 
     let source =
         <p className={"dropdown_chart_source"}>
-            <span className="source_pre">Source:</span>
-            Calculated from Stats SA General Household Survey
+            <span className="source_pre">Source: </span>
+            {dropname === "Travel Time" || dropname === "Transport Mode" ? 
+            "StatsSA General Household Survey"
+            :"Calculated from Stats SA General Household Survey"}
         </p>
+
+
 
     return source
 }
