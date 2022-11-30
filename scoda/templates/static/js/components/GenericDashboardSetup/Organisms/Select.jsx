@@ -79,7 +79,7 @@ export const Select = ({ chartData, originalValues, selected, options,
     return (<div className="conditional_select_wrapper" onClick={closeAllAlerts}>
         {
             isDropDownChart ? <>
-                <p className="select_title">Choose Cities:</p>
+                <p className="select_title">Choose Cities</p>
                 <div className='custom_select'
                 onClick={ () => selectContext.setSelect(!selectContext.selectOpen)}>
                     {

@@ -75,21 +75,52 @@ export const getStatTotals = (originalValues, cityLabels, setStats, selected) =>
 
 export const getTransportModeStatsTotal = (setStats, selected) => {
     let endpoints = [
-        `/api/explore_new?indicator_id=941&city=${selected}&year=2018`,
-        `/api/explore_new?indicator_id=944&city=${selected}&year=2018`,
-        `/api/explore_new?indicator_id=947&city=${selected}&year=2018`,
-        `/api/explore_new?indicator_id=947&city=${selected}&year=2018`,
-        `/api/explore_new?indicator_id=947&city=${selected}&year=2018`,
-        `/api/stats?indicator_id=941&average=True&year=2018`,
-        `/api/stats?indicator_id=944&average=True&year=2018`,
-        `/api/stats?indicator_id=947&average=True&year=2018`,
-        `/api/stats?indicator_id=947&average=True&year=2018`,
-        `/api/stats?indicator_id=947&average=True&year=2018`,
+        `/api/explore_new?indicator_id=816&city=${selected}&year=2018`,
+        `/api/explore_new?indicator_id=822&city=${selected}&year=2018`,
+        `/api/explore_new?indicator_id=825&city=${selected}&year=2018`,
+        `/api/explore_new?indicator_id=828&city=${selected}&year=2018`,
+        `/api/explore_new?indicator_id=837&city=${selected}&year=2018`,
+        `/api/stats?indicator_id=816&average=True&year=2018`,
+        `/api/stats?indicator_id=822&average=True&year=2018`,
+        `/api/stats?indicator_id=825&average=True&year=2018`,
+        `/api/stats?indicator_id=828&average=True&year=2018`,
+        `/api/stats?indicator_id=837&average=True&year=2018`,
+        `/api/explore_new?indicator_id=816`,
+        `/api/explore_new?indicator_id=822`,
+        `/api/explore_new?indicator_id=825`,
+        `/api/explore_new?indicator_id=828`,
+        `/api/explore_new?indicator_id=837`,
     ];
 
     Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
 
         (data) => {
+
+            const rawChartData = [
+                data[10].data, data[11].data, data[12].data, data[13].data, data[14].data
+            ]
+
+            let averageDenominatorForAllCities = []
+            let averageDenominatorPerCity = []
+
+            rawChartData.forEach((stat, statIndex) => {
+
+                let averageValueForSingleChartAll = 0
+                let averageValueForSingleChartByYear = 0
+
+                stat.forEach(year => {
+
+                    year.values.forEach(value => averageValueForSingleChartAll += value)
+
+                    if (year.year === "2018") {
+
+                        year.values.forEach(value => averageValueForSingleChartByYear += value)
+                    }
+                })
+                averageDenominatorForAllCities.push(averageValueForSingleChartAll / rawChartData.length)
+                averageDenominatorPerCity.push(averageValueForSingleChartByYear)
+            })
+
             const values = data.map((value, valueIndex) => {
 
                 if (valueIndex <= 4) {
@@ -106,16 +137,16 @@ export const getTransportModeStatsTotal = (setStats, selected) => {
 
                     let newArr = { ...prev }
 
-                    newArr.first = [values[0], "Walk"]
-                    newArr.second = [values[1], "MINIBUS TAXI"]
-                    newArr.third = [values[2], "BUS"]
-                    newArr.fourth = [values[3], "TRAIN"]
-                    newArr.fifth = [values[4], "OWN CAR"]
-                    newArr.firstTot = [values[5], "Walk"]
-                    newArr.secondTot = [values[6], "MINIBUS TAXI"]
-                    newArr.thirdTot = [values[7], "BUS"]
-                    newArr.secondTot = [values[8], "TRAIN"]
-                    newArr.thirdTot = [values[9], "OWN CAR"]
+                    newArr.first = [Math.round(values[0] / averageDenominatorPerCity[0] * 10000) / 100, "Walk"]
+                    newArr.second = [Math.round(values[1] / averageDenominatorPerCity[1] * 10000) / 100, "MINIBUS TAXI"]
+                    newArr.third = [Math.round(values[2] / averageDenominatorPerCity[2] * 10000) / 100, "BUS"]
+                    newArr.fourth = [Math.round(values[3] / averageDenominatorPerCity[3] * 10000) / 100, "TRAIN"]
+                    newArr.fifth = [Math.round(values[4] / averageDenominatorPerCity[4] * 10000) / 100, "OWN CAR"]
+                    newArr.firstTot = [Math.round(values[5] / averageDenominatorForAllCities[0] * 10000) / 100, "Walk"]
+                    newArr.secondTot = [Math.round(values[6] / averageDenominatorForAllCities[1] * 10000) / 100, "MINIBUS TAXI"]
+                    newArr.thirdTot = [Math.round(values[7] / averageDenominatorForAllCities[2] * 10000) / 100, "BUS"]
+                    newArr.fourthTot = [Math.round(values[8] / averageDenominatorForAllCities[3] * 10000) / 100, "TRAIN"]
+                    newArr.fifthTot = [Math.round(values[9] / averageDenominatorForAllCities[4] * 10000) / 100, "OWN CAR"]
 
                     return newArr
                 }
@@ -133,15 +164,45 @@ export const getICTStatsTotal = (setStats, selected) => {
         `/api/stats?indicator_id=941&average=True&year=2018`,
         `/api/stats?indicator_id=944&average=True&year=2018`,
         `/api/stats?indicator_id=947&average=True&year=2018`,
+        `/api/explore_new?indicator_id=941`,
+        `/api/explore_new?indicator_id=944`,
+        `/api/explore_new?indicator_id=947`,
     ];
 
     Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
 
         (data) => {
+
+            const rawChartData = [
+                data[6].data, data[7].data, data[8].data
+            ]
+
+            let averageDenominatorForAllCities = []
+            let averageDenominatorPerCity = []
+
+            rawChartData.forEach((stat, statIndex) => {
+
+                let averageValueForSingleChartAll = 0
+                let averageValueForSingleChartByYear = 0
+
+                stat.forEach(year => {
+
+                    year.values.forEach(value => averageValueForSingleChartAll += value)
+
+                    if (year.year === "2018") {
+
+                        year.values.forEach(value => averageValueForSingleChartByYear += value)
+                    }
+                })
+                averageDenominatorForAllCities.push(averageValueForSingleChartAll / rawChartData.length)
+                averageDenominatorPerCity.push(averageValueForSingleChartByYear)
+            })
+
             const values = data.map((value, valueIndex) => {
 
                 if (valueIndex <= 2) {
-                    let numberValue = value.data[0].values
+
+                    let numberValue = value.data[0].values[0]
                     return numberValue
                 } else {
 
@@ -154,12 +215,12 @@ export const getICTStatsTotal = (setStats, selected) => {
 
                     let newArr = { ...prev }
 
-                    newArr.first = [values[0], "Fixed Line Telephone"]
-                    newArr.second = [values[1], "Mobile Telephone"]
-                    newArr.third = [values[2], "internet ConnectioN"]
-                    newArr.firstTot = [values[3], "Fixed Line Telephone"]
-                    newArr.secondTot = [values[4], "Mobile Telephone"]
-                    newArr.thirdTot = [values[5], "internet ConnectioN"]
+                    newArr.first = [Math.round(values[0] / averageDenominatorPerCity[0] * 10000) / 100, "Fixed Line Telephone"]
+                    newArr.second = [Math.round(values[1] / averageDenominatorPerCity[1] * 10000) / 100, "Mobile Telephone"]
+                    newArr.third = [Math.round(values[2] / averageDenominatorPerCity[2] * 10000) / 100, "internet ConnectioN"]
+                    newArr.firstTot = [Math.round(values[3] / averageDenominatorForAllCities[0] * 10000) / 100, "Fixed Line Telephone"]
+                    newArr.secondTot = [Math.round(values[4] / averageDenominatorForAllCities[1] * 10000) / 100, "Mobile Telephone"]
+                    newArr.thirdTot = [Math.round(values[5] / averageDenominatorForAllCities[2] * 10000) / 100, "internet ConnectioN"]
 
                     return newArr
                 }
@@ -179,16 +240,18 @@ export const getPublicTransportSpendStatsTotals = (setStats, selected) => {
         `/api/stats?indicator_id=1085&average=True&year=2018`,
         `/api/stats?indicator_id=1086&average=True&year=2018`,
         `/api/stats?indicator_id=1087&average=True&year=2018`,
-       
+
     ];
 
     Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
         (data) => {
+
+            
             const values = data.map((value, valueIndex) => {
-               
+
                 if (valueIndex <= 3) {
                     let numberValue = value.data[0].values
-              
+
                     return numberValue
                 } else {
 
@@ -228,23 +291,47 @@ export const getTravelTimeStatsTotals = (setStats, selected) => {
         `/api/stats?indicator_id=863&average=True&year=2018`,
         `/api/stats?indicator_id=872&average=True&year=2018`,
         `/api/stats?indicator_id=881&average=True&year=2018`,
+        `/api/explore_new?indicator_id=845`,
+        `/api/explore_new?indicator_id=854`,
+        `/api/explore_new?indicator_id=863`,
+        `/api/explore_new?indicator_id=872`,
+        `/api/explore_new?indicator_id=881`,
     ];
 
-    const labels = ['Buffalo City', 'City of Cape Town', 'Ekurhuleni', 'eThekwini', 'City of Joburg', 'Mangaung', 'Nelson Mandela Bay', "Tshwane"].sort()
-    const averageValues = [186440.23262469997, 953506.7239258001, 805731.6900653, 830482.3551183001, 924107.6886005, 223937.3599529, 176044.57130190002, 650400.4376029001]
-    let totalAverage = 0
-
-    averageValues.forEach((number, index) => {
-        totalAverage += number
-    })
 
     Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
         (data) => {
+
+            const rawChartData = [
+                data[10].data, data[11].data, data[12].data, data[13].data, data[14].data
+            ]
+
+            let averageDenominatorForAllCities = []
+            let averageDenominatorPerCity = []
+
+            rawChartData.forEach((stat, statIndex) => {
+
+                let averageValueForSingleChartAll = 0
+                let averageValueForSingleChartByYear = 0
+
+                stat.forEach(year => {
+
+                    year.values.forEach(value => averageValueForSingleChartAll += value)
+
+                    if (year.year === "2018") {
+
+                        year.values.forEach(value => averageValueForSingleChartByYear += value)
+                    }
+                })
+                averageDenominatorForAllCities.push(averageValueForSingleChartAll / rawChartData.length)
+                averageDenominatorPerCity.push(averageValueForSingleChartByYear)
+            })
+
             const values = data.map((value, valueIndex) => {
-               
+
                 if (valueIndex <= 4) {
-                    let numberValue = value.data[0].values
-              
+                    let numberValue = value.data[0].values[0]
+
                     return numberValue
                 } else {
 
@@ -256,20 +343,20 @@ export const getTravelTimeStatsTotals = (setStats, selected) => {
 
                 let newArr = { ...prev }
 
-                newArr.first = [Math.round(values[0]), "15 minutes or less"]
-                newArr.second = [Math.round(values[1]), "15 - 30 Minutes"]
-                newArr.third = [Math.round(values[2]), "31 - 60 Minutes"]
-                newArr.fourth = [Math.round(values[3]), "61 - 90 Minutes"]
-                newArr.fifth = [Math.round(values[4]), "More Than 90 Minutes"]
-                newArr.firstTot = [Math.round(values[5]), "15 minutes or less"]
-                newArr.secondTot = [Math.round(values[6]), "15 - 30 Minutes"]
-                newArr.thirdTot = [Math.round(values[7]), "31 - 60 Minutes"]
-                newArr.fourthTot = [Math.round(values[8]), "61 - 90 Minutes"]
-                newArr.fifthTot = [Math.round(values[9]), "More Than 90 Minutes"]
+                newArr.first = [Math.round(values[0] / averageDenominatorPerCity[0] * 10000) / 100, "15 minutes or less"]
+                newArr.second = [Math.round(values[1] / averageDenominatorPerCity[1] * 10000) / 100, "15 - 30 Minutes"]
+                newArr.third = [Math.round(values[2] / averageDenominatorPerCity[2] * 10000) / 100, "31 - 60 Minutes"]
+                newArr.fourth = [Math.round(values[3] / averageDenominatorPerCity[3] * 10000) / 100, "61 - 90 Minutes"]
+                newArr.fifth = [Math.round(values[4] / averageDenominatorPerCity[4] * 10000) / 100, "More Than 90 Minutes"]
+                newArr.firstTot = [Math.round(values[5] / averageDenominatorForAllCities[0] * 10000) / 100, "15 minutes or less"]
+                newArr.secondTot = [Math.round(values[6] / averageDenominatorForAllCities[1] * 10000) / 100, "15 - 30 Minutes"]
+                newArr.thirdTot = [Math.round(values[7] / averageDenominatorForAllCities[2] * 10000) / 100, "31 - 60 Minutes"]
+                newArr.fourthTot = [Math.round(values[8] / averageDenominatorForAllCities[3] * 10000) / 100, "61 - 90 Minutes"]
+                newArr.fifthTot = [Math.round(values[9] / averageDenominatorForAllCities[4] * 10000) / 100, "More Than 90 Minutes"]
 
                 return newArr
             })
-       
+
         }
     )
 }

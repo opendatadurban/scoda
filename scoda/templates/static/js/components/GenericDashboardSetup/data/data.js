@@ -317,11 +317,11 @@ export const transport_mode_data = [
     {
         toggle_calculation: true,
         percent: {
-            name: "Proportion of individuals travelling to education or work:  Vehicle hired by a group of parents/lift club",
+            name: "Proportion of individuals travelling to education or work: Vehicle hired by a group of parents/lift club",
             code: "TR.SOCR.10.0",
         },
         number: {
-            name: "Number of individuals travelling to education or work:  Vehicle hired by a group of parents/lift club",
+            name: "Number of individuals travelling to education or work: Vehicle hired by a group of parents/lift club",
             code: "TR.SOCR.10.0",
         },
         endpoints: [834] 
