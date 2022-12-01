@@ -10,13 +10,6 @@ function GetCardInfo(){
               class:'_citizen_engagement',
               href:'/scoda/socr#/citizen_engagement'
             },
-            // {
-            //   header:'City Finances',
-            //   subheader:" (From SoCR 2021)",
-            //   type:'DASHBOARD',
-            //   class:'_city_finances',
-            //   href:'/scoda/socr#/city_finances'
-            // },
             {
                 header:'Human Resources',
                 subheader:" (From SoCR 2021)",
@@ -86,6 +79,35 @@ function GetCardInfo(){
                 type:'DASHBOARD',
                 class:'_sustainability',
                 href:'/scoda/socr#/sustainability'
+              },
+              {
+                header:'ICT Infrastructure',
+                subheader:" (From SoCR 2021)",
+                type:'DASHBOARD',
+                class:'_infrastructure',
+                href:'/scoda/socr#/infrastructure'
+              },
+              {
+                header:'Transport Mode',
+                subheader:" (From SoCR 2021)",
+                type:'DASHBOARD',
+                class:'_transport_mode',
+                href:'/scoda/socr#/transport_mode'
+              },
+            
+              {
+                header:'Public Transport Spend',
+                subheader:" (From SoCR 2021)",
+                type:'DASHBOARD',
+                class:'_public_transport_spend',
+                href:'/scoda/socr#/public_transport_spend'
+              },
+              {
+                header:'Travel Time',
+                subheader:" (From SoCR 2021)",
+                type:'DASHBOARD',
+                class:'_travel_time',
+                href:'/scoda/socr#/travel_time'
               }
 
             //   {
