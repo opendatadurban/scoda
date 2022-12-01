@@ -12,6 +12,7 @@ import { ChartWrapper } from './Organisms/ChartWrapper';
 import { MiniSelect } from './Organisms/MiniSelect';
 import { useGlobalClose } from '../../context';
 import { SingleCitySelect } from './Organisms/SingleCitySelect';
+import { chartWrapperClassNames } from './helpers/chartGridStyles';
 
 export const ChartGrid = ({ indicator_ids,
   chartGroup,
@@ -90,13 +91,6 @@ export const ChartGrid = ({ indicator_ids,
 
   const globalCityDropDownClose = useGlobalClose()
 
-  const chartWrapperClassNames = gridItems > 4 && (dropdownName !== "Food Security, Literacy and Inequality") ? "grid-container" :
-    gridItems > 4 && (dropdownName === "Food Security, Literacy and Inequality") ? "grid-container horizontal_food" :
-      gridItems === 4 && (dropdownName === "Life Expectancy and Health") ? "grid-container-4 horizontal" :
-        (gridItems > 2 && gridItems <= 4) && (dropdownName !== "Life Expectancy and Health") ? "grid-container-4" :
-          gridItems === 2 && indicator_ids.includes("indicator text box") ? "grid-2-text" :
-            gridItems === 2 ? "grid-only-charts-2" : "grid-container-1"
-
   const singleCityForYears = (dropdownName === "Public Transport Spend" && genericIndex === 1)
   const isDropDownChart = Array.isArray(indicator_ids[0])
   const isSingleCityDropdown = (dropdownName === "Travel Time" && genericIndex === 1)
@@ -126,8 +120,6 @@ export const ChartGrid = ({ indicator_ids,
                   chartDropName={dropdownName}
                   isDropDownChart={isDropDownChart}
                   genericIndex={genericIndex} />
-
-
             }
 
             {
@@ -143,7 +135,7 @@ export const ChartGrid = ({ indicator_ids,
             }
           </div>
 
-          <div className={chartWrapperClassNames}>
+          <div className={chartWrapperClassNames(gridItems,dropdownName,indicator_ids)}>
             {
               <ChartWrapper
                 chartGroup={chartData}

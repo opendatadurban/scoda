@@ -264,6 +264,58 @@
           }
         }
       }
+      &_infrastructure{
+        $image: '/static/dist/img/image_card-ict_infrastructure.jpg';
+         &.module {
+            background: url($image) top left / cover;
+          }
+        @at-root {
+          .card {
+            &--gaussian-blur_infrastructure {
+          @include gaussian-blur($image,2px,#4fa68399);
+            }
+          }
+        }
+      }
+      &_transport_mode{
+        $image: '/static/dist/img/image_card-transport_mode.jpg';
+         &.module {
+            background: url($image) top left / cover;
+          }
+        @at-root {
+          .card {
+            &--gaussian-blur_transport_mode {
+          @include gaussian-blur($image,2px,#4fa68399);
+            }
+          }
+        }
+      }
+      &_public_transport_spend{
+        $image: '/static/dist/img/image_card-public_transport_spend.jpg';
+         &.module {
+            background: url($image) top left / cover;
+          }
+        @at-root {
+          .card {
+            &--gaussian-blur_public_transport_spend {
+          @include gaussian-blur($image,2px,#4fa68399);
+            }
+          }
+        }
+      }
+      &_travel_time{
+        $image: '/static/dist/img/image_card-travel_time.jpg';
+         &.module {
+            background: url($image) top left / cover;
+          }
+        @at-root {
+          .card {
+            &--gaussian-blur_travel_time {
+          @include gaussian-blur($image,2px,#4fa68399);
+            }
+          }
+        }
+      }
     
     // General styling
       .label {

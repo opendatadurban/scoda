@@ -64,7 +64,7 @@
                 justify-content: space-between;
                 width: calc(50vw - 39px);
 
-                &.closer{
+                &.closer {
                     justify-content: center;
                     gap: 39px;
                 }
@@ -85,15 +85,22 @@
                         text-align: center;
                     }
 
-                    &.small>p{
+                    &.small>p {
                         width: 70px;
                         text-align: center;
                     }
-                    &.medium>p{
+
+                    &.extra_small>p {
+                        width: 52px;
+                        text-align: center;
+                    }
+
+                    &.medium>p {
                         width: 85px;
                         text-align: center;
                     }
-                    &.large>p{
+
+                    &.large>p {
                         width: 95px;
                         text-align: center;
                     }
@@ -232,8 +239,8 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
-                
-                &.closer{
+
+                &.closer {
                     justify-content: center;
                     gap: 39px;
                 }
@@ -254,15 +261,22 @@
                         text-align: center;
                     }
 
-                    &.small>p{
+                    &.small>p {
                         width: 70px;
                         text-align: center;
                     }
-                    &.medium>p{
+
+                    &.extra_small>p {
+                        width: 52px;
+                        text-align: center;
+                    }
+
+                    &.medium>p {
                         width: 85px;
                         text-align: center;
                     }
-                    &.large>p{
+
+                    &.large>p {
                         width: 95px;
                         text-align: center;
                     }
@@ -297,7 +311,7 @@
                         text-align: center;
                     }
 
-                    &.tertiaryEducationTot>p{
+                    &.tertiaryEducationTot>p {
                         width: 77px;
                         text-align: center;
                     }
@@ -391,7 +405,7 @@
 
                 // .title_wrapper {
                 //     position: absolute;
-                   
+
 
                 //     .dropdown_title {}
 
@@ -484,6 +498,8 @@
                 }
 
                 .source_title {
+                    display: flex;
+                    align-items: baseline;
                     margin: 0;
                     padding: 3px 0 3px 0;
                     font-family: 'Montserrat';
@@ -501,7 +517,7 @@
                         line-height: 10px;
                         text-transform: uppercase;
                         color: #8C8F97;
-                        float:left;
+                        float: left;
                     }
                 }
             }
@@ -529,6 +545,8 @@
                 }
 
                 .source_title {
+                    display: flex;
+                    align-items: baseline;
                     margin: 0;
                     padding: 3px 0 3px 0;
                     font-family: 'Montserrat';
@@ -565,6 +583,8 @@
                 .chart_wrapper {
 
                     .source_title {
+                        display: flex;
+                        align-items: baseline;
                         margin: 0;
                         padding: 3px 0 3px 0;
                         font-family: 'Montserrat';
@@ -622,11 +642,24 @@
                     top: 10px;
                 }
 
+                &.no_divider {
+                    padding: 10px 25px 7px 25px;
+                    grid-column-gap: 20px;
+                    grid-row-gap: 37px;
+                    grid-template-columns: calc(50% - 20px/2) calc(50% - 20px/2);
 
+                    &:after {
+
+                        width: 0;
+                        background: transparent;
+                    }
+                }
 
                 .chart_wrapper {
 
                     .source_title {
+                        display: flex;
+                        align-items: baseline;
                         margin: 0;
                         padding: 3px 0 3px 0;
                         font-family: 'Montserrat';
@@ -651,14 +684,53 @@
                     .heading_wrapper {
                         align-items: center;
 
-                        .heading {
-                            height: unset;
-                            width: 418px;
+                        .heading_stack {
+                            .heading {
+                                height: unset;
+                                width: 418px;
 
+                            }
+
+                            .top_main {
+                                padding: 0;
+                                margin: 0;
+                                font-family: 'Montserrat';
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 12px;
+                                line-height: 15px;
+                                color: #2F3442;
+                            }
+
+                            .sub_main {
+                                padding: 0 0 4px 0;
+                                margin: 0;
+                                font-family: 'Montserrat';
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 12px;
+                                line-height: 15px;
+                                color: #2F3442;
+                            }
                         }
+
 
                     }
 
+                }
+
+                &.three_charts {
+
+                    grid-row-gap: 36px;
+                    grid-column-gap: 50px;
+                    padding: 10px 30px 10px 30px;
+                    grid-template-columns: calc(50% - 50px/2) calc(50% - 50px/2);
+
+                    &:after {
+                        content: "";
+                        width: 0;
+                        background: transparent;
+                    }
                 }
             }
 
@@ -721,6 +793,8 @@
 
 
                     .dropdown_chart_source {
+                        display: flex;
+                        align-items: baseline;
                         margin: 0;
                         padding: 3px 0 3px 0;
                         font-family: 'Montserrat';
@@ -758,7 +832,7 @@
 
 .secondary {
     margin: 0;
-    padding: 13px 0 0 0;
+    padding: 15px 0 0 0;
 
     .chart_grid {
 
