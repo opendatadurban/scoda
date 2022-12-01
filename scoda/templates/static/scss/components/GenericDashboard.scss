@@ -643,10 +643,10 @@
                 }
 
                 &.no_divider {
-                    padding: 10px 25px 7px 25px;
-                    grid-column-gap: 20px;
-                    grid-row-gap: 37px;
-                    grid-template-columns: calc(50% - 20px/2) calc(50% - 20px/2);
+                    padding: 10px 30px 10px 30px;
+                    grid-row-gap: 36px;
+                    grid-column-gap: 50px;
+                    grid-template-columns: calc(50% - 50px/2) calc(50% - 50px/2);
 
                     &:after {
 

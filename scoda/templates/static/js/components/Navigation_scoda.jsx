@@ -21,11 +21,8 @@ export default class Navigation_scoda extends Component {
     }
 
     checkSoCR() {
-        if (document.location.href == window.location.origin + '/scoda/socr#/' ||
-        document.location.href == window.location.origin + '/scoda/socr#/human_resources' ||
-        document.location.href == window.location.origin + '/scoda/socr#/city_finances' ||
-        document.location.href == window.location.origin + '/scoda/socr#/citizen_engagement' ||
-        document.location.href == window.location.origin + '/scoda/socr#/service_delivery' 
+        if (
+            document.location.href.includes(window.location.origin + '/scoda/socr#/')
         ) {
             return true
         }
