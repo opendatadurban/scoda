@@ -61,12 +61,16 @@ module.exports = (env, argv) => {
   if (argv.mode === "development") {
 
     config.output.path = resolve("../../static/public/")
-    config.output.clean = true
+    config.output.clean = {
+      keep: "sitemap.xml", // Keep these assets under 'ignored/dir'.
+    }
     config.devtool = "source-map"
     config.watch = true
   }
   if (argv.mode === 'production') {
-    config.output.clean = true
+    config.output.clean = {
+      keep: "sitemap.xml", // Keep these assets under 'ignored/dir'.
+    }
     config.output.path = resolve("../../static/public")
   }
 
