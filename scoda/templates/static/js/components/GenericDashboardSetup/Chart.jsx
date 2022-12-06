@@ -66,7 +66,7 @@ export const Chart = ({ graphData, title, dropdownName, stacked, chartIndex, gen
                 }
                     :
 
-                    tickExceptionsForDwellings(dropdownName, chartIndex),
+                    tickExceptionsForDwellings(dropdownName, chartIndex, genericIndex),
             }],
         },
         tooltips: {
