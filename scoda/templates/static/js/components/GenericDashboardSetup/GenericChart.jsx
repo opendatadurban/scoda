@@ -5,10 +5,8 @@ import { GenericStatsPanel } from './Organisms/GenericStatsPanel'
 import '../../../scss/components/GenericDashboard.scss'
 import { populateChartGroup } from './data/api'
 import { Modal, ModalBody, Spinner } from 'reactstrap'
-//import Sidebar_left from '../Sidebar_left'
 import { SelectContextState } from '../../context'
 import { hhiDropdownNames } from './helpers/helpers'
-import { indicator_text_box_data } from './data/data'
 
 const GenericChart = ({ indicator_ids, minYear, maxYear,
   gridItems, subNavContent, genericIndex,
@@ -21,24 +19,26 @@ const GenericChart = ({ indicator_ids, minYear, maxYear,
   const [selectedName, setSelectedName] = useState(Array.isArray(indicator_ids[0]) ?
     hhiDropdownNames(indicator_ids[0])[0].shortName : "")
 
-  // const singleCityName = ['BUF', 'CPT', 'EKU', 'ETH', 'JHB', 'MAN', 'NMA', 'TSH']
-
   useEffect(() => {
+
     setChartGroup([])
+
     populateChartGroup(
+
       setChartGroup,
       Array.isArray(indicator_ids[0]) ?
         [indicator_ids[0][selectedChart], indicator_ids[1]]
         :
         indicator_ids,
-      minYear, maxYear, //year min max
-      colors, //color presets
+      minYear, maxYear,
+      colors, 
       setOriginalValues,
       dropdownName,
       genericIndex,
       singleCityIndex
     )
   }, [selectedName, selectedChart, singleCityIndex])
+
   const isDropDownChart = Array.isArray(indicator_ids[0])
   const firstDashboardClass = (genericIndex === 0) ? "first_chart" : ""
 
@@ -51,13 +51,13 @@ const GenericChart = ({ indicator_ids, minYear, maxYear,
             {/* <Sidebar_left /> */}
           </>}
           <div id='content' >
+            
             {secondaryChart ?
               "" :
               <GenericStatsPanel
                 originalValues={originalValues}
                 dropName={dropdownName}
               />
-
             }
 
             <ChartGrid

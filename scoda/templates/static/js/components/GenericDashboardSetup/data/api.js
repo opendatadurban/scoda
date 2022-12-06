@@ -5,7 +5,7 @@ import { filterForSingleCity, sortCities } from '../helpers/sorting'
 import { indicator_text_box_data } from './data'
 
 export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYear,
-  yearColors, setOriginalValues, dropdownName, genericIndex,singleCityIndex
+  yearColors, setOriginalValues, dropdownName, genericIndex, singleCityIndex
 
 ) => {
 
@@ -48,13 +48,13 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
           ])
           , type: "toggle_single_city"
         })
-      } else if(id.toggle_calculation) {
+      } else if (id.toggle_calculation) {
         indicator_id_requests.push({
           request: axios.get(newApiUri + id.endpoints[0])
           , type: "toggle_calculation"
         })
 
-      } else if(id.barchart_by_year){
+      } else if (id.barchart_by_year) {
 
         indicator_id_requests.push({
           request: Promise.all([
@@ -65,7 +65,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
           ])
           , type: "toggle_barchart_by_year"
         })
-      }else {
+      } else {
         indicator_id_requests.push({
           request: Promise.all([
             axios.get(newApiUri + id.endpoints[1]),
@@ -85,16 +85,15 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
   Promise.all(indicator_id_requests.map(request => request.request)).then(
 
     (chartData) => {
-      
+
       chartData.forEach((chart, index) => {
-       
+
         let filterData = []
 
 
         if (indicator_id_requests[index].type === "new") {
           let colorCount = 0
           chart.data.forEach((item) => {
-
 
             /**
              * Filter out min max year range, or 
@@ -196,17 +195,18 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
               let ogLabels = [...year.labels]
 
               year.labels.sort(function (a, b) {
+
                 return a.toLowerCase().localeCompare(b.toLowerCase());
               })
 
               let indexes = []
 
               year.labels.forEach((label, labelIndex) => {
+
                 indexes.push(ogLabels.indexOf(label))
               })
 
               let newValues = []
-
 
               indexes.forEach((newIndex_1) => newValues.push(year.values[newIndex_1]))
 
@@ -217,80 +217,62 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
 
             return newChart
           })
-      
+
           filterData.push(toggleChartWithColor)
         } else if (indicator_id_requests[index].type === "toggle_calculation") {
-        
+
           const toggleCharts = chart.data
-          
-      
+          let numberChart = []
+          let percentageChart = []
+          let percentageAverages = []
 
-            let numberChart = []
-            let percentageAverages = []
-          
+          toggleCharts.forEach((year, yearIndex) => {
 
-            toggleCharts.forEach((year, yearIndex) => {
+            if ((parseInt(year.year) < minYear || parseInt(year.year) > maxYear)) return
 
-              if ((parseInt(year.year) < minYear || parseInt(year.year) > maxYear)) return
+            year.color = yearColors[yearIndex]
 
-              year.color = yearColors[yearIndex]
-              year.labels = year.labels.map((city) => cityLabels(city))
-              let ogLabels = [...year.labels]
+            sortCities(year)
 
-              year.labels.sort(function (a, b) {
-                return a.toLowerCase().localeCompare(b.toLowerCase());
-              })
+            numberChart.push(year)
+          })
 
-              let indexes = []
+          numberChart.forEach((year, labelIndex) => {
 
-              year.labels.forEach((label, labelIndex) => {
-                indexes.push(ogLabels.indexOf(label))
-              })
+            let valuesTotal = 0
 
-              let newValues = []
+            year.values.forEach((number, numberIndex) => {
 
-
-              indexes.forEach((newIndex_1) => newValues.push(year.values[newIndex_1]))
-
-              year.values = newValues
-
-              numberChart.push(year)
+              valuesTotal += number
             })
 
-
-            numberChart[0].labels.forEach((label, labelIndex) =>{
-              let average = 0
-              numberChart.forEach((year,yearIndex) =>{
-               average += year.values[labelIndex]
-              })
-              percentageAverages.push(average)
+            let newYearValues = year.values.map(value => {
+        
+              return (value / valuesTotal) * 100
             })
 
-            let percentageChart = numberChart.map((year,index) => {
-            
-              return {
-                ...year,
-                values: year.values.map((value,valueIndex) => {
-                  return (value/percentageAverages[valueIndex])*100
-                })
-              }
-            })
-          
-          filterData.push([numberChart,percentageChart])
-        }else if (indicator_id_requests[index].type === "toggle_single_city") {
+            let newYear = {
+              ...year,
+              values: newYearValues
+            }
+
+            percentageChart.push(newYear)
+          })
+
+          filterData.push([numberChart, percentageChart])
+        } else if (indicator_id_requests[index].type === "toggle_single_city") {
 
           const toggleCharts = chart.map((data) => { return data.data })
+
           const toggleChartSortedByMetro = toggleCharts.map(chart => {
-
             let newChart = []
-
 
             chart.forEach((year, yearIndex) => {
 
               if ((parseInt(year.year) < minYear || parseInt(year.year) > maxYear)) return
 
               year.labels = year.labels.map((city) => cityLabels(city))
-              sortCities(year,yearIndex)
+              sortCities(year, yearIndex)
 
               newChart.push(year)
             })
@@ -299,50 +281,50 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
           })
 
           const newYears = ["15mins or less", "15 - 30mins", "31 - 60mins", "61 - 90mins ", "More than 90mins"]
-          const cityIndex = 0
-          
-          
+
           const mutatedChart = newYears.map((travelDuration, travelDurationIndex) => {
 
             let value = 0
             let newLabels = []
             let valuesByTravelDuration = []
-           
+
             toggleChartSortedByMetro[travelDurationIndex].forEach((chartItem, chartItemIndex) => {
-     
+
               newLabels.push(chartItem.year)
               valuesByTravelDuration.push(chartItem.values[singleCityIndex])
-            });
+            })
 
-            return {
+            let numberChart = {
               year: travelDuration,
               labels: newLabels,
               color: travelTimeColors[travelDurationIndex],
               values: valuesByTravelDuration
             }
+
+            return numberChart
           })
 
- 
+
           const mutatedChartPercent = mutatedChart.map((travelDuration, travelDurationIndex) => {
 
             let sumOfValues = 0
-      
+
             mutatedChart.forEach((item, index) => {
 
-               sumOfValues += item.values[travelDurationIndex]
+              sumOfValues += item.values[travelDurationIndex]
             })
 
             return {
               year: travelDuration.year,
               labels: travelDuration.labels,
               color: travelTimeColors[travelDurationIndex],
-              values: travelDuration.values.map((value)=> (value/sumOfValues)*100)
+              values: travelDuration.values.map((value) => (value / sumOfValues) * 100)
             }
           })
 
 
-          filterData.push([mutatedChart,mutatedChartPercent])
-        }else if (indicator_id_requests[index].type === "toggle_barchart_by_year") {
+          filterData.push([mutatedChart, mutatedChartPercent])
+        } else if (indicator_id_requests[index].type === "toggle_barchart_by_year") {
 
           const toggleCharts = chart.map((data) => { return data.data })
           const toggleChartSortedByMetro = toggleCharts.map(chart => {
@@ -355,38 +337,38 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
               if ((parseInt(year.year) < minYear || parseInt(year.year) > maxYear)) return
 
               year.labels = year.labels.map((city) => cityLabels(city))
-              sortCities(year,yearIndex)
+              sortCities(year, yearIndex)
 
               newChart.push(year)
             })
 
             return newChart
           })
-  
-        const newYears = ["< 10%", "10 - 20%", "20 - 30%", "> 30%"]
 
-let newChartWithPercentages = []    
-      
- toggleChartSortedByMetro.forEach((percentage, index) => {
+          const newYears = ["< 10%", "10 - 20%", "20 - 30%", "> 30%"]
 
-  let filteredByYear = []
+          let newChartWithPercentages = []
 
-  percentage.forEach((filterYear,filterIndex) => {
+          toggleChartSortedByMetro.forEach((percentage, index) => {
 
-    if(filterIndex === singleCityIndex){
+            let filteredByYear = []
 
-      filteredByYear.push(filterYear)
-    }
-  })
-  
-  newChartWithPercentages.push(...filteredByYear)
- })
+            percentage.forEach((filterYear, filterIndex) => {
 
- const newYearsWithPercentages = newChartWithPercentages.map((newItem,percentageIndex)=>{
-  return {...newItem, year: newYears[percentageIndex],color: travelTimeColors[percentageIndex]}
- })
+              if (filterIndex === singleCityIndex) {
 
-          filterData.push([newYearsWithPercentages,newYearsWithPercentages])
+                filteredByYear.push(filterYear)
+              }
+            })
+
+            newChartWithPercentages.push(...filteredByYear)
+          })
+
+          const newYearsWithPercentages = newChartWithPercentages.map((newItem, percentageIndex) => {
+            return { ...newItem, year: newYears[percentageIndex], color: travelTimeColors[percentageIndex] }
+          })
+
+          filterData.push([newYearsWithPercentages, newYearsWithPercentages])
         }
         else if (indicator_id_requests[index].type === "indicator text box") {
 

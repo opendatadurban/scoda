@@ -85,46 +85,17 @@ export const getTransportModeStatsTotal = (setStats, selected) => {
         `/api/stats?indicator_id=825&average=True&year=2018`,
         `/api/stats?indicator_id=828&average=True&year=2018`,
         `/api/stats?indicator_id=837&average=True&year=2018`,
-        `/api/explore_new?indicator_id=816`,
-        `/api/explore_new?indicator_id=822`,
-        `/api/explore_new?indicator_id=825`,
-        `/api/explore_new?indicator_id=828`,
-        `/api/explore_new?indicator_id=837`,
     ];
 
     Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
 
         (data) => {
 
-            const rawChartData = [
-                data[10].data, data[11].data, data[12].data, data[13].data, data[14].data
-            ]
-
-            let averageDenominatorForAllCities = []
-            let averageDenominatorPerCity = []
-
-            rawChartData.forEach((stat, statIndex) => {
-
-                let averageValueForSingleChartAll = 0
-                let averageValueForSingleChartByYear = 0
-
-                stat.forEach(year => {
-
-                    year.values.forEach(value => averageValueForSingleChartAll += value)
-
-                    if (year.year === "2018") {
-
-                        year.values.forEach(value => averageValueForSingleChartByYear += value)
-                    }
-                })
-                averageDenominatorForAllCities.push(averageValueForSingleChartAll / rawChartData.length)
-                averageDenominatorPerCity.push(averageValueForSingleChartByYear)
-            })
-
             const values = data.map((value, valueIndex) => {
 
                 if (valueIndex <= 4) {
-                    let numberValue = value.data[0].values
+                    let numberValue = value.data[0].values[0]
+
                     return numberValue
                 } else {
 
@@ -132,21 +103,66 @@ export const getTransportModeStatsTotal = (setStats, selected) => {
                 }
             })
 
+            const valuesPercentageByCity = []
+            const valuePercentageForAll = []
+
+            values.forEach((averageNumber, aveNumIndex) => {
+                if (aveNumIndex <= 4) {
+
+                    let totalValuesPercity = 0
+
+                    values.forEach((value, valueIndex) => {
+
+                        if (valueIndex <= 4) {
+
+                            totalValuesPercity += value
+                        }
+                    })
+
+                    let percent = Math.round(
+                        ((averageNumber / totalValuesPercity) * 100) * 100
+                    ) / 100
+
+                    valuesPercentageByCity.push(percent)
+                }
+            })
+
+            values.forEach((averageNumber, aveNumIndex) => {
+                if (aveNumIndex > 4) {
+
+                    let totalValuesForAllMetros = 0
+
+                    values.forEach((value, valueIndex) => {
+
+                        if (valueIndex > 4) {
+
+                            totalValuesForAllMetros += value
+                        }
+                    })
+
+                    let percent = Math.round(
+                        ((averageNumber / totalValuesForAllMetros) * 100) * 100
+                    ) / 100
+
+                    valuePercentageForAll.push(percent)
+                }
+            })
             setStats(
                 prev => {
 
                     let newArr = { ...prev }
 
-                    newArr.first = [Math.round(values[0] / averageDenominatorPerCity[0] * 10000) / 100, "Walk"]
-                    newArr.second = [Math.round(values[1] / averageDenominatorPerCity[1] * 10000) / 100, "MINIBUS TAXI"]
-                    newArr.third = [Math.round(values[2] / averageDenominatorPerCity[2] * 10000) / 100, "BUS"]
-                    newArr.fourth = [Math.round(values[3] / averageDenominatorPerCity[3] * 10000) / 100, "TRAIN"]
-                    newArr.fifth = [Math.round(values[4] / averageDenominatorPerCity[4] * 10000) / 100, "OWN CAR"]
-                    newArr.firstTot = [Math.round(values[5] / averageDenominatorForAllCities[0] * 10000) / 100, "Walk"]
-                    newArr.secondTot = [Math.round(values[6] / averageDenominatorForAllCities[1] * 10000) / 100, "MINIBUS TAXI"]
-                    newArr.thirdTot = [Math.round(values[7] / averageDenominatorForAllCities[2] * 10000) / 100, "BUS"]
-                    newArr.fourthTot = [Math.round(values[8] / averageDenominatorForAllCities[3] * 10000) / 100, "TRAIN"]
-                    newArr.fifthTot = [Math.round(values[9] / averageDenominatorForAllCities[4] * 10000) / 100, "OWN CAR"]
+                    newArr.first = [ valuesPercentageByCity[0], "Walk"]
+                    newArr.second = [ valuesPercentageByCity[1], "MINIBUS TAXI"]
+                    newArr.third = [ valuesPercentageByCity[2], "BUS"]
+                    newArr.fourth = [ valuesPercentageByCity[3], "TRAIN"]
+                    newArr.fifth = [valuesPercentageByCity[4] , "OWN CAR"]
+
+                    newArr.firstTot = [ valuePercentageForAll[0] , "Walk"]
+                    newArr.secondTot = [ valuePercentageForAll[1], "MINIBUS TAXI"]
+                    newArr.thirdTot = [valuePercentageForAll[2] , "BUS"]
+                    newArr.fourthTot = [valuePercentageForAll[3] , "TRAIN"]
+                    newArr.fifthTot = [ valuePercentageForAll[4], "OWN CAR"]
 
                     return newArr
                 }
@@ -164,39 +180,13 @@ export const getICTStatsTotal = (setStats, selected) => {
         `/api/stats?indicator_id=941&average=True&year=2018`,
         `/api/stats?indicator_id=944&average=True&year=2018`,
         `/api/stats?indicator_id=947&average=True&year=2018`,
-        `/api/explore_new?indicator_id=941`,
-        `/api/explore_new?indicator_id=944`,
-        `/api/explore_new?indicator_id=947`,
+
     ];
 
     Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
 
         (data) => {
 
-            const rawChartData = [
-                data[6].data, data[7].data, data[8].data
-            ]
-
-            let averageDenominatorForAllCities = []
-            let averageDenominatorPerCity = []
-
-            rawChartData.forEach((stat, statIndex) => {
-
-                let averageValueForSingleChartAll = 0
-                let averageValueForSingleChartByYear = 0
-
-                stat.forEach(year => {
-
-                    year.values.forEach(value => averageValueForSingleChartAll += value)
-
-                    if (year.year === "2018") {
-
-                        year.values.forEach(value => averageValueForSingleChartByYear += value)
-                    }
-                })
-                averageDenominatorForAllCities.push(averageValueForSingleChartAll / rawChartData.length)
-                averageDenominatorPerCity.push(averageValueForSingleChartByYear)
-            })
 
             const values = data.map((value, valueIndex) => {
 
@@ -210,17 +200,62 @@ export const getICTStatsTotal = (setStats, selected) => {
                 }
             })
 
+            const valuesPercentageByCity = []
+            const valuePercentageForAll = []
+
+            values.forEach((averageNumber, aveNumIndex) => {
+                if (aveNumIndex <= 2) {
+
+                    let totalValuesPercity = 0
+
+                    values.forEach((value, valueIndex) => {
+
+                        if (valueIndex <= 2) {
+
+                            totalValuesPercity += value
+                        }
+                    })
+
+                    let percent = Math.round(
+                        ((averageNumber / totalValuesPercity) * 100) * 100
+                    ) / 100
+
+                    valuesPercentageByCity.push(percent)
+                }
+            })
+
+            values.forEach((averageNumber, aveNumIndex) => {
+                if (aveNumIndex > 2) {
+
+                    let totalValuesForAllMetros = 0
+
+                    values.forEach((value, valueIndex) => {
+
+                        if (valueIndex > 2) {
+
+                            totalValuesForAllMetros += value
+                        }
+                    })
+
+                    let percent = Math.round(
+                        ((averageNumber / totalValuesForAllMetros) * 100) * 100
+                    ) / 100
+
+                    valuePercentageForAll.push(percent)
+                }
+            })
+
             setStats(
                 prev => {
 
                     let newArr = { ...prev }
 
-                    newArr.first = [Math.round(values[0] / averageDenominatorPerCity[0] * 10000) / 100, "Fixed Line Telephone"]
-                    newArr.second = [Math.round(values[1] / averageDenominatorPerCity[1] * 10000) / 100, "Mobile Telephone"]
-                    newArr.third = [Math.round(values[2] / averageDenominatorPerCity[2] * 10000) / 100, "internet ConnectioN"]
-                    newArr.firstTot = [Math.round(values[3] / averageDenominatorForAllCities[0] * 10000) / 100, "Fixed Line Telephone"]
-                    newArr.secondTot = [Math.round(values[4] / averageDenominatorForAllCities[1] * 10000) / 100, "Mobile Telephone"]
-                    newArr.thirdTot = [Math.round(values[5] / averageDenominatorForAllCities[2] * 10000) / 100, "internet ConnectioN"]
+                    newArr.first = [valuesPercentageByCity[0], "Fixed Line Telephone"]
+                    newArr.second = [valuesPercentageByCity[1], "Mobile Telephone"]
+                    newArr.third = [valuesPercentageByCity[2], "internet ConnectioN"]
+                    newArr.firstTot = [valuePercentageForAll[0], "Fixed Line Telephone"]
+                    newArr.secondTot = [valuePercentageForAll[1], "Mobile Telephone"]
+                    newArr.thirdTot = [valuePercentageForAll[2], "internet ConnectioN"]
 
                     return newArr
                 }
@@ -246,7 +281,7 @@ export const getPublicTransportSpendStatsTotals = (setStats, selected) => {
     Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
         (data) => {
 
-            
+
             const values = data.map((value, valueIndex) => {
 
                 if (valueIndex <= 3) {
@@ -290,42 +325,11 @@ export const getTravelTimeStatsTotals = (setStats, selected) => {
         `/api/stats?indicator_id=854&average=True&year=2018`,
         `/api/stats?indicator_id=863&average=True&year=2018`,
         `/api/stats?indicator_id=872&average=True&year=2018`,
-        `/api/stats?indicator_id=881&average=True&year=2018`,
-        `/api/explore_new?indicator_id=845`,
-        `/api/explore_new?indicator_id=854`,
-        `/api/explore_new?indicator_id=863`,
-        `/api/explore_new?indicator_id=872`,
-        `/api/explore_new?indicator_id=881`,
+        `/api/stats?indicator_id=881&average=True&year=2018`
     ];
-
 
     Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
         (data) => {
-
-            const rawChartData = [
-                data[10].data, data[11].data, data[12].data, data[13].data, data[14].data
-            ]
-
-            let averageDenominatorForAllCities = []
-            let averageDenominatorPerCity = []
-
-            rawChartData.forEach((stat, statIndex) => {
-
-                let averageValueForSingleChartAll = 0
-                let averageValueForSingleChartByYear = 0
-
-                stat.forEach(year => {
-
-                    year.values.forEach(value => averageValueForSingleChartAll += value)
-
-                    if (year.year === "2018") {
-
-                        year.values.forEach(value => averageValueForSingleChartByYear += value)
-                    }
-                })
-                averageDenominatorForAllCities.push(averageValueForSingleChartAll / rawChartData.length)
-                averageDenominatorPerCity.push(averageValueForSingleChartByYear)
-            })
 
             const values = data.map((value, valueIndex) => {
 
@@ -339,20 +343,66 @@ export const getTravelTimeStatsTotals = (setStats, selected) => {
                 }
 
             })
+
+            const valuesPercentageByCity = []
+            const valuePercentageForAll = []
+
+            values.forEach((averageNumber, aveNumIndex) => {
+                if (aveNumIndex <= 4) {
+
+                    let totalValuesPercity = 0
+
+                    values.forEach((value, valueIndex) => {
+
+                        if (valueIndex <= 4) {
+
+                            totalValuesPercity += value
+                        }
+                    })
+
+                    let percent = Math.round(
+                        ((averageNumber / totalValuesPercity) * 100) * 100
+                    ) / 100
+
+                    valuesPercentageByCity.push(percent)
+                }
+            })
+
+            values.forEach((averageNumber, aveNumIndex) => {
+                if (aveNumIndex > 4) {
+
+                    let totalValuesForAllMetros = 0
+
+                    values.forEach((value, valueIndex) => {
+
+                        if (valueIndex > 4) {
+
+                            totalValuesForAllMetros += value
+                        }
+                    })
+
+                    let percent = Math.round(
+                        ((averageNumber / totalValuesForAllMetros) * 100) * 100
+                    ) / 100
+
+                    valuePercentageForAll.push(percent)
+                }
+            })
+
             setStats(prev => {
 
                 let newArr = { ...prev }
 
-                newArr.first = [Math.round(values[0] / averageDenominatorPerCity[0] * 10000) / 100, "15 minutes or less"]
-                newArr.second = [Math.round(values[1] / averageDenominatorPerCity[1] * 10000) / 100, "15 - 30 Minutes"]
-                newArr.third = [Math.round(values[2] / averageDenominatorPerCity[2] * 10000) / 100, "31 - 60 Minutes"]
-                newArr.fourth = [Math.round(values[3] / averageDenominatorPerCity[3] * 10000) / 100, "61 - 90 Minutes"]
-                newArr.fifth = [Math.round(values[4] / averageDenominatorPerCity[4] * 10000) / 100, "More Than 90 Minutes"]
-                newArr.firstTot = [Math.round(values[5] / averageDenominatorForAllCities[0] * 10000) / 100, "15 minutes or less"]
-                newArr.secondTot = [Math.round(values[6] / averageDenominatorForAllCities[1] * 10000) / 100, "15 - 30 Minutes"]
-                newArr.thirdTot = [Math.round(values[7] / averageDenominatorForAllCities[2] * 10000) / 100, "31 - 60 Minutes"]
-                newArr.fourthTot = [Math.round(values[8] / averageDenominatorForAllCities[3] * 10000) / 100, "61 - 90 Minutes"]
-                newArr.fifthTot = [Math.round(values[9] / averageDenominatorForAllCities[4] * 10000) / 100, "More Than 90 Minutes"]
+                newArr.first = [valuesPercentageByCity[0], "15 minutes or less"]
+                newArr.second = [valuesPercentageByCity[1], "15 - 30 Minutes"]
+                newArr.third = [valuesPercentageByCity[2], "31 - 60 Minutes"]
+                newArr.fourth = [valuesPercentageByCity[3], "61 - 90 Minutes"]
+                newArr.fifth = [valuesPercentageByCity[4], "More Than 90 Minutes"]
+                newArr.firstTot = [valuePercentageForAll[0], "15 minutes or less"]
+                newArr.secondTot = [valuePercentageForAll[1], "15 - 30 Minutes"]
+                newArr.thirdTot = [valuePercentageForAll[2], "31 - 60 Minutes"]
+                newArr.fourthTot = [valuePercentageForAll[3], "61 - 90 Minutes"]
+                newArr.fifthTot = [valuePercentageForAll[4], "More Than 90 Minutes"]
 
                 return newArr
             })

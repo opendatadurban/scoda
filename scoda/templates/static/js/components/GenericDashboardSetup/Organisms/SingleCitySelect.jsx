@@ -16,14 +16,15 @@ export const SingleCitySelect = ({ singleCityIndex, setSingleCityIndex, isSingle
         "Nelson Mandela Bay",
         "Tshwane",
         "eThekwini"
-    ]
+    ].map( fullname => cityLabels(fullname) /* abbreviate */ ).sort()
 
     const years = [
         "2015", "2016", "2017", "2018"
     ]
 
     const select = (index) => {
-       setSingleCityIndex(index)
+
+        setSingleCityIndex(index)
     }
 
     return (
@@ -31,32 +32,32 @@ export const SingleCitySelect = ({ singleCityIndex, setSingleCityIndex, isSingle
             <p className="dropdown_title">
                 {
                     isSingleYear ?
-                    "CHOOSE A YEAR":
-                    "CHOOSE ONE CITY"
+                        "CHOOSE A YEAR" :
+                        "CHOOSE ONE CITY"
                 }
             </p>
             <div className={'mini_select macro_select'} onClick={() => { visibility(!show) }}>
 
                 <p className="title">
-                    {isSingleYear ? 
-                    years[singleCityIndex]:
-                     cities[singleCityIndex]}
+                    {isSingleYear ?
+                        years[singleCityIndex] :
+                        extendAbbreviation( cities[singleCityIndex] ) }
                 </p>
 
                 <div className={"dropdownbox " + `${show ? "show" : ""}`} >
                     {isSingleYear ?
-                    years.map((year, index) => {
+                        years.map((year, index) => {
 
-                        return <p key={index.toString()} className="drop_content" onClick={() => {
-                            select(index)
-                        }}>{ year}</p>
-                    })
-                    :
+                            return <p key={index.toString()} className="drop_content" onClick={() => {
+                                select(index)
+                            }}>{year}</p>
+                        })
+                        :
                         cities.map((city, index) => {
 
                             return <p key={index.toString()} className="drop_content" onClick={() => {
                                 select(index)
-                            }}>{typeof (city) === "string" ? city : city.shortName}</p>
+                            }}>{typeof (city) === "string" ? extendAbbreviation(city) : city.shortName}</p>
                         })
                     }
                 </div>
