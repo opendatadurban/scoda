@@ -130,7 +130,7 @@
     border-radius: 12.5px;
     margin-left: 45px;
     cursor: pointer;
-    
+
 
     .title {
         display: flex;
@@ -232,14 +232,18 @@
             margin-left: 45px;
 
             .title {
-                display: flex;
-                align-items: center;
-                font-family: 'Montserrat';
+                display: inline;
+                margin: auto 0;
+                font-family: "Montserrat";
                 font-style: normal;
                 font-weight: 400;
                 font-size: 13.6px;
                 line-height: 1.5;
                 color: #4A4A4A;
+                white-space: nowrap;
+                width: 310px;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .dropdownbox {
@@ -252,7 +256,7 @@
                     flex-direction: column;
                     align-items: flex-start;
                     position: absolute;
-                    width: 28vw;
+                    width: 26vw;
                     top: calc(100% + 10px);
                     right: 0;
                     z-index: 100;
@@ -264,7 +268,7 @@
                         font-style: normal;
                         font-weight: 400;
                         font-size: 13.6px;
-                        line-height: 13px;
+                        line-height: 15px;
                         cursor: pointer;
                     }
                 }
@@ -310,7 +314,6 @@
                     font-style: normal;
                     font-weight: 400;
                     font-size: 10px;
-                    width: 120px;
                     line-height: 15px;
                     color: rgba(74, 74, 74, 1);
                     padding: 5px 0 5px 8px;
@@ -324,8 +327,6 @@
             }
         }
 
-
-
         .chevron_icon {
             position: absolute;
             right: 10px;
@@ -333,18 +334,16 @@
             transform: translate(0, -50%);
             cursor: pointer;
         }
-
-
     }
-
 }
 
-.title_wrapper{
+.title_wrapper {
     display: flex;
     flex-direction: column;
     position: absolute;
     gap: 6px;
     left: calc(45px + 63vw + 30px);
+
     .dropdown_title {
         font-family: 'Montserrat';
         font-style: normal;
@@ -369,8 +368,6 @@
         margin-left: 45px;
         cursor: pointer;
 
-
-
         &.macro_select {
             width: 28vw;
             height: 36.2px;
@@ -378,14 +375,18 @@
             margin-left: 0;
 
             .title {
-                display: flex;
-                align-items: center;
-                font-family: 'Montserrat';
+                display: inline;
+                margin: auto 0;
+                font-family: "Montserrat";
                 font-style: normal;
                 font-weight: 400;
                 font-size: 13.6px;
                 line-height: 1.5;
                 color: #4A4A4A;
+                white-space: nowrap;
+                width: 310px;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .dropdownbox {
@@ -444,12 +445,13 @@
                 flex-direction: column;
                 align-items: flex-start;
                 position: absolute;
-               
+
                 top: calc(100% + 10px);
                 right: 0;
                 z-index: 100;
                 border-radius: 5px;
-                .drop_content{
+
+                .drop_content {
 
                     display: block;
                     font-family: 'Montserrat';
@@ -461,9 +463,10 @@
                     color: rgba(74, 74, 74, 1);
                     padding: 5px 10% 5px 8px;
                     cursor: pointer;
+
                     &:hover {
                         background-color: rgba($color: aqua, $alpha: 0.15);
-                       // width: 100%;
+                        // width: 100%;
                         transition: background-color 1s cubic-bezier(0.165, 0.84, 0.44, 1);
                     }
                 }
