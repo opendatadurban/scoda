@@ -414,7 +414,6 @@ export const travel_time_text_box_data = [
         },
         number: {
             name: "Number of individuals that take: more than 90 minutes to get to work",
-
             code: "TR.SOCR.18.0",
         },
         endpoints: [881]
