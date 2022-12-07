@@ -20,7 +20,8 @@ const Codebook =()=> {
             infoTitle={_heroInfoTitle_codebook}
             primaryColor={_heroPrimaryColor_codebook}
             secondaryColor={_heroSecondaryColor_codebook}
-            linearGradient={_heroLinearGradient_codebook}/>
+            linearGradient={_heroLinearGradient_codebook}
+            collapseHeight={366}/>
             <Codebook_ />
             <Footer />
         </div>

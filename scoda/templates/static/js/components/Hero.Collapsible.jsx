@@ -14,8 +14,8 @@ export default class Hero extends Component {
         this.toggleHero = this.toggleHero.bind(this);
     }
     componentDidMount(){
-        height = $('.hero-tab-header').height() + 30;
-        $('#infoBlock').height(height);
+        // height = $('.hero-tab-header').height() + 30;
+        // $('#infoBlock').height(height);
        
     }
 
@@ -30,7 +30,7 @@ export default class Hero extends Component {
             document.getElementById('contentContainer').style.height = '0px';
             document.getElementById('buttonContainer').style.display = 'none';
             document.getElementById('infoBlockContainer').style.visibility = 'hidden';
-            document.getElementById('infoBlock').style.height = '300px';
+            document.getElementById('infoBlock').style.height = this.props.collapseHeight+'px'
             document.getElementById('hero-content-column').style.height = '50px';
             document.getElementById('hero-content-column').style.paddingBottom = '0px';
             document.getElementById('hero-title').style.paddingBottom = '0px';

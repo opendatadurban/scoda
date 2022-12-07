@@ -21,7 +21,8 @@ const Explore_ =()=> {
             infoTitle={_heroInfoTitle_explore}
             primaryColor={_heroPrimaryColor_explore} 
             secondaryColor={_heroSecondaryColor_explore}
-            linearGradient={_heroLinearGradient_codebook}/>
+            linearGradient={_heroLinearGradient_codebook}
+            collapseHeight={285}/>
             <IndicatorExplorer />
             <Footer />
         </div>

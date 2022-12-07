@@ -20,7 +20,8 @@ const Demographic =()=> {
             infoTitle={_heroInfoTitle_demo}
             primaryColor={_heroPrimaryColor_demo}
             secondaryColor={_heroSecondaryColor_demo}
-            linearGradient={_heroLinearGradient_demo}/>
+            linearGradient={_heroLinearGradient_demo}
+            collapseHeight={312}/>
             <DemographicModeller />
             <Footer />
         </div>
