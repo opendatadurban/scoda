@@ -23,17 +23,44 @@
   <!--alt-languages-->
   <link rel="alternate" href="https://scoda.co.za/" hreflang="en" />
 
-  <link rel="stylesheet" href="/main.min.css" />
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700" rel="stylesheet">
-  <link rel="stylesheet" href="/static/dist/fonts/fontawesome-free/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Megrim&display=swap" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="/main.min.css" /> -->
+
   <link rel="stylesheet" href="/static/dist/css/ds-style.css" />
   <!--Displays fontawsome icons-->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
-    type="text/css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
   <link rel='icon' type='image/x-icon' href="/static/dist/img/favicon_v6.ico?v=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="/static/dist/fonts/fontawesome-free/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Megrim&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/main.min.css" />
+  </noscript>
+  
+  <!-- LOAD CSS -->
+  <script type="text/javascript">//<![CDATA[
+    function lazycss(url) {
+      var css = document.createElement("link");
+      css.href = url;
+      css.rel = "stylesheet";
+      css.type = "text/css";
+      document.getElementsByTagName("head")[0].appendChild(css);
+    }
+  // LOAD CSS
+  lazycss("https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700");
+  lazycss("/static/dist/fonts/fontawesome-free/css/all.min.css");
+  lazycss("https://fonts.googleapis.com/css2?family=Megrim&display=swap");
+  lazycss("https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css");
+  lazycss("https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css");
+  lazycss("https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css")
+  lazycss("/main.min.css");
+  //]]></script> 
+  
+  
+  
+  
   <style>
     .data-story-trigger.selected {
       opacity: .5;

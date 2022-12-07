@@ -20,7 +20,8 @@ const Home = () => {
             infoTitle={_heroInfoTitle_insight}
             primaryColor={_heroPrimaryColor_insight} 
             secondaryColor={_heroSecondaryColor_insight}
-            linearGradient={_heroLinearGradient_datastories} />
+            linearGradient={_heroLinearGradient_datastories} 
+            collapseHeight={447}/>
             <DataStoriesDetails />
             <Footer />
         </div>
