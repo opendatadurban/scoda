@@ -307,15 +307,16 @@ export default class CodebookFilterModal extends Component {
                 <Button className="filter-toggle" color="danger" onClick={() =>this.toggleModal()}>
                     <i className="fas fa-filter"></i>
                 </Button>
-                <Modal className="codebook-modal" isOpen={this.state.modalVisible} size="lg" backdrop={true} toggle={() => this.toggleModal()}>
+                <div className='test-modal'>
+                <Modal modalClassName="codebook-modal" className="codebook-modal-container mx-auto" isOpen={this.state.modalVisible} size="lg" backdrop={true} toggle={() => this.toggleModal()}>
                     <ModalBody style={{ padding: '0px' }}>
                         <Form>
                             <div className="modal-container">
-                                <FormGroup>
+                                <FormGroup style={{ marginBottom: 0 }}>
                                     <div style={{padding: '0 5%'}}>
                                         <div className="row">
                                             <div>
-                                                <div className="modal-subtitle">
+                                                <div className="modal-subtitle modal-subtitle--search">
                                                     Search
                                                 </div>
                                                 <div>
@@ -348,7 +349,7 @@ export default class CodebookFilterModal extends Component {
                                         </div>
                                     </div>
                                 </FormGroup>
-                                <hr />
+                                <hr className='mt-0' style={{background:'white', opacity:1,borderTop:'1px solid wh'}} />
                                 <div className="filter-content-wrapper" style={{padding: '0 5%'}}>
                                     <div className="row">
                                         <div className="modal-subtitle">Filter</div>
@@ -385,6 +386,7 @@ export default class CodebookFilterModal extends Component {
                                             </div>
                                         </div>
                                     </div>
+                                    <div className='filter-spacer d-block' style={{height:142}}></div>
                                 </div>
 
                             </div>
@@ -392,6 +394,7 @@ export default class CodebookFilterModal extends Component {
 
                     </ModalBody>
                 </Modal>
+                </div>
             </>
         )
     }
