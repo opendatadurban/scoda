@@ -1,8 +1,9 @@
 import axios from 'axios'
-import { cityLabels, combinationColors, isCombinationIndicator, isNewApiIndicator, isOldApiIndicator, isSingleYearIndicator, isTextBoxIndicator, peopleHouseholdColors, secondaryColors, sustainabilityColors, travelTimeColors } from '../helpers/helpers'
+import { cityLabels, combinationColors, extendAbbreviation, getTransportModePercentages, isCombinationIndicator, isNewApiIndicator, isOldApiIndicator, isSingleYearIndicator, isTextBoxIndicator, peopleHouseholdColors, secondaryColors, sustainabilityColors, travelTimeColors } from '../helpers/helpers'
 import { tableData } from '../helpers/helpers'
 import { filterForSingleCity, sortCities } from '../helpers/sorting'
 import { indicator_text_box_data } from './data'
+import { getTravelTimeAverages } from './chartPercentageData'
 
 export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYear,
   yearColors, setOriginalValues, dropdownName, genericIndex, singleCityIndex
@@ -89,7 +90,6 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
       chartData.forEach((chart, index) => {
 
         let filterData = []
-
 
         if (indicator_id_requests[index].type === "new") {
           let colorCount = 0
@@ -224,7 +224,6 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
           const toggleCharts = chart.data
           let numberChart = []
           let percentageChart = []
-          let percentageAverages = []
 
           toggleCharts.forEach((year, yearIndex) => {
 
@@ -239,27 +238,28 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
 
           numberChart.forEach((year, labelIndex) => {
 
-            let valuesTotal = 0
+            const newValues = year.values.map((value, valueIndex) => {
 
-            year.values.forEach((number, numberIndex) => {
+              let denominator = getTravelTimeAverages(
+                year.year, extendAbbreviation(year.labels[valueIndex]) ,
+                dropdownName, genericIndex
+                )
 
-              valuesTotal += number
+              return (value/denominator) * 100
+
             })
-
-            let newYearValues = year.values.map(value => {
-        
-              return (value / valuesTotal) * 100
-            })
-
+            
             let newYear = {
+
               ...year,
-              values: newYearValues
+              values: newValues
             }
 
             percentageChart.push(newYear)
           })
 
           filterData.push([numberChart, percentageChart])
+
         } else if (indicator_id_requests[index].type === "toggle_single_city") {
 
           const toggleCharts = chart.map((data) => { return data.data })
@@ -284,7 +284,6 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
 
           const mutatedChart = newYears.map((travelDuration, travelDurationIndex) => {
 
-            let value = 0
             let newLabels = []
             let valuesByTravelDuration = []
 
@@ -304,26 +303,29 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
             return numberChart
           })
 
+          let percentageChart = []
 
-          const mutatedChartPercent = mutatedChart.map((travelDuration, travelDurationIndex) => {
+          mutatedChart.forEach((travelDuration, travelDurationIndex) => {
 
-            let sumOfValues = 0
+            let newYearValues = travelDuration.values.map((value,valueIndex) => {
 
-            mutatedChart.forEach((item, index) => {
+              let denominator = getTravelTimeAverages(
+                travelDuration.year, travelDuration.labels[travelDurationIndex],
+                dropdownName, genericIndex
+              )
 
-              sumOfValues += item.values[travelDurationIndex]
+              return (value/denominator) * 100
             })
 
-            return {
-              year: travelDuration.year,
-              labels: travelDuration.labels,
-              color: travelTimeColors[travelDurationIndex],
-              values: travelDuration.values.map((value) => (value / sumOfValues) * 100)
+            let newYear = {
+              ...travelDuration,
+              values: newYearValues
             }
+
+            percentageChart.push(newYear)
           })
 
-
-          filterData.push([mutatedChart, mutatedChartPercent])
+          filterData.push([mutatedChart, percentageChart])
         } else if (indicator_id_requests[index].type === "toggle_barchart_by_year") {
 
           const toggleCharts = chart.map((data) => { return data.data })

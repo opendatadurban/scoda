@@ -54,6 +54,10 @@ export const getYAxisTitle = (isNumber, genericIndex, dropname) => {
         yAxisTitles = isNumber ? "Number of People" : "Percentage of People"
     }
 
+    if(dropname === "Public Transport Spend" && genericIndex === 1){
+        yAxisTitles = "Percentage of Households"
+    }
+
     return yAxisTitles
 }
 
@@ -66,8 +70,6 @@ export const getSourceTitle = (genericIndex, dropname) => {
             "StatsSA General Household Survey"
             :"Calculated from Stats SA General Household Survey"}
         </p>
-
-
 
     return source
 }
