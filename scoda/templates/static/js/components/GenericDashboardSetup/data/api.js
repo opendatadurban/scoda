@@ -3,7 +3,7 @@ import { cityLabels, combinationColors, extendAbbreviation, getTransportModePerc
 import { tableData } from '../helpers/helpers'
 import { filterForSingleCity, sortCities } from '../helpers/sorting'
 import { indicator_text_box_data } from './data'
-import { getTravelTimeAverages } from './chartPercentageData'
+import { allTravelTimeCategories, getTravelTimeAverages, treatTravelTimeDataPerCity } from './chartPercentageData'
 
 export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYear,
   yearColors, setOriginalValues, dropdownName, genericIndex, singleCityIndex
@@ -244,7 +244,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
                 year.year, extendAbbreviation(year.labels[valueIndex]) ,
                 dropdownName, genericIndex
                 )
-
+ 
               return (value/denominator) * 100
 
             })
@@ -263,7 +263,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
         } else if (indicator_id_requests[index].type === "toggle_single_city") {
 
           const toggleCharts = chart.map((data) => { return data.data })
-
+        
           const toggleChartSortedByMetro = toggleCharts.map(chart => {
             let newChart = []
 
@@ -303,28 +303,29 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
             return numberChart
           })
 
+          const treatedToggleDataPerCity = treatTravelTimeDataPerCity(singleCityIndex)
           let percentageChart = []
 
-          mutatedChart.forEach((travelDuration, travelDurationIndex) => {
+          mutatedChart.forEach((year, travelDurationIndex) => {
 
-            let newYearValues = travelDuration.values.map((value,valueIndex) => {
+            let newYearValues = year.values.map((value,valueIndex) => {
 
               let denominator = getTravelTimeAverages(
-                travelDuration.year, travelDuration.labels[travelDurationIndex],
-                dropdownName, genericIndex
+                year.year, year.labels[valueIndex],
+                dropdownName, genericIndex, treatedToggleDataPerCity
               )
 
-              return (value/denominator) * 100
+              return (+value / +denominator) * 100
             })
 
             let newYear = {
-              ...travelDuration,
+              ...year,
               values: newYearValues
             }
 
             percentageChart.push(newYear)
           })
-
+console.log(percentageChart,"chart")
           filterData.push([mutatedChart, percentageChart])
         } else if (indicator_id_requests[index].type === "toggle_barchart_by_year") {
 

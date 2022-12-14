@@ -130,7 +130,6 @@ export const getTransportModeStatsTotal = (setStats, selected) => {
                         }
                     })
 
-
                     let percent = Math.round(
                         ((averageNumber / totalValuesPercity) * 100) * 100
                     ) / 100
@@ -140,13 +139,13 @@ export const getTransportModeStatsTotal = (setStats, selected) => {
             })
 
             values.forEach((averageNumber, aveNumIndex) => {
-                if (aveNumIndex > 4) {
+                if (aveNumIndex > 8) {
 
                     let totalValuesForAllMetros = 0
 
                     values.forEach((value, valueIndex) => {
 
-                        if (valueIndex > 4) {
+                        if (valueIndex > 8) {
 
                             totalValuesForAllMetros += value
                         }
