@@ -1,4 +1,4 @@
-import { isArray } from "jquery"
+import axios from "axios"
 import { indicator_text_box_data } from "../data/data"
 
 export const peopleHouseholdColors = [
@@ -96,7 +96,7 @@ export const tpChartTitles = (genericIndex) => {
         "Calculated from Stats SA General Household Survey", "Calculated from Stats SA General Household Survey"]
     }
   } else {
-    return{}
+    return {}
   }
 
 }
@@ -349,6 +349,33 @@ export const isNewApiIndicator = (indicator) => {
   return isNewApi
 }
 
+export const getTransportModePercentages = (a,b,c,d,e,f) => {
+  let endpoints = [
+    `${f}${a}`,
+    `${f}${b}`,
+    `${f}${c}`,
+    `${f}${d}`,
+    `${f}${e}`,
+  ];
+console.log(endpoints,"endpoints")
+  Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
+
+    (data) => {
+
+      const values = data.map((value, valueIndex) => {
+
+        let chartdata = value.data
+
+        console.log(chartdata, "chart number: ", valueIndex)
+
+        return chartdata
+
+      })
+
+    }
+  )
+}
+
 export const isCombinationIndicator = (indicator) => {
 
   /*Checks if indicator id is for a chart which represents a combination of
@@ -394,7 +421,7 @@ export const chartHeights = (dropdownName, genericIndex) => {
   /* Create a conditional list of chart heights specified for each dashboard*/
 
   const heightByDropName = ((dropdownName === "Employment" ||
-  (dropdownName === "Public Transport Spend" && genericIndex === 0) ) ? 170
+    (dropdownName === "Public Transport Spend" && genericIndex === 0)) ? 170
     : dropdownName === "Household Income" || dropdownName === "Education" ||
       dropdownName === "Transport Mode" ||
       ((dropdownName === "Sustainability" || dropdownName === "Travel Time")
@@ -428,7 +455,7 @@ export const hhiDropdownNames = (input) => {
     if (Array.isArray(item.number.name)) {
 
       let shortNames = item.number.name.map((shortNameInstance) => shortNameInstance.split(": "))
-  
+
       return { //remove all zero index arrays 
         numberName: item.number.name,
         percentName: item.percent.name,

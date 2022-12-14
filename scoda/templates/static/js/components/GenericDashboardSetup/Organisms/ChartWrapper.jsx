@@ -117,6 +117,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
 
       const isSingleEndpoint = indicator_ids[i][0].toggle_calculation ? true : false
 
+      const isBarChartByYear = indicator_ids[i][0].barchart_by_year ? true : false
 
       const indicatorNumber = hhiDropdownNames(indicator_ids[0])[selectedDropDownChart]
         .endpoints[isSingleEndpoint ?
@@ -143,7 +144,12 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
                 <button className={isNumber ? "percent" : "percent select"} onClick={() => { toggle(false) }}>Percent</button>
               </>}
 
-            <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
+            {
+              isBarChartByYear ?
+                ""
+                : <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
+            }
+
           </div>
         </div>
 
@@ -156,7 +162,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
       </div>
       )
     } else if (Array.isArray(indicator_ids[i])) {
- 
+
       const codebookUrl = `/scoda/toolkit#/codebook-explorer/${hhiDropdownNames(indicator_ids[0])[selectedDropDownChart].endpoints[isNumber ? 1 : 0]}`
 
       items.push(<div className='chart_wrapper' key={i.toString()} onClick={clearAllErrors}>
