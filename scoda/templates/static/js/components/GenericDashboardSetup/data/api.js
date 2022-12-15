@@ -241,14 +241,14 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
             const newValues = year.values.map((value, valueIndex) => {
 
               let denominator = getTravelTimeAverages(
-                year.year, extendAbbreviation(year.labels[valueIndex]) ,
+                year.year, extendAbbreviation(year.labels[valueIndex]),
                 dropdownName, genericIndex
-                )
- 
-              return (value/denominator) * 100
+              )
+
+              return (value / denominator) * 100
 
             })
-            
+
             let newYear = {
 
               ...year,
@@ -263,7 +263,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
         } else if (indicator_id_requests[index].type === "toggle_single_city") {
 
           const toggleCharts = chart.map((data) => { return data.data })
-        
+
           const toggleChartSortedByMetro = toggleCharts.map(chart => {
             let newChart = []
 
@@ -304,18 +304,53 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
           })
 
           const treatedToggleDataPerCity = treatTravelTimeDataPerCity(singleCityIndex)
+
           let percentageChart = []
 
+
+          let aveValues = [0, 0, 0, 0]
+
+          mutatedChart.forEach((year, yearIndex) => {
+
+          
+            year.labels.forEach((label, labelIndex) => {
+
+              if (label === "2015") {
+                aveValues[0] += year.values[labelIndex]
+              }
+              if (label === "2016") {
+                aveValues[1] += year.values[labelIndex]
+              }
+              if (label === "2017") {
+                aveValues[2] += year.values[labelIndex]
+              }
+              if (label === "2018") {
+                aveValues[3] += year.values[labelIndex]
+              }
+            })
+          })
+
+      
           mutatedChart.forEach((year, travelDurationIndex) => {
 
-            let newYearValues = year.values.map((value,valueIndex) => {
+            let newYearValues = year.values.map((value, valueIndex) => {
+          
+                if (year.labels[valueIndex] === "2015") {
 
-              let denominator = getTravelTimeAverages(
-                year.year, year.labels[valueIndex],
-                dropdownName, genericIndex, treatedToggleDataPerCity
-              )
+                  return (value/aveValues[0]) * 100
+                }
+                if (year.labels[valueIndex] === "2016") {
 
-              return (+value / +denominator) * 100
+                  return (value/aveValues[1]) * 100
+                }
+                if (year.labels[valueIndex] === "2017") {
+
+                  return (value/aveValues[2]) * 100
+                }
+                if (year.labels[valueIndex] === "2018") {
+
+                  return (value/aveValues[3]) * 100
+                }
             })
 
             let newYear = {
@@ -325,8 +360,9 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
 
             percentageChart.push(newYear)
           })
-console.log(percentageChart,"chart")
+
           filterData.push([mutatedChart, percentageChart])
+
         } else if (indicator_id_requests[index].type === "toggle_barchart_by_year") {
 
           const toggleCharts = chart.map((data) => { return data.data })
