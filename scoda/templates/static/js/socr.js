@@ -1,6 +1,6 @@
 //Imports
 import React, { Suspense, lazy } from 'react';
-import { HashRouter, Route } from 'react-router-dom';
+import { HashRouter, Route,Routes } from 'react-router-dom';
 import createHistory from "history/createBrowserHistory"
 import loader from "./gif/Spinner.gif"
 
@@ -38,24 +38,25 @@ export default (
   <HashRouter history={history}>
 
     <Suspense fallback={<div style={style}><img src={loader} alt='Loader'></img></div>}>
-
-      <Route exact path='/' component={SoCR} />
-      <Route exact path='/citizen_engagement' component={CitizenEngagements} />
-      <Route exact path='/service_delivery' component={ServiceDelivery} />
-      <Route exact path='/human_resources' component={HumanResources} />
-      <Route exact path='/city_finances' component={CityFinances} />
-      <Route exact path='/people_household' component={PeopleAndHousehold} />
-      <Route exact path='/employment' component={Employment} />
-      <Route exact path='/dwellings' component={Dwellings} />
-      <Route exact path='/household_income' component={HouseholdIncome} />
-      <Route exact path='/life_expectancy' component={LifeExpectancy}/>
-      <Route exact path='/food_security' component={FoodSecurity}/>
-      <Route exact path='/education' component={Education}/>
-      <Route exact path='/sustainability' component={Sustainability}/>
-      <Route exact path='/infrastructure' component={Infrastructure}/>
-      <Route exact path='/transport_mode' component={TransportMode}/>
-      <Route exact path='/public_transport_spend' component={PublicTransportSpend}/>
-      <Route exact path='/travel_time' component={TravelTime}/>
+      <Routes>
+          <Route path='/' element={<SoCR/>} />
+          <Route path='/citizen_engagement' element={<CitizenEngagements/>} />
+          <Route path='/service_delivery' element={<ServiceDelivery/>} />
+          <Route path='/human_resources' element={<HumanResources/>} />
+          <Route path='/city_finances' element={<CityFinances/>} />
+          <Route path='/people_household' element={<PeopleAndHousehold/>} />
+          <Route path='/employment' element={<Employment/>} />
+          <Route path='/dwellings' element={<Dwellings/>} />
+          <Route path='/household_income' element={<HouseholdIncome/>} />
+          <Route path='/life_expectancy' element={<LifeExpectancy/>}/>
+          <Route path='/food_security' element={<FoodSecurity/>}/>
+          <Route path='/education' element={<Education/>}/>
+          <Route path='/sustainability' element={<Sustainability/>}/>
+          <Route path='/infrastructure' element={<Infrastructure/>}/>
+          <Route path='/transport_mode' element={<TransportMode/>}/>
+          <Route path='/public_transport_spend' element={<PublicTransportSpend/>}/>
+          <Route path='/travel_time' element={<TravelTime/>}/>
+      </Routes>
     </Suspense>
   </HashRouter>
 );

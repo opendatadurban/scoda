@@ -1,6 +1,6 @@
 //Imports
 import React, {Suspense, lazy} from 'react';
-import { HashRouter, Route } from 'react-router-dom';
+import { HashRouter, Route,Routes } from 'react-router-dom';
 import createHistory from "history/createBrowserHistory"
 import loader from "./gif/Spinner.gif"
 
@@ -21,7 +21,9 @@ history.listen(() => {
 export default (
     <HashRouter history={history}>
     <Suspense fallback={<div style={style}><img src={loader} alt='Loader'></img></div>}>
-      <Route exact path='/' component={()=> <About />} />
+        <Routes>
+            <Route  path='/' element={ <About />} />
+        </Routes>
       </Suspense>
     </HashRouter>
 );
