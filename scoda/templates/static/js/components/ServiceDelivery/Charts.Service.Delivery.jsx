@@ -4,7 +4,30 @@ import Button from '../Button';
 import Switch_text from '../Switch_text'
 import axios from 'axios';
 import { Container, Row, Col, Modal, ModalBody, Spinner } from 'reactstrap';
-import { Bar } from 'react-chartjs-2';
+
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement
+} from 'chart.js';
+import { Bar,Pie } from 'react-chartjs-2';
+
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement
+);
+
 
 let a = true;
 let years = []
@@ -460,7 +483,6 @@ export default class Charts_dashboards extends Component {
       }
 
      switchTrigger(){
-      console.log('-----------------',final_num_of_household[3])
        this.setState({
          toggle: !this.state.toggle
        });
@@ -646,496 +668,479 @@ export default class Charts_dashboards extends Component {
 
       renderChart_percentage_of_household_with_basic_water_supply(){
         let color = '#d6d6d6'
+        let opt = {}
         let data = {
           labels:sortedData,
           datasets:[]
           }
-
-          years.forEach(function(a,i) {
-            switch(i) {
-              case 0:
-                color='#D0D1E6'
-                break;
-              case 1:
-                color='#74A9CF'
-                break;
-              case 2:
-                color='#0570B0'
-                break;
-              case 3:
-                color='#023858'
-                break;
-              default:
-                color='#d6d6d6'
-            }
-                data.datasets.push({
-                label: a,
-                stack: 'Stack '+i,
-                data: final_water_supply[i],
-                backgroundColor: color,
-                borderColor: color,
-              })
+        years.forEach(function(a,i) {
+          switch(i) {
+            case 0:
+              color='#D0D1E6'
+              break;
+            case 1:
+              color='#74A9CF'
+              break;
+            case 2:
+              color='#0570B0'
+              break;
+            case 3:
+              color='#023858'
+              break;
+            default:
+              color='#d6d6d6'
+          }
+              data.datasets.push({
+              label: a,
+              stack: 'Stack '+i,
+              data: final_water_supply[i],
+              backgroundColor: color,
+              borderColor: color,
             })
-          
-        if(chartRef1){chartRef1.destroy();}
-        var ctx = document.getElementById('mc').getContext('2d');
-        chartRef1 = new Chart(ctx, {
-            type: 'bar',
-            data,
-            options: {
-              legend: {
-                labels: {
-                    fontColor: "#4A4A4A",
-                    fontSize: 8,
-                    fontFamily: "Montserrat",
-                }
-              },
-              title: {
-                  display: false,
-                  text: 'Title',
-                  fontFamily: "Montserrat",
-              },
-              tooltips: {
-                  mode: 'index',
-                  intercept: false,
-                  callbacks: {
-                      label: function (tooltipItem, data) {
-                          var label = data.datasets[tooltipItem.datasetIndex].label || '';
+          })
+        opt= {
+          legend: {
+            labels: {
+                fontColor: "#4A4A4A",
+                fontSize: 8,
+                fontFamily: "Montserrat",
+            }
+          },
+          title: {
+              display: false,
+              text: 'Title',
+              fontFamily: "Montserrat",
+          },
+          tooltips: {
+              mode: 'index',
+              intercept: false,
+              callbacks: {
+                  label: function (tooltipItem, data) {
+                      var label = data.datasets[tooltipItem.datasetIndex].label || '';
 
-                          if (label) {
-                              label += ': ';
-                          }
-                          label += Math.round(tooltipItem.yLabel * 100) / 100;
-                          return label;
+                      if (label) {
+                          label += ': ';
                       }
+                      label += Math.round(tooltipItem.yLabel * 100) / 100;
+                      return label;
                   }
-              },
-              responsive: true,
-              scales: {
-                  xAxes: [{
-                      stacked: true,
-                      ticks: {fontStyle: 'bold',steps:4,fontFamily: "Montserrat",},
-                      gridLines: {
-                        display:false,
-                      }
-                  }],
-                  yAxes: [{
-                      stacked: true,
-                      ticks: {
-                        stepSize:25,
-                          callback: function (value, index, values) {
-                              return Math.round(value * 100) / 100 + '  ';
-                          },
-                         
-                      },
-                      gridLines: {
-                          drawTicks: false,
-                      },
-                      scaleLabel: {
-                          display: true,
-                          labelString: "Percent of Households",
-                          fontStyle: 'bold',
-                          fontFamily: "Montserrat",
-                          fontSize: 12
-                      }
-                  }],
-
               }
-           }
-          });
-      }
+          },
+          responsive: true,
+          scales: {
+              xAxes: [{
+                  stacked: true,
+                  ticks: {fontStyle: 'bold',steps:4,fontFamily: "Montserrat",},
+                  gridLines: {
+                    display:false,
+                  }
+              }],
+              yAxes: [{
+                  stacked: true,
+                  ticks: {
+                    stepSize:25,
+                      callback: function (value, index, values) {
+                          return Math.round(value * 100) / 100 + '  ';
+                      },
+                      
+                  },
+                  gridLines: {
+                      drawTicks: false,
+                  },
+                  scaleLabel: {
+                      display: true,
+                      labelString: "Percent of Households",
+                      fontStyle: 'bold',
+                      fontFamily: "Montserrat",
+                      fontSize: 12
+                  }
+              }],
+
+          }
+        }
+           return(
+            <Bar data={data} options={opt}/>
+           )
+      };
       renderChart_percentage_of_households_with_access_to_basic_sanitation(){
         let color = '#d6d6d6'
+        let opt = {}
         let data = {
           labels:sortedData,
           datasets:[]
           }
-            years.forEach(function(a,i) {
-              switch(i) {
-                case 0:
-                  color='#D0D1E6'
-                  break;
-                case 1:
-                  color='#74A9CF'
-                  break;
-                case 2:
-                  color='#0570B0'
-                  break;
-                case 3:
-                  color='#023858'
-                  break;
-                default:
-                  color='#d6d6d6'
-              }
-                data.datasets.push({
-                label: a,
-                stack: 'Stack '+i,
-                data: final_basic_sanitation[i],
-                backgroundColor: color,
-                borderColor: color,
-              })
-            })
-          
-        if(chartRef2){chartRef2.destroy();}
-        var ctx = document.getElementById('mc1').getContext('2d');
-        chartRef2 = new Chart(ctx, {
-            type: 'bar',
-            data,
-            options: {
-              legend: {
-                labels: {
-                    fontColor: "#4A4A4A",
-                    fontSize: 8,
-                    fontFamily: "Montserrat",
-                }
-              },
-              title: {
-                  display: false,
-                  text: 'Title',
-                  fontFamily: "Montserrat",
-              },
-              tooltips: {
-                  mode: 'index',
-                  intercept: false,
-                  callbacks: {
-                      label: function (tooltipItem, data) {
-                          var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-                          if (label) {
-                              label += ': ';
-                          }
-                          label += Math.round(tooltipItem.yLabel * 100) / 100;
-                          return label;
-                      }
-                  }
-              },
-              responsive: true,
-              scales: {
-                  xAxes: [{
-                      stacked: true,
-                      ticks: {fontStyle: 'bold',fontFamily: "Montserrat",},
-                      gridLines: {
-                        display:false,
-                      }
-                  }],
-                  yAxes: [{
-                      stacked: true,
-                      ticks: {
-                          stepSize:25,
-                          callback: function (value, index, values) {
-                              return Math.round(value * 100) / 100 + '  ';
-                          }
-                      },
-                      gridLines: {
-                          drawTicks: false,
-                      },
-                      scaleLabel: {
-                          display: true,
-                          labelString: "Percent of Households",
-                          fontStyle: 'bold',
-                          fontFamily: "Montserrat",
-                          fontSize: 12
-                      }
-                  }],
-              }
+        years.forEach(function(a,i) {
+          switch(i) {
+            case 0:
+              color='#D0D1E6'
+              break;
+            case 1:
+              color='#74A9CF'
+              break;
+            case 2:
+              color='#0570B0'
+              break;
+            case 3:
+              color='#023858'
+              break;
+            default:
+              color='#d6d6d6'
           }
-          });
+            data.datasets.push({
+            label: a,
+            stack: 'Stack '+i,
+            data: final_basic_sanitation[i],
+            backgroundColor: color,
+            borderColor: color,
+          })
+        })
+        opt = {
+          legend: {
+            labels: {
+                fontColor: "#4A4A4A",
+                fontSize: 8,
+                fontFamily: "Montserrat",
+            }
+          },
+          title: {
+              display: false,
+              text: 'Title',
+              fontFamily: "Montserrat",
+          },
+          tooltips: {
+              mode: 'index',
+              intercept: false,
+              callbacks: {
+                  label: function (tooltipItem, data) {
+                      var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                      if (label) {
+                          label += ': ';
+                      }
+                      label += Math.round(tooltipItem.yLabel * 100) / 100;
+                      return label;
+                  }
+              }
+          },
+          responsive: true,
+          scales: {
+              xAxes: [{
+                  stacked: true,
+                  ticks: {fontStyle: 'bold',fontFamily: "Montserrat",},
+                  gridLines: {
+                    display:false,
+                  }
+              }],
+              yAxes: [{
+                  stacked: true,
+                  ticks: {
+                      stepSize:25,
+                      callback: function (value, index, values) {
+                          return Math.round(value * 100) / 100 + '  ';
+                      }
+                  },
+                  gridLines: {
+                      drawTicks: false,
+                  },
+                  scaleLabel: {
+                      display: true,
+                      labelString: "Percent of Households",
+                      fontStyle: 'bold',
+                      fontFamily: "Montserrat",
+                      fontSize: 12
+                  }
+              }],
+          }
+        }
+          return (
+            <Bar data={data} options={opt}/>
+          )
       }
       renderChart_percentage_of_households_with_access_to_electricity(){
         let color = '#d6d6d6'
+        let opt = {}
         let data = {
           labels:sortedData,
           datasets:[]
           }
-            years.forEach(function(a,i) {
-              switch(i) {
-                case 0:
-                  color='#D0D1E6'
-                  break;
-                case 1:
-                  color='#74A9CF'
-                  break;
-                case 2:
-                  color='#0570B0'
-                  break;
-                case 3:
-                  color='#023858'
-                  break;
-                default:
-                  color='#d6d6d6'
-              }
-                data.datasets.push({
-                label: a,
-                stack: 'Stack '+i,
-                data: final_access_elec[i],
-                backgroundColor: color,
-                borderColor: color,
-              })
-            })
-        if(chartRef3){chartRef3.destroy();}
-        var ctx = document.getElementById('mc2').getContext('2d');
-        chartRef3 = new Chart(ctx, {
-            type: 'bar',
-            data,
-            options: {
-              legend: {
-                labels: {
-                    fontColor: "#4A4A4A",
-                    fontSize: 8,
-                    fontFamily: "Montserrat",
-                }
-              },
-              title: {
-                  display: false,
-                  text: 'Title',
-                  fontFamily: "Montserrat",
-              },
-              tooltips: {
-                  mode: 'index',
-                  intercept: false,
-                  callbacks: {
-                      label: function (tooltipItem, data) {
-                          var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-                          if (label) {
-                              label += ': ';
-                          }
-                          label += Math.round(tooltipItem.yLabel * 100) / 100;
-                          return label;
-                      }
-                  }
-              },
-              responsive: true,
-              scales: {
-                  xAxes: [{
-                      stacked: true,
-                      ticks: {fontStyle: 'bold',fontFamily: "Montserrat",},
-                      gridLines: {
-                        display:false,
-                      }
-                  }],
-                  yAxes: [{
-                      stacked: true,
-                      ticks: {
-                        stepSize:25,
-                          callback: function (value, index, values) {
-                              return Math.round(value * 100) / 100 + '  ';
-                          }
-                      },
-                      gridLines: {
-                          drawTicks: false,
-                      },
-                      scaleLabel: {
-                          display: true,
-                          labelString: "Percent of Households",
-                          fontStyle: 'bold',
-                          fontFamily: "Montserrat",
-                          fontSize: 12
-                      }
-                  }],
-              }
+        years.forEach(function(a,i) {
+          switch(i) {
+            case 0:
+              color='#D0D1E6'
+              break;
+            case 1:
+              color='#74A9CF'
+              break;
+            case 2:
+              color='#0570B0'
+              break;
+            case 3:
+              color='#023858'
+              break;
+            default:
+              color='#d6d6d6'
           }
-          });
+            data.datasets.push({
+            label: a,
+            stack: 'Stack '+i,
+            data: final_access_elec[i],
+            backgroundColor: color,
+            borderColor: color,
+          })
+        })
+
+        opt = {
+          legend: {
+            labels: {
+                fontColor: "#4A4A4A",
+                fontSize: 8,
+                fontFamily: "Montserrat",
+            }
+          },
+          title: {
+              display: false,
+              text: 'Title',
+              fontFamily: "Montserrat",
+          },
+          tooltips: {
+              mode: 'index',
+              intercept: false,
+              callbacks: {
+                  label: function (tooltipItem, data) {
+                      var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                      if (label) {
+                          label += ': ';
+                      }
+                      label += Math.round(tooltipItem.yLabel * 100) / 100;
+                      return label;
+                  }
+              }
+          },
+          responsive: true,
+          scales: {
+              xAxes: [{
+                  stacked: true,
+                  ticks: {fontStyle: 'bold',fontFamily: "Montserrat",},
+                  gridLines: {
+                    display:false,
+                  }
+              }],
+              yAxes: [{
+                  stacked: true,
+                  ticks: {
+                    stepSize:25,
+                      callback: function (value, index, values) {
+                          return Math.round(value * 100) / 100 + '  ';
+                      }
+                  },
+                  gridLines: {
+                      drawTicks: false,
+                  },
+                  scaleLabel: {
+                      display: true,
+                      labelString: "Percent of Households",
+                      fontStyle: 'bold',
+                      fontFamily: "Montserrat",
+                      fontSize: 12
+                  }
+              }],
+          }
+      }
+          return (
+            <Bar data={data} options={opt}/>
+          )
       }
       renderChart_percentage_households_with_weekly_municipal_refuse_removal(){
         let color = '#d6d6d6'
+        let opt = {}
         let data = {
           labels:sortedData,
           datasets:[]
           }
-            years.forEach(function(a,i) {
-              switch(i) {
-                case 0:
-                  color='#D0D1E6'
-                  break;
-                case 1:
-                  color='#74A9CF'
-                  break;
-                case 2:
-                  color='#0570B0'
-                  break;
-                case 3:
-                  color='#023858'
-                  break;
-                default:
-                  color='#d6d6d6'
-              }
-                data.datasets.push({
-                label: a,
-                stack: 'Stack '+i,
-                data: final_refuse_removal[i],
-                backgroundColor: color,
-                borderColor: color,
-              })
-            })
-        if(chartRef4){chartRef4.destroy();}
-        var ctx = document.getElementById('mc3').getContext('2d');
-        chartRef4 = new Chart(ctx, {
-            type: 'bar',
-            data,
-            options: {
-              legend: {
-                labels: {
-                    fontColor: "#4A4A4A",
-                    fontSize: 8,
-                    fontFamily: "Montserrat",
-                }
-              },
-              title: {
-                  display: false,
-                  text: 'Title',
-                  fontFamily: "Montserrat",
-              },
-              tooltips: {
-                  mode: 'index',
-                  intercept: false,
-                  callbacks: {
-                      label: function (tooltipItem, data) {
-                          var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-                          if (label) {
-                              label += ': ';
-                          }
-                          label += Math.round(tooltipItem.yLabel * 100) / 100;
-                          return label;
-                      }
-                  }
-              },
-              responsive: true,
-              scales: {
-                  xAxes: [{
-                      stacked: true,
-                      ticks: {fontStyle: 'bold',fontFamily: "Montserrat",},
-                      gridLines: {
-                        display:false,
-                      }
-                  }],
-                  yAxes: [{
-                      stacked: true,
-                      ticks: {
-                        stepSize:25,
-                          callback: function (value, index, values) {
-                              return Math.round(value * 100) / 100 + '  ';
-                          }
-                      },
-                      gridLines: {
-                          drawTicks: false,
-                      },
-                      scaleLabel: {
-                          display: true,
-                          labelString: "Percent of Households",
-                          fontStyle: 'bold',
-                          fontFamily: "Montserrat",
-                          fontSize: 12
-                      }
-                  }],
-
-              }
+        years.forEach(function(a,i) {
+          switch(i) {
+            case 0:
+              color='#D0D1E6'
+              break;
+            case 1:
+              color='#74A9CF'
+              break;
+            case 2:
+              color='#0570B0'
+              break;
+            case 3:
+              color='#023858'
+              break;
+            default:
+              color='#d6d6d6'
           }
-          });
+            data.datasets.push({
+            label: a,
+            stack: 'Stack '+i,
+            data: final_refuse_removal[i],
+            backgroundColor: color,
+            borderColor: color,
+          })
+        })
+        opt = {
+          legend: {
+            labels: {
+                fontColor: "#4A4A4A",
+                fontSize: 8,
+                fontFamily: "Montserrat",
+            }
+          },
+          title: {
+              display: false,
+              text: 'Title',
+              fontFamily: "Montserrat",
+          },
+          tooltips: {
+              mode: 'index',
+              intercept: false,
+              callbacks: {
+                  label: function (tooltipItem, data) {
+                      var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                      if (label) {
+                          label += ': ';
+                      }
+                      label += Math.round(tooltipItem.yLabel * 100) / 100;
+                      return label;
+                  }
+              }
+          },
+          responsive: true,
+          scales: {
+              xAxes: [{
+                  stacked: true,
+                  ticks: {fontStyle: 'bold',fontFamily: "Montserrat",},
+                  gridLines: {
+                    display:false,
+                  }
+              }],
+              yAxes: [{
+                  stacked: true,
+                  ticks: {
+                    stepSize:25,
+                      callback: function (value, index, values) {
+                          return Math.round(value * 100) / 100 + '  ';
+                      }
+                  },
+                  gridLines: {
+                      drawTicks: false,
+                  },
+                  scaleLabel: {
+                      display: true,
+                      labelString: "Percent of Households",
+                      fontStyle: 'bold',
+                      fontFamily: "Montserrat",
+                      fontSize: 12
+                  }
+              }],
+
+          }
+        }
+        return (
+          <Bar data={data} options={opt}/>
+        )
       }
       renderChart_total_number_of_households_in_the_municipality(){
         let color = '#d6d6d6'
+        let opt = {}
         let data = {
           labels:sortedData,
           datasets:[]
           }
-            years.forEach(function(a,i) {
-              switch(i) {
-                case 0:
-                  color='#D0D1E6'
-                  break;
-                case 1:
-                  color='#74A9CF'
-                  break;
-                case 2:
-                  color='#0570B0'
-                  break;
-                case 3:
-                  color='#023858'
-                  break;
-                default:
-                  color='#d6d6d6'
-              }
-                data.datasets.push({
-                label: a,
-                stack: 'Stack '+i,
-                data: final_num_of_household[i],
-                backgroundColor: color,
-                borderColor: color,
-              })
-            })
-        if(chartRef5){chartRef5.destroy();}
-        var ctx = document.getElementById('mc4').getContext('2d');
-        chartRef5 = new Chart(ctx, {
-            type: 'bar',
-            data,
-            options: {
-              legend: {
-                labels: {
-                    fontColor: "#4A4A4A",
-                    fontSize: 8,
-                    fontFamily: "Montserrat",
-                }
-              },
-              title: {
-                  display: false,
-                  text: 'Title',
-                  fontFamily: "Montserrat",
-              },
-              tooltips: {
-                  mode: 'index',
-                  intercept: false,
-                  callbacks: {
-                      label: function (tooltipItem, data) {
-                          var label = data.datasets[tooltipItem.datasetIndex].label || '';
-                          if (label) {
-                              label += ': ';
-                          }
-                          label += Math.round(tooltipItem.yLabel * 100) / 100;
-                          return label;
-                      }
-                  }
-              },
-              responsive: true,
-              scales: {
-                  xAxes: [{
-                      stacked: true,
-                      ticks: {fontStyle: 'bold',fontFamily: "Montserrat",},
-                      gridLines: {
-                        display:false,
-                      }
-                  }],
-                  yAxes: [{
-                      stacked: true,
-                      ticks: {
-                          stepSize: 500000,
-                          callback: function (value, index, values) {
-                              return Math.round(value * 100) / 100000 + 'k  ';
-                          }
-                      },
-                      gridLines: {
-                          drawTicks: false,
-                      },
-                      scaleLabel: {
-                          display: true,
-                          labelString: "No. of Households",
-                          fontStyle: 'bold',
-                          fontFamily: "Montserrat",
-                          fontSize: 12
-                      }
-                  }],
-              }
+        years.forEach(function(a,i) {
+          switch(i) {
+            case 0:
+              color='#D0D1E6'
+              break;
+            case 1:
+              color='#74A9CF'
+              break;
+            case 2:
+              color='#0570B0'
+              break;
+            case 3:
+              color='#023858'
+              break;
+            default:
+              color='#d6d6d6'
           }
-          });
+            data.datasets.push({
+            label: a,
+            stack: 'Stack '+i,
+            data: final_num_of_household[i],
+            backgroundColor: color,
+            borderColor: color,
+          })
+        })
+        opt = {
+          legend: {
+            labels: {
+                fontColor: "#4A4A4A",
+                fontSize: 8,
+                fontFamily: "Montserrat",
+            }
+          },
+          title: {
+              display: false,
+              text: 'Title',
+              fontFamily: "Montserrat",
+          },
+          tooltips: {
+              mode: 'index',
+              intercept: false,
+              callbacks: {
+                  label: function (tooltipItem, data) {
+                      var label = data.datasets[tooltipItem.datasetIndex].label || '';
+                      if (label) {
+                          label += ': ';
+                      }
+                      label += Math.round(tooltipItem.yLabel * 100) / 100;
+                      return label;
+                  }
+              }
+          },
+          responsive: true,
+          scales: {
+              xAxes: [{
+                  stacked: true,
+                  ticks: {fontStyle: 'bold',fontFamily: "Montserrat",},
+                  gridLines: {
+                    display:false,
+                  }
+              }],
+              yAxes: [{
+                  stacked: true,
+                  ticks: {
+                      stepSize: 500000,
+                      callback: function (value, index, values) {
+                          return Math.round(value * 100) / 100000 + 'k  ';
+                      }
+                  },
+                  gridLines: {
+                      drawTicks: false,
+                  },
+                  scaleLabel: {
+                      display: true,
+                      labelString: "No. of Households",
+                      fontStyle: 'bold',
+                      fontFamily: "Montserrat",
+                      fontSize: 12
+                  }
+              }],
+          }
+      }
+          return (
+            <Bar data={data} options={opt}/>
+          )
       }
       renderChart_free_basic_services(){
-        if(chartRef6){chartRef6.destroy();}
-        var ctx = document.getElementById('mc5').getContext('2d');
-
-        chartRef6 = new Chart(ctx, {
-            type: 'bar',
-            data: {
+            let data = {
               labels: sortedData,
               datasets: [
                 {
@@ -1146,8 +1151,8 @@ export default class Charts_dashboards extends Component {
                   borderColor: '#C8EBBA',
                 },
           ]
-            },
-            options: {
+            }
+            let opt = {
               legend: {
                 labels: {
                     fontColor: "#4A4A4A",
@@ -1208,7 +1213,10 @@ export default class Charts_dashboards extends Component {
                   }],
               }
           }
-          });
+
+          return (
+            <Bar data={data} options={opt}/>
+          )
       }
 
     render(){
@@ -1231,7 +1239,7 @@ export default class Charts_dashboards extends Component {
                   <br/>
               </ModalBody>
           </Modal>
-          :''
+          : ''
           }
           <div  className='container-fluid charts_dashboards'>
             <div className='row'>
@@ -1256,7 +1264,7 @@ export default class Charts_dashboards extends Component {
                           <div className='col-md-9'><h1 className='charts_dashboards--households'>Households: Access to Basic Water Supply</h1></div>
                           <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='toolkit#/codebook-explorer/392' target='_blank'/></div>
                         </div>
-                        <canvas id='mc'></canvas>
+                        {this.renderChart_percentage_of_household_with_basic_water_supply()}
                       </div>
                     </div>
                     <div className='col-md-6'>
@@ -1265,7 +1273,7 @@ export default class Charts_dashboards extends Component {
                           <div className='col-md-9'><h1 className='charts_dashboards--households'>Households: Access to Basic Sanitation</h1></div>
                           <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='toolkit#/codebook-explorer/384' target='_blank'/></div>
                         </div>
-                        <canvas id='mc1'></canvas>
+                        {this.renderChart_percentage_of_households_with_access_to_basic_sanitation()}
                       </div>
                     </div>
                   </div>
@@ -1276,7 +1284,7 @@ export default class Charts_dashboards extends Component {
                           <div className='col-md-9'><h1 className='charts_dashboards--households'>Households: Access to Electricity</h1></div>
                           <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='toolkit#/codebook-explorer/10' target='_blank'/></div>
                         </div>
-                        <canvas id='mc2'></canvas>
+                          {this.renderChart_percentage_of_households_with_access_to_electricity()}
                       </div>
                     </div>
                     <div className='col-md-6'>
@@ -1285,7 +1293,7 @@ export default class Charts_dashboards extends Component {
                           <div className='col-md-9'><h1 className='charts_dashboards--households'>Households: Access to Refuse Removal</h1></div>
                           <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='toolkit#/codebook-explorer/1114' target='_blank' /></div>
                         </div>
-                        <canvas id='mc3'></canvas>
+                        {this.renderChart_percentage_households_with_weekly_municipal_refuse_removal()}
                       </div>
                     </div>
                   </div>
@@ -1297,7 +1305,7 @@ export default class Charts_dashboards extends Component {
                     <div className='col-md-9'><h1 className='charts_dashboards--households'>Total Number of Households/Municipality</h1></div>
                     <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='toolkit#/codebook-explorer/12' target='_blank'/></div>
                   </div>
-                  <canvas id='mc4'></canvas>
+                  {this.renderChart_total_number_of_households_in_the_municipality()}
                 </div>
                 <div className='charts p-0 mt-4'>
                   <div className='row'>
@@ -1305,7 +1313,7 @@ export default class Charts_dashboards extends Component {
                     <div className='col-md-3 d-none'><Button className='charts_dashboards--button' text='Raw Data' href='toolkit#/codebook-explorer/384' target='_blank'/></div>
                   </div>
                   <Switch_text toggle={this.state.toggle} action={this.switchTrigger} />
-                  <canvas id='mc5'></canvas>
+                  {this.renderChart_free_basic_services()}
                 </div>
               </div>
             </div>

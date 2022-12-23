@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState } from 'react'
 import Select from "react-select";
 import Button from '../Button';
 import { Modal, ModalBody, Spinner } from 'reactstrap';
-import { Bar } from 'react-chartjs-2';
 import BarChart from '../Barchart'
 import HumanResourcesData from '../../data/HumanResourceData'
 
