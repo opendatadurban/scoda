@@ -140,7 +140,23 @@
     .text {
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        gap: 15px;
+        width: 65%;
+        overflow-y: auto;
+        height: 300px;
+
+        &::-webkit-scrollbar{
+            width:9px;
+        }
+        &::-webkit-scrollbar-track{
+            background: #F1F1F1;
+            border-radius: 40px;
+        }
+        &::-webkit-scrollbar-thumb{
+            background: #BABABA;
+            height: 25px;
+            border-radius: 40px;
+        }
 
         .headings {
 

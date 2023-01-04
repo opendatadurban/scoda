@@ -6,7 +6,7 @@ import { useCloseAllErrors } from '../../../context'
 
 export const Select = ({ chartData, originalValues, selected, options,
     setSelected, setChartGroup, setOptions,
-    removeItem, addItem, clearAll, chartDropName,isDropDownChart }) => {
+    removeItem, addItem, clearAll, chartDropName,isDropDownChart, genericIndex}) => {
 
     useEffect(() => {
 
@@ -16,9 +16,7 @@ export const Select = ({ chartData, originalValues, selected, options,
     const selectContext = useSelectOpen()
     const closeAlerts = useCloseAllErrors()
 
-    console.log(selected, "selected from selected")
     const closeAllAlerts = () => {
-
 
         let isClearable = false
 
@@ -49,7 +47,12 @@ export const Select = ({ chartData, originalValues, selected, options,
                 if (index > 4) return
                 filtered.push(chart)
             })
-        } else if (chartDropName === "Household Income" || chartDropName === "Education" || (chartDropName === "Sustainability" && isDropDownChart)) {
+        } else if (chartDropName === "Household Income" || chartDropName === "Education" ||
+        chartDropName === "Transport Mode" ||
+         (chartDropName === "Sustainability" && isDropDownChart)|| 
+         (chartDropName === "Travel Time" && isDropDownChart) ||
+         (chartDropName === "Public Transport Spend" && genericIndex === 1)
+         ) {
             
             chartData[0][0].forEach((chart, index) => {
         
@@ -76,7 +79,7 @@ export const Select = ({ chartData, originalValues, selected, options,
     return (<div className="conditional_select_wrapper" onClick={closeAllAlerts}>
         {
             isDropDownChart ? <>
-                <p className="select_title">Choose Cities:</p>
+                <p className="select_title">Choose Cities</p>
                 <div className='custom_select'
                 onClick={ () => selectContext.setSelect(!selectContext.selectOpen)}>
                     {
@@ -145,7 +148,5 @@ export const Select = ({ chartData, originalValues, selected, options,
                 </div>
         }
     </div>
-
-
     )
 }

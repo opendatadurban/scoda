@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { MiniSelect } from './MiniSelect';
 import { cityLabels } from '../helpers/helpers';
 import { getStatTotals, getEmploymentStatTotals, getDwellingsStatTotals,
-     getFoodSecurityStatTotals,getEducationStatTotals,getLifeExpectancyStatTotals } from '../helpers/statsBar';
+     getFoodSecurityStatTotals,getEducationStatTotals,getLifeExpectancyStatTotals, getTravelTimeStatsTotals, getICTStatsTotal, getTransportModeStatsTotal, getPublicTransportSpendStatsTotals } from '../helpers/statsBar';
 import { useGlobalClose } from '../../../context';
 import { useCloseAllErrors } from '../../../context';
 
@@ -61,6 +61,46 @@ const initialValues = (dropName) => {
                     } :
                     dropName === "Sustainability" ?
                     null:
+                    dropName === "Travel Time" ? {
+                        first: [0, "15 minutes or less"],
+                        second: [0, "15 - 30 Minutes"],
+                        third: [0, "31 - 60 Minutes"],
+                        fourth: [0, "61 - 90 Minutes"],
+                        fifth: [0, "More Than 90 Minutes"],
+                        firstTot: [0, "15 minutes or less"],
+                        secondTot: [0, "15 - 30 Minutes"],
+                        thirdTot: [0, "31 - 60 Minutes"],
+                        fourthTot: [0, "61 - 90 Minutes"],
+                        fifthTot: [0, "More Than 90 Minutes"],
+                    } :dropName === "ICT Infrastructure" ? {
+                        first: [0, "Fixed Line Telephone"],
+                        second: [0, "Mobile Telephone"],
+                        third: [0, "internet ConnectioN"],
+                        firstTot: [0, "Fixed Line Telephone"],
+                        secondTot: [0, "Mobile Telephone"],
+                        thirdTot: [0, "internet ConnectioN"],  
+                    }:dropName === "Transport Mode" ? {
+                        first : [0, "Walk"],
+                        second : [0, "MINIBUS TAXI"],
+                        third : [0, "BUS"],
+                        fourth : [0, "TRAIN"],
+                        fifth : [0, "OWN CAR"],
+                        firstTot : [0, "Walk"],
+                        secondTot : [0, "MINIBUS TAXI"],
+                        thirdTot : [0, "BUS"],
+                        fourthTot : [0, "TRAIN"],
+                        fifthTot : [0, "OWN CAR"]
+                    }:dropName === "Public Transport Spend" ? {
+                        first : [0, "< 10% of Household income"],
+                        second : [0, "10 - 20% of Household income"],
+                        third : [0, "20 - 30% of Household income"],
+                        fourth : [0, "> 30% of Household income"],
+        
+                        firstTot : [0, "< 10% of Household income"],
+                        secondTot : [0, "10 - 20% of Household income"],
+                        thirdTot : [0, "20 - 30% of Household income"],
+                        fourthTot : [0, "> 30% of Household income"],
+                    }:
                     {}
 
     return statsInit
@@ -73,21 +113,39 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
 
     useEffect(() => {
         if (dropName === "People and Households") {
+
             getStatTotals(originalValues, cityLabels, setStats, selected)
         } else if (dropName === "Employment" || dropName === "Household Income") {
+
             getEmploymentStatTotals(setStats, selected)
         } else if (dropName === "Dwellings") {
+
             getDwellingsStatTotals(originalValues, cityLabels, setStats, selected)
         } else if (dropName === "Food Security, Literacy and Inequality") {
+
             getFoodSecurityStatTotals(originalValues, cityLabels, setStats, selected)
         } else if (dropName === "Life Expectancy and Health") {
+
             getLifeExpectancyStatTotals(originalValues, cityLabels, setStats, selected)
         }else if (dropName === "Education") {
+
             getEducationStatTotals(originalValues, cityLabels, setStats, selected)
         }else if (dropName === "Sustainability") {
-            setStats(null)
-        }
 
+            setStats(null)
+        }else if(dropName === "Travel Time"){
+           
+            getTravelTimeStatsTotals(setStats,selected)
+        }else if(dropName === "ICT Infrastructure"){
+           
+            getICTStatsTotal(setStats,selected)
+        }else if(dropName === "Transport Mode"){
+           
+            getTransportModeStatsTotal(setStats,selected)
+        }else if(dropName === "Public Transport Spend"){
+           
+            getPublicTransportSpendStatsTotals(setStats,selected)
+        }
 
     }, [selected])
 
@@ -421,7 +479,224 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                                     </div>
                                 </div>
                             </div> : dropName === "Sustainability" ?
-                            "" :
+                            "" :dropName === "Travel Time" ?
+                            <div className='stat_display_panel' onClick={() => { globalCityDropDownClose() }}>
+                                <div className='first_panel'>
+                                    <p className='catagory-name '>Travel Time:  <span>City Averages 2018</span></p>
+                                    <p className="title">PROPORTION OF TRAVELLERS WHO TRAVEL:</p>
+                                    <div className='row'>
+
+                                        <div className='stat tertiaryEducationTot'>
+                                            <h1>{makeHumanReadable(statsValues.firstTot[0])}%</h1>
+                                            <p > {makeHumanReadable(statsValues.firstTot[1])}</p>
+                                        </div>
+                                        <div className='stat tertiaryEducationTot'>
+                                            <h1>{makeHumanReadable(statsValues.secondTot[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.secondTot[1])}</p>
+                                        </div>
+                                        <div className='stat tertiaryEducationTot'>
+                                            <h1>{makeHumanReadable(statsValues.thirdTot[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.thirdTot[1])}</p>
+                                        </div>
+                                        <div className='stat tertiaryEducationTot'>
+                                            <h1>{makeHumanReadable(statsValues.fourthTot[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.fourthTot[1])}</p>
+                                        </div>
+                                        <div className='stat tertiaryEducationTot'>
+                                            <h1>{makeHumanReadable(statsValues.fifthTot[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.fifthTot[1])}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='second_panel'>
+                                    <div className='top'>
+                                        <p className='catagory-name'> Travel Time: <span>Municipality Focus 2018</span></p>
+
+                                        <MiniSelect names={['Buffalo City', 'City of Cape Town', 'Ekurhuleni', 'eThekwini', 'City of Joburg', 'Mangaung', 'Nelson Mandela Bay', "Tshwane"].sort()} setSelected={setSelected} selected={selected} />
+                                    </div>
+                                    <p className="title_header">PROPORTION OF TRAVELLERS WHO TRAVEL:</p>
+                                    <div className='bottom'>
+                                    <div className='stat tertiaryEducationTot'>
+                                            <h1>{makeHumanReadable(statsValues.first[0])}%</h1>
+                                            <p > {makeHumanReadable(statsValues.first[1])}</p>
+                                        </div>
+                                        <div className='stat tertiaryEducationTot'>
+                                            <h1>{makeHumanReadable(statsValues.second[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.second[1])}</p>
+                                        </div>
+                                        <div className='stat tertiaryEducationTot'>
+                                            <h1>{makeHumanReadable(statsValues.third[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.third[1])}</p>
+                                        </div>
+                                        <div className='stat tertiaryEducationTot'>
+                                            <h1>{makeHumanReadable(statsValues.fourth[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.fourth[1])}</p>
+                                        </div>
+                                        <div className='stat tertiaryEducationTot'>
+                                            <h1>{makeHumanReadable(statsValues.fifth[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.fifth[1])}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> :dropName === "ICT Infrastructure" ?
+                            <div className='stat_display_panel' onClick={() => { globalCityDropDownClose() }}>
+                                <div className='first_panel'>
+                                    <p className='catagory-name '>Infrastructure:  <span>City Averages 2018</span></p>
+                                    <p className="title">NUMBER OF POPULATION WITH ACCESS TO:</p>
+                                    <div className='row'>
+
+                                        <div className='stat noSchoolingTot'>
+                                            <h1>{makeHumanReadable(statsValues.firstTot[0])}</h1>
+                                            <p > {makeHumanReadable(statsValues.firstTot[1])}</p>
+                                        </div>
+                                        <div className='stat primarySchoolingTot'>
+                                            <h1>{makeHumanReadable(statsValues.secondTot[0])}</h1>
+                                            <p>{makeHumanReadable(statsValues.secondTot[1])}</p>
+                                        </div>
+                                        <div className='stat secondarySchoolingTot'>
+                                            <h1>{makeHumanReadable(statsValues.thirdTot[0])}</h1>
+                                            <p>{makeHumanReadable(statsValues.thirdTot[1])}</p>
+                                        </div>
+                                      
+                                    </div>
+                                </div>
+                                <div className='second_panel'>
+                                    <div className='top'>
+                                        <p className='catagory-name'> Infrastructure: <span>Municipality Focus 2018</span></p>
+
+                                        <MiniSelect names={['Buffalo City', 'City of Cape Town', 'Ekurhuleni', 'eThekwini', 'City of Joburg', 'Mangaung', 'Nelson Mandela Bay', "Tshwane"].sort()} setSelected={setSelected} selected={selected} />
+                                    </div>
+                                    <p className="title_header">NUMBER OF POPULATION WITH ACCESS TO:</p>
+                                    <div className='bottom'>
+                                    <div className='stat small'>
+                                            <h1>{makeHumanReadable(statsValues.first[0])}</h1>
+                                            <p > {makeHumanReadable(statsValues.first[1])}</p>
+                                        </div>
+                                        <div className='stat small'>
+                                            <h1>{makeHumanReadable(statsValues.second[0])}</h1>
+                                            <p>{makeHumanReadable(statsValues.second[1])}</p>
+                                        </div>
+                                        <div className='stat small'>
+                                            <h1>{makeHumanReadable(statsValues.third[0])}</h1>
+                                            <p>{makeHumanReadable(statsValues.third[1])}</p>
+                                        </div>
+                                      
+                                    </div>
+                                </div>
+                            </div>:dropName === "Transport Mode" ?
+                            <div className='stat_display_panel' onClick={() => { globalCityDropDownClose() }}>
+                                <div className='first_panel'>
+                                    <p className='catagory-name '>Passengers by Mode:  <span>City Averages 2018</span></p>
+                                    <p className="title">PROPORTION OF TRAVELLERS WHO:</p>
+                                    <div className='row'>
+
+                                        <div className='stat noSchoolingTot'>
+                                            <h1>{makeHumanReadable(statsValues.firstTot[0])}%</h1>
+                                            <p > {makeHumanReadable(statsValues.firstTot[1])}</p>
+                                        </div>
+                                        <div className='stat extra_small'>
+                                            <h1>{makeHumanReadable(statsValues.secondTot[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.secondTot[1])}</p>
+                                        </div>
+                                        <div className='stat secondarySchoolingTot'>
+                                            <h1>{makeHumanReadable(statsValues.thirdTot[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.thirdTot[1])}</p>
+                                        </div>
+                                        <div className='stat tertiaryEducationTot'>
+                                            <h1>{makeHumanReadable(statsValues.fourthTot[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.fourthTot[1])}</p>
+                                        </div>
+                                        <div className='stat tertiaryEducationTot'>
+                                            <h1>{makeHumanReadable(statsValues.fifthTot[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.fifthTot[1])}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='second_panel'>
+                                    <div className='top'>
+                                        <p className='catagory-name'> Passengers by Mode: <span>Municipality Focus 2018</span></p>
+
+                                        <MiniSelect names={['Buffalo City', 'City of Cape Town', 'Ekurhuleni', 'eThekwini', 'City of Joburg', 'Mangaung', 'Nelson Mandela Bay', "Tshwane"].sort()} setSelected={setSelected} selected={selected} />
+                                    </div>
+                                    <p className="title_header">PROPORTION OF TRAVELLERS WHO:</p>
+                                    <div className='bottom'>
+                                    <div className='stat noSchoolingTot'>
+                                            <h1>{makeHumanReadable(statsValues.first[0])}%</h1>
+                                            <p > {makeHumanReadable(statsValues.first[1])}</p>
+                                        </div>
+                                        <div className='stat extra_small'>
+                                            <h1>{makeHumanReadable(statsValues.second[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.second[1])}</p>
+                                        </div>
+                                        <div className='stat secondarySchoolingTot'>
+                                            <h1>{makeHumanReadable(statsValues.third[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.third[1])}</p>
+                                        </div>
+                                        <div className='stat tertiaryEducationTot'>
+                                            <h1>{makeHumanReadable(statsValues.fourth[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.fourth[1])}</p>
+                                        </div>
+                                        <div className='stat tertiaryEducationTot'>
+                                            <h1>{makeHumanReadable(statsValues.fifth[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.fifth[1])}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>:
+                            dropName === "Public Transport Spend" ?
+                            <div className='stat_display_panel' onClick={() => { globalCityDropDownClose() }}>
+                                <div className='first_panel'>
+                                    <p className='catagory-name '>Travel Costs:  <span>City Averages 2018</span></p>
+                                    <p className="title">Proportion of Spending on Public Transport by households:</p>
+                                    <div className='row'>
+
+                                        <div className='stat small'>
+                                            <h1>{makeHumanReadable(statsValues.firstTot[0])}%</h1>
+                                            <p > {makeHumanReadable(statsValues.firstTot[1])}</p>
+                                        </div>
+                                        <div className='stat small'>
+                                            <h1>{makeHumanReadable(statsValues.secondTot[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.secondTot[1])}</p>
+                                        </div>
+                                        <div className='stat small'>
+                                            <h1>{makeHumanReadable(statsValues.thirdTot[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.thirdTot[1])}</p>
+                                        </div>
+                                        <div className='stat small'>
+                                            <h1>{makeHumanReadable(statsValues.fourthTot[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.fourthTot[1])}</p>
+                                        </div>
+                                      
+                                    </div>
+                                </div>
+                                <div className='second_panel'>
+                                    <div className='top'>
+                                        <p className='catagory-name'> Travel Costs: <span>Municipality Focus 2018</span></p>
+
+                                        <MiniSelect names={['Buffalo City', 'City of Cape Town', 'Ekurhuleni', 'eThekwini', 'City of Joburg', 'Mangaung', 'Nelson Mandela Bay', "Tshwane"].sort()} setSelected={setSelected} selected={selected} />
+                                    </div>
+                                    <p className="title_header">Proportion of Spending on Public Transport by households:</p>
+                                    <div className='bottom'>
+                                    <div className='stat small'>
+                                            <h1>{makeHumanReadable(statsValues.first[0])}%</h1>
+                                            <p > {makeHumanReadable(statsValues.first[1])}</p>
+                                        </div>
+                                        <div className='stat small'>
+                                            <h1>{makeHumanReadable(statsValues.second[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.second[1])}</p>
+                                        </div>
+                                        <div className='stat small'>
+                                            <h1>{makeHumanReadable(statsValues.third[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.third[1])}</p>
+                                        </div>
+                                        <div className='stat small'>
+                                            <h1>{makeHumanReadable(statsValues.fourth[0])}%</h1>
+                                            <p>{makeHumanReadable(statsValues.fourth[1])}</p>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>:
                             ""}
     </div>
     )

@@ -6,7 +6,9 @@
     margin-right: 41px;
 
     div {
-      margin-top: 28px;
+      margin-top: 0;
+      display: flex;
+      margin: auto;
 
       button {
         color:#fff !important;
@@ -303,8 +305,11 @@
   line-height: 14px;
   text-align: center;
 }
-
-.codebook-modal {
+.codebook-modal{
+  height: 80%;
+  margin: auto;
+  overflow: hidden !important;
+&-container {
   max-width: none;
   opacity: 0.95;
   margin: 0;
@@ -312,8 +317,10 @@
     border: 0;
   }
 }
-
+}
 .modal-open {
+  height: 80%;
+  margin: auto;
   .navigation-scoda {
     z-index: 1;
   }
@@ -439,9 +446,16 @@ input:checked + .slider:before {
 }
 
 .modal-search-bar {
-  border-radius: 25px;
+  border-radius: 5px;
   height: 25px;
   margin-bottom: 15px;
+  width: 291px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 13px;
+  color: #B2BEC3;
 }
 
 .filter-label-text {
@@ -480,6 +494,8 @@ input:checked + .slider:before {
     border: 1px solid;
     border-color: white !important;
     border-radius: 30px;
+    width: 250px;
+    height: 30px;
   }
 
   &.cancel {
@@ -503,28 +519,22 @@ input:checked + .slider:before {
 
 .close {
   position: absolute;
-  right: 32px;
-  top: 32px;
+  right: 2px;
+  top: 28px;
   width: 32px;
   height: 32px;
   color: #FFFFFF;
-}
-
-.close:before, .close:after {
-  position: absolute;
-  left: 15px;
-  content: ' ';
-  height: 33px;
-  width: 2px;
-  background-color: #FFFFFF;
+  opacity: 1;
 }
 
 .close:before {
-  transform: rotate(45deg);
-}
-
-.close:after {
-  transform: rotate(-45deg);
+  position: absolute;
+  right: 24px;
+  content: ' ';
+  height: 40px;
+  width: 40px;
+  background-image: url("/static/dist/img/codebook-close.svg");
+  background-repeat: no-repeat;
 }
 
 .modal-container {
@@ -543,6 +553,19 @@ input:checked + .slider:before {
   font-weight: bold;
   letter-spacing: 0;
   margin: 10px 0;
+  &--search{
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 22px;
+    position: absolute;
+    background-image: url("/static/dist/img/Search-reactangle.svg");
+    background-repeat: no-repeat;
+    left: 12px;
+    top: 16.5px;
+  }
+}
 }
 
 .toggle-subitem {
@@ -555,6 +578,7 @@ input:checked + .slider:before {
 
 .toggle label {
   margin-top: 0;
+  font-weight: 400 !important;
   &.primary-label {
     color: inherit !important;
     font-weight: bold !important;

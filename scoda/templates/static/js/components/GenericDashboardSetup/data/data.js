@@ -241,6 +241,514 @@ export const sustainability_text_box_data = [
 
 ]
 
+export const transport_mode_data = [
+    {
+        toggle_calculation: true,
+        percent: {
+            name: "Proportion of individuals travelling to education or work: Walking",
+            code: "TR.SOCR.4.0",
+        },
+        number: {
+            name: "Number of individuals travelling to education or work: Walking",
+            code: "TR.SOCR.4.0",
+        },
+        endpoints: [816]
+    },
+    {
+        toggle_calculation: true,
+        percent: {
+            name: "Proportion of individuals travelling to education or work: Bicycle/motorcycle",
+            code: "TR.SOCR.5.0",
+        },
+        number: {
+            name: "Number of individuals travelling to education or work: Bicycle/motorcycle",
+            code: "TR.SOCR.5.0",
+        },
+        endpoints: [819]
+    },
+    {
+        toggle_calculation: true,
+        percent: {
+            name: "Proportion of individuals travelling to education or work: Taxi",
+            code: "TR.SOCR.6.0",
+        },
+        number: {
+            name: "Number of individuals travelling to education or work: Taxi",
+            code: "TR.SOCR.6.0",
+        },
+        endpoints: [822]
+    },
+    {
+        toggle_calculation: true,
+        percent: {
+            name: "Proportion of individuals travelling to education or work: Bus",
+            code: "TR.SOCR.7.0",
+        },
+        number: {
+            name: "Number of individuals travelling to education or work: Bus",
+            code: "TR.SOCR.7.0",
+        },
+        endpoints: [825] 
+    },
+    {
+        toggle_calculation: true,
+        percent: {
+            name: "Proportion of individuals travelling to education or work: Train",
+            code: "TR.SOCR.8.0",
+        },
+        number: {
+            name: "Number of individuals travelling to education or work: Train",
+            code: "TR.SOCR.8.0",
+        },
+        endpoints: [828] 
+    },
+    {
+        toggle_calculation: true,
+        percent: {
+            name: "Proportion of individuals travelling to education or work: Minibus/bus provided by institution/government and not paid for",
+            code: "TR.SOCR.9.0",
+        },
+        number: {
+            name: "Number of individuals travelling to education or work: Minibus/bus provided by institution/government and not paid for",
+            code: "TR.SOCR.9.0",
+        },
+        endpoints: [831] 
+    },
+    {
+        toggle_calculation: true,
+        percent: {
+            name: "Proportion of individuals travelling to education or work: Vehicle hired by a group of parents/lift club",
+            code: "TR.SOCR.10.0",
+        },
+        number: {
+            name: "Number of individuals travelling to education or work: Vehicle hired by a group of parents/lift club",
+            code: "TR.SOCR.10.0",
+        },
+        endpoints: [834] 
+    },
+    {
+        toggle_calculation: true,
+        percent: {
+            name: "Proportion of individuals travelling to education or work: Own car or other private vehicle or company car",
+            code: "TR.SOCR.11.0",
+        },
+        number: {
+            name: "Number of individuals travelling to education or work: Own car or other private vehicle or company car",
+            code: "TR.SOCR.11.0",
+        },
+        endpoints: [837] 
+    },
+    {
+        toggle_calculation: true,
+        percent: {
+            name: "Proportion of individuals travelling to education or work: Other transportation",
+            code: "TR.SOCR.12.0",
+        },
+        number: {
+            name: "Number of individuals travelling to education or work: Other transportation",
+            code: "TR.SOCR.12.0",
+        },
+        endpoints: [840] 
+    }
+
+]
+
+export const travel_time_text_box_data = [
+    {
+        toggle_calculation: true,
+        percent: {
+            name: "Proportion of individuals that take: 15 minutes or less to get to work",
+            code: "TR.SOCR.14.0",
+        },
+        number: {
+            name: "Number of individuals that take: 15 minutes or less to get to work",
+
+            code: "TR.SOCR.14.0",
+        },
+        endpoints: [845]
+    },
+    {
+        toggle_calculation: true,
+        percent: {
+            name: "Proportion of individuals that take: 15-30 minutes to get to work",
+            code: "TR.SOCR.15.0",
+        },
+        number: {
+            name: "Number of individuals that take: 15-30 minutes to get to work",
+
+            code: "TR.SOCR.15.0",
+        },
+        endpoints: [854]
+    },
+    {
+        toggle_calculation: true,
+        percent: {
+            name: "Proportion of individuals that take: 31-60 minutes to get to work",
+            code: "TR.SOCR.16.0",
+        },
+        number: {
+            name: "Number of individuals that take: 31-60 minutes to get to work",
+
+            code: "TR.SOCR.16.0",
+        },
+        endpoints: [863]
+    },
+    {
+        toggle_calculation: true,
+        percent: {
+            name: "Proportion of individuals that take: 61-90 minutes to get to work",
+            code: "TR.SOCR.17.0",
+        },
+        number: {
+            name: "Number of individuals that take: 61-90 minutes to get to work",
+
+            code: "TR.SOCR.17.0",
+        },
+        endpoints: [872]
+    },
+    {
+        toggle_calculation: true,
+        percent: {
+            name: "Proportion of individuals that take: more than 90 minutes to get to work",
+            code: "TR.SOCR.18.0",
+        },
+        number: {
+            name: "Number of individuals that take: more than 90 minutes to get to work",
+            code: "TR.SOCR.18.0",
+        },
+        endpoints: [881]
+    }
+
+]
+
+export const public_transport_text_box_data = [
+    {
+        barchart_by_year: true,
+        number: {
+            name: [
+                "Number of individuals that spent Less Than 10% of Household Income on Public Transport",
+                "Number of individuals that spent 10 - 20% of Household Income on Public Transport",
+                "Number of individuals that spent 20 - 30% of Household Income on Public Transport",
+                "Number of individuals that spent > 30% of Household Income on Public Transport"
+        
+            ],
+            code: [
+                "TR.SOCR.19.0",
+                "TR.SOCR.20.0",
+                "TR.SOCR.21.0",
+                "TR.SOCR.22.0"
+            ]
+        },
+        percent: {
+            name: [
+                "Proportion of individuals that spent Less Than 10% of Household Income on Public Transport",
+                "Proportion of individuals that spent 10 - 20% of Household Income on Public Transport",
+                "Proportion of individuals that spent 20 - 30% of Household Income on Public Transport",
+                "Proportion of individuals that spent >30% of Household Income on Public Transport"
+            ],
+            code: [
+                "TR.SOCR.19.0",
+                "TR.SOCR.20.0",
+                "TR.SOCR.21.0",
+                "TR.SOCR.22.0"
+            ]
+        },
+        endpoints: [1084, 1085, 1086, 1087]
+    }
+]
+
+export const travel_time_text_box_data_2 = [
+    {
+        single_city_select: true,
+        number: {
+            name: [
+                "Number of individuals that take 15 minutes or less to get to work: Walking",
+                "Number of individuals that take 15-30 minutes  to get to work: Walking",
+                "Number of individuals that take 31-60 minutes  to get to work: Walking",
+                "Number of individuals that take 61-90 minutes  to get to work: Walking",
+                "Number of individuals that take more than 90 minutes  to get to work: Walking"
+            ],
+            code: [
+                "TR.SOCR.14.1",
+                "TR.SOCR.15.1",
+                "TR.SOCR.16.1",
+                "TR.SOCR.17.1",
+                "TR.SOCR.18.1"
+            ]
+        },
+        percent: {
+            name: [
+                "Proportion of individuals that take 15 minutes or less to get to work: Walking",
+                "Proportion of individuals that take 15-30 minutes  to get to work: Walking",
+                "Proportion of individuals that take 31-60 minutes  to get to work: Walking",
+                "Proportion of individuals that take 61-90 minutes  to get to work: Walking",
+                "Proportion of individuals that take more than 90 minutes  to get to work: Walking"
+            ],
+            code: [
+                "TR.SOCR.14.1",
+                "TR.SOCR.15.1",
+                "TR.SOCR.16.1",
+                "TR.SOCR.17.1",
+                "TR.SOCR.18.1"
+            ]
+        },
+        endpoints: [846, 855, 864, 873, 882]
+    },
+    {
+        single_city_select: true,
+        number: {
+            name: [
+                "Number of individuals that take 15 minutes or less to get to work: Bicycle/motorcycle",
+                "Number of individuals that take 15-30 minutes  to get to work: Bicycle/motorcycle",
+                "Number of individuals that take 31-60 minutes  to get to work: Bicycle/motorcycle",
+                "Number of individuals that take 61-90 minutes  to get to work: Bicycle/motorcycle",
+                "Number of individuals that take more than 90 minutes  to get to work: Bicycle/motorcycle"
+            ],
+            code: [
+                "TR.SOCR.14.2",
+                "TR.SOCR.15.2",
+                "TR.SOCR.16.2",
+                "TR.SOCR.17.2",
+                "TR.SOCR.18.2"
+            ]
+        },
+        percent: {
+            name: [
+                "Proportion of individuals that take 15 minutes or less to get to work: Bicycle/motorcycle",
+                "Proportion of individuals that take 15-30 minutes  to get to work: Bicycle/motorcycle",
+                "Proportion of individuals that take 31-60 minutes  to get to work: Bicycle/motorcycle",
+                "Proportion of individuals that take 61-90 minutes  to get to work: Bicycle/motorcycle",
+                "Proportion of individuals that take more than 90 minutes  to get to work: Bicycle/motorcycle"
+            ],
+            code: [
+                "TR.SOCR.14.2",
+                "TR.SOCR.15.2",
+                "TR.SOCR.16.2",
+                "TR.SOCR.17.2",
+                "TR.SOCR.18.2"
+            ]
+        },
+        endpoints: [847, 856, 865, 874, 883]
+    },
+    {
+        single_city_select: true,
+        number: {
+            name: [
+                "Number of individuals that take 15 minutes or less to get to work: Minibus taxi/sedan taxi/bakkie taxi",
+                "Number of individuals that take 15-30 minutes  to get to work: Minibus taxi/sedan taxi/bakkie taxi",
+                "Number of individuals that take 31-60 minutes  to get to work: Minibus taxi/sedan taxi/bakkie taxi",
+                "Number of individuals that take 61-90 minutes  to get to work: Minibus taxi/sedan taxi/bakkie taxi",
+                "Number of individuals that take more than 90 minutes  to get to work: Minibus taxi/sedan taxi/bakkie taxi"
+            ],
+            code: [
+                "TR.SOCR.14.3",
+                "TR.SOCR.15.3",
+                "TR.SOCR.16.3",
+                "TR.SOCR.17.3",
+                "TR.SOCR.18.3"
+            ]
+        },
+        percent: {
+            name: [
+                "Proportion of individuals that take 15 minutes or less to get to work: Minibus taxi/sedan taxi/bakkie taxi",
+                "Proportion of individuals that take 15-30 minutes  to get to work: Minibus taxi/sedan taxi/bakkie taxi",
+                "Proportion of individuals that take 31-60 minutes  to get to work: Minibus taxi/sedan taxi/bakkie taxi",
+                "Proportion of individuals that take 61-90 minutes  to get to work: Minibus taxi/sedan taxi/bakkie taxi",
+                "Proportion of individuals that take more than 90 minutes  to get to work: Minibus taxi/sedan taxi/bakkie taxi"
+            ],
+            code: [
+                "TR.SOCR.14.3",
+                "TR.SOCR.15.3",
+                "TR.SOCR.16.3",
+                "TR.SOCR.17.3",
+                "TR.SOCR.18.3"
+            ]
+        },
+        endpoints: [848, 857, 866, 875, 884]
+    },
+    {
+        single_city_select: true,
+        number: {
+            name: [
+                "Number of individuals that take 15 minutes or less to get to work: Bus",
+                "Number of individuals that take 15-30 minutes  to get to work: Bus",
+                "Number of individuals that take 31-60 minutes  to get to work: Bus",
+                "Number of individuals that take 61-90 minutes  to get to work: Bus",
+                "Number of individuals that take more than 90 minutes  to get to work: Bus"
+            ],
+            code: [
+                "TR.SOCR.14.4",
+                "TR.SOCR.15.4",
+                "TR.SOCR.16.4",
+                "TR.SOCR.17.4",
+                "TR.SOCR.18.4"
+            ]
+        },
+        percent: {
+            name: [
+                "Proportion of individuals that take 15 minutes or less to get to work: Bus",
+                "Proportion of individuals that take 15-30 minutes  to get to work: Bus",
+                "Proportion of individuals that take 31-60 minutes  to get to work: Bus",
+                "Proportion of individuals that take 61-90 minutes  to get to work: Bus",
+                "Proportion of individuals that take more than 90 minutes  to get to work: Bus"
+            ],
+            code: [
+                "TR.SOCR.14.4",
+                "TR.SOCR.15.4",
+                "TR.SOCR.16.4",
+                "TR.SOCR.17.4",
+                "TR.SOCR.18.4"
+            ]
+        },
+        endpoints: [849, 858, 867, 876, 885]
+    },
+    {
+        single_city_select: true,
+        number: {
+            name: [
+                "Number of individuals that take 15 minutes or less to get to work: Train",
+                "Number of individuals that take 15-30 minutes  to get to work: Train",
+                "Number of individuals that take 31-60 minutes  to get to work: Train",
+                "Number of individuals that take 61-90 minutes  to get to work: Train",
+                "Number of individuals that take more than 90 minutes  to get to work: Train"
+            ],
+            code: [
+                "TR.SOCR.14.5",
+                "TR.SOCR.15.5",
+                "TR.SOCR.16.5",
+                "TR.SOCR.17.5",
+                "TR.SOCR.18.5"
+            ]
+        },
+        percent: {
+            name: [
+                "Proportion of individuals that take 15 minutes or less to get to work: Train",
+                "Proportion of individuals that take 15-30 minutes  to get to work: Train",
+                "Proportion of individuals that take 31-60 minutes  to get to work: Train",
+                "Proportion of individuals that take 61-90 minutes  to get to work: Train",
+                "Proportion of individuals that take more than 90 minutes  to get to work: Train"
+            ],
+            code: [
+                "TR.SOCR.14.5",
+                "TR.SOCR.15.5",
+                "TR.SOCR.16.5",
+                "TR.SOCR.17.5",
+                "TR.SOCR.18.5"
+            ]
+        },
+        endpoints: [850, 859, 868, 877, 886]
+    },
+    {
+        single_city_select: true,
+        number: {
+            name: [
+                "Number of individuals that take 15 minutes or less to get to work: Lift club by a group of people sharing a private vehicle",
+                "Number of individuals that take 15-30 minutes  to get to work: Lift club by a group of people sharing a private vehicle",
+                "Number of individuals that take 31-60 minutes  to get to work: Lift club by a group of people sharing a private vehicle",
+                "Number of individuals that take 61-90 minutes  to get to work: Lift club by a group of people sharing a private vehicle",
+                "Number of individuals that take more than 90 minutes  to get to work: Lift club by a group of people sharing a private vehicle"
+            ],
+            code: [
+                "TR.SOCR.14.6",
+                "TR.SOCR.15.6",
+                "TR.SOCR.16.6",
+                "TR.SOCR.17.6",
+                "TR.SOCR.18.6"
+            ]
+        },
+        percent: {
+            name: [
+                "Proportion of individuals that take 15 minutes or less to get to work: Lift club by a group of people sharing a private vehicle",
+                "Proportion of individuals that take 15-30 minutes  to get to work: Lift club by a group of people sharing a private vehicle",
+                "Proportion of individuals that take 31-60 minutes  to get to work: Lift club by a group of people sharing a private vehicle",
+                "Proportion of individuals that take 61-90 minutes  to get to work: Lift club by a group of people sharing a private vehicle",
+                "Proportion of individuals that take more than 90 minutes  to get to work: Lift club by a group of people sharing a private vehicle"
+            ],
+            code: [
+                "TR.SOCR.14.6",
+                "TR.SOCR.15.6",
+                "TR.SOCR.16.6",
+                "TR.SOCR.17.6",
+                "TR.SOCR.18.6"
+            ]
+        },
+        endpoints: [851, 860, 869, 878, 887]
+    },
+    {
+        single_city_select: true,
+        number: {
+            name: [
+                "Number of individuals that take 15 minutes or less to get to work: Own car/other private vehicle/company vehicle",
+                "Number of individuals that take 15-30 minutes  to get to work: Own car/other private vehicle/company vehicle",
+                "Number of individuals that take 31-60 minutes  to get to work: Own car/other private vehicle/company vehicle",
+                "Number of individuals that take 61-90 minutes  to get to work: Own car/other private vehicle/company vehicle",
+                "Number of individuals that take more than 90 minutes  to get to work: Own car/other private vehicle/company vehicle"
+            ],
+            code: [
+                "TR.SOCR.14.7",
+                "TR.SOCR.15.7",
+                "TR.SOCR.16.7",
+                "TR.SOCR.17.7",
+                "TR.SOCR.18.7"
+            ]
+        },
+        percent: {
+            name: [
+                "Proportion of individuals that take 15 minutes or less to get to work: Own car/other private vehicle/company vehicle",
+                "Proportion of individuals that take 15-30 minutes  to get to work: Own car/other private vehicle/company vehicle",
+                "Proportion of individuals that take 31-60 minutes  to get to work: Own car/other private vehicle/company vehicle",
+                "Proportion of individuals that take 61-90 minutes  to get to work: Own car/other private vehicle/company vehicle",
+                "Proportion of individuals that take more than 90 minutes  to get to work: Own car/other private vehicle/company vehicle"
+            ],
+            code: [
+                "TR.SOCR.14.7",
+                "TR.SOCR.15.7",
+                "TR.SOCR.16.7",
+                "TR.SOCR.17.7",
+                "TR.SOCR.18.7"
+            ]
+        },
+        endpoints: [852, 861, 870, 879, 888]
+    },
+    {
+        single_city_select: true,
+        number: {
+            name: [
+                "Number of individuals that take 15 minutes or less to get to work: Other",
+                "Number of individuals that take 15-30 minutes  to get to work: Other",
+                "Number of individuals that take 31-60 minutes  to get to work: Other",
+                "Number of individuals that take 61-90 minutes  to get to work: Other",
+                "Number of individuals that take more than 90 minutes  to get to work: Other"
+            ],
+            code: [
+                "TR.SOCR.14.8",
+                "TR.SOCR.15.8",
+                "TR.SOCR.16.8",
+                "TR.SOCR.17.8",
+                "TR.SOCR.18.8"
+            ]
+        },
+        percent: {
+            name: [
+                "Proportion of individuals that take 15 minutes or less to get to work: Other",
+                "Proportion of individuals that take 15-30 minutes  to get to work: Other",
+                "Proportion of individuals that take 31-60 minutes  to get to work: Other",
+                "Proportion of individuals that take 61-90 minutes  to get to work: Other",
+                "Proportion of individuals that take more than 90 minutes  to get to work: Other"
+            ],
+            code: [
+                "TR.SOCR.14.8",
+                "TR.SOCR.15.8",
+                "TR.SOCR.16.8",
+                "TR.SOCR.17.8",
+                "TR.SOCR.18.8"
+            ]
+        },
+        endpoints: [853, 862, 871, 880, 889]
+    }
+]
+
+
 export const sustainability_text_box_data_2 = [
     {
         percent: {
@@ -252,7 +760,6 @@ export const sustainability_text_box_data_2 = [
 
             code: "ENV.SOCR.1.1",
         },
-
         endpoints: [1051, 1052]
     },
     {
@@ -401,3 +908,5 @@ export const education_text_box_data = [
         endpoints: [1108, 1109]
     },
 ]
+
+

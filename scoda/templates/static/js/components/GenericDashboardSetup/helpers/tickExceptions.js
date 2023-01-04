@@ -1,4 +1,4 @@
-export const tickExceptionsForDwellings = (dropdownName,chartIndex) => {
+export const tickExceptionsForDwellings = (dropdownName,chartIndex,genericIndex) => {
   
     const dwellingsConditions = {
         dashboard: dropdownName === "Dwellings",
@@ -21,6 +21,15 @@ export const tickExceptionsForDwellings = (dropdownName,chartIndex) => {
         chart2: chartIndex === 1,
         chart3: chartIndex === 2,
         chart4: chartIndex === 3,
+    }
+
+    const publicTransportSpendConditions = {
+        dashboard: dropdownName === "Public Transport Spend",
+        genericSet: genericIndex === 0
+    }
+
+    const ictInfrastructureConditions = {
+        dashboard: dropdownName === "ICT Infrastructure",
     }
 
     if(dwellingsConditions.dashboard){
@@ -164,6 +173,30 @@ export const tickExceptionsForDwellings = (dropdownName,chartIndex) => {
             }
         }
 
+    }
+
+    else if (publicTransportSpendConditions.dashboard && publicTransportSpendConditions.genericSet){
+        return{
+            fontFamily: "Montserrat",
+                min: 0,
+                max: 80,
+                callback: function (value) { 
+                    return value + "" 
+                }
+        }
+    }
+
+    else if (ictInfrastructureConditions.dashboard) {
+        return{
+            fontFamily: "Montserrat",
+                min: 0,
+                max: 100000,
+                callback: function (value,index,values) { 
+
+                    values = Math.round(value) / 1000 + 'K '
+                    return values
+                }
+        }
     }
 
     else {

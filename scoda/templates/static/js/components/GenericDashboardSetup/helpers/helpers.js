@@ -1,3 +1,4 @@
+import axios from "axios"
 import { indicator_text_box_data } from "../data/data"
 
 export const peopleHouseholdColors = [
@@ -18,6 +19,14 @@ export const combinationColors = [
   '#D9F0D3',
   '#FFE79B',
   '#F4BB8C'
+]
+
+export const travelTimeColors = [
+  "#C8E6F6",
+  "#D9F0D3",
+  "#FFE79B",
+  "#F7CCA9",
+  "#E2918E"
 ]
 
 export const sustainabilityColors = [
@@ -48,10 +57,10 @@ export const dChartTitles = {
 }
 
 export const leChartTitles = {
-  yAxes: ["Percentage of Households", "Percentage of Population","Average Number of Years", "Average Number of Years"],
-  main: ["Public Healthcare Usage", "Medical Aid Coverage","Average Male Life Expectancy", "Average Female Life Expectancy",],
-  source: ["Calculated from Stats SA General Household Survey","Calculated from Stats SA General Household Survey",
-  "Stats SA Mid-Year Population Estimates","Stats SA Mid-Year Population Estimates"]
+  yAxes: ["Percentage of Households", "Percentage of Population", "Average Number of Years", "Average Number of Years"],
+  main: ["Public Healthcare Usage", "Medical Aid Coverage", "Average Male Life Expectancy", "Average Female Life Expectancy",],
+  source: ["Calculated from Stats SA General Household Survey", "Calculated from Stats SA General Household Survey",
+    "Stats SA Mid-Year Population Estimates", "Stats SA Mid-Year Population Estimates"]
 }
 
 export const fsChartTitles = {
@@ -59,32 +68,61 @@ export const fsChartTitles = {
     "Gini Coefficient", "HDI", "Percentage of Population Aged 15 and Over"],
   main: ["Adequate Access to Food", "Inadequate Access to Food", "Severely Inadequate Access to Food",
     "Gini Coefficient", "Human Development Index (HDI)", "Literacy Rate"],
-  source: ["Calculated from Stats SA General Household Survey","Calculated from Stats SA General Household Survey",
-"Calculated from Stats SA General Household Survey","IHS Global Insight",
-"IHS Global Insight","Stats SA General Household Survey"]
+  source: ["Calculated from Stats SA General Household Survey", "Calculated from Stats SA General Household Survey",
+    "Calculated from Stats SA General Household Survey", "IHS Global Insight",
+    "IHS Global Insight", "Stats SA General Household Survey"]
 }
 
-export const sustainabilityChartTitles = (dropdownName,genericIndex) => {
-  let chartTitles = {yAxes:"", main:"",source:""}
+export const ictChartTitles = {
+  yAxes: ["Number of Connections", "Number of Connections", "Number of Connections"
+  ],
+  main: ["Fixed Line Telephone Connections", "Mobile Telephone Connections",
+    "Internet Connections"],
+  sub_main: ["Per 100 000 Population", "Per 100 000 Population", "Per 100 000 Population"],
+  source: ["Calculated from Stats SA General Household Survey", "Calculated from Stats SA General Household Survey",
+    "Calculated from Stats SA General Household Survey"]
+}
 
-  if(dropdownName === "Sustainability" && genericIndex === 2){
-    chartTitles ={
+export const tpChartTitles = (genericIndex) => {
+
+  if (genericIndex === 0) {
+    return {
+      yAxes: ["Percentage", "Percentage", "Percentage", "Percentage"],
+      main: ["Spent Less Than 10% of Household Income on Public Transport", " Spent 10 - 20% of Household Income on Public Transport",
+        "Spent 20 - 30% of Household Income on Public Transport", "Spent More Than 30% of Household Income on Public Transport"],
+      top_main: ["Proportion of Households Who:", "Proportion of Households Who:",
+        "Proportion of Households Who:", "Proportion of Households Who:"],
+      source: ["Calculated from Stats SA General Household Survey", "Calculated from Stats SA General Household Survey",
+        "Calculated from Stats SA General Household Survey", "Calculated from Stats SA General Household Survey"]
+    }
+  } else {
+    return {}
+  }
+
+}
+
+
+export const sustainabilityChartTitles = (dropdownName, genericIndex) => {
+  let chartTitles = { yAxes: "", main: "", source: "" }
+
+  if (dropdownName === "Sustainability" && genericIndex === 2) {
+    chartTitles = {
       yAxes: [`Percentage of Household`],
-        main: ["Recycling Profile of Households in South Africa’s Major Metros (2019)"],
-        source: ["Stats SA General Household Survey"]
+      main: ["Recycling Profile of Households in South Africa’s Major Metros (2019)"],
+      source: ["Stats SA General Household Survey"]
     }
   }
-  if(dropdownName === "Sustainability" && genericIndex === 3){
-    chartTitles ={
+  if (dropdownName === "Sustainability" && genericIndex === 3) {
+    chartTitles = {
       yAxes: ["Days where PM2.5 levels exceed guidelines", "Days where PM10 levels\n\texceed guidelines"],
-        main: ["Ambient Air Quality: PM2.5", 
+      main: ["Ambient Air Quality: PM2.5",
         "Ambient Air Quality: PM10"],
-        source: ["South African Air Quality Information System (SAAQIS)",
-      "South African Air Quality Information System (SAAQIS)"]
+      source: ["South African Air Quality Information System (SAAQIS)",
+        "South African Air Quality Information System (SAAQIS)"]
     }
   }
 
-return chartTitles
+  return chartTitles
 }
 
 //TODO: use select to alter cities labels within chart grid 
@@ -154,6 +192,49 @@ export const cityLabels = city => {
   }
 }
 
+export const extendAbbreviation = city => {
+  switch (city) {
+    case "BUF":
+      return 'Buffalo City';
+    case "CPT":
+      return 'City of Cape Town';
+    case "JHB":
+      return 'City of Joburg';
+    case "EKU":
+      return 'Ekurhuleni';
+    case "MAN":
+      return "Mangaung";
+    case "MSU":
+      return "Msunduzi";
+    case "NMA":
+      return "Nelson Mandela Bay";
+    case "TSH":
+      return "Tshwane";
+    case "ETH":
+      return "eThekwini";
+    case "EC":
+      return 'Eastern Cape';
+    case "FS":
+      return 'Free State';
+    case "GP":
+      return 'Gauteng';
+    case "KZN":
+      return 'KwaZulu-Natal';
+    case "LP":
+      return "Limpopo";
+    case "MP":
+      return "Mpumalanga";
+    case "NW":
+      return "North West";
+    case "NC":
+      return "Northern Cape";
+    case "WC":
+      return "Western Cape";
+    default:
+      return city
+  }
+}
+
 export const populateSelect = (chartData, setOriginal, cityLabels, setSelected) => {
 
   if (chartData[1].length !== 0) {
@@ -183,15 +264,15 @@ export const populateSelect = (chartData, setOriginal, cityLabels, setSelected) 
 
 
 
-export const tableData = (table, cities,min, max) => {
+export const tableData = (table, cities, min, max) => {
 
-  const years = [2015, 2016, 2017, 2018,2019,2020]
+  const years = [2015, 2016, 2017, 2018, 2019, 2020]
   const labels = cities
   let newTable = []
   let byLabel = []
   let byYear = []
   let graphData = []
-  
+
   let labelsShallowCopy = [...labels]
   let sortingShallowCopy = [...labels.map(city => cityLabels(city))]
   let abbrev = labelsShallowCopy.map(city => cityLabels(city))
@@ -232,25 +313,25 @@ export const tableData = (table, cities,min, max) => {
     byYear.push(valuesByYear)
   })
 
- 
+
   graphData = byYear.map((year, index) => {
 
     const values = year.map((value) => {
-    
+
       return value[2]
     })
 
     let indexes = []
-  
-    abbrevSorted.forEach((label,labelIndex)=>{
+
+    abbrevSorted.forEach((label, labelIndex) => {
 
       indexes.push(abbrev.indexOf(label))
     })
-  
+
     let newValues = []
-  
+
     indexes.forEach((newIndex_1) => newValues.push(values[newIndex_1]))
-    return { labels: abbrevSorted, values:newValues, color: peopleHouseholdColors[index], year: year[0][1] }
+    return { labels: abbrevSorted, values: newValues, color: peopleHouseholdColors[index], year: year[0][1] }
   })
 
   return graphData
@@ -266,6 +347,33 @@ export const isNewApiIndicator = (indicator) => {
   const isNewApi = (typeof (indicator) === "number")
 
   return isNewApi
+}
+
+export const getTransportModePercentages = (a,b,c,d,e,f) => {
+  let endpoints = [
+    `${f}${a}`,
+    `${f}${b}`,
+    `${f}${c}`,
+    `${f}${d}`,
+    `${f}${e}`,
+  ];
+console.log(endpoints,"endpoints")
+  Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
+
+    (data) => {
+
+      const values = data.map((value, valueIndex) => {
+
+        let chartdata = value.data
+
+        console.log(chartdata, "chart number: ", valueIndex)
+
+        return chartdata
+
+      })
+
+    }
+  )
 }
 
 export const isCombinationIndicator = (indicator) => {
@@ -308,37 +416,74 @@ export const isTextBoxIndicator = (indicator) => {
   return isTextBox
 }
 
-export const chartHeights = (dropdownName,genericIndex) => {
+export const chartHeights = (dropdownName, genericIndex) => {
 
   /* Create a conditional list of chart heights specified for each dashboard*/
 
-  const heightByDropName = (dropdownName === "Employment" ? 170
+  const heightByDropName = ((dropdownName === "Employment" ||
+    (dropdownName === "Public Transport Spend" && genericIndex === 0)) ? 170
     : dropdownName === "Household Income" || dropdownName === "Education" ||
-    (dropdownName === "Sustainability" && genericIndex !== 3 && genericIndex !== 2) ? 100 :
-    (dropdownName === "Sustainability" && genericIndex === 3) ? 150:
-    (dropdownName === "Sustainability" && genericIndex === 2) ? 60:
-    (dropdownName === "Life Expectancy and Health") ? 150
-    : 210) // 210 is the fallback value if height not specified
+      dropdownName === "Transport Mode" ||
+      ((dropdownName === "Sustainability" || dropdownName === "Travel Time")
+        && genericIndex !== 3 && genericIndex !== 2) || (dropdownName === "Public Transport Spend" && genericIndex === 1) ? 100 :
+      (dropdownName === "Sustainability" && genericIndex === 3) ? 150 :
+        (dropdownName === "Sustainability" && genericIndex === 2) ? 60 :
+          (dropdownName === "Life Expectancy and Health" ||
+            dropdownName === "ICT Infrastructure") ? 150
+            : 210) // 210 is the fallback value if height not specified
 
   return heightByDropName
+}
+
+export const isArrayOfIndicatorCodes = (indicatorObject, selectedDropDownChart) => {
+
+  let isArrayOfIndicatorNames = Array.isArray(hhiDropdownNames(indicatorObject[0])[selectedDropDownChart].numberName)
+
+  if (isArrayOfIndicatorNames) {
+
+    return true
+  } else {
+    return false
+  }
 }
 
 export const hhiDropdownNames = (input) => {
 
   const options = input.map((item, index) => {
 
-    let shortName = item.number.name.split(": ")
+    //Checks for array of shortnames or just one shortname string
+    if (Array.isArray(item.number.name)) {
 
-    return {
-      numberName: item.number.name,
-      percentName: item.percent.name,
-      shortName: shortName[1],
-      endpoints: item.endpoints,
-      percentCode: item.percent.code,
-      numberCode: item.number.code,
-      index: index
+      let shortNames = item.number.name.map((shortNameInstance) => shortNameInstance.split(": "))
+
+      return { //remove all zero index arrays 
+        numberName: item.number.name,
+        percentName: item.percent.name,
+        shortName: shortNames.map((shortNameInstance) => shortNameInstance[1])[0],
+        longName: shortNames.map((shortNameInstance) => shortNameInstance[0])[0],
+        endpoints: item.endpoints,
+        percentCode: item.percent.code,
+        numberCode: item.number.code,
+        index: index
+      }
+
+    } else {
+      let shortName = item.number.name.split(": ")
+
+      return {
+        numberName: item.number.name,
+        percentName: item.percent.name,
+        shortName: shortName[1],
+        longName: shortName[0],
+        endpoints: item.endpoints,
+        percentCode: item.percent.code,
+        numberCode: item.number.code,
+        index: index
+      }
     }
-  })
+  }
+
+  )
 
   return options
 }

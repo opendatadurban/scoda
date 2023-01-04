@@ -64,7 +64,7 @@
                 justify-content: space-between;
                 width: calc(50vw - 39px);
 
-                &.closer{
+                &.closer {
                     justify-content: center;
                     gap: 39px;
                 }
@@ -82,6 +82,26 @@
 
                     &.aveFemaleTot>p {
                         width: 93px;
+                        text-align: center;
+                    }
+
+                    &.small>p {
+                        width: 70px;
+                        text-align: center;
+                    }
+
+                    &.extra_small>p {
+                        width: 52px;
+                        text-align: center;
+                    }
+
+                    &.medium>p {
+                        width: 85px;
+                        text-align: center;
+                    }
+
+                    &.large>p {
+                        width: 95px;
                         text-align: center;
                     }
 
@@ -219,8 +239,8 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
-                
-                &.closer{
+
+                &.closer {
                     justify-content: center;
                     gap: 39px;
                 }
@@ -238,6 +258,26 @@
 
                     &.aveFemale>p {
                         width: 93px;
+                        text-align: center;
+                    }
+
+                    &.small>p {
+                        width: 70px;
+                        text-align: center;
+                    }
+
+                    &.extra_small>p {
+                        width: 52px;
+                        text-align: center;
+                    }
+
+                    &.medium>p {
+                        width: 85px;
+                        text-align: center;
+                    }
+
+                    &.large>p {
+                        width: 95px;
                         text-align: center;
                     }
 
@@ -267,6 +307,11 @@
                     }
 
                     &.tertiaryEducation>p {
+                        width: 77px;
+                        text-align: center;
+                    }
+
+                    &.tertiaryEducationTot>p {
                         width: 77px;
                         text-align: center;
                     }
@@ -358,68 +403,6 @@
                     }
                 }
 
-                .title_wrapper {
-                    position: absolute;
-                    left: calc(45px + 63vw + 30px);
-
-                    .dropdown_title {}
-
-                    .macro_select {
-                        display: inline !important;
-                        width: 400px !important;
-                        height: 36.2px;
-                        border-radius: 28px;
-
-                        position: relative;
-
-                        >.title {
-                            position: absolute;
-                            top: 50%;
-                            left: 12px;
-                            transform: translate(0, -50%);
-                            display: block !important;
-                            width: 280px !important;
-                            white-space: nowrap !important;
-                            overflow: hidden !important;
-                            text-overflow: ellipsis !important;
-                            align-items: center;
-                            font-family: 'Montserrat';
-                            font-style: normal;
-                            font-weight: 400;
-                            font-size: 13.6px;
-                            line-height: 1.5;
-                            color: #4A4A4A;
-                        }
-                    }
-
-                    .dropdownbox {
-                        display: none;
-                        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
-                        &.show {
-                            display: flex;
-                            background-color: white;
-                            flex-direction: column;
-                            align-items: flex-start;
-                            position: absolute;
-                            width: 400px;
-                            top: calc(100% + 10px);
-                            right: 0;
-                            z-index: 100;
-                            border-radius: 5px;
-
-                            >p {
-                                display: block;
-                                font-family: 'Montserrat';
-                                font-style: normal;
-                                font-weight: 400;
-                                font-size: 13.6px;
-                                line-height: 13px;
-                                cursor: pointer;
-                            }
-                        }
-                    }
-                }
             }
 
             .grid-container {
@@ -453,6 +436,8 @@
                 }
 
                 .source_title {
+                    display: flex;
+                    align-items: baseline;
                     margin: 0;
                     padding: 3px 0 3px 0;
                     font-family: 'Montserrat';
@@ -470,7 +455,7 @@
                         line-height: 10px;
                         text-transform: uppercase;
                         color: #8C8F97;
-                        float:left;
+                        float: left;
                     }
                 }
             }
@@ -498,6 +483,8 @@
                 }
 
                 .source_title {
+                    display: flex;
+                    align-items: baseline;
                     margin: 0;
                     padding: 3px 0 3px 0;
                     font-family: 'Montserrat';
@@ -534,6 +521,8 @@
                 .chart_wrapper {
 
                     .source_title {
+                        display: flex;
+                        align-items: baseline;
                         margin: 0;
                         padding: 3px 0 3px 0;
                         font-family: 'Montserrat';
@@ -591,11 +580,24 @@
                     top: 10px;
                 }
 
+                &.no_divider {
+                    padding: 10px 30px 10px 30px;
+                    grid-row-gap: 36px;
+                    grid-column-gap: 50px;
+                    grid-template-columns: calc(50% - 50px/2) calc(50% - 50px/2);
 
+                    &:after {
+
+                        width: 0;
+                        background: transparent;
+                    }
+                }
 
                 .chart_wrapper {
 
                     .source_title {
+                        display: flex;
+                        align-items: baseline;
                         margin: 0;
                         padding: 3px 0 3px 0;
                         font-family: 'Montserrat';
@@ -620,14 +622,53 @@
                     .heading_wrapper {
                         align-items: center;
 
-                        .heading {
-                            height: unset;
-                            width: 418px;
+                        .heading_stack {
+                            .heading {
+                                height: unset;
+                                width: 418px;
 
+                            }
+
+                            .top_main {
+                                padding: 0;
+                                margin: 0;
+                                font-family: 'Montserrat';
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 12px;
+                                line-height: 15px;
+                                color: #2F3442;
+                            }
+
+                            .sub_main {
+                                padding: 0 0 4px 0;
+                                margin: 0;
+                                font-family: 'Montserrat';
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 12px;
+                                line-height: 15px;
+                                color: #2F3442;
+                            }
                         }
+
 
                     }
 
+                }
+
+                &.three_charts {
+
+                    grid-row-gap: 36px;
+                    grid-column-gap: 50px;
+                    padding: 10px 30px 10px 30px;
+                    grid-template-columns: calc(50% - 50px/2) calc(50% - 50px/2);
+
+                    &:after {
+                        content: "";
+                        width: 0;
+                        background: transparent;
+                    }
                 }
             }
 
@@ -690,6 +731,8 @@
 
 
                     .dropdown_chart_source {
+                        display: flex;
+                        align-items: baseline;
                         margin: 0;
                         padding: 3px 0 3px 0;
                         font-family: 'Montserrat';
@@ -727,7 +770,7 @@
 
 .secondary {
     margin: 0;
-    padding: 13px 0 0 0;
+    padding: 15px 0 0 0;
 
     .chart_grid {
 
