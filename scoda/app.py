@@ -20,7 +20,6 @@ for static in my_static_folders:
 env = os.environ.get('FLASK_ENV', 'development')
 app.config['ENV'] = env
 app.config.from_pyfile('config/%s.cfg' % env)
-# app.config['SECURITY_USER_IDENTITY_ATTRIBUTES'] = ('name', 'email')
 
 # CSRF protection
 from flask_wtf.csrf import CsrfProtect
@@ -42,7 +41,8 @@ sentry_sdk.init(
     integrations=[
         FlaskIntegration(),
     ],
-    traces_sample_rate=1.0
+    traces_sample_rate=app.config['SENTRY_SAMPLER'],
+    environment=app.config['SENTRY_ENV']
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for performance monitoring.
     # We recommend adjusting this value in production.
@@ -54,8 +54,5 @@ from flask_mail import Mail
 mail = Mail(app)
 
 from redis import Redis
-from redis.cluster import RedisCluster
-# redis_host = os.getenv(app.config['REDIS_HOST'], "")
 
 redisClient = Redis.from_url(app.config['REDIS_URL'])
-print(app.config['REDIS_URL'])
