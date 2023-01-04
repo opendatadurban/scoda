@@ -1,6 +1,4 @@
-
 from flask import Flask
-import jinja2
 import os
 from whitenoise import WhiteNoise
 
@@ -20,7 +18,6 @@ for static in my_static_folders:
 
 # setup configs
 env = os.environ.get('FLASK_ENV', 'development')
-
 app.config['ENV'] = env
 app.config.from_pyfile('config/%s.cfg' % env)
 # app.config['SECURITY_USER_IDENTITY_ATTRIBUTES'] = ('name', 'email')
@@ -38,11 +35,27 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
+sentry_sdk.init(
+    dsn=f"{app.config['SENTRY_DSN']}",
+    integrations=[
+        FlaskIntegration(),
+    ],
+    traces_sample_rate=1.0
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production.
+)
+
 # Mail
 from flask_mail import Mail
 
 mail = Mail(app)
 
-from flask_mobility import Mobility
+from redis import Redis
+from redis.cluster import RedisCluster
+# redis_host = os.getenv(app.config['REDIS_HOST'], "")
 
-mobility = Mobility(app)
+redisClient = Redis.from_url(app.config['REDIS_URL'])
+print(app.config['REDIS_URL'])
