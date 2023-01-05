@@ -28,7 +28,7 @@ intervals==0.8.0
 itsdangerous==0.24
 Jinja2==2.9.6
 Mako==1.0.6
-numpy==1.18.4
+numpy==1.22.0
 olefile==0.44
 pandas==1.0.3
 passlib==1.7.0
