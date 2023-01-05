@@ -1,4 +1,4 @@
-from scoda.app import app
+from scoda.app import app,redisClient
 from flask import request, url_for, redirect, flash, make_response, session, render_template, jsonify, Response
 from flask_security import current_user
 from itertools import product, zip_longest
@@ -7,6 +7,11 @@ from .models.user import UserAnalysis
 from .models.datasets import ExploreForm
 from pandas import read_sql_query
 import gviz_api
+import json
+import itertools
+from .app import csrf
+
+from sqlalchemy_searchable import search
 
 def grouper(iterable, n, fillvalue=None):
     "Collect data into fixed-length chunks or blocks"
@@ -20,7 +25,14 @@ def api_indicators_list(check):
     remove_list = ['Poverty rate', 'Gini Coefficient', 'Gross Value Add', 'Exports', 'Multiple deprivation index',
                    'Human Development Index']
     if check == "codebook":
-        indicators_list = [[str(c.id), c.name] for c in CbIndicator.query.join(CbDataPoint,CbDataPoint.indicator_id == CbIndicator.id).all() if c.name not in remove_list]
+        redis_key = "testing-indicators"
+        if redisClient.exists(redis_key):
+            indicators_list = json.loads(redisClient.get(redis_key))
+        else:
+            indicators_list = [[str(c.id), c.name] for c in
+                               CbIndicator.query.join(CbDataPoint, CbDataPoint.indicator_id == CbIndicator.id).all() if
+                               c.name not in remove_list]
+            redisClient.set(redis_key, json.dumps(indicators_list))
     else:
         indicators_list = [[str(c.id), c.in_name] for c in Indicator.all() if c.in_name not in remove_list]
     return jsonify(indicators_list)
@@ -142,7 +154,6 @@ def api_explore(check):
     table_plot = []
     years, cities, datasets = [list(df.year.unique()), list(df.re_name.unique()), list(df.ds_name.unique())]
     cities = [c for c in cities]
-    print(df)
     options_list = [{'optid': i, 'optname': d} for i, d in enumerate(datasets, start=1)]
     years_list = [{'optid': i, 'optname': 'Year: %s' % d} for i, d in enumerate(sorted(years), start=1)]
 
@@ -393,6 +404,104 @@ def api_search():
 
         print(request.data)
     return render_template('indicators-api/generate-api.html',form=form,form_url='/search-api')
+
+@app.route('/api/codebook', methods=['GET', 'POST'])
+@app.route('/api/codebook/<int:page>', methods=['GET', 'POST'])
+@csrf.exempt
+def api_codebook(page=1):
+    codebook_redis = "codebook-api"
+    store_in_redis = False
+    if request.method == 'GET':
+        if redisClient.exists(codebook_redis):
+            result_list = json.loads(redisClient.get(codebook_redis))
+            return jsonify(result_list)
+        store_in_redis = True
+    query = db.session.query(CbIndicator). \
+        outerjoin(CbTheme, CbTheme.id == CbIndicator.theme_id). \
+        outerjoin(CbSource, CbSource.id == CbIndicator.source_id). \
+        outerjoin(CbUnit, CbUnit.id == CbIndicator.unit_id)
+
+    if request.method == 'POST':
+        data = request.get_json()
+        print(f'data: {data}')
+        if data['c88']:
+            query = query.filter(CbIndicator.c88_theme.in_(data['c88']))
+
+        if data['socr']:
+            query = query.filter(CbIndicator.socr_theme.in_(data['socr']))
+
+        if data['sdg']:
+            query = query.filter(CbIndicator.sdg_theme.in_(data['sdg']))
+
+        if data['search']:
+            query = search(query, data['search'], sort=True)
+
+    # else:
+    #     query = query.limit(150).offset((page - 1) * 20)
+
+    row_count = query.count()
+    query = query.all()
+    # query.sort(key=lambda x: x.code)
+
+    result_list = [row_count]
+    for day, dicts_for_group_code in itertools.groupby(query, key=lambda x:x.group_code):
+        dicts_for_group_code = list(dicts_for_group_code)
+        day_dict = {
+            "id": str(dicts_for_group_code[0].id),
+            "varCode": dicts_for_group_code[0].code,
+            "groupCode": dicts_for_group_code[0].group_code,
+            "indicator": dicts_for_group_code[0].name,
+            "c88": dicts_for_group_code[0].c88_theme,
+            "socr": dicts_for_group_code[0].socr_theme,
+            "sdg": dicts_for_group_code[0].sdg_theme,
+            "definition": dicts_for_group_code[0].definition,
+            "source": dicts_for_group_code[0].source.name if dicts_for_group_code[0].source else None,
+            "reportingResponsibility": dicts_for_group_code[0].reporting_responsibility,
+            "notesOnCalculation": dicts_for_group_code[0].notes_on_calculation,
+            "variableType": dicts_for_group_code[0].unit.name if dicts_for_group_code[0].unit else None,
+            "frequencyOfCollection": dicts_for_group_code[0].frequency_of_collection,
+            "automatibility": dicts_for_group_code[0].automatable,
+            "granulity": dicts_for_group_code[0].granularity,
+            "gathering_method": dicts_for_group_code[0].gathering_method,
+            "expandability": dicts_for_group_code[0].expandable,
+            "period": dicts_for_group_code[0].period,
+            "unit_of_measurement": dicts_for_group_code[0].unit.name if dicts_for_group_code[0].unit else None,
+            "source_link": dicts_for_group_code[0].url_link,
+            "data_check":True if dicts_for_group_code[0].indicator_data else False
+        }
+        children = []
+        dicts_for_group_code.pop(0)
+        for d in dicts_for_group_code:
+            child = {
+                "id": str(d.id),
+                "varCode": d.code,
+                "groupCode": d.group_code,
+                "indicator": d.name,
+                "c88": d.c88_theme,
+                "socr": d.socr_theme,
+                "sdg": d.sdg_theme,
+                "definition": d.definition,
+                "source": d.source.name if d.source else None,
+                "reportingResponsibility": d.reporting_responsibility,
+                "notesOnCalculation": d.notes_on_calculation,
+                "variableType": d.unit.name if d.unit else None,
+                "frequencyOfCollection": d.frequency_of_collection,
+                "automatibility": d.automatable,
+                "granulity": d.granularity,
+                "gathering_method": d.gathering_method,
+                "expandability": d.expandable,
+                "period": d.period,
+                "unit_of_measurement": d.unit.name if d.unit else None,
+                "source_link": d.url_link,
+                "data_check": bool(d.indicator_data),
+            }
+
+            children.append(child)
+        day_dict.update({"children": children})
+        result_list.append(day_dict)
+    if store_in_redis:
+        redisClient.set(codebook_redis, json.dumps(result_list))
+    return jsonify(result_list)
 
 class IndicatorService():
 
