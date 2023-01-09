@@ -1,5 +1,26 @@
 import React, { useState } from 'react';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement
+} from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement
+);
 
 const Charts = ({
   x_label,
@@ -45,7 +66,7 @@ const Charts = ({
         }
       },
       responsive: true,
-      maintainAspectRatio: true,
+      maintainAspectRatio: false,
       scales: {
         xAxes: [{
           stacked: true,
@@ -97,7 +118,7 @@ const Charts = ({
                 <div className="row  ">
                     <div className="col-12 ">
                         <h3 className={h3class}>{title}</h3>
-                        <Bar options={options}  data={data} redraw={true} height={height}/>
+                        <Bar options={options}  data={data} redraw={true} height={300}/>
                         <p className="source">{source}</p>
                     </div>
                 </div>

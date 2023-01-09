@@ -47,7 +47,9 @@ text {
 *::after {
   box-sizing: inherit;
 }
-
+.visually-hidden {
+  display: none;
+}
 body {
   background: $background-colour;
   // background: #2d3036;

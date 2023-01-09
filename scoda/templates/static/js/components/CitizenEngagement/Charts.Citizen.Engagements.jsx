@@ -2,7 +2,6 @@ import React, {useEffect, useState } from 'react'
 import Select from "react-select";
 import Button from '../Button';
 import { Modal, ModalBody, Spinner } from 'reactstrap';
-import { Bar } from 'react-chartjs-2';
 import BarChart from '../Barchart'
 import axios from 'axios'
 import _ from 'lodash';
@@ -338,7 +337,7 @@ const local_registered_voters_callback = (table)=>{
                     </div>
                     {/**National election voter turnout chart */}
 
-                    <BarChart data={{
+                    <BarChart height={50} data={{
                       labels: _.map(select_values, 'label'),
                       datasets: turnout.map(data => {
                         return ({
@@ -359,7 +358,7 @@ const local_registered_voters_callback = (table)=>{
                       <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/scoda/toolkit#/codebook-explorer/985' target='_blank' /></div>
                     </div>
                      {/**National election registered voters chart */}
-                     <BarChart data={{
+                     <BarChart height={50} data={{
                       labels: _.map(select_values, 'label'),
                       datasets: registered_voters.map(data => {
                         return ({
@@ -383,7 +382,7 @@ const local_registered_voters_callback = (table)=>{
                       <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/scoda/toolkit#/codebook-explorer/987' target='_blank' /></div>
                     </div>
                     {/**Local election registered voters chart */}
-                    <BarChart data={{
+                    <BarChart height={50} data={{
                       labels: _.map(select_values, 'label'),
                       datasets: local_turnout.map(data => {
                         return ({
@@ -404,7 +403,7 @@ const local_registered_voters_callback = (table)=>{
                       <div className='col-md-3'><Button className='charts_dashboards--button' text='Raw Data' href='/scoda/toolkit#/codebook-explorer/983' target='_blank' /></div>
                     </div>
                      {/**Local election voter turnout chart */}
-                     <BarChart data={{
+                     <BarChart height={50} data={{
                       labels: _.map(select_values, 'label'),
                       datasets: local_registered_voters.map(data => {
                         return ({

@@ -1,6 +1,6 @@
 //Imports
 import React, {Suspense, lazy} from 'react';
-import { HashRouter, Route } from 'react-router-dom';
+import { HashRouter, Route,Routes  } from 'react-router-dom';
 import createHistory from "history/createBrowserHistory"
 import loader from "./gif/Spinner.gif"
 
@@ -34,19 +34,21 @@ export default (
     <HashRouter history={history}>
     <Suspense fallback={<div style={style}><img src={loader} alt='Loader'></img></div>}>
 
-      <Route exact path="/data-stories-details" component={()=><DataStoriesDetails />} />
-      <Route exact path="/codebook" component={() => <Codebook />} />
-      <Route exact path="/ds-state-of-finance-2018" component={()=> <State_of_finance />} />
-      <Route exact path="/ds-spatial-transformation-2018" component={()=> <DataStoriesSpacial />} />
-      <Route exact path="/ds-household-bills-and-affordibility" component={()=> <HouseholdBills />} />
-      <Route exact path="/ds-state-of-the-city-finance-2020" component={()=> <StateOfTheCityFinance />} />
-      <Route exact path="/ds-urban-safety-2018" component={()=> <DataStoriesUrbanSafety />} />
-      <Route exact path="/ds-epw-metro-2018" component={()=> <DataStoriesEPW />} />
-      <Route exact path="/ds-affordability-2018" component={()=> <DataStoriesAffordability />} />
-      <Route exact path='/home' component={()=> <Home />} />
-      <Route exact path="/explorer" component={()=> <IndicatorExplorer />}/>
-      <Route exact path='/codebook-explorer/:id' render={()=> <CBIndicatorExplorer/>} />
-      <Route exact path="/demographic-modeller" component={()=><Demographic />} />
+       <Routes>
+          <Route path="/data-stories-details" element={<DataStoriesDetails />} />
+          <Route path="/codebook" element={ <Codebook />} />
+          <Route path="/ds-state-of-finance-2018" element={<State_of_finance />} />
+          <Route path="/ds-spatial-transformation-2018" element={<DataStoriesSpacial />} />
+          <Route path="/ds-household-bills-and-affordibility" element={<HouseholdBills />} />
+          <Route path="/ds-state-of-the-city-finance-2020" element={<StateOfTheCityFinance />} />
+          <Route path="/ds-urban-safety-2018" element={<DataStoriesUrbanSafety />} />
+          <Route path="/ds-epw-metro-2018" element={<DataStoriesEPW />} />
+          <Route path="/ds-affordability-2018" element={<DataStoriesAffordability />} />
+          <Route path='/home' element={<DataStoriesDetails />} />
+          <Route path="/explorer" element={<IndicatorExplorer />}/>
+          <Route path='/codebook-explorer/:id' element={ <CBIndicatorExplorer/>} />
+          <Route path="/demographic-modeller" element={<Demographic />} />
+       </Routes>
       </Suspense>
     </HashRouter>
 );

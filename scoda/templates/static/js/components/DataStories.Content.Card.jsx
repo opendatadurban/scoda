@@ -1,6 +1,27 @@
 import React, { Component } from 'react';
 
-import Chart from 'chart.js';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+    ArcElement
+  } from 'chart.js';
+  import { Bar,Pie } from 'react-chartjs-2';
+  
+  
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+    ArcElement
+  );
 
 import Image from '../components/Image';
 
@@ -9,173 +30,151 @@ import DataStoriesContentCardHighlightBlock from '../components/DataStories.Cont
 import DataStoriesContentCardContentBlock from '../components/DataStories.Content.Card.ContentBlock';
 import DataStoriesContentCardDataInformation from '../components/DataStories.Content.Card.Data.Information';
 
-export default class DataStoriesContentCard extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount() {
-        Chart.platform.disableCSSInjection = true;
-        
-        this.renderCapitalGrants();
-    }
-
-    renderCapitalGrants() {
-
-        const chartRef = document.getElementById('mainChart').getContext('2d');
-        
+const DataStoriesContentCard = (props) => {
         const chartColors = {
             yellow: 'rgb(255,201,105)',
             green: 'rgb(113,199,120)',
             blue: 'rgb(140,171,228)',
             orange: 'rgb(245,149,0)',
             red: 'rgb(220,123,135)',
-            };
+        };
 
-           new Chart(chartRef, {
-                    type: 'bar',
-                    data: {
-                    labels: ['JHB','CPT','ETH','TSH','EKU','NMB','MAN','BCM'],
-                    datasets: [{
-                        label: 'Capital Grants',
-                        backgroundColor: chartColors.yellow,
-                        stack: 'Stack 0',
-                        data: [
-                            40.0,
-                            32.8,
-                            40.0,
-                            40.3,
-                            41.4,
-                            14.3,
-                            15.7,
-                            15.0,
-                        ]
-                    }, {
-                        label: 'Existing Development Charges',
-                        backgroundColor: chartColors.green,
-                        stack: 'Stack 0',
-                        data: [
-                            5.9,
-                            1.4,
-                            0.0,
-                            1.9,
-                            0.0,
-                            1.8,
-                            2.5,
-                            0.0,
-                        ]
-                    }, {
-                        label: 'Internal Funds',
-                        backgroundColor: chartColors.blue,
-                        stack: 'Stack 0',
-                        data: [
-                            7.3,
-                            0.0,
-                            0.0,
-                            0.0,
-                            0.0,
-                            0.0,
-                            0.0,
-                            0.0,
-                        ]
-                    }, {
-                        label: 'New Loans',
-                        backgroundColor: chartColors.orange,
-                        stack: 'Stack 0',
-                        data: [
-                            8.4,
-                            11.7,
-                            30.7,
-                            47.6,
-                            7.1,
-                            3.1,
-                            4.8,
-                            10.1,
-                        ]
-                    }, {
-                        label: 'Funding Gap',
-                        backgroundColor: chartColors.red,
-                        stack: 'Stack 0',
-                        data: [
-                            170.5,
-                            107.9,
-                            71.3,
-                            72.5,
-                            117.3,
-                            16.2,
-                            9.7,
-                            3.6,
-                        ]
+        const data = {
+            labels: ['JHB','CPT','ETH','TSH','EKU','NMB','MAN','BCM'],
+            datasets: [{
+                label: 'Capital Grants',
+                backgroundColor: chartColors.yellow,
+                stack: 'Stack 0',
+                data: [
+                    40.0,
+                    32.8,
+                    40.0,
+                    40.3,
+                    41.4,
+                    14.3,
+                    15.7,
+                    15.0,
+                ]
+            }, {
+                label: 'Existing Development Charges',
+                backgroundColor: chartColors.green,
+                stack: 'Stack 0',
+                data: [
+                    5.9,
+                    1.4,
+                    0.0,
+                    1.9,
+                    0.0,
+                    1.8,
+                    2.5,
+                    0.0,
+                ]
+            }, {
+                label: 'Internal Funds',
+                backgroundColor: chartColors.blue,
+                stack: 'Stack 0',
+                data: [
+                    7.3,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                ]
+            }, {
+                label: 'New Loans',
+                backgroundColor: chartColors.orange,
+                stack: 'Stack 0',
+                data: [
+                    8.4,
+                    11.7,
+                    30.7,
+                    47.6,
+                    7.1,
+                    3.1,
+                    4.8,
+                    10.1,
+                ]
+            }, {
+                label: 'Funding Gap',
+                backgroundColor: chartColors.red,
+                stack: 'Stack 0',
+                data: [
+                    170.5,
+                    107.9,
+                    71.3,
+                    72.5,
+                    117.3,
+                    16.2,
+                    9.7,
+                    3.6,
+                ]
+                }
+            ]
+          }
+        const options = {
+            title: {
+                display: false,
+                text: 'Title'
+            },
+            tooltips: {
+                mode: 'index',
+                intercept: false,
+                callbacks: {
+                    label: function (tooltipItem, data) {
+                        var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                        if (label) {
+                            label += ': ';
                         }
-                    ]
-                  },
-                  options: {
-                    title: {
-                        display: false,
-                        text: 'Title'
-                    },
-                    tooltips: {
-                        mode: 'index',
-                        intercept: false,
-                        callbacks: {
-                            label: function (tooltipItem, data) {
-                                var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-                                if (label) {
-                                    label += ': ';
-                                }
-                                label += Math.round(tooltipItem.yLabel * 100) / 100;
-                                return label;
-                            }
-                        }
-                    },
-                    responsive: true,
-                    maintainAspectRatio:false,
-                    scales: {
-                        xAxes: [{
-                            stacked: true,
-                            ticks: {fontStyle: 'bold'},
-                            gridLines: {
-                                borderDash: [2],
-                                lineWidth: 2,
-                                color: [0, 0, 0],
-                                drawTicks: true,
-                            }
-                        }],
-                        yAxes: [{
-                            stacked: true,
-                            ticks: {
-                                callback: function (value, index, values) {
-                                    return Math.round(value * 100) / 100 + '  ';
-                                }
-                            },
-                            gridLines: {
-                                drawTicks: false,
-                            },
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'Nominal Rands, Nearest R billion',
-                                fontStyle: 'bold'
-                            },
-                            borderSkipped: 'bottom',
-                        }],
-
+                        label += Math.round(tooltipItem.yLabel * 100) / 100;
+                        return label;
                     }
                 }
+            },
+            responsive: true,
+            maintainAspectRatio:true,
+            scales: {
+                xAxes: [{
+                    stacked: true,
+                    ticks: {fontStyle: 'bold'},
+                    gridLines: {
+                        borderDash: [2],
+                        lineWidth: 2,
+                        color: [0, 0, 0],
+                        drawTicks: true,
+                    }
+                }],
+                yAxes: [{
+                    stacked: true,
+                    ticks: {
+                        callback: function (value, index, values) {
+                            return Math.round(value * 100) / 100 + '  ';
+                        }
+                    },
+                    gridLines: {
+                        drawTicks: false,
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Nominal Rands, Nearest R billion',
+                        fontStyle: 'bold'
+                    },
+                    borderSkipped: 'bottom',
+                }],
 
-            });
-    }
+            }
+        }
 
-    downloadChart() {
-        var url_base64jp = document.getElementById("mainChart").toDataURL("image/jpg");
+        const downloadChart = () => {
+            var url_base64jp = document.getElementById("mainChart").toDataURL("image/jpg");
 
-        var a =  document.getElementById("download");
+            var a =  document.getElementById("download");
 
-        a.href = url_base64jp;
-    }
-
-    render() {
-
+            a.href = url_base64jp;
+        }
 
         let contentBlockOne = `While revenues are sufficient to cover operating expenditures in the metros, they do not generate enough internal finance to fully fund capital expenditure. 
         <br/><br/>
@@ -200,18 +199,18 @@ export default class DataStoriesContentCard extends Component {
                         <div className="ds-content-card">
                             <div className="ds-content-card-header">
                                <DataStoriesContentCardHeader 
-                                    storyTitle={this.props.storyTitle}
-                                    storySubtitle={this.props.storySubtitle}
-                                    filter={this.props.filter}
-                                    filterColor={this.props.filterColor}
-                                    author={this.props.author}
-                                    publishedDate={this.props.publishedDate}
+                                    storyTitle={props.storyTitle}
+                                    storySubtitle={props.storySubtitle}
+                                    filter={props.filter}
+                                    filterColor={props.filterColor}
+                                    author={props.author}
+                                    publishedDate={props.publishedDate}
                                />
                             </div>
                             <div className="card-body pt-4 pb-5 mt-5">
                                <div className="row">
                                 <DataStoriesContentCardHighlightBlock 
-                                    infoBlockText={this.props.infoBlockText}
+                                    infoBlockText={props.infoBlockText}
                                 />
                                </div>
                                <div className="row">
@@ -237,15 +236,13 @@ export default class DataStoriesContentCard extends Component {
                                <div className="row mt-3"></div>
                                <div className="row mt-3">
                                    <div className="col-10"></div>
-                                   <div className="col-0 float-right ds-download-button" onClick={this.downloadChart}>
+                                   <div className="col-0 float-right ds-download-button" onClick={downloadChart}>
                                        <a id="download" download="chart.jpg" style={{color:'#fff',textDecoration:'none'}}>
                                          Download
                                        </a>
                                    </div><br/><br/>
-                                                    <canvas
-                                                        id="mainChart"
-                                                        className="w-100"
-                                                    />
+                                     <Bar id='mainChart' data={data} options={options} height={100}/>
+
                                </div>
                                <div className="row">
                                    <DataStoriesContentCardDataInformation
@@ -271,5 +268,6 @@ export default class DataStoriesContentCard extends Component {
                 </div>
             </div>
         )
-    }
+    
 }
+export default DataStoriesContentCard;

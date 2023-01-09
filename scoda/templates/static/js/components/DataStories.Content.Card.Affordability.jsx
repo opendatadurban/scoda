@@ -1,6 +1,27 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 
-import Chart from 'chart.js';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+    ArcElement
+  } from 'chart.js';
+  import { Bar,Pie } from 'react-chartjs-2';
+  
+  
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+    ArcElement
+  );
 
 import Image from '../components/Image';
 
@@ -9,161 +30,65 @@ import DataStoriesContentCardHighlightBlock from '../components/DataStories.Cont
 import DataStoriesContentCardContentBlock from '../components/DataStories.Content.Card.ContentBlock';
 import DataStoriesContentCardDataInformation from '../components/DataStories.Content.Card.Data.Information';
 
-export default class DataStoriesContentCardAffordability extends Component {
-    constructor(props) {
-        super(props);
-    }
+const DataStoriesContentCardAffordability = (props) => {
+    let contentBlockOne = `Figure 1 shows that between 2015 and 2017, the cost of all service packages increased in all cities, with the exception of Nelson Mandela Bay (Type D) and Mangaung (Types A and B). Cape Town increased the cost of all its service packages at well above the average growth for the nine cities. (this increase was driven by higher charges for water combined with the abolition of the free 6kl for non-indigent households).
+    <br/><br/>
+    All this is important, but are the bills affordable? 
+    <br/><br/>
+    The affordability of municipal bills depends on both the municipal rates and charges and household incomes. The distribution of household incomes is used to create benchmark household income categories ranging from about R3 000 to R 50 000, which are associated with the four service packages A, B, C, and D.`;
+    
+    let contentBlockTwo2 = `An affordability analysis, which used an affordability threshold of 10% maximum of household income spent on tariffs, found that most Type A and B service packages are unaffordable.
+    <br/><br/>
+    The following two images show the ranking of all municipal bills across all cities from least affordable (in red) to most affordable (in green). The least affordable bills, across all cities, correspond to the service packages A and B associated with lower income consumers, while the most affordable bills correspond to the service packages C and D associated with higher income consumers.`;
 
-    componentDidMount() {
-        Chart.platform.disableCSSInjection = true;
+    let contentBlockTwo = `<ul style="margin-left:2%">
+        <li>There is a mismatch in the job supply and demand in South Africa</li>
+        <li>The country’s economy isn’t creating jobs for the available labour force</li>
+        <li>The EPWP is an important programme that creates employment opportunities for the poor and unemployed unskilled and semi-skilled people in the country</li>
+        <li>More programmes like the EPWP will be required if jobs are not created for the available labour force of the country, especially with;
+            <ol type="a">
+                <li>job losses in the agricultural and mining sector and </li>
+                <li>the industrial revolution that requires a new kind of skillset from the labour force.</li>
+            </ol>
+        </li>
+    </ul>`;
 
-        this.renderDataTable();
-        
-        this.renderChart();
-        this.renderChart2();
-    }
+    let resources = `<o onClick="javascript:window.open('https://www.sacities.net/municipal-finance/','_new');">Read</o> more SACN publications and research on municipal finance matters on the SACN website
+    <o onClick="javascript:window.open('https://www.sacities.net/state-of-cities-reporting','_new')">Engage</o> with SACN’s State of Cities Reporting for broader cities development context since 2004 Explore municipal finance’s interactively on National Treasury’s <o onClick="javascript:window.open('https://municipalmoney.gov.za/','_new')">Municipal Money</o> Datatool
+    Explore the <o onClick="javascript:window.open('https://ckan.scoda.co.za/dataset/city-revenue-performance','_new')">full collection of State of Cities Finances 2018 datasets</o> on SCODA’s data portal
+    <br/><br/>
+    If you have any queries and further comment on this datastory, please email <o onClick="javascript:window.location='mailto:danga@sacities.net'">Danga Mughogho</o> at SACN.`;
 
-    renderChart() {
+    let contentBlockFour = `The demand to increase revenue makes cities focus on the gains to be made from greenfield development rather than brownfield development.
+    <br/><br/>
+    The two columns show the fiscal consequences of greenfield vs brownfield development.
+    <br/><br/>
+    A completed greenfield development will generate significantly higher revenue from property rates because of the lower value of rates payable on agricultural land.
+    <br/><br/>
+    The bottom row of the graphic shows very clearly the quantum difference in the percentage increase in the revenue received per property in a greenfield vs a brownfield development.`;
 
-      const chartColors1 = {
+
+    let contentBlockThree = `<o onClick="javascript:window.open('https://www.sacities.net/municipal-finance/','_new');">Read</o> more SACN publications and research on municipal finance matters on the SACN website
+    <o onClick="javascript:window.open('https://www.sacities.net/state-of-cities-reporting','_new')">Engage</o> with SACN’s State of Cities Reporting for broader cities development context since 2004 Explore municipal finance’s interactively on National Treasury’s <o onClick="javascript:window.open('https://municipalmoney.gov.za/','_new')">Municipal Money</o> Datatool
+    Explore the <o onClick="javascript:window.open('https://ckan.scoda.co.za/dataset/city-revenue-performance','_new')">full collection of State of Cities Finances 2018 datasets</o> on SCODA’s data portal
+    <br/><br/>
+    If you have any queries and further comment on this datastory, please email <o onClick="javascript:window.location='mailto:danga@sacities.net'">Danga Mughogho</o> at SACN.`;
+
+    let imgOne = `/static/dist/img/scoda/datastories/ds-mun.svg`;
+    let imgTwo = `/static/dist/img/scoda/datastories/muntable.PNG`;
+    const chartColors = {
+        colour_1: 'rgb(247, 208, 145)',
+        colour_2: 'rgb(255, 182, 68)',
+        colour_3: 'rgb(245, 149, 0)',
+        };
+    const chartColors1 = {
         yellow: 'rgb(255, 236,0)',
         green: 'rgb(113, 199,120)',
         blue: 'rgb(140, 171,228)',
         red: 'rgb(220,123,135)'
         };
 
-        const chartRef = document.getElementById('mainChart').getContext('2d');
-
-        new Chart(chartRef, {
-            type: 'bar',
-            data: {
-              labels: ['JHB','CCT','ETH','TSH','EKU','NMB','MAN','BCM','MSU'],
-			datasets: [{
-				label: 'Type A',
-				backgroundColor: chartColors1.yellow,
-				stack: 'Stack 0',
-				data: [
-					1.8,
-                    8.3,
-                    2.8,
-                    0.6,
-                    4.2,
-                    0.7,
-                    -1.6,
-                    0.7,
-                    1.6,
-                    2.1,
-				]
-			}, {
-				label: 'Type B',
-				backgroundColor: chartColors1.green,
-				stack: 'Stack 1',
-				data: [
-					1.2,
-                    5.5,
-                    2.2,
-                    0.6,
-                    3.9,
-                    1.1,
-                    -0.5,
-                    0.9,
-                    0.2,
-                    1.7,
-				]
-			}, {
-				label: 'Type C',
-				backgroundColor: chartColors1.blue,
-				stack: 'Stack 2',
-				data: [
-					0.6,
-                    5.2,
-                    1.6,
-                    -0.1,
-                    2.2,
-                    1.7,
-                    0.9,
-                    0.9,
-                    0.9,
-                    1.6,
-				]
-			},
-			{
-				label: 'Type D',
-				backgroundColor: chartColors1.red,
-				stack: 'Stack 3',
-				data: [
-					0.5,
-                    6.3,
-                    1.3,
-                    -0.1,
-                    0.9,
-                    -1.4,
-                    1.5,
-                    0.4,
-                    1.2,
-                    1.2,
-				]
-			}]
-            },
-            options: {
-              title: {
-                  display: false,
-                  text: 'Chart Title'
-              },
-              tooltips: {
-                  mode: 'index',
-                  intercept: false,
-                  callbacks: {
-                      label: function (tooltipItem, data) {
-                          var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-                          if (label) {
-                              label += ': ';
-                          }
-                          label += Math.round(tooltipItem.yLabel * 100) / 100;
-                          return label + '%';
-                      }
-                  }
-              },
-              responsive: true,
-              scales: {
-                  xAxes: [{
-                      stacked: true,
-                      ticks: {fontStyle: 'bold'},
-                      gridLines: {
-                          borderDash: [2],
-                          zeroLineBorderDash: [],
-                          zeroLineWidth: 2,
-                          lineWidth: 2,
-                          color: [0, 0, 0],
-                          drawTicks: true,
-                      }
-                  }],
-                  yAxes: [{
-                      stacked: true,
-                      ticks: {
-                          callback: function (value, index, values) {
-                              return Math.round(value * 100) / 100 + '%  ';
-                          }
-                      },
-                      gridLines: {
-                          drawTicks: false,
-                      }
-                  }],
-
-              }
-          }
-      });
-    }
-
-    renderChart2() {
-      const chartColors = {
-        colour_1: 'rgb(247, 208, 145)',
-        colour_2: 'rgb(255, 182, 68)',
-        colour_3: 'rgb(245, 149, 0)',
-        };
-      
-      var barChartData_a = {
+    var barChartData_a = {
             labels: ['JHB','CCT','ETH','TSH','EKU','NMB','MAN','BCM','MSU'],
             datasets: [{
               label: '2010',
@@ -214,379 +139,480 @@ export default class DataStoriesContentCardAffordability extends Component {
             ]
       
           };
+    var barChartData_b = {
+    labels: ['JHB','CCT','ETH','TSH','EKU','NMB','MAN','BCM','MSU'],
+    datasets: [{
+        label: '2010',
+        backgroundColor: chartColors.colour_1,
+        stack: 'Stack 0',
+        data: [
+        12.7,
+        9.6,
+        8.3,
+        11.5,
+        7.2,
+        9.3,
+        9.2,
+        10.6,
+        14.6,
+        ]
+    }, {
+        label: '2012',
+        backgroundColor: chartColors.colour_2,
+        stack: 'Stack 1',
+        data: [
+        12.2,
+        9.9,
+        8.2,
+        12.2,
+        6.8,
+        10.0,
+        10.0,
+        12.2,
+        15.4,
+        ]
+    }, {
+        label: '2014',
+        backgroundColor: chartColors.colour_3,
+        stack: 'Stack 2',
+        data: [
+        11.8,
+        10.3,
+        9.9,
+        10.2,
+        6.9,
+        9.1,
+        8.9,
+        11.2,
+        12.8,
+        ]
+    }]
 
-          var barChartData_b = {
+    };
+
+    var barChartData_c = {
+    labels: ['JHB','CCT','ETH','TSH','EKU','NMB','MAN','BCM','MSU'],
+    datasets: [{
+        label: '2010',
+        backgroundColor: chartColors.colour_1,
+        stack: 'Stack 0',
+        data: [
+        8.4,
+        7.8,
+        6.8,
+        8.5,
+        6.5,
+        7.1,
+        8.5,
+        8.2,
+        8.4,
+        ]
+    }, {
+        label: '2012',
+        backgroundColor: chartColors.colour_2,
+        stack: 'Stack 1',
+        data: [
+        8.5,
+        8.2,
+        6.8,
+        9.1,
+        5.5,
+        7.8,
+        8.0,
+        9.3,
+        8.7,
+        ]
+    }, {
+        label: '2014',
+        backgroundColor: chartColors.colour_3,
+        stack: 'Stack 2',
+        data: [
+        8.4,
+        8.9,
+        7.7,
+        7.7,
+        6.0,
+        7.8,
+        7.7,
+        9.0,
+        8.2,
+        ]
+    }]
+
+    };
+
+    var barChartData_d = {
+    labels: ['JHB','CCT','ETH','TSH','EKU','NMB','MAN','BCM','MSU'],
+    datasets: [{
+        label: '2010',
+        backgroundColor: chartColors.colour_1,
+        stack: 'Stack 0',
+        data: [
+        6.5,
+        6.9,
+        6.9,
+        7.2,
+        6.0,
+        6.1,
+        8.2,
+        6.7,
+        6.4,
+        ]
+    }, {
+        label: '2012',
+        backgroundColor: chartColors.colour_2,
+        stack: 'Stack 1',
+        data: [
+        6.8,
+        7.7,
+        6.8,
+        7.8,
+        7.4,
+        7.1,
+        7.5,
+        7.6,
+        6.6,
+        ]
+    }, {
+        label: '2014',
+        backgroundColor: chartColors.colour_3,
+        stack: 'Stack 2',
+        data: [
+        6.9,
+        8.2,
+        7.2,
+        7.0,
+        7.8,
+        6.7,
+        6.6,
+        7.9,
+        6.2,
+        ]
+    }]
+
+    };
+
+     // type bar mainChart
+      const data = {
             labels: ['JHB','CCT','ETH','TSH','EKU','NMB','MAN','BCM','MSU'],
             datasets: [{
-              label: '2010',
-              backgroundColor: chartColors.colour_1,
-              stack: 'Stack 0',
-              data: [
-                12.7,
-                9.6,
-                8.3,
-                11.5,
-                7.2,
-                9.3,
-                9.2,
-                10.6,
-                14.6,
-              ]
+                label: 'Type A',
+                backgroundColor: chartColors1.yellow,
+                stack: 'Stack 0',
+                data: [
+                    1.8,
+                    8.3,
+                    2.8,
+                    0.6,
+                    4.2,
+                    0.7,
+                    -1.6,
+                    0.7,
+                    1.6,
+                    2.1,
+                ]
             }, {
-              label: '2012',
-              backgroundColor: chartColors.colour_2,
-              stack: 'Stack 1',
-              data: [
-                12.2,
-                9.9,
-                8.2,
-                12.2,
-                6.8,
-                10.0,
-                10.0,
-                12.2,
-                15.4,
-              ]
+                label: 'Type B',
+                backgroundColor: chartColors1.green,
+                stack: 'Stack 1',
+                data: [
+                    1.2,
+                    5.5,
+                    2.2,
+                    0.6,
+                    3.9,
+                    1.1,
+                    -0.5,
+                    0.9,
+                    0.2,
+                    1.7,
+                ]
             }, {
-              label: '2014',
-              backgroundColor: chartColors.colour_3,
-              stack: 'Stack 2',
-              data: [
-                11.8,
-                10.3,
-                9.9,
-                10.2,
-                6.9,
-                9.1,
-                8.9,
-                11.2,
-                12.8,
-              ]
+                label: 'Type C',
+                backgroundColor: chartColors1.blue,
+                stack: 'Stack 2',
+                data: [
+                    0.6,
+                    5.2,
+                    1.6,
+                    -0.1,
+                    2.2,
+                    1.7,
+                    0.9,
+                    0.9,
+                    0.9,
+                    1.6,
+                ]
+            },
+            {
+                label: 'Type D',
+                backgroundColor: chartColors1.red,
+                stack: 'Stack 3',
+                data: [
+                    0.5,
+                    6.3,
+                    1.3,
+                    -0.1,
+                    0.9,
+                    -1.4,
+                    1.5,
+                    0.4,
+                    1.2,
+                    1.2,
+                ]
             }]
-      
-          };
+            }
+      const options = {
+        title: {
+            display: false,
+            text: 'Chart Title'
+        },
+        tooltips: {
+            mode: 'index',
+            intercept: false,
+            callbacks: {
+                label: function (tooltipItem, data) {
+                    var label = data.datasets[tooltipItem.datasetIndex].label || '';
 
-          var barChartData_c = {
-            labels: ['JHB','CCT','ETH','TSH','EKU','NMB','MAN','BCM','MSU'],
-            datasets: [{
-              label: '2010',
-              backgroundColor: chartColors.colour_1,
-              stack: 'Stack 0',
-              data: [
-                8.4,
-                7.8,
-                6.8,
-                8.5,
-                6.5,
-                7.1,
-                8.5,
-                8.2,
-                8.4,
-              ]
-            }, {
-              label: '2012',
-              backgroundColor: chartColors.colour_2,
-              stack: 'Stack 1',
-              data: [
-                8.5,
-                8.2,
-                6.8,
-                9.1,
-                5.5,
-                7.8,
-                8.0,
-                9.3,
-                8.7,
-              ]
-            }, {
-              label: '2014',
-              backgroundColor: chartColors.colour_3,
-              stack: 'Stack 2',
-              data: [
-                8.4,
-                8.9,
-                7.7,
-                7.7,
-                6.0,
-                7.8,
-                7.7,
-                9.0,
-                8.2,
-              ]
-            }]
-      
-          };
+                    if (label) {
+                        label += ': ';
+                    }
+                    label += Math.round(tooltipItem.yLabel * 100) / 100;
+                    return label + '%';
+                }
+            }
+        },
+        responsive: true,
+        scales: {
+            xAxes: [{
+                stacked: true,
+                ticks: {fontStyle: 'bold'},
+                gridLines: {
+                    borderDash: [2],
+                    zeroLineBorderDash: [],
+                    zeroLineWidth: 2,
+                    lineWidth: 2,
+                    color: [0, 0, 0],
+                    drawTicks: true,
+                }
+            }],
+            yAxes: [{
+                stacked: true,
+                ticks: {
+                    callback: function (value, index, values) {
+                        return Math.round(value * 100) / 100 + '%  ';
+                    }
+                },
+                gridLines: {
+                    drawTicks: false,
+                }
+            }],
 
-          var barChartData_d = {
-            labels: ['JHB','CCT','ETH','TSH','EKU','NMB','MAN','BCM','MSU'],
-            datasets: [{
-              label: '2010',
-              backgroundColor: chartColors.colour_1,
-              stack: 'Stack 0',
-              data: [
-                6.5,
-                6.9,
-                6.9,
-                7.2,
-                6.0,
-                6.1,
-                8.2,
-                6.7,
-                6.4,
-              ]
-            }, {
-              label: '2012',
-              backgroundColor: chartColors.colour_2,
-              stack: 'Stack 1',
-              data: [
-                6.8,
-                7.7,
-                6.8,
-                7.8,
-                7.4,
-                7.1,
-                7.5,
-                7.6,
-                6.6,
-              ]
-            }, {
-              label: '2014',
-              backgroundColor: chartColors.colour_3,
-              stack: 'Stack 2',
-              data: [
-                6.9,
-                8.2,
-                7.2,
-                7.0,
-                7.8,
-                6.7,
-                6.6,
-                7.9,
-                6.2,
-              ]
-            }]
-      
-          };
+        }
+            }
+      //stacks barChartTypeA
+      const dataA = barChartData_a;
 
-      var ctx_b = document.getElementById('barChartTypeB').getContext('2d');
-      new Chart(ctx_b, {
-          type: 'bar',
-          data: barChartData_b,
-          options: {
-              title: {
-                  display: true,
-                  text: 'Type B (Cost as % of Income)'
-              },
-              tooltips: {
-                  mode: 'index',
-                  intercept: false,
-                  callbacks: {
-                      label: function (tooltipItem, data) {
-                          var label = data.datasets[tooltipItem.datasetIndex].label || '';
+      const optionsA = {
+          title: {
+              display: true,
+              text: 'Type A (Cost as % of Income)'
+          },
+          tooltips: {
+              mode: 'index',
+              intercept: false,
+              callbacks: {
+                  label: function (tooltipItem, data) {
+                      var label = data.datasets[tooltipItem.datasetIndex].label || '';
 
-                          if (label) {
-                              label += ': ';
-                          }
-                          label += Math.round(tooltipItem.yLabel * 100) / 100;
-                          return label + '%';
+                      if (label) {
+                          label += ': ';
                       }
+                      label += Math.round(tooltipItem.yLabel * 100) / 100;
+                      return label + '%';
                   }
-              },
-              responsive: true,
-              scales: {
-                  xAxes: [{
-                      stacked: true,
-                      ticks: {fontStyle: 'bold'},
-                      gridLines: {
-                          borderDash: [2],
-                          zeroLineBorderDash: [],
-                          zeroLineWidth: 2,
-                          lineWidth: 2,
-                          color: [0, 0, 0],
-                          drawTicks: true,
-                      }
-                  }],
-                  yAxes: [{
-                      stacked: true,
-                      ticks: {
-                          callback: function (value, index, values) {
-                              return Math.round(value * 100) / 100 + '%  ';
-                          }
-                      },
-                      gridLines: {
-                          drawTicks: false,
-                      }
-                  }],
-
               }
-          }
-      });
-
-      var ctx_a = document.getElementById('barChartTypeA').getContext('2d');
-      new Chart(ctx_a, {
-          type: 'bar',
-          data: barChartData_a,
-          options: {
-              title: {
-                  display: true,
-                  text: 'Type A (Cost as % of Income)'
-              },
-              tooltips: {
-                  mode: 'index',
-                  intercept: false,
-                  callbacks: {
-                      label: function (tooltipItem, data) {
-                          var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-                          if (label) {
-                              label += ': ';
-                          }
-                          label += Math.round(tooltipItem.yLabel * 100) / 100;
-                          return label + '%';
-                      }
+          },
+          responsive: true,
+          scales: {
+              xAxes: [{
+                  stacked: true,
+                  ticks: {fontStyle: 'bold'},
+                  gridLines: {
+                      borderDash: [2],
+                      zeroLineBorderDash: [],
+                      zeroLineWidth: 2,
+                      lineWidth: 2,
+                      color: [0, 0, 0],
+                      drawTicks: true,
                   }
-              },
-              responsive: true,
-              scales: {
-                  xAxes: [{
-                      stacked: true,
-                      ticks: {fontStyle: 'bold'},
-                      gridLines: {
-                          borderDash: [2],
-                          zeroLineBorderDash: [],
-                          zeroLineWidth: 2,
-                          lineWidth: 2,
-                          color: [0, 0, 0],
-                          drawTicks: true,
+              }],
+              yAxes: [{
+                  stacked: true,
+                  ticks: {
+                      callback: function (value, index, values) {
+                          return Math.round(value * 100) / 100 + '%  ';
                       }
-                  }],
-                  yAxes: [{
-                      stacked: true,
-                      ticks: {
-                          callback: function (value, index, values) {
-                              return Math.round(value * 100) / 100 + '%  ';
-                          }
-                      },
-                      gridLines: {
-                          drawTicks: false,
-                      }
-                  }],
-
-              }
-          }
-      });
-
-      var ctx_c = document.getElementById('barChartTypeC').getContext('2d');
-      new Chart(ctx_c, {
-          type: 'bar',
-          data: barChartData_c,
-          options: {
-              title: {
-                  display: true,
-                  text: 'Type C (Cost as % of Income)'
-              },
-              tooltips: {
-                  mode: 'index',
-                  intercept: false,
-                  callbacks: {
-                      label: function (tooltipItem, data) {
-                          var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-                          if (label) {
-                              label += ': ';
-                          }
-                          label += Math.round(tooltipItem.yLabel * 100) / 100;
-                          return label + '%';
-                      }
+                  },
+                  gridLines: {
+                      drawTicks: false,
                   }
-              },
-              responsive: true,
-              scales: {
-                  xAxes: [{
-                      stacked: true,
-                      ticks: {fontStyle: 'bold'},
-                      gridLines: {
-                          borderDash: [2],
-                          zeroLineBorderDash: [],
-                          zeroLineWidth: 2,
-                          lineWidth: 2,
-                          color: [0, 0, 0],
-                          drawTicks: true,
-                      }
-                  }],
-                  yAxes: [{
-                      stacked: true,
-                      ticks: {
-                          callback: function (value, index, values) {
-                              return Math.round(value * 100) / 100 + '%  ';
-                          }
-                      },
-                      gridLines: {
-                          drawTicks: false,
-                      }
-                  }],
+              }],
 
-              }
           }
-      });
+      }
+      //barChartTypeB bar
+      const dataB = barChartData_b;
+      const optionsB = {
+          title: {
+              display: true,
+              text: 'Type B (Cost as % of Income)'
+          },
+          tooltips: {
+              mode: 'index',
+              intercept: false,
+              callbacks: {
+                  label: function (tooltipItem, data) {
+                      var label = data.datasets[tooltipItem.datasetIndex].label || '';
 
-      var ctx_d = document.getElementById('barChartTypeD').getContext('2d');
-      new Chart(ctx_d, {
-          type: 'bar',
-          data: barChartData_d,
-          options: {
-              title: {
-                  display: true,
-                  text: 'Type D (Cost as % of Income)'
-              },
-              tooltips: {
-                  mode: 'index',
-                  intercept: false,
-                  callbacks: {
-                      label: function (tooltipItem, data) {
-                          var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-                          if (label) {
-                              label += ': ';
-                          }
-                          label += Math.round(tooltipItem.yLabel * 100) / 100;
-                          return label + '%';
+                      if (label) {
+                          label += ': ';
                       }
+                      label += Math.round(tooltipItem.yLabel * 100) / 100;
+                      return label + '%';
                   }
-              },
-              responsive: true,
-              scales: {
-                  xAxes: [{
-                      stacked: true,
-                      ticks: {fontStyle: 'bold'},
-                      gridLines: {
-                          borderDash: [2],
-                          zeroLineBorderDash: [],
-                          zeroLineWidth: 2,
-                          lineWidth: 2,
-                          color: [0, 0, 0],
-                          drawTicks: true,
-                      }
-                  }],
-                  yAxes: [{
-                      stacked: true,
-                      ticks: {
-                          callback: function (value, index, values) {
-                              return Math.round(value * 100) / 100 + '%  ';
-                          }
-                      },
-                      gridLines: {
-                          drawTicks: false,
-                      }
-                  }],
-
               }
+          },
+          responsive: true,
+          scales: {
+              xAxes: [{
+                  stacked: true,
+                  ticks: {fontStyle: 'bold'},
+                  gridLines: {
+                      borderDash: [2],
+                      zeroLineBorderDash: [],
+                      zeroLineWidth: 2,
+                      lineWidth: 2,
+                      color: [0, 0, 0],
+                      drawTicks: true,
+                  }
+              }],
+              yAxes: [{
+                  stacked: true,
+                  ticks: {
+                      callback: function (value, index, values) {
+                          return Math.round(value * 100) / 100 + '%  ';
+                      }
+                  },
+                  gridLines: {
+                      drawTicks: false,
+                  }
+              }],
+
           }
-      });
-    }
+      }
+      //barChartTypeC bar
+      const dataC = barChartData_c;
+      const optionsC = {
+          title: {
+              display: true,
+              text: 'Type C (Cost as % of Income)'
+          },
+          tooltips: {
+              mode: 'index',
+              intercept: false,
+              callbacks: {
+                  label: function (tooltipItem, data) {
+                      var label = data.datasets[tooltipItem.datasetIndex].label || '';
 
+                      if (label) {
+                          label += ': ';
+                      }
+                      label += Math.round(tooltipItem.yLabel * 100) / 100;
+                      return label + '%';
+                  }
+              }
+          },
+          responsive: true,
+          scales: {
+              xAxes: [{
+                  stacked: true,
+                  ticks: {fontStyle: 'bold'},
+                  gridLines: {
+                      borderDash: [2],
+                      zeroLineBorderDash: [],
+                      zeroLineWidth: 2,
+                      lineWidth: 2,
+                      color: [0, 0, 0],
+                      drawTicks: true,
+                  }
+              }],
+              yAxes: [{
+                  stacked: true,
+                  ticks: {
+                      callback: function (value, index, values) {
+                          return Math.round(value * 100) / 100 + '%  ';
+                      }
+                  },
+                  gridLines: {
+                      drawTicks: false,
+                  }
+              }],
 
-    downloadChart() {
+          }
+      }
+      //barChartTypeD bar
+      const dataD = barChartData_d;
+      const optionsD = {
+          title: {
+              display: true,
+              text: 'Type D (Cost as % of Income)'
+          },
+          tooltips: {
+              mode: 'index',
+              intercept: false,
+              callbacks: {
+                  label: function (tooltipItem, data) {
+                      var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                      if (label) {
+                          label += ': ';
+                      }
+                      label += Math.round(tooltipItem.yLabel * 100) / 100;
+                      return label + '%';
+                  }
+              }
+          },
+          responsive: true,
+          scales: {
+              xAxes: [{
+                  stacked: true,
+                  ticks: {fontStyle: 'bold'},
+                  gridLines: {
+                      borderDash: [2],
+                      zeroLineBorderDash: [],
+                      zeroLineWidth: 2,
+                      lineWidth: 2,
+                      color: [0, 0, 0],
+                      drawTicks: true,
+                  }
+              }],
+              yAxes: [{
+                  stacked: true,
+                  ticks: {
+                      callback: function (value, index, values) {
+                          return Math.round(value * 100) / 100 + '%  ';
+                      }
+                  },
+                  gridLines: {
+                      drawTicks: false,
+                  }
+              }],
+
+          }
+      }
+
+    const downloadChart = () => {
         var url_base64jp = document.getElementById("mainChart").toDataURL("image/png");
 
         var a =  document.getElementById("download");
@@ -594,7 +620,7 @@ export default class DataStoriesContentCardAffordability extends Component {
         a.href = url_base64jp;
     }
 
-    renderDataTable(){
+    const renderDataTable = () => {
         try {
             $('#example').DataTable({
                 "order": [[1, "asc"], [0, "asc"]],
@@ -614,56 +640,9 @@ export default class DataStoriesContentCardAffordability extends Component {
             location.reload();
           }
     }
-
-
-    render() {
-
-
-        let contentBlockOne = `Figure 1 shows that between 2015 and 2017, the cost of all service packages increased in all cities, with the exception of Nelson Mandela Bay (Type D) and Mangaung (Types A and B). Cape Town increased the cost of all its service packages at well above the average growth for the nine cities. (this increase was driven by higher charges for water combined with the abolition of the free 6kl for non-indigent households).
-        <br/><br/>
-        All this is important, but are the bills affordable? 
-        <br/><br/>
-        The affordability of municipal bills depends on both the municipal rates and charges and household incomes. The distribution of household incomes is used to create benchmark household income categories ranging from about R3 000 to R 50 000, which are associated with the four service packages A, B, C, and D.`;
-        
-        let contentBlockTwo2 = `An affordability analysis, which used an affordability threshold of 10% maximum of household income spent on tariffs, found that most Type A and B service packages are unaffordable.
-        <br/><br/>
-        The following two images show the ranking of all municipal bills across all cities from least affordable (in red) to most affordable (in green). The least affordable bills, across all cities, correspond to the service packages A and B associated with lower income consumers, while the most affordable bills correspond to the service packages C and D associated with higher income consumers.`;
-
-        let contentBlockTwo = `<ul style="margin-left:2%">
-            <li>There is a mismatch in the job supply and demand in South Africa</li>
-            <li>The country’s economy isn’t creating jobs for the available labour force</li>
-            <li>The EPWP is an important programme that creates employment opportunities for the poor and unemployed unskilled and semi-skilled people in the country</li>
-            <li>More programmes like the EPWP will be required if jobs are not created for the available labour force of the country, especially with;
-                <ol type="a">
-                    <li>job losses in the agricultural and mining sector and </li>
-                    <li>the industrial revolution that requires a new kind of skillset from the labour force.</li>
-                </ol>
-            </li>
-        </ul>`;
-
-        let resources = `<o onClick="javascript:window.open('https://www.sacities.net/municipal-finance/','_new');">Read</o> more SACN publications and research on municipal finance matters on the SACN website
-        <o onClick="javascript:window.open('https://www.sacities.net/state-of-cities-reporting','_new')">Engage</o> with SACN’s State of Cities Reporting for broader cities development context since 2004 Explore municipal finance’s interactively on National Treasury’s <o onClick="javascript:window.open('https://municipalmoney.gov.za/','_new')">Municipal Money</o> Datatool
-        Explore the <o onClick="javascript:window.open('https://ckan.scoda.co.za/dataset/city-revenue-performance','_new')">full collection of State of Cities Finances 2018 datasets</o> on SCODA’s data portal
-        <br/><br/>
-        If you have any queries and further comment on this datastory, please email <o onClick="javascript:window.location='mailto:danga@sacities.net'">Danga Mughogho</o> at SACN.`;
-
-        let contentBlockFour = `The demand to increase revenue makes cities focus on the gains to be made from greenfield development rather than brownfield development.
-        <br/><br/>
-        The two columns show the fiscal consequences of greenfield vs brownfield development.
-        <br/><br/>
-        A completed greenfield development will generate significantly higher revenue from property rates because of the lower value of rates payable on agricultural land.
-        <br/><br/>
-        The bottom row of the graphic shows very clearly the quantum difference in the percentage increase in the revenue received per property in a greenfield vs a brownfield development.`;
-
-
-        let contentBlockThree = `<o onClick="javascript:window.open('https://www.sacities.net/municipal-finance/','_new');">Read</o> more SACN publications and research on municipal finance matters on the SACN website
-        <o onClick="javascript:window.open('https://www.sacities.net/state-of-cities-reporting','_new')">Engage</o> with SACN’s State of Cities Reporting for broader cities development context since 2004 Explore municipal finance’s interactively on National Treasury’s <o onClick="javascript:window.open('https://municipalmoney.gov.za/','_new')">Municipal Money</o> Datatool
-        Explore the <o onClick="javascript:window.open('https://ckan.scoda.co.za/dataset/city-revenue-performance','_new')">full collection of State of Cities Finances 2018 datasets</o> on SCODA’s data portal
-        <br/><br/>
-        If you have any queries and further comment on this datastory, please email <o onClick="javascript:window.location='mailto:danga@sacities.net'">Danga Mughogho</o> at SACN.`;
-
-        let imgOne = `/static/dist/img/scoda/datastories/ds-mun.svg`;
-        let imgTwo = `/static/dist/img/scoda/datastories/muntable.PNG`;
+    useEffect(() => {
+        renderDataTable();
+    },[])
 
         return (
           
@@ -673,12 +652,12 @@ export default class DataStoriesContentCardAffordability extends Component {
                         <div className="ds-content-card">
                             <div className="ds-content-card-header">
                                <DataStoriesContentCardHeader 
-                                    storyTitle={this.props.storyTitle}
-                                    storySubtitle={this.props.storySubtitle}
-                                    filter={this.props.filter}
-                                    filterColor={this.props.filterColor}
-                                    author={this.props.author}
-                                    publishedDate={this.props.publishedDate}
+                                    storyTitle={props.storyTitle}
+                                    storySubtitle={props.storySubtitle}
+                                    filter={props.filter}
+                                    filterColor={props.filterColor}
+                                    author={props.author}
+                                    publishedDate={props.publishedDate}
                                />
                             </div>
                             <div className="card-body pt-4 pb-5 mt-5">
@@ -737,16 +716,14 @@ export default class DataStoriesContentCardAffordability extends Component {
                                </div>
                                <div className="row mt-4">
                                    <div className="col-10"></div>
-                                   <div className="col-0 float-right ds-download-button" onClick={this.downloadChart}>
+                                   <div className="col-0 float-right ds-download-button" onClick={downloadChart}>
                                        <a id="download" download="chart.png" style={{color:'#fff',textDecoration:'none'}}>
                                          Download as PNG
                                        </a>
                                    </div>
                                    <br/>
-                                        <canvas
-                                         id="mainChart"
-                                        className="w-100"
-                                        />
+                                    <Bar id="mainChart" data={data} options={options}/>
+                
                                </div>
                                <div className="row mt-3">
                                    <DataStoriesContentCardDataInformation
@@ -1121,21 +1098,18 @@ export default class DataStoriesContentCardAffordability extends Component {
 
                                <div className="row mt-4">
                                <div className="col-md-6">
-
-                                  <canvas id="barChartTypeA" className="w-100"></canvas>
+                                  <Bar id="barChartTypeA" data={dataA} options={optionsA}/>
                               </div>
                               <div className="col-md-6">
-
-                                  <canvas id="barChartTypeB" className="w-100"></canvas>
-
+                                  <Bar id="barChartTypeB" data={dataB} options={optionsB}/>
                               </div>
                               </div>
                               <div className="row">
                               <div className="col-md-6">
-                                  <canvas id="barChartTypeC" className="w-100"></canvas>
+                                  <Bar id="barChartTypeC" data={dataC} options={optionsC}/>
                               </div>
                               <div className="col-md-6">
-                                  <canvas id="barChartTypeD" className="w-100"></canvas>
+                                  <Bar id="barChartTypeD" data={dataD} options={optionsD}/>  
                               </div>   
 
                               </div>
@@ -1160,5 +1134,7 @@ export default class DataStoriesContentCardAffordability extends Component {
                 </div>
             </div>
         )
-    }
+    
 }
+
+export default DataStoriesContentCardAffordability;
