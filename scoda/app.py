@@ -1,6 +1,4 @@
-
 from flask import Flask
-import jinja2
 import os
 from whitenoise import WhiteNoise
 
@@ -20,10 +18,8 @@ for static in my_static_folders:
 
 # setup configs
 env = os.environ.get('FLASK_ENV', 'development')
-
 app.config['ENV'] = env
 app.config.from_pyfile('config/%s.cfg' % env)
-# app.config['SECURITY_USER_IDENTITY_ATTRIBUTES'] = ('name', 'email')
 
 # CSRF protection
 from flask_wtf.csrf import CsrfProtect
@@ -34,15 +30,28 @@ csrf = CsrfProtect(app)
 from flask_sqlalchemy import SQLAlchemy
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://scoda:scoda@localhost/scoda'
 db = SQLAlchemy(app)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
+sentry_sdk.init(
+    dsn=f"{app.config['SENTRY_DSN']}",
+    integrations=[
+        FlaskIntegration(),
+    ],
+    traces_sample_rate=app.config['SENTRY_SAMPLER'],
+    environment=app.config['SENTRY_ENV']
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production.
+)
 
 # Mail
 from flask_mail import Mail
 
 mail = Mail(app)
 
-from flask_mobility import Mobility
+from redis import Redis
 
-mobility = Mobility(app)
+redisClient = Redis.from_url(app.config['REDIS_URL'])
