@@ -91,9 +91,6 @@ python app.py runserver
 2. Update the development.cfg REDIS_URL to your local configurations - Default is "redis://localhost:6379"
 3. Start the server with `redis-server`
 
-## Module list and syntax
-// Coming Soon
-
 ## Technical Specs for QA
 
 #### Device and Browser Information
