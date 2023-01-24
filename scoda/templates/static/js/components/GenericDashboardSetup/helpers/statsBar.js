@@ -124,7 +124,6 @@ export const getTransportModeStatsTotal = (setStats, selected) => {
                     values.forEach((value, valueIndex) => {
 
                         if (valueIndex <= 8) {
-                            console.log(value, "denominator")
 
                             totalValuesPercity += value
                         }

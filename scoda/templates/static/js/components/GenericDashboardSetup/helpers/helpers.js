@@ -390,7 +390,7 @@ export const getTransportModePercentages = (a, b, c, d, e, f) => {
     `${f}${d}`,
     `${f}${e}`,
   ];
-  console.log(endpoints, "endpoints")
+
   Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
 
     (data) => {
@@ -399,7 +399,7 @@ export const getTransportModePercentages = (a, b, c, d, e, f) => {
 
         let chartdata = value.data
 
-        console.log(chartdata, "chart number: ", valueIndex)
+   
 
         return chartdata
 

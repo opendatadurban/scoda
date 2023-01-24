@@ -89,7 +89,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
 
     const element = elements[i]
 
-    console.log(indicator_ids[i], "indicator types")
+
 
     if (typeof (indicator_ids[i]) === "number" || indicator_ids[i].manual_toggle_values) {
 
@@ -107,8 +107,6 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
           return item
         })
       }
-
-      i === 5 ? console.log(element, newElement) : console.log("n")
 
       items.push(<div className='chart_wrapper' key={i.toString()} onClick={clearAllErrors}>
         <div className='heading_wrapper'>
