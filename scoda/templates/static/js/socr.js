@@ -8,7 +8,7 @@ const SoCR = lazy(() => import('./templates/SoCR'));
 const CitizenEngagements = lazy(() => import('./templates/CitizenEngagementNew'));
 const ServiceDelivery = lazy(() => import('./templates/ServiceDeliveryNew'));
 const HumanResources = lazy(() => import('./templates/MunicipalHumanResourcesNew'));
-const CityFinances = lazy(() => import('./templates/CityFinances'));
+// const CityFinances = lazy(() => import('./templates/CityFinances'));
 const PeopleAndHousehold = lazy(() => import('./templates/PeopleAndHousehold'));
 const Employment = lazy(() => import('./templates/Employment'));
 const Dwellings = lazy(() => import('./templates/Dwellings'));
@@ -43,7 +43,7 @@ export default (
       <Route exact path='/citizen_engagement' component={CitizenEngagements} />
       <Route exact path='/service_delivery' component={ServiceDelivery} />
       <Route exact path='/human_resources' component={HumanResources} />
-      <Route exact path='/city_finances' component={CityFinances} />
+      {/* <Route exact path='/city_finances' component={CityFinances} /> */}
       <Route exact path='/people_household' component={PeopleAndHousehold} />
       <Route exact path='/employment' component={Employment} />
       <Route exact path='/dwellings' component={Dwellings} />
