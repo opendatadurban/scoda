@@ -5,9 +5,9 @@ import createHistory from "history/createBrowserHistory"
 import loader from "./gif/Spinner.gif"
 
 const SoCR = lazy(() => import('./templates/SoCR'));
-const CitizenEngagements = lazy(() => import('./templates/CitizenEngagements'));
-const ServiceDelivery = lazy(() => import('./templates/ServiceDelivery'));
-const HumanResources = lazy(() => import('./templates/HumanResources'));
+const CitizenEngagements = lazy(() => import('./templates/CitizenEngagementNew'));
+const ServiceDelivery = lazy(() => import('./templates/ServiceDeliveryNew'));
+const HumanResources = lazy(() => import('./templates/MunicipalHumanResourcesNew'));
 const CityFinances = lazy(() => import('./templates/CityFinances'));
 const PeopleAndHousehold = lazy(() => import('./templates/PeopleAndHousehold'));
 const Employment = lazy(() => import('./templates/Employment'));
