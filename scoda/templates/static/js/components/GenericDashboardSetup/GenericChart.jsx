@@ -39,8 +39,6 @@ const GenericChart = ({ indicator_ids, minYear, maxYear,
     )
   }, [selectedName, selectedChart, singleCityIndex])
 
-  console.log(chartGroup,"chart group")
-
   const isDropDownChart = Array.isArray(indicator_ids[0])
   const firstDashboardClass = (genericIndex === 0) ? "first_chart" : ""
 

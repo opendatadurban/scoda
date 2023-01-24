@@ -1,5 +1,5 @@
 import React, { lazy } from 'react';
-import { greenGradientColors } from '../components/GenericDashboardSetup/helpers/helpers';
+import { peopleHouseholdColors } from '../components/GenericDashboardSetup/helpers/helpers';
 import { SelectContextState } from '../context';
 
 
@@ -98,7 +98,7 @@ const Home = () => {
         values: [fbs_data_2018, fbs_data_2018_percent],
         labels: labels,
         year: "2018",
-        color: color
+   
     }]
 
     return (
@@ -115,7 +115,7 @@ const Home = () => {
                     subNavContent={subNavContent}
                     gridItems={6}
                     dropdownName={subNavContent.dropdownMenu[0].name}
-                    colors={greenGradientColors} />
+                    colors={peopleHouseholdColors} />
                 <Footer />
             </div>
         </SelectContextState>
