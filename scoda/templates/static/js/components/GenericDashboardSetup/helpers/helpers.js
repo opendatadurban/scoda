@@ -8,6 +8,22 @@ export const peopleHouseholdColors = [
   'rgba(2, 56, 88, 1)'
 ]
 
+export const greenGradientColors = [
+  '#B7E0DE',
+  '#6ABFBB',
+  '#2D9B96',
+  '#0F7671',
+  '#0F7671'
+]
+
+export const orangeGradientColors = [
+  '#FFD0B7',
+  '#FFAD81',
+  '#EE702D',
+  '#D44F08',
+  '#D44F08'
+]
+
 export const secondaryColors = [
   'rgba(165, 215, 216, 1)',
   'rgba(116, 169, 207, 1)',
@@ -34,6 +50,19 @@ export const sustainabilityColors = [
   '#BBF2B4',
   '#8BDE9E'
 ]
+
+export const ceChartTitles = {
+  yAxes: ["Number of People","Number of People","Number of People","Number of People"],
+  main: ["National Election: Voter Turnout", "National Election: Registered Voters", 
+  "Local Election: Voter Turnout","Local Election: Registered Voters"]
+}
+
+export const sdChartTitles = {
+  yAxes: ["Percent of Households","Percent of Households","No. of Households","Percent of Households","Percent of Households","No. of Domestic Units"],
+  main: ["Households: Access to Basic Water Supply", "Households: Access to Basic Sanitation", 
+  "Total Number of Households/Municipality","Households: Access to Electricity",
+"Households: Access to Refuse Removal", "Units Receiving Free Basic Services"]
+}
 
 export const phChartTitles = {
   yAxes: ["Number of Households", "Average Number of People", "Percentage", "Population", "Population Density", "Percentage"],
@@ -73,6 +102,12 @@ export const fsChartTitles = {
     "IHS Global Insight", "Stats SA General Household Survey"]
 }
 
+export const mhrChartTitles = {
+  yAxes: ["Number of Posts", "Number of Vaccibes", "","Number of Vaccines"],
+  main: ["Total number of municipal posts", "Municipal Management Vacancies", "Municipal Post Breakdown: Indicators",
+   "Number of Senior Management Vacancies",]
+}
+
 export const ictChartTitles = {
   yAxes: ["Number of Connections", "Number of Connections", "Number of Connections"
   ],
@@ -100,7 +135,6 @@ export const tpChartTitles = (genericIndex) => {
   }
 
 }
-
 
 export const sustainabilityChartTitles = (dropdownName, genericIndex) => {
   let chartTitles = { yAxes: "", main: "", source: "" }
@@ -263,7 +297,6 @@ export const populateSelect = (chartData, setOriginal, cityLabels, setSelected) 
 }
 
 
-
 export const tableData = (table, cities, min, max) => {
 
   const years = [2015, 2016, 2017, 2018, 2019, 2020]
@@ -349,7 +382,7 @@ export const isNewApiIndicator = (indicator) => {
   return isNewApi
 }
 
-export const getTransportModePercentages = (a,b,c,d,e,f) => {
+export const getTransportModePercentages = (a, b, c, d, e, f) => {
   let endpoints = [
     `${f}${a}`,
     `${f}${b}`,
@@ -357,7 +390,7 @@ export const getTransportModePercentages = (a,b,c,d,e,f) => {
     `${f}${d}`,
     `${f}${e}`,
   ];
-console.log(endpoints,"endpoints")
+  console.log(endpoints, "endpoints")
   Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
 
     (data) => {

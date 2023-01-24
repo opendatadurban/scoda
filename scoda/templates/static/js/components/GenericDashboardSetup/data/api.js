@@ -1,14 +1,18 @@
 import axios from 'axios'
-import { cityLabels, combinationColors, extendAbbreviation, getTransportModePercentages, isCombinationIndicator, isNewApiIndicator, isOldApiIndicator, isSingleYearIndicator, isTextBoxIndicator, peopleHouseholdColors, secondaryColors, sustainabilityColors, travelTimeColors } from '../helpers/helpers'
+import { cityLabels, combinationColors, extendAbbreviation, isCombinationIndicator, isNewApiIndicator, isOldApiIndicator, isSingleYearIndicator, isTextBoxIndicator, travelTimeColors } from '../helpers/helpers'
 import { tableData } from '../helpers/helpers'
-import { filterForSingleCity, sortCities } from '../helpers/sorting'
+import { sortCities } from '../helpers/sorting'
 import { indicator_text_box_data } from './data'
-import { allTravelTimeCategories, getTravelTimeAverages, treatTravelTimeDataPerCity } from './chartPercentageData'
+import {getTravelTimeAverages, treatTravelTimeDataPerCity } from './chartPercentageData'
+import { colorSorting } from '../helpers/colorSorting'
+import { type } from 'jquery'
 
 export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYear,
   yearColors, setOriginalValues, dropdownName, genericIndex, singleCityIndex
 
 ) => {
+
+
 
   let newApiUri = "/api/explore_new?indicator_id="
   let oldApiUri = "/api-temp/explore/?indicator_id="
@@ -21,8 +25,9 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
 
     if (isNewApiIndicator(id)) {
 
-      indicator_id_requests.push({ request: axios.get(newApiUri + id), type: "new" })
+        indicator_id_requests.push({ request: axios.get(newApiUri + id), type: "new" }) 
     }
+
     else if (isCombinationIndicator(id)) {
 
       indicator_id_requests.push({ request: { data: [] }, type: "combination" })
@@ -36,7 +41,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
       indicator_id_requests.push({ request: axios.get(oldApiUri + id.substring(1)), type: "old" })
     }
     else if (typeof (id) === "object") {
-
+      
       if (id.single_city_select) {
 
         indicator_id_requests.push({
@@ -66,7 +71,13 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
           ])
           , type: "toggle_barchart_by_year"
         })
-      } else {
+      } else if (id.manual_toggle_values){
+
+        indicator_id_requests.push({ request:{data: id.manual_toggle_values}, type: "new" }) 
+      }else if (Array.isArray(id)){
+
+        indicator_id_requests.push({ request:{data: []}, type: "new" }) 
+      }else {
         indicator_id_requests.push({
           request: Promise.all([
             axios.get(newApiUri + id.endpoints[1]),
@@ -87,6 +98,8 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
 
     (chartData) => {
 
+
+
       chartData.forEach((chart, index) => {
 
         let filterData = []
@@ -105,36 +118,8 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
               index !== 5
             ) return
 
-
-
-            if (dropdownName === "Life Expectancy and Health" && index > 1) {
-
-              if (parseInt(item.year) === 2015 || parseInt(item.year) === 2016) {
-
-                item.year = parseInt(item.year) === 2015 ? "2011-2015" : "2016-2020"
-                item['color'] = item.year === "2011-2015" ? "#4AD2D5" : "#5F993B"
-              } else {
-                return
-              }
-
-
-            } else {
-              item['color'] = yearColors[colorCount]
-            }
-
-            if (dropdownName === "Sustainability" && genericIndex === 3) {
-              item['color'] = sustainabilityColors[colorCount]
-            }
-
-            if (index === 5 && dropdownName === "People and Households") {
-              item['color'] = secondaryColors[colorCount]
-            }
-
-            if (index === 5 && dropdownName !== "People and Households") {
-              item['color'] = peopleHouseholdColors[colorCount + 2]
-            }
-
-
+            colorSorting(item, index, genericIndex, dropdownName,colorCount, yearColors)
+            
             /** Sorting labels and values alphabetically */
             item.labels = item.labels.map((city) => cityLabels(city))
 
@@ -144,6 +129,8 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
             item.labels.sort(function (a, b) {
               return a.toLowerCase().localeCompare(b.toLowerCase());
             })
+
+           
             let indexes = []
 
             item.labels.forEach((label, labelIndex) => {
@@ -152,11 +139,11 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
 
             let newValues = []
 
-
             indexes.forEach((newIndex_1) => newValues.push(item.values[newIndex_1]))
 
             item.values = newValues
             /**End of Label/Value sorting */
+
             filterData.push(item)
 
             colorCount++
@@ -585,6 +572,7 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
       setOriginalValues([...gridData])
       const copy = JSON.parse(JSON.stringify(gridData)) // deep copy to be manipuilated
       setChartGroup([...copy])
+      console.log(gridData,"cheese")
     }
   ).catch(err => console.warn(err + "error fetching chart data in api.js"))
 }
