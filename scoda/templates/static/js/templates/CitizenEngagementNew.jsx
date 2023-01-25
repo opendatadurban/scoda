@@ -97,7 +97,7 @@ const Home = () => {
                 <Navigation_scoda logoHide={false} box_shadow={true} />
                 <CitizenEngagement
                     indicator_ids={[989, 985, 987, 983]}
-                    minYear={2004}
+                    minYear={2000}
                     maxYear={2019}
                     subNavContent={subNavContent}
                     gridItems={4}
