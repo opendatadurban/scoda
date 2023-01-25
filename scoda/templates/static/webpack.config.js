@@ -64,7 +64,7 @@ module.exports = (env, argv) => {
     config.output.clean = {
       keep: "sitemap.xml", // Keep these assets under 'ignored/dir'.
     }
-    config.devtool = "source-map"
+   // config.devtool = "source-map"
     config.watch = true
   }
   if (argv.mode === 'production') {

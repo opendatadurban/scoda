@@ -5,7 +5,7 @@ import {
   dAddItem, dClearAll, dRemoveItem,
   hiAddItem, hiRemoveItem, hiClearAll,
   leRemoveItem, leAddItem, leClearAll,
-  fsAddItem, fsRemoveItem, fsClearAll, edRemoveItem, edAddItem, edClearAll, sustainabilityAddItem, sustainabilityRemoveItem, sustainabilityClearAll, ictRemoveItem, ictAddItem, ictClearAll, ptsRemoveItem, ptsAddItem, ptsClearAll
+  fsAddItem, fsRemoveItem, fsClearAll, edRemoveItem, edAddItem, edClearAll, sustainabilityAddItem, sustainabilityRemoveItem, sustainabilityClearAll, ictRemoveItem, ictAddItem, ictClearAll, ptsRemoveItem, ptsAddItem, ptsClearAll, ceRemoveItem, ceAddItem, ceClearAll, sdRemoveItem, sdAddItem, sdClearAll
 } from './helpers/citySelect';
 import { Select } from './Organisms/Select';
 import { ChartWrapper } from './Organisms/ChartWrapper';
@@ -36,7 +36,11 @@ export const ChartGrid = ({ indicator_ids,
 
   const chartData = chartGroup
 
-  const selectControls = dropdownName === "People and Households" ? {
+  const selectControls = dropdownName === "Citizen Engagement" ? {
+    removeItem: ceRemoveItem,
+    addItem: ceAddItem,
+    clearAll: ceClearAll,
+  } :dropdownName === "People and Households" ? {
     removeItem: phRemoveItem,
     addItem: phAddItem,
     clearAll: phClearAll,
@@ -86,6 +90,14 @@ export const ChartGrid = ({ indicator_ids,
     removeItem: ptsRemoveItem,
     addItem: ptsAddItem,
     clearAll: ptsClearAll,
+  }:(dropdownName === "Service Delivery") ? {
+    removeItem: sdRemoveItem,
+    addItem: sdAddItem,
+    clearAll: sdClearAll,
+  }:(dropdownName === "Municipal Human Resources") ? {
+    removeItem: ceRemoveItem,
+    addItem: ceAddItem,
+    clearAll: ceClearAll,
   }:
     {}
 

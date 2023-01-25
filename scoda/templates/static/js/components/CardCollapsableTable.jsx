@@ -94,14 +94,14 @@ const CardCollapsableTable = () => {
   });
 
   const handleClick = (e) => {
-    console.log("clickEvent ", e.target);
+   // console.log("clickEvent ", e.target);
   };
 
   return (
     <div>
       <ul id="collapsable-cards-container">
         {data.map((i, key) => {
-          console.log("keyFor", key);
+        //  console.log("keyFor", key);
           return (
             <li>
               <div id="collapsable-card-table">

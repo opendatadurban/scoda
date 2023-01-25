@@ -96,8 +96,12 @@ const GenericChart = ({ indicator_ids, minYear, maxYear,
         </Modal>
 
         <div className="placeholder"
-          style={{ width: "100%", height: "450px", backgroundColor: "transparent" }}>
-          {/* The place holder div simply maintains the scroll position
+          style={{
+             width: "100%", 
+             height: "450px", 
+             backgroundColor: "transparent" 
+             }}>
+          {/* The place hold er div simply maintains the scroll position
               of the page when charts are rerendered
               making sure the user stays in the same place */}
         </div>

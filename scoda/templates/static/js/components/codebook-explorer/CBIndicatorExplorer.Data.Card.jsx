@@ -141,7 +141,7 @@ export default class IndicatorExplorerDataCard extends Component {
                 });
         }
         catch(error) {
-            console.log(error);
+            console.warn(error);
           //For now we just swallow any errors. Any data errors get handled above in axios call.
           this.hideLoader();
         }

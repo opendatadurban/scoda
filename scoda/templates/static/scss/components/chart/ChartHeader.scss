@@ -218,6 +218,15 @@
         }
     }
 
+    .text_only{
+        width: unset;
+        height: 550px;
+
+        .content > .name{
+            width: unset;
+        }
+    }
+
     .error_message {
         display: flex;
         flex-direction: column;

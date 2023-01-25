@@ -124,7 +124,6 @@ export const getTransportModeStatsTotal = (setStats, selected) => {
                     values.forEach((value, valueIndex) => {
 
                         if (valueIndex <= 8) {
-                            console.log(value, "denominator")
 
                             totalValuesPercity += value
                         }
@@ -713,6 +712,104 @@ export const getFoodSecurityStatTotals = async (originalValues, cityLabels, setS
             adequiteTot: [Math.round(adequiteTot), "Adequate Access to Food"],
             inadequiteTot: [Math.round(inadequiteTot), "Inadequate Access to Food"],
             severelyInadequiteTot: [Math.round(severelyInadequiteTot * 10) / 10, "Severely Inadequate Access to Food"],
+        }
+    })
+}
+
+export const getMHRStatTotals = async (setStats, selected) => {
+
+    let adequite = 0
+    let inadequite = 0
+    let severelyInadequite = 0
+
+
+    let adequiteTot = 0
+    let inadequiteTot = 0
+    let severelyInadequiteTot = 0
+
+
+    const [firstResponse, secondResponse, thirdResponse,
+        firstAve, secondAve, thirdAve] = await Promise.all([
+            axios.get(`/api/explore_new?indicator_id=970&city=${selected}&year=2017`),
+            axios.get(`/api/explore_new?indicator_id=968&city=${selected}&year=2017`),
+            axios.get(`/api/explore_new?indicator_id=969&city=${selected}&year=2017`),
+
+
+            axios.get(`/api/stats?indicator_id=970&average=True&year=2017`),
+            axios.get(`/api/stats?indicator_id=968&average=True&year=2017`),
+            axios.get(`/api/stats?indicator_id=969&average=True&year=2017`),
+     
+        ]);
+
+    adequite = firstResponse.data[0].values
+    inadequite = secondResponse.data[0].values
+    severelyInadequite = thirdResponse.data[0].values
+
+
+    adequiteTot = firstAve.data.total_average
+    inadequiteTot = secondAve.data.total_average
+    severelyInadequiteTot = thirdAve.data.total_average
+
+    setStats({
+        ...{
+            adequite: [Math.round(adequite), "TOTAL MUNICIPAL POSTS"],
+            inadequite: [Math.round(inadequite), "MUNICIPAL MANAGEMENT VACANCIES"],
+            severelyInadequite: [Math.round(severelyInadequite * 10) / 10, "SENIOR MANAGEMENT VACANCIES"],
+
+            adequiteTot: [Math.round(adequiteTot),"TOTAL MUNICIPAL POSTS"],
+            inadequiteTot: [Math.round(inadequiteTot),"MUNICIPAL MANAGEMENT VACANCIES"],
+            severelyInadequiteTot: [Math.round(severelyInadequiteTot * 10) / 10, "SENIOR MANAGEMENT VACANCIES"],
+        }
+    })
+}
+
+
+export const getServiceDeliveryStatTotals = async (setStats, selected) => {
+
+    let adequite = 0
+    let inadequite = 0
+    let severelyInadequite = 0
+    let fourth = 0
+
+    let adequiteTot = 0
+    let inadequiteTot = 0
+    let severelyInadequiteTot = 0
+    let fourthAverage = 0
+
+    const [firstResponse, secondResponse, thirdResponse,fourthResponse,
+        firstAve, secondAve, thirdAve,fourthAve] = await Promise.all([ // 392, 384, 12, 10, 1114,
+            axios.get(`/api/explore_new?indicator_id=392&city=${selected}&year=2018`),
+            axios.get(`/api/explore_new?indicator_id=384&city=${selected}&year=2018`),
+            axios.get(`/api/explore_new?indicator_id=10&city=${selected}&year=2018`),
+            axios.get(`/api/explore_new?indicator_id=1114&city=${selected}&year=2018`),
+
+            axios.get(`/api/stats?indicator_id=392&average=True&year=2018`),
+            axios.get(`/api/stats?indicator_id=384&average=True&year=2018`),
+            axios.get(`/api/stats?indicator_id=10&average=True&year=2018`),
+            axios.get(`/api/stats?indicator_id=1114&average=True&year=2018`),
+        ]);
+
+    adequite = firstResponse.data[0].values
+    inadequite = secondResponse.data[0].values
+    severelyInadequite = thirdResponse.data[0].values
+    fourth = fourthResponse.data[0].values
+
+    adequiteTot = firstAve.data.total_average
+    inadequiteTot = secondAve.data.total_average
+    severelyInadequiteTot = thirdAve.data.total_average
+    fourthAverage = fourthAve.data.total_average 
+
+    setStats({
+        ...{
+            adequite: [Math.round(adequite), "WATER SUPPLY"],
+            inadequite: [Math.round(inadequite), "BASIC SANITATION"],
+            severelyInadequite: [Math.round(severelyInadequite * 10) / 10, "ELECTRICITY SUPPLY"],
+            fourth: [Math.round(fourth * 10) / 10,"REFUSE REMOVAL"],
+
+            adequiteTot: [Math.round(adequiteTot), "WATER SUPPLY"],
+            inadequiteTot: [Math.round(inadequiteTot), "BASIC SANITATION"],
+            severelyInadequiteTot: [Math.round(severelyInadequiteTot * 10) / 10, "ELECTRICITY SUPPLY"],
+            fourthTot: [Math.round(fourthAverage * 10) / 10,"REFUSE REMOVAL"]
         }
     })
 }

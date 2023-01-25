@@ -288,7 +288,7 @@ export const transport_mode_data = [
             name: "Number of individuals travelling to education or work: Bus",
             code: "TR.SOCR.7.0",
         },
-        endpoints: [825] 
+        endpoints: [825]
     },
     {
         toggle_calculation: true,
@@ -300,7 +300,7 @@ export const transport_mode_data = [
             name: "Number of individuals travelling to education or work: Train",
             code: "TR.SOCR.8.0",
         },
-        endpoints: [828] 
+        endpoints: [828]
     },
     {
         toggle_calculation: true,
@@ -312,7 +312,7 @@ export const transport_mode_data = [
             name: "Number of individuals travelling to education or work: Minibus/bus provided by institution/government and not paid for",
             code: "TR.SOCR.9.0",
         },
-        endpoints: [831] 
+        endpoints: [831]
     },
     {
         toggle_calculation: true,
@@ -324,7 +324,7 @@ export const transport_mode_data = [
             name: "Number of individuals travelling to education or work: Vehicle hired by a group of parents/lift club",
             code: "TR.SOCR.10.0",
         },
-        endpoints: [834] 
+        endpoints: [834]
     },
     {
         toggle_calculation: true,
@@ -336,7 +336,7 @@ export const transport_mode_data = [
             name: "Number of individuals travelling to education or work: Own car or other private vehicle or company car",
             code: "TR.SOCR.11.0",
         },
-        endpoints: [837] 
+        endpoints: [837]
     },
     {
         toggle_calculation: true,
@@ -348,7 +348,7 @@ export const transport_mode_data = [
             name: "Number of individuals travelling to education or work: Other transportation",
             code: "TR.SOCR.12.0",
         },
-        endpoints: [840] 
+        endpoints: [840]
     }
 
 ]
@@ -421,16 +421,59 @@ export const travel_time_text_box_data = [
 
 ]
 
+export const mhr_text_only_data = [
+    {
+        text_only:true,
+
+        number: {
+            name: [
+                "Total number of municipal posts",
+                "Total number of municipal posts: Community & Social Services",
+                "Total number of municipal posts: Financial & Administration",
+                "Total number of municipal posts: Electricity",
+                "Total number of municipal posts: Environmental Protection",
+                "Total number of municipal posts: Health",
+                "Total number of municipal posts: Public Safety",
+                "Total number of municipal posts: Road Transport",
+                "Total number of municipal posts: Sport & Recreation",
+                "Total number of municipal posts: Waste Management",
+                "Total number of municipal posts: Waste Water Management",
+                "Total number of municipal posts: Water",
+                "Total number of municipal posts: Other",
+            ],
+            code: [
+                "GG.SOCR.28.0",
+                "GG.SOCR.28.1",
+                "GG.SOCR.28.2",
+                "GG.SOCR.28.3",
+                "GG.SOCR.28.4",
+                "GG.SOCR.28.5",
+                "GG.SOCR.28.6",
+                "GG.SOCR.28.7",
+                "GG.SOCR.28.8",
+                "GG.SOCR.28.9",
+                "GG.SOCR.28.10",
+                "GG.SOCR.28.11",
+                "GG.SOCR.28.12",
+
+            ]
+        },
+
+        endpoints: [970, 971, 972, 973, 974, 975, 976, 977, 978, 979, 980, 981, 982]
+    }
+]
+
 export const public_transport_text_box_data = [
     {
         barchart_by_year: true,
+
         number: {
             name: [
                 "Number of individuals that spent Less Than 10% of Household Income on Public Transport",
                 "Number of individuals that spent 10 - 20% of Household Income on Public Transport",
                 "Number of individuals that spent 20 - 30% of Household Income on Public Transport",
                 "Number of individuals that spent > 30% of Household Income on Public Transport"
-        
+
             ],
             code: [
                 "TR.SOCR.19.0",
