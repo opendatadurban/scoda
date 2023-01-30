@@ -780,15 +780,15 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                                                                     <p className='catagory-name '>Averages 2017: <span>Municipal Posts And Vacancies</span></p>
                                                                     <div className='row'>
                                                                         <div className='stat adequiteTot'>
-                                                                            <h1>{makeHumanReadable(statsValues.adequiteTot[0])}%</h1>
+                                                                            <h1>{makeHumanReadable(statsValues.adequiteTot[0])}</h1>
                                                                             <p > {makeHumanReadable(statsValues.adequiteTot[1])}</p>
                                                                         </div>
                                                                         <div className='stat inadequiteTot'>
-                                                                            <h1>{makeHumanReadable(statsValues.inadequiteTot[0])}%</h1>
+                                                                            <h1>{makeHumanReadable(statsValues.inadequiteTot[0])}</h1>
                                                                             <p>{makeHumanReadable(statsValues.inadequiteTot[1])}</p>
                                                                         </div>
                                                                         <div className='stat severelyInadequiteTot'>
-                                                                            <h1>{makeHumanReadable(statsValues.severelyInadequiteTot[0])}%</h1>
+                                                                            <h1>{makeHumanReadable(statsValues.severelyInadequiteTot[0])}</h1>
                                                                             <p>{makeHumanReadable(statsValues.severelyInadequiteTot[1])}</p>
                                                                         </div>
 
@@ -796,21 +796,24 @@ export const GenericStatsPanel = ({ originalValues, dropName }) => {
                                                                 </div>
                                                                 <div className='second_panel'>
                                                                     <div className='top'>
-                                                                        <p className='catagory-name'>Municipal Human Resources Overview: <span>Municipality Focus 2017</span></p>
+                                                                        <p className='catagory-name'>Municipal Human Resources Overview: <span>{
+                                                                           selected
+                                                                        }</span>
+                                                                        </p>
 
                                                                         <MiniSelect names={['Buffalo City', 'City of Cape Town', 'Ekurhuleni', 'eThekwini', 'City of Joburg', 'Mangaung', 'Nelson Mandela Bay', "Tshwane"]} setSelected={setSelected} selected={selected} />
                                                                     </div>
                                                                     <div className='bottom'>
                                                                         <div className='stat adequite'>
-                                                                            <h1>{makeHumanReadable(statsValues.adequite[0])}%</h1>
+                                                                            <h1>{makeHumanReadable(statsValues.adequite[0])}</h1>
                                                                             <p > {makeHumanReadable(statsValues.adequite[1])}</p>
                                                                         </div>
                                                                         <div className='stat inadequite'>
-                                                                            <h1>{makeHumanReadable(statsValues.inadequite[0])}%</h1>
+                                                                            <h1>{makeHumanReadable(statsValues.inadequite[0])}</h1>
                                                                             <p>{makeHumanReadable(statsValues.inadequite[1])}</p>
                                                                         </div>
                                                                         <div className='stat severelyInadequite'>
-                                                                            <h1>{makeHumanReadable(statsValues.severelyInadequite[0])}%</h1>
+                                                                            <h1>{makeHumanReadable(statsValues.severelyInadequite[0])}</h1>
                                                                             <p>{makeHumanReadable(statsValues.severelyInadequite[1])}</p>
                                                                         </div>
                                                                     </div>

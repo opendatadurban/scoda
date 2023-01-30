@@ -196,7 +196,7 @@ export const phClearAll = (originalValues, setSelected, setOptions) => {
 
       let fillRef = fallbackValue[cIndex]
       return chart.map((year, yIndex) => {
-        year.labels = ['BUF', 'CPT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETH']
+        year.labels = ['BUF', 'CPT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMA', 'TSH', 'ETH']
         year.values = fillRef[yIndex].values
 
         return year
@@ -451,7 +451,7 @@ export const ceAddItem = (clickIndex, options, setSelected, setChartGroup, setOp
 
     let newArr = prev
 
-    let optionState = newArr.length > 1 ? newArr.map((chart, cIndex) => {
+    let optionState = newArr.length > 0 ? newArr.map((chart, cIndex) => {
 
       let optionChart = optionsTemp[cIndex]
 
@@ -475,7 +475,7 @@ export const ceAddItem = (clickIndex, options, setSelected, setChartGroup, setOp
       //dictates number of charts effected by add operation
       newArr[0] = optionState[0]
       newArr[1] = optionState[1]
-      newArr[2] = optionState[2]
+      newArr[2].length > 0 ? newArr[2] = optionState[2] : newArr[2] = []
       newArr[3] = optionState[3]
 
 
@@ -510,8 +510,10 @@ export const ceRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
   let selectTemp = []
 
   selected.forEach((chart, cIndex) => {
+
     let optionsChart = []
     let selectChart = []
+
     chart.forEach((year, yIndex) => {
 
       let optionYear = {
@@ -519,6 +521,7 @@ export const ceRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
         labels: year.labels.filter(clicked => clicked === year.labels[clickIndex]),
         values: year.values.filter(clicked => clicked === year.values[clickIndex])
       }
+
       let selectYear = {
         ...year,
         labels: year.labels.filter(clicked => clicked !== year.labels[clickIndex]),
@@ -536,7 +539,7 @@ export const ceRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
 
     let newArr = prev
 
-    let optionState = newArr.length > 1 ? newArr.map((chart, cIndex) => {
+    let optionState = newArr.length > 0 ? newArr.map((chart, cIndex) => {
 
       let optionChart = optionsTemp[cIndex]
 
@@ -578,7 +581,7 @@ export const ceRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
       //dictates number of charts effected by remove operation
       newArr[0] = selectedState[0]
       newArr[1] = selectedState[1]
-      newArr[2] = selectedState[2]
+      newArr[2].length > 0 ? newArr[2] = selectedState[2] : newArr[2] = []
       newArr[3] = selectedState[3]
 
       return [...newArr]
@@ -613,11 +616,12 @@ export const ceClearAll = (originalValues, setSelected, setOptions) => {
 
     let fallbackValue = JSON.parse(JSON.stringify(originalValues))
 
-    let filled = newArr.length > 1 ? newArr.map((chart, cIndex) => {
+    let filled = newArr.length > 0 ? newArr.map((chart, cIndex) => {
 
       let fillRef = fallbackValue[cIndex]
       return chart.map((year, yIndex) => {
-        year.labels = ['BUF', 'CPT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETH','MSU']
+        year.labels = ['BUF', 'CPT', 'JHB', 'EKU', 
+        'MAN', 'MSU', 'NMA', 'TSH', 'ETH']
         year.values = fillRef[yIndex].values
 
         return year
@@ -1015,7 +1019,7 @@ export const dClearAll = (originalValues, setSelected, setOptions) => {
       let fillRef = fallbackValue[cIndex]
       return chart.map((year, yIndex) => {
 
-        year.labels = ['BUF', 'CPT', 'JHB', 'EKU', 'MAN', 'NMB', 'TSH', 'ETH']
+        year.labels = ['BUF', 'CPT', 'JHB', 'EKU', 'MAN', 'NMA', 'TSH', 'ETH']
         year.values = fillRef[yIndex].values
         return year
       })
@@ -1426,7 +1430,7 @@ export const fsClearAll = (originalValues, setSelected, setOptions) => {
 
       let fillRef = fallbackValue[cIndex]
       return chart.map((year, yIndex) => {
-        year.labels = ['BUF', 'CPT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMB', 'TSH', 'ETH']
+        year.labels = ['BUF', 'CPT', 'JHB', 'EKH', 'MAN', 'PMB', 'NMA', 'TSH', 'ETH']
         year.values = fillRef[yIndex].values
 
         return year
