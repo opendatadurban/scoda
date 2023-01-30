@@ -89,8 +89,6 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
 
     const element = elements[i]
 
-
-
     if (typeof (indicator_ids[i]) === "number" || indicator_ids[i].manual_toggle_values) {
 
       const codebookUrl = `/scoda/toolkit#/codebook-explorer/${indicator_ids[i]}`
@@ -129,11 +127,13 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
 
                 <button className={isNumber ? "number" : "number deselect"} onClick={() => { toggle(true) }}>Number</button>
                 <button className={isNumber ? "percent" : "percent select"} onClick={() => { toggle(false) }}>Percent</button>
-
+                <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
               </div>
-
+             
               :
-              ""
+             
+                <a className='link' href={codebookUrl} target='_blank' >Raw Data</a>
+           
           }
 
 

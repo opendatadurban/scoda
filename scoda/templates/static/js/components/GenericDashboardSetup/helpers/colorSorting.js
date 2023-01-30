@@ -2,8 +2,6 @@ import { orangeGradientColors, peopleHouseholdColors, secondaryColors, sustainab
 
 export const colorSorting = (item, index, genericIndex, dropdownName,colorCount, yearColors) => {
 
-    debugger
-
     if (dropdownName === "Life Expectancy and Health" && index > 1) {
 
         if (parseInt(item.year) === 2015 || parseInt(item.year) === 2016) {

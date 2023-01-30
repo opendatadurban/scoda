@@ -52,16 +52,16 @@ export const sustainabilityColors = [
 ]
 
 export const ceChartTitles = {
-  yAxes: ["Number of People","Number of People","Number of People","Number of People"],
-  main: ["National Election: Voter Turnout", "National Election: Registered Voters", 
-  "Local Election: Voter Turnout","Local Election: Registered Voters"]
+  yAxes: ["Number of People", "Number of People", "Number of People", "Number of People"],
+  main: ["National Election: Voter Turnout", "National Election: Registered Voters",
+    "Local Election: Voter Turnout", "Local Election: Registered Voters"]
 }
 
 export const sdChartTitles = {
-  yAxes: ["Percent of Households","Percent of Households","No. of Households","Percent of Households","Percent of Households","No. of Domestic Units"],
-  main: ["Households: Access to Basic Water Supply", "Households: Access to Basic Sanitation", 
-  "Total Number of Households/Municipality","Households: Access to Electricity",
-"Households: Access to Refuse Removal", "Units Receiving Free Basic Services"]
+  yAxes: ["Percent of Households", "Percent of Households", "No. of Households", "Percent of Households", "Percent of Households", "No. of Domestic Units"],
+  main: ["Households: Access to Basic Water Supply", "Households: Access to Basic Sanitation",
+    "Total Number of Households/Municipality", "Households: Access to Electricity",
+    "Households: Access to Refuse Removal", "Units Receiving Free Electricity"]
 }
 
 export const phChartTitles = {
@@ -103,9 +103,9 @@ export const fsChartTitles = {
 }
 
 export const mhrChartTitles = {
-  yAxes: ["Number of Posts", "Number of Vaccibes", "","Number of Vaccines"],
+  yAxes: ["Number of Posts", "Number of Vaccibes", "", "Number of Vaccines"],
   main: ["Total number of municipal posts", "Municipal Management Vacancies", "Municipal Post Breakdown: Indicators",
-   "Number of Senior Management Vacancies",]
+    "Number of Senior Management Vacancies",]
 }
 
 export const ictChartTitles = {
@@ -399,7 +399,7 @@ export const getTransportModePercentages = (a, b, c, d, e, f) => {
 
         let chartdata = value.data
 
-   
+
 
         return chartdata
 
@@ -454,16 +454,18 @@ export const chartHeights = (dropdownName, genericIndex) => {
   /* Create a conditional list of chart heights specified for each dashboard*/
 
   const heightByDropName = ((dropdownName === "Employment" ||
-    (dropdownName === "Public Transport Spend" && genericIndex === 0)) ? 170
-    : dropdownName === "Household Income" || dropdownName === "Education" ||
-      dropdownName === "Transport Mode" ||
-      ((dropdownName === "Sustainability" || dropdownName === "Travel Time")
-        && genericIndex !== 3 && genericIndex !== 2) || (dropdownName === "Public Transport Spend" && genericIndex === 1) ? 100 :
-      (dropdownName === "Sustainability" && genericIndex === 3) ? 150 :
-        (dropdownName === "Sustainability" && genericIndex === 2) ? 60 :
-          (dropdownName === "Life Expectancy and Health" ||
-            dropdownName === "ICT Infrastructure") ? 150
-            : 210) // 210 is the fallback value if height not specified
+    (dropdownName === "Public Transport Spend" && genericIndex === 0)) ? 170 :
+    dropdownName === "Municipal Human Resources" ? 140 :
+      dropdownName === "Citizen Engagement" ? 140 :
+        dropdownName === "Household Income" || dropdownName === "Education" ||
+          dropdownName === "Transport Mode" ||
+          ((dropdownName === "Sustainability" || dropdownName === "Travel Time")
+            && genericIndex !== 3 && genericIndex !== 2) || (dropdownName === "Public Transport Spend" && genericIndex === 1) ? 100 :
+          (dropdownName === "Sustainability" && genericIndex === 3) ? 150 :
+            (dropdownName === "Sustainability" && genericIndex === 2) ? 60 :
+              (dropdownName === "Life Expectancy and Health" ||
+                dropdownName === "ICT Infrastructure") ? 150
+                : 210) // 210 is the fallback value if height not specified
 
   return heightByDropName
 }
