@@ -516,11 +516,6 @@ export const ceRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
 
     chart.forEach((year, yIndex) => {
 
-      
-      console.log(year.values ,clickIndex,"find out",
-      year.values.filter(clicked => clicked !== year.values[clickIndex]),
-      clickIndex,"filtered")
-
       let optionYear = {
         ...year,
         labels: year.labels.filter(clicked => clicked === year.labels[clickIndex]),

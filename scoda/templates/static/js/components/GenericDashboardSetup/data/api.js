@@ -571,7 +571,6 @@ export const populateChartGroup = (setChartGroup, indicator_ids, minYear, maxYea
 
       setOriginalValues([...gridData])
       const copy = JSON.parse(JSON.stringify(gridData)) // deep copy to be manipuilated
-      console.log(gridData,"api data")
       setChartGroup([...copy])
     }
   ).catch(err => console.warn(err + "error fetching chart data in api.js"))
