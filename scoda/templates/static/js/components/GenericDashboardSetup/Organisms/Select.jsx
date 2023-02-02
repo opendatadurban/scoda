@@ -66,7 +66,6 @@ export const Select = ({ chartData, originalValues, selected, options,
             })
         }
         else {
-
             chartData.forEach((chart, index) => {
 
                 filtered.push(chart)

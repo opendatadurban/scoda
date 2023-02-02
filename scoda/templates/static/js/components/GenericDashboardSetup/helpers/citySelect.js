@@ -432,12 +432,12 @@ export const ceAddItem = (clickIndex, options, setSelected, setChartGroup, setOp
       let optionYear = {
         ...year,
         labels: year.labels.filter(clicked => clicked === year.labels[clickIndex]),
-        values: year.values.filter(clicked => clicked === year.values[clickIndex])
+        values: filterArray(year,clickIndex)
       }
       let selectYear = {
         ...year,
         labels: year.labels.filter(clicked => clicked !== year.labels[clickIndex]),
-        values: year.values.filter(clicked => clicked !== year.values[clickIndex])
+        values: reverseFilterArray(year,clickIndex)
       }
       optionsChart.push(optionYear)
       selectChart.push(selectYear)
@@ -477,7 +477,7 @@ export const ceAddItem = (clickIndex, options, setSelected, setChartGroup, setOp
       newArr[1] = optionState[1]
       newArr[2].length > 0 ? newArr[2] = optionState[2] : newArr[2] = []
       newArr[3] = optionState[3]
-
+      
 
       return [...newArr]
     })
@@ -519,18 +519,21 @@ export const ceRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
       let optionYear = {
         ...year,
         labels: year.labels.filter(clicked => clicked === year.labels[clickIndex]),
-        values: year.values.filter(clicked => clicked === year.values[clickIndex])
+        values: filterArray(year,clickIndex)
       }
 
       let selectYear = {
         ...year,
         labels: year.labels.filter(clicked => clicked !== year.labels[clickIndex]),
-        values: year.values.filter(clicked => clicked !== year.values[clickIndex])
+        values: reverseFilterArray(year, clickIndex)
       }
+
       optionsChart.push(optionYear)
       selectChart.push(selectYear)
-    })
 
+    })
+    
+    
     optionsTemp.push(optionsChart)
     selectTemp.push(selectChart)
   })
@@ -538,7 +541,7 @@ export const ceRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
   setOptions(prev => {
 
     let newArr = prev
-
+    
     let optionState = newArr.length > 0 ? newArr.map((chart, cIndex) => {
 
       let optionChart = optionsTemp[cIndex]
@@ -554,7 +557,7 @@ export const ceRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
         return optionYear
       })
     }) : optionsTemp
-
+   
     return [...optionState]
   })
 
@@ -583,6 +586,7 @@ export const ceRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
       newArr[1] = selectedState[1]
       newArr[2].length > 0 ? newArr[2] = selectedState[2] : newArr[2] = []
       newArr[3] = selectedState[3]
+    
 
       return [...newArr]
     })
@@ -2458,3 +2462,15 @@ export const sdClearAll = (originalValues, setSelected, setOptions) => {
     return filled
   })
 }
+
+function filterArray(year, clickIndex) {
+  const index = year.values.findIndex(val => val === year.values[clickIndex]);
+  return year.values.filter((val, i) => i === index);
+}
+
+function reverseFilterArray(year, clickIndex) {
+  const index = year.values.findIndex(val => val === year.values[clickIndex]);
+  return year.values.filter((val, i) => i !== index);
+}
+
+

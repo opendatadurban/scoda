@@ -202,7 +202,7 @@ export const ChartWrapper = ({ chartGroup, indicator_ids, dropdownName, toggle, 
 
       items.push(<div className='chart_wrapper' key={i.toString()} >
         <div className='heading_wrapper text_box'>
-          <div className='heading'>Selected Indicator</div>
+          <div className='heading'>Municipal Post Breakdown: Indicators</div>
         </div>
         <div className="text text_only">
           <div className="headings">
