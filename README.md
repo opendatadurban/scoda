@@ -15,13 +15,13 @@ SCODA Website Repository
 - [Larger Data for DB seeds can be found here](https://drive.google.com/drive/folders/1tnI_EveGeeJg8-WnP5Js2doMDsQGT2Vh?usp=sharing)
 
 ## Creative Resources
-- [SCODA UI](https://projects.invisionapp.com/d/main#/projects/prototypes/15567383)
+- [SCODA UI](https://www.figma.com/file/1Zslv9edwmlxZxTH7Q9dfm/SCODA-Platform-3_2?node-id=628%3A3942&t=BbVqdRcINId32XpW-1)
 - Needs Design Spec
 
 
 ## Website Environments
-- [Staging Environment]()
-- No Live Environment yet
+- [Staging Environment](https://scodastaging.opencitieslab.org/)
+- [Production Environment](http://scoda.co.za/)
 
 ## Gulp Setup
 ### Setting up Frontend Boiler Plate with Gulp and NPM
@@ -53,7 +53,7 @@ Then do the following:
 * If needed update any local credentials on the new development.cfg file you've just created
 
 ### Setting up the Database with PostgreSQL
-Setup the PostgreSQL database (version 9.6.*)
+Setup the PostgreSQL database (version 12.13.*)
 Download and install postgis (version 3.1.1) locally from http://download.osgeo.org/postgis/windows/pg96/
 ```
 psql -U postgres
@@ -66,7 +66,7 @@ psql -U postgres
 =# \q
 ```
 Construct your db app-side:
-1. Download this [data folder](https://drive.google.com/drive/folders/1tnI_EveGeeJg8-WnP5Js2doMDsQGT2Vh) and empty it's contents into the /scoda/data directory, extrating the contents out of the zipped files. No zipped files or empty folders should be in the scoda/data folder.
+1. Download this [data folder](https://drive.google.com/drive/folders/1tnI_EveGeeJg8-WnP5Js2doMDsQGT2Vh) and empty it's contents into the /scoda/data directory, extracting the contents out of the zipped files. No zipped files or empty folders should be in the scoda/data folder.
 2. Request access to the drive data folder if unable to download data.
 3. Activate your local environment
 ```
@@ -85,8 +85,11 @@ python app.py runserver
 * This will autogenerate a change. Double check that it make sense. To apply it on your machine, run
 `python app.py db upgrade head`
 
-## Module list and syntax
-// Coming Soon
+# Setup Redis for cache
+
+1. [Insall Redis on local](https://redis.io/download/)
+2. Update the development.cfg REDIS_URL to your local configurations - Default is "redis://localhost:6379"
+3. Start the server with `redis-server`
 
 ## Technical Specs for QA
 
