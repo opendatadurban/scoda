@@ -53,7 +53,7 @@ Then do the following:
 * If needed update any local credentials on the new development.cfg file you've just created
 
 ### Setting up the Database with PostgreSQL
-Setup the PostgreSQL database (version 9.6.*)
+Setup the PostgreSQL database (version 12.13.*)
 Download and install postgis (version 3.1.1) locally from http://download.osgeo.org/postgis/windows/pg96/
 ```
 psql -U postgres
