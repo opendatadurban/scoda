@@ -432,12 +432,12 @@ export const ceAddItem = (clickIndex, options, setSelected, setChartGroup, setOp
       let optionYear = {
         ...year,
         labels: year.labels.filter(clicked => clicked === year.labels[clickIndex]),
-        values: year.values.filter(clicked => clicked === year.values[clickIndex])
+        values: filterArray(year,clickIndex)
       }
       let selectYear = {
         ...year,
         labels: year.labels.filter(clicked => clicked !== year.labels[clickIndex]),
-        values: year.values.filter(clicked => clicked !== year.values[clickIndex])
+        values: reverseFilterArray(year,clickIndex)
       }
       optionsChart.push(optionYear)
       selectChart.push(selectYear)
@@ -516,25 +516,28 @@ export const ceRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
 
     chart.forEach((year, yIndex) => {
 
+      
+      console.log(year.values ,clickIndex,"find out",
+      year.values.filter(clicked => clicked !== year.values[clickIndex]),
+      clickIndex,"filtered")
+
       let optionYear = {
         ...year,
         labels: year.labels.filter(clicked => clicked === year.labels[clickIndex]),
-        values: year.values.filter(clicked => clicked === year.values[clickIndex])
+        values: filterArray(year,clickIndex)
       }
 
       let selectYear = {
         ...year,
         labels: year.labels.filter(clicked => clicked !== year.labels[clickIndex]),
-        values: year.values.filter(clicked => clicked !== year.values[clickIndex])
+        values: reverseFilterArray(year, clickIndex)
       }
+
       optionsChart.push(optionYear)
       selectChart.push(selectYear)
-     
+
     })
-
-
     
-    console.log(chart,"chart after")
     
     optionsTemp.push(optionsChart)
     selectTemp.push(selectChart)
@@ -2464,3 +2467,15 @@ export const sdClearAll = (originalValues, setSelected, setOptions) => {
     return filled
   })
 }
+
+function filterArray(year, clickIndex) {
+  const index = year.values.findIndex(val => val === year.values[clickIndex]);
+  return year.values.filter((val, i) => i === index);
+}
+
+function reverseFilterArray(year, clickIndex) {
+  const index = year.values.findIndex(val => val === year.values[clickIndex]);
+  return year.values.filter((val, i) => i !== index);
+}
+
+

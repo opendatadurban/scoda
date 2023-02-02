@@ -32,6 +32,10 @@ export const tickExceptionsForDwellings = (dropdownName,chartIndex,genericIndex)
         dashboard: dropdownName === "ICT Infrastructure",
     }
 
+    const citizenEngagement = {
+        dashboard: dropdownName === "Citizen Engagement",
+    }
+
     if(dwellingsConditions.dashboard){
         if(dwellingsConditions.chart1){
             return{
@@ -198,6 +202,19 @@ export const tickExceptionsForDwellings = (dropdownName,chartIndex,genericIndex)
                 }
         }
     }
+    else if (citizenEngagement.dashboard) {
+        return{
+            fontFamily: "Montserrat",
+                min: 0,
+                max: 2500000,
+                callback: function (value,index,values) { 
+
+                    values = Math.round(value) / 1000000 + 'M '
+                    return values
+                }
+        }
+    }
+
 
     else {
 
