@@ -477,7 +477,7 @@ export const ceAddItem = (clickIndex, options, setSelected, setChartGroup, setOp
       newArr[1] = optionState[1]
       newArr[2].length > 0 ? newArr[2] = optionState[2] : newArr[2] = []
       newArr[3] = optionState[3]
-
+      
 
       return [...newArr]
     })
@@ -529,8 +529,13 @@ export const ceRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
       }
       optionsChart.push(optionYear)
       selectChart.push(selectYear)
+     
     })
 
+
+    
+    console.log(chart,"chart after")
+    
     optionsTemp.push(optionsChart)
     selectTemp.push(selectChart)
   })
@@ -538,7 +543,7 @@ export const ceRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
   setOptions(prev => {
 
     let newArr = prev
-
+    
     let optionState = newArr.length > 0 ? newArr.map((chart, cIndex) => {
 
       let optionChart = optionsTemp[cIndex]
@@ -554,7 +559,7 @@ export const ceRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
         return optionYear
       })
     }) : optionsTemp
-
+   
     return [...optionState]
   })
 
@@ -583,6 +588,7 @@ export const ceRemoveItem = (clickIndex, selected, setSelected, setChartGroup, s
       newArr[1] = selectedState[1]
       newArr[2].length > 0 ? newArr[2] = selectedState[2] : newArr[2] = []
       newArr[3] = selectedState[3]
+    
 
       return [...newArr]
     })
