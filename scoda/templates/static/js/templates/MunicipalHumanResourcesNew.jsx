@@ -97,13 +97,14 @@ const Home = () => {
         >
             <Navigation_scoda logoHide={false} box_shadow={true} />
             <PeopleHousehold
-                indicator_ids={[970, 968, 968, 969]}
+                indicator_ids={[970, 968, mhr_text_only_data, 969]}
                 minYear={2014}
                 maxYear={2018}
                 subNavContent={subNavContent}
                 gridItems={4}
                 dropdownName={subNavContent.dropdownMenu[2].name}
                 colors={peopleHouseholdColors}
+                
             />
             <Footer />
         </div>

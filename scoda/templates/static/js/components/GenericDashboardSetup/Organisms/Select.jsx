@@ -74,7 +74,6 @@ export const Select = ({ chartData, originalValues, selected, options,
         setSelected(filtered)
     }
 
-
     return (<div className="conditional_select_wrapper" onClick={closeAllAlerts}>
         {
             isDropDownChart ? <>
@@ -82,7 +81,7 @@ export const Select = ({ chartData, originalValues, selected, options,
                 <div className='custom_select'
                 onClick={ () => selectContext.setSelect(!selectContext.selectOpen)}>
                     {
-                        selected.length > 0 ? selected[0][0].labels.map((tag, index) => {
+                        selected && selected.length > 0 ? selected[0][0].labels.map((tag, index) => {
 
                             return <p key={index.toString()} className="tag">
                                 {tag}
@@ -94,7 +93,7 @@ export const Select = ({ chartData, originalValues, selected, options,
                     }
                     <div className={"dropdownbox " + `${selectContext.selectOpen ? "show" : ""}`} >
                         {
-                            options.length > 0 ? options[0][0].labels.map((city, index) => {
+                           options && options.length > 0 ? options[0][0].labels.map((city, index) => {
 
                                 return <p key={index.toString()} className="drop_content" onClick={() => {
                                     addItem(index, options, setSelected, setChartGroup, setOptions)
@@ -115,7 +114,7 @@ export const Select = ({ chartData, originalValues, selected, options,
                 :
                 <div className='custom_select' onClick={() => selectContext.setSelect(!selectContext.selectOpen)}>
                     {
-                        selected.length > 0? selected[0][0].labels.map((tag, index) => {
+                       selected && selected.length > 0? selected[0][0].labels.map((tag, index) => {
 
                             return <p key={index.toString()} className="tag">
                                 {tag}
@@ -128,7 +127,7 @@ export const Select = ({ chartData, originalValues, selected, options,
                     }
                     <div className={"dropdownbox " + `${selectContext.selectOpen ? "show" : ""}`} >
                         {
-                            options.length > 0 ? options[0][0].labels.map((city, index) => {
+                           options && options.length > 0 ? options[0][0].labels.map((city, index) => {
 
                                 return <p key={index.toString()} className="drop_content" onClick={() => {
                                     addItem(index, options, setSelected, setChartGroup, setOptions)
