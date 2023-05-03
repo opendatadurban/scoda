@@ -51,7 +51,7 @@ export default class CTA_block extends Component {
               />
             </div>
           </div>
-          <div className="row partnership mt-5 mb-5">
+          {/* <div className="row partnership mt-5 mb-5">
             <div className="col-12">
               <h3>Partnerships</h3>
               <p>
@@ -67,7 +67,7 @@ export default class CTA_block extends Component {
                 constituents and vice versa.
               </p>
             </div>
-          </div>
+          </div> */}
           <a href="https://www.sacities.net" target="_blank">
             <div className="row box container">
               <div className="col-12">
