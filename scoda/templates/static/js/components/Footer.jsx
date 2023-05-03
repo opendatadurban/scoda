@@ -10,7 +10,7 @@ export default class Footer extends Component {
                     <div className="row">
                         <div className="span4 footer--col_one col-md-3">
                             <a href="https://ckan.org/" target="blank__"><img className="ckan" src="../../../../static/dist/img/ckan-logo.webp" alt="ckan logo" /></a>
-                            <span><span className="sacn"><a href="https://www.sacities.net/" target="blank__">SACN</a></span> in partnership with <span className="sacn"><a target="blank__" href="https://opencitieslab.org/odd/home">OCL</a></span> <br/> <span className="ccl"> Creative Commons License</span></span>
+                            <span><span className="sacn">Curated by <a href="https://www.sacities.net/" target="blank__"> SACN </a></span><br/> <span className="ccl"> Creative Commons License</span></span>
                         </div>
                         <div className="span4 footer--col_two col-md-6">
                             <div className='row'>

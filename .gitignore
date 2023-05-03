@@ -119,3 +119,7 @@ scoda/pip-selfcheck.json
 /requirements_mac.txt
 node_modules/
 scoda/data
+
+#mac files
+.DS_Store
+scoda/.DS_Store
