@@ -66,7 +66,7 @@ psql -U postgres
 =# \q
 ```
 Construct your db app-side:
-1. Download this [data folder](https://drive.google.com/drive/folders/1tnI_EveGeeJg8-WnP5Js2doMDsQGT2Vh) and empty it's contents into the /scoda/data directory, extracting the contents out of the zipped files. No zipped files or empty folders should be in the scoda/data folder.
+1. Request Access to the data and empty it's contents into the /scoda/data directory, extracting the contents out of the zipped files. No zipped files or empty folders should be in the scoda/data folder.
 2. Request access to the drive data folder if unable to download data.
 3. Activate your local environment
 ```
@@ -80,7 +80,7 @@ python app.py runserver
 
 #### Deploying database changes
 * SCODA App uses Flask-Migrate (which uses Alembic) to handle database migrations.
-* To add a new model or make changes, update the SQLAlchemy definitions in `opendatadurban/models/`. Then run
+* To add a new model or make changes, update the SQLAlchemy definitions in `scoda/models/`. Then run
 `python app.py db migrate --message "a description of your change"`
 * This will autogenerate a change. Double check that it make sense. To apply it on your machine, run
 `python app.py db upgrade head`
