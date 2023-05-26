@@ -11,16 +11,13 @@ SCODA Website Repository
 - [Techinical Specs For QA](/README.md#technical-specs-for-qa)
 - [Caveats, Dev Notes and or Outstanding Bugs](/README.md#caveats-dev-notes-and-or-outstanding-bugs)
 
-#### Information Resources
-- [Larger Data for DB seeds can be found here](https://drive.google.com/drive/folders/1tnI_EveGeeJg8-WnP5Js2doMDsQGT2Vh?usp=sharing)
-
 ## Creative Resources
 - [SCODA UI](https://www.figma.com/file/1Zslv9edwmlxZxTH7Q9dfm/SCODA-Platform-3_2?node-id=628%3A3942&t=BbVqdRcINId32XpW-1)
 - Needs Design Spec
 
 
 ## Website Environments
-- [Staging Environment](https://scodastaging.opencitieslab.org/)
+- [Staging Environment]()
 - [Production Environment](http://scoda.co.za/)
 
 ## Gulp Setup

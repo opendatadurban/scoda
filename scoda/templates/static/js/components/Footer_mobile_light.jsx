@@ -8,7 +8,7 @@ const Footer_mobile_light = (props) => {
             <a href="/#/home"><img className="" src={props.logoPath} alt="DDCI logo" /></a>
           </div>
           <div className="col-10">
-            <span>A collaboration between: <a>DCCI</a> & <a href="edge.durban">THE DURBAN EDGE</a> & <a href="opencitieslab.org">OCL</a></span>
+            {/*<span>A collaboration between: <a>DCCI</a> & <a href="edge.durban">THE DURBAN EDGE</a> & <a href="opencitieslab.org">OCL</a></span>*/}
           </div>
       </div>
       </div>
