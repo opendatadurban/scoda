@@ -63,7 +63,8 @@ psql -U postgres
 =# \q
 ```
 Construct your db app-side:
-1. Request Access to the data and empty it's contents into the /scoda/data directory, extracting the contents out of the zipped files. No zipped files or empty folders should be in the scoda/data folder.
+1. For a simpler & quicker DB seeding process, see the DatabaseSetup file for instructions on restoring a DB. Alternatively follow the instructions below.
+2. Request Access to the data and empty it's contents into the /scoda/data directory, extracting the contents out of the zipped files. No zipped files or empty folders should be in the scoda/data folder.
 2. Request access to the drive data folder if unable to download data.
 3. Activate your local environment
 ```
