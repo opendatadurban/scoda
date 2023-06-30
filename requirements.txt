@@ -16,7 +16,7 @@ geomet==1.0.0
 gviz-api== 1.10.0
 numpy==1.24.1
 pyparsing==2.1.10
-PyPDF2==3.0.1
+PyPDF2==1.27.9
 gunicorn==20.1.0
 itsdangerous==2.0.1
 Jinja2==3.0.2
