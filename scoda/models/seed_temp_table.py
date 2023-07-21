@@ -3,7 +3,8 @@ from ..app import app
 import pandas as pd
 import datetime
 import json
-
+CHUNK_SIZE = 10000
+records_households = []
 def seed_temp_indicators(db):
     df = pd.read_excel('%s/data/%s' % (app.root_path, "inflation_DB_ckan.xlsx")). \
         fillna(value='')
@@ -26,9 +27,15 @@ def seed_temp_indicators(db):
             data_point.re_name = row["class_name"]
             data_point.ds_name = row["indicator_name"]
             data_point.indicator_id = indicator_list.index(row["indicator_name"]) + 1
-            db.session.add(data_point)
+            # db.session.add(data_point)
+            records_households.append(data_point)
+            if len(records_households) > CHUNK_SIZE:
+                db.session.bulk_save_objects(records_households)
+                db.session.commit()
+                records_households.clear()
         print(F" {index} updated")
     try:
+        db.session.bulk_save_objects(records_households)
         db.session.commit()
     except Exception as e:
         print(e)
