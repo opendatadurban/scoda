@@ -1,6 +1,6 @@
 alembic==1.7.4
 ckanapi==4.7
-Flask==2.0.2
+Flask==2.2.5
 Flask-Login==0.4.1
 Flask-Mail==0.9.1
 Flask-Security==3.0.0
