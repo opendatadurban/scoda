@@ -5,7 +5,7 @@ from itertools import product, zip_longest
 from .models import *
 from .models.user import UserAnalysis
 from .models.datasets import ExploreForm
-from pandas import read_sql_query
+from pandas import read_sql_query,Series
 import gviz_api
 import json
 import itertools
@@ -30,9 +30,9 @@ def api_indicators_list(check):
             indicators_list = json.loads(redisClient.get(redis_key))
         else:
             indicators_list = [[str(c.id), c.ds_name] for c in
-                               CbTempIndicators.query.limit(5) if
+                               CbTempIndicators.query.all() if
                                c.ds_name not in remove_list]
-            # redisClient.set(redis_key, json.dumps(indicators_list))
+            redisClient.set(redis_key, json.dumps(indicators_list))
     else:
         indicators_list = [[str(c.id), c.in_name] for c in Indicator.all() if c.in_name not in remove_list]
     return jsonify(indicators_list)
@@ -213,14 +213,20 @@ def api_explore(check):
                     if len(datapoint) == 0:
                         row.append(None)
                     else:
+                        checks = df.loc[(df["re_name"] == c) & (df["year"] == y) & (
+                            df["ds_name"] == d), "value"]
+                        print(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
+                            df["ds_name"] == d), "value"].iloc[0])
+                        if isinstance(checks,Series):
+                            row.append(checks.iloc[0])
+                        else:
+                            row.append(checks)
                         print(f"c:{c} -"
                               f"y: {y} -"
                               f"d: {d}")
-                        print(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
-                            df["ds_name"] == d), "value"].iloc[0])
-                        row.append(
-                            float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
-                            df["ds_name"] == d), "value"].iloc[0]))
+                        # row.append(
+                        #     float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
+                        #     df["ds_name"] == d), "value"].iloc[0]))
                 table.append(row)
     yrs = ['Year'] + [str(y) for y in years[::-1]]
     payload = {"plot":plot, "table":table, "table_plot":table_plot,"colours":colours,"year":str(max(years)), "series":series,
