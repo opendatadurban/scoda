@@ -267,7 +267,7 @@ class Indicator(db.Model):
     __tablename__ = "indicators"
 
     id = Column(Integer, primary_key=True)
-    in_name = Column(String(80), nullable=False, unique=True)
+    in_name = Column(Text, nullable=False, unique=True)
     unit = Column(String(80), nullable=True, unique=False)
     definition = Column(String(400), nullable=True, unique=False)
     theme = Column(String(80), nullable=True, unique=False)

@@ -26,12 +26,14 @@ def api_indicators_list(check):
                    'Human Development Index']
     if check == "codebook":
         redis_key = "testing-indicators"
-        if redisClient.exists(redis_key):
-            indicators_list = json.loads(redisClient.get(redis_key))
-        else:
-            indicators_list = [[str(c.id), c.ds_name] for c in
-                               CbTempIndicators.query.limit(5) if
-                               c.ds_name not in remove_list]
+        # if redisClient.exists(redis_key):
+        #     indicators_list = json.loads(redisClient.get(redis_key))
+        # else:
+            # indicators_list = [[str(c.id), c.ds_name] for c in
+            #                    CbTempIndicators.query.limit(5) if
+            #                    c.ds_name not in remove_list]
+        indicators_list = [[str(c.id), c.in_name] for c in
+                           Indicator.query.all()]
             # redisClient.set(redis_key, json.dumps(indicators_list))
     else:
         indicators_list = [[str(c.id), c.in_name] for c in Indicator.all() if c.in_name not in remove_list]
@@ -163,6 +165,9 @@ def api_explore(check):
 
     plot_type = 1
     print(len(years))
+    years.sort()
+    years = years[-6:]
+    print(years)
     if (len(datasets) > 1) or (len(years) == 1):
         plot_type = 2
 
@@ -182,7 +187,7 @@ def api_explore(check):
         head.append(str(i))
     table.append(head)
     table_plot.append(head)
-    # print(f"df:{df}")
+    print(f"plot_type:{df}")
     if plot_type == 1:
         df_i = df.iloc[:, [0, 1, 3]]
 
