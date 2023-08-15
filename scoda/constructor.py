@@ -10,16 +10,13 @@ from itertools import zip_longest
 from .models import db
 from .models import *
 from io import StringIO
-import shutil
 from io import BytesIO
 from pandas import read_sql_query
-from datetime import datetime
 from ckanapi import RemoteCKAN
-from pandas.io.json import json_normalize
+from pandas import json_normalize
 import pandas as pd
 import gviz_api
 from urllib.parse import urljoin
-import urllib
 from urllib.request import urlopen,Request
 import urllib
 import json
@@ -31,7 +28,6 @@ import zipfile
 from math import ceil
 from flask_mail import Message
 from .app import mail
-# from config import MAIL_DEFAULT_SENDER
 
 
 def create_package(base_url, data=None, api_key=None):

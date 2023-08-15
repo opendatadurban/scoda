@@ -6,7 +6,7 @@ import scoda.city
 import scoda.researcher
 from flask_wtf.csrf import CSRFError
 from json import loads
-from pandas.io.json import json_normalize
+from pandas import json_normalize
 import pandas as pd
 import gviz_api
 import urllib

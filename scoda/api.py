@@ -29,10 +29,10 @@ def api_indicators_list(check):
         if redisClient.exists(redis_key):
             indicators_list = json.loads(redisClient.get(redis_key))
         else:
-            indicators_list = [[str(c.id), c.name] for c in
-                               CbIndicator.query.join(CbDataPoint, CbDataPoint.indicator_id == CbIndicator.id).all() if
-                               c.name not in remove_list]
-            redisClient.set(redis_key, json.dumps(indicators_list))
+            indicators_list = [[str(c.id), c.ds_name] for c in
+                               CbTempIndicators.query.limit(5) if
+                               c.ds_name not in remove_list]
+            # redisClient.set(redis_key, json.dumps(indicators_list))
     else:
         indicators_list = [[str(c.id), c.in_name] for c in Indicator.all() if c.in_name not in remove_list]
     return jsonify(indicators_list)
@@ -120,11 +120,15 @@ def api_explore(check):
     print(check)
     # codebook query
     if check == "codebook":
-        query = db.session.query(CbRegion.name.label('re_name'), CbDataPoint.start_dt,
-                                 CbIndicator.name.label('ds_name'), CbDataPoint.value,
-                                 CbDataPoint.end_dt). \
-            filter(CbDataPoint.indicator_id == ind).filter(CbDataPoint.indicator_id == CbIndicator.id). \
-            filter(CbDataPoint.region_id == CbRegion.id)
+        # query = db.session.query(CbRegion.name.label('re_name'), CbDataPoint.start_dt,
+        #                          CbIndicator.name.label('ds_name'), CbDataPoint.value,
+        #                          CbDataPoint.end_dt). \
+        #     filter(CbDataPoint.indicator_id == ind).filter(CbDataPoint.indicator_id == CbIndicator.id). \
+        #     filter(CbDataPoint.region_id == CbRegion.id)
+        query = db.session.query(CbTempIndicators.re_name.label('re_name'), CbTempIndicators.start_dt,
+                                 CbTempIndicators.ds_name.label('ds_name'), CbTempIndicators.value,
+                                 CbTempIndicators.start_dt.label('end_dt')). \
+            filter(CbTempIndicators.indicator_id == ind)
         if city:
             query = query.filter(CbTempIndicators.re_name == city)
         if year_filter:
@@ -135,11 +139,10 @@ def api_explore(check):
         df = read_sql_query(query.statement, query.session.bind)
         df = df.rename(columns={'name': 're_name', 'name.1': 'ds_name'})
         if df['start_dt'].iloc[0]:
-            df["year"] = df["start_dt"].apply(lambda x: int(x.strftime('%Y')))
+            df["year"] = df["start_dt"]
             df["start_dt"] = df["year"]
         elif df['end_dt'].iloc[0]:
-            df["year"] = df["end_dt"].apply(lambda x: int(x.strftime('%Y')))
-            df["start_dt"] = df["year"]
+            df["year"] = df["end_dt"]
             del df["end_dt"]
 
     else:
@@ -147,6 +150,7 @@ def api_explore(check):
             filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
             filter(DataPoint.region_id == Region.id)
         df = read_sql_query(query.statement, query.session.bind)
+        print("In else")
     df = df.drop_duplicates()
     # print(app.root_path)
     # df.to_csv('%s/data/%s' % (app.root_path, "data_test.csv"), index=False)
@@ -163,7 +167,9 @@ def api_explore(check):
         plot_type = 2
 
     colours = ['#f44336', '#03a9f4', '#4caf50', '#ffc107', '#03a9f4', '#ff5722', '#9c27b0', '#8bc34a',
+               '#ffeb3b', '#9e9e9e', '#3f51b5', '#e91e63','#f44336', '#03a9f4', '#4caf50', '#ffc107', '#03a9f4', '#ff5722', '#9c27b0', '#8bc34a',
                '#ffeb3b', '#9e9e9e', '#3f51b5', '#e91e63']
+    print(f"len(datasets):{len(datasets)}")
     series = {i: {'color': colours[i]} for i in range(len(datasets))}
     view = list(range(2, len(datasets) + 2))
     view.insert(0, 0)
@@ -176,7 +182,7 @@ def api_explore(check):
         head.append(str(i))
     table.append(head)
     table_plot.append(head)
-
+    # print(f"df:{df}")
     if plot_type == 1:
         df_i = df.iloc[:, [0, 1, 3]]
 
@@ -196,7 +202,7 @@ def api_explore(check):
                     else:
                         row.append(
                             float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
-                            df["ds_name"] == d), "value"]))
+                            df["ds_name"] == d), "value"].iloc[0]))
                 table.append(row)
     else:
         for c in cities:
@@ -207,9 +213,14 @@ def api_explore(check):
                     if len(datapoint) == 0:
                         row.append(None)
                     else:
+                        print(f"c:{c} -"
+                              f"y: {y} -"
+                              f"d: {d}")
+                        print(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
+                            df["ds_name"] == d), "value"].iloc[0])
                         row.append(
                             float(df.loc[(df["re_name"] == c) & (df["year"] == y) & (
-                            df["ds_name"] == d), "value"]))
+                            df["ds_name"] == d), "value"].iloc[0]))
                 table.append(row)
     yrs = ['Year'] + [str(y) for y in years[::-1]]
     payload = {"plot":plot, "table":table, "table_plot":table_plot,"colours":colours,"year":str(max(years)), "series":series,
