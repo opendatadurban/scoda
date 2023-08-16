@@ -120,39 +120,25 @@ def api_explore(check):
     print(ind)
     plot = 1
     print(check)
-    # codebook query
-    if check == "codebook":
-        # query = db.session.query(CbRegion.name.label('re_name'), CbDataPoint.start_dt,
-        #                          CbIndicator.name.label('ds_name'), CbDataPoint.value,
-        #                          CbDataPoint.end_dt). \
-        #     filter(CbDataPoint.indicator_id == ind).filter(CbDataPoint.indicator_id == CbIndicator.id). \
-        #     filter(CbDataPoint.region_id == CbRegion.id)
-        query = db.session.query(CbTempIndicators.re_name.label('re_name'), CbTempIndicators.start_dt,
-                                 CbTempIndicators.ds_name.label('ds_name'), CbTempIndicators.value,
-                                 CbTempIndicators.start_dt.label('end_dt')). \
-            filter(CbTempIndicators.indicator_id == ind)
-        if city:
-            query = query.filter(CbTempIndicators.re_name == city)
-        if year_filter:
-            years_db = db.session.query(CbYear.id).filter(CbYear.name.in_([int(yr) for yr in year_filter]))
-            query = query.filter(CbDataPoint.year_start_id.in_([yr[0] for yr in years_db]))
-        if not query.first():
-            return jsonify({})
-        df = read_sql_query(query.statement, query.session.bind)
-        df = df.rename(columns={'name': 're_name', 'name.1': 'ds_name'})
-        if df['start_dt'].iloc[0]:
-            df["year"] = df["start_dt"]
-            df["start_dt"] = df["year"]
-        elif df['end_dt'].iloc[0]:
-            df["year"] = df["end_dt"]
-            del df["end_dt"]
-
-    else:
-        query = db.session.query(Region.re_name, DataPoint.year, DataSet.ds_name, DataPoint.value). \
-            filter(DataPoint.indicator_id == ind).filter(DataPoint.dataset_id == DataSet.id). \
-            filter(DataPoint.region_id == Region.id)
-        df = read_sql_query(query.statement, query.session.bind)
-        print("In else")
+    query = db.session.query(CbTempIndicators.re_name.label('re_name'), CbTempIndicators.start_dt,
+                             CbTempIndicators.ds_name.label('ds_name'), CbTempIndicators.value,
+                             CbTempIndicators.start_dt.label('end_dt')). \
+        filter(CbTempIndicators.indicator_id == ind)
+    if city:
+        query = query.filter(CbTempIndicators.re_name == city)
+    if year_filter:
+        years_db = db.session.query(CbYear.id).filter(CbYear.name.in_([int(yr) for yr in year_filter]))
+        query = query.filter(CbDataPoint.year_start_id.in_([yr[0] for yr in years_db]))
+    if not query.first():
+        return jsonify({})
+    df = read_sql_query(query.statement, query.session.bind)
+    df = df.rename(columns={'name': 're_name', 'name.1': 'ds_name'})
+    if df['start_dt'].iloc[0]:
+        df["year"] = df["start_dt"]
+        df["start_dt"] = df["year"]
+    elif df['end_dt'].iloc[0]:
+        df["year"] = df["end_dt"]
+        del df["end_dt"]
     df = df.drop_duplicates()
     # print(app.root_path)
     # df.to_csv('%s/data/%s' % (app.root_path, "data_test.csv"), index=False)
@@ -166,8 +152,8 @@ def api_explore(check):
     plot_type = 1
     print(len(years))
     years.sort()
-    years = years[-6:]
-    print(years)
+    # years = years[-6:]
+    # print(years)
     if (len(datasets) > 1) or (len(years) == 1):
         plot_type = 2
 
