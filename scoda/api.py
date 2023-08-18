@@ -120,12 +120,14 @@ def api_explore(check):
     print(ind)
     plot = 1
     print(check)
+    cities = ["Albania","Algeria","Angola"]
+    years = [2022,2021,2020,2019,2018,2017,2016]
     query = db.session.query(CbTempIndicators.re_name.label('re_name'), CbTempIndicators.start_dt,
                              CbTempIndicators.ds_name.label('ds_name'), CbTempIndicators.value,
                              CbTempIndicators.start_dt.label('end_dt')). \
-        filter(CbTempIndicators.indicator_id == ind)
-    if city:
-        query = query.filter(CbTempIndicators.re_name == city)
+        filter(CbTempIndicators.indicator_id == ind).filter(CbTempIndicators.year.in_(years))
+    if cities:
+        query = query.filter(CbTempIndicators.re_name.in_(cities))
     if year_filter:
         years_db = db.session.query(CbYear.id).filter(CbYear.name.in_([int(yr) for yr in year_filter]))
         query = query.filter(CbDataPoint.year_start_id.in_([yr[0] for yr in years_db]))
