@@ -112,7 +112,7 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                     'containerId':'chart',
                     'options': {
                         stacked: true,
-                        legend: {position: 'right'},
+                        legend: {position: 'top'},
                         bars: 'vertical',
                         vAxis: {minValue:0},
                         hAxis: {slantedText: true},
@@ -135,7 +135,7 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                     'chartType': 'Line',
                     'containerId': 'chart',
                     'options': {
-                      legend: {position: 'right' },
+                      legend: { position: 'top', alignment: 'start' },
                       axes: {
                           y: {
                               all: {

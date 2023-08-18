@@ -5,6 +5,7 @@ import createHistory from "history/createBrowserHistory"
 import loader from "./gif/Spinner.gif"
 
 const Home =  lazy(() => import('./templates/Home'));
+const IndicatorExplorer =  lazy(() => import('./components/IndicatorExplorer'));
 
 const style = {
       position: 'absolute', left: '50%', top: '50%',
@@ -21,7 +22,7 @@ history.listen(() => {
 export default (
     <HashRouter history={history}>
     <Suspense fallback={<div style={style}><img src={loader} alt='Loader'></img></div>}>
-      <Route exact path='/' component={()=> <Home />} />
+      <Route exact path='/' component={()=> <IndicatorExplorer />} />
       </Suspense>
     </HashRouter>
 );

@@ -6,7 +6,20 @@ export default class IndicatorExplorer extends Component {
     constructor(props) {
         super(props);
     }
+    componentDidMount() {
+        //Remove spinner
+       $('.spinner--container').remove();
 
+        //window.scrollTo(0,0);
+
+        this.props.logoHide ? (
+            document.addEventListener("scroll", () => {
+                const logo = window.scrollY < 50 ? "none" : "block";
+
+                this.setState({ logo_hide: logo });
+            })
+        ) : this.setState({ logo_hide: "block" });
+    }
 
 
     render() {
