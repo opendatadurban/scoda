@@ -165,6 +165,7 @@ def api_explore(check):
     
     print("indicator", ind)
     plot = 1
+
     print("args", check)
 
     # Calculate the current year
@@ -214,6 +215,7 @@ def api_explore(check):
             filter(DataPoint.region_id == Region.id)
         df = read_sql_query(query.statement, query.session.bind)
         print("In else")
+
     df = df.drop_duplicates()
 
     # Filter the DataFrame to get data for African countries
