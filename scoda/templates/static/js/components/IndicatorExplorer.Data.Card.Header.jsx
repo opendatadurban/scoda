@@ -108,16 +108,30 @@ export default class IndicatorExplorerDataCardHeader extends Component {
                             <div className='ie-spacer'></div>
                         <div className="row">
                             <div className="col-6">
-                                <div id="button-search" className="ie-button-search ie-button-search-explorer ie-button-inactive" onClick={this.filterData}>Search</div>
+                                <div id="button-search" className="ie-button-search ie-button-search-explorer ie-button-inactive" style={{width:'170px'}} onClick={this.filterData}>Display the Data</div>
                             </div>
                             <div className="col-6">
-                                 <div className="ie-button-reset" onClick={this.resetForm}>Reset Form</div>
+                                 {/* <div className="ie-button-reset" onClick={this.resetForm}>Reset Form</div> */}
                             </div>
                         </div>
 
                     </div>
-                    <div className="col-5 explainer-text">
-                        The data explorer provides access to the different indicators used by the South African Cities Network in the State of Cities Report.
+                    <div className="col-6 explainer-text" style={{marginLeft: 0}} >
+                        <span  style={{
+                        fontSize: '16px',
+                        fontWeight: '500',
+                        lineHeight: '20px'
+                    }}>
+                    The purpose of this data explorer is to visually display data in a way that breaks a large dataset into smaller understandable constituent parts.  In this case the focus is on gender per country that may be less apparent when the data are viewed together.<br/><br/>
+ 
+                     Data is sourced from the <a href="" target='_blank' style={{
+                        textDecoration: 'underline',
+                        color: '#CACACA',
+                        fontStyle: 'italic',
+                        fontWeight: '500'
+                     }}>World Bank</a>.
+
+                        </span>
                     </div>
            </div> 
         )

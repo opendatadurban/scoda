@@ -1,4 +1,4 @@
-# SCODA - Flask
+# ADH Data Explorer - Flask
 SCODA Website Repository
 
 ## Readme Contents
