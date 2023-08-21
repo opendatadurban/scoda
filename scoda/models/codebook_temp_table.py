@@ -38,7 +38,7 @@ class CbTempIndicators(db.Model):
     re_name = Column(String)
     start_dt = Column(Integer)
     year = Column(Integer)
-    indicator_id = Column(Integer)
+    indicator_id = Column(Integer, index=True, unique=True)
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
