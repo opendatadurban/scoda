@@ -72,7 +72,7 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
       };
 
      $.ajax(options).done(function(){
-        google.load("visualization", "1", {
+        google.load("visualization", "1.1", {
           packages:['controls', 'bar', 'corechart', 'geochart','line'],
           callback: function() {
                 document.getElementById('chartPng').value = '';
@@ -129,13 +129,13 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                 };
 
               }
-
+              
                 if(resultSet.plot_type === 1) {
                   options = {
                     'chartType': 'Line',
                     'containerId': 'chart',
                     'options': {
-                      legend: { position: 'top', alignment: 'start' },
+                      legend: { position: 'top' },
                       axes: {
                           y: {
                               all: {
@@ -148,15 +148,16 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                       },
                       hAxis: {slantedText: true},
                       height: winHeight,
+                      width: '100%',
                       lineWidth: 4,
                       interpolateNulls: true,
                       tooltip: { isHtml: true },
-                      pointSize: 5     
+                      pointSize: 5
                    }
                   };
 
               }
-
+              console.log('options', options)
               let bar = new google.visualization.ChartWrapper(options);
 
               let cssClassNames = {
@@ -538,7 +539,7 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
                   optionsTmp = {
                     'chartType': 'Line',
                     'options': {
-                      legend: {position: 'right' },
+                      legend: {position: 'top' },
                       axes: {
                           y: {
                               all: {
