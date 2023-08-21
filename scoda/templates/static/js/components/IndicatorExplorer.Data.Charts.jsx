@@ -181,7 +181,7 @@ loadGoogleVizApi(resultSet,selectedYear,winWidth,winHeight) {
               let categoryPicker1 = new google.visualization.ControlWrapper({
                 'controlType': 'CategoryFilter',
                 'containerId': 'categorySelector1',
-                'state': {'selectedValues':resultSet.cities},
+                'state': {'selectedValues':resultSet.cities.slice(0, 10)},
                 'options': {
                     'filterColumnLabel': 'City',
                     'ui': {
