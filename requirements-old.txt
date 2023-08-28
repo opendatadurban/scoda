@@ -45,7 +45,7 @@ python-editor==1.0.3
 python-http-client==2.2.1
 pytz==2017.2
 requests==2.12.3
-reportlab==3.6.6
+reportlab==3.6.13
 sendgrid==3.6.3
 simplejson==3.10.0
 six==1.10.0
